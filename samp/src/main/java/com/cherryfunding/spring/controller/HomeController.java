@@ -1,4 +1,4 @@
-package com.samp.spring.controller;
+package com.cherryfunding.spring.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

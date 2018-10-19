@@ -24,14 +24,14 @@
 	<!-- SqlSessionFactory설정 -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
-		<property name="configLocation" value="classpath:com/samp/spring/mybatis/mybatis-config.xml" />
+		<property name="configLocation" value="classpath:com/cherryfunding/spring/mybatis/mybatis-config.xml" />
 	</bean>
 	<!-- SqlSession설정 -->
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg index="0" ref="sqlSessionFactory" />
 	</bean>
 	
-	<context:component-scan base-package="com.samp.spring">
+	<context:component-scan base-package="com.cherryfunding.spring">
 		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>	
 	</context:component-scan>
 		
