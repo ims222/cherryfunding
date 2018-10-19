@@ -16,7 +16,7 @@
     </appender>
 	
 	<!-- Application Loggers -->
-	<logger name="com.samp.spring">
+	<logger name="com.cherryfunding.spring">
 		<level value="info" />
 	</logger>
 	
