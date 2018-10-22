@@ -1,0 +1,2400 @@
+-- 테이블 순서는 관계를 고려하여 한 번에 실행해도 에러가 발생하지 않게 정렬되었습니다.
+
+-- users Table Create SQL
+CREATE TABLE users
+(
+    id         VARCHAR2(40)      NOT NULL, 
+    pwd        VARCHAR2(1000)    NULL, 
+    nick       VARCHAR2(100)     NULL, 
+    email      VARCHAR2(40)      NULL, 
+    addr       VARCHAR2(100)     NULL, 
+    gender     CHAR(3)           NULL, 
+    phone      VARCHAR2(40)      NULL, 
+    birth      VARCHAR2(30)      NULL, 
+    regDate    DATE              NULL, 
+    balance    INT               NULL, 
+    CONSTRAINT USERS_PK PRIMARY KEY (id)
+)
+/
+
+COMMENT ON TABLE users IS '회원'
+/
+
+COMMENT ON COLUMN users.id IS '아이디'
+/
+
+COMMENT ON COLUMN users.pwd IS '비밀번호'
+/
+
+COMMENT ON COLUMN users.nick IS '닉네임'
+/
+
+COMMENT ON COLUMN users.email IS '이메일'
+/
+
+COMMENT ON COLUMN users.addr IS '주소'
+/
+
+COMMENT ON COLUMN users.gender IS '성별'
+/
+
+COMMENT ON COLUMN users.phone IS '전화번호'
+/
+
+COMMENT ON COLUMN users.birth IS '생년월일'
+/
+
+COMMENT ON COLUMN users.regDate IS '가입일자'
+/
+
+COMMENT ON COLUMN users.balance IS '잔액'
+/
+
+
+-- admin Table Create SQL
+CREATE TABLE admin
+(
+    aId        VARCHAR2(40)      NOT NULL, 
+    pwd        VARCHAR2(1000)    NULL, 
+    nick       VARCHAR2(100)     NULL, 
+    regDate    DATE              NULL, 
+    CONSTRAINT ADMIN_PK PRIMARY KEY (aId)
+)
+/
+
+COMMENT ON TABLE admin IS '관리자'
+/
+
+COMMENT ON COLUMN admin.aId IS '아이디'
+/
+
+COMMENT ON COLUMN admin.pwd IS '비밀번호'
+/
+
+COMMENT ON COLUMN admin.nick IS '닉네임'
+/
+
+COMMENT ON COLUMN admin.regDate IS '등록일자'
+/
+
+
+-- Charity Table Create SQL
+CREATE TABLE Charity
+(
+    cNum        INT              NOT NULL, 
+    id          VARCHAR2(40)     NULL, 
+    title       VARCHAR2(100)    NULL, 
+    content     CLOB             NULL, 
+    amount      INT              NULL, 
+    cAmount     INT              NULL, 
+    sDate       DATE             NULL, 
+    eDate       DATE             NULL, 
+    category    VARCHAR2(20)     NULL, 
+    confirm     char(1)          NULL, 
+    aId         VARCHAR2(40)     NULL, 
+    addr        VARCHAR2(100)    NULL, 
+    regDate     DATE             NULL, 
+    hit         INT              NULL, 
+    CONSTRAINT CHARITY_PK PRIMARY KEY (cNum)
+)
+/
+
+CREATE SEQUENCE Charity_SEQ
+START WITH 1
+INCREMENT BY 1;
+/
+
+CREATE OR REPLACE TRIGGER Charity_AI_TRG
+BEFORE INSERT ON Charity 
+REFERENCING NEW AS NEW FOR EACH ROW 
+BEGIN 
+    SELECT Charity_SEQ.NEXTVAL
+    INTO: NEW.cNum
+    FROM DUAL;
+END;
+/
+
+--DROP TRIGGER Charity_AI_TRG;
+/
+
+--DROP SEQUENCE Charity_SEQ;
+/
+
+COMMENT ON TABLE Charity IS '후원글'
+/
+
+COMMENT ON COLUMN Charity.cNum IS '후원글번호'
+/
+
+COMMENT ON COLUMN Charity.id IS '아이디'
+/
+
+COMMENT ON COLUMN Charity.title IS '후원글제목'
+/
+
+COMMENT ON COLUMN Charity.content IS '후원글내용'
+/
+
+COMMENT ON COLUMN Charity.amount IS '목표금액'
+/
+
+COMMENT ON COLUMN Charity.cAmount IS '현재금액'
+/
+
+COMMENT ON COLUMN Charity.sDate IS '시작날짜'
+/
+
+COMMENT ON COLUMN Charity.eDate IS '종료날짜'
+/
+
+COMMENT ON COLUMN Charity.category IS '카테고리'
+/
+
+COMMENT ON COLUMN Charity.confirm IS '승인구분'
+/
+
+COMMENT ON COLUMN Charity.aId IS '승인자'
+/
+
+COMMENT ON COLUMN Charity.addr IS '주소'
+/
+
+COMMENT ON COLUMN Charity.regDate IS '등록일자'
+/
+
+COMMENT ON COLUMN Charity.hit IS '조회수'
+/
+
+ALTER TABLE Charity
+    ADD CONSTRAINT FK_Charity_aId_admin_aId FOREIGN KEY (aId)
+        REFERENCES admin (aId)
+	on delete cascade
+
+/
+
+ALTER TABLE Charity
+    ADD CONSTRAINT FK_Charity_id_users_id FOREIGN KEY (id)
+        REFERENCES users (id)
+	on delete cascade
+/
+
+
+-- funding Table Create SQL
+CREATE TABLE funding
+(
+    fNum        INT              NOT NULL, 
+    title       VARCHAR2(100)    NULL, 
+    content     CLOB             NULL, 
+    amount      INT              NULL, 
+    cAmout      INT              NULL, 
+    sDate       DATE             NULL, 
+    eDate       DATE             NULL, 
+    category    VARCHAR2(40)     NULL, 
+    confirm     CHAR(1)          NULL, 
+    aId         VARCHAR2(40)     NULL, 
+    addr        VARCHAR2(100)    NULL, 
+    regDate     DATE             NULL, 
+    id          VARCHAR2(40)     NULL, 
+    hit         INT              NULL, 
+    CONSTRAINT FUNDING_PK PRIMARY KEY (fNum)
+)
+
+/
+
+CREATE SEQUENCE funding_SEQ
+START WITH 1
+INCREMENT BY 1;
+/
+
+CREATE OR REPLACE TRIGGER funding_AI_TRG
+BEFORE INSERT ON funding 
+REFERENCING NEW AS NEW FOR EACH ROW 
+BEGIN 
+    SELECT funding_SEQ.NEXTVAL
+    INTO: NEW.fNum
+    FROM DUAL;
+END;
+/
+
+--DROP TRIGGER funding_AI_TRG;
+/
+
+--DROP SEQUENCE funding_SEQ;
+/
+
+COMMENT ON TABLE funding IS '펀딩'
+/
+
+COMMENT ON COLUMN funding.fNum IS '펀딩번호'
+/
+
+COMMENT ON COLUMN funding.title IS '제목'
+/
+
+COMMENT ON COLUMN funding.content IS '내용'
+/
+
+COMMENT ON COLUMN funding.amount IS '목표금액'
+/
+
+COMMENT ON COLUMN funding.cAmout IS '현재금액'
+/
+
+COMMENT ON COLUMN funding.sDate IS '시작날짜'
+/
+
+COMMENT ON COLUMN funding.eDate IS '종료날짜'
+/
+
+COMMENT ON COLUMN funding.category IS '카테고리'
+/
+
+COMMENT ON COLUMN funding.confirm IS '승인구분'
+/
+
+COMMENT ON COLUMN funding.aId IS '승인자'
+/
+
+COMMENT ON COLUMN funding.addr IS '주소'
+/
+
+COMMENT ON COLUMN funding.regDate IS '등록날짜'
+/
+
+COMMENT ON COLUMN funding.id IS '아이디'
+/
+
+COMMENT ON COLUMN funding.hit IS '조회수'
+/
+
+ALTER TABLE funding
+    ADD CONSTRAINT FK_funding_id_users_id FOREIGN KEY (id)
+        REFERENCES users (id)
+	on delete cascade
+/
+
+ALTER TABLE funding
+    ADD CONSTRAINT FK_funding_aId_admin_aId FOREIGN KEY (aId)
+        REFERENCES admin (aId)
+	on delete cascade
+/
+
+
+-- cDetail Table Create SQL
+CREATE TABLE cDetail
+(
+    cdNum      INT              NULL, 
+    id         VARCHAR2(40)     NULL, 
+    cNum       INT              NULL, 
+    amount     INT              NULL, 
+    content    VARCHAR2(150)    NULL, 
+    regDate    DATE             NULL, 
+    CONSTRAINT CDETAIL_PK PRIMARY KEY (cdNum)
+)
+/
+
+CREATE SEQUENCE cDetail_SEQ
+START WITH 1
+INCREMENT BY 1;
+/
+
+CREATE OR REPLACE TRIGGER cDetail_AI_TRG
+BEFORE INSERT ON cDetail 
+REFERENCING NEW AS NEW FOR EACH ROW 
+BEGIN 
+    SELECT cDetail_SEQ.NEXTVAL
+    INTO: NEW.cdNum
+    FROM DUAL;
+END;
+/
+
+--DROP TRIGGER cDetail_AI_TRG;
+/
+
+--DROP SEQUENCE cDetail_SEQ;
+/
+
+COMMENT ON TABLE cDetail IS '후원내역'
+/
+
+COMMENT ON COLUMN cDetail.cdNum IS '후원내역번호'
+/
+
+COMMENT ON COLUMN cDetail.id IS '아이디'
+/
+
+COMMENT ON COLUMN cDetail.cNum IS '후원글번호'
+/
+
+COMMENT ON COLUMN cDetail.amount IS '후원금액'
+/
+
+COMMENT ON COLUMN cDetail.content IS '후원메세지'
+/
+
+COMMENT ON COLUMN cDetail.regDate IS '후원날짜'
+/
+
+ALTER TABLE cDetail
+    ADD CONSTRAINT FK_cDetail_id_users_id FOREIGN KEY (id)
+        REFERENCES users (id)
+	on delete cascade
+/
+
+ALTER TABLE cDetail
+    ADD CONSTRAINT FK_cDetail_cNum_Charity_cNum FOREIGN KEY (cNum)
+        REFERENCES Charity (cNum)
+	on delete cascade
+/
+
+ALTER TABLE cDetail
+    ADD CONSTRAINT UC_id UNIQUE (id)
+/
+
+
+-- Epilogue Table Create SQL
+CREATE TABLE Epilogue
+(
+    eNum       INT              NOT NULL, 
+    id         VARCHAR2(40)     NULL, 
+    cNum       INT              NULL, 
+    title      VARCHAR2(100)    NULL, 
+    content    CLOB             NULL, 
+    regDate    DATE             NULL, 
+    hit        INT              NULL, 
+    CONSTRAINT EPILOGUE_PK PRIMARY KEY (eNum)
+)
+/
+
+CREATE SEQUENCE Epilogue_SEQ
+START WITH 1
+INCREMENT BY 1;
+/
+
+CREATE OR REPLACE TRIGGER Epilogue_AI_TRG
+BEFORE INSERT ON Epilogue 
+REFERENCING NEW AS NEW FOR EACH ROW 
+BEGIN 
+    SELECT Epilogue_SEQ.NEXTVAL
+    INTO: NEW.eNum
+    FROM DUAL;
+END;
+/
+
+--DROP TRIGGER Epilogue_AI_TRG;
+/
+
+--DROP SEQUENCE Epilogue_SEQ;
+/
+
+COMMENT ON TABLE Epilogue IS '후기(리뷰)'
+/
+
+COMMENT ON COLUMN Epilogue.eNum IS '후기번호'
+/
+
+COMMENT ON COLUMN Epilogue.id IS '아이디'
+/
+
+COMMENT ON COLUMN Epilogue.cNum IS '후원번호'
+/
+
+COMMENT ON COLUMN Epilogue.title IS '후기제목'
+/
+
+COMMENT ON COLUMN Epilogue.content IS '후기내용'
+/
+
+COMMENT ON COLUMN Epilogue.regDate IS '등록일자'
+/
+
+COMMENT ON COLUMN Epilogue.hit IS '조회수'
+/
+
+ALTER TABLE Epilogue
+    ADD CONSTRAINT FK_Epilogue_cNum_Charity_cNum FOREIGN KEY (cNum)
+        REFERENCES Charity (cNum)
+	on delete cascade
+/
+
+-- volunteer Table Create SQL
+CREATE TABLE volunteer
+(
+    vNum        INT              NOT NULL, 
+    id          VARCHAR2(40)     NULL, 
+    content     CLOB             NULL, 
+    Dday        DATE             NULL, 
+    title       VARCHAR2(100)    NULL, 
+    members     INT              NULL, 
+    regDate     DATE             NULL, 
+    category    VARCHAR2(40)     NULL, 
+    place       VARCHAR2(100)    NULL, 
+    hit         INT              NULL, 
+    CONSTRAINT VOLUNTEER_PK PRIMARY KEY (vNum)
+)
+/
+
+CREATE SEQUENCE volunteer_SEQ
+START WITH 1
+INCREMENT BY 1;
+/
+
+CREATE OR REPLACE TRIGGER volunteer_AI_TRG
+BEFORE INSERT ON volunteer 
+REFERENCING NEW AS NEW FOR EACH ROW 
+BEGIN 
+    SELECT volunteer_SEQ.NEXTVAL
+    INTO: NEW.vNum
+    FROM DUAL;
+END;
+/
+
+--DROP TRIGGER volunteer_AI_TRG;
+/
+
+--DROP SEQUENCE volunteer_SEQ;
+/
+
+COMMENT ON TABLE volunteer IS '봉사'
+/
+
+COMMENT ON COLUMN volunteer.vNum IS '봉사번호'
+/
+
+COMMENT ON COLUMN volunteer.id IS '아이디'
+/
+
+COMMENT ON COLUMN volunteer.content IS '내용'
+/
+
+COMMENT ON COLUMN volunteer.Dday IS '디데이'
+/
+
+COMMENT ON COLUMN volunteer.title IS '제목'
+/
+
+COMMENT ON COLUMN volunteer.members IS '필요인원'
+/
+
+COMMENT ON COLUMN volunteer.regDate IS '등록일자'
+/
+
+COMMENT ON COLUMN volunteer.category IS '카테고리'
+/
+
+COMMENT ON COLUMN volunteer.place IS '장소'
+/
+
+COMMENT ON COLUMN volunteer.hit IS '조회수'
+/
+
+ALTER TABLE volunteer
+    ADD CONSTRAINT FK_volunteer_id_users_id FOREIGN KEY (id)
+        REFERENCES users (id)
+	on delete cascade
+/
+
+
+-- sharing Table Create SQL
+CREATE TABLE sharing
+(
+    sNum        INT             NOT NULL, 
+    id          VARCHAR2(40)    NULL, 
+    content     CLOB            NULL, 
+    category    VARCHAR2(40)    NULL, 
+    regDate     DATE            NULL, 
+    hit         INT             NULL, 
+    CONSTRAINT SHARING_PK PRIMARY KEY (sNum)
+)
+/
+
+CREATE SEQUENCE sharing_SEQ
+START WITH 1
+INCREMENT BY 1;
+/
+
+CREATE OR REPLACE TRIGGER sharing_AI_TRG
+BEFORE INSERT ON sharing 
+REFERENCING NEW AS NEW FOR EACH ROW 
+BEGIN 
+    SELECT sharing_SEQ.NEXTVAL
+    INTO: NEW.sNum
+    FROM DUAL;
+END;
+/
+
+--DROP TRIGGER sharing_AI_TRG;
+/
+
+--DROP SEQUENCE sharing_SEQ;
+/
+
+COMMENT ON TABLE sharing IS '나눔'
+/
+
+COMMENT ON COLUMN sharing.sNum IS '나눔번호'
+/
+
+COMMENT ON COLUMN sharing.id IS '아이디'
+/
+
+COMMENT ON COLUMN sharing.content IS '내용'
+/
+
+COMMENT ON COLUMN sharing.category IS '카테고리'
+/
+
+COMMENT ON COLUMN sharing.regDate IS '등록날짜'
+/
+
+COMMENT ON COLUMN sharing.hit IS '조회수'
+/
+
+ALTER TABLE sharing
+    ADD CONSTRAINT FK_sharing_id_users_id FOREIGN KEY (id)
+        REFERENCES users (id)
+	on delete cascade
+/
+
+
+-- reward Table Create SQL
+CREATE TABLE reward
+(
+    rNum       INT              NOT NULL, 
+    fNum       INT              NULL, 
+    title      VARCHAR2(100)    NULL, 
+    price      INT              NULL, 
+    regDate    DATE             NULL, 
+    CONSTRAINT REWARD_PK PRIMARY KEY (rNum)
+)
+/
+
+CREATE SEQUENCE reward_SEQ
+START WITH 1
+INCREMENT BY 1;
+/
+
+CREATE OR REPLACE TRIGGER reward_AI_TRG
+BEFORE INSERT ON reward 
+REFERENCING NEW AS NEW FOR EACH ROW 
+BEGIN 
+    SELECT reward_SEQ.NEXTVAL
+    INTO: NEW.rNum
+    FROM DUAL;
+END;
+/
+
+--DROP TRIGGER reward_AI_TRG;
+/
+
+--DROP SEQUENCE reward_SEQ;
+/
+
+COMMENT ON TABLE reward IS '리워드'
+/
+
+COMMENT ON COLUMN reward.rNum IS '리워드번호'
+/
+
+COMMENT ON COLUMN reward.fNum IS '펀딩번호'
+/
+
+COMMENT ON COLUMN reward.title IS '물품명'
+/
+
+COMMENT ON COLUMN reward.price IS '물품가격'
+/
+
+COMMENT ON COLUMN reward.regDate IS '생성날짜'
+/
+
+ALTER TABLE reward
+    ADD CONSTRAINT FK_reward_fNum_funding_fNum FOREIGN KEY (fNum)
+        REFERENCES funding (fNum)
+	on delete cascade
+/
+
+
+-- category Table Create SQL
+CREATE TABLE category
+(
+    cGroup      VARCHAR2(40)    NOT NULL, 
+    category    VARCHAR2(40)    NOT NULL, 
+    CONSTRAINT CATEGORY_PK PRIMARY KEY (cGroup, category)
+)
+/
+
+COMMENT ON TABLE category IS '카테고리'
+/
+
+COMMENT ON COLUMN category.cGroup IS '분류'
+/
+
+COMMENT ON COLUMN category.category IS '카테고리명'
+/
+
+
+-- payment Table Create SQL
+CREATE TABLE payment
+(
+    pNum       INT             NOT NULL, 
+    id         VARCHAR2(40)    NULL, 
+    amount     INT             NULL, 
+    payDate    DATE            NULL, 
+    method     VARCHAR2(20)    NULL, 
+    CONSTRAINT PAYMENT_PK PRIMARY KEY (pNum)
+)
+/
+
+CREATE SEQUENCE payment_SEQ
+START WITH 1
+INCREMENT BY 1;
+/
+
+CREATE OR REPLACE TRIGGER payment_AI_TRG
+BEFORE INSERT ON payment 
+REFERENCING NEW AS NEW FOR EACH ROW 
+BEGIN 
+    SELECT payment_SEQ.NEXTVAL
+    INTO: NEW.pNum
+    FROM DUAL;
+END;
+/
+
+--DROP TRIGGER payment_AI_TRG;
+/
+
+--DROP SEQUENCE payment_SEQ;
+/
+
+COMMENT ON TABLE payment IS '결제내역'
+/
+
+COMMENT ON COLUMN payment.pNum IS '결제번호'
+/
+
+COMMENT ON COLUMN payment.id IS '아이디'
+/
+
+COMMENT ON COLUMN payment.amount IS '결제금액'
+/
+
+COMMENT ON COLUMN payment.payDate IS '결제날짜'
+/
+
+COMMENT ON COLUMN payment.method IS '결제수단'
+/
+
+ALTER TABLE payment
+    ADD CONSTRAINT FK_payment_id_users_id FOREIGN KEY (id)
+        REFERENCES users (id)
+	on delete cascade
+/
+
+ALTER TABLE payment
+    ADD CONSTRAINT UC_method UNIQUE (method)
+/
+
+
+-- fDetail Table Create SQL
+CREATE TABLE fDetail
+(
+    fdNum      INT             NOT NULL, 
+    id         VARCHAR2(40)    NULL, 
+    fNum       INT             NULL, 
+    rNum       INT             NULL, 
+    fDate      DATE            NULL, 
+    regDate    DATE            NULL, 
+    state      VARCHAR2(20)    NULL, 
+    CONSTRAINT FDETAIL_PK PRIMARY KEY (fdNum)
+)
+/
+
+CREATE SEQUENCE fDetail_SEQ
+START WITH 1
+INCREMENT BY 1;
+/
+
+CREATE OR REPLACE TRIGGER fDetail_AI_TRG
+BEFORE INSERT ON fDetail 
+REFERENCING NEW AS NEW FOR EACH ROW 
+BEGIN 
+    SELECT fDetail_SEQ.NEXTVAL
+    INTO: NEW.fdNum
+    FROM DUAL;
+END;
+/
+
+--DROP TRIGGER fDetail_AI_TRG;
+/
+
+--DROP SEQUENCE fDetail_SEQ;
+/
+
+COMMENT ON TABLE fDetail IS '펀딩내역'
+/
+
+COMMENT ON COLUMN fDetail.fdNum IS '펀딩내역번호'
+/
+
+COMMENT ON COLUMN fDetail.id IS '아이디'
+/
+
+COMMENT ON COLUMN fDetail.fNum IS '펀딩번호'
+/
+
+COMMENT ON COLUMN fDetail.rNum IS '리워드번호'
+/
+
+COMMENT ON COLUMN fDetail.fDate IS '펀딩날짜'
+/
+
+COMMENT ON COLUMN fDetail.regDate IS '펀딩날짜'
+/
+
+COMMENT ON COLUMN fDetail.state IS '펀딩상태'
+/
+
+ALTER TABLE fDetail
+    ADD CONSTRAINT FK_fDetail_id_users_id FOREIGN KEY (id)
+        REFERENCES users (id)
+	on delete cascade
+/
+
+ALTER TABLE fDetail
+    ADD CONSTRAINT FK_fDetail_fNum_funding_fNum FOREIGN KEY (fNum)
+        REFERENCES funding (fNum)
+	on delete cascade
+/
+
+ALTER TABLE fDetail
+    ADD CONSTRAINT FK_fDetail_rNum_reward_rNum FOREIGN KEY (rNum)
+        REFERENCES reward (rNum)
+	on delete cascade
+/
+
+
+-- userSetting Table Create SQL
+CREATE TABLE userSetting
+(
+    id       VARCHAR2(40)    NULL, 
+    lang     VARCHAR2(20)    NULL, 
+    voice    CHAR(1)         NULL, 
+    alarm    CHAR(1)         NULL   
+)
+/
+
+COMMENT ON TABLE userSetting IS '회원환경설정e'
+/
+
+COMMENT ON COLUMN userSetting.id IS '아이디'
+/
+
+COMMENT ON COLUMN userSetting.lang IS '언어'
+/
+
+COMMENT ON COLUMN userSetting.voice IS '음성지원'
+/
+
+COMMENT ON COLUMN userSetting.alarm IS '알림설정'
+/
+
+ALTER TABLE userSetting
+    ADD CONSTRAINT FK_userSetting_id_users_id FOREIGN KEY (id)
+        REFERENCES users (id)
+	on delete cascade
+/
+
+ALTER TABLE userSetting
+    ADD CONSTRAINT UC_lang UNIQUE (lang)
+/
+
+
+-- sItem Table Create SQL
+CREATE TABLE sItem
+(
+    siNum     INT              NOT NULL, 
+    sNum      INT              NULL, 
+    title     VARCHAR2(100)    NULL, 
+    amount    INT              NULL, 
+    CONSTRAINT SITEM_PK PRIMARY KEY (siNum)
+)
+/
+
+CREATE SEQUENCE sItem_SEQ
+START WITH 1
+INCREMENT BY 1;
+/
+
+CREATE OR REPLACE TRIGGER sItem_AI_TRG
+BEFORE INSERT ON sItem 
+REFERENCING NEW AS NEW FOR EACH ROW 
+BEGIN 
+    SELECT sItem_SEQ.NEXTVAL
+    INTO: NEW.siNum
+    FROM DUAL;
+END;
+/
+
+--DROP TRIGGER sItem_AI_TRG;
+/
+
+--DROP SEQUENCE sItem_SEQ;
+/
+
+COMMENT ON TABLE sItem IS '나눔물품'
+/
+
+COMMENT ON COLUMN sItem.siNum IS '물품번호'
+/
+
+COMMENT ON COLUMN sItem.sNum IS '나눔번호'
+/
+
+COMMENT ON COLUMN sItem.title IS '물품명'
+/
+
+COMMENT ON COLUMN sItem.amount IS '수량'
+/
+
+ALTER TABLE sItem
+    ADD CONSTRAINT FK_sItem_sNum_sharing_sNum FOREIGN KEY (sNum)
+        REFERENCES sharing (sNum)
+	on delete cascade
+/
+
+
+-- cComment Table Create SQL
+CREATE TABLE cComment
+(
+    ccNum      INT             NOT NULL, 
+    id         VARCHAR2(40)    NULL, 
+    cNum       INT             NOT NULL, 
+    content    CLOB            NULL, 
+    regDate    DATE            NULL, 
+    CONSTRAINT CCOMMENT_PK PRIMARY KEY (ccNum)
+)
+/
+
+CREATE SEQUENCE cComment_SEQ
+START WITH 1
+INCREMENT BY 1;
+/
+
+CREATE OR REPLACE TRIGGER cComment_AI_TRG
+BEFORE INSERT ON cComment 
+REFERENCING NEW AS NEW FOR EACH ROW 
+BEGIN 
+    SELECT cComment_SEQ.NEXTVAL
+    INTO: NEW.ccNum
+    FROM DUAL;
+END;
+/
+
+--DROP TRIGGER cComment_AI_TRG;
+/
+
+--DROP SEQUENCE cComment_SEQ;
+/
+
+COMMENT ON TABLE cComment IS '후원댓글'
+/
+
+COMMENT ON COLUMN cComment.ccNum IS '댓글번호'
+/
+
+COMMENT ON COLUMN cComment.id IS '아이디'
+/
+
+COMMENT ON COLUMN cComment.cNum IS '후원글번호'
+/
+
+COMMENT ON COLUMN cComment.content IS '댓글내용'
+/
+
+COMMENT ON COLUMN cComment.regDate IS '등록일자'
+/
+
+ALTER TABLE cComment
+    ADD CONSTRAINT FK_cComment_id_users_id FOREIGN KEY (id)
+        REFERENCES users (id)
+	on delete cascade
+/
+
+ALTER TABLE cComment
+    ADD CONSTRAINT FK_cComment_cNum_Charity_cNum FOREIGN KEY (cNum)
+        REFERENCES Charity (cNum)
+	on delete cascade
+/
+
+
+-- eComment Table Create SQL
+CREATE TABLE eComment
+(
+    ecNum      INT             NOT NULL, 
+    eNum       INT             NULL, 
+    id         VARCHAR2(40)    NULL, 
+    content    CLOB            NULL, 
+    regDate    DATE            NULL, 
+    CONSTRAINT ECOMMENT_PK PRIMARY KEY (ecNum)
+)
+/
+
+CREATE SEQUENCE eComment_SEQ
+START WITH 1
+INCREMENT BY 1;
+/
+
+CREATE OR REPLACE TRIGGER eComment_AI_TRG
+BEFORE INSERT ON eComment 
+REFERENCING NEW AS NEW FOR EACH ROW 
+BEGIN 
+    SELECT eComment_SEQ.NEXTVAL
+    INTO: NEW.ecNum
+    FROM DUAL;
+END;
+/
+
+--DROP TRIGGER eComment_AI_TRG;
+/
+
+--DROP SEQUENCE eComment_SEQ;
+/
+
+COMMENT ON TABLE eComment IS '후기댓글'
+/
+
+COMMENT ON COLUMN eComment.ecNum IS '후기댓글번호'
+/
+
+COMMENT ON COLUMN eComment.eNum IS '후기번호'
+/
+
+COMMENT ON COLUMN eComment.id IS '아이디'
+/
+
+COMMENT ON COLUMN eComment.content IS '댓글내용'
+/
+
+COMMENT ON COLUMN eComment.regDate IS '등록일자'
+/
+
+ALTER TABLE eComment
+    ADD CONSTRAINT FK_eComment_id_users_id FOREIGN KEY (id)
+        REFERENCES users (id)
+	on delete cascade
+/
+
+ALTER TABLE eComment
+    ADD CONSTRAINT FK_eComment_eNum_Epilogue_eNum FOREIGN KEY (eNum)
+        REFERENCES Epilogue (eNum)
+	on delete cascade
+/
+
+
+-- messenger Table Create SQL
+CREATE TABLE messenger
+(
+    mNum        INT             NOT NULL, 
+    id          VARCHAR2(40)    NULL, 
+    aId         VARCHAR2(40)    NULL, 
+    content     CLOB            NULL, 
+    sendOk      CHAR(1)         NULL, 
+    sendDate    DATE            NULL, 
+    CONSTRAINT MESSENGER_PK PRIMARY KEY (mNum)
+)
+/
+
+CREATE SEQUENCE messenger_SEQ
+START WITH 1
+INCREMENT BY 1;
+/
+
+CREATE OR REPLACE TRIGGER messenger_AI_TRG
+BEFORE INSERT ON messenger 
+REFERENCING NEW AS NEW FOR EACH ROW 
+BEGIN 
+    SELECT messenger_SEQ.NEXTVAL
+    INTO: NEW.mNum
+    FROM DUAL;
+END;
+/
+
+--DROP TRIGGER messenger_AI_TRG;
+/
+
+--DROP SEQUENCE messenger_SEQ;
+/
+
+COMMENT ON TABLE messenger IS '메신져'
+/
+
+COMMENT ON COLUMN messenger.mNum IS '톡번호'
+/
+
+COMMENT ON COLUMN messenger.id IS '유저'
+/
+
+COMMENT ON COLUMN messenger.aId IS '관리자'
+/
+
+COMMENT ON COLUMN messenger.content IS '톡내용'
+/
+
+COMMENT ON COLUMN messenger.sendOk IS '수신확인'
+/
+
+COMMENT ON COLUMN messenger.sendDate IS '수신날짜'
+/
+
+ALTER TABLE messenger
+    ADD CONSTRAINT FK_messenger_id_users_id FOREIGN KEY (id)
+        REFERENCES users (id)
+	on delete cascade
+/
+
+ALTER TABLE messenger
+    ADD CONSTRAINT FK_messenger_aId_admin_aId FOREIGN KEY (aId)
+        REFERENCES admin (aId)
+	on delete cascade
+/
+
+
+-- cPicture Table Create SQL
+CREATE TABLE cPicture
+(
+    cpNum       INT             NOT NULL, 
+    cNum        INT             NULL, 
+    saveName    VARCHAR2(50)    NULL, 
+    orgName     VARCHAR2(50)    NULL, 
+    fileSize    LONG            NULL, 
+    regDate     DATE            NULL, 
+    CONSTRAINT CPICTURE_PK PRIMARY KEY (cpNum)
+)
+/
+
+CREATE SEQUENCE cPicture_SEQ
+START WITH 1
+INCREMENT BY 1;
+/
+
+CREATE OR REPLACE TRIGGER cPicture_AI_TRG
+BEFORE INSERT ON cPicture 
+REFERENCING NEW AS NEW FOR EACH ROW 
+BEGIN 
+    SELECT cPicture_SEQ.NEXTVAL
+    INTO: NEW.cpNum
+    FROM DUAL;
+END;
+/
+
+--DROP TRIGGER cPicture_AI_TRG;
+/
+
+--DROP SEQUENCE cPicture_SEQ;
+/
+
+COMMENT ON TABLE cPicture IS '후원사진'
+/
+
+COMMENT ON COLUMN cPicture.cpNum IS '사진번호'
+/
+
+COMMENT ON COLUMN cPicture.cNum IS '후원번호'
+/
+
+COMMENT ON COLUMN cPicture.saveName IS '저장파일명'
+/
+
+COMMENT ON COLUMN cPicture.orgName IS '원래파일명'
+/
+
+COMMENT ON COLUMN cPicture.fileSize IS '파일싸이즈'
+/
+
+COMMENT ON COLUMN cPicture.regDate IS '생성날짜'
+/
+
+ALTER TABLE cPicture
+    ADD CONSTRAINT FK_cPicture_cNum_Charity_cNum FOREIGN KEY (cNum)
+        REFERENCES Charity (cNum)
+	on delete cascade
+/
+
+
+-- fPicture Table Create SQL
+CREATE TABLE fPicture
+(
+    fpNum       INT             NOT NULL, 
+    fNum        INT             NULL, 
+    rNum        INT             NULL, 
+    saveName    VARCHAR2(50)    NULL, 
+    orgName     VARCHAR2(50)    NULL, 
+    fileSize    LONG            NULL, 
+    regDate     DATE            NULL, 
+    CONSTRAINT FPICTURE_PK PRIMARY KEY (fpNum)
+)
+/
+
+CREATE SEQUENCE fPicture_SEQ
+START WITH 1
+INCREMENT BY 1;
+/
+
+CREATE OR REPLACE TRIGGER fPicture_AI_TRG
+BEFORE INSERT ON fPicture 
+REFERENCING NEW AS NEW FOR EACH ROW 
+BEGIN 
+    SELECT fPicture_SEQ.NEXTVAL
+    INTO: NEW.fpNum
+    FROM DUAL;
+END;
+/
+
+--DROP TRIGGER fPicture_AI_TRG;
+/
+
+--DROP SEQUENCE fPicture_SEQ;
+/
+
+COMMENT ON TABLE fPicture IS '펀딩사진'
+/
+
+COMMENT ON COLUMN fPicture.fpNum IS '사진번호'
+/
+
+COMMENT ON COLUMN fPicture.fNum IS '펀딩번호'
+/
+
+COMMENT ON COLUMN fPicture.rNum IS '리워드번호'
+/
+
+COMMENT ON COLUMN fPicture.saveName IS '저장파일명'
+/
+
+COMMENT ON COLUMN fPicture.orgName IS '원래파일명'
+/
+
+COMMENT ON COLUMN fPicture.fileSize IS '파일싸이즈'
+/
+
+COMMENT ON COLUMN fPicture.regDate IS '생성날짜'
+/
+
+ALTER TABLE fPicture
+    ADD CONSTRAINT FK_fPicture_fNum_funding_fNum FOREIGN KEY (fNum)
+        REFERENCES funding (fNum)
+	on delete cascade
+/
+
+ALTER TABLE fPicture
+    ADD CONSTRAINT FK_fPicture_rNum_reward_rNum FOREIGN KEY (rNum)
+        REFERENCES reward (rNum)
+	on delete cascade
+/
+
+
+-- vPicture Table Create SQL
+CREATE TABLE vPicture
+(
+    vpNum       INT             NOT NULL, 
+    vNum        INT             NULL, 
+    saveName    VARCHAR2(50)    NULL, 
+    orgName     VARCHAR2(50)    NULL, 
+    fileSize    INT             NULL, 
+    regDate     DATE            NULL, 
+    CONSTRAINT VPICTURE_PK PRIMARY KEY (vpNum)
+)
+/
+
+CREATE SEQUENCE vPicture_SEQ
+START WITH 1
+INCREMENT BY 1;
+/
+
+CREATE OR REPLACE TRIGGER vPicture_AI_TRG
+BEFORE INSERT ON vPicture 
+REFERENCING NEW AS NEW FOR EACH ROW 
+BEGIN 
+    SELECT vPicture_SEQ.NEXTVAL
+    INTO: NEW.vpNum
+    FROM DUAL;
+END;
+/
+
+--DROP TRIGGER vPicture_AI_TRG;
+/
+
+--DROP SEQUENCE vPicture_SEQ;
+/
+
+COMMENT ON TABLE vPicture IS '봉사사진'
+/
+
+COMMENT ON COLUMN vPicture.vpNum IS '사진번호'
+/
+
+COMMENT ON COLUMN vPicture.vNum IS '봉사번호'
+/
+
+COMMENT ON COLUMN vPicture.saveName IS '저장파일명'
+/
+
+COMMENT ON COLUMN vPicture.orgName IS '원래파일명'
+/
+
+COMMENT ON COLUMN vPicture.fileSize IS '파일싸이즈'
+/
+
+COMMENT ON COLUMN vPicture.regDate IS '생성날짜'
+/
+
+ALTER TABLE vPicture
+    ADD CONSTRAINT FK_vPicture_vNum_volunteer_vNu FOREIGN KEY (vNum)
+        REFERENCES volunteer (vNum)
+	on delete cascade
+/
+
+
+-- sPicture Table Create SQL
+CREATE TABLE sPicture
+(
+    spNum       INT             NOT NULL, 
+    sNum        INT             NOT NULL, 
+    siNum       INT             NULL, 
+    saveName    VARCHAR2(20)    NULL, 
+    orgName     VARCHAR2(20)    NULL, 
+    fileSize    VARCHAR2(20)    NULL, 
+    CONSTRAINT SPICTURE_PK PRIMARY KEY (spNum)
+)
+/
+
+CREATE SEQUENCE sPicture_SEQ
+START WITH 1
+INCREMENT BY 1;
+/
+
+CREATE OR REPLACE TRIGGER sPicture_AI_TRG
+BEFORE INSERT ON sPicture 
+REFERENCING NEW AS NEW FOR EACH ROW 
+BEGIN 
+    SELECT sPicture_SEQ.NEXTVAL
+    INTO: NEW.spNum
+    FROM DUAL;
+END;
+/
+
+--DROP TRIGGER sPicture_AI_TRG;
+/
+
+--DROP SEQUENCE sPicture_SEQ;
+/
+
+COMMENT ON TABLE sPicture IS '나눔사진'
+/
+
+COMMENT ON COLUMN sPicture.spNum IS '사진번호'
+/
+
+COMMENT ON COLUMN sPicture.sNum IS '나눔번호'
+/
+
+COMMENT ON COLUMN sPicture.siNum IS '물품번호'
+/
+
+COMMENT ON COLUMN sPicture.saveName IS '저장파일명'
+/
+
+COMMENT ON COLUMN sPicture.orgName IS '원래파일명'
+/
+
+COMMENT ON COLUMN sPicture.fileSize IS '파일싸이즈'
+/
+
+ALTER TABLE sPicture
+    ADD CONSTRAINT FK_sPicture_sNum_sharing_sNum FOREIGN KEY (sNum)
+        REFERENCES sharing (sNum)
+	on delete cascade
+/
+
+ALTER TABLE sPicture
+    ADD CONSTRAINT FK_sPicture_siNum_sItem_siNum FOREIGN KEY (siNum)
+        REFERENCES sItem (siNum)
+	on delete cascade
+/
+
+
+-- fComment Table Create SQL
+CREATE TABLE fComment
+(
+    fcNum      INT             NOT NULL, 
+    id         VARCHAR2(40)    NULL, 
+    fNum       INT             NULL, 
+    content    CLOB            NULL, 
+    regDate    DATE            NULL, 
+    CONSTRAINT FCOMMENT_PK PRIMARY KEY (fcNum)
+)
+/
+
+CREATE SEQUENCE fComment_SEQ
+START WITH 1
+INCREMENT BY 1;
+/
+
+CREATE OR REPLACE TRIGGER fComment_AI_TRG
+BEFORE INSERT ON fComment 
+REFERENCING NEW AS NEW FOR EACH ROW 
+BEGIN 
+    SELECT fComment_SEQ.NEXTVAL
+    INTO: NEW.fcNum
+    FROM DUAL;
+END;
+/
+
+--DROP TRIGGER fComment_AI_TRG;
+/
+
+--DROP SEQUENCE fComment_SEQ;
+/
+
+COMMENT ON TABLE fComment IS '펀딩댓글'
+/
+
+COMMENT ON COLUMN fComment.fcNum IS '댓글번호'
+/
+
+COMMENT ON COLUMN fComment.id IS '아이디'
+/
+
+COMMENT ON COLUMN fComment.fNum IS '펀딩번호'
+/
+
+COMMENT ON COLUMN fComment.content IS '댓글내용'
+/
+
+COMMENT ON COLUMN fComment.regDate IS '등록일자'
+/
+
+ALTER TABLE fComment
+    ADD CONSTRAINT FK_fComment_id_users_id FOREIGN KEY (id)
+        REFERENCES users (id)
+	on delete cascade
+/
+
+ALTER TABLE fComment
+    ADD CONSTRAINT FK_fComment_fNum_funding_fNum FOREIGN KEY (fNum)
+        REFERENCES funding (fNum)
+	on delete cascade
+/
+
+
+-- vComment Table Create SQL
+CREATE TABLE vComment
+(
+    vcNum      INT             NOT NULL, 
+    vNum       INT             NULL, 
+    id         VARCHAR2(40)    NULL, 
+    content    CLOB            NULL, 
+    regDate    DATE            NULL, 
+    CONSTRAINT VCOMMENT_PK PRIMARY KEY (vcNum)
+)
+/
+
+CREATE SEQUENCE vComment_SEQ
+START WITH 1
+INCREMENT BY 1;
+/
+
+CREATE OR REPLACE TRIGGER vComment_AI_TRG
+BEFORE INSERT ON vComment 
+REFERENCING NEW AS NEW FOR EACH ROW 
+BEGIN 
+    SELECT vComment_SEQ.NEXTVAL
+    INTO: NEW.vcNum
+    FROM DUAL;
+END;
+/
+
+--DROP TRIGGER vComment_AI_TRG;
+/
+
+--DROP SEQUENCE vComment_SEQ;
+/
+
+COMMENT ON TABLE vComment IS '봉사댓글'
+/
+
+COMMENT ON COLUMN vComment.vcNum IS '댓글번호'
+/
+
+COMMENT ON COLUMN vComment.vNum IS '봉사번호'
+/
+
+COMMENT ON COLUMN vComment.id IS '아이디'
+/
+
+COMMENT ON COLUMN vComment.content IS '댓글내용'
+/
+
+COMMENT ON COLUMN vComment.regDate IS '등록일자'
+/
+
+ALTER TABLE vComment
+    ADD CONSTRAINT FK_vComment_id_users_id FOREIGN KEY (id)
+        REFERENCES users (id)
+	on delete cascade
+/
+
+ALTER TABLE vComment
+    ADD CONSTRAINT FK_vComment_vNum_volunteer_vNu FOREIGN KEY (vNum)
+        REFERENCES volunteer (vNum)
+	on delete cascade
+/
+
+
+-- sComment Table Create SQL
+CREATE TABLE sComment
+(
+    sNum       INT             NOT NULL, 
+    id         VARCHAR2(40)    NULL, 
+    content    CLOB            NULL, 
+    regDate    DATE            NULL, 
+    CONSTRAINT SCOMMENT_PK PRIMARY KEY (sNum)
+)
+/
+
+CREATE SEQUENCE sComment_SEQ
+START WITH 1
+INCREMENT BY 1;
+/
+
+CREATE OR REPLACE TRIGGER sComment_AI_TRG
+BEFORE INSERT ON sComment 
+REFERENCING NEW AS NEW FOR EACH ROW 
+BEGIN 
+    SELECT sComment_SEQ.NEXTVAL
+    INTO: NEW.sNum
+    FROM DUAL;
+END;
+/
+
+--DROP TRIGGER sComment_AI_TRG;
+/
+
+--DROP SEQUENCE sComment_SEQ;
+/
+
+COMMENT ON TABLE sComment IS '나눔댓글'
+/
+
+COMMENT ON COLUMN sComment.sNum IS '댓글번호'
+/
+
+COMMENT ON COLUMN sComment.id IS '아이디'
+/
+
+COMMENT ON COLUMN sComment.content IS '댓글내용'
+/
+
+COMMENT ON COLUMN sComment.regDate IS '등록일자'
+/
+
+ALTER TABLE sComment
+    ADD CONSTRAINT FK_sComment_id_users_id FOREIGN KEY (id)
+        REFERENCES users (id)
+	on delete cascade
+/
+
+
+-- sList Table Create SQL
+CREATE TABLE sList
+(
+    slNum      INT               NOT NULL, 
+    sNum       INT               NULL, 
+    id         VARCHAR2(40)      NULL, 
+    confirm    CHAR(1)           NULL, 
+    content    VARCHAR2(1000)    NULL, 
+    CONSTRAINT SLIST_PK PRIMARY KEY (slNum)
+)
+/
+
+CREATE SEQUENCE sList_SEQ
+START WITH 1
+INCREMENT BY 1;
+/
+
+CREATE OR REPLACE TRIGGER sList_AI_TRG
+BEFORE INSERT ON sList 
+REFERENCING NEW AS NEW FOR EACH ROW 
+BEGIN 
+    SELECT sList_SEQ.NEXTVAL
+    INTO: NEW.slNum
+    FROM DUAL;
+END;
+/
+
+--DROP TRIGGER sList_AI_TRG;
+/
+
+--DROP SEQUENCE sList_SEQ;
+/
+
+COMMENT ON TABLE sList IS '나눔신청자'
+/
+
+COMMENT ON COLUMN sList.slNum IS '리스트번호'
+/
+
+COMMENT ON COLUMN sList.sNum IS '나눔번호'
+/
+
+COMMENT ON COLUMN sList.id IS '아이디'
+/
+
+COMMENT ON COLUMN sList.confirm IS '수령승인'
+/
+
+COMMENT ON COLUMN sList.content IS '내용'
+/
+
+ALTER TABLE sList
+    ADD CONSTRAINT FK_sList_sNum_sharing_sNum FOREIGN KEY (sNum)
+        REFERENCES sharing (sNum)
+	on delete cascade
+/
+
+ALTER TABLE sList
+    ADD CONSTRAINT FK_sList_id_users_id FOREIGN KEY (id)
+        REFERENCES users (id)
+	on delete cascade
+/
+
+
+-- vList Table Create SQL
+CREATE TABLE vList
+(
+    vlNum      INT               NOT NULL, 
+    vNum       INT               NULL, 
+    id         VARCHAR2(40)      NULL, 
+    content    VARCHAR2(1000)    NULL, 
+    CONSTRAINT VLIST_PK PRIMARY KEY (vlNum)
+)
+/
+
+CREATE SEQUENCE vList_SEQ
+START WITH 1
+INCREMENT BY 1;
+/
+
+CREATE OR REPLACE TRIGGER vList_AI_TRG
+BEFORE INSERT ON vList 
+REFERENCING NEW AS NEW FOR EACH ROW 
+BEGIN 
+    SELECT vList_SEQ.NEXTVAL
+    INTO: NEW.vlNum
+    FROM DUAL;
+END;
+/
+
+--DROP TRIGGER vList_AI_TRG;
+/
+
+--DROP SEQUENCE vList_SEQ;
+/
+
+COMMENT ON TABLE vList IS '봉사신청자'
+/
+
+COMMENT ON COLUMN vList.vlNum IS '신청자번호'
+/
+
+COMMENT ON COLUMN vList.vNum IS '봉사번호'
+/
+
+COMMENT ON COLUMN vList.id IS '아이디'
+/
+
+COMMENT ON COLUMN vList.content IS '내용'
+/
+
+ALTER TABLE vList
+    ADD CONSTRAINT FK_vList_vNum_volunteer_vNum FOREIGN KEY (vNum)
+        REFERENCES volunteer (vNum)
+	on delete cascade
+/
+
+ALTER TABLE vList
+    ADD CONSTRAINT FK_vList_id_users_id FOREIGN KEY (id)
+        REFERENCES users (id)
+	on delete cascade
+/
+
+
+-- interest Table Create SQL
+CREATE TABLE interest
+(
+    iNum        INT             NOT NULL, 
+    id          VARCHAR2(40)    NULL, 
+    cGroup      VARCHAR2(40)    NULL, 
+    category    VARCHAR2(40)    NULL, 
+    CONSTRAINT INTEREST_PK PRIMARY KEY (iNum)
+)
+/
+
+CREATE SEQUENCE interest_SEQ
+START WITH 1
+INCREMENT BY 1;
+/
+
+CREATE OR REPLACE TRIGGER interest_AI_TRG
+BEFORE INSERT ON interest 
+REFERENCING NEW AS NEW FOR EACH ROW 
+BEGIN 
+    SELECT interest_SEQ.NEXTVAL
+    INTO: NEW.iNum
+    FROM DUAL;
+END;
+/
+
+--DROP TRIGGER interest_AI_TRG;
+/
+
+--DROP SEQUENCE interest_SEQ;
+/
+
+COMMENT ON TABLE interest IS '관심사항'
+/
+
+COMMENT ON COLUMN interest.iNum IS '관심번호'
+/
+
+COMMENT ON COLUMN interest.id IS '아이디'
+/
+
+COMMENT ON COLUMN interest.cGroup IS '분류'
+/
+
+COMMENT ON COLUMN interest.category IS '카테고리'
+/
+
+ALTER TABLE interest
+    ADD CONSTRAINT FK_interest_id_users_id FOREIGN KEY (id)
+        REFERENCES users (id)
+	on delete cascade
+/
+
+ALTER TABLE interest
+    ADD CONSTRAINT FK_interest_category_category_ FOREIGN KEY (category,cGroup)
+        REFERENCES category (category,cGroup)
+	on delete cascade
+/
+
+-- cRecommend Table Create SQL
+CREATE TABLE cRecommend
+(
+    crNum    INT             NOT NULL, 
+    cNum     INT             NULL, 
+    id       VARCHAR2(40)    NULL, 
+    CONSTRAINT CRECOMMEND_PK PRIMARY KEY (crNum)
+)
+/
+
+CREATE SEQUENCE cRecommend_SEQ
+START WITH 1
+INCREMENT BY 1;
+/
+
+CREATE OR REPLACE TRIGGER cRecommend_AI_TRG
+BEFORE INSERT ON cRecommend 
+REFERENCING NEW AS NEW FOR EACH ROW 
+BEGIN 
+    SELECT cRecommend_SEQ.NEXTVAL
+    INTO: NEW.crNum
+    FROM DUAL;
+END;
+/
+
+--DROP TRIGGER cRecommend_AI_TRG;
+/
+
+--DROP SEQUENCE cRecommend_SEQ;
+/
+
+COMMENT ON TABLE cRecommend IS '후원추천'
+/
+
+COMMENT ON COLUMN cRecommend.crNum IS '추천번호'
+/
+
+COMMENT ON COLUMN cRecommend.cNum IS '후원글번호'
+/
+
+COMMENT ON COLUMN cRecommend.id IS '아이디'
+/
+
+ALTER TABLE cRecommend
+    ADD CONSTRAINT FK_cRecommend_id_users_id FOREIGN KEY (id)
+        REFERENCES users (id)
+	on delete cascade
+/
+
+ALTER TABLE cRecommend
+    ADD CONSTRAINT FK_cRecommend_cNum_Charity_cNu FOREIGN KEY (cNum)
+        REFERENCES Charity (cNum)
+	on delete cascade
+/
+
+
+-- fRecommend Table Create SQL
+CREATE TABLE fRecommend
+(
+    frNum    INT             NOT NULL, 
+    fNum     INT             NULL, 
+    id       VARCHAR2(40)    NULL, 
+    CONSTRAINT FRECOMMEND_PK PRIMARY KEY (frNum)
+)
+/
+
+CREATE SEQUENCE fRecommend_SEQ
+START WITH 1
+INCREMENT BY 1;
+/
+
+CREATE OR REPLACE TRIGGER fRecommend_AI_TRG
+BEFORE INSERT ON fRecommend 
+REFERENCING NEW AS NEW FOR EACH ROW 
+BEGIN 
+    SELECT fRecommend_SEQ.NEXTVAL
+    INTO: NEW.frNum
+    FROM DUAL;
+END;
+/
+
+--DROP TRIGGER fRecommend_AI_TRG;
+/
+
+--DROP SEQUENCE fRecommend_SEQ;
+/
+
+COMMENT ON TABLE fRecommend IS '펀딩추천'
+/
+
+COMMENT ON COLUMN fRecommend.frNum IS '추천번호'
+/
+
+COMMENT ON COLUMN fRecommend.fNum IS '펀딩번호'
+/
+
+COMMENT ON COLUMN fRecommend.id IS '아이디'
+/
+
+ALTER TABLE fRecommend
+    ADD CONSTRAINT FK_fRecommend_fNum_funding_fNu FOREIGN KEY (fNum)
+        REFERENCES funding (fNum)
+	on delete cascade
+/
+
+ALTER TABLE fRecommend
+    ADD CONSTRAINT FK_fRecommend_id_users_id FOREIGN KEY (id)
+        REFERENCES users (id)
+	on delete cascade
+/
+
+
+-- sRecommned Table Create SQL
+CREATE TABLE sRecommned
+(
+    srNum    INT             NOT NULL, 
+    sNum     INT             NULL, 
+    id       VARCHAR2(40)    NULL, 
+    CONSTRAINT SRECOMMNED_PK PRIMARY KEY (srNum)
+)
+/
+
+CREATE SEQUENCE sRecommned_SEQ
+START WITH 1
+INCREMENT BY 1;
+/
+
+CREATE OR REPLACE TRIGGER sRecommned_AI_TRG
+BEFORE INSERT ON sRecommned 
+REFERENCING NEW AS NEW FOR EACH ROW 
+BEGIN 
+    SELECT sRecommned_SEQ.NEXTVAL
+    INTO: NEW.srNum
+    FROM DUAL;
+END;
+/
+
+--DROP TRIGGER sRecommned_AI_TRG;
+/
+
+--DROP SEQUENCE sRecommned_SEQ;
+/
+
+COMMENT ON TABLE sRecommned IS '나눔추천'
+/
+
+COMMENT ON COLUMN sRecommned.srNum IS '추천번호'
+/
+
+COMMENT ON COLUMN sRecommned.sNum IS '나눔번호'
+/
+
+COMMENT ON COLUMN sRecommned.id IS '아이디'
+/
+
+ALTER TABLE sRecommned
+    ADD CONSTRAINT FK_sRecommned_id_users_id FOREIGN KEY (id)
+        REFERENCES users (id)
+	on delete cascade
+/
+
+ALTER TABLE sRecommned
+    ADD CONSTRAINT FK_sRecommned_sNum_sharing_sNu FOREIGN KEY (sNum)
+        REFERENCES sharing (sNum)
+	on delete cascade
+/
+
+
+-- vRecommend Table Create SQL
+CREATE TABLE vRecommend
+(
+    vrNum    INT             NOT NULL, 
+    vNum     INT             NULL, 
+    id       VARCHAR2(40)    NULL, 
+    CONSTRAINT VRECOMMEND_PK PRIMARY KEY (vrNum)
+)
+/
+
+CREATE SEQUENCE vRecommend_SEQ
+START WITH 1
+INCREMENT BY 1;
+/
+
+CREATE OR REPLACE TRIGGER vRecommend_AI_TRG
+BEFORE INSERT ON vRecommend 
+REFERENCING NEW AS NEW FOR EACH ROW 
+BEGIN 
+    SELECT vRecommend_SEQ.NEXTVAL
+    INTO: NEW.vrNum
+    FROM DUAL;
+END;
+/
+
+--DROP TRIGGER vRecommend_AI_TRG;
+/
+
+--DROP SEQUENCE vRecommend_SEQ;
+/
+
+COMMENT ON TABLE vRecommend IS '봉사추천'
+/
+
+COMMENT ON COLUMN vRecommend.vrNum IS '추천번호'
+/
+
+COMMENT ON COLUMN vRecommend.vNum IS '봉사번호'
+/
+
+COMMENT ON COLUMN vRecommend.id IS '아이디'
+/
+
+ALTER TABLE vRecommend
+    ADD CONSTRAINT FK_vRecommend_id_users_id FOREIGN KEY (id)
+        REFERENCES users (id)
+	on delete cascade
+/
+
+ALTER TABLE vRecommend
+    ADD CONSTRAINT FK_vRecommend_vNum_volunteer_v FOREIGN KEY (vNum)
+        REFERENCES volunteer (vNum)
+	on delete cascade
+/
+
+
+-- alarm Table Create SQL
+CREATE TABLE alarm
+(
+    alarmNum    INT               NOT NULL, 
+    cases       VARCHAR2(40)      NULL, 
+    msg         VARCHAR2(1000)    NULL, 
+    CONSTRAINT ALARM_PK PRIMARY KEY (alarmNum)
+)
+/
+
+CREATE SEQUENCE alarm_SEQ
+START WITH 1
+INCREMENT BY 1;
+/
+
+CREATE OR REPLACE TRIGGER alarm_AI_TRG
+BEFORE INSERT ON alarm 
+REFERENCING NEW AS NEW FOR EACH ROW 
+BEGIN 
+    SELECT alarm_SEQ.NEXTVAL
+    INTO: NEW.alarmNum
+    FROM DUAL;
+END;
+/
+
+--DROP TRIGGER alarm_AI_TRG;
+/
+
+--DROP SEQUENCE alarm_SEQ;
+/
+
+COMMENT ON TABLE alarm IS '알림메시지'
+/
+
+COMMENT ON COLUMN alarm.alarmNum IS '알람번호'
+/
+
+COMMENT ON COLUMN alarm.cases IS '메시지종류'
+/
+
+COMMENT ON COLUMN alarm.msg IS '메시지'
+/
+
+
+-- vLanguage Table Create SQL
+CREATE TABLE vLanguage
+(
+    lang      VARCHAR2(20)    NOT NULL, 
+    div       VARCHAR2(40)    NULL, 
+    saying    CLOB            NULL, 
+    CONSTRAINT VLANGUAGE_PK PRIMARY KEY (lang)
+)
+/
+
+COMMENT ON TABLE vLanguage IS '다국어'
+/
+
+COMMENT ON COLUMN vLanguage.lang IS '언어'
+/
+
+COMMENT ON COLUMN vLanguage.div IS '번역부분'
+/
+
+COMMENT ON COLUMN vLanguage.saying IS '언어'
+/
+
+ALTER TABLE vLanguage
+    ADD CONSTRAINT FK_vLanguage_lang_userSetting_ FOREIGN KEY (lang)
+        REFERENCES userSetting (lang)
+	on delete cascade
+/
+
+
+-- cHashtag Table Create SQL
+CREATE TABLE cHashtag
+(
+    ctagNum    INT              NOT NULL, 
+    cNum       INT              NULL, 
+    hashtag    VARCHAR2(100)    NULL, 
+    CONSTRAINT CHASHTAG_PK PRIMARY KEY (ctagNum)
+)
+/
+
+CREATE SEQUENCE cHashtag_SEQ
+START WITH 1
+INCREMENT BY 1;
+/
+
+CREATE OR REPLACE TRIGGER cHashtag_AI_TRG
+BEFORE INSERT ON cHashtag 
+REFERENCING NEW AS NEW FOR EACH ROW 
+BEGIN 
+    SELECT cHashtag_SEQ.NEXTVAL
+    INTO: NEW.ctagNum
+    FROM DUAL;
+END;
+/
+
+--DROP TRIGGER cHashtag_AI_TRG;
+/
+
+--DROP SEQUENCE cHashtag_SEQ;
+/
+
+COMMENT ON TABLE cHashtag IS '후원해시태크'
+/
+
+COMMENT ON COLUMN cHashtag.ctagNum IS '태그번호'
+/
+
+COMMENT ON COLUMN cHashtag.cNum IS '후원글번호'
+/
+
+COMMENT ON COLUMN cHashtag.hashtag IS '해시태그'
+/
+
+ALTER TABLE cHashtag
+    ADD CONSTRAINT FK_cHashtag_cNum_Charity_cNum FOREIGN KEY (cNum)
+        REFERENCES Charity (cNum)
+	on delete cascade
+/
+
+
+-- fHashtag Table Create SQL
+CREATE TABLE fHashtag
+(
+    ftagNum    INT              NOT NULL, 
+    fNum       INT              NULL, 
+    hashtag    VARCHAR2(100)    NULL, 
+    CONSTRAINT FHASHTAG_PK PRIMARY KEY (ftagNum)
+)
+/
+
+CREATE SEQUENCE fHashtag_SEQ
+START WITH 1
+INCREMENT BY 1;
+/
+
+CREATE OR REPLACE TRIGGER fHashtag_AI_TRG
+BEFORE INSERT ON fHashtag 
+REFERENCING NEW AS NEW FOR EACH ROW 
+BEGIN 
+    SELECT fHashtag_SEQ.NEXTVAL
+    INTO: NEW.ftagNum
+    FROM DUAL;
+END;
+/
+
+--DROP TRIGGER fHashtag_AI_TRG;
+/
+
+--DROP SEQUENCE fHashtag_SEQ;
+/
+
+COMMENT ON TABLE fHashtag IS '펀딩해시태그'
+/
+
+COMMENT ON COLUMN fHashtag.ftagNum IS '태그번호'
+/
+
+COMMENT ON COLUMN fHashtag.fNum IS '펀딩번호'
+/
+
+COMMENT ON COLUMN fHashtag.hashtag IS '해시태그'
+/
+
+ALTER TABLE fHashtag
+    ADD CONSTRAINT FK_fHashtag_fNum_funding_fNum FOREIGN KEY (fNum)
+        REFERENCES funding (fNum)
+	on delete cascade
+/
+
+
+-- ePicture Table Create SQL
+CREATE TABLE ePicture
+(
+    epNum       INT             NOT NULL, 
+    eNum        INT             NULL, 
+    saveName    VARCHAR2(50)    NULL, 
+    orgName     VARCHAR2(50)    NULL, 
+    fileSize    LONG            NULL, 
+    regDate     DATE            NULL, 
+    CONSTRAINT EPICTURE_PK PRIMARY KEY (epNum)
+)
+/
+
+CREATE SEQUENCE ePicture_SEQ
+START WITH 1
+INCREMENT BY 1;
+/
+
+CREATE OR REPLACE TRIGGER ePicture_AI_TRG
+BEFORE INSERT ON ePicture 
+REFERENCING NEW AS NEW FOR EACH ROW 
+BEGIN 
+    SELECT ePicture_SEQ.NEXTVAL
+    INTO: NEW.epNum
+    FROM DUAL;
+END;
+/
+
+--DROP TRIGGER ePicture_AI_TRG;
+/
+
+--DROP SEQUENCE ePicture_SEQ;
+/
+
+COMMENT ON TABLE ePicture IS '후기사진'
+/
+
+COMMENT ON COLUMN ePicture.epNum IS '사진번호'
+/
+
+COMMENT ON COLUMN ePicture.eNum IS '후기번호'
+/
+
+COMMENT ON COLUMN ePicture.saveName IS '저장파일명'
+/
+
+COMMENT ON COLUMN ePicture.orgName IS '원래파일명'
+/
+
+COMMENT ON COLUMN ePicture.fileSize IS '파일싸이즈'
+/
+
+COMMENT ON COLUMN ePicture.regDate IS '생성날짜'
+/
+
+ALTER TABLE ePicture
+    ADD CONSTRAINT FK_ePicture_eNum_Epilogue_eNum FOREIGN KEY (eNum)
+        REFERENCES Epilogue (eNum)
+	on delete cascade
+/
+
+
+-- eRecommend Table Create SQL
+CREATE TABLE eRecommend
+(
+    erNum    INT             NOT NULL, 
+    eNum     INT             NULL, 
+    id       VARCHAR2(40)    NULL, 
+    CONSTRAINT ERECOMMEND_PK PRIMARY KEY (erNum)
+)
+/
+
+CREATE SEQUENCE eRecommend_SEQ
+START WITH 1
+INCREMENT BY 1;
+/
+
+CREATE OR REPLACE TRIGGER eRecommend_AI_TRG
+BEFORE INSERT ON eRecommend 
+REFERENCING NEW AS NEW FOR EACH ROW 
+BEGIN 
+    SELECT eRecommend_SEQ.NEXTVAL
+    INTO: NEW.erNum
+    FROM DUAL;
+END;
+/
+
+--DROP TRIGGER eRecommend_AI_TRG;
+/
+
+--DROP SEQUENCE eRecommend_SEQ;
+/
+
+COMMENT ON TABLE eRecommend IS '후기추천'
+/
+
+COMMENT ON COLUMN eRecommend.erNum IS '추천번호'
+/
+
+COMMENT ON COLUMN eRecommend.eNum IS '후기번호'
+/
+
+COMMENT ON COLUMN eRecommend.id IS '아이디'
+/
+
+ALTER TABLE eRecommend
+    ADD CONSTRAINT FK_eRecommend_eNum_Epilogue_eN FOREIGN KEY (eNum)
+        REFERENCES Epilogue (eNum)
+	on delete cascade
+/
+
+ALTER TABLE eRecommend
+    ADD CONSTRAINT FK_eRecommend_id_users_id FOREIGN KEY (id)
+        REFERENCES users (id)
+	on delete cascade
+/
+
+
+-- eHashtag Table Create SQL
+CREATE TABLE eHashtag
+(
+    ctagNum    INT              NOT NULL, 
+    eNum       INT              NULL, 
+    hashtag    VARCHAR2(100)    NULL, 
+    CONSTRAINT EHASHTAG_PK PRIMARY KEY (ctagNum)
+)
+/
+
+CREATE SEQUENCE eHashtag_SEQ
+START WITH 1
+INCREMENT BY 1;
+/
+
+CREATE OR REPLACE TRIGGER eHashtag_AI_TRG
+BEFORE INSERT ON eHashtag 
+REFERENCING NEW AS NEW FOR EACH ROW 
+BEGIN 
+    SELECT eHashtag_SEQ.NEXTVAL
+    INTO: NEW.ctagNum
+    FROM DUAL;
+END;
+/
+
+--DROP TRIGGER eHashtag_AI_TRG;
+/
+
+--DROP SEQUENCE eHashtag_SEQ;
+/
+
+COMMENT ON TABLE eHashtag IS '후기해시태그'
+/
+
+COMMENT ON COLUMN eHashtag.ctagNum IS '태그번호'
+/
+
+COMMENT ON COLUMN eHashtag.eNum IS '후기번호'
+/
+
+COMMENT ON COLUMN eHashtag.hashtag IS '해시태그'
+/
+
+ALTER TABLE eHashtag
+    ADD CONSTRAINT FK_eHashtag_eNum_Epilogue_eNum FOREIGN KEY (eNum)
+        REFERENCES Epilogue (eNum)
+	on delete cascade
+/
+
+
+-- creditMethod Table Create SQL
+CREATE TABLE creditMethod
+(
+    cmNum     INT             NOT NULL, 
+    method    VARCHAR2(20)    NULL, 
+    CONSTRAINT CREDITMETHOD_PK PRIMARY KEY (cmNum)
+)
+/
+
+CREATE SEQUENCE creditMethod_SEQ
+START WITH 1
+INCREMENT BY 1;
+/
+
+CREATE OR REPLACE TRIGGER creditMethod_AI_TRG
+BEFORE INSERT ON creditMethod 
+REFERENCING NEW AS NEW FOR EACH ROW 
+BEGIN 
+    SELECT creditMethod_SEQ.NEXTVAL
+    INTO: NEW.cmNum
+    FROM DUAL;
+END;
+/
+
+--DROP TRIGGER creditMethod_AI_TRG;
+/
+
+--DROP SEQUENCE creditMethod_SEQ;
+/
+
+COMMENT ON TABLE creditMethod IS '결제수단'
+/
+
+COMMENT ON COLUMN creditMethod.cmNum IS '수단번호'
+/
+
+COMMENT ON COLUMN creditMethod.method IS '결제수단'
+/
+
+ALTER TABLE creditMethod
+    ADD CONSTRAINT FK_creditMethod_method_payment FOREIGN KEY (method)
+        REFERENCES payment (method)
+	on delete cascade
+/
+
+
+-- fResult Table Create SQL
+CREATE TABLE fResult
+(
+    frNum    INT             NOT NULL, 
+    fdNum    INT             NULL, 
+    state    VARCHAR2(40)    NULL, 
+    CONSTRAINT FRESULT_PK PRIMARY KEY (frNum)
+)
+/
+
+CREATE SEQUENCE fResult_SEQ
+START WITH 1
+INCREMENT BY 1;
+/
+
+CREATE OR REPLACE TRIGGER fResult_AI_TRG
+BEFORE INSERT ON fResult 
+REFERENCING NEW AS NEW FOR EACH ROW 
+BEGIN 
+    SELECT fResult_SEQ.NEXTVAL
+    INTO: NEW.frNum
+    FROM DUAL;
+END;
+/
+
+--DROP TRIGGER fResult_AI_TRG;
+/
+
+--DROP SEQUENCE fResult_SEQ;
+/
+
+COMMENT ON TABLE fResult IS '펀딩결과'
+/
+
+COMMENT ON COLUMN fResult.frNum IS '결과번호'
+/
+
+COMMENT ON COLUMN fResult.fdNum IS '펀딩내역번호'
+/
+
+COMMENT ON COLUMN fResult.state IS '결과상태'
+/
+
+ALTER TABLE fResult
+    ADD CONSTRAINT FK_fResult_fdNum_fDetail_fdNum FOREIGN KEY (fdNum)
+        REFERENCES fDetail (fdNum)
+	on delete cascade
+/
+
+
+-- event Table Create SQL
+CREATE TABLE event
+(
+    enum         INT              NOT NULL, 
+    name         VARCHAR2(100)    NULL, 
+    startTime    DATE             NULL, 
+    endTime      DATE             NULL, 
+    CONSTRAINT EVENT_PK PRIMARY KEY (enum)
+)
+/
+
+CREATE SEQUENCE event_SEQ
+START WITH 1
+INCREMENT BY 1;
+/
+
+CREATE OR REPLACE TRIGGER event_AI_TRG
+BEFORE INSERT ON event 
+REFERENCING NEW AS NEW FOR EACH ROW 
+BEGIN 
+    SELECT event_SEQ.NEXTVAL
+    INTO: NEW.enum
+    FROM DUAL;
+END;
+/
+
+--DROP TRIGGER event_AI_TRG;
+/
+
+--DROP SEQUENCE event_SEQ;
+/
+
+COMMENT ON TABLE event IS '일정'
+/
+
+COMMENT ON COLUMN event.enum IS '이벤트번호'
+/
+
+COMMENT ON COLUMN event.name IS '이벤트이름'
+/
+
+COMMENT ON COLUMN event.startTime IS '시작시간'
+/
+
+COMMENT ON COLUMN event.endTime IS '종료시간'
+/
+
+
