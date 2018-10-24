@@ -9,14 +9,39 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		$("#inputFile").on('change', "input[name='fPicture']", function(){
-			var file = $("<input>").attr('type', 'file')
-					.attr('name', 'fPicture');
-			var text = $('<input>').attr('type', 'text')
-					.attr('name', 'fPinfo');
-			var br = $('<br>');
-			$("#inputFile").append(file).append(text).append(br);
+			var last = $("input[name='fPicture']").last();
+			if($(last).is($(this))){
+				var file = $("<input>").attr('type', 'file')
+									.attr('name', 'fPicture');
+				var text = $('<input>').attr('type', 'text')
+									.attr('name', 'fPinfo');
+				$("#inputFile").append(file).append(text).append('<br>');
+			}
+			
 		});
-
+		$("#inputReward").on('change', "input[name='price']", function(){
+			var last = $("input[name='price']").last();
+			if($(last).is($(this))){
+				var tr = $("<span></span>").text("리워드명");
+				var rw = $("<input>").attr('type', 'text')
+									.attr('name', 'reward');
+				var tp = $("<span></span>").text('가격');
+				var pr = $("<input>").attr('type', 'text')
+									.attr('name', 'price');
+				$("#inputReward").append(tr).append(rw)
+								.append(tp).append(pr).append('<br>');
+			}
+		});
+		$("#inputHashtag").on('change', "input[data-hash='ht']", function(){
+			var last = $("input[data-hash='ht']").last();
+			if($(last).is($(this))){
+				var h = $("<input>").attr("type", 'text')
+					.attr('data-hash', 'ht')
+					.attr('name', 'hashtag');
+				$("#inputHashtag").append(h).append("<br>");
+			}
+		});
+		
 	});
 	function appCommit(){
 		if(!$("#title").val()){
@@ -84,28 +109,44 @@
 		
 		<label for="category">카테고리</label>
 		<select name="category">
-			<option value="1">1</option>
-			<option value="2">2</option>
-			<option value="3">3</option>
-			<option value="4">4</option>
+			<option value="테크·가전">테크·가전</option>
+			<option value="패션·잡화">패션·잡화</option>
+			<option value="뷰티">뷰티</option>
+			<option value="푸드">푸드</option>
+			<option value="홈리빙">홈리빙</option>
+			<option value="디자인소품">디자인소품</option>
+			<option value="여행·레저">여행·레저</option>
+			<option value="스포츠·모빌리티">스포츠·모빌리티</option>
+			<option value="반려동물">반려동물</option>
+			<option value="공연·컬쳐">공연·컬쳐</option>
+			<option value="소셜·캠페인">소셜·캠페인</option>
+			<option value="교육·키즈">교육·키즈</option>
+			<option value="게임·취미">게임·취미</option>
+			<option value="출판">출판</option>
 		</select>
 		<br>
-		해시태그 <input type="text" name="hashtag">
+		
+		
+		<span>해시태그</span>
 		<label for="hashtag">#1</label><input type="checkbox" name="hashtag" value="n1">
 		<label for="hashtag">#2</label><input type="checkbox" name="hashtag" value="n2">
 		<label for="hashtag">#3</label><input type="checkbox" name="hashtag" value="n3">
 		<br>
+		<div id="inputHashtag">
+			<input type="text" name="hashtag" data-hash="ht"><br>
+		</div>
+		
 		
 		리워드 등록<br>
-		물품명1<input type="text" name="reward">
-		가격1<input type="text" name="price"><br>
-		물품명2<input type="text" name="reward">
-		가격2<input type="text" name="price"><br>
-		물품명3<input type="text" name="reward">
-		가격3<input type="text" name="price"><br>
+		<div id="inputReward">
+			<span>물품명</span><input type="text" name="reward">
+			<span>가격</span><input type="text" name="price"><br>
+		</div>
+		
 		<div id="inputFile">
-		사진업로드<br>
-		<input type="file" name="fPicture"><input type="text" name="fPinfo"><br>
+			사진업로드<br>
+			<input type="file" name="fPicture">
+			<input type="text" name="fPinfo"><br>
 		</div>
 		<input type="submit" value="submit">
 	</form>
