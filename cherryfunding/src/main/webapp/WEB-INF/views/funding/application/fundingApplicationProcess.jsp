@@ -8,13 +8,21 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
-		
+		$("#inputFile").on('change', "input[name='fPicture']", function(){
+			var file = $("<input>").attr('type', 'file')
+					.attr('name', 'fPicture');
+			var text = $('<input>').attr('type', 'text')
+					.attr('name', 'fPinfo');
+			var br = $('<br>');
+			$("#inputFile").append(file).append(text).append(br);
+		});
+
 	});
-	 function appCommit(){
-		 if(!$("#title").val()){
-			 alert("제목을 입력해주세욧");
-			 return false;
-		 }
+	function appCommit(){
+		if(!$("#title").val()){
+		 alert("제목을 입력해주세욧");
+		 return false;
+		}
 		if(!$("#content").val()){
 			alert("내용을 입력해주세욧");
 			 return false;
@@ -39,8 +47,6 @@
 			return false;
 		}
 		
-		
-		
 		var r = $("input[name='reward']");
 		var ind = $("input[name='reward']").length;
 		var check = 0;
@@ -54,7 +60,7 @@
 			return false;
 		}
 		return true;
-	 }
+	}
 </script>
 </head>
 <body>
@@ -97,12 +103,10 @@
 		가격2<input type="text" name="price"><br>
 		물품명3<input type="text" name="reward">
 		가격3<input type="text" name="price"><br>
-		
+		<div id="inputFile">
 		사진업로드<br>
 		<input type="file" name="fPicture"><input type="text" name="fPinfo"><br>
-		<input type="file" name="fPicture"><input type="text" name="fPinfo"><br>
-		<input type="file" name="fPicture"><input type="text" name="fPinfo"><br>
-		
+		</div>
 		<input type="submit" value="submit">
 	</form>
 </body>
