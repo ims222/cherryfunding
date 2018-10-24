@@ -18,6 +18,7 @@
 			<th>등록일</th>
 			<th>아이디</th>
 			<th>조회수</th>
+			<th>상세글</th>
 		</tr>
 		<c:forEach var="vo" items="${list }">
 			<tr>
@@ -28,7 +29,7 @@
 				<td>${vo.regdate }</td>
 				<td>${vo.id }</td>
 				<td>${vo.hit }</td>
-				<td><a href="<c:url value='/fundingList/detail?num=${vo.fnum }'/>">상세글</a></td>
+				<td><a href="<c:url value='/fundingList/detail?num=${vo.fnum }'/>">보기</a></td>
 			</tr>
 		</c:forEach>
 	</table>

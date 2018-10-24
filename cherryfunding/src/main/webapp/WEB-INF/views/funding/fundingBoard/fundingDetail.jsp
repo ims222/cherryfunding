@@ -10,40 +10,26 @@
 <body>
 	<h2>상세글 보기</h2>
 	<table border="1" width="500">
+		<tr><td>글번호</td><td>${vo.fnum }</td><tr>
+		<tr><td>제목</td><td>${vo.title }</td></tr>
+		<tr><td>내용</td><td>${vo.content }</td></tr>
+		<tr><td>목표금액</td><td>${vo.amount }</td></tr>
+		<tr><td>현재금액</td><td>${vo.camout }</td></tr>
+		<tr><td>시작일</td><td>${vo.sdate }</td></tr>
+		<tr><td>종료일</td><td>${vo.edate }</td></tr>
+		<tr><td>카테고리</td><td>${vo.category }</td></tr>
+		<tr><td>승인구분</td><td>${vo.confirm }</td></tr>
+		<tr><td>승인자</td><td>${vo.aid }</td></tr>
+		<tr><td>주소</td><td>${vo.addr }</td></tr>
+		<tr><td>등록일</td><td>${vo.regdate }</td></tr>
+		<tr><td>아이디</td><td>${vo.id }</td></tr>
+		<tr><td>조회수</td><td>${vo.hit }</td></tr>
 		<tr>
-			<th>글번호</th>
-			<th>제목</th>
-			<th>내용</th>
-			<th>목표금액</th>
-			<th>현재금액</th>
-			<th>시작일</th>
-			<th>종료일</th>
-			<th>카테고리</th>
-			<th>승인구분</th>
-			<th>승인자</th>
-			<th>주소</th>
-			<th>등록일</th>
-			<th>아이디</th>
-			<th>조회수</th>
+		  <td>
+		  <a href="<c:url value='/fundingList/update?num=${vo.fnum }'/>">수정</a>
+		  <a href="<c:url value='/fundingList/delete?num=${vo.fnum }'/>">삭제</a>
+		  </td>
 		</tr>
-			<tr>
-				<td>${vo.fnum }</td>
-				<td>${vo.title }</td>
-				<td>${vo.content }</td>
-				<td>${vo.amount }</td>
-				<td>${vo.camout }</td>
-				<td>${vo.sdate }</td>
-				<td>${vo.edate }</td>
-				<td>${vo.category }</td>
-				<td>${vo.confirm }</td>
-				<td>${vo.aid }</td>
-				<td>${vo.addr }</td>
-				<td>${vo.regdate }</td>
-				<td>${vo.id }</td>
-				<td>${vo.hit }</td>
-				<td><a href="<c:url value='/fundingList/update?num=${vo.fnum }'/>">수정</a></td>
-				<td><a href="<c:url value='/fundingList/delete?num=${vo.fnum }'/>">삭제</a></td>
-			</tr>
 	</table>
 </body>
 
