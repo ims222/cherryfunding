@@ -9,21 +9,37 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		$("#inputFile").on('change', "input[name='fPicture']", function(){
-			var file = $("<input>").attr('type', 'file')
-					.attr('name', 'fPicture');
-			var text = $('<input>').attr('type', 'text')
-					.attr('name', 'fPinfo');
-			$("#inputFile").append(file).append(text).append('<br>');
+			var last = $("input[name='fPicture']").last();
+			if($(last).is($(this))){
+				var file = $("<input>").attr('type', 'file')
+									.attr('name', 'fPicture');
+				var text = $('<input>').attr('type', 'text')
+									.attr('name', 'fPinfo');
+				$("#inputFile").append(file).append(text).append('<br>');
+			}
+			
 		});
 		$("#inputReward").on('change', "input[name='price']", function(){
-			var tr = $("<span></span>").text("리워드명");
-			var rw = $("<input>").attr('type', 'text')
-								.attr('name', 'reward');
-			var tp = $("<span></span>").text('가격');
-			var pr = $("<input>").attr('type', 'text')
-								.attr('name', 'price');
-			$("#inputReward").append(tr).append(rw)
-							.append(tp).append(pr).append('<br>');
+			var last = $("input[name='price']").last();
+			if($(last).is($(this))){
+				var tr = $("<span></span>").text("리워드명");
+				var rw = $("<input>").attr('type', 'text')
+									.attr('name', 'reward');
+				var tp = $("<span></span>").text('가격');
+				var pr = $("<input>").attr('type', 'text')
+									.attr('name', 'price');
+				$("#inputReward").append(tr).append(rw)
+								.append(tp).append(pr).append('<br>');
+			}
+		});
+		$("#inputHashtag").on('change', "input[data-hash='ht']", function(){
+			var last = $("input[data-hash='ht']").last();
+			if($(last).is($(this))){
+				var h = $("<input>").attr("type", 'text')
+					.attr('data-hash', 'ht')
+					.attr('name', 'hashtag');
+				$("#inputHashtag").append(h).append("<br>");
+			}
 		});
 		
 	});
@@ -99,11 +115,17 @@
 			<option value="4">4</option>
 		</select>
 		<br>
-		해시태그 <input type="text" name="hashtag">
+		
+		
+		<span>해시태그</span>
 		<label for="hashtag">#1</label><input type="checkbox" name="hashtag" value="n1">
 		<label for="hashtag">#2</label><input type="checkbox" name="hashtag" value="n2">
 		<label for="hashtag">#3</label><input type="checkbox" name="hashtag" value="n3">
 		<br>
+		<div id="inputHashtag">
+			<input type="text" name="hashtag" data-hash="ht"><br>
+		</div>
+		
 		
 		리워드 등록<br>
 		<div id="inputReward">
