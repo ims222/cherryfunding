@@ -18,7 +18,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="update" parameterType="funding">
 		update funding set title=#{title},content=#{content},amount=#{amount},camout=#{camout},
 		sdate=#{sdate},edate=#{edate},category=#{category},confirm=#{confirm},aid=#{aid},
-		addr=#{addr},id=#{id} where fnum = #{num} 
+		addr=#{addr},id=#{id} where fnum = #{fnum} 
 	</update>
 	<delete id="delete" parameterType="int">
 		delete from funding where fnum=#{num}

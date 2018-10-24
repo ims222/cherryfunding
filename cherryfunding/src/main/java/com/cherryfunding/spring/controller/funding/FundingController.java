@@ -179,15 +179,32 @@ public class FundingController {
 		model.addAttribute("vo", vo);
 		// model.addAttribute("prev",prev);
 		// model.addAttribute("next",next);
-		return "funding/fundingBoard/fundingDetail";
+		return "/funding/fundingBoard/fundingDetail";
 	}
 
 	@RequestMapping(value = "/fundingList/delete", method = RequestMethod.GET)
 	public String delete(int num, Model model) {
 		int n = fundingService.delete(num); // 疫뀐옙 占쎄맒占쎄쉭占쎌젟癰귨옙
 		if (n > 0) {
-			return "/fundingList/showAll";
+			return "redirect:/fundingList/showAll";
 		} else {
+			return "error";
+		}
+	}
+	
+	@RequestMapping(value = "/fundingList/update", method = RequestMethod.GET)
+	public String update(int num, Model model) {
+		FundingVo vo = fundingService.select(num); 
+		model.addAttribute("vo", vo);
+		return "/funding/fundingBoard/fundingUpdate";
+	}
+	
+	@RequestMapping(value = "/fundingList/update", method = RequestMethod.POST)
+	public String updateOk(FundingVo vo, Model model) {
+		int n = fundingService.update(vo);
+		if(n>0) {
+			return "redirect:/fundingList/showAll";
+		}else {
 			return "error";
 		}
 	}

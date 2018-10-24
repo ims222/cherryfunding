@@ -16,5 +16,6 @@
 	<a href="${pageContext.request.contextPath}/funding/fundingApplication">펀드등록</a>
 	<a href="${pageContext.request.contextPath}/funding/prepareFundingList">준비중펀드목록</a>
 	<a href="${pageContext.request.contextPath}/funding/endFundingList">종료펀드목록</a>
+	<a href="${pageContext.request.contextPath}/fundingList/showAll">전체펀드목록</a>
 </body>
 </html>
