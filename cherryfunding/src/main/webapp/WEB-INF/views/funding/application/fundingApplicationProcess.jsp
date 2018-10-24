@@ -5,11 +5,62 @@
 <head>
 <meta charset="UTF-8">
 <title>home.jsp</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		
+	});
+	 function appCommit(){
+		 if(!$("#title").val()){
+			 alert("제목을 입력해주세욧");
+			 return false;
+		 }
+		if(!$("#content").val()){
+			alert("내용을 입력해주세욧");
+			 return false;
+		}
+		if(!$("#amount").val()){
+			alert("목표금액을 설정하세욧");
+			return false;
+		}
+		if(!$("#sDate").val()){
+			alert("시작일자를 선택하세요");
+			return false;
+		}
+		if(!$("#eDate").val()){
+			alert("종료일자를 선택하세요");
+			return false;
+		}
+		
+		var sd = new Date($("#sDate").val());
+		var ed = new Date($("#eDate").val());
+		if(sd.getTime() > ed.getTime()){
+			alert("시작보다 종료를 더 먼저 입력했어여");
+			return false;
+		}
+		
+		
+		
+		var r = $("input[name='reward']");
+		var ind = $("input[name='reward']").length;
+		var check = 0;
+		for(var i = 0;i<ind;i++){
+			if($(r[i]).val()){
+				check++;
+			}
+		}
+		if(check < 1){
+			alert("물품은 한가지 이상 입력하셔야 되욧");
+			return false;
+		}
+		return true;
+	 }
+</script>
 </head>
 <body>
 	<h1>funding application</h1>
 	
-	<form method="post" action="${pageContext.request.contextPath}/funding/fundingApplication" enctype="multipart/form-data">
+	<form method="post" action="${pageContext.request.contextPath}/funding/fundingApplication" enctype="multipart/form-data" onsubmit="return appCommit()">
 		<input type="hidden" name="id" value="${sessionScope.id}">
 		<label for="title">제목</label>
 		<input type="text" name="title" id="title"><br>
