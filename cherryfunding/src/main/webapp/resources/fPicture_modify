@@ -1,18 +1,19 @@
 drop table fPicture;
-CREATE TABLE fPicture -- ������ ������ �ߴ��մϴ� ����
+CREATE TABLE fPicture -- 리와드 참조 중단을 알려드립니다.
 (
     fpNum       INT             NOT NULL, 
     fNum        INT             NULL, 
-    saveName    VARCHAR2(50)    NULL, 
-    orgName     VARCHAR2(50)    NULL, 
+    saveName    VARCHAR2(1000)    NULL,  --글자수 증가 홍
+    orgName     VARCHAR2(1000)    NULL,  --글자수 증가 홍
     fileSize    LONG            NULL, 
     regDate     DATE            NULL,
     fPinfo        VARCHAR2(500),
     CONSTRAINT FPICTURE_PK PRIMARY KEY (fpNum)
-    --rNum        INT             NULL, ���� ����
+    --rNum        INT             NULL, 리워드 참조 중단
 )
 /
---���� ���� ������ ÷���մϴ��
+
+-- 이친구는 이제 그만하시길 바라요
 ALTER TABLE fPicture
     ADD CONSTRAINT FK_fPicture_rNum_reward_rNum FOREIGN KEY (rNum)
         REFERENCES reward (rNum)
@@ -25,7 +26,7 @@ START WITH 1
 INCREMENT BY 1;
 /
 
-
+--펀딩번호는 그래로 참조해요
 ALTER TABLE fPicture
     ADD CONSTRAINT FK_fPicture_fNum_funding_fNum FOREIGN KEY (fNum)
         REFERENCES funding (fNum)

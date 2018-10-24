@@ -109,10 +109,20 @@
 		
 		<label for="category">카테고리</label>
 		<select name="category">
-			<option value="1">1</option>
-			<option value="2">2</option>
-			<option value="3">3</option>
-			<option value="4">4</option>
+			<option value="테크·가전">테크·가전</option>
+			<option value="패션·잡화">패션·잡화</option>
+			<option value="뷰티">뷰티</option>
+			<option value="푸드">푸드</option>
+			<option value="홈리빙">홈리빙</option>
+			<option value="디자인소품">디자인소품</option>
+			<option value="여행·레저">여행·레저</option>
+			<option value="스포츠·모빌리티">스포츠·모빌리티</option>
+			<option value="반려동물">반려동물</option>
+			<option value="공연·컬쳐">공연·컬쳐</option>
+			<option value="소셜·캠페인">소셜·캠페인</option>
+			<option value="교육·키즈">교육·키즈</option>
+			<option value="게임·취미">게임·취미</option>
+			<option value="출판">출판</option>
 		</select>
 		<br>
 		
