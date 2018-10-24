@@ -164,7 +164,7 @@ public class FundingController {
 	}
 
 	@RequestMapping(value = "/fundingList/showAll", method = RequestMethod.GET)
-	public String list(Model model) { // �쟾泥� ���뵫湲� 遺덈윭�삤湲�
+	public String list(Model model) { // 전체 목록
 		List<FundingVo> list = fundingService.list();
 		model.addAttribute("list", list);
 		return "funding/fundingBoard/fundingList";
@@ -173,10 +173,12 @@ public class FundingController {
 
 	@RequestMapping(value = "/fundingList/detail", method = RequestMethod.GET)
 	public String detail(int num, Model model) {
-		FundingVo vo = fundingService.select(num); // 疫뀐옙 占쎄맒占쎄쉭占쎌젟癰귨옙
-		// 鈺곌퀬�돳占쎈땾 筌앹빓占쏙옙�뻻占쎄텕疫뀐옙(域뱀눖�쑓 占쎈연疫꿸퀣苑� 鈺곌퀬�돳占쎈땾揶쏉옙 占쎈툡占쎌뒄占쎈립筌욑옙 占쎌벥�눧紐꾩뵠..)
+		FundingVo vo = fundingService.select(num); // 글 하나만 조회
+		List<FPictureVo> list = fPictureService.list(num);	//펀딩번호로 이미지파일 조회
+		// 조회수 증가시켜야 하는데 조회수가 필요한지 잘 모르겠음 
 		// service.addHit(num);
 		model.addAttribute("vo", vo);
+		model.addAttribute("list",list);
 		// model.addAttribute("prev",prev);
 		// model.addAttribute("next",next);
 		return "/funding/fundingBoard/fundingDetail";

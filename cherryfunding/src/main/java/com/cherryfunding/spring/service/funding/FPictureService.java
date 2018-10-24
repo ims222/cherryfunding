@@ -1,5 +1,7 @@
 package com.cherryfunding.spring.service.funding;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,5 +20,9 @@ public class FPictureService {
 
 	public int getMaxNum() {
 		return dao.getMaxNum();
+	}
+	
+	public List<FPictureVo> list(int num) {
+		return dao.list(num);
 	}
 }

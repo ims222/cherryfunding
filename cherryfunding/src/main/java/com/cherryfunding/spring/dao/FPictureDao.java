@@ -1,10 +1,13 @@
 package com.cherryfunding.spring.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.cherryfunding.spring.vo.FPictureVo;
+import com.cherryfunding.spring.vo.FundingVo;
 
 @Repository
 public class FPictureDao {
@@ -20,4 +23,9 @@ public class FPictureDao {
 	public int getMaxNum() {
 		return sqlSession.selectOne(NAMESPACE + "getMaxNum");
 	}
+	
+	public List<FPictureVo> list(int num) {
+		return sqlSession.selectList(NAMESPACE + "list", num);
+	}
+	
 }

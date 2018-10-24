@@ -31,6 +31,17 @@
 		  </td>
 		</tr>
 	</table>
+	<h2>첨부 이미지</h2>
+	<table border="1">
+	<tr>
+	<c:forEach var="vo" items="${list }">
+	<td>${vo.fpNum}</td>
+	<td>${vo.orgname}</td>
+	<td>${vo.fpinfo}</td>
+	</c:forEach>
+	</tr>
+	</table>
+	<h2>에디터</h2>
 </body>
 
 </html>
