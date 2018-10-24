@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.cherryfunding.spring.mybatis.AdminMapper">
+  
+  	<insert id="insert" parameterType="AdminVo">
+  		insert into admin values(#{aid},#{pwd},#{nick},sysdate)
+  	</insert>
+  	
+  	<select id="login" parameterType="hashmap" resultType="AdminVo">
+  		select * from admin where aid=#{aid} and pwd=#{pwd}
+  	</select>
+  
+  
+  </mapper>

@@ -3,17 +3,17 @@ package com.cherryfunding.spring.vo;
 import java.sql.Date;
 
 public class AdminVo {
-	private String aId;
+	private String aid;
 	private String pwd;
 	private String nick;
 	private Date regdate;
 
-	public String getaId() {
-		return aId;
+	public String getaid() {
+		return aid;
 	}
 
-	public void setaId(String aId) {
-		this.aId = aId;
+	public void setaid(String aid) {
+		this.aid = aid;
 	}
 
 	public String getPwd() {
@@ -40,8 +40,8 @@ public class AdminVo {
 		this.regdate = regdate;
 	}
 
-	public AdminVo(String aId, String pwd, String nick, Date regdate) {
-		this.aId = aId;
+	public AdminVo(String aid, String pwd, String nick, Date regdate) {
+		this.aid = aid;
 		this.pwd = pwd;
 		this.nick = nick;
 		this.regdate = regdate;

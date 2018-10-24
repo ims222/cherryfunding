@@ -2,13 +2,21 @@
 <!DOCTYPE configuration
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
 <configuration>
-<!-- 
+
 	<typeAliases>
-		<typeAlias type="" alias=""/>
+		<typeAlias type="com.cherryfunding.spring.vo.AdminVo" alias="AdminVo"/>
 	</typeAliases>
+	
+	
 	<mappers>
-		<mapper resource=""/>
+	
+		<mapper resource="com/cherryfunding/spring/mybatis/AdminMapper.xml"/>
+	
 	</mappers>
- -->
+	
+
+
+
 </configuration>
