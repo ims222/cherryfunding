@@ -13,10 +13,19 @@
 					.attr('name', 'fPicture');
 			var text = $('<input>').attr('type', 'text')
 					.attr('name', 'fPinfo');
-			var br = $('<br>');
-			$("#inputFile").append(file).append(text).append(br);
+			$("#inputFile").append(file).append(text).append('<br>');
 		});
-
+		$("#inputReward").on('change', "input[name='price']", function(){
+			var tr = $("<span></span>").text("리워드명");
+			var rw = $("<input>").attr('type', 'text')
+								.attr('name', 'reward');
+			var tp = $("<span></span>").text('가격');
+			var pr = $("<input>").attr('type', 'text')
+								.attr('name', 'price');
+			$("#inputReward").append(tr).append(rw)
+							.append(tp).append(pr).append('<br>');
+		});
+		
 	});
 	function appCommit(){
 		if(!$("#title").val()){
@@ -97,15 +106,15 @@
 		<br>
 		
 		리워드 등록<br>
-		물품명1<input type="text" name="reward">
-		가격1<input type="text" name="price"><br>
-		물품명2<input type="text" name="reward">
-		가격2<input type="text" name="price"><br>
-		물품명3<input type="text" name="reward">
-		가격3<input type="text" name="price"><br>
+		<div id="inputReward">
+			<span>물품명</span><input type="text" name="reward">
+			<span>가격</span><input type="text" name="price"><br>
+		</div>
+		
 		<div id="inputFile">
-		사진업로드<br>
-		<input type="file" name="fPicture"><input type="text" name="fPinfo"><br>
+			사진업로드<br>
+			<input type="file" name="fPicture">
+			<input type="text" name="fPinfo"><br>
 		</div>
 		<input type="submit" value="submit">
 	</form>
