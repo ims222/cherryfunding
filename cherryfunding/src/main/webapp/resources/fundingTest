@@ -1,0 +1,11 @@
+insert into funding values(1,'테스트제목','테스트내용',1000000,0,
+'20181024','20181124','리빙','승인대기','관리자아이디','주소주소',sysdate,'아이디',0);
+	--원래는 funding_seq를 사용해야 하지만 테스트를 위해 번호 기입
+	--용량 부족으로 글이 많이 안들어감
+
+insert into reward values(1,1,'세트1',5000,sysdate); 
+insert into reward values(2,1,'세트2',20000,sysdate); 
+
+insert into fpicture values(fpicture_seq,1,1,null,'set1.jpg',null,sysdate);
+insert into fpicture values(fpicture_seq,1,2,null,'set2.jpg',null,sysdate);  
+  

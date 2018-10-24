@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cherryfunding.spring.vo.FHashtagMapper">
+	<insert id="insert" parameterType="fHashtag">
+		insert into fHashtag values(
+			#{ftagNum}, #{fnum}, #{hashtag}
+		)
+	</insert>
+	<select id="getMaxNum" resultType="int">
+		select NVL(max(ftagnum), 0) from fhashtag
+	</select>
+</mapper>
+

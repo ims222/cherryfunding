@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cherryfunding.spring.vo.FPictureMapper">
+
+	<insert id="insert" parameterType="fPicture">
+		insert into fPicture values(
+			#{fpNum},#{fNum},#{savename},#{orgname},#{filesize},sysdate,#{fpinfo})
+	</insert>
+	
+	<select id="getMaxNum" resultType="int">
+		select NVL(max(fpNum), 0) from fPicture
+	</select>
+</mapper>

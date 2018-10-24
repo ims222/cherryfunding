@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cherryfunding.spring.vo.SCommentMapper">
+	<select id="list" resultType="sComment">
+		select * from sComment
+	</select>
+
+	<select id="select" parameterType="string" resultType="sComment">
+		select * from sComment where id = #{id}
+	</select>
+
+	<insert id="insert" parameterType="sComment">
+		insert into sComment values()
+	</insert>
+	<update id="update" parameterType="sComment">
+		update sComment set #{pwd} where #{id}
+	</update>
+	<delete id="delete" parameterType="string">
+		delete from sComment where id=#{id}
+	</delete>
+</mapper>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cherryfunding.spring.vo.UsersMapper">
+	<select id="list" resultType="users">
+		select * from users
+	</select>
+
+	<select id="select" parameterType="string" resultType="users">
+		select *
+		from users where id = #{id}
+	</select>
+
+	<insert id="insert" parameterType="users">
+		insert into users values(
+		#{id}, #{pwd}, #{nick}, #{email},
+		 #{addr}, #{gender}, #{phone},
+		#{birth}, sysdate, 0)
+	</insert>
+	<update id="update" parameterType="users">
+		update users set #{pwd} where #{id}
+	</update>
+	<delete id="delete" parameterType="string">
+		delete from users where id=#{id}
+	</delete>
+	<select id="login" parameterType="users" resultType="users">
+		select * from users where id=#{id} and pwd=#{pwd}
+	</select>
+</mapper>

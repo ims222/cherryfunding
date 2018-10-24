@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cherryfunding.spring.vo.CreditMethodMapper">
+	<select id="list" resultType="creditMethod">
+		select * from creditMethod
+	</select>
+
+	<select id="select" parameterType="string" resultType="creditMethod">
+		select * from creditMethod where id = #{id}
+	</select>
+
+	<insert id="insert" parameterType="creditMethod">
+		insert into creditMethod values()
+	</insert>
+	<update id="update" parameterType="creditMethod">
+		update creditMethod set #{pwd} where #{id}
+	</update>
+	<delete id="delete" parameterType="string">
+		delete from creditMethod where id=#{id}
+	</delete>
+</mapper>

@@ -1,0 +1,34 @@
+drop table fPicture;
+CREATE TABLE fPicture -- 府况靛 曼炼甫 吝窜钦聪村 村村村
+(
+    fpNum       INT             NOT NULL, 
+    fNum        INT             NULL, 
+    saveName    VARCHAR2(50)    NULL, 
+    orgName     VARCHAR2(50)    NULL, 
+    fileSize    LONG            NULL, 
+    regDate     DATE            NULL,
+    fPinfo        VARCHAR2(500),
+    CONSTRAINT FPICTURE_PK PRIMARY KEY (fpNum)
+    --rNum        INT             NULL, 曼炼 救窃
+)
+/
+--曼炼 力芭 孽府甫 梅何钦聪村村
+ALTER TABLE fPicture
+    ADD CONSTRAINT FK_fPicture_rNum_reward_rNum FOREIGN KEY (rNum)
+        REFERENCES reward (rNum)
+	on delete cascade
+/
+
+
+CREATE SEQUENCE fPicture_SEQ
+START WITH 1
+INCREMENT BY 1;
+/
+
+
+ALTER TABLE fPicture
+    ADD CONSTRAINT FK_fPicture_fNum_funding_fNum FOREIGN KEY (fNum)
+        REFERENCES funding (fNum)
+	on delete cascade
+/
+

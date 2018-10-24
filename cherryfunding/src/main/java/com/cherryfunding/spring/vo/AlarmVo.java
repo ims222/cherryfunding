@@ -4,6 +4,7 @@ public class AlarmVo {
 	private int alarmNum;
 	private String cases;
 	private String msg;
+
 	public AlarmVo() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -24,6 +25,13 @@ public class AlarmVo {
 	public void setMsg(String msg) {
 		this.msg = msg;
 	}
+	public String getCases() {
+		return cases;
+	}
+	public void setCases(String cases) {
+		this.cases = cases;
+	}
+	
 	
 	
 }

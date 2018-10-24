@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cherryfunding.spring.vo.RewardMapper">
+	<insert id="insert" parameterType="reward">
+		insert into reward values(
+			#{rnum}, #{fnum}, #{title}, #{price}, sysdate)
+	</insert>
+	
+	<select id="getMaxNum" resultType="int">
+		select NVL(max(rnum), 0) from reward
+	</select>
+</mapper>

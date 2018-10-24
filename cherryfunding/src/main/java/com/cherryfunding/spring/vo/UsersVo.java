@@ -6,6 +6,7 @@ public class UsersVo {
 	private String id;
 	private String pwd;
 	private String email;
+	private String nick;
 	private String addr;
 	private String gender;
 	private String phone;
@@ -16,11 +17,13 @@ public class UsersVo {
 	public UsersVo() {
 	}
 
-	public UsersVo(String id, String pwd, String email, String addr, String gender, String phone, String birth,
-			Date regdate, int balance) {
+	public UsersVo(String id, String pwd, String email, String nick, String addr, String gender, String phone,
+			String birth, Date regdate, int balance) {
+		super();
 		this.id = id;
 		this.pwd = pwd;
 		this.email = email;
+		this.nick = nick;
 		this.addr = addr;
 		this.gender = gender;
 		this.phone = phone;
@@ -51,6 +54,14 @@ public class UsersVo {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getNick() {
+		return nick;
+	}
+
+	public void setNick(String nick) {
+		this.nick = nick;
 	}
 
 	public String getAddr() {

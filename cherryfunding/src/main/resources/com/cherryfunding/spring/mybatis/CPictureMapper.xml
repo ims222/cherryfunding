@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cherryfunding.spring.vo.CPictureMapper">
+	<select id="list" resultType="cPicture">
+		select * from cPicture
+	</select>
+
+	<select id="select" parameterType="string" resultType="cPicture">
+		select * from cPicture where id = #{id}
+	</select>
+
+	<insert id="insert" parameterType="cPicture">
+		insert into cPicture values()
+	</insert>
+	<update id="update" parameterType="cPicture">
+		update cPicture set #{pwd} where #{id}
+	</update>
+	<delete id="delete" parameterType="string">
+		delete from cPicture where id=#{id}
+	</delete>
+</mapper>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cherryfunding.spring.vo.VPictureMapper">
+	<select id="list" resultType="vPicture">
+		select * from vPicture
+	</select>
+
+	<select id="select" parameterType="string" resultType="vPicture">
+		select * from vPicture where id = #{id}
+	</select>
+
+	<insert id="insert" parameterType="vPicture">
+		insert into vPicture values()
+	</insert>
+	<update id="update" parameterType="vPicture">
+		update vPicture set #{pwd} where #{id}
+	</update>
+	<delete id="delete" parameterType="string">
+		delete from vPicture where id=#{id}
+	</delete>
+</mapper>

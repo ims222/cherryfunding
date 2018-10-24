@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cherryfunding.spring.vo.SRecommendMapper">
+	<select id="list" resultType="sRecommend">
+		select * from sRecommend
+	</select>
+
+	<select id="select" parameterType="string" resultType="sRecommend">
+		select * from sRecommend where id = #{id}
+	</select>
+
+	<insert id="insert" parameterType="sRecommend">
+		insert into sRecommend values()
+	</insert>
+	<update id="update" parameterType="sRecommend">
+		update sRecommend set #{pwd} where #{id}
+	</update>
+	<delete id="delete" parameterType="string">
+		delete from sRecommend where id=#{id}
+	</delete>
+</mapper>
