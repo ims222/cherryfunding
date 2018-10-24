@@ -44,9 +44,9 @@ public class FundingController {
 
 	@Autowired
 	private RewardService rewardService;
-	
+
 	@Autowired
-	private FPictureService fPictureService; 
+	private FPictureService fPictureService;
 
 	// for Testing
 	@RequestMapping(value = "/testlogin", method = RequestMethod.GET)
@@ -74,7 +74,7 @@ public class FundingController {
 
 	@RequestMapping(value = "/funding/fundingApplication", method = RequestMethod.POST)
 	public String fundingApplication(MultipartHttpServletRequest request, HttpSession session) {
-		String title = request.getParameter("title");
+		String title = request.getParameter("title"); //폼 정보
 		String id = request.getParameter("id");
 		String content = request.getParameter("content");
 		String amount = request.getParameter("amount");
@@ -86,13 +86,13 @@ public class FundingController {
 		String[] prices = request.getParameterValues("price");
 		String[] fpinfo = request.getParameterValues("fPinfo");
 
-		int fnum = fundingService.getMaxNum() + 1;
+		int fnum = fundingService.getMaxNum() + 1; //펀딩 인덱스
 		String uploadPath = session.getServletContext().getRealPath("/resources/upload");
 		File f = new File(uploadPath);
 		if (f.exists() == false) { // 폴더 만들기
 			f.mkdirs();
 		}
-		try {
+		try { //펀딩 지원서 저장
 			FundingVo fvo = new FundingVo();
 			fvo.setFnum(fnum);
 			fvo.setTitle(title);
@@ -107,14 +107,14 @@ public class FundingController {
 			fvo.setAddr("");
 			fvo.setAid("");
 			fvo.setId(id);
-			fundingService.insert(fvo);
+			fundingService.insert(fvo); //db
 
-			for (String hashtag : hashtags) {
+			for (String hashtag : hashtags) { //해시태그 저장
 				FHashtagVo fhvo = new FHashtagVo(fHashtagService.getMaxNum() + 1, fnum, hashtag);
 				fHashtagService.insert(fhvo);
 			}
 
-			for (int ind = 0; ind < rewards.length; ind++) {
+			for (int ind = 0; ind < rewards.length; ind++) { //리와드 저장
 				RewardVo rvo = new RewardVo();
 				rvo.setRnum(rewardService.getMaxNum() + 1);
 				rvo.setFnum(fnum);
@@ -128,21 +128,21 @@ public class FundingController {
 
 		List<MultipartFile> files = request.getFiles("fPicture");
 		int num = 0;
-		for (MultipartFile file : files) {
+		for (MultipartFile file : files) { //파일들
 			String orgfilename = file.getOriginalFilename();
 			String savefilename = id + "_" + title + "_" + num + orgfilename;
 			try { // 파일저장
 				long filesize = file.getSize();
-				FPictureVo fpvo = new FPictureVo();
-				fpvo.setFpNum(fPictureService.getMaxNum() + 1);
-				fpvo.setfNum(fnum);
-				fpvo.setSavename(savefilename);
-				fpvo.setOrgname(orgfilename);
-				fpvo.setFilesize(filesize);
-				fpvo.setFpinfo(fpinfo[num++]);
-
-				fPictureService.insert(fpvo);
 				if (filesize > 0) {
+					FPictureVo fpvo = new FPictureVo();
+					fpvo.setFpNum(fPictureService.getMaxNum() + 1);
+					fpvo.setfNum(fnum);
+					fpvo.setSavename(savefilename);
+					fpvo.setOrgname(orgfilename);
+					fpvo.setFilesize(filesize);
+					fpvo.setFpinfo(fpinfo[num++]);
+
+					fPictureService.insert(fpvo); //파일 정보 저장
 					InputStream is = file.getInputStream();
 					FileOutputStream fos = new FileOutputStream(uploadPath + "\\" + savefilename);
 					FileCopyUtils.copy(is, fos);
@@ -170,7 +170,6 @@ public class FundingController {
 		return "funding/fundingBoard/fundingList";
 	}
 
-
 	@RequestMapping(value = "/fundingList/detail", method = RequestMethod.GET)
 	public String detail(int num, Model model) {
 		FundingVo vo = fundingService.select(num); // 疫뀐옙 占쎄맒占쎄쉭占쎌젟癰귨옙
@@ -191,20 +190,20 @@ public class FundingController {
 			return "error";
 		}
 	}
-	
+
 	@RequestMapping(value = "/fundingList/update", method = RequestMethod.GET)
 	public String update(int num, Model model) {
-		FundingVo vo = fundingService.select(num); 
+		FundingVo vo = fundingService.select(num);
 		model.addAttribute("vo", vo);
 		return "/funding/fundingBoard/fundingUpdate";
 	}
-	
+
 	@RequestMapping(value = "/fundingList/update", method = RequestMethod.POST)
 	public String updateOk(FundingVo vo, Model model) {
 		int n = fundingService.update(vo);
-		if(n>0) {
+		if (n > 0) {
 			return "redirect:/fundingList/showAll";
-		}else {
+		} else {
 			return "error";
 		}
 	}
