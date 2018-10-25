@@ -69,12 +69,12 @@ public class FundingController {
 
 	@RequestMapping(value = "/funding/fundingApplication", method = RequestMethod.GET)
 	public String fundingForm() {
-		return "funding/application/fundingApplicationProcess";
+		return ".inputFunding";
 	}
 
 	@RequestMapping(value = "/funding/fundingApplication", method = RequestMethod.POST)
 	public String fundingApplication(MultipartHttpServletRequest request, HttpSession session) {
-		String title = request.getParameter("title"); //폼 정보
+		String title = request.getParameter("title"); // �뤌 �젙蹂�
 		String id = request.getParameter("id");
 		String content = request.getParameter("content");
 		String amount = request.getParameter("amount");
@@ -86,13 +86,13 @@ public class FundingController {
 		String[] prices = request.getParameterValues("price");
 		String[] fpinfo = request.getParameterValues("fPinfo");
 
-		int fnum = fundingService.getMaxNum() + 1; //펀딩 인덱스
+		int fnum = fundingService.getMaxNum() + 1; // ���뵫 �씤�뜳�뒪
 		String uploadPath = session.getServletContext().getRealPath("/resources/upload");
 		File f = new File(uploadPath);
-		if (f.exists() == false) { // 폴더 만들기
+		if (f.exists() == false) { // �뤃�뜑 留뚮뱾湲�
 			f.mkdirs();
 		}
-		try { //펀딩 지원서 저장
+		try { // ���뵫 吏��썝�꽌 ���옣
 			FundingVo fvo = new FundingVo();
 			fvo.setFnum(fnum);
 			fvo.setTitle(title);
@@ -107,14 +107,14 @@ public class FundingController {
 			fvo.setAddr("");
 			fvo.setAid("");
 			fvo.setId(id);
-			fundingService.insert(fvo); //db
+			fundingService.insert(fvo); // db
 
-			for (String hashtag : hashtags) { //해시태그 저장
+			for (String hashtag : hashtags) { // �빐�떆�깭洹� ���옣
 				FHashtagVo fhvo = new FHashtagVo(fHashtagService.getMaxNum() + 1, fnum, hashtag);
 				fHashtagService.insert(fhvo);
 			}
 
-			for (int ind = 0; ind < rewards.length; ind++) { //리와드 저장
+			for (int ind = 0; ind < rewards.length; ind++) { // 由ъ��뱶 ���옣
 				RewardVo rvo = new RewardVo();
 				rvo.setRnum(rewardService.getMaxNum() + 1);
 				rvo.setFnum(fnum);
@@ -128,10 +128,10 @@ public class FundingController {
 
 		List<MultipartFile> files = request.getFiles("fPicture");
 		int num = 0;
-		for (MultipartFile file : files) { //파일들
+		for (MultipartFile file : files) { // �뙆�씪�뱾
 			String orgfilename = file.getOriginalFilename();
 			String savefilename = id + "_" + title + "_" + num + orgfilename;
-			try { // 파일저장
+			try { // �뙆�씪���옣
 				long filesize = file.getSize();
 				if (filesize > 0) {
 					FPictureVo fpvo = new FPictureVo();
@@ -142,7 +142,7 @@ public class FundingController {
 					fpvo.setFilesize(filesize);
 					fpvo.setFpinfo(fpinfo[num++]);
 
-					fPictureService.insert(fpvo); //파일 정보 저장
+					fPictureService.insert(fpvo); // �뙆�씪 �젙蹂� ���옣
 					InputStream is = file.getInputStream();
 					FileOutputStream fos = new FileOutputStream(uploadPath + "\\" + savefilename);
 					FileCopyUtils.copy(is, fos);
@@ -158,13 +158,20 @@ public class FundingController {
 	}
 
 	@RequestMapping(value = "/funding/ingFundingList", method = RequestMethod.GET)
-	public String fundingList(Model model) {
+	public String ingFundingList(Model model) {
+		List<FundingVo> list = fundingService.list();
 
-		return "funding/fundingBoard/ingFundingList";
+		for (FundingVo vo : list) {
+			vo.setSavename(fundingService.thumbnail(vo.getFnum()).getSavename());
+			vo.setFpinfo(fundingService.thumbnail(vo.getFnum()).getFpinfo());
+		}
+
+		model.addAttribute("list", list);
+		return ".ingFundingList";
 	}
 
 	@RequestMapping(value = "/fundingList/showAll", method = RequestMethod.GET)
-	public String list(Model model) { // �쟾泥� ���뵫湲� 遺덈윭�삤湲�
+	public String list(Model model) { // 占쎌읈筌ｏ옙 占쏙옙占쎈뎃疫뀐옙 �겫�뜄�쑎占쎌궎疫뀐옙
 		List<FundingVo> list = fundingService.list();
 		model.addAttribute("list", list);
 		return "funding/fundingBoard/fundingList";
@@ -172,16 +179,11 @@ public class FundingController {
 
 	@RequestMapping(value = "/fundingList/detail", method = RequestMethod.GET)
 	public String detail(int num, Model model) {
-		FundingVo vo = fundingService.select(num); // 글 하나만 조회
-		List<FPictureVo> list = fPictureService.list(num);	//펀딩번호로 이미지파일 조회
-<<<<<<< HEAD
-		// 조회수 증가시켜야 하는데 조회수가 필요한지 잘 모르겠음
-=======
-		// 조회수 증가시켜야 하는데 조회수가 필요한지 잘 모르겠음 
->>>>>>> branch 'master' of https://github.com/ims222/cherryfunding.git
+		FundingVo vo = fundingService.select(num); // 湲� �븯�굹留� 議고쉶
+		List<FPictureVo> list = fPictureService.list(num); // ���뵫踰덊샇濡� �씠誘몄��뙆�씪 議고쉶
 		// service.addHit(num);
 		model.addAttribute("vo", vo);
-		model.addAttribute("list",list);
+		model.addAttribute("list", list);
 		// model.addAttribute("prev",prev);
 		// model.addAttribute("next",next);
 		return "/funding/fundingBoard/fundingDetail";
@@ -189,7 +191,7 @@ public class FundingController {
 
 	@RequestMapping(value = "/fundingList/delete", method = RequestMethod.GET)
 	public String delete(int num, Model model) {
-		int n = fundingService.delete(num); // 疫뀐옙 占쎄맒占쎄쉭占쎌젟癰귨옙
+		int n = fundingService.delete(num); // �뼨�먯삕 �뜝�럡留믣뜝�럡�돪�뜝�럩�젧�솻洹⑥삕
 		if (n > 0) {
 			return "redirect:/fundingList/showAll";
 		} else {

@@ -1,16 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<header>
-
-<button class="h_button">회원가입</button>
-<button class="h_button">로그인</button>
-	<ul>
-		<li><a href="<c:url value='/'/>">회원가입</a></li>
-		<li><a href="<c:url value='/'/>">로그인</a></li>
-		<li><a href="<c:url value='/'/>">로그아웃</a></li>
-		<li><a href="<c:url value='/'/>">마이페이지</a></li>
-		
-		<li><a href="<c:url value='/hhh'/>">후원</a></li>
-	</ul>
-</header>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<div id="header" class="skel-panels-fixed">
+	<div id="logo">
+		<h1>
+			<a href="${pageContext.request.contextPath}">CherryFunding</a>
+		</h1>
+		<span class="tag">by cherryfunding</span>
+	</div>
+	<nav id="nav">
+		<ul>
+			<li class="active"><a href="${pageContext.request.contextPath}">후원</a></li>
+			<li><a href="${pageContext.request.contextPath}/funding/ingFundingList">펀딩</a></li>
+			<li><a href="${pageContext.request.contextPath}">나눔</a></li>
+			<li><a href="${pageContext.request.contextPath}">봉사</a></li>
+		</ul>
+	</nav>
+</div>

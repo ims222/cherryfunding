@@ -26,6 +26,6 @@ public class EndFundingListController {
 		}
 
 		model.addAttribute("list", list);
-		return "/funding/fundingBoard/endFundingList";
+		return ".endFundingList";
 	}
 }

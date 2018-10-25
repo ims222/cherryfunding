@@ -5,7 +5,8 @@ PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
 <tiles-definitions >
 	<definition name=".main" template="/WEB-INF/views/main/layout.jsp">
 		<put-attribute name="header" value="/WEB-INF/views/main/header.jsp"/>
-		<put-attribute name="content" value="/WEB-INF/views/main/summary.jsp"/>
+		<put-attribute name="banner" value="/WEB-INF/views/main/banner.jsp"/>
+		<put-attribute name="content" value="/WEB-INF/views/main/home.jsp"/>
 		<put-attribute name="footer" value="/WEB-INF/views/main/footer.jsp"/>
 	</definition>
 	
@@ -14,5 +15,27 @@ PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
 		<put-attribute name="content" value="/WEB-INF/views/main/summary.jsp"/>
 		<put-attribute name="footer" value="/WEB-INF/views/main/footer.jsp"/>
 	</definition>
+	
+	<!-- funding -->
+		<definition name=".ingFundingList" extends = ".main">
+			<put-attribute name="banner" value="/WEB-INF/views/funding/banner.jsp"/>
+			<put-attribute name="content" value="/WEB-INF/views/funding/fundingBoard/ingFundingList.jsp"/>
+		</definition>
+		
+		<definition name=".prepareFundingList" extends = ".main">
+			<put-attribute name="banner" value="/WEB-INF/views/funding/banner.jsp"/>
+			<put-attribute name="content" value="/WEB-INF/views/funding/fundingBoard/prepareFundingList.jsp"/>
+		</definition>
+		
+		<definition name=".endFundingList" extends = ".main">
+			<put-attribute name="banner" value="/WEB-INF/views/funding/banner.jsp"/>
+			<put-attribute name="content" value="/WEB-INF/views/funding/fundingBoard/endFundingList.jsp"/>
+		</definition>
+		
+		<definition name=".inputFunding" extends = ".main">
+			<put-attribute name="banner" value="/WEB-INF/views/funding/banner.jsp"/>
+			<put-attribute name="content" value="/WEB-INF/views/funding/application/fundingApplicationProcess.jsp"/>
+		</definition>
+	<!-- //////// -->
 	
 </tiles-definitions>
