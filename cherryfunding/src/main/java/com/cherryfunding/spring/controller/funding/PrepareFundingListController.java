@@ -19,13 +19,10 @@ public class PrepareFundingListController {
 	@RequestMapping("/funding/prepareFundingList")
 	public String prepare(Model model) {
 		List<FundingVo> list = prepareService.list();
-
+		
 		for (FundingVo vo : list) {
-			System.out.println(prepareService.thumbnail(vo.getFnum()));
-			vo.setSavename(prepareService.thumbnail(vo.getFnum()));
-		}
-		for (FundingVo vo : list) {
-			System.out.println(vo.getSavename());
+			vo.setSavename(prepareService.thumbnail(vo.getFnum()).getSavename());
+			vo.setFpinfo(prepareService.thumbnail(vo.getFnum()).getFpinfo());
 		}
 
 		model.addAttribute("list", list);

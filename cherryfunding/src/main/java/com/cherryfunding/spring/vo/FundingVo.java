@@ -18,13 +18,14 @@ public class FundingVo {
 	private String id;
 	private int hit;
 	private String savename;
+	private String fpinfo;
 
 	public FundingVo() {
 	}
 
 	public FundingVo(int fnum, String title, String content, int amount, int camout, Date sdate, Date edate,
-			String category, String confirm, String aid, String addr, Date regdate, String id, int hit,
-			String savename) {
+			String category, String confirm, String aid, String addr, Date regdate, String id, int hit, String savename,
+			String fpinfo) {
 		this.fnum = fnum;
 		this.title = title;
 		this.content = content;
@@ -40,6 +41,7 @@ public class FundingVo {
 		this.id = id;
 		this.hit = hit;
 		this.savename = savename;
+		this.fpinfo = fpinfo;
 	}
 
 	public int getFnum() {
@@ -162,5 +164,12 @@ public class FundingVo {
 		this.savename = savename;
 	}
 
+	public String getFpinfo() {
+		return fpinfo;
+	}
+
+	public void setFpinfo(String fpinfo) {
+		this.fpinfo = fpinfo;
+	}
 
 }

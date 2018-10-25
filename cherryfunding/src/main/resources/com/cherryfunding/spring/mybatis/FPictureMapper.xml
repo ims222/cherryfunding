@@ -17,11 +17,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from fPicture where fnum=#{num} 
 	</select>
 	
-	<select id="thumbnail" resultType="string" parameterType="int">
-		select string from (
+	<select id="thumbnail" resultType="fPicture" parameterType="int">
+		select * from (
 			select aa.*, rownum rnum from (
 				select * from fPicture where fNum = #{fNum} order by fpNum
 			)aa
-		) where rnum = 1;
+		) where rnum = 1
 	</select>
 </mapper>

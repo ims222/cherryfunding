@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.cherryfunding.spring.vo.FPictureVo;
-import com.cherryfunding.spring.vo.FundingVo;
 
 @Repository
 public class FPictureDao {
@@ -28,7 +27,7 @@ public class FPictureDao {
 		return sqlSession.selectList(NAMESPACE + "list", num);
 	}
 	
-	public String thumbnail(int fNum) {
+	public FPictureVo thumbnail(int fNum) {
 		return sqlSession.selectOne(NAMESPACE + "thumbnail", fNum);
 	}
 	
