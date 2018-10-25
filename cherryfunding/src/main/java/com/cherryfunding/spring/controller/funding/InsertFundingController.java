@@ -42,7 +42,7 @@ public class InsertFundingController {
 
 	@RequestMapping(value = "/funding/fundingApplication", method = RequestMethod.POST)
 	public String fundingApplication(MultipartHttpServletRequest request, HttpSession session) {
-		String title = request.getParameter("title"); // �뤌 �젙蹂�
+		String title = request.getParameter("title"); // 지원서 양식
 		String id = request.getParameter("id");
 		String content = request.getParameter("content");
 		String amount = request.getParameter("amount");
@@ -54,13 +54,13 @@ public class InsertFundingController {
 		String[] prices = request.getParameterValues("price");
 		String[] fpinfo = request.getParameterValues("fPinfo");
 
-		int fnum = fundingService.getMaxNum() + 1; // ���뵫 �씤�뜳�뒪
+		int fnum = fundingService.getMaxNum() + 1; // 펀딩번호
 		String uploadPath = session.getServletContext().getRealPath("/resources/upload");
 		File f = new File(uploadPath);
-		if (f.exists() == false) { // �뤃�뜑 留뚮뱾湲�
+		if (f.exists() == false) { // 파일 생성
 			f.mkdirs();
 		}
-		try { // ���뵫 吏��썝�꽌 ���옣
+		try { // 펀딩저장
 			FundingVo fvo = new FundingVo();
 			fvo.setFnum(fnum);
 			fvo.setTitle(title);
@@ -77,12 +77,12 @@ public class InsertFundingController {
 			fvo.setId(id);
 			fundingService.insert(fvo); // db
 
-			for (String hashtag : hashtags) { // �빐�떆�깭洹� ���옣
+			for (String hashtag : hashtags) { // 해시태그 저장
 				FHashtagVo fhvo = new FHashtagVo(fHashtagService.getMaxNum() + 1, fnum, hashtag);
 				fHashtagService.insert(fhvo);
 			}
 
-			for (int ind = 0; ind < rewards.length; ind++) { // 由ъ��뱶 ���옣
+			for (int ind = 0; ind < rewards.length; ind++) { // 리와드 저장
 				RewardVo rvo = new RewardVo();
 				rvo.setRnum(rewardService.getMaxNum() + 1);
 				rvo.setFnum(fnum);
@@ -96,10 +96,10 @@ public class InsertFundingController {
 
 		List<MultipartFile> files = request.getFiles("fPicture");
 		int num = 0;
-		for (MultipartFile file : files) { // �뙆�씪�뱾
+		for (MultipartFile file : files) { // 사진들
 			String orgfilename = file.getOriginalFilename();
 			String savefilename = id + "_" + title + "_" + num + orgfilename;
-			try { // �뙆�씪���옣
+			try { // 사진db저장
 				long filesize = file.getSize();
 				if (filesize > 0) {
 					FPictureVo fpvo = new FPictureVo();
@@ -110,7 +110,7 @@ public class InsertFundingController {
 					fpvo.setFilesize(filesize);
 					fpvo.setFpinfo(fpinfo[num++]);
 
-					fPictureService.insert(fpvo); // �뙆�씪 �젙蹂� ���옣
+					fPictureService.insert(fpvo); //저장
 					InputStream is = file.getInputStream();
 					FileOutputStream fos = new FileOutputStream(uploadPath + "\\" + savefilename);
 					FileCopyUtils.copy(is, fos);
