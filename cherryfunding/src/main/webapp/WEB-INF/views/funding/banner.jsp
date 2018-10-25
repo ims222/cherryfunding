@@ -7,7 +7,7 @@
 			안녕하세요 <strong>CherryFunding</strong>입니다.<br> 자신의 제품을 크라우드펀딩하기 위해
 			펀딩신청하기를 눌러주세요.<br> <a href="http://templated.co">템플릿</a>
 			<a href="http://twitter.com/templatedco">Twitter</a>.
-				
+			
 			<a href="${pageContext.request.contextPath}/funding/fundingApplication"
 			class="button medium">펀딩신청하기</a>
 		</p>
