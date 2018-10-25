@@ -65,7 +65,7 @@ public class InsertFundingController {
 		String[] fpinfo = request.getParameterValues("fPinfo");
 
 		int fnum = fundingService.getMaxNum() + 1; // 펀딩번호
-		String uploadPath = session.getServletContext().getRealPath("/resources/upload");
+		String uploadPath = session.getServletContext().getRealPath("/resources/upload/funding");
 		File f = new File(uploadPath);
 		if (f.exists() == false) { // 파일 생성
 			f.mkdirs();
@@ -76,9 +76,11 @@ public class InsertFundingController {
 			fvo.setTitle(title);
 			fvo.setContent(content);
 			fvo.setAmount(Integer.parseInt(amount));
-			java.util.Date jsdate = new SimpleDateFormat("yyyy-mm-dd").parse(sDate);
+			System.out.println("sDate: " + sDate + "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+			java.util.Date jsdate = new SimpleDateFormat("yyyy-MM-dd").parse(sDate);
 			fvo.setSdate(new Date(jsdate.getTime()));
-			java.util.Date jedate = new SimpleDateFormat("yyyy-mm-dd").parse(eDate);
+			System.out.println("jsdate: " + jsdate + "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+			java.util.Date jedate = new SimpleDateFormat("yyyy-MM-dd").parse(eDate);
 			fvo.setEdate(new Date(jedate.getTime()));
 			fvo.setCategory(category);
 			fvo.setConfirm("n");
@@ -88,8 +90,10 @@ public class InsertFundingController {
 			insertFundingService.finsert(fvo); // db
 
 			for (String hashtag : hashtags) { // 해시태그 저장
-				FHashtagVo fhvo = new FHashtagVo(fHashtagService.getMaxNum() + 1, fnum, hashtag);
-				insertFundingService.fhinsert(fhvo);
+				if (hashtag != null && !hashtag.equals("")) {
+					FHashtagVo fhvo = new FHashtagVo(fHashtagService.getMaxNum() + 1, fnum, hashtag);
+					insertFundingService.fhinsert(fhvo);
+				}
 			}
 
 			for (int ind = 0; ind < rewards.length; ind++) { // 리와드 저장
@@ -132,6 +136,6 @@ public class InsertFundingController {
 				return "error";
 			}
 		}
-		return "funding/application/fundingApplicationProcess";
+		return "redirect:/funding/ingFundingList";
 	}
 }

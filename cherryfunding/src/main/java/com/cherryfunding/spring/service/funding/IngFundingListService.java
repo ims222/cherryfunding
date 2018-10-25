@@ -1,5 +1,6 @@
 package com.cherryfunding.spring.service.funding;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +19,8 @@ public class IngFundingListService {
 	@Autowired
 	private FPictureDao fpdao;
 
-	public List<FundingVo> list() {
-		return dao.ing();
+	public List<FundingVo> list(HashMap<String, Object> map) {
+		return dao.ing(map);
 	}
 
 	public FPictureVo thumbnail(int fNum) {

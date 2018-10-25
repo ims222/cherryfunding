@@ -3,6 +3,12 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cherryfunding.spring.vo.FundingMapper">
+	<sql id="category">
+		<if test="category != null and category != '' and category != '전체보기'">
+			and category = #{category}
+		</if>
+	</sql>
+	
 	<select id="list" resultType="funding">
 		select * from funding
 	</select>
@@ -24,25 +30,31 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		delete from funding where fnum=#{num}
 	</delete>
 	<select id="getMaxNum" resultType="int">
-		select NVL(max(fNum), 0) from funding
+		select nvl(max(fnum), 0) from funding
 	</select>
 	
 	
 	
 	<!-- 준비중 펀딩 -->
-	<select id="prepare" resultType="funding">
+	<select id="prepare" parameterType= "hashmap" resultType="funding">
 		select * from funding
-		<![CDATA[where sdate > sysdate order by fnum desc]]>
+		<![CDATA[where sdate > sysdate and edate > sysdate]]>
+		<include refid="category"/>
+		order by fnum desc
 	</select>
 	
 	<!-- 종료된 펀딩 -->
-	<select id="end" resultType="funding">
+	<select id="end" parameterType= "hashmap"  resultType="funding">
 		select * from funding
-		<![CDATA[where edate < sysdate order by fnum desc]]>
+		<![CDATA[where sdate < sysdate and edate < sysdate]]>
+		<include refid="category"/>
+		order by fnum desc
 	</select>
 	<!-- 진행중 펀딩 -->
-	<select id="ing" resultType="funding">
+	<select id="ing" parameterType= "hashmap" resultType="funding">
 		select * from funding
-		<![CDATA[where sdate <= sysdate and edate >= sysdate order by fnum desc]]>
+		<![CDATA[where sdate < sysdate and edate > sysdate]]>
+		<include refid="category"/>
+		order by fnum desc
 	</select>
 </mapper>

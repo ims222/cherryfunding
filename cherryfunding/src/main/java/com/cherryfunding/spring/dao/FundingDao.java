@@ -1,5 +1,6 @@
 package com.cherryfunding.spring.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -15,7 +16,7 @@ public class FundingDao {
 
 	private static final String NAMESPACE = "com.cherryfunding.spring.vo.FundingMapper.";
 
-	public int insert(FundingVo vo) { //������ �ۼ�
+	public int insert(FundingVo vo) { //지원서 작성
 		return sqlSession.insert(NAMESPACE + "insert", vo);
 	}
 
@@ -39,14 +40,14 @@ public class FundingDao {
 		return sqlSession.selectOne(NAMESPACE + "getMaxNum");
 	}
 
-	public List<FundingVo> prepare() { // 준비중
-		return sqlSession.selectList(NAMESPACE + "prepare");
+	public List<FundingVo> prepare(HashMap<String, Object> map) { // 준비중
+		return sqlSession.selectList(NAMESPACE + "prepare", map);
 	}
 
-	public List<FundingVo> end() { // 종료
-		return sqlSession.selectList(NAMESPACE + "end");
+	public List<FundingVo> end(HashMap<String, Object> map) { // 종료
+		return sqlSession.selectList(NAMESPACE + "end", map);
 	}
-	public List<FundingVo> ing() { // 진행
-		return sqlSession.selectList(NAMESPACE + "ing");
+	public List<FundingVo> ing(HashMap<String, Object> map) { // 진행
+		return sqlSession.selectList(NAMESPACE + "ing", map);
 	}
 }

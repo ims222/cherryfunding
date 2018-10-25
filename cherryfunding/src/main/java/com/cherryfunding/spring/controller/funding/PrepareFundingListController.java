@@ -1,12 +1,14 @@
 package com.cherryfunding.spring.controller.funding;
 
+import java.util.HashMap;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.cherryfunding.spring.service.funding.PrepareFundingListService;
 import com.cherryfunding.spring.vo.FundingVo;
@@ -18,8 +20,10 @@ public class PrepareFundingListController {
 	private PrepareFundingListService prepareService;
 	
 	@RequestMapping("/funding/prepareFundingList")
-	public String prepare(Model model) {
-		List<FundingVo> list = prepareService.list();
+	public String prepare(Model model, HttpServletRequest request) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("category", request.getParameter("category"));
+		List<FundingVo> list = prepareService.list(map);
 		
 		for (FundingVo vo : list) {
 			vo.setSavename(prepareService.thumbnail(vo.getFnum()).getSavename());

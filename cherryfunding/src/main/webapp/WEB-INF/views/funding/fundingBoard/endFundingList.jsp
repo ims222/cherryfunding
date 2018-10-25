@@ -2,14 +2,38 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#category").on('click', 'button', function(e){
+			var value = $(this).text();
+			location.href= "${pageContext.request.contextPath}/funding/endFundingList?category=" + value;
+		});
+	});
+</script>
 <!-- Main -->
 <div id="main">
 	<div class="container">
+		<div class="btn-group" role="group" aria-label="category" id="category">
+			<button type="button" class="btn btn-secondary">전체보기</button>
+			<button type="button" class="btn btn-secondary">테크·가전</button>
+			<button type="button" class="btn btn-secondary">패션·잡화</button>
+			<button type="button" class="btn btn-secondary">푸드</button>
+			<button type="button" class="btn btn-secondary">홈리빙</button>
+			<button type="button" class="btn btn-secondary">디자인소품</button>
+			<button type="button" class="btn btn-secondary">여행·레저</button>
+			<button type="button" class="btn btn-secondary">스포츠·모빌리티</button>
+			<button type="button" class="btn btn-secondary">반려동물</button>
+			<button type="button" class="btn btn-secondary">공연·컬쳐</button>
+			<button type="button" class="btn btn-secondary">소셜·캠페인</button>
+			<button type="button" class="btn btn-secondary">교육·키즈</button>
+			<button type="button" class="btn btn-secondary">게임·취미</button>
+			<button type="button" class="btn btn-secondary">출판</button>
+		</div>
 		<div class="row no-collapse-1">
 			<c:forEach var="vo" items="${list}" varStatus="vs">
 				<section class="4u">
 					<a href="#" class="image featured"> <img
-						src="${pageContext.request.contextPath}/resources/upload/${vo.savename}"
+						src="${pageContext.request.contextPath}/resources/upload/funding/${vo.savename}"
 						alt="${vo.fpinfo}" height="200px"></a>
 					<div class="box">
 						<p>${vo.title}</p>
