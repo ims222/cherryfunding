@@ -27,7 +27,7 @@ import com.cherryfunding.spring.vo.FundingVo;
 import com.cherryfunding.spring.vo.RewardVo;
 
 @Controller
-public class InsertFundingController {
+public class InsertFundingControllerImpl {
 	@Autowired
 	private FHashtagService fHashtagService;
 
@@ -39,7 +39,7 @@ public class InsertFundingController {
 
 	@Autowired
 	private FPictureService fPictureService;
-	
+
 	@RequestMapping(value = "/funding/fundingApplication", method = RequestMethod.GET)
 	public String fundingForm() {
 		return ".inputFunding";
@@ -115,7 +115,7 @@ public class InsertFundingController {
 					fpvo.setFilesize(filesize);
 					fpvo.setFpinfo(fpinfo[num++]);
 
-					fPictureService.insert(fpvo); //저장
+					fPictureService.insert(fpvo); // 저장
 					InputStream is = file.getInputStream();
 					FileOutputStream fos = new FileOutputStream(uploadPath + "\\" + savefilename);
 					FileCopyUtils.copy(is, fos);
