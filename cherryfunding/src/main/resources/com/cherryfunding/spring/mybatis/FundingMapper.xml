@@ -8,6 +8,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			and category = #{category}
 		</if>
 	</sql>
+	<sql id="search">
+		<if test="field!=null and field!=''">
+			and ${field} like '%' || #{keyword} || '%'
+		</if>
+	</sql>
 	
 	<select id="list" resultType="funding">
 		select * from funding
@@ -40,6 +45,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from funding
 		<![CDATA[where sdate > sysdate and edate > sysdate]]>
 		<include refid="category"/>
+		<include refid="search"/>
 		order by fnum desc
 	</select>
 	
@@ -48,6 +54,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from funding
 		<![CDATA[where sdate < sysdate and edate < sysdate]]>
 		<include refid="category"/>
+		<include refid="search"/>
 		order by fnum desc
 	</select>
 	<!-- 진행중 펀딩 -->
@@ -55,6 +62,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from funding
 		<![CDATA[where sdate < sysdate and edate > sysdate]]>
 		<include refid="category"/>
+		<include refid="search"/>
 		order by fnum desc
 	</select>
 </mapper>

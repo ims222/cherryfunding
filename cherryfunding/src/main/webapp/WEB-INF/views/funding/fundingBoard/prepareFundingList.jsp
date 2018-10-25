@@ -29,6 +29,16 @@
 				<button type="button" class="btn btn-secondary">게임·취미</button>
 				<button type="button" class="btn btn-secondary">출판</button>
 			</div>
+			<form method="get" action="${pageContext.request.contextPath}/funding/prepareFundingList">
+				<input type="hidden" name="category" value="${category}">
+				<select name="field">
+					<option value="title" <c:if test="${field eq 'title'}">selected="selected"</c:if>>제목</option>
+					<option value="content" <c:if test="${field eq 'content'}">selected="selected"</c:if>>내용</option>
+					<option value="id" <c:if test="${field eq 'id'}">selected="selected"</c:if>>글쓴이</option>
+				</select>
+				<input type="text" name="keyword" value="${keyword}">
+				<input type="submit" value="검색">		
+			</form>
 		<div class="row no-collapse-1">
 			<c:forEach var="vo" items="${list}" varStatus="vs">
 				<section class="4u">

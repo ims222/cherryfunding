@@ -29,14 +29,14 @@
 			<button type="button" class="btn btn-secondary">게임·취미</button>
 			<button type="button" class="btn btn-secondary">출판</button>
 		</div>
-		<form method="post" action="">
+		<form method="get" action="${pageContext.request.contextPath}/funding/ingFundingList">
 			<input type="hidden" name="category" value="${category}">
 			<select name="field">
-				<option value="title">제목</option>
-				<option value="content">내용</option>
-				<option value="id">글쓴이</option>
+				<option value="title" <c:if test="${field eq 'title'}">selected="selected"</c:if>>제목</option>
+				<option value="content" <c:if test="${field eq 'content'}">selected="selected"</c:if>>내용</option>
+				<option value="id" <c:if test="${field eq 'id'}">selected="selected"</c:if>>글쓴이</option>
 			</select>
-			<input type="text" name="keyword">
+			<input type="text" name="keyword" value="${keyword}">
 			<input type="submit" value="검색">		
 		</form>
 		

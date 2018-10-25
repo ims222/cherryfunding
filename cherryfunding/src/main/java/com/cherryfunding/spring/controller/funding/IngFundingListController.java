@@ -21,8 +21,13 @@ public class IngFundingListController {
 
 	@RequestMapping(value = "/funding/ingFundingList", method = RequestMethod.GET)
 	public String ingFundingList(Model model, HttpServletRequest request) {
+		String category = request.getParameter("category");
+		String field = request.getParameter("field");
+		String keyword = request.getParameter("keyword");
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("category", request.getParameter("category"));
+		map.put("category", category);
+		map.put("field", field);
+		map.put("keyword", keyword);
 		List<FundingVo> list = ingFundingListService.list(map);
 
 		for (FundingVo vo : list) {
@@ -31,6 +36,9 @@ public class IngFundingListController {
 		}
 
 		model.addAttribute("list", list);
+		model.addAttribute("category", category);
+		model.addAttribute("field", field);
+		model.addAttribute("keyword", keyword);
 		return ".ingFundingList";
 	}
 }

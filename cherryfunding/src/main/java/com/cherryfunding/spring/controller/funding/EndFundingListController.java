@@ -21,7 +21,13 @@ public class EndFundingListController {
 
 	@RequestMapping("/funding/endFundingList")
 	public String end(Model model, HttpServletRequest request) {
+		String category = request.getParameter("category");
+		String field = request.getParameter("field");
+		String keyword = request.getParameter("keyword");
 		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("category", category);
+		map.put("field", field);
+		map.put("keyword", keyword);
 		map.put("category", request.getParameter("category"));
 		List<FundingVo> list = endService.list(map);
 
@@ -31,6 +37,9 @@ public class EndFundingListController {
 		}
 
 		model.addAttribute("list", list);
+		model.addAttribute("category", category);
+		model.addAttribute("field", field);
+		model.addAttribute("keyword", keyword);
 		return ".endFundingList";
 	}
 }
