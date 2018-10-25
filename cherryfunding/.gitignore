@@ -32,6 +32,9 @@ tmp/
 # Java annotation processor (APT)
 .factorypath
 
+# Java class files
+*.class
+
 # PDT-specific (PHP Development Tools)
 .buildpath
 
