@@ -7,16 +7,18 @@ public class CPictureVo {
     private int cNum;
     private String saveName;
     private String orgName;
-    private String fileSize;
+    private long fileSize;
     private Date regdate;
+    private String cpinfo;
     public CPictureVo(){}
-	public CPictureVo(int cpNum, int cNum, String saveName, String orgName, String fileSize, Date regdate) {
+	public CPictureVo(int cpNum, int cNum, String saveName, String orgName, long fileSize, Date regdate, String cpinfo) {
 		super();
 		this.cpNum = cpNum;
 		this.cNum = cNum;
 		this.saveName = saveName;
 		this.fileSize = fileSize;
 		this.regdate = regdate;
+		this.cpinfo = cpinfo;
 	}
 	public int getCpNum() {
 		return cpNum;
@@ -42,10 +44,10 @@ public class CPictureVo {
 	public void setOrgName(String orgName) {
 		this.orgName = orgName;
 	}
-	public String getFileSize() {
+	public long getFileSize() {
 		return fileSize;
 	}
-	public void setFileSize(String fileSize) {
+	public void setFileSize(long fileSize) {
 		this.fileSize = fileSize;
 	}
 	public Date getRegdate() {
@@ -53,6 +55,12 @@ public class CPictureVo {
 	}
 	public void setRegdate(Date regdate) {
 		this.regdate = regdate;
+	}
+	public String getCpinfo() {
+		return cpinfo;
+	}
+	public void setCpinfo(String cpinfo) {
+		this.cpinfo = cpinfo;
 	}
     
 }

@@ -1,0 +1,27 @@
+drop table cPicture;
+CREATE TABLE cPicture -- ¸®¿öµå ÂüÁ¶¸¦ Áß´ÜÇÕ´Ï´å ´å´å´å
+(
+    cpNum       INT             NOT NULL, 
+    cNum        INT             NULL, 
+    saveName    VARCHAR2(50)    NULL, 
+    orgName     VARCHAR2(50)    NULL, 
+    fileSize    LONG            NULL, 
+    regDate     DATE            NULL,
+    cPinfo        VARCHAR2(500),
+    CONSTRAINT CPICTURE_PK PRIMARY KEY (cpNum)
+    --rNum        INT             NULL, ÂüÁ¶ ¾ÈÇÔ
+)
+/
+
+CREATE SEQUENCE cPicture_SEQ
+START WITH 1
+INCREMENT BY 1;
+/
+
+
+ALTER TABLE cPicture
+    ADD CONSTRAINT FK_cPicture_cNum_charity_cNum FOREIGN KEY (cNum)
+        REFERENCES Charity (cNum)
+	on delete cascade
+/
+

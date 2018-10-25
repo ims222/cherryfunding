@@ -14,4 +14,7 @@ public class CHashtagDao {
 	public int insert(CHashtagVo vo) {
 		return sqlSession.insert(NAMESPACE + "insert", vo);
 	}
+	public int getMaxNum() {
+		return sqlSession.selectOne(NAMESPACE + "getMaxNum");
+	}
 }
