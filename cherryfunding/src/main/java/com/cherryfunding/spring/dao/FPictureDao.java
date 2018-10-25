@@ -28,4 +28,8 @@ public class FPictureDao {
 		return sqlSession.selectList(NAMESPACE + "list", num);
 	}
 	
+	public String thumbnail(int fNum) {
+		return sqlSession.selectOne(NAMESPACE + "thumbnail", fNum);
+	}
+	
 }

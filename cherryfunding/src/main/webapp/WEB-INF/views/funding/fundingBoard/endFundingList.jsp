@@ -8,7 +8,7 @@
 <title>home.jsp</title>
 </head>
 <body>
-	<h1>준비중</h1>
+	<h1>종료</h1>
 
 	<table border="1" width="1000">
 		<tr>
