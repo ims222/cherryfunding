@@ -20,6 +20,8 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.cherryfunding.spring.service.funding.FHashtagService;
 import com.cherryfunding.spring.service.funding.FPictureService;
 import com.cherryfunding.spring.service.funding.FundingService;
+import com.cherryfunding.spring.service.funding.InsertFundingService;
+import com.cherryfunding.spring.service.funding.InsertFundingServiceImpl;
 import com.cherryfunding.spring.service.funding.RewardService;
 import com.cherryfunding.spring.vo.FHashtagVo;
 import com.cherryfunding.spring.vo.FPictureVo;
@@ -27,7 +29,7 @@ import com.cherryfunding.spring.vo.FundingVo;
 import com.cherryfunding.spring.vo.RewardVo;
 
 @Controller
-public class InsertFundingControllerImpl {
+public class InsertFundingController {
 	@Autowired
 	private FHashtagService fHashtagService;
 
@@ -39,6 +41,9 @@ public class InsertFundingControllerImpl {
 
 	@Autowired
 	private FPictureService fPictureService;
+
+	@Autowired
+	private InsertFundingService insertFundingService;
 
 	@RequestMapping(value = "/funding/fundingApplication", method = RequestMethod.GET)
 	public String fundingForm() {
@@ -80,11 +85,11 @@ public class InsertFundingControllerImpl {
 			fvo.setAddr("");
 			fvo.setAid("");
 			fvo.setId(id);
-			fundingService.insert(fvo); // db
+			insertFundingService.finsert(fvo); // db
 
 			for (String hashtag : hashtags) { // 해시태그 저장
 				FHashtagVo fhvo = new FHashtagVo(fHashtagService.getMaxNum() + 1, fnum, hashtag);
-				fHashtagService.insert(fhvo);
+				insertFundingService.fhinsert(fhvo);
 			}
 
 			for (int ind = 0; ind < rewards.length; ind++) { // 리와드 저장
@@ -93,7 +98,7 @@ public class InsertFundingControllerImpl {
 				rvo.setFnum(fnum);
 				rvo.setTitle(rewards[ind]);
 				rvo.setPrice(Integer.parseInt(prices[ind]));
-				rewardService.insert(rvo);
+				insertFundingService.rinsert(rvo);
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -115,7 +120,7 @@ public class InsertFundingControllerImpl {
 					fpvo.setFilesize(filesize);
 					fpvo.setFpinfo(fpinfo[num++]);
 
-					fPictureService.insert(fpvo); // 저장
+					insertFundingService.fpinsert(fpvo); // 저장
 					InputStream is = file.getInputStream();
 					FileOutputStream fos = new FileOutputStream(uploadPath + "\\" + savefilename);
 					FileCopyUtils.copy(is, fos);
