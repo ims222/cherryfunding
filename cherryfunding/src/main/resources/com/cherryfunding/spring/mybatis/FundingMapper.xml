@@ -40,4 +40,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from funding
 		<![CDATA[where edate < sysdate order by fnum desc]]>
 	</select>
+	<!-- 진행중 펀딩 -->
+	<select id="ing" resultType="funding">
+		select * from funding
+		<![CDATA[where sdate <= sysdate and edate >= sysdate order by fnum desc]]>
+	</select>
 </mapper>

@@ -39,6 +39,11 @@ public class InsertFundingController {
 
 	@Autowired
 	private FPictureService fPictureService;
+	
+	@RequestMapping(value = "/funding/fundingApplication", method = RequestMethod.GET)
+	public String fundingForm() {
+		return ".inputFunding";
+	}
 
 	@RequestMapping(value = "/funding/fundingApplication", method = RequestMethod.POST)
 	public String fundingApplication(MultipartHttpServletRequest request, HttpSession session) {

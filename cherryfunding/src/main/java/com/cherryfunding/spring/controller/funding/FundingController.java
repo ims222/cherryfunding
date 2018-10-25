@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.cherryfunding.spring.service.TestLoginService;
 import com.cherryfunding.spring.service.funding.FPictureService;
 import com.cherryfunding.spring.service.funding.FundingService;
+import com.cherryfunding.spring.service.funding.IngFundingListService;
 import com.cherryfunding.spring.vo.FPictureVo;
 import com.cherryfunding.spring.vo.FundingVo;
 import com.cherryfunding.spring.vo.UsersVo;
@@ -47,24 +48,6 @@ public class FundingController {
 			session.setAttribute("id", vo.getId());
 		}
 		return "cicadas";
-	}
-
-	@RequestMapping(value = "/funding/fundingApplication", method = RequestMethod.GET)
-	public String fundingForm() {
-		return ".inputFunding";
-	}
-
-	@RequestMapping(value = "/funding/ingFundingList", method = RequestMethod.GET)
-	public String ingFundingList(Model model) {
-		List<FundingVo> list = fundingService.list();
-
-		for (FundingVo vo : list) {
-			vo.setSavename(fundingService.thumbnail(vo.getFnum()).getSavename());
-			vo.setFpinfo(fundingService.thumbnail(vo.getFnum()).getFpinfo());
-		}
-
-		model.addAttribute("list", list);
-		return ".ingFundingList";
 	}
 
 	@RequestMapping(value = "/fundingList/showAll", method = RequestMethod.GET)

@@ -89,8 +89,6 @@
 </script>
 </head>
 <body>
-	<h1>funding application</h1>
-	
 	<form method="post" action="${pageContext.request.contextPath}/funding/fundingApplication" enctype="multipart/form-data" onsubmit="return appCommit()">
 		<input type="hidden" name="id" value="${sessionScope.id}">
 		<label for="title">제목</label>

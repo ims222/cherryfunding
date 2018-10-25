@@ -15,7 +15,7 @@ public class FundingDao {
 
 	private static final String NAMESPACE = "com.cherryfunding.spring.vo.FundingMapper.";
 
-	public int insert(FundingVo vo) { //Áö¿ø¼­ ÀÛ¼º
+	public int insert(FundingVo vo) { //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Û¼ï¿½
 		return sqlSession.insert(NAMESPACE + "insert", vo);
 	}
 
@@ -35,15 +35,18 @@ public class FundingDao {
 		return sqlSession.selectList(NAMESPACE + "list");
 	}
 
-	public int getMaxNum() { //ÀÎµ¦½º
+	public int getMaxNum() { //ì¸ë±ìŠ¤
 		return sqlSession.selectOne(NAMESPACE + "getMaxNum");
 	}
 
-	public List<FundingVo> prepare() { // ÁØºñÁß
+	public List<FundingVo> prepare() { // ì¤€ë¹„ì¤‘
 		return sqlSession.selectList(NAMESPACE + "prepare");
 	}
 
-	public List<FundingVo> end() { // Á¾·á
+	public List<FundingVo> end() { // ì¢…ë£Œ
 		return sqlSession.selectList(NAMESPACE + "end");
+	}
+	public List<FundingVo> ing() { // ì§„í–‰
+		return sqlSession.selectList(NAMESPACE + "ing");
 	}
 }
