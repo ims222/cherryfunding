@@ -21,37 +21,14 @@ import com.cherryfunding.spring.vo.UsersVo;
 
 @Controller
 public class CharityController {
-
-	@Autowired
-	private TestLoginService testLoginService;
-
 	@Autowired
 	private CharityService charityService;
 
 	@Autowired
 	private CPictureService cPictureService;
 
-	// for Testing
-	@RequestMapping(value = "/testlogin", method = RequestMethod.GET)
-	public String loginForm() {
-		return "cicadas_login";
-	}
-
-	@RequestMapping(value = "/testlogin", method = RequestMethod.POST)
-	public String login(HttpServletRequest request, HttpSession session) {
-		String id = request.getParameter("id");
-		String pwd = request.getParameter("pwd");
-		UsersVo vo = new UsersVo();
-		vo.setId(id);
-		vo.setPwd(pwd);
-		if (testLoginService.login(vo) != null) {
-			session.setAttribute("id", vo.getId());
-		}
-		return "cicadas";
-	}
-
 	@RequestMapping(value = "/charityList/showAll", method = RequestMethod.GET)
-	public String list(Model model) { // ? ?Œ?ˆç­Œï½?˜™ ? ?™?˜™? ?ˆ?ƒ?–«?ì˜™ ï¿½ê²«ï¿½ëœ„ï¿½ì‘? ?Œê¶ç–«?ì˜™
+	public String list(Model model) { // ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ç­Œï½?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½?ï¿½ì˜™ ï¿½ê²«ï¿½ëœ„ï¿½ì‘?ï¿½ï¿½?ï¿½ï¿½ê¶ç–«?ï¿½ì˜™
 		List<CharityVo> list = charityService.list();
 		model.addAttribute("list", list);
 		return "charity/charityBoard/charityList";
@@ -59,8 +36,8 @@ public class CharityController {
 
 	@RequestMapping(value = "/charityList/detail", method = RequestMethod.GET)
 	public String detail(int num, Model model) {
-		CharityVo vo = charityService.select(num); // æ¹²ï¿½ ï¿½ë¸¯ï¿½êµ¹ï§ï¿½ è­°ê³ ?‰¶
-		List<CPictureVo> list = cPictureService.list(num); // ï¿½ï¿½ï¿½ëµ«è¸°ëŠ?ƒ‡æ¿¡ï¿½ ï¿½ì” èª˜ëª„ï¿½ï¿½?™†ï¿½ì”ª è­°ê³ ?‰¶
+		CharityVo vo = charityService.select(num); // æ¹²ï¿½ ï¿½ë¸¯ï¿½êµ¹ï§ï¿½ è­°ê³ ?ï¿½ï¿½
+		List<CPictureVo> list = cPictureService.list(num); // ï¿½ï¿½ï¿½ëµ«è¸°ëŠ?ï¿½ï¿½æ¿¡ï¿½ ï¿½ì” èª˜ëª„ï¿½ï¿½?ï¿½ï¿½ï¿½ì”ª è­°ê³ ?ï¿½ï¿½
 		// service.addHit(num);
 		model.addAttribute("vo", vo);
 		model.addAttribute("list", list);
@@ -71,7 +48,7 @@ public class CharityController {
 
 	@RequestMapping(value = "/charityList/delete", method = RequestMethod.GET)
 	public String delete(int num, Model model) {
-		int n = charityService.delete(num); // ï¿½ë¼¨ï¿½ë¨¯?‚• ï¿½ëœï¿½ëŸ¡ï§ë?£ëœï¿½ëŸ¡ï¿½ëªï¿½ëœï¿½ëŸ©ï¿½ì §ï¿½ì†»æ´¹â‘¥?‚•
+		int n = charityService.delete(num); // ï¿½ë¼¨ï¿½ë¨¯?ï¿½ï¿½ ï¿½ëœï¿½ëŸ¡ï§ï¿½?ï¿½ëœï¿½ëŸ¡ï¿½ëªï¿½ëœï¿½ëŸ©ï¿½ì §ï¿½ì†»æ´¹â‘¥?ï¿½ï¿½
 		if (n > 0) {
 			return "redirect:/charityList/showAll";
 		} else {

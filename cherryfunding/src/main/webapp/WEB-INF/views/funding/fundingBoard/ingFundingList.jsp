@@ -29,6 +29,17 @@
 			<button type="button" class="btn btn-secondary">게임·취미</button>
 			<button type="button" class="btn btn-secondary">출판</button>
 		</div>
+		<form method="post" action="">
+			<input type="hidden" name="category" value="${category}">
+			<select name="field">
+				<option value="title">제목</option>
+				<option value="content">내용</option>
+				<option value="id">글쓴이</option>
+			</select>
+			<input type="text" name="keyword">
+			<input type="submit" value="검색">		
+		</form>
+		
 		<div class="row no-collapse-1">
 			<c:forEach var="vo" items="${list}" varStatus="vs">
 				<section class="4u">
