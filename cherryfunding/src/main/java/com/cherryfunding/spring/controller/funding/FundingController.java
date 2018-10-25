@@ -174,7 +174,11 @@ public class FundingController {
 	public String detail(int num, Model model) {
 		FundingVo vo = fundingService.select(num); // 글 하나만 조회
 		List<FPictureVo> list = fPictureService.list(num);	//펀딩번호로 이미지파일 조회
+<<<<<<< HEAD
 		// 조회수 증가시켜야 하는데 조회수가 필요한지 잘 모르겠음
+=======
+		// 조회수 증가시켜야 하는데 조회수가 필요한지 잘 모르겠음 
+>>>>>>> branch 'master' of https://github.com/ims222/cherryfunding.git
 		// service.addHit(num);
 		model.addAttribute("vo", vo);
 		model.addAttribute("list",list);
