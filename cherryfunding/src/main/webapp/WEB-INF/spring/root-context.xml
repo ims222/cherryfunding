@@ -7,13 +7,14 @@
 	</bean>
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
-	
+	<context:property-placeholder location="/WEB-INF/*.properties" /> 
+
 	<!-- dataSource설정 -->
 	<bean id="dataSourceSpied" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
-		<property name="driverClassName" value="oracle.jdbc.OracleDriver" />
-		<property name="username" value="scott" />
-		<property name="password" value="tiger" />
-		<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe" />
+		<property name="driverClassName" value="${jdbc.driver}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+		<property name="url" value="${jdbc.url}" />
 	</bean>
 	<!-- sql log를 위한 설정 -->
 	<bean id="dataSource" class="net.sf.log4jdbc.Log4jdbcProxyDataSource">
