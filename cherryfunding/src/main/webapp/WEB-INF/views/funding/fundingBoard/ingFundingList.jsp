@@ -60,12 +60,13 @@
 						
 						<fmt:formatDate value="${vo.edate}" var="edate" pattern="yyyyMMdd"/>
 						<fmt:parseDate value="${edate}" var="edateDate" pattern="yyyyMMdd"/>
-						<fmt:parseNumber value="${edateDate.time / (1000 * 60 * 60 * 24)}" integerOnly="true"/>
+						<fmt:parseNumber value="${edateDate.time / (1000 * 60 * 60 * 24)}" var="end" integerOnly="true"/>
 						
 						<jsp:useBean id="today" class="java.util.Date"/>
-						<fmt:formatDate value="${today}" var="edateDate" pattern="yyyyMMdd"/>
-						<fmt:parseDate value="${edateDate}" pattern="yyyyMMdd"/>
-						
+						<fmt:formatDate value="${today}" var="todayDate" pattern="yyyyMMdd"/>
+						<fmt:parseDate value="${todayDate}" var="nowDate" pattern="yyyyMMdd"/>
+						<fmt:parseNumber value="${nowDate.time / (1000 * 60 * 60 * 24)}" var="now" integerOnly="true"/>
+						<p>D${now-end}</p>
 						<div class="progress">
 							<c:set var="before" value="${vo.camout * 100 / vo.amount}" />
 							<div class="progress-bar" role="progressbar"

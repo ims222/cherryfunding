@@ -50,6 +50,16 @@
 						<p>${vo.id}</p>
 						<p>목표금액: ${vo.amount}</p>
 						<p>현재금액: ${vo.camout}</p>
+						
+						<fmt:formatDate value="${vo.sdate}" var="sdate" pattern="yyyyMMdd"/>
+						<fmt:parseDate value="${sdate}" var="sdateDate" pattern="yyyyMMdd"/>
+						<fmt:parseNumber value="${sdateDate.time / (1000 * 60 * 60 * 24)}" var="start" integerOnly="true"/>
+						
+						<jsp:useBean id="today" class="java.util.Date"/>
+						<fmt:formatDate value="${today}" var="todayDate" pattern="yyyyMMdd"/>
+						<fmt:parseDate value="${todayDate}" var="nowDate" pattern="yyyyMMdd"/>
+						<fmt:parseNumber value="${nowDate.time / (1000 * 60 * 60 * 24)}" var="now" integerOnly="true"/>
+						<p>D${now - start}</p>
 
 						<div class="progress">
 							<c:set var="before" value="${vo.camout * 100 / vo.amount}" />
