@@ -8,7 +8,5 @@
 </head>
 <body>
 	<h1>home_home_home_</h1>
-	
-	<!-- 후원자 목록 -->
 </body>
 </html>

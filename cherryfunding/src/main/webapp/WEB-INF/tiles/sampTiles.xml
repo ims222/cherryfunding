@@ -16,6 +16,28 @@ PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
 		<put-attribute name="footer" value="/WEB-INF/views/main/footer.jsp"/>
 	</definition>
 	
+	<!-- charity -->
+		<definition name=".ingCharityList" extends = ".main">
+			<put-attribute name="banner" value="/WEB-INF/views/charity/banner.jsp"/>
+			<put-attribute name="content" value="/WEB-INF/views/charity/charitytBoard/ingCharityList.jsp"/>
+		</definition>
+		
+		<definition name=".prepareCharityList" extends = ".main">
+			<put-attribute name="banner" value="/WEB-INF/views/charity/banner.jsp"/>
+			<put-attribute name="content" value="/WEB-INF/views/charity/charityBoard/prepareCharityList.jsp"/>
+		</definition>
+		
+		<definition name=".endCharityList" extends = ".main">
+			<put-attribute name="banner" value="/WEB-INF/views/charity/banner.jsp"/>
+			<put-attribute name="content" value="/WEB-INF/views/charity/charityBoard/endCharityList.jsp"/>
+		</definition>
+		
+		<definition name=".inputCharity" extends = ".main">
+			<put-attribute name="banner" value="/WEB-INF/views/charity/application/banner.jsp"/>
+			<put-attribute name="content" value="/WEB-INF/views/charity/application/charityApplicationProcess.jsp"/>
+		</definition>
+	<!-- //////// -->
+	
 	<!-- funding -->
 		<definition name=".ingFundingList" extends = ".main">
 			<put-attribute name="banner" value="/WEB-INF/views/funding/banner.jsp"/>
