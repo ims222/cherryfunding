@@ -28,7 +28,7 @@ public class CPictureDao {
 		return sqlSession.selectList(NAMESPACE + "list", num);
 	}
 	
-	public CPictureVo thumbnail(int fNum) {
-		return sqlSession.selectOne(NAMESPACE + "thumbnail", fNum);
+	public CPictureVo thumbnail(int cNum) {
+		return sqlSession.selectOne(NAMESPACE + "thumbnail", cNum);
 	}
 }
