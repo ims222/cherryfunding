@@ -17,8 +17,8 @@ public class IngCharityListController {
 	@Autowired
 	IngCharityListService ingCharityListService;
 
-	@RequestMapping(value = "/support/ingSupportList", method = RequestMethod.GET)
-	public String ingFundingList(Model model) {
+	@RequestMapping(value = "/charity/ingCharityList", method = RequestMethod.GET)
+	public String ingCharityList(Model model) {
 		List<CharityVo> list = ingCharityListService.list();
 
 		for (CharityVo vo : list) {
@@ -27,6 +27,6 @@ public class IngCharityListController {
 		}
 
 		model.addAttribute("list", list);
-		return ".ingFundingList";
+		return ".ingCharityList";
 	}
 }

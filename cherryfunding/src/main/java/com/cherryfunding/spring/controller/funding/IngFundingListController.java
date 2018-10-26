@@ -24,10 +24,12 @@ public class IngFundingListController {
 		String category = request.getParameter("category");
 		String field = request.getParameter("field");
 		String keyword = request.getParameter("keyword");
+		String sort = request.getParameter("sort");
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("category", category);
 		map.put("field", field);
 		map.put("keyword", keyword);
+		map.put("sort", sort);
 		List<FundingVo> list = ingFundingListService.list(map);
 
 		for (FundingVo vo : list) {
@@ -39,6 +41,7 @@ public class IngFundingListController {
 		model.addAttribute("category", category);
 		model.addAttribute("field", field);
 		model.addAttribute("keyword", keyword);
+		model.addAttribute("sort", sort);
 		return ".ingFundingList";
 	}
 }
