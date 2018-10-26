@@ -10,7 +10,7 @@
 	</div>
 	<nav id="nav">
 		<ul>
-			<li class="active"><a href="${pageContext.request.contextPath}/funding/ingFundingList">후원</a></li>
+			<li class="active"><a href="${pageContext.request.contextPath}/charity/ingCharityList">후원</a></li>
 			<li><a href="${pageContext.request.contextPath}/funding/ingFundingList">펀딩</a></li>
 			<li><a href="${pageContext.request.contextPath}">나눔</a></li>
 			<li><a href="${pageContext.request.contextPath}">봉사</a></li>
