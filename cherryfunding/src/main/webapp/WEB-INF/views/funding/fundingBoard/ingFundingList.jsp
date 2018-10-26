@@ -8,6 +8,10 @@
 			var value = $(this).text();
 			location.href= "${pageContext.request.contextPath}/funding/ingFundingList?category=" + value;
 		});
+		$("#sort").on('change', function(){
+			var value = $(this).val();
+			location.href= "${pageContext.request.contextPath}/funding/ingFundingList?sort=" + value;
+		});
 	});
 </script>
 <!-- Main -->
@@ -39,12 +43,12 @@
 			<input type="text" name="keyword" value="${keyword}">
 			<input type="submit" value="검색">		
 		</form>
-		<select name="sort">
-			<option value="fnum">최신순</option>
-			<option value="">추천순</option>
-			<option value="">인기순</option>
+		<select id="sort">
+			<option value="latest">최신순</option>
+			<option value="recommend">추천순</option>
+			<option value="popular">인기순</option>
 			<option value="camount">참여금액순</option>
-			<option value="">종료임박순</option>
+			<option value="end">종료임박순</option>
 		</select>
 		<div class="row no-collapse-1">
 			<c:forEach var="vo" items="${list}" varStatus="vs">

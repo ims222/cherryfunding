@@ -4,7 +4,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cherryfunding.spring.vo.FundingMapper">
 	<sql id="category">
-		<if test="category != null and category != '' and category != '전체보기'">
+		<if
+			test="category != null and category != '' and category != '전체보기'">
 			and category = #{category}
 		</if>
 	</sql>
@@ -13,56 +14,97 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			and ${field} like '%' || #{keyword} || '%'
 		</if>
 	</sql>
-	
+	<sql id="sort">
+		<choose>
+			<when test="sort == 'recommend'">
+				order by fnum desc
+			</when>
+			<when test="sort == 'popular'">
+				order by hit desc, fnum desc
+			</when>
+			<when test="sort == 'camount'">
+				order by camout desc, fnum desc
+			</when>
+			<otherwise>
+				order by fnum desc
+			</otherwise>
+		</choose>
+	</sql>
+
 	<select id="list" resultType="funding">
 		select * from funding
 	</select>
-	
+
 	<select id="select" parameterType="int" resultType="funding">
-		select * from funding where fnum = #{num}
+		select * from
+		funding where fnum = #{num}
 	</select>
 	<insert id="insert" parameterType="funding">
-		insert into funding values(#{fnum},#{title},#{content},#{amount},
+		insert into funding
+		values(#{fnum},#{title},#{content},#{amount},
 		0,#{sdate},#{edate},#{category},
 		#{confirm},#{aid},#{addr},sysdate,#{id},0)
 	</insert>
 	<update id="update" parameterType="funding">
-		update funding set title=#{title},content=#{content},amount=#{amount},camout=#{camout},
+		update funding set
+		title=#{title},content=#{content},amount=#{amount},camout=#{camout},
 		sdate=#{sdate},edate=#{edate},category=#{category},confirm=#{confirm},aid=#{aid},
-		addr=#{addr},id=#{id} where fnum = #{fnum} 
+		addr=#{addr},id=#{id} where fnum = #{fnum}
 	</update>
 	<delete id="delete" parameterType="int">
-		delete from funding where fnum=#{num}
+		delete from funding where
+		fnum=#{num}
 	</delete>
 	<select id="getMaxNum" resultType="int">
-		select nvl(max(fnum), 0) from funding
+		select nvl(max(fnum), 0) from
+		funding
 	</select>
-	
-	
-	
+
+
+
 	<!-- 준비중 펀딩 -->
-	<select id="prepare" parameterType= "hashmap" resultType="funding">
+	<select id="prepare" parameterType="hashmap"
+		resultType="funding">
 		select * from funding
 		<![CDATA[where sdate > sysdate and edate > sysdate]]>
-		<include refid="category"/>
-		<include refid="search"/>
+		<include refid="category" />
+		<include refid="search" />
+		order by fnum desc
+	</select>
+
+	<!-- 종료된 펀딩 -->
+	<select id="end" parameterType="hashmap" resultType="funding">
+		select * from funding
+		<![CDATA[where sdate < sysdate and edate < sysdate]]>
+		<include refid="category" />
+		<include refid="search" />
 		order by fnum desc
 	</select>
 	
-	<!-- 종료된 펀딩 -->
-	<select id="end" parameterType= "hashmap"  resultType="funding">
-		select * from funding
-		<![CDATA[where sdate < sysdate and edate < sysdate]]>
-		<include refid="category"/>
-		<include refid="search"/>
-		order by fnum desc
-	</select>
 	<!-- 진행중 펀딩 -->
-	<select id="ing" parameterType= "hashmap" resultType="funding">
-		select * from funding
-		<![CDATA[where sdate < sysdate and edate > sysdate]]>
-		<include refid="category"/>
-		<include refid="search"/>
-		order by fnum desc
+	<select id="ing" parameterType="hashmap" resultType="funding">
+		<choose>
+			<when test="sort == 'end'">
+				select * from (
+    				select * from funding
+    				<![CDATA[where sdate < sysdate and edate > sysdate]]>
+					)aa,(
+					select (edate-sysdate)cal, fnum from funding
+					<![CDATA[where sdate < sysdate and edate > sysdate]]>
+					)bb
+				where aa.fnum = bb.fnum
+				<include refid="category" />
+				<include refid="search" />
+				order by cal desc
+			</when>
+			<otherwise>
+				select * from funding
+				<![CDATA[where sdate < sysdate and edate > sysdate]]>
+				<include refid="category" />
+				<include refid="search" />
+				<include refid="sort" />
+			</otherwise>
+		</choose>
+		
 	</select>
 </mapper>
