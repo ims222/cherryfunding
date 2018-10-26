@@ -39,11 +39,17 @@
 			<input type="text" name="keyword" value="${keyword}">
 			<input type="submit" value="검색">		
 		</form>
-		
+		<select name="sort">
+			<option value="fnum">최신순</option>
+			<option value="">추천순</option>
+			<option value="">인기순</option>
+			<option value="camount">참여금액순</option>
+			<option value="">종료임박순</option>
+		</select>
 		<div class="row no-collapse-1">
 			<c:forEach var="vo" items="${list}" varStatus="vs">
 				<section class="4u">
-					<a href="#" class="image featured"> <img
+					<a href="${pageContext.request.contextPath}/fundingList/detail?num=${vo.fnum}" class="image featured"> <img
 						src="${pageContext.request.contextPath}/resources/upload/funding/${vo.savename}"
 						alt="${vo.fpinfo}" height="200px"></a>
 					<div class="box">
@@ -51,7 +57,15 @@
 						<p>${vo.id}</p>
 						<p>목표금액: ${vo.amount}</p>
 						<p>현재금액: ${vo.camout}</p>
-
+						
+						<fmt:formatDate value="${vo.edate}" var="edate" pattern="yyyyMMdd"/>
+						<fmt:parseDate value="${edate}" var="edateDate" pattern="yyyyMMdd"/>
+						<fmt:parseNumber value="${edateDate.time / (1000 * 60 * 60 * 24)}" integerOnly="true"/>
+						
+						<jsp:useBean id="today" class="java.util.Date"/>
+						<fmt:formatDate value="${today}" var="edateDate" pattern="yyyyMMdd"/>
+						<fmt:parseDate value="${edateDate}" pattern="yyyyMMdd"/>
+						
 						<div class="progress">
 							<c:set var="before" value="${vo.camout * 100 / vo.amount}" />
 							<div class="progress-bar" role="progressbar"
@@ -63,7 +77,6 @@
 						</div>
 					</div>
 				</section>
-
 			</c:forEach>
 		</div>
 		<div class="row">
