@@ -5,7 +5,7 @@
 	<div class="container">
 		<div class="row no-collapse-1"></div>
 		<div class="row">
-
+			
 			<!-- Content -->
 			<div class="6u">
 				<section>
