@@ -8,13 +8,13 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
-		$("#inputFile").on('change', "input[name='fPicture']", function(){
-			var last = $("input[name='fPicture']").last();
+		$("#inputFile").on('change', "input[name='cPicture']", function(){
+			var last = $("input[name='cPicture']").last();
 			if($(last).is($(this))){
 				var file = $("<input>").attr('type', 'file')
-									.attr('name', 'fPicture');
+									.attr('name', 'cPicture');
 				var text = $('<input>').attr('type', 'text')
-									.attr('name', 'fPinfo');
+									.attr('name', 'cPinfo');
 				$("#inputFile").append(file).append(text).append('<br>');
 			}
 			
@@ -72,14 +72,6 @@
 			return false;
 		}
 		
-		var r = $("input[name='reward']");
-		var ind = $("input[name='reward']").length;
-		var check = 0;
-		for(var i = 0;i<ind;i++){
-			if($(r[i]).val()){
-				check++;
-			}
-		}
 		if(check < 1){
 			alert("물품은 한가지 이상 입력하셔야 되욧");
 			return false;
@@ -124,8 +116,8 @@
 		
 		<div id="inputFile">
 			사진업로드<br>
-			<input type="file" name="fPicture">
-			<input type="text" name="fPinfo"><br>
+			<input type="file" name="cPicture">
+			<input type="text" name="cPinfo"><br>
 		</div>
 		<input type="submit" value="submit">
 	</form>
