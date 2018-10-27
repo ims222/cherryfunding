@@ -50,4 +50,21 @@ public class FundingDao {
 	public List<FundingVo> ing(HashMap<String, Object> map) { // 진행
 		return sqlSession.selectList(NAMESPACE + "ing", map);
 	}
+	
+	//메인 요악 
+	public FundingVo mainEnd() {//종료임박
+		return sqlSession.selectOne(NAMESPACE + "mainEnd");
+	}
+	public FundingVo mainNew() {//최신
+		return sqlSession.selectOne(NAMESPACE + "mainNew");
+	}
+	public FundingVo mainHot() {//조회수높은
+		return sqlSession.selectOne(NAMESPACE + "mainHot");
+	}
+	public FundingVo mainPrice() {//참여금액이 제일 높은
+		return sqlSession.selectOne(NAMESPACE + "mainPrice");
+	}
+	
+	
+	
 }

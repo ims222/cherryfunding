@@ -109,29 +109,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 메인 요약 -->
 		<!-- 종료임바크 -->
-		<select id="main_end" >
-			select * from (
-				select *, rownum rnum from (
-    				select * from funding
-    				<![CDATA[where sdate < sysdate and edate > sysdate]]>
-					)aa,(
-					select (edate-sysdate)cal, fnum from funding
-					<![CDATA[where sdate < sysdate and edate > sysdate]]>
-					)bb
-				where aa.fnum = bb.fnum
-				order by cal desc)cal
-			where cal.rnum = 1
+		<select id="mainEnd" resultType="funding">
+			select * from funding
+			<![CDATA[where sdate < sysdate and edate > sysdate]]>
+			and (edate-sysdate) = (select min(edate-sysdate) from funding
+							 <![CDATA[where sdate < sysdate and edate > sysdate]]>)
 		</select>
+		
 		<!-- 최신 -->
-		<select id="main_new">
+		<select id="mainNew" resultType="funding">
 			select * from (
 				select aa.*, rownum rnum from (
 					select * from funding order by fnum desc
 				)aa
 			) where rnum = 1
 		</select>
+		
 		<!-- 핫 -->
-		<select id="main_hot">
+		<select id="mainHot" resultType="funding">
 			select * from (
 				select aa.*, rownum rnum from (
 					select * from funding
@@ -140,10 +135,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    				 )aa
 			where hit = (select max(hit) from funding
 				<![CDATA[where sdate < sysdate and edate > sysdate]]>)
-			) where rnum = 1;
+			) where rnum = 1
 		</select>
+		
 		<!-- 액수 -->
-		<select id="main_price">
+		<select id="mainPrice" resultType="funding">
 			select * from (
 				select aa.*, rownum rnum from (
 					select * from funding
@@ -152,7 +148,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    				 )aa
 			where camout = (select max(camout) from funding
 				<![CDATA[where sdate < sysdate and edate > sysdate]]>)
-			) where rnum = 1;
+			) where rnum = 1
 		</select>
 	
 	<!-- ///////// -->
