@@ -21,19 +21,9 @@ import com.cherryfunding.spring.service.charity.CHashtagService;
 import com.cherryfunding.spring.service.charity.CPictureService;
 import com.cherryfunding.spring.service.charity.CharityService;
 import com.cherryfunding.spring.service.charity.InsertCharityService;
-import com.cherryfunding.spring.service.funding.FHashtagService;
-import com.cherryfunding.spring.service.funding.FPictureService;
-import com.cherryfunding.spring.service.funding.FundingService;
-import com.cherryfunding.spring.service.funding.InsertFundingService;
-import com.cherryfunding.spring.service.funding.InsertFundingServiceImpl;
-import com.cherryfunding.spring.service.funding.RewardService;
 import com.cherryfunding.spring.vo.CHashtagVo;
 import com.cherryfunding.spring.vo.CPictureVo;
 import com.cherryfunding.spring.vo.CharityVo;
-import com.cherryfunding.spring.vo.FHashtagVo;
-import com.cherryfunding.spring.vo.FPictureVo;
-import com.cherryfunding.spring.vo.FundingVo;
-import com.cherryfunding.spring.vo.RewardVo;
 
 @Controller
 public class InsertCharityController {
@@ -64,7 +54,7 @@ public class InsertCharityController {
 		String sDate = request.getParameter("sDate");
 		String eDate = request.getParameter("eDate");
 		String[] hashtags = request.getParameterValues("hashtag");
-		String[] prices = request.getParameterValues("price");
+		String cPrice = request.getParameter("cPrice");
 		String[] cpinfo = request.getParameterValues("cPinfo");
 
 		int cnum = charityService.getMaxNum() + 1; // 펀딩번호
@@ -73,7 +63,7 @@ public class InsertCharityController {
 		if (f.exists() == false) { // 파일 생성
 			f.mkdirs();
 		}
-		try { // 펀딩저장
+		try { // 후원저장
 			CharityVo cvo = new CharityVo();
 			cvo.setcNum(cnum);
 			cvo.setTitle(title);
@@ -86,6 +76,7 @@ public class InsertCharityController {
 			java.util.Date jedate = new SimpleDateFormat("yyyy-MM-dd").parse(eDate);
 			cvo.seteDate(new Date(jedate.getTime()));
 			cvo.setCategory(category);
+			cvo.setcPrice(Integer.parseInt(cPrice));
 			cvo.setConfirm("n");
 			cvo.setAddr("");
 			cvo.setaId("");
@@ -118,7 +109,6 @@ public class InsertCharityController {
 					cpvo.setOrgName(orgfilename);
 					cpvo.setFileSize(filesize);
 					cpvo.setCpinfo(cpinfo[num++]);
-
 					insertCharityService.cpinsert(cpvo); // 저장
 					InputStream is = file.getInputStream();
 					FileOutputStream fos = new FileOutputStream(uploadPath + "\\" + savefilename);

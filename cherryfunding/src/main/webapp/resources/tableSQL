@@ -94,7 +94,8 @@ CREATE TABLE Charity
     aId         VARCHAR2(40)     NULL, 
     addr        VARCHAR2(100)    NULL, 
     regDate     DATE             NULL, 
-    hit         INT              NULL, 
+    hit         INT              NULL,
+    cPrice      INT              NULL,
     CONSTRAINT CHARITY_PK PRIMARY KEY (cNum)
 )
 /
