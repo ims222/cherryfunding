@@ -30,7 +30,7 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		responsiveVoice.setDefaultVoice("Korean Female");
-		responsiveVoice.speak("안녕하세요");
+		//responsiveVoice.speak("안녕하세요");
 		
 		$('body').on('keyup', function(e){
 			if(e.keyCode === 9){
