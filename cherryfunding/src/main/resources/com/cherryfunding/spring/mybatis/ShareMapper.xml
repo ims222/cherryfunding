@@ -15,6 +15,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from sharing order by sNum desc
 	</select>
 	
+	<select id="detail" parameterType="int" resultType="share">
+		select * from sharing where sNum = #{sNum}
+	</select>
+	
 	
 	
 
