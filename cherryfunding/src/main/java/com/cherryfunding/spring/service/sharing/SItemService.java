@@ -11,9 +11,9 @@ import com.cherryfunding.spring.dao.SItemDao;
 public class SItemService {
 
 	@Autowired
-	private SItemDao dao;
+	private SItemDao sItemDao;
 	
 	public int getMaxNum() {
-		return dao.getMaxNum();
+		return sItemDao.getMaxNum();
 	}
 }

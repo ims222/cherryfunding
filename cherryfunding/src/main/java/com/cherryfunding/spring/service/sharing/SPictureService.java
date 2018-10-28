@@ -9,9 +9,9 @@ import com.cherryfunding.spring.dao.SPictureDao;
 public class SPictureService {
 
 	@Autowired
-	private SPictureDao dao;
+	private SPictureDao sPictureDao;
 	
 	public int getMaxNum() {
-		return dao.getMaxNum();
+		return sPictureDao.getMaxNum();
 	}
 }

@@ -107,7 +107,7 @@ public class InsertSharingController {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-		return ".main";
+		return "redirect:/sharing/sharingList";
 	}
 
 }

@@ -9,9 +9,9 @@ import com.cherryfunding.spring.dao.ShareDao;
 public class ShareService {
 	
 	@Autowired
-	private ShareDao dao;
+	private ShareDao shareDao;
 	
 	public int getMaxNum() {
-		return dao.getMaxNum();
+		return shareDao.getMaxNum();
 	}
 }

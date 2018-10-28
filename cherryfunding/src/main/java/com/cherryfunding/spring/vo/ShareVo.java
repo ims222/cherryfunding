@@ -10,11 +10,15 @@ public class ShareVo {
 	private Date regdate;
 	private int hit;
 	private String title;
+	private String saveName;
+	private String sPinfo;
 
 	public ShareVo() {
 	}
 
-	public ShareVo(int sNum, String id, String content, String category, Date regdate, int hit, String title) {
+	public ShareVo(int sNum, String id, String content, String category, Date regdate, int hit, String title,
+			String saveName, String sPinfo) {
+		super();
 		this.sNum = sNum;
 		this.id = id;
 		this.content = content;
@@ -22,6 +26,8 @@ public class ShareVo {
 		this.regdate = regdate;
 		this.hit = hit;
 		this.title = title;
+		this.saveName = saveName;
+		this.sPinfo = sPinfo;
 	}
 
 	public int getsNum() {
@@ -78,6 +84,22 @@ public class ShareVo {
 
 	public void setTitle(String title) {
 		this.title = title;
+	}
+
+	public String getSaveName() {
+		return saveName;
+	}
+
+	public void setSaveName(String saveName) {
+		this.saveName = saveName;
+	}
+
+	public String getsPinfo() {
+		return sPinfo;
+	}
+
+	public void setsPinfo(String sPinfo) {
+		this.sPinfo = sPinfo;
 	}
 
 }

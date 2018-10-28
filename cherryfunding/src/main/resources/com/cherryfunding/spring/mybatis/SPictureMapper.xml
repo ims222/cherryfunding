@@ -9,7 +9,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getMaxNum" resultType="int">
 		select NVL(max(spNum), 0) from sPicture
 	</select>
-
+	
+	<select id="thumbnail" resultType="sPicture" parameterType="int">
+		select * from (
+			select aa.*, rownum rnum from (
+				select * from sPicture where sNum = #{sNum} order by spNum
+			)aa
+		) where rnum = 1
+	</select>
 
 
 	<select id="list" resultType="sPicture">

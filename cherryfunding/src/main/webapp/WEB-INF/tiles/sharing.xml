@@ -8,4 +8,9 @@ PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
 		<put-attribute name="banner" value="/WEB-INF/views/sharing/banner.jsp"/>
 		<put-attribute name="content" value="/WEB-INF/views/sharing/shareBoard/insertSharing.jsp"/>
 	</definition>
+	
+	<definition name=".sharingList" extends = ".main">
+		<put-attribute name="banner" value="/WEB-INF/views/sharing/banner.jsp"/>
+		<put-attribute name="content" value="/WEB-INF/views/sharing/shareBoard/sharingList.jsp"/>
+	</definition>
 </tiles-definitions>

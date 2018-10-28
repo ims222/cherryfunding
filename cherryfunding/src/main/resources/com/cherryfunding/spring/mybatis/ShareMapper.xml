@@ -11,12 +11,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select NVL(max(sNum), 0) from sharing
 	</select>
 	
-	
-	
-	
 	<select id="list" resultType="share">
-		select * from sharing
+		select * from sharing order by sNum desc
 	</select>
+	
+	
+	
 
 	<select id="select" parameterType="string" resultType="share">
 		select * from sharing where id = #{id}

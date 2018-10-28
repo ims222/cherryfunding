@@ -28,7 +28,14 @@ public class FPictureDao {
 	}
 	
 	public FPictureVo thumbnail(int fNum) {
-		return sqlSession.selectOne(NAMESPACE + "thumbnail", fNum);
+		FPictureVo fPictureVo = sqlSession.selectOne(NAMESPACE + "thumbnail", fNum);
+		if(fPictureVo == null){
+			fPictureVo = new FPictureVo();
+			fPictureVo.setfNum(fNum);
+			fPictureVo.setSavename("default");
+			fPictureVo.setFpinfo("default");
+		}
+		return fPictureVo;
 	}
 	
 }
