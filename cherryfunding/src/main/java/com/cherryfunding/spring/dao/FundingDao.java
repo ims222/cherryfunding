@@ -55,7 +55,7 @@ public class FundingDao {
 	public FundingVo mainEnd() {//종료임박
 		return sqlSession.selectOne(NAMESPACE + "mainEnd");
 	}
-	public FundingVo mainNew() {//최신
+	public FundingVo mainNew() {//새로 시작하는 펀딩
 		return sqlSession.selectOne(NAMESPACE + "mainNew");
 	}
 	public FundingVo mainHot() {//조회수높은
