@@ -34,7 +34,12 @@
 		
 		$('body').on('keyup', function(e){
 			if(e.keyCode === 9){
-				responsiveVoice.speak($(e.target).text());
+				var target = $(e.target);
+				var text = target.text();
+				if($(target).attr('class') === 'image featured'){
+					text = $(target).find('img').attr('alt');
+				}
+				responsiveVoice.speak(text);		
 			}
 		});
 	});
