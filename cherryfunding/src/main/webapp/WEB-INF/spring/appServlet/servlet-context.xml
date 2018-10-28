@@ -38,6 +38,9 @@
 			<beans:list>
 				<!-- tiles설정파일 -->
 				<beans:value>/WEB-INF/tiles/cherryFundingTiles.xml</beans:value>
+				<beans:value>/WEB-INF/tiles/funding.xml</beans:value>
+				<beans:value>/WEB-INF/tiles/charity.xml</beans:value>
+				<beans:value>/WEB-INF/tiles/sharing.xml</beans:value>
 			</beans:list>
 		</beans:property>
 	</beans:bean>

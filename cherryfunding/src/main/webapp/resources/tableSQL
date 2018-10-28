@@ -450,7 +450,8 @@ ALTER TABLE volunteer
 CREATE TABLE sharing
 (
     sNum        INT             NOT NULL, 
-    id          VARCHAR2(40)    NULL, 
+    id          VARCHAR2(40)    NULL,
+    title		VARCHAR2(100)	NULL, -- 제목 추가
     content     CLOB            NULL, 
     category    VARCHAR2(40)    NULL, 
     regDate     DATE            NULL, 
@@ -463,6 +464,9 @@ CREATE SEQUENCE sharing_SEQ
 START WITH 1
 INCREMENT BY 1;
 /
+
+alter table sharing
+add title VARCHAR2(100);
 
 
 --DROP TRIGGER sharing_AI_TRG;
