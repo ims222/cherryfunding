@@ -5,16 +5,24 @@ CREATE TABLE sPicture
     spNum       INT             NOT NULL, 
     sNum        INT             NOT NULL, 
     --siNum       INT             NULL, --참조제거 
-    saveName    VARCHAR2(20)    NULL, 
-    orgName     VARCHAR2(20)    NULL, 
-    fileSize    VARCHAR2(20)    NULL,
+    saveName    VARCHAR2(500)    NULL, --사이즈 변경
+    orgName     VARCHAR2(500)    NULL, --사이즈 변경
+    fileSize    LONG    NULL,   --LONG 변경
     sPinfo		VARCHAR2(500)	NULL, --정보 추가
     CONSTRAINT SPICTURE_PK PRIMARY KEY (spNum)
 )
 /
+
+alter table spicture
+modify saveName varchar2(500);
+alter table spicture
+modify orgName varchar2(500);
 
 alter table spicture -- 아이템 컴럼 제거
 drop column sinum;
 
 alter table spicture --사진정보 추가
 add sPinfo varchar2(500);
+
+alter table sPicture -- 타입변경
+modify fileSize LONG;

@@ -5,13 +5,13 @@ public class SPictureVo {
 	private int sNum;
 	private String saveName;
 	private String orgName;
-	private String fileSize;
+	private long fileSize;
 	private String sPinfo;
 
 	public SPictureVo() {
 	}
 
-	public SPictureVo(int spNum, int sNum, String saveName, String orgName, String fileSize, String sPinfo) {
+	public SPictureVo(int spNum, int sNum, String saveName, String orgName, long fileSize, String sPinfo) {
 		super();
 		this.spNum = spNum;
 		this.sNum = sNum;
@@ -53,11 +53,11 @@ public class SPictureVo {
 		this.orgName = orgName;
 	}
 
-	public String getFileSize() {
+	public long getFileSize() {
 		return fileSize;
 	}
 
-	public void setFileSize(String fileSize) {
+	public void setFileSize(long fileSize) {
 		this.fileSize = fileSize;
 	}
 

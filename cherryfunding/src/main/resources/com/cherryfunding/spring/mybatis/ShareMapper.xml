@@ -3,21 +3,29 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cherryfunding.spring.vo.ShareMapper">
+	<insert id="insert" parameterType="share">
+		insert into sharing values(#{sNum}, #{id}, #{content}, #{category}, sysdate, 0, #{title})
+	</insert>
+	
+	<select id="getMaxNum" resultType="int">
+		select NVL(max(sNum), 0) from sharing
+	</select>
+	
+	
+	
+	
 	<select id="list" resultType="share">
-		select * from share
+		select * from sharing
 	</select>
 
 	<select id="select" parameterType="string" resultType="share">
-		select * from share where id = #{id}
+		select * from sharing where id = #{id}
 	</select>
 
-	<insert id="insert" parameterType="share">
-		insert into share values()
-	</insert>
 	<update id="update" parameterType="share">
-		update share set #{pwd} where #{id}
+		update sharing set #{pwd} where #{id}
 	</update>
 	<delete id="delete" parameterType="string">
-		delete from share where id=#{id}
+		delete from sharing where id=#{id}
 	</delete>
 </mapper>

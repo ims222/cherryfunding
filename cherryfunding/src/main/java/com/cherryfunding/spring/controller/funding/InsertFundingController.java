@@ -76,10 +76,8 @@ public class InsertFundingController {
 			fvo.setTitle(title);
 			fvo.setContent(content);
 			fvo.setAmount(Integer.parseInt(amount));
-			System.out.println("sDate: " + sDate + "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 			java.util.Date jsdate = new SimpleDateFormat("yyyy-MM-dd").parse(sDate);
 			fvo.setSdate(new Date(jsdate.getTime()));
-			System.out.println("jsdate: " + jsdate + "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 			java.util.Date jedate = new SimpleDateFormat("yyyy-MM-dd").parse(eDate);
 			fvo.setEdate(new Date(jedate.getTime()));
 			fvo.setCategory(category);
@@ -108,14 +106,14 @@ public class InsertFundingController {
 			System.out.println(e.getMessage());
 		}
 
-		List<MultipartFile> files = request.getFiles("fPicture");
-		int num = 0;
-		for (MultipartFile file : files) { // 사진들
-			String orgfilename = file.getOriginalFilename();
-			String savefilename = id + "_" + title + "_" + num + orgfilename;
-			try { // 사진db저장
+		try {
+			List<MultipartFile> files = request.getFiles("fPicture");
+			int num = 0;
+			for (MultipartFile file : files) { // 사진들
+				String orgfilename = file.getOriginalFilename();
+				String savefilename = id + "_" + title + "_" + num + orgfilename;
 				long filesize = file.getSize();
-				if (filesize > 0) {
+				if (filesize > 0) { // 사진db저장
 					FPictureVo fpvo = new FPictureVo();
 					fpvo.setFpNum(fPictureService.getMaxNum() + 1);
 					fpvo.setfNum(fnum);
@@ -131,11 +129,12 @@ public class InsertFundingController {
 					is.close();
 					fos.close();
 				}
-			} catch (Exception io) {
-				System.out.println(io.getMessage());
-				return "error";
 			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			return "error";
 		}
+
 		return "redirect:/funding/ingFundingList";
 	}
 }

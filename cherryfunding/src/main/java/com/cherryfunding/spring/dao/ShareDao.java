@@ -2,9 +2,11 @@ package com.cherryfunding.spring.dao;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.cherryfunding.spring.vo.ShareVo;
 
+@Repository
 public class ShareDao {
 	@Autowired
 	SqlSession sqlSession;
@@ -13,5 +15,8 @@ public class ShareDao {
 	
 	public int insert(ShareVo vo) {
 		return sqlSession.insert(NAMESPACE + "insert", vo);
+	}
+	public int getMaxNum() {
+		return sqlSession.selectOne(NAMESPACE + "getMaxNum");
 	}
 }

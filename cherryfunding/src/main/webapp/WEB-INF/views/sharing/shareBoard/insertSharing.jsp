@@ -20,16 +20,16 @@
 			
 		});
 		$("#inputItem").on('change', "input[name='amount']", function(){
-			var last = $("input[name='price']").last();
+			var last = $("input[name='amount']").last();
 			if($(last).is($(this))){
-				var tr = $("<span></span>").text("물품명");
-				var rw = $("<input>").attr('type', 'text')
+				var iname = $("<span></span>").text("물품명");
+				var item = $("<input>").attr('type', 'text')
 									.attr('name', 'sItem');
-				var tp = $("<span></span>").text('수량');
-				var pr = $("<input>").attr('type', 'text')
+				var am = $("<span></span>").text('수량');
+				var amtxt = $("<input>").attr('type', 'text')
 									.attr('name', 'amount');
-				$("#inputReward").append(tr).append(rw)
-								.append(tp).append(pr).append('<br>');
+				$("#inputItem").append(iname).append(item)
+								.append(am).append(amtxt).append('<br>');
 			}
 		});
 	});
@@ -58,17 +58,20 @@
 	}
 </script>
 <body>
-	<form method="post" action="/share/insertSharing">
+	<form method="post" action="${pageContext.request.contextPath}/sharing/insertSharing" enctype="multipart/form-data" onsubmit="return appCommit()">
+		<input type="hidden" name="id" value="${sessionScope.id}">
 		<label for="title">제목</label><input type="text" name="title" id="title"><br>
 		내용<br>
 		<textarea name="content" rows="5" cols="5" id="content"></textarea>
 		<br>
+		카테고리<br>
 		<select name="category">
 			<option value="1">1</option>
 			<option value="2">2</option>
 			<option value="3">3</option>
 			<option value="4">4</option>
 		</select>
+		<br>
 		
 		물품 등록<br>
 		<div id="inputItem">

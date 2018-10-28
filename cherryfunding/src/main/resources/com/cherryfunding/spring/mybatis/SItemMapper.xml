@@ -3,6 +3,14 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cherryfunding.spring.vo.SItemMapper">
+	<insert id="insert" parameterType="sItem">
+		insert into sitem values(#{siNum}, #{sNum}, #{title}, #{amount})
+	</insert>
+	<select id="getMaxNum" resultType="int">
+		select NVL(max(sinum), 0) from sitem
+	</select>
+
+
 	<select id="list" resultType="sItem">
 		select * from sItem
 	</select>
@@ -11,9 +19,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from sItem where id = #{id}
 	</select>
 
-	<insert id="insert" parameterType="sItem">
-		insert into sItem values()
-	</insert>
 	<update id="update" parameterType="sItem">
 		update sItem set #{pwd} where #{id}
 	</update>
