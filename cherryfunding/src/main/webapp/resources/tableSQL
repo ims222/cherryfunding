@@ -663,7 +663,7 @@ CREATE TABLE vPicture
     vNum        INT             NULL, 
     saveName    VARCHAR2(50)    NULL, 
     orgName     VARCHAR2(50)    NULL, 
-    fileSize    INT             NULL, 
+    fileSize    LONG             NULL, 
     regDate     DATE            NULL, 
     CONSTRAINT VPICTURE_PK PRIMARY KEY (vpNum)
 )

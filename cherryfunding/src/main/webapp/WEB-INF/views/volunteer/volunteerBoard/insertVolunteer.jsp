@@ -35,35 +35,32 @@
 	});
 	function appCommit(){
 		if(!$("#title").val()){
-		 alert("제목을 입력해주세욧");
-		 return false;
+			alert("제목을 입력해주세욧");
+			return false;
 		}
 		if(!$("#content").val()){
 			alert("내용을 입력해주세욧");
-			 return false;
+			return false;
 		}
-		var r = $("input[name='sItem']");
-		var ind = $("input[name='amount']").length;
-		var check = 0;
-		for(var i = 0;i<ind;i++){
-			if($(r[i]).val()){
-				check++;
-			}
+		if(!$("#dDay").val()){
+			alert("봉사 날짜를 입력하세욧");
+			return false;
 		}
-		if(check < 1){
-			alert("물품은 한가지 이상 입력하셔야 되욧");
+		if(!$("#members").val()){
+			alert("필요인원수를 입력하세욧");
+			return false;
+		}
+		if(!$("#place").val()){
+			alert("봉사 장소를 입력하세욧ㅅㅅ");
 			return false;
 		}
 		return true;
 	}
 </script>
 <body>
-	<form method="post" action="${pageContext.request.contextPath}/sharing/insertSharing" enctype="multipart/form-data" onsubmit="return appCommit()">
+	<form method="post" action="${pageContext.request.contextPath}/volunteer/insertVolunteer" enctype="multipart/form-data" onsubmit="return appCommit()">
 		<input type="hidden" name="id" value="${sessionScope.id}">
 		<label for="title">제목</label><input type="text" name="title" id="title"><br>
-		내용<br>
-		<textarea name="content" rows="5" cols="5" id="content"></textarea>
-		<br>
 		카테고리<br>
 		<select name="category">
 			<option value="1">1</option>
@@ -73,17 +70,23 @@
 		</select>
 		<br>
 		
-		물품 등록<br>
-		<div id="inputItem">
-			<span>물품명</span><input type="text" name="sItem">
-			<span>수량</span><input type="text" name="amount"><br>
-		</div>
+		내용<br>
+		<textarea name="content" rows="5" cols="5" id="content"></textarea>
+		<br>
 		
+		봉사일자<br>
+		<input type="date" name="dDay" id="dDay">
+		<br>
+		필요인원<br>
+		<input type="number" name="members" id="members">
+		<br>
+		장소<br>
+		<input type="text" name="place" id="place">
 		
-		<div id="inputFile">
+			<div id="inputFile">
 			사진업로드<br>
-			<input type="file" name="sPicture">
-			<input type="text" name="sPinfo"><br>
+			<input type="file" name="vPicture">
+			<input type="text" name="vPinfo"><br>
 		</div>
 		<input type="submit" value="제출">
 	</form>
