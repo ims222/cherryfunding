@@ -11,10 +11,10 @@
 
 	<!-- dataSource설정 -->
 	<bean id="dataSourceSpied" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
-		<property name="driverClassName" value="oracle.jdbc.OracleDriver" />
-		<property name="url" value="jdbc:oracle:thin:@oracle11gr2.ckd8kyeq9pj4.ap-northeast-2.rds.amazonaws.com:1521:orcl" />
-		<property name="username" value="cherryfunding" />
-		<property name="password" value="cherryfunding" />
+		<property name="driverClassName" value="${jdbc.driver}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
 	</bean>
 	<!-- sql log를 위한 설정 -->
 	<bean id="dataSource" class="net.sf.log4jdbc.Log4jdbcProxyDataSource">
