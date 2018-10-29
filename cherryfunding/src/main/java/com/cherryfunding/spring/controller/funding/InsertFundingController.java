@@ -1,17 +1,15 @@
 package com.cherryfunding.spring.controller.funding;
 
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.InputStream;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
@@ -21,8 +19,8 @@ import com.cherryfunding.spring.service.funding.FHashtagService;
 import com.cherryfunding.spring.service.funding.FPictureService;
 import com.cherryfunding.spring.service.funding.FundingService;
 import com.cherryfunding.spring.service.funding.InsertFundingService;
-import com.cherryfunding.spring.service.funding.InsertFundingServiceImpl;
 import com.cherryfunding.spring.service.funding.RewardService;
+import com.cherryfunding.spring.util.S3Util;
 import com.cherryfunding.spring.vo.FHashtagVo;
 import com.cherryfunding.spring.vo.FPictureVo;
 import com.cherryfunding.spring.vo.FundingVo;
@@ -110,8 +108,10 @@ public class InsertFundingController {
 			List<MultipartFile> files = request.getFiles("fPicture");
 			int num = 0;
 			for (MultipartFile file : files) { // 사진들
+				S3Util s3 = new S3Util();
 				String orgfilename = file.getOriginalFilename();
-				String savefilename = id + "_" + title + "_" + num + orgfilename;
+				String exe = orgfilename.substring(orgfilename.lastIndexOf("."), orgfilename.length());
+				String savefilename = UUID.randomUUID() + exe;
 				long filesize = file.getSize();
 				if (filesize > 0) { // 사진db저장
 					FPictureVo fpvo = new FPictureVo();
@@ -121,13 +121,8 @@ public class InsertFundingController {
 					fpvo.setOrgname(orgfilename);
 					fpvo.setFilesize(filesize);
 					fpvo.setFpinfo(fpinfo[num++]);
-
 					insertFundingService.fpinsert(fpvo); // 저장
-					InputStream is = file.getInputStream();
-					FileOutputStream fos = new FileOutputStream(uploadPath + "\\" + savefilename);
-					FileCopyUtils.copy(is, fos);
-					is.close();
-					fos.close();
+					s3.fileUpload("/funding/" + savefilename, file.getBytes()); // 파일 업로드
 				}
 			}
 		} catch (Exception e) {

@@ -25,7 +25,7 @@ public class ImgUpload {
 			try {
 				String orgName = file.getOriginalFilename();
 				String exe = orgName.substring(orgName.lastIndexOf("."), orgName.length());
-				String saveName = UUID.randomUUID() + "_" + exe;
+				String saveName = UUID.randomUUID() + exe;
 				s3util.fileUpload("/funding/" + saveName, file.getBytes()); // 파일 업로드
 				filenames.add(s3util.getFileURL("/funding/" + saveName)); // 파일이름 불러오기
 			} catch (Exception e) {
