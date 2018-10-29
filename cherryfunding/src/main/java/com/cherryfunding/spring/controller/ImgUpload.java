@@ -15,7 +15,6 @@ import com.cherryfunding.spring.util.S3Util;
 
 @Controller
 public class ImgUpload {
-	private String bucketName = "cherryfundingbucket";
 
 	@RequestMapping(value = "/imgUpload", method = RequestMethod.POST)
 	public String imgUpload(MultipartHttpServletRequest request, Model model) {
@@ -27,8 +26,8 @@ public class ImgUpload {
 				String orgName = file.getOriginalFilename();
 				String exe = orgName.substring(orgName.lastIndexOf("."), orgName.length());
 				String saveName = UUID.randomUUID() + "_" + exe;
-				s3util.fileUpload(bucketName, "/funding/" + saveName, file.getBytes()); // 파일 업로드
-				filenames.add(s3util.getFileURL(bucketName, "/funding/" + saveName)); // 파일이름 불러오기
+				s3util.fileUpload("/funding/" + saveName, file.getBytes()); // 파일 업로드
+				filenames.add(s3util.getFileURL("/funding/" + saveName)); // 파일이름 불러오기
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
 			}
