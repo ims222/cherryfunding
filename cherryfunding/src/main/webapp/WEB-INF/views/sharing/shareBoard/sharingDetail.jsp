@@ -4,17 +4,25 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
+		recomm();		
 		$("#recommend").on('click', function(){
-			$.ajax({
-				url: '${pageContext.request.contextPath}/sharing/sharingRecommend',
-				data:{id:'${sessionScope.id}', sNum: '${vo.sNum}'},
-				dataType: 'json',
-				success: function(data){
-					alert(data.result);	
-				}
-			});
+			recomm();
 		});
 	});
+	function recomm(){
+		$.ajax({
+			url: '${pageContext.request.contextPath}/sharing/sharingRecommend',
+			data:{id:'${sessionScope.id}', sNum: '${vo.sNum}'},
+			dataType: 'json',
+			success: function(data){
+				if(data.result === 'recommend'){
+					$("#recommend").text("추천 취소");
+				}else{
+					$("#recommend").text("추천");
+				}
+			}
+		});
+	}
 
 </script>
 <!-- Main -->
