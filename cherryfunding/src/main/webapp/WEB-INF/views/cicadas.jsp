@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -82,5 +83,11 @@
 	<input type="file" name="file"><br>
 	<input type="submit" value="submit">
 </form>
+
+<div>
+	<c:forEach var="filename" items="${filenames}">
+		<img src="${filename}">
+	</c:forEach>
+</div>
 </body>
 </html>
