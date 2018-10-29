@@ -1,16 +1,9 @@
 package com.cherryfunding.spring.controller;
 
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import org.apache.commons.io.IOUtils;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,8 +27,8 @@ public class ImgUpload {
 				String orgName = file.getOriginalFilename();
 				String exe = orgName.substring(orgName.lastIndexOf("."), orgName.length());
 				String saveName = UUID.randomUUID() + "_" + exe;
-				s3util.fileUpload(bucketName, saveName, file.getBytes()); // 파일 업로드
-				filenames.add(s3util.getFileURL(bucketName, saveName)); //파일이름 불러오기
+				s3util.fileUpload(bucketName, "/funding/" + saveName, file.getBytes()); // 파일 업로드
+				filenames.add(s3util.getFileURL(bucketName, "/funding/" + saveName)); // 파일이름 불러오기
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
 			}
