@@ -5,7 +5,6 @@
 <head>
 <meta charset="UTF-8">
 <title>home.jsp</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
 		$("#inputFile").on('change', "input[name='fPicture']", function(){
@@ -94,7 +93,7 @@
 		<label for="title">제목</label>
 		<input type="text" name="title" id="title"><br>
 		
-		<label for="content">제목</label><br>
+		<label for="content">내용</label><br>
 		<textarea rows="5" cols="50" name="content" id="content"></textarea><br>
 		
 		<label for="amount">목표금액</label>
@@ -137,7 +136,7 @@
 		
 		리워드 등록<br>
 		<div id="inputReward">
-			<span>물품명</span><input type="text" name="reward">
+			<span>리워드명</span><input type="text" name="reward">
 			<span>가격</span><input type="text" name="price"><br>
 		</div>
 		
@@ -146,7 +145,7 @@
 			<input type="file" name="fPicture">
 			<input type="text" name="fPinfo"><br>
 		</div>
-		<input type="submit" value="submit">
+		<input type="submit" value="제출">
 	</form>
 </body>
 </html>

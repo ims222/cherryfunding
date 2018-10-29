@@ -3,6 +3,14 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cherryfunding.spring.vo.VolunteerMapper">
+	<insert id="insert" parameterType="volunteer">
+		insert into volunteer values(#{vNum}, #{id}, #{content}, #{dDay}, #{title},
+								 #{members}, sysdate, #{category}, #{place}, 0)
+	</insert>
+	<select id="getMaxNum" resultType="int">
+		select NVL(max(vNum), 0) from volunteer
+	</select>
+
 	<select id="list" resultType="volunteer">
 		select * from volunteer
 	</select>
@@ -11,9 +19,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from volunteer where id = #{id}
 	</select>
 
-	<insert id="insert" parameterType="volunteer">
-		insert into volunteer values()
-	</insert>
+
 	<update id="update" parameterType="volunteer">
 		update volunteer set #{pwd} where #{id}
 	</update>

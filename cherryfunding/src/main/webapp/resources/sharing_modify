@@ -1,0 +1,23 @@
+CREATE TABLE sharing -- 나눔 테이블에 제목이 없어서 추가해요 
+(
+    sNum        INT             NOT NULL, 
+    id          VARCHAR2(40)    NULL,
+    title		VARCHAR2(100)	NULL, -- 제목 추가
+    content     CLOB            NULL, 
+    category    VARCHAR2(40)    NULL, 
+    regDate     DATE            NULL, 
+    hit         INT             NULL, 
+    CONSTRAINT SHARING_PK PRIMARY KEY (sNum)
+)
+/
+
+alter table sharing  --추가 쿼리
+add title VARCHAR2(100);
+
+SNUM     NOT NULL NUMBER(38)    
+ID                VARCHAR2(40)  
+CONTENT           CLOB          
+CATEGORY          VARCHAR2(40)  
+REGDATE           DATE          
+HIT               NUMBER(38)    
+TITLE             VARCHAR2(100) 

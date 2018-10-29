@@ -9,13 +9,13 @@ import com.cherryfunding.spring.vo.RewardVo;
 @Service
 public class RewardService {
 	@Autowired
-	private RewardDao dao;
+	private RewardDao rewardDao;
 
 	public int insert(RewardVo vo) {
-		return dao.insert(vo);
+		return rewardDao.insert(vo);
 	}
 
 	public int getMaxNum() {
-		return dao.getMaxNum();
+		return rewardDao.getMaxNum();
 	}
 }

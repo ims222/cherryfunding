@@ -19,10 +19,11 @@ public class CharityVo {
 	private int hit;
 	private String savename;
 	private String cpinfo;
+	private int cPrice;
 	
 	public CharityVo() {}
 	public CharityVo(int cNum, String id, String title, String content, int amount, int cAmount, Date sDate, Date eDate,
-			String category, String confirm, String aId, String addr, Date regdate, int hit, String savename, String cpinfo) {
+			String category, String confirm, String aId, String addr, Date regdate, int hit, String savename, String cpinfo, int cPrice) {
 		super();
 		this.cNum = cNum;
 		this.id = id;
@@ -38,6 +39,7 @@ public class CharityVo {
 		this.addr = addr;
 		this.regdate = regdate;
 		this.hit = hit;
+		this.cPrice = cPrice;
 	}
 	public int getcNum() {
 		return cNum;
@@ -125,6 +127,12 @@ public class CharityVo {
 	}
 	public String getSavename() {
 		return savename;
+	}
+	public int getcPrice() {
+		return cPrice;
+	}
+	public void setcPrice(int cPrice) {
+		this.cPrice = cPrice;
 	}
 	public void setSavename(String savename) {
 		this.savename = savename;

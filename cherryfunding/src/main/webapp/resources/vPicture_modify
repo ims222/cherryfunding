@@ -1,0 +1,48 @@
+--자꾸 늘어만 가는 수정
+
+
+-- vPicture Table Create SQL
+drop table vPicture;
+CREATE TABLE vPicture
+(
+    vpNum       INT             NOT NULL, 
+    vNum        INT             NULL, 
+    saveName    VARCHAR2(1000)    NULL,  --크기 조절
+    orgName     VARCHAR2(1000)    NULL,  --크기 조절 
+    fileSize    LONG             NULL, --long 으로 변경
+    regDate     DATE            NULL, 
+    vPinfo        VARCHAR2(500),  --사진정보 추가
+    CONSTRAINT VPICTURE_PK PRIMARY KEY (vpNum)
+)
+/
+
+CREATE SEQUENCE vPicture_SEQ
+START WITH 1
+INCREMENT BY 1;
+/
+
+
+--DROP TRIGGER vPicture_AI_TRG;
+/
+
+--DROP SEQUENCE vPicture_SEQ;
+/
+
+ALTER TABLE vPicture
+    ADD CONSTRAINT FK_vPicture_vNum_volunteer_vNu FOREIGN KEY (vNum)
+        REFERENCES volunteer (vNum)
+	on delete cascade
+/
+
+
+alter table vPicture --크기 변경
+modify saveName varchar2(1000);
+
+alter table vPicture --크기 변경
+modify orgName varchar2(1000);
+
+alter table vPicture --정보 추가
+add vPinfo varchar2(500);
+
+alter table vPicture -- 타입변경
+modify filesize long;

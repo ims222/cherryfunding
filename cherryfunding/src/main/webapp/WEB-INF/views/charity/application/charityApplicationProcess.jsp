@@ -8,29 +8,16 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
-		$("#inputFile").on('change', "input[name='fPicture']", function(){
-			var last = $("input[name='fPicture']").last();
+		$("#inputFile").on('change', "input[name='cPicture']", function(){
+			var last = $("input[name='cPicture']").last();
 			if($(last).is($(this))){
 				var file = $("<input>").attr('type', 'file')
-									.attr('name', 'fPicture');
+									.attr('name', 'cPicture');
 				var text = $('<input>').attr('type', 'text')
-									.attr('name', 'fPinfo');
+									.attr('name', 'cPinfo');
 				$("#inputFile").append(file).append(text).append('<br>');
 			}
 			
-		});
-		$("#inputReward").on('change', "input[name='price']", function(){
-			var last = $("input[name='price']").last();
-			if($(last).is($(this))){
-				var tr = $("<span></span>").text("리워드명");
-				var rw = $("<input>").attr('type', 'text')
-									.attr('name', 'reward');
-				var tp = $("<span></span>").text('가격');
-				var pr = $("<input>").attr('type', 'text')
-									.attr('name', 'price');
-				$("#inputReward").append(tr).append(rw)
-								.append(tp).append(pr).append('<br>');
-			}
 		});
 		$("#inputHashtag").on('change', "input[data-hash='ht']", function(){
 			var last = $("input[data-hash='ht']").last();
@@ -43,7 +30,8 @@
 		});
 		
 	});
-	function appCommit(){
+	/* 
+	    function appCommit(){
 		if(!$("#title").val()){
 		 alert("제목을 입력해주세욧");
 		 return false;
@@ -72,26 +60,18 @@
 			return false;
 		}
 		
-		var r = $("input[name='reward']");
-		var ind = $("input[name='reward']").length;
-		var check = 0;
-		for(var i = 0;i<ind;i++){
-			if($(r[i]).val()){
-				check++;
-			}
-		}
 		if(check < 1){
 			alert("물품은 한가지 이상 입력하셔야 되욧");
 			return false;
 		}
 		return true;
 	}
+	*/
 </script>
 </head>
 <body>
-	<h1>후원 신청서</h1>
-	<form method="post" action="${pageContext.request.contextPath}/support/supportApplication" enctype="multipart/form-data" onsubmit="return appCommit()">
-		<input type="text" name="id" value="#{sessionScope.id }" readonly="readonly"><br>
+	<form method="post" action="${pageContext.request.contextPath}/charity/charityApplication" enctype="multipart/form-data" onsubmit="return appCommit()">
+		작성자 <input type="text" name="id" value="${sessionScope.id }" readonly="readonly"><br>
 		제목<input type="text" name="title"><br>
 		내용<textarea cols="50" rows="10" name="content"></textarea><br>
 		목표금액<input type="text" name="price"><br>
@@ -100,9 +80,13 @@
 		카테고리
 		<select name="category">
 			   <option value="">선택</option>
-			   <option value="1">질병</option>
-			   <option value="2">동물</option>
-			   <option value="3">교육</option>
+			   <option value="아동·청소년">아동·청소년</option>
+			   <option value="어르신">어르신</option>
+			   <option value="다문화">다문화</option>
+			   <option value="장애인">장애인</option>
+			   <option value="사회운동">사회운동</option>
+			   <option value="동물">동물</option>
+			   <option value="환경">환경</option>
 		</select><br>
 		주소 <input type="text" name="addr"><br>
 
@@ -114,18 +98,13 @@
 		<div id="inputHashtag">
 			<input type="text" name="hashtag" data-hash="ht"><br>
 		</div>
-		
-		
-		 등록<br>
-		<div id="inputSupport">
-			<span>후원명</span><input type="text" name="reward">
+		<div id="inputCharity">
 			<span>후원단위금액</span><input type="text" name="price"><br>
 		</div>
-		
 		<div id="inputFile">
 			사진업로드<br>
-			<input type="file" name="fPicture">
-			<input type="text" name="fPinfo"><br>
+			<input type="file" name="cPicture">
+			<input type="text" name="cPinfo"><br>
 		</div>
 		<input type="submit" value="submit">
 	</form>

@@ -26,6 +26,25 @@
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <!--[if lte IE 8]><link rel="stylesheet" href="css/ie/v8.css" /><![endif]-->
+<script src="http://code.responsivevoice.org/responsivevoice.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		responsiveVoice.setDefaultVoice("Korean Female");
+		//responsiveVoice.speak("안녕하세요");
+		
+		$('body').on('keyup', function(e){
+			if(e.keyCode === 9){
+				var target = $(e.target);
+				var text = target.text();
+				if($(target).attr('class') === 'image featured'){
+					text = $(target).find('img').attr('alt');
+				}
+				responsiveVoice.speak(text);		
+			}
+		});
+	});
+
+</script>
 </head>
 <body>
 
