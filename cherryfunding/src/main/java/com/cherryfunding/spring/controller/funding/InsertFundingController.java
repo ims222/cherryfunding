@@ -110,7 +110,7 @@ public class InsertFundingController {
 			for (MultipartFile file : files) { // 사진들
 				S3Util s3 = new S3Util();
 				String orgfilename = file.getOriginalFilename();
-				String exe = orgfilename.substring(orgfilename.lastIndexOf("."), orgfilename.length());
+				String exe = orgfilename.substring(orgfilename.lastIndexOf(".") + 1);
 				String savefilename = UUID.randomUUID() + exe;
 				long filesize = file.getSize();
 				if (filesize > 0) { // 사진db저장
@@ -122,7 +122,7 @@ public class InsertFundingController {
 					fpvo.setFilesize(filesize);
 					fpvo.setFpinfo(fpinfo[num++]);
 					insertFundingService.fpinsert(fpvo); // 저장
-					s3.fileUpload("/funding/" + savefilename, file.getBytes()); // 파일 업로드
+					s3.fileUpload("funding/" + savefilename, file.getBytes()); // 파일 업로드
 				}
 			}
 		} catch (Exception e) {
