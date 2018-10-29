@@ -10,9 +10,14 @@
 		});
 	});
 	function recomm(){
+		var id='${sessionScope.id}';
+		if(!id){
+			alert("로그인 해주세욧");
+			return;
+		}
 		$.ajax({
 			url: '${pageContext.request.contextPath}/sharing/sharingRecommend',
-			data:{id:'${sessionScope.id}', sNum: '${vo.sNum}'},
+			data:{id:id, sNum: '${vo.sNum}'},
 			dataType: 'json',
 			success: function(data){
 				if(data.result === 'recommend'){
@@ -47,5 +52,12 @@
 				</div>
 			</section>
 		</div>
+		<div class="row">
+			<!-- 댓글 -->
+		</div>
+		<form>
+			<input type="text" name="content"><br>
+			<input type="submit" value="댓글 등록">
+		</form>
 	</div>
 </div>
