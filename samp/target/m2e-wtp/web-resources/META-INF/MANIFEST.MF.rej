@@ -1,7 +1,0 @@
-diff a/samp/target/m2e-wtp/web-resources/META-INF/MANIFEST.MF b/samp/target/m2e-wtp/web-resources/META-INF/MANIFEST.MF	(rejected hunks)
-@@ -1,5 +1,4 @@
- Manifest-Version: 1.0
--Built-By: JHTA
- Build-Jdk: 1.8.0_181
- Created-By: Maven Integration for Eclipse
- 
