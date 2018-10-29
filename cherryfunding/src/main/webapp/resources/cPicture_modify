@@ -1,15 +1,15 @@
 drop table cPicture;
-CREATE TABLE cPicture -- ¸®¿öµå ÂüÁ¶¸¦ Áß´ÜÇÕ´Ï´å ´å´å´å
+CREATE TABLE cPicture -- ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß´ï¿½ï¿½Õ´Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½
 (
     cpNum       INT             NOT NULL, 
     cNum        INT             NULL, 
-    saveName    VARCHAR2(50)    NULL, 
-    orgName     VARCHAR2(50)    NULL, 
+    saveName    VARCHAR2(1000)    NULL, 
+    orgName     VARCHAR2(1000)    NULL, 
     fileSize    LONG            NULL, 
     regDate     DATE            NULL,
     cPinfo        VARCHAR2(500),
     CONSTRAINT CPICTURE_PK PRIMARY KEY (cpNum)
-    --rNum        INT             NULL, ÂüÁ¶ ¾ÈÇÔ
+    --rNum        INT             NULL, ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 )
 /
 
