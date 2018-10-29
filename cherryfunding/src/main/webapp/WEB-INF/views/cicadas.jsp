@@ -72,5 +72,15 @@
 	</form>
 <button id="btn">머문</button>
 <div id="space"></div>
+
+
+<form method="post" action="${pageContext.request.contextPath}/imgUpload" enctype="multipart/form-data">
+	<input type="file" name="file"><br>
+	<input type="file" name="file"><br>
+	<input type="file" name="file"><br>
+	<input type="file" name="file"><br>
+	<input type="file" name="file"><br>
+	<input type="submit" value="submit">
+</form>
 </body>
 </html>

@@ -3,7 +3,6 @@ package com.cherryfunding.spring.controller;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
-import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -13,9 +12,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.cherryfunding.spring.util.S3Util;
+
 @Controller
 public class InsertImgController {
 
+  
+//cherryfundingbucket
 	@RequestMapping(value = "/insertImg", method = RequestMethod.POST)
 	public String insertImg(MultipartFile file, HttpSession session) {
 		System.out.println("살려주세요");
@@ -26,7 +29,7 @@ public class InsertImgController {
 		if (f.exists() == false) { // �뙆�씪 �깮�꽦
 			f.mkdirs();
 		}
-
+		
 		String orgfilename = file.getOriginalFilename();
 		savefilename = Math.random() + "_" + orgfilename;
 		try { // �궗吏꼋b���옣
