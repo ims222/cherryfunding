@@ -4,26 +4,45 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
-		recomm();		
+		//recomm();		
 		$("#recommend").on('click', function(){
+			var id='${sessionScope.id}';
+			if(!id){
+				alert("로그인 해주세욧");
+				return;
+			}
 			recomm();
+		});
+		$("#insertComment").on('submit', function(e){
+			e.preventDefault();
+			var content = $("#insertComment input[name='content']").val();
+			alert(content);
 		});
 	});
 	function recomm(){
-		var id='${sessionScope.id}';
-		if(!id){
-			alert("로그인 해주세욧");
-			return;
-		}
+		
 		$.ajax({
 			url: '${pageContext.request.contextPath}/sharing/sharingRecommend',
-			data:{id:id, sNum: '${vo.sNum}'},
+			data:{id:'${sessionScope.id}', sNum: '${vo.sNum}'},
 			dataType: 'json',
 			success: function(data){
 				if(data.result === 'recommend'){
 					$("#recommend").text("추천 취소");
 				}else{
 					$("#recommend").text("추천");
+				}
+			}
+		});
+	}
+	function commentList(){
+		$.ajax({
+			url: '',
+			dataType: 'json',
+			type: 'post',
+			success: function(data){
+				$("#commment").empty();
+				for(var i=0; i<data.length;i++){
+					console.log('data', data[i]);
 				}
 			}
 		});
@@ -52,10 +71,10 @@
 				</div>
 			</section>
 		</div>
-		<div class="row">
+		<div class="row" id="commment">
 			<!-- 댓글 -->
 		</div>
-		<form>
+		<form id="insertComment">
 			<input type="text" name="content"><br>
 			<input type="submit" value="댓글 등록">
 		</form>
