@@ -53,6 +53,7 @@ public class InsertCharityController {
 		String category = request.getParameter("category");
 		String sDate = request.getParameter("sDate");
 		String eDate = request.getParameter("eDate");
+		String addr = request.getParameter("addr");
 		String[] hashtags = request.getParameterValues("hashtag");
 		String cPrice = request.getParameter("cPrice");
 		String[] cpinfo = request.getParameterValues("cPinfo");
@@ -78,7 +79,7 @@ public class InsertCharityController {
 			cvo.setCategory(category);
 			cvo.setcPrice(Integer.parseInt(cPrice));
 			cvo.setConfirm("n");
-			cvo.setAddr("");
+			cvo.setAddr(addr);
 			cvo.setaId("");
 			cvo.setId(id);
 			insertCharityService.cinsert(cvo); // db

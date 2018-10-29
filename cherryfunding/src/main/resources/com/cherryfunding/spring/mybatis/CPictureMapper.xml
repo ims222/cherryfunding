@@ -6,7 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<insert id="insert" parameterType="cPicture">
 		insert into cPicture values(
-			#{cpNum},#{cNum},#{savename},#{orgname},#{filesize},sysdate,#{cpinfo})
+			#{cpNum},#{cNum},#{saveName},#{orgName},#{fileSize},sysdate,#{cpinfo})
 	</insert>
 	
 	<select id="getMaxNum" resultType="int">

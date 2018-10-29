@@ -19,23 +19,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="select" parameterType="int" resultType="charity">
-		select * from charity where cnum = #{num}
+		select * from charity where cNum = #{num}
 	</select>
 	<insert id="insert" parameterType="charity">
-		insert into charity values(#{cnum},#{title},#{content},#{amount},
-		0,#{sdate},#{edate},#{category},
-		#{confirm},#{aid},#{addr},sysdate,#{id},0)
+		insert into charity values(#{cNum},#{id},#{title},#{content},#{amount},
+		0,#{sDate},#{eDate},#{category},
+		#{confirm},#{aId},#{addr},sysdate,0,#{cPrice})
 	</insert>
 	<update id="update" parameterType="charity">
 		update charity set title=#{title},content=#{content},amount=#{amount},cAmount=#{cAmount},
-		sdate=#{sdate},edate=#{edate},category=#{category},confirm=#{confirm},aid=#{aid},
-		addr=#{addr},id=#{id} where cnum = #{cnum} 
+		sdate=#{sdate},edate=#{edate},category=#{category},confirm=#{confirm},aId=#{aId},
+		addr=#{addr},id=#{id} where cNum = #{cNum} 
 	</update>
 	<delete id="delete" parameterType="int">
-		delete from charity where cnum=#{num}
+		delete from charity where cNum=#{num}
 	</delete>
 	<select id="getMaxNum" resultType="int">
-		select nvl(max(cnum), 0) from charity
+		select nvl(max(cNum), 0) from charity
 	</select>
 	
 	
@@ -46,7 +46,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<![CDATA[where sdate > sysdate and edate > sysdate]]>
 		<include refid="category"/>
 		<include refid="search"/>
-		order by cnum desc
+		order by cNum desc
 	</select>
 	
 	<!-- 종료된 펀딩 -->
@@ -55,7 +55,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<![CDATA[where sdate < sysdate and edate < sysdate]]>
 		<include refid="category"/>
 		<include refid="search"/>
-		order by cnum desc
+		order by cNum desc
 	</select>
 	<!-- 진행중 펀딩 -->
 	<select id="ing" parameterType= "hashmap" resultType="charity">
@@ -63,6 +63,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<![CDATA[where sdate < sysdate and edate > sysdate]]>
 		<include refid="category"/>
 		<include refid="search"/>
-		order by cnum desc
+		order by cNum desc
 	</select>
 </mapper>

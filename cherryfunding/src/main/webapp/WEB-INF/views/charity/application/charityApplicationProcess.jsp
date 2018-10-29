@@ -30,11 +30,10 @@
 		});
 		
 	});
-	/* 
 	    function appCommit(){
 		if(!$("#title").val()){
 		 alert("제목을 입력해주세욧");
-		 return false;
+		 	return false;
 		}
 		if(!$("#content").val()){
 			alert("내용을 입력해주세욧");
@@ -59,24 +58,18 @@
 			alert("시작보다 종료를 더 먼저 입력했어여");
 			return false;
 		}
-		
-		if(check < 1){
-			alert("물품은 한가지 이상 입력하셔야 되욧");
-			return false;
-		}
 		return true;
 	}
-	*/
 </script>
 </head>
 <body>
 	<form method="post" action="${pageContext.request.contextPath}/charity/charityApplication" enctype="multipart/form-data" onsubmit="return appCommit()">
 		작성자 <input type="text" name="id" value="${sessionScope.id }" readonly="readonly"><br>
-		제목<input type="text" name="title"><br>
-		내용<textarea cols="50" rows="10" name="content"></textarea><br>
-		목표금액<input type="text" name="price"><br>
-		시작날짜<input type="date" name="sdate"><br>
-		종료날짜<input type="date" name="edate"><br>
+		제목<input type="text" name="title" id="title"><br>
+		내용<textarea cols="50" rows="10" name="content" id="content"></textarea><br>
+		목표금액<input type="text" name="amount" id="amount"><br>
+		시작날짜<input type="date" name="sDate" id="sDate"><br>
+		종료날짜<input type="date" name="eDate" id="eDate"><br>
 		카테고리
 		<select name="category">
 			   <option value="">선택</option>
@@ -99,7 +92,7 @@
 			<input type="text" name="hashtag" data-hash="ht"><br>
 		</div>
 		<div id="inputCharity">
-			<span>후원단위금액</span><input type="text" name="price"><br>
+			<span>후원단위금액</span><input type="text" name="cPrice"><br>
 		</div>
 		<div id="inputFile">
 			사진업로드<br>

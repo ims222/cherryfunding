@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cherryfunding.spring.dao.CHashtagDao;
+import com.cherryfunding.spring.dao.CPictureDao;
 import com.cherryfunding.spring.dao.CharityDao;
 import com.cherryfunding.spring.dao.FHashtagDao;
 import com.cherryfunding.spring.dao.FPictureDao;
@@ -24,24 +25,22 @@ public class InsertCharityServiceImpl implements InsertCharityService{
 
 	@Autowired
 	private CharityDao charityDao;
+	
+	@Autowired
+	private CPictureDao cPictureDao;
 
 	@Override
 	public int cinsert(CharityVo cvo) {
-		// TODO Auto-generated method stub
-		return 0;
+		return charityDao.insert(cvo);
 	}
 
 	@Override
 	public int chinsert(CHashtagVo chvo) {
-		// TODO Auto-generated method stub
-		return 0;
+		return cHashtagDao.insert(chvo);
 	}
 
 	@Override
-	public int cpinsert(CPictureVo fpvo) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int cpinsert(CPictureVo cpvo) {
+		return cPictureDao.insert(cpvo);
 	}
-	
-	
 }
