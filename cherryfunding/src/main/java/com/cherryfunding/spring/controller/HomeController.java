@@ -28,7 +28,8 @@ public class HomeController {
 		summary.put("fNew", mfService.mainNew()); // 새로 시작하는 펀딩
 		summary.put("fHot", mfService.mainHot()); // 진행중 펀딩중 조회수가 가장 높은
 		summary.put("fPrice",  mfService.mainPrice()); // 진행중 펀딩중 참여금액이 제일 높은
-		
+		summary.put("totFunding", mfService.totFunding());
+		summary.put("todayFunding", mfService.todayFunding());
 		model.addAttribute("summary", summary);
 		return ".main";
 	}

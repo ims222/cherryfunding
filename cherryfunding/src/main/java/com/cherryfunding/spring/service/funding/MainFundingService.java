@@ -1,5 +1,7 @@
 package com.cherryfunding.spring.service.funding;
 
+import java.util.HashMap;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -62,6 +64,13 @@ public class MainFundingService {
 
 	public FPictureVo thumbnail(int fNum) {
 		return pfdao.thumbnail(fNum);
+	}
+	
+	public HashMap<String, Object> totFunding(){
+		return fdao.totFunding();
+	}
+	public HashMap<String, Object> todayFunding() {
+		return fdao.todayFunding();
 	}
 
 }
