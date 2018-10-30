@@ -6,7 +6,7 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		isRecommed();
-		commentList();
+		//commentList();
 		$("#recommend").on('click', function(){
 			var recomm;
 			var id='${sessionScope.id}';
@@ -62,7 +62,7 @@
 	function isRecommed(){
 		$.ajax({
 			url: '${pageContext.request.contextPath}/funding/fundingIsRecommend',
-			data:{id:'${sessionScope.id}', fnum: '${vo.fnum}'},
+			data:{id:'${sessionScope.id}', fnum:'${vo.fnum}'},
 			type:'post',
 			dataType: 'json',
 			success: function(data){

@@ -21,7 +21,7 @@ public class FRecommendService {
 	}
 
 	public FRecommendVo isRecomm(FRecommendVo vo) {
-		return fRecommendDao.isRecomm();
+		return fRecommendDao.isRecomm(vo);
 	}
 
 	public int delete(FRecommendVo vo) {

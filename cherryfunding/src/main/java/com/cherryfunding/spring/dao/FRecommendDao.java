@@ -21,8 +21,8 @@ public class FRecommendDao {
 		return sqlSession.selectOne(NAMESPACE + "getMaxNum");
 	}
 
-	public FRecommendVo isRecomm() {
-		return sqlSession.selectOne(NAMESPACE + "isRecomm");
+	public FRecommendVo isRecomm(FRecommendVo vo) {
+		return sqlSession.selectOne(NAMESPACE + "isRecomm", vo);
 	}
 
 	public int delete(FRecommendVo vo) {

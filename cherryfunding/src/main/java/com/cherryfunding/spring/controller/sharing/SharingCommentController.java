@@ -26,18 +26,16 @@ public class SharingCommentController {
 		scvo.setContent(content);
 		scvo.setsNum(sNum);
 		JSONObject obj = new JSONObject();
-		if (sharingCommentService.insert(scvo) > 0) {
+		if (sharingCommentService.insert(scvo) > 0)
 			obj.put("result", "ok");
-		} else {
+		else
 			obj.put("result", "no");
-		}
 		return obj.toString();
 	}
 
 	@RequestMapping("/sharing/commentList")
 	@ResponseBody
 	public List<SCommentVo> commentList(int sNum) {
-		System.out.println("sNum: " + sNum);
 		return sharingCommentService.commentList(sNum);
 	}
 

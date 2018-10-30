@@ -59,6 +59,7 @@ public class InsertFundingController {
 		String eDate = request.getParameter("eDate");
 		String[] hashtags = request.getParameterValues("hashtag");
 		String[] rewards = request.getParameterValues("reward");
+		String[] fAmount = request.getParameterValues("fAmount");
 		String[] prices = request.getParameterValues("price");
 		String[] fpinfo = request.getParameterValues("fPinfo");
 
@@ -98,6 +99,7 @@ public class InsertFundingController {
 				rvo.setFnum(fnum);
 				rvo.setTitle(rewards[ind]);
 				rvo.setPrice(Integer.parseInt(prices[ind]));
+				rvo.setAmount(Integer.parseInt(fAmount[ind]));
 				insertFundingService.rinsert(rvo);
 			}
 		} catch (Exception e) {

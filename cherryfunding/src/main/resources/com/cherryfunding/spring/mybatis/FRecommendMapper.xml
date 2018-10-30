@@ -5,7 +5,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.cherryfunding.spring.vo.FRecommendMapper">
 
 	<insert id="insert" parameterType="fRecommend">
-		insert into fRecommend values(#{frNum},#{fNum},#{id})
+		insert into fRecommend values(#{frNum},#{fnum},#{id})
 	</insert>
 	
 	<select id="getMaxNum" resultType="int">
@@ -13,11 +13,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="isRecomm" parameterType="fRecommend" resultType="fRecommend">
-		select * from fRecommend where fNum = #{fNum} and id = #{id}
+		select * from fRecommend where fnum=#{fnum} and id=#{id}
 	</select>
 	
 	<delete id="delete" parameterType="fRecommend">
-		delete from fRecommend where fNum = #{fNum} and id = #{id}
+		delete from fRecommend where fnum=#{fnum} and id=#{id}
 	</delete>
 	
 </mapper>

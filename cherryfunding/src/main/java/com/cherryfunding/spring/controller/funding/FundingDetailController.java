@@ -15,9 +15,8 @@ public class FundingDetailController {
 
 	@RequestMapping("/funding/fundingDetailforUser")
 	public String fundingDetail(int fnum, Model model) {
-		System.out.println("detail: " + fundingDetailService.detail(fnum));
 		model.addAttribute("vo", fundingDetailService.detail(fnum));
-		model.addAttribute("reward", fundingDetailService.rewardList(fnum));
+		model.addAttribute("rewardList", fundingDetailService.rewardList(fnum));
 		return ".fundingDetailforUser";
 	}
 }
