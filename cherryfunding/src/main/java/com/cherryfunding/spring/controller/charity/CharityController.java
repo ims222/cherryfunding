@@ -31,7 +31,7 @@ public class CharityController {
 	public String list(Model model) { // ?��?��?��筌ｏ?�� ?��?��?��?��?��?��?��?�옙 �겫�뜄�쑎?��?��궎疫?�옙
 		List<CharityVo> list = charityService.list();
 		model.addAttribute("list", list);
-		return "charity/charityBoard/charityList";
+		return "charity/charitytBoard/charityList";
 	}
 
 	@RequestMapping(value = "/charityList/detail", method = RequestMethod.GET)
@@ -43,7 +43,7 @@ public class CharityController {
 		model.addAttribute("list", list);
 		// model.addAttribute("prev",prev);
 		// model.addAttribute("next",next);
-		return "/charity/charityBoard/charityDetail";
+		return "/charity/charitytBoard/charityDetail";
 	}
 
 	@RequestMapping(value = "/charityList/delete", method = RequestMethod.GET)
@@ -60,7 +60,7 @@ public class CharityController {
 	public String update(int num, Model model) {
 		CharityVo vo = charityService.select(num);
 		model.addAttribute("vo", vo);
-		return "/charity/charityBoard/charityUpdate";
+		return "/charity/charitytBoard/charityUpdate";
 	}
 
 	@RequestMapping(value = "/charityList/update", method = RequestMethod.POST)
