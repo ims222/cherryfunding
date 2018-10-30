@@ -6,8 +6,7 @@
 <div id="main">
 	<div class="container">
 		<div class="row no-collapse-1">
-<<<<<<< HEAD
-			<section class="4u">
+			<div class="col-md-2">
 				<a href="${pageContext.request.contextPath}/charityList/detail?num=${summary.cEnd.cNum}" class="image featured">
 				<img src="${pageContext.request.contextPath}/resources/upload/funding/${summary.cEnd.savename}"
 				alt="${summary.cEnd.cpinfo}" height="200px"></a>
@@ -37,9 +36,9 @@
 						</div>
 					</div>
 				</div>
-			</section>
+			</div>
 			
-			<section class="4u">
+			<div class="col-md-2">
 				<a href="${pageContext.request.contextPath}/fundingList/detail?num=${summary.cNew.cNum}" class="image featured">
 				<img src="${pageContext.request.contextPath}/resources/upload/funding/${summary.cNew.savename}"
 				alt="${summary.cNew.cpinfo}" height="200px"></a>
@@ -69,9 +68,8 @@
 						</div>
 					</div>
 				</div>
-			</section>
-			
-			<section class="4u">
+			</div>
+			<div class="col-md-2">
 				<a href="${pageContext.request.contextPath}/fundingList/detail?num=${summary.cHot.cNum}" class="image featured">
 				<img src="${pageContext.request.contextPath}/resources/upload/funding/${summary.cHot.savename}"
 				alt="${summary.cHot.cpinfo}" height="200px"></a>
@@ -101,9 +99,9 @@
 						</div>
 					</div>
 				</div>
-			</section>
+			</div>
 			
-			<section class="4u">
+			<div class="col-md-2">
 				<a href="${pageContext.request.contextPath}/fundingList/detail?num=${summary.cPrice.cNum}" class="image featured">
 				<img src="${pageContext.request.contextPath}/resources/upload/funding/${summary.cPrice.savename}"
 				alt="${summary.cPrice.cpinfo}" height="200px"></a>
@@ -133,12 +131,9 @@
 						</div>
 					</div>
 				</div>
-			</section>
+			</div>
 			
-			<section class="4u">
-=======
 			<div class="col-md-2">
->>>>>>> refs/remotes/origin/master
 				<a href="${pageContext.request.contextPath}/fundingList/detail?num=${summary.fEnd.fnum}" class="image featured">
 				<img src="${summary.fEnd.savename}"
 				alt="${summary.fEnd.fpinfo}" height="200px"></a>
@@ -233,7 +228,6 @@
 					</div>
 				</div>
 			</div>
-			
 			<div class="col-md-2">
 				<a href="${pageContext.request.contextPath}/fundingList/detail?num=${summary.fPrice.fnum}" class="image featured">
 				<img src="${summary.fPrice.savename}"
@@ -264,10 +258,6 @@
 						</div>
 					</div>
 				</div>
-<<<<<<< HEAD
-			</section>
-		
-=======
 			</div>
 			<div class="col-md-3">
 				<div class="box">
@@ -300,7 +290,6 @@
 					<br>
 				</div>
 			</div>
->>>>>>> refs/remotes/origin/master
 		</div>
 		<div class="row">
 
