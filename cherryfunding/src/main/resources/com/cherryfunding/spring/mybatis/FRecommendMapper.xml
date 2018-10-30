@@ -3,21 +3,21 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cherryfunding.spring.vo.FRecommendMapper">
-	<select id="list" resultType="fRecommend">
-		select * from fRecommend
-	</select>
-
-	<select id="select" parameterType="string" resultType="fRecommend">
-		select * from fRecommend where id = #{id}
-	</select>
 
 	<insert id="insert" parameterType="fRecommend">
-		insert into fRecommend values()
+		insert into fRecommend values(#{frNum},#{fNum},#{id})
 	</insert>
-	<update id="update" parameterType="fRecommend">
-		update fRecommend set #{pwd} where #{id}
-	</update>
-	<delete id="delete" parameterType="string">
-		delete from fRecommend where id=#{id}
+	
+	<select id="getMaxNum" resultType="int">
+		select NVL(max(frNum), 0) from fRecommend
+	</select>
+	
+	<select id="isRecomm" parameterType="fRecommend" resultType="fRecommend">
+		select * from fRecommend where fNum = #{fNum} and id = #{id}
+	</select>
+	
+	<delete id="delete" parameterType="fRecommend">
+		delete from fRecommend where fNum = #{fNum} and id = #{id}
 	</delete>
+	
 </mapper>

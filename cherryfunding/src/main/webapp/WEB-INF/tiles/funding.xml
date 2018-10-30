@@ -24,5 +24,10 @@ PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
 			<put-attribute name="banner" value="/WEB-INF/views/funding/application/banner.jsp"/>
 			<put-attribute name="content" value="/WEB-INF/views/funding/application/fundingApplicationProcess.jsp"/>
 		</definition>
+		
+		<definition name=".fundingDetailforUser" extends = ".main">
+			<put-attribute name="banner" value="/WEB-INF/views/funding/application/banner.jsp"/>
+			<put-attribute name="content" value="/WEB-INF/views/funding/fundingBoard/fundingDetailforUser.jsp"/>
+		</definition>
 	<!-- //////// -->
 </tiles-definitions>

@@ -11,4 +11,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getMaxNum" resultType="int">
 		select NVL(max(rnum), 0) from reward
 	</select>
+	
+	<select id="rewardList" parameterType="int" resultType="reward">
+		select * from reward where fnum = #{fnum}
+	</select>
 </mapper>

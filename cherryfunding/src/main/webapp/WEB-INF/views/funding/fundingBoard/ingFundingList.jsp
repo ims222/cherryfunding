@@ -53,9 +53,9 @@
 		<div class="row no-collapse-1">
 			<c:forEach var="vo" items="${list}" varStatus="vs">
 				<section class="4u">
-					<a href="${pageContext.request.contextPath}/fundingList/detail?num=${vo.fnum}" class="image featured"> <img
-						src="${vo.savename}"
-						alt="${vo.fpinfo}" height="200px"></a>
+					<a href="${pageContext.request.contextPath}/funding/fundingDetailforUser?fnum=${vo.fnum}"
+					class="image featured">
+					<img src="${vo.savename}" alt="${vo.fpinfo}" height="200px"></a>
 					<div class="box">
 						<p>${vo.title}</p>
 						<p>${vo.id}</p>

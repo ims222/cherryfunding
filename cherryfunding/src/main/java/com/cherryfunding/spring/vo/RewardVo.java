@@ -8,16 +8,18 @@ public class RewardVo {
 	private String title;
 	private int price;
 	private Date regdate;
+	private int amount;
 
 	public RewardVo() {
 	}
 
-	public RewardVo(int rnum, int fnum, String title, int price, Date regdate) {
+	public RewardVo(int rnum, int fnum, String title, int price, Date regdate, int amount) {
 		this.rnum = rnum;
 		this.fnum = fnum;
 		this.title = title;
 		this.price = price;
 		this.regdate = regdate;
+		this.amount = amount;
 	}
 
 	public int getRnum() {
@@ -58,6 +60,14 @@ public class RewardVo {
 
 	public void setRegdate(Date regdate) {
 		this.regdate = regdate;
+	}
+
+	public int getAmount() {
+		return amount;
+	}
+
+	public void setAmount(int amount) {
+		this.amount = amount;
 	}
 
 }

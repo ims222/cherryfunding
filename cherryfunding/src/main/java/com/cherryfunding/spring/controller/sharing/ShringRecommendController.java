@@ -14,15 +14,15 @@ public class ShringRecommendController {
 
 	@Autowired
 	SRecommendService sRecommendService;
-	
-	@RequestMapping(value="/sharing/sharingIsRecommend", produces = "application/json;charset=UTF-8")
+
+	@RequestMapping(value = "/sharing/sharingIsRecommend", produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String sharingIsRecommend(String id, int sNum) {
 		JSONObject obj = new JSONObject();
 		SRecommendVo vo = sRecommendService.isRecomm(new SRecommendVo(0, sNum, id));
-		if(vo == null) {
+		if (vo == null) {
 			obj.put("result", "ok");
-		}else {
+		} else {
 			obj.put("result", "no");
 		}
 		return obj.toString();
@@ -32,15 +32,13 @@ public class ShringRecommendController {
 	@ResponseBody
 	public String sharingRecommend(String id, int sNum, String recomm) {
 		JSONObject obj = new JSONObject();
-		System.out.println("id: " + id);
-		System.out.println("sNum: " + sNum);
-		System.out.println("recomm: " + recomm);
-		
+
 		if (recomm.equals("recomm")) {
-			obj.put("recomm", sRecommendService.insert(new SRecommendVo(sRecommendService.getMaxNum() + 1, sNum, id)));
-		} else {
+			SRecommendVo srvo = new SRecommendVo(sRecommendService.getMaxNum() + 1, sNum, id);
+			obj.put("recomm", sRecommendService.insert(srvo));
+		} else
 			obj.put("recomm", sRecommendService.delete(new SRecommendVo(0, sNum, id)));
-		}
+
 		return obj.toString();
 	}
 
