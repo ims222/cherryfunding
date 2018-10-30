@@ -6,7 +6,139 @@
 <div id="main">
 	<div class="container">
 		<div class="row no-collapse-1">
+<<<<<<< HEAD
+			<section class="4u">
+				<a href="${pageContext.request.contextPath}/charityList/detail?num=${summary.cEnd.cNum}" class="image featured">
+				<img src="${pageContext.request.contextPath}/resources/upload/funding/${summary.cEnd.savename}"
+				alt="${summary.cEnd.cpinfo}" height="200px"></a>
+				<div class="box">
+					<p>종료임박후원</p>
+					<p>${summary.cEnd.title}</p>
+					<p>${summary.cEnd.id}</p>
+					<p>목표금액: ${summary.cEnd.amount}</p>
+					<p>현재금액: ${summary.cEnd.cAmount}</p>
+					
+					<fmt:formatDate value="${summary.cEnd.eDate}" var="cEndeDate" pattern="yyyyMMdd"/>
+					<fmt:parseDate value="${cEndeDate}" var="cEndeDateDate" pattern="yyyyMMdd"/>
+					<fmt:parseNumber value="${cEndeDateDate.time / (1000 * 60 * 60 * 24)}" var="cEndEnd" integerOnly="true"/>
+					
+					<jsp:useBean id="cEndToday" class="java.util.Date"/>
+					<fmt:formatDate value="${cEndToday}" var="cEndTodayDate" pattern="yyyyMMdd"/>
+					<fmt:parseDate value="${cEndTodayDate}" var="cEndNowDate" pattern="yyyyMMdd"/>
+					<fmt:parseNumber value="${cEndNowDate.time / (1000 * 60 * 60 * 24)}" var="cEndNow" integerOnly="true"/>
+					<p>D${cEndNow-cEndEnd}</p>
+					<div class="progress">
+						<c:set var="cEndBefore" value="${summary.cEnd.cAmount * 100 / summary.cEnd.amount}" />
+						<div class="progress-bar" role="progressbar"
+							style="width: <fmt:formatNumber value="${cEndBefore}" type="percent"/>"
+							aria-valuenow="${cEndBefore * 100}" aria-valuemin="0"
+							aria-valuemax="100">
+							<fmt:formatNumber value="${cEndBefore}" type="percent" />
+						</div>
+					</div>
+				</div>
+			</section>
+			
+			<section class="4u">
+				<a href="${pageContext.request.contextPath}/fundingList/detail?num=${summary.cNew.cNum}" class="image featured">
+				<img src="${pageContext.request.contextPath}/resources/upload/funding/${summary.cNew.savename}"
+				alt="${summary.cNew.cpinfo}" height="200px"></a>
+				<div class="box">
+					<p>신규 후원</p>
+					<p>${summary.cNew.title}</p>
+					<p>${summary.cNew.id}</p>
+					<p>목표금액: ${summary.cNew.amount}</p>
+					<p>현재금액: ${summary.cNew.cAmount}</p>
+					
+					<fmt:formatDate value="${summary.cNew.sDate}" var="cNewsDate" pattern="yyyyMMdd"/>
+					<fmt:parseDate value="${cNewsDate}" var="cNewsDateDate" pattern="yyyyMMdd"/>
+					<fmt:parseNumber value="${cNewsDateDate.time / (1000 * 60 * 60 * 24)}" var="cNewStart" integerOnly="true"/>
+					
+					<jsp:useBean id="cNewToday" class="java.util.Date"/>
+					<fmt:formatDate value="${cNewToday}" var="cNewTodayDate" pattern="yyyyMMdd"/>
+					<fmt:parseDate value="${cNewTodayDate}" var="cNewNowDate" pattern="yyyyMMdd"/>
+					<fmt:parseNumber value="${cNewNowDate.time / (1000 * 60 * 60 * 24)}" var="cNewNow" integerOnly="true"/>
+					<p>D${cNewNow - cNewStart}</p>
+					<div class="progress">
+						<c:set var="cNewBefore" value="${summary.cNew.cAmount * 100 / summary.cNew.amount}" />
+						<div class="progress-bar" role="progressbar"
+							style="width: <fmt:formatNumber value="${cNewBefore}" type="percent"/>"
+							aria-valuenow="${cNewBefore * 100}" aria-valuemin="0"
+							aria-valuemax="100">
+							<fmt:formatNumber value="${cNewBefore}" type="percent" />
+						</div>
+					</div>
+				</div>
+			</section>
+			
+			<section class="4u">
+				<a href="${pageContext.request.contextPath}/fundingList/detail?num=${summary.cHot.cNum}" class="image featured">
+				<img src="${pageContext.request.contextPath}/resources/upload/funding/${summary.cHot.savename}"
+				alt="${summary.cHot.cpinfo}" height="200px"></a>
+				<div class="box">
+					<p>주목할만한 후원</p>
+					<p>${summary.cHot.title}</p>
+					<p>${summary.cHot.id}</p>
+					<p>목표금액: ${summary.cHot.amount}</p>
+					<p>현재금액: ${summary.cHot.cAmount}</p>
+					
+					<fmt:formatDate value="${summary.cHot.eDate}" var="cHoteDate" pattern="yyyyMMdd"/>
+					<fmt:parseDate value="${cHoteDate}" var="cHoteDateDate" pattern="yyyyMMdd"/>
+					<fmt:parseNumber value="${cHoteDateDate.time / (1000 * 60 * 60 * 24)}" var="cHotEnd" integerOnly="true"/>
+					
+					<jsp:useBean id="cHotToday" class="java.util.Date"/>
+					<fmt:formatDate value="${cHotToday}" var="cHotTodayDate" pattern="yyyyMMdd"/>
+					<fmt:parseDate value="${cHotTodayDate}" var="cHotNowDate" pattern="yyyyMMdd"/>
+					<fmt:parseNumber value="${cHotNowDate.time / (1000 * 60 * 60 * 24)}" var="cHotNow" integerOnly="true"/>
+					<p>D${cHotNow-cHotEnd}</p>
+					<div class="progress">
+						<c:set var="cHotBefore" value="${summary.cHot.cAmount * 100 / summary.cHot.amount}" />
+						<div class="progress-bar" role="progressbar"
+							style="width: <fmt:formatNumber value="${cHotBefore}" type="percent"/>"
+							aria-valuenow="${cHotBefore * 100}" aria-valuemin="0"
+							aria-valuemax="100">
+							<fmt:formatNumber value="${cHotBefore}" type="percent" />
+						</div>
+					</div>
+				</div>
+			</section>
+			
+			<section class="4u">
+				<a href="${pageContext.request.contextPath}/fundingList/detail?num=${summary.cPrice.cNum}" class="image featured">
+				<img src="${pageContext.request.contextPath}/resources/upload/funding/${summary.cPrice.savename}"
+				alt="${summary.cPrice.cpinfo}" height="200px"></a>
+				<div class="box">
+					<p>참여금액이 높은 후원</p>
+					<p>${summary.cPrice.title}</p>
+					<p>${summary.cPrice.id}</p>
+					<p>목표금액: ${summary.cPrice.amount}</p>
+					<p>현재금액: ${summary.cPrice.cAmount}</p>
+					
+					<fmt:formatDate value="${summary.cPrice.eDate}" var="cPriceeDate" pattern="yyyyMMdd"/>
+					<fmt:parseDate value="${cPriceeDate}" var="cPriceeDateDate" pattern="yyyyMMdd"/>
+					<fmt:parseNumber value="${cPriceeDateDate.time / (1000 * 60 * 60 * 24)}" var="cPriceEnd" integerOnly="true"/>
+					
+					<jsp:useBean id="cPriceToday" class="java.util.Date"/>
+					<fmt:formatDate value="${cPriceToday}" var="cPriceTodayDate" pattern="yyyyMMdd"/>
+					<fmt:parseDate value="${cPriceTodayDate}" var="cPriceNowDate" pattern="yyyyMMdd"/>
+					<fmt:parseNumber value="${cPriceNowDate.time / (1000 * 60 * 60 * 24)}" var="cPriceNow" integerOnly="true"/>
+					<p>D${cPriceNow-cPriceEnd}</p>
+					<div class="progress">
+						<c:set var="cPriceBefore" value="${summary.cPrice.cAmount * 100 / summary.cPrice.amount}" />
+						<div class="progress-bar" role="progressbar"
+							style="width: <fmt:formatNumber value="${cPriceBefore}" type="percent"/>"
+							aria-valuenow="${cPriceBefore * 100}" aria-valuemin="0"
+							aria-valuemax="100">
+							<fmt:formatNumber value="${cPriceBefore}" type="percent" />
+						</div>
+					</div>
+				</div>
+			</section>
+			
+			<section class="4u">
+=======
 			<div class="col-md-2">
+>>>>>>> refs/remotes/origin/master
 				<a href="${pageContext.request.contextPath}/fundingList/detail?num=${summary.fEnd.fnum}" class="image featured">
 				<img src="${summary.fEnd.savename}"
 				alt="${summary.fEnd.fpinfo}" height="200px"></a>
@@ -132,6 +264,10 @@
 						</div>
 					</div>
 				</div>
+<<<<<<< HEAD
+			</section>
+		
+=======
 			</div>
 			<div class="col-md-3">
 				<div class="box">
@@ -164,6 +300,7 @@
 					<br>
 				</div>
 			</div>
+>>>>>>> refs/remotes/origin/master
 		</div>
 		<div class="row">
 

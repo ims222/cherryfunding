@@ -28,7 +28,7 @@ import com.cherryfunding.spring.vo.CharityVo;
 @Controller
 public class InsertCharityController {
 	@Autowired
-	private CHashtagService cHashtagService;
+	private CHashtagService cHashtagService; 
 
 	@Autowired
 	private CharityService charityService;
