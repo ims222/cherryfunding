@@ -22,12 +22,8 @@
 			tabsize: 2,
 			height: 500,
 			callbacks: {
-				onImageUpload: function(files, editor, welEditable){
-					alert("온이미지");
-					for(var i=files.length - 1; i >=0; i--){
-						sendFile(files[i], this);
-					}
-				}
+				
+			
 			}
 		});
 		
