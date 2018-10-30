@@ -70,10 +70,8 @@ public class InsertCharityController {
 			cvo.setTitle(title);
 			cvo.setContent(content);
 			cvo.setAmount(Integer.parseInt(amount));
-			System.out.println("sDate: " + sDate + "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 			java.util.Date jsdate = new SimpleDateFormat("yyyy-MM-dd").parse(sDate);
 			cvo.setsDate(new Date(jsdate.getTime()));
-			System.out.println("jsdate: " + jsdate + "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 			java.util.Date jedate = new SimpleDateFormat("yyyy-MM-dd").parse(eDate);
 			cvo.seteDate(new Date(jedate.getTime()));
 			cvo.setCategory(category);

@@ -6,6 +6,7 @@
 <div id="main">
 	<div class="container">
 		<div class="row no-collapse-1">
+<<<<<<< HEAD
 			<section class="4u">
 				<a href="${pageContext.request.contextPath}/charityList/detail?num=${summary.cEnd.cNum}" class="image featured">
 				<img src="${pageContext.request.contextPath}/resources/upload/funding/${summary.cEnd.savename}"
@@ -135,8 +136,11 @@
 			</section>
 			
 			<section class="4u">
+=======
+			<div class="col-md-2">
+>>>>>>> refs/remotes/origin/master
 				<a href="${pageContext.request.contextPath}/fundingList/detail?num=${summary.fEnd.fnum}" class="image featured">
-				<img src="${pageContext.request.contextPath}/resources/upload/funding/${summary.fEnd.savename}"
+				<img src="${summary.fEnd.savename}"
 				alt="${summary.fEnd.fpinfo}" height="200px"></a>
 				<div class="box">
 					<p>종료임박펀딩</p>
@@ -164,11 +168,11 @@
 						</div>
 					</div>
 				</div>
-			</section>
+			</div>
 			
-			<section class="4u">
+			<div class="col-md-2">
 				<a href="${pageContext.request.contextPath}/fundingList/detail?num=${summary.fNew.fnum}" class="image featured">
-				<img src="${pageContext.request.contextPath}/resources/upload/funding/${summary.fNew.savename}"
+				<img src="${summary.fNew.savename}"
 				alt="${summary.fNew.fpinfo}" height="200px"></a>
 				<div class="box">
 					<p>새로 시작되는 펀딩</p>
@@ -196,11 +200,11 @@
 						</div>
 					</div>
 				</div>
-			</section>
+			</div>
 			
-			<section class="4u">
+			<div class="col-md-2">
 				<a href="${pageContext.request.contextPath}/fundingList/detail?num=${summary.fHot.fnum}" class="image featured">
-				<img src="${pageContext.request.contextPath}/resources/upload/funding/${summary.fHot.savename}"
+				<img src="${summary.fHot.savename}"
 				alt="${summary.fHot.fpinfo}" height="200px"></a>
 				<div class="box">
 					<p>가장 많이 주목된 펀딩</p>
@@ -228,11 +232,11 @@
 						</div>
 					</div>
 				</div>
-			</section>
+			</div>
 			
-			<section class="4u">
+			<div class="col-md-2">
 				<a href="${pageContext.request.contextPath}/fundingList/detail?num=${summary.fPrice.fnum}" class="image featured">
-				<img src="${pageContext.request.contextPath}/resources/upload/funding/${summary.fPrice.savename}"
+				<img src="${summary.fPrice.savename}"
 				alt="${summary.fPrice.fpinfo}" height="200px"></a>
 				<div class="box">
 					<p>참여금액이 제일 많은 펀딩</p>
@@ -260,8 +264,43 @@
 						</div>
 					</div>
 				</div>
+<<<<<<< HEAD
 			</section>
 		
+=======
+			</div>
+			<div class="col-md-3">
+				<div class="box">
+					<form method="post" action="${pageContext.request.contextPath}/testlogin">
+						<c:choose>
+							<c:when test="${not empty sessionScope.id}">
+								${sessionScope.id} 님 <a href="#">마이페이지</a>
+								<input type="button" value="로그아웃" onclick="location.href='${pageContext.request.contextPath}/testlogout'">
+							</c:when>
+							<c:otherwise>
+								<input type="text" name="id" placeholder="아이디"><br>
+								<input type="text" name="pwd" placeholder="비밀번호">
+								<input type="submit" value="로그인">	
+							</c:otherwise>
+						</c:choose>
+						
+					</form>
+				</div>
+				
+				<div class="box">
+					<p>전체 펀딩 갯수</p>
+					<p>${summary.totFunding.CNT}</p>
+					<p>전체 펀딩 금액</p>
+					<p>${summary.totFunding.S}</p>
+					<br>
+					<p>오늘 펀딩 갯수</p>
+					<p>${summary.todayFunding.CNT}</p>
+					<p>오늘 펀딩 금액</p>
+					<p>${summary.todayFunding.S}</p>
+					<br>
+				</div>
+			</div>
+>>>>>>> refs/remotes/origin/master
 		</div>
 		<div class="row">
 

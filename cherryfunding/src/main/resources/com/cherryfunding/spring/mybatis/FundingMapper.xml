@@ -159,4 +159,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</select>
 	
 	<!-- ///////// -->
+	
+	<!-- 전체 펀딩 금액, 갯수-->
+	<select id="totFunding" resultType="hashmap">
+		select NVL(count(fNum), 0) cnt, NVL(sum(camout), 0) s from funding
+	</select>
+	<!-- 오늘 펀딩 금액, 갯수 -->
+	<select id="todayFunding" resultType="hashmap">
+		select NVL(count(funding.fNum), 0) cnt, NVL(sum(funding.camout), 0) s from (
+			select * from funding
+			<![CDATA[where sdate < sysdate and edate > sysdate]]>) funding,
+			(select * from fdetail where regdate = sysdate) fdetail
+			where funding.fnum = fdetail.fnum
+	</select>
+	
+	
 </mapper>
