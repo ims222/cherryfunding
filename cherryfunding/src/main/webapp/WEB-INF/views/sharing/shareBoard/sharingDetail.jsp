@@ -4,32 +4,67 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
-		//recomm();		
+		isRecommed();
+		
 		$("#recommend").on('click', function(){
+			var recomm;
 			var id='${sessionScope.id}';
 			if(!id){
 				alert("로그인 해주세욧");
 				return;
 			}
-			recomm();
+			$.ajax({
+				url: '${pageContext.request.contextPath}/sharing/sharingIsRecommend',
+				data:{id:'${sessionScope.id}', sNum: '${vo.sNum}'},
+				dataType: 'json',
+				success: function(data){
+					if(data.result === 'ok'){
+						recomm = 'recomm';
+					}else{
+						recomm = 'cancel';
+					}
+					$.ajax({
+						url:'${pageContext.request.contextPath}/sharing/sharingRecommend',
+						data: {id:id, sNum: '${vo.sNum}', recomm:recomm},
+						dataType: 'json',
+						type:'post',
+						success: function(data){
+							isRecommed();
+						}
+					});
+				}
+			});
 		});
+		
 		$("#insertComment").on('submit', function(e){
 			e.preventDefault();
+			var id = '${sessionScope.id}';
+			if(!id)
+				alert('로그인 해주세욧ㅅ');
 			var content = $("#insertComment input[name='content']").val();
-			alert(content);
+			
+			$.ajax({
+				url:'',
+				dataType:'json',
+				type:'post',
+				data: {id:id, content:content},
+				success: function(data){
+					alert(data);
+				}
+			});
 		});
 	});
-	function recomm(){
-		
+	
+	function isRecommed(){
 		$.ajax({
-			url: '${pageContext.request.contextPath}/sharing/sharingRecommend',
+			url: '${pageContext.request.contextPath}/sharing/sharingIsRecommend',
 			data:{id:'${sessionScope.id}', sNum: '${vo.sNum}'},
 			dataType: 'json',
 			success: function(data){
-				if(data.result === 'recommend'){
-					$("#recommend").text("추천 취소");
+				if(data.result === 'ok'){
+					$("#recommend").text('추천');
 				}else{
-					$("#recommend").text("추천");
+					$("#recommend").text('추천취소');
 				}
 			}
 		});
@@ -67,7 +102,7 @@
 					</c:forEach>
 					</select>
 					<br>
-					<button id="recommend" type="button">추천</button>
+					<button id="recommend" type="button"></button>
 				</div>
 			</section>
 		</div>

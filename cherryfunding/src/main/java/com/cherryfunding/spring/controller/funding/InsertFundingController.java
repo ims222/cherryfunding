@@ -110,7 +110,7 @@ public class InsertFundingController {
 			for (MultipartFile file : files) { // 사진들
 				S3Util s3 = new S3Util();
 				String orgfilename = file.getOriginalFilename();
-				String savefilename =String.valueOf(UUID.randomUUID());
+				String savefilename = String.valueOf(UUID.randomUUID());
 				long filesize = file.getSize();
 				if (filesize > 0) { // 사진db저장
 					FPictureVo fpvo = new FPictureVo();

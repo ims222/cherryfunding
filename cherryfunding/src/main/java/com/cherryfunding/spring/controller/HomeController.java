@@ -40,10 +40,6 @@ public class HomeController {
 		summary.put("todayFunding", mfService.todayFunding());
 		model.addAttribute("summary", summary);
 		
-		System.out.println("fEnd: " +  mfService.mainEnd().getSavename());
-		System.out.println("fNew: " +  mfService.mainEnd().getSavename());
-		System.out.println("fHot: " +  mfService.mainEnd().getSavename());
-		System.out.println("fPrice: " +  mfService.mainEnd().getSavename());
 		return ".main";
 	}
 
