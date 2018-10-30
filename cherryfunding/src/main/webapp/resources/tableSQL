@@ -56,10 +56,10 @@ START WITH 1
 INCREMENT BY 1;
 /
 
---DROP TRIGGER Charity_AI_TRG;
+DROP TRIGGER Charity_AI_TRG;
 /
 
---DROP SEQUENCE Charity_SEQ;
+DROP SEQUENCE Charity_SEQ;
 /
 
 
@@ -104,10 +104,10 @@ START WITH 1
 INCREMENT BY 1;
 /
 
---DROP TRIGGER funding_AI_TRG;
+DROP TRIGGER funding_AI_TRG;
 /
 
---DROP SEQUENCE funding_SEQ;
+DROP SEQUENCE funding_SEQ;
 /
 
 
@@ -142,10 +142,10 @@ START WITH 1
 INCREMENT BY 1;
 /
 
---DROP TRIGGER cDetail_AI_TRG;
+DROP TRIGGER cDetail_AI_TRG;
 /
 
---DROP SEQUENCE cDetail_SEQ;
+DROP SEQUENCE cDetail_SEQ;
 /
 
 ALTER TABLE cDetail
@@ -184,10 +184,10 @@ START WITH 1
 INCREMENT BY 1;
 /
 
---DROP TRIGGER Epilogue_AI_TRG;
+DROP TRIGGER Epilogue_AI_TRG;
 /
 
---DROP SEQUENCE Epilogue_SEQ;
+DROP SEQUENCE Epilogue_SEQ;
 /
 
 ALTER TABLE Epilogue
@@ -217,11 +217,10 @@ CREATE SEQUENCE volunteer_SEQ
 START WITH 1
 INCREMENT BY 1;
 /
-
---DROP TRIGGER volunteer_AI_TRG;
+DROP TRIGGER volunteer_AI_TRG;
 /
 
---DROP SEQUENCE volunteer_SEQ;
+DROP SEQUENCE volunteer_SEQ;
 /
 
 
@@ -252,14 +251,10 @@ START WITH 1
 INCREMENT BY 1;
 /
 
-alter table sharing
-add title VARCHAR2(100);
-
-
---DROP TRIGGER sharing_AI_TRG;
+DROP TRIGGER sharing_AI_TRG;
 /
 
---DROP SEQUENCE sharing_SEQ;
+DROP SEQUENCE sharing_SEQ;
 /
 
 
@@ -287,10 +282,10 @@ START WITH 1
 INCREMENT BY 1;
 /
 
---DROP TRIGGER reward_AI_TRG;
+DROP TRIGGER reward_AI_TRG;
 /
 
---DROP SEQUENCE reward_SEQ;
+DROP SEQUENCE reward_SEQ;
 /
 
 
@@ -327,10 +322,10 @@ START WITH 1
 INCREMENT BY 1;
 /
 
---DROP TRIGGER payment_AI_TRG;
+DROP TRIGGER payment_AI_TRG;
 /
 
---DROP SEQUENCE payment_SEQ;
+DROP SEQUENCE payment_SEQ;
 /
 
 
@@ -352,7 +347,6 @@ CREATE TABLE fDetail
     id         VARCHAR2(40)    NULL, 
     fNum       INT             NULL, 
     rNum       INT             NULL, 
-    fDate      DATE            NULL, 
     regDate    DATE            NULL, 
     state      VARCHAR2(20)    NULL, 
     CONSTRAINT FDETAIL_PK PRIMARY KEY (fdNum)
@@ -365,10 +359,10 @@ INCREMENT BY 1;
 /
 
 
---DROP TRIGGER fDetail_AI_TRG;
+DROP TRIGGER fDetail_AI_TRG;
 /
 
---DROP SEQUENCE fDetail_SEQ;
+DROP SEQUENCE fDetail_SEQ;
 /
 
 
@@ -430,10 +424,10 @@ INCREMENT BY 1;
 /
 
 
---DROP TRIGGER sItem_AI_TRG;
+DROP TRIGGER sItem_AI_TRG;
 /
 
---DROP SEQUENCE sItem_SEQ;
+DROP SEQUENCE sItem_SEQ;
 /
 
 
@@ -462,10 +456,10 @@ INCREMENT BY 1;
 /
 
 
---DROP TRIGGER cComment_AI_TRG;
+DROP TRIGGER cComment_AI_TRG;
 /
 
---DROP SEQUENCE cComment_SEQ;
+DROP SEQUENCE cComment_SEQ;
 /
 
 
@@ -499,10 +493,10 @@ START WITH 1
 INCREMENT BY 1;
 /
 
---DROP TRIGGER eComment_AI_TRG;
+DROP TRIGGER eComment_AI_TRG;
 /
 
---DROP SEQUENCE eComment_SEQ;
+DROP SEQUENCE eComment_SEQ;
 /
 
 COMMENT ON TABLE eComment IS '후기댓글'
@@ -554,10 +548,10 @@ START WITH 1
 INCREMENT BY 1;
 /
 
---DROP TRIGGER messenger_AI_TRG;
+DROP TRIGGER messenger_AI_TRG;
 /
 
---DROP SEQUENCE messenger_SEQ;
+DROP SEQUENCE messenger_SEQ;
 /
 
 COMMENT ON TABLE messenger IS '메신져'
@@ -613,10 +607,10 @@ START WITH 1
 INCREMENT BY 1;
 /
 
---DROP TRIGGER cPicture_AI_TRG;
+DROP TRIGGER cPicture_AI_TRG;
 /
 
---DROP SEQUENCE cPicture_SEQ;
+DROP SEQUENCE cPicture_SEQ;
 /
 
 ALTER TABLE cPicture
@@ -644,10 +638,10 @@ START WITH 1
 INCREMENT BY 1;
 /
 
---DROP TRIGGER fPicture_AI_TRG;
+DROP TRIGGER fPicture_AI_TRG;
 /
 
---DROP SEQUENCE fPicture_SEQ;
+DROP SEQUENCE fPicture_SEQ;
 /
 
 ALTER TABLE fPicture
@@ -675,10 +669,10 @@ INCREMENT BY 1;
 /
 
 
---DROP TRIGGER vPicture_AI_TRG;
+DROP TRIGGER vPicture_AI_TRG;
 /
 
---DROP SEQUENCE vPicture_SEQ;
+DROP SEQUENCE vPicture_SEQ;
 /
 
 COMMENT ON TABLE vPicture IS '봉사사진'
@@ -728,10 +722,10 @@ START WITH 1
 INCREMENT BY 1;
 /
 
---DROP TRIGGER sPicture_AI_TRG;
+DROP TRIGGER sPicture_AI_TRG;
 /
 
---DROP SEQUENCE sPicture_SEQ;
+DROP SEQUENCE sPicture_SEQ;
 /
 
 ALTER TABLE sPicture
@@ -760,10 +754,10 @@ START WITH 1
 INCREMENT BY 1;
 /
 
---DROP TRIGGER fComment_AI_TRG;
+DROP TRIGGER fComment_AI_TRG;
 /
 
---DROP SEQUENCE fComment_SEQ;
+DROP SEQUENCE fComment_SEQ;
 /
 
 COMMENT ON TABLE fComment IS '펀딩댓글'
@@ -814,10 +808,10 @@ START WITH 1
 INCREMENT BY 1;
 /
 
---DROP TRIGGER vComment_AI_TRG;
+DROP TRIGGER vComment_AI_TRG;
 /
 
---DROP SEQUENCE vComment_SEQ;
+DROP SEQUENCE vComment_SEQ;
 /
 
 COMMENT ON TABLE vComment IS '봉사댓글'
@@ -867,10 +861,10 @@ START WITH 1
 INCREMENT BY 1;
 /
 
---DROP TRIGGER sComment_AI_TRG;
+DROP TRIGGER sComment_AI_TRG;
 /
 
---DROP SEQUENCE sComment_SEQ;
+DROP SEQUENCE sComment_SEQ;
 /
 
 COMMENT ON TABLE sComment IS '나눔댓글'
@@ -912,10 +906,10 @@ START WITH 1
 INCREMENT BY 1;
 /
 
---DROP TRIGGER sList_AI_TRG;
+DROP TRIGGER sList_AI_TRG;
 /
 
---DROP SEQUENCE sList_SEQ;
+DROP SEQUENCE sList_SEQ;
 /
 
 COMMENT ON TABLE sList IS '나눔신청자'
@@ -965,10 +959,10 @@ START WITH 1
 INCREMENT BY 1;
 /
 
---DROP TRIGGER vList_AI_TRG;
+DROP TRIGGER vList_AI_TRG;
 /
 
---DROP SEQUENCE vList_SEQ;
+DROP SEQUENCE vList_SEQ;
 /
 
 COMMENT ON TABLE vList IS '봉사신청자'
@@ -1015,10 +1009,10 @@ START WITH 1
 INCREMENT BY 1;
 /
 
---DROP TRIGGER interest_AI_TRG;
+DROP TRIGGER interest_AI_TRG;
 /
 
---DROP SEQUENCE interest_SEQ;
+DROP SEQUENCE interest_SEQ;
 /
 
 COMMENT ON TABLE interest IS '관심사항'
@@ -1063,10 +1057,10 @@ START WITH 1
 INCREMENT BY 1;
 /
 
---DROP TRIGGER cRecommend_AI_TRG;
+DROP TRIGGER cRecommend_AI_TRG;
 /
 
---DROP SEQUENCE cRecommend_SEQ;
+DROP SEQUENCE cRecommend_SEQ;
 /
 
 ALTER TABLE cRecommend
@@ -1097,10 +1091,10 @@ START WITH 1
 INCREMENT BY 1;
 /
 
---DROP TRIGGER fRecommend_AI_TRG;
+DROP TRIGGER fRecommend_AI_TRG;
 /
 
---DROP SEQUENCE fRecommend_SEQ;
+DROP SEQUENCE fRecommend_SEQ;
 /
 
 COMMENT ON TABLE fRecommend IS '펀딩추천'
@@ -1143,10 +1137,10 @@ START WITH 1
 INCREMENT BY 1;
 /
 
---DROP TRIGGER sRecommned_AI_TRG;
+DROP TRIGGER sRecommned_AI_TRG;
 /
 
---DROP SEQUENCE sRecommned_SEQ;
+DROP SEQUENCE sRecommned_SEQ;
 /
 
 COMMENT ON TABLE sRecommned IS '나눔추천'
@@ -1189,10 +1183,10 @@ START WITH 1
 INCREMENT BY 1;
 /
 
---DROP TRIGGER vRecommend_AI_TRG;
+DROP TRIGGER vRecommend_AI_TRG;
 /
 
---DROP SEQUENCE vRecommend_SEQ;
+DROP SEQUENCE vRecommend_SEQ;
 /
 
 COMMENT ON TABLE vRecommend IS '봉사추천'
@@ -1235,10 +1229,10 @@ START WITH 1
 INCREMENT BY 1;
 /
 
---DROP TRIGGER alarm_AI_TRG;
+DROP TRIGGER alarm_AI_TRG;
 /
 
---DROP SEQUENCE alarm_SEQ;
+DROP SEQUENCE alarm_SEQ;
 /
 
 COMMENT ON TABLE alarm IS '알림메시지'
@@ -1298,10 +1292,10 @@ START WITH 1
 INCREMENT BY 1;
 /
 
---DROP TRIGGER cHashtag_AI_TRG;
+DROP TRIGGER cHashtag_AI_TRG;
 /
 
---DROP SEQUENCE cHashtag_SEQ;
+DROP SEQUENCE cHashtag_SEQ;
 /
 
 COMMENT ON TABLE cHashtag IS '후원해시태크'
@@ -1338,10 +1332,10 @@ START WITH 1
 INCREMENT BY 1;
 /
 
---DROP TRIGGER fHashtag_AI_TRG;
+DROP TRIGGER fHashtag_AI_TRG;
 /
 
---DROP SEQUENCE fHashtag_SEQ;
+DROP SEQUENCE fHashtag_SEQ;
 /
 
 COMMENT ON TABLE fHashtag IS '펀딩해시태그'
@@ -1381,10 +1375,10 @@ START WITH 1
 INCREMENT BY 1;
 /
 
---DROP TRIGGER ePicture_AI_TRG;
+DROP TRIGGER ePicture_AI_TRG;
 /
 
---DROP SEQUENCE ePicture_SEQ;
+DROP SEQUENCE ePicture_SEQ;
 /
 
 COMMENT ON TABLE ePicture IS '후기사진'
@@ -1430,10 +1424,10 @@ START WITH 1
 INCREMENT BY 1;
 /
 
---DROP TRIGGER eRecommend_AI_TRG;
+DROP TRIGGER eRecommend_AI_TRG;
 /
 
---DROP SEQUENCE eRecommend_SEQ;
+DROP SEQUENCE eRecommend_SEQ;
 /
 
 COMMENT ON TABLE eRecommend IS '후기추천'
@@ -1476,10 +1470,10 @@ START WITH 1
 INCREMENT BY 1;
 /
 
---DROP TRIGGER eHashtag_AI_TRG;
+DROP TRIGGER eHashtag_AI_TRG;
 /
 
---DROP SEQUENCE eHashtag_SEQ;
+DROP SEQUENCE eHashtag_SEQ;
 /
 
 COMMENT ON TABLE eHashtag IS '후기해시태그'
@@ -1515,10 +1509,10 @@ START WITH 1
 INCREMENT BY 1;
 /
 
---DROP TRIGGER creditMethod_AI_TRG;
+DROP TRIGGER creditMethod_AI_TRG;
 /
 
---DROP SEQUENCE creditMethod_SEQ;
+DROP SEQUENCE creditMethod_SEQ;
 /
 
 COMMENT ON TABLE creditMethod IS '결제수단'
@@ -1552,10 +1546,10 @@ START WITH 1
 INCREMENT BY 1;
 /
 
---DROP TRIGGER fResult_AI_TRG;
+DROP TRIGGER fResult_AI_TRG;
 /
 
---DROP SEQUENCE fResult_SEQ;
+DROP SEQUENCE fResult_SEQ;
 /
 
 COMMENT ON TABLE fResult IS '펀딩결과'
@@ -1593,10 +1587,10 @@ START WITH 1
 INCREMENT BY 1;
 /
 
---DROP TRIGGER event_AI_TRG;
+DROP TRIGGER event_AI_TRG;
 /
 
---DROP SEQUENCE event_SEQ;
+DROP SEQUENCE event_SEQ;
 /
 
 COMMENT ON TABLE event IS '일정'

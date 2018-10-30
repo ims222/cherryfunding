@@ -129,7 +129,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 					and (sysdate - sdate) = (select max(sysdate - sdate) fnum from funding
 								<![CDATA[where sdate > sysdate and edate > sysdate]]>) order by fnum desc
 											)aa
-			) where rnum =1
+			) where rnum = 1
 		</select>
 		
 		<!-- 핫 -->

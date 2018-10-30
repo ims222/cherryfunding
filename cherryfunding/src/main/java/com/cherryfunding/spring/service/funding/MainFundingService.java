@@ -7,12 +7,16 @@ import org.springframework.stereotype.Service;
 
 import com.cherryfunding.spring.dao.FPictureDao;
 import com.cherryfunding.spring.dao.FundingDao;
+import com.cherryfunding.spring.util.S3Util;
 import com.cherryfunding.spring.vo.FPictureVo;
 import com.cherryfunding.spring.vo.FundingVo;
 
 @Service
 public class MainFundingService {
 
+	@Autowired
+	private S3Util s3;
+	
 	@Autowired
 	private FundingDao fdao;
 
@@ -24,7 +28,8 @@ public class MainFundingService {
 		if (fEnd == null) {
 			fEnd = new FundingVo();
 		}
-		fEnd.setSavename(this.thumbnail(fEnd.getFnum()).getSavename());// 썸네일
+		String thumbnail = this.thumbnail(fEnd.getFnum()).getSavename();
+		fEnd.setSavename(s3.getFileURL("funding/"+ thumbnail));// 썸네일
 		fEnd.setFpinfo(this.thumbnail(fEnd.getFnum()).getFpinfo()); // 사진정보
 
 		return fEnd;
@@ -35,7 +40,8 @@ public class MainFundingService {
 		if (fNew == null) {
 			fNew = new FundingVo();
 		}
-		fNew.setSavename(this.thumbnail(fNew.getFnum()).getSavename());// 썸네일
+		String thumbnail = this.thumbnail(fNew.getFnum()).getSavename();
+		fNew.setSavename(s3.getFileURL("funding/"+ thumbnail));// 썸네일
 		fNew.setFpinfo(this.thumbnail(fNew.getFnum()).getFpinfo()); // 사진정보
 
 		return fNew;
@@ -46,7 +52,8 @@ public class MainFundingService {
 		if (fHot == null) {
 			fHot = new FundingVo();
 		}
-		fHot.setSavename(this.thumbnail(fHot.getFnum()).getSavename());// 썸네일
+		String thumbnail = this.thumbnail(fHot.getFnum()).getSavename();
+		fHot.setSavename(s3.getFileURL("funding/"+ thumbnail));// 썸네일
 		fHot.setFpinfo(this.thumbnail(fHot.getFnum()).getFpinfo()); // 사진정보
 
 		return fHot;
@@ -57,7 +64,8 @@ public class MainFundingService {
 		if (fPrice == null) {
 			fPrice = new FundingVo();
 		}
-		fPrice.setSavename(this.thumbnail(fPrice.getFnum()).getSavename());// 썸네일
+		String thumbnail = this.thumbnail(fPrice.getFnum()).getSavename();
+		fPrice.setSavename(s3.getFileURL("funding/"+ thumbnail));// 썸네일
 		fPrice.setFpinfo(this.thumbnail(fPrice.getFnum()).getFpinfo()); // 사진정보
 		return fPrice;
 	}
@@ -65,10 +73,11 @@ public class MainFundingService {
 	public FPictureVo thumbnail(int fNum) {
 		return pfdao.thumbnail(fNum);
 	}
-	
-	public HashMap<String, Object> totFunding(){
+
+	public HashMap<String, Object> totFunding() {
 		return fdao.totFunding();
 	}
+
 	public HashMap<String, Object> todayFunding() {
 		return fdao.todayFunding();
 	}
