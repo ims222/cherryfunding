@@ -11,11 +11,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.cherryfunding.spring.service.funding.PrepareFundingListService;
+import com.cherryfunding.spring.util.S3Util;
 import com.cherryfunding.spring.vo.FundingVo;
 
 @Controller
 public class PrepareFundingListController {
 
+	@Autowired
+	private S3Util s3;
+	
 	@Autowired
 	private PrepareFundingListService prepareService;
 	
@@ -32,7 +36,8 @@ public class PrepareFundingListController {
 		List<FundingVo> list = prepareService.list(map);
 		
 		for (FundingVo vo : list) {
-			vo.setSavename(prepareService.thumbnail(vo.getFnum()).getSavename());
+			String thumbnail = prepareService.thumbnail(vo.getFnum()).getSavename();
+			vo.setSavename(s3.getFileURL("funding/"+ thumbnail));
 			vo.setFpinfo(prepareService.thumbnail(vo.getFnum()).getFpinfo());
 		}
 

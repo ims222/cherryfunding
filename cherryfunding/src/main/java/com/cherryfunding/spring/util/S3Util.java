@@ -5,6 +5,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+
 import com.amazonaws.ClientConfiguration;
 import com.amazonaws.Protocol;
 import com.amazonaws.auth.AWSCredentials;
@@ -15,6 +17,7 @@ import com.amazonaws.services.s3.model.Bucket;
 import com.amazonaws.services.s3.model.GeneratePresignedUrlRequest;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 
+@Component
 public class S3Util {
 	private String bucketName = "cherryfundingbucket";
 	private String accessKey = "AKIAJXSPLWJTXD6S2YTA"; // 엑세스 키

@@ -8,7 +8,7 @@
 		<div class="row no-collapse-1">
 			<div class="col-md-2">
 				<a href="${pageContext.request.contextPath}/fundingList/detail?num=${summary.fEnd.fnum}" class="image featured">
-				<img src="${pageContext.request.contextPath}/resources/upload/funding/${summary.fEnd.savename}"
+				<img src="${summary.fEnd.savename}"
 				alt="${summary.fEnd.fpinfo}" height="200px"></a>
 				<div class="box">
 					<p>종료임박펀딩</p>
@@ -40,7 +40,7 @@
 			
 			<div class="col-md-2">
 				<a href="${pageContext.request.contextPath}/fundingList/detail?num=${summary.fNew.fnum}" class="image featured">
-				<img src="${pageContext.request.contextPath}/resources/upload/funding/${summary.fNew.savename}"
+				<img src="${summary.fNew.savename}"
 				alt="${summary.fNew.fpinfo}" height="200px"></a>
 				<div class="box">
 					<p>새로 시작되는 펀딩</p>
@@ -72,7 +72,7 @@
 			
 			<div class="col-md-2">
 				<a href="${pageContext.request.contextPath}/fundingList/detail?num=${summary.fHot.fnum}" class="image featured">
-				<img src="${pageContext.request.contextPath}/resources/upload/funding/${summary.fHot.savename}"
+				<img src="${summary.fHot.savename}"
 				alt="${summary.fHot.fpinfo}" height="200px"></a>
 				<div class="box">
 					<p>가장 많이 주목된 펀딩</p>
@@ -104,7 +104,7 @@
 			
 			<div class="col-md-2">
 				<a href="${pageContext.request.contextPath}/fundingList/detail?num=${summary.fPrice.fnum}" class="image featured">
-				<img src="${pageContext.request.contextPath}/resources/upload/funding/${summary.fPrice.savename}"
+				<img src="${summary.fPrice.savename}"
 				alt="${summary.fPrice.fpinfo}" height="200px"></a>
 				<div class="box">
 					<p>참여금액이 제일 많은 펀딩</p>
@@ -138,7 +138,7 @@
 					<form method="post" action="${pageContext.request.contextPath}/testlogin">
 						<c:choose>
 							<c:when test="${not empty sessionScope.id}">
-								${sessionScope.id} 님 
+								${sessionScope.id} 님 <a href="#">마이페이지</a>
 								<input type="button" value="로그아웃" onclick="location.href='${pageContext.request.contextPath}/testlogout'">
 							</c:when>
 							<c:otherwise>

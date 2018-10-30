@@ -18,11 +18,12 @@ import com.cherryfunding.spring.vo.FundingVo;
 @Controller
 public class IngFundingListController {
 	@Autowired
+	private S3Util s3;
+	@Autowired
 	IngFundingListService ingFundingListService;
 
 	@RequestMapping(value = "/funding/ingFundingList", method = RequestMethod.GET)
 	public String ingFundingList(Model model, HttpServletRequest request) {
-		S3Util s3 = new S3Util();
 		String category = request.getParameter("category");
 		String field = request.getParameter("field");
 		String keyword = request.getParameter("keyword");
