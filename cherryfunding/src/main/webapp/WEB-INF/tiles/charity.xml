@@ -12,12 +12,12 @@ PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
 	
 	<definition name=".prepareCharityList" extends = ".main">
 		<put-attribute name="banner" value="/WEB-INF/views/charity/banner.jsp"/>
-		<put-attribute name="content" value="/WEB-INF/views/charity/charityBoard/prepareCharityList.jsp"/>
+		<put-attribute name="content" value="/WEB-INF/views/charity/charitytBoard/prepareCharityList.jsp"/>
 	</definition>
 	
 	<definition name=".endCharityList" extends = ".main">
 		<put-attribute name="banner" value="/WEB-INF/views/charity/banner.jsp"/>
-		<put-attribute name="content" value="/WEB-INF/views/charity/charityBoard/endCharityList.jsp"/>
+		<put-attribute name="content" value="/WEB-INF/views/charity/charitytBoard/endCharityList.jsp"/>
 	</definition>
 	
 	<definition name=".inputCharity" extends = ".main">
