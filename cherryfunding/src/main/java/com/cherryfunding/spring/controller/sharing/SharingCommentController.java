@@ -18,20 +18,26 @@ public class SharingCommentController {
 	private SharingCommentService sharingCommentService;
 
 	@RequestMapping(value = "/sharing/insertComment", produces = "application/json;charset=UTF-8")
-	public String insertComment(SCommentVo vo) {
-		vo.setScNum(sharingCommentService.getMaxNum() + 1);
+	@ResponseBody
+	public String insertComment(String id, String content, int sNum) {
+		SCommentVo scvo = new SCommentVo();
+		scvo.setScNum(sharingCommentService.getMaxNum() + 1);
+		scvo.setId(id);
+		scvo.setContent(content);
+		scvo.setsNum(sNum);
 		JSONObject obj = new JSONObject();
-		if (sharingCommentService.insert(vo) > 0) {
+		if (sharingCommentService.insert(scvo) > 0) {
 			obj.put("result", "ok");
-		}else {
+		} else {
 			obj.put("result", "no");
 		}
 		return obj.toString();
 	}
 
-	@RequestMapping(value = "/sharing/commentList", produces = "application/json;charset=UTF-8")
+	@RequestMapping("/sharing/commentList")
 	@ResponseBody
 	public List<SCommentVo> commentList(int sNum) {
+		System.out.println("sNum: " + sNum);
 		return sharingCommentService.commentList(sNum);
 	}
 

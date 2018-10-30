@@ -2,10 +2,6 @@ package com.cherryfunding.spring.vo;
 
 import java.sql.Date;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-
-@XmlAccessorType(XmlAccessType.FIELD)
 public class SCommentVo {
 	private int scNum;
 	private String id;

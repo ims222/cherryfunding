@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
 		isRecommed();
-		
+		commentList();
 		$("#recommend").on('click', function(){
 			var recomm;
 			var id='${sessionScope.id}';
@@ -42,14 +43,19 @@
 			if(!id)
 				alert('로그인 해주세욧ㅅ');
 			var content = $("#insertComment input[name='content']").val();
+			if(!content)
+				alert('댓글을 작성해욧');
+			
+			var sNum = '${vo.sNum}';
 			
 			$.ajax({
-				url:'',
+				url:'${pageContext.request.contextPath}/sharing/insertComment',
 				dataType:'json',
 				type:'post',
-				data: {id:id, content:content},
+				data: {id:id, content:content, sNum:sNum},
 				success: function(data){
-					alert(data);
+					$("#insertComment input[name='content']").val('');
+					commentList();
 				}
 			});
 		});
@@ -59,6 +65,7 @@
 		$.ajax({
 			url: '${pageContext.request.contextPath}/sharing/sharingIsRecommend',
 			data:{id:'${sessionScope.id}', sNum: '${vo.sNum}'},
+			type:'post',
 			dataType: 'json',
 			success: function(data){
 				if(data.result === 'ok'){
@@ -71,17 +78,41 @@
 	}
 	function commentList(){
 		$.ajax({
-			url: '',
+			url: '${pageContext.request.contextPath}/sharing/commentList',
+			data: {sNum:'${vo.sNum}'},
 			dataType: 'json',
 			type: 'post',
 			success: function(data){
-				$("#commment").empty();
-				for(var i=0; i<data.length;i++){
-					console.log('data', data[i]);
-				}
+				var table = $('<table></table>');
+				$("#commment").empty().append(table);
+				data.forEach(function(value){
+					var id = value.id;
+					var content = value.content;
+					var regdate = value.regdate;
+					var tr = $('<tr></tr>');
+					$(tr).append('<td>' + id + '</td>')
+					$(tr).append('<td>' + content + '</td>')
+					$(tr).append('<td>'+ formatDate(regdate) +'</td>')
+					$(table).prepend(tr);
+				});
+				$('#comment').append(table);
+				
 			}
 		});
 	}
+	function formatDate(date) {
+		var d = new Date(date);
+		var month = (d.getMonth() + 1) + '';
+		var day = d.getDate() + '';
+		var year = d.getFullYear();
+		
+		if (month.length < 2)
+			month = '0' + month;
+		if (day.length < 2)
+			day = '0' + day;
+			return [year, month, day].join('-');
+	} 
+
 
 </script>
 <!-- Main -->
@@ -106,7 +137,7 @@
 				</div>
 			</section>
 		</div>
-		<div class="row" id="commment">
+		<div class="row box" id="commment">
 			<!-- 댓글 -->
 		</div>
 		<form id="insertComment">
