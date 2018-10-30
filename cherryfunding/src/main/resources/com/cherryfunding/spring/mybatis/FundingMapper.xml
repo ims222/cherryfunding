@@ -16,9 +16,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</sql>
 	<sql id="sort">
 		<choose>
-			<when test="sort == 'recommend'">
-				order by fnum desc
-			</when>
 			<when test="sort == 'popular'">
 				order by hit desc, fnum desc
 			</when>
@@ -96,6 +93,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				<include refid="category" />
 				<include refid="search" />
 				order by cal asc
+			</when>
+			<when test="sort == 'recommend'">
+				select bb.* from (
+					select * from (
+    					select aa.* from (
+     						select count(f.fnum) cnt, f.fnum fn from (
+       							select * from funding
+       							<![CDATA[where sdate < sysdate and edate > sysdate]]>
+      						) f, frecommend fr where f.fnum = fr.fnum group by f.fnum
+    					)aa
+    				order by cnt desc, fn desc)
+			)aa, (select * from funding )bb
+			where aa.fn = bb.fnum(+) order by cnt
 			</when>
 			<otherwise>
 				select * from funding
