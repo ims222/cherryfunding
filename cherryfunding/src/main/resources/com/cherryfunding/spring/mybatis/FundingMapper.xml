@@ -112,6 +112,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				where aa.fNum = bb.fNum
 				<include refid="category" />
 				<include refid="search" />
+				<include refid="isConfirm"/>
 				order by cal asc
 			</when>
 			<when test="sort == 'recommend'">
@@ -125,7 +126,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     					)aa
     				order by cnt desc, fn desc)
 			)aa, (select * from funding )bb
-			where aa.fn = bb.fNum(+) order by cnt
+			where aa.fn = bb.fNum(+)
+			<include refid="isConfirm"/>
+			 order by cnt
 			</when>
 			<otherwise>
 				select * from funding
@@ -148,7 +151,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 					and (edate-sysdate) = (select min(edate-sysdate) from funding
 						<![CDATA[where sdate < sysdate and edate > sysdate]]>) order by fNum desc
 										)aa
-			) where rnum = 1
+			) where rnum = 1 
+			<include refid="isConfirm"/>
 		</select>
 		
 		<!-- 새로 시작하는 -->
@@ -156,9 +160,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			select * from (
 				select aa.*, rownum rnum from (
 					select * from funding
-					<![CDATA[where sdate > sysdate and edate > sysdate]]>
+	where sdate > sysdate and edate > sysdate 
 					and (sysdate - sdate) = (select max(sysdate - sdate) fNum from funding
-								<![CDATA[where sdate > sysdate and edate > sysdate]]>) order by fNum desc
+						where sdate > sysdate and edate > sysdate and confirm = 'y'
+                        ) order by fNum desc
 											)aa
 			) where rnum = 1
 		</select>
@@ -174,6 +179,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			where hit = (select max(hit) from funding
 				<![CDATA[where sdate < sysdate and edate > sysdate]]>)
 			) where rnum = 1
+			<include refid="isConfirm"/>
 		</select>
 		
 		<!-- 액수 -->
@@ -187,6 +193,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			where camout = (select max(camout) from funding
 				<![CDATA[where sdate < sysdate and edate > sysdate]]>)
 			) where rnum = 1
+			<include refid="isConfirm"/>
 		</select>
 	
 	<!-- ///////// -->
