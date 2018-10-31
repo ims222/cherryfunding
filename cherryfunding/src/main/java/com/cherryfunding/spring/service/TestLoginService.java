@@ -1,5 +1,6 @@
 package com.cherryfunding.spring.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,5 +20,20 @@ public class TestLoginService {
 
 	public List<UsersVo> list() {
 		return dao.list();
+	}
+	public int insert(UsersVo vo) {
+		return dao.insert(vo);
+	}
+	public UsersVo select(String id) {
+		return dao.select(id);
+	}
+	public int update(UsersVo vo) {
+		return dao.update(vo);
+	}
+	public int delete(HashMap<String, String> map) {
+		return dao.delete(map);
+	}
+	public UsersVo userlogin(HashMap<String, String> map) {
+		return dao.userlogin(map);
 	}
 }

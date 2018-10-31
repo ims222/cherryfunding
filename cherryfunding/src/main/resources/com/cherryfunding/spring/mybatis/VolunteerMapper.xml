@@ -18,7 +18,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="select" parameterType="string" resultType="volunteer">
 		select * from volunteer where id = #{id}
 	</select>
-
+	
+	<select id="detail" parameterType="int" resultType="volunteer">
+		select * from volunteer where vnum = #{vnum}
+	</select>
 
 	<update id="update" parameterType="volunteer">
 		update volunteer set #{pwd} where #{id}

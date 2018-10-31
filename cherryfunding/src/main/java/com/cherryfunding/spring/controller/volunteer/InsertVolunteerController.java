@@ -1,18 +1,37 @@
 package com.cherryfunding.spring.controller.volunteer;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.cherryfunding.spring.service.volunteer.VPictureService;
+import com.cherryfunding.spring.service.volunteer.VolunteerService;
+import com.cherryfunding.spring.vo.SPictureVo;
+import com.cherryfunding.spring.vo.VPictureVo;
+import com.cherryfunding.spring.vo.VolunteerVo;
+
 @Controller
 public class InsertVolunteerController {
-
+	@Autowired
+	private VolunteerService volunteerService;
+	
+	@Autowired
+	private VPictureService vPictureService;
+	
+	
 	@RequestMapping(value = "/volunteer/insertVolunteer", method = RequestMethod.GET)
 	public String insertVolunteerForm() {
 		return ".insertVolunteer";
@@ -25,14 +44,64 @@ public class InsertVolunteerController {
 		String category = request.getParameter("category");
 		String content = request.getParameter("content");
 		String dDay = request.getParameter("dDay");
-		String members = request.getParameter("members");
+		int members = Integer.parseInt(request.getParameter("members"));
 		String place = request.getParameter("place");
-		String[] vPinfo = request.getParameterValues("vPinfo");
 		
+		String[] vPinfo = request.getParameterValues("vPinfo");
 		List<MultipartFile> files = request.getFiles("vPicture");
 		
+		int vNum = volunteerService.getMaxNum() + 1;
 		
+		String uploadPath = session.getServletContext().getRealPath("/resources/upload/volunteer");
+		File f = new File(uploadPath);
+		if (f.exists() == false) { // 파일 생성
+			f.mkdirs();
+		}
 		
-		return ".volunteerList";
+		try {	//텍스트 저장
+			VolunteerVo vo=new VolunteerVo();
+			vo.setvNum(vNum);
+			vo.setId(id);
+			vo.setTitle(title);
+			vo.setCategory(category);
+			vo.setContent(content);
+			java.util.Date dDay2 = new SimpleDateFormat("yyyy-MM-dd").parse(dDay);
+			vo.setdDay(new Date(dDay2.getTime()));
+			vo.setMembers(members);
+			vo.setPlace(place);
+			volunteerService.insert(vo);
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
+		
+		try {	//사진 저장
+			int num = 0;
+			for (MultipartFile file : files) {
+				String orgfilename = file.getOriginalFilename();
+				String savefilename = id + "_" + title + "_" + num + orgfilename;
+				long filesize = file.getSize();
+				if (filesize > 0) {
+					
+					VPictureVo vpvo=new VPictureVo();
+					vpvo.setVpNum(vPictureService.getMaxNum() + 1);
+					vpvo.setvNum(vNum);
+					vpvo.setOrgName(orgfilename);
+					vpvo.setSaveName(savefilename);
+					vpvo.setFileSize(Long.toString(filesize));
+					vpvo.setVpInfo(vPinfo[num++]);
+					
+					vPictureService.insert(vpvo);
+					InputStream is = file.getInputStream();
+					FileOutputStream fos = new FileOutputStream(uploadPath + "\\" + savefilename);
+					FileCopyUtils.copy(is, fos);
+					is.close();
+					fos.close();
+				}
+			}
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
+		
+		return "redirect:/volunteer/volunteerList";
 	}
 }
