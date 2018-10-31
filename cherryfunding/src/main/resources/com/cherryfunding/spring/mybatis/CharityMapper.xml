@@ -92,7 +92,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</select>
 		
 		<!-- 핫 -->
-		<select id="mainHot" resultType="funding">
+		<select id="mainHot" resultType="charity">
 			select * from (
 				select aa.*, rownum rnum from (
 					select * from charity
@@ -105,7 +105,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</select>
 		
 		<!-- 액수 -->
-		<select id="mainPrice" resultType="funding">
+		<select id="mainPrice" resultType="charity">
 			select * from (
 				select aa.*, rownum rnum from (
 					select * from charity

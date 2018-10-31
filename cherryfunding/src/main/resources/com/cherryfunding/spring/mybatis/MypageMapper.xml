@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cherryfunding.spring.vo.MypageMapper">
+	<select id="charitysum" parameterType="String">
+		select sum(amount) from cDetail where id = #{id};
+	</select>
+	
+	<select id="fundingsum" parameterType="String">
+		select sum(amount) from fDetail where id = #{id};
+	</select>
+	
+	<select id="charitylist" resultType="Mypage">
+		select c.title,category,d.amount,d.regdate,d.id from charity c, cDetail d 
+		where c.cnum=d.cnum and id = #{id};	
+	</select>
+	<select id="fundinglist" resultType="Mypage">
+		select f.title,category,r.price,d.regdate,d.id from funding f,reward r, fDetail d 
+		where f.fnum=d.fnum and d.fnum=r.fnum and d.id='RoyLee' and d.state='w';	
+	</select>
+</mapper>
