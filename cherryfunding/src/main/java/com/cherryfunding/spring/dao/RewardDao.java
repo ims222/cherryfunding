@@ -26,4 +26,8 @@ public class RewardDao {
 	public List<RewardVo> rewardItem(int fnum) {
 		return sqlSession.selectList(NAMESPACE + "rewardList", fnum);
 	}
+
+	public RewardVo detail(int rNum) {
+		return sqlSession.selectOne(NAMESPACE + "detail", rNum);
+	}
 }

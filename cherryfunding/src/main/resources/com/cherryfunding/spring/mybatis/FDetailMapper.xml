@@ -3,21 +3,13 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cherryfunding.spring.vo.FDetailMapper">
-	<select id="list" resultType="fDetail">
-		select * from fDetail
-	</select>
-
-	<select id="select" parameterType="string" resultType="fDetail">
-		select * from fDetail where id = #{id}
-	</select>
 
 	<insert id="insert" parameterType="fDetail">
-		insert into fDetail values()
+		insert into fDetail values(#{fdNum}, #{id}, #{fNum}, #{rNum}, sysdate, '예약', #{amount})
 	</insert>
-	<update id="update" parameterType="fDetail">
-		update fDetail set #{pwd} where #{id}
-	</update>
-	<delete id="delete" parameterType="string">
-		delete from fDetail where id=#{id}
-	</delete>
+	
+	<select id="getMaxNum" resultType="int">
+		select NVL(max(fdNum), 0) from fDetail
+	</select>
+
 </mapper>

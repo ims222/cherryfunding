@@ -63,7 +63,7 @@ public class InsertFundingController {
 		String[] prices = request.getParameterValues("price");
 		String[] fpinfo = request.getParameterValues("fPinfo");
 
-		int fnum = fundingService.getMaxNum() + 1; // 펀딩번호
+		int fNum = fundingService.getMaxNum() + 1; // 펀딩번호
 		String uploadPath = session.getServletContext().getRealPath("/resources/upload/funding");
 		File f = new File(uploadPath);
 		if (f.exists() == false) { // 파일 생성
@@ -71,7 +71,7 @@ public class InsertFundingController {
 		}
 		try { // 펀딩저장
 			FundingVo fvo = new FundingVo();
-			fvo.setfNum(fnum);
+			fvo.setfNum(fNum);
 			fvo.setTitle(title);
 			fvo.setContent(content);
 			fvo.setAmount(Integer.parseInt(amount));
@@ -88,15 +88,15 @@ public class InsertFundingController {
 
 			for (String hashtag : hashtags) { // 해시태그 저장
 				if (hashtag != null && !hashtag.equals("")) {
-					FHashtagVo fhvo = new FHashtagVo(fHashtagService.getMaxNum() + 1, fnum, hashtag);
+					FHashtagVo fhvo = new FHashtagVo(fHashtagService.getMaxNum() + 1, fNum, hashtag);
 					insertFundingService.fhinsert(fhvo);
 				}
 			}
 
 			for (int ind = 0; ind < rewards.length; ind++) { // 리와드 저장
 				RewardVo rvo = new RewardVo();
-				rvo.setRnum(rewardService.getMaxNum() + 1);
-				rvo.setFnum(fnum);
+				rvo.setrNum(rewardService.getMaxNum() + 1);
+				rvo.setfNum(fNum);
 				rvo.setTitle(rewards[ind]);
 				rvo.setPrice(Integer.parseInt(prices[ind]));
 				rvo.setAmount(Integer.parseInt(fAmount[ind]));
@@ -117,7 +117,7 @@ public class InsertFundingController {
 				if (filesize > 0) { // 사진db저장
 					FPictureVo fpvo = new FPictureVo();
 					fpvo.setFpNum(fPictureService.getMaxNum() + 1);
-					fpvo.setfNum(fnum);
+					fpvo.setfNum(fNum);
 					fpvo.setSavename(savefilename);
 					fpvo.setOrgname(orgfilename);
 					fpvo.setFilesize(filesize);

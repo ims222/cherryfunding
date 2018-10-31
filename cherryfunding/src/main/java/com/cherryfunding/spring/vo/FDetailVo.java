@@ -9,17 +9,19 @@ public class FDetailVo {
 	private int rNum;
 	private Date regdate;
 	private String state;
+	private int amount;
 
 	public FDetailVo() {
 	}
 
-	public FDetailVo(int fdNum, String id, int fNum, int rNum, Date regdate, String state) {
+	public FDetailVo(int fdNum, String id, int fNum, int rNum, Date regdate, String state, int amount) {
 		this.fdNum = fdNum;
 		this.id = id;
 		this.fNum = fNum;
 		this.rNum = rNum;
 		this.regdate = regdate;
 		this.state = state;
+		this.amount = amount;
 	}
 
 	public int getFdNum() {
@@ -68,6 +70,14 @@ public class FDetailVo {
 
 	public void setState(String state) {
 		this.state = state;
+	}
+
+	public int getAmount() {
+		return amount;
+	}
+
+	public void setAmount(int amount) {
+		this.amount = amount;
 	}
 
 }
