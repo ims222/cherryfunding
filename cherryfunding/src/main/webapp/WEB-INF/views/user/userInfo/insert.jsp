@@ -16,7 +16,7 @@
 	닉네임 <input type="text" name="nick"><br>
 	이메일 <input type="email" name="email" required="required" placeholder="test@domain.com"><br>
 	주소 <input type="text" name="addr" required="required"><br>
-	성별 <input type="radio" checked="checked" name="gender" value="1"> 남자 <input type="radio" name="gender" value="2"> 여자<br>
+	성별 <input type="radio" checked="checked" name="gender" value="m"> 남자 <input type="radio" name="gender" value="w"> 여자<br>
 	전번 <input type="text" name="phone" placeholder="'-'를 넣어주세요">
 	생년월일 <input type="date" name="birth" required="required">
 	<input type="submit" value="가입">

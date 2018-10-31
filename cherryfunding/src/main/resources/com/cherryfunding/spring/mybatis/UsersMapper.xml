@@ -19,7 +19,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		#{birth}, sysdate, 0)
 	</insert>
 	<update id="update" parameterType="users">
-		update users set #{pwd} where #{id}
+		update users set pwd=#{pwd}, email=#{email}, nick=#{nick}, addr=#{addr}, phone=#{phone} where id=#{id}
 	</update>
 	<delete id="delete" parameterType="string">
 		delete from users where id=#{id}

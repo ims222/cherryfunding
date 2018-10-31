@@ -23,7 +23,7 @@ public class MemberJoinController {
 		return "insert";
 	}
 	//전화번호 형태 변환을 위한 메소드
-	public static String mackPhoneNumber(String phone) {
+	/*public static String mackPhoneNumber(String phone) {
 		String regEx = "(\\d{3})(\\d{3,4})(\\d{4})";
 		if (!Pattern.matches(regEx, phone)) {
 			
@@ -31,7 +31,7 @@ public class MemberJoinController {
 			
 		}
 		return phone.replaceAll(regEx, "$1-$2-$3");
-	}
+	}*/
 	
 	
 	
@@ -41,11 +41,11 @@ public class MemberJoinController {
 		
 		
 		ModelAndView mv = new ModelAndView("result");
-		UsersVo vo = new UsersVo(id, pwd, email, nick,addr,gender,mackPhoneNumber(phone),birth,null,0);
-		if (mackPhoneNumber(phone)==null) {
-			mv.addObject("code","전화번호 형태가 다릅니다");
-			return mv;
-		}
+		UsersVo vo = new UsersVo(id, pwd, email, nick,addr,gender,phone,birth,null,0);
+		//if (mackPhoneNumber(phone)==null) {
+		//	mv.addObject("code","전화번호 형태가 다릅니다");
+		//	return mv;
+		//}
 		int n = service.insert(vo);
 		if (n>0) {
 			mv.addObject("code","success");

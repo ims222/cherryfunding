@@ -34,7 +34,7 @@ private TestLoginService service;
 		if (vo!=null) {
 			session = req.getSession();
 			session.setAttribute("id", id);
-			return "redirect:/home";
+			return "redirect:/";
 		} else {
 			session.setAttribute("errMsg", "아이디나 비번이 맞지 않습니다.");
 			return "login";
