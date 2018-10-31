@@ -9,8 +9,15 @@ public class VPictureVo {
 	private String orgName;
 	private String fileSize;
 	private Date regdate;
+	private String vpInfo;
+	public String getVpInfo() {
+		return vpInfo;
+	}
+	public void setVpInfo(String vpInfo) {
+		this.vpInfo = vpInfo;
+	}
 	public VPictureVo() {}
-	public VPictureVo(int vpNum, int vNum, String saveName, String orgName, String fileSize, Date regdate) {
+	public VPictureVo(int vpNum, int vNum, String saveName, String orgName, String fileSize, Date regdate, String vpInfo) {
 		super();
 		this.vpNum = vpNum;
 		this.vNum = vNum;
@@ -18,6 +25,7 @@ public class VPictureVo {
 		this.orgName = orgName;
 		this.fileSize = fileSize;
 		this.regdate = regdate;
+		this.vpInfo = vpInfo;
 	}
 	public int getVpNum() {
 		return vpNum;
