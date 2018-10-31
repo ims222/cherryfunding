@@ -22,7 +22,7 @@ public class FCommentService {
 		return fCommentDao.getMaxNum();
 	}
 
-	public List<FCommentVo> commentList(int fnum) {
-		return fCommentDao.commentList(fnum);
+	public List<FCommentVo> commentList(int fNum) {
+		return fCommentDao.commentList(fNum);
 	}
 }

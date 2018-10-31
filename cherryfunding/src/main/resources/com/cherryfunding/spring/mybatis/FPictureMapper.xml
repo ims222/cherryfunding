@@ -14,7 +14,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="list" parameterType="int" resultType="fPicture">
-		select * from fPicture where fnum=#{num} 
+		select * from fPicture where fNum=#{fNum} 
 	</select>
 	
 	<select id="thumbnail" resultType="fPicture" parameterType="int">

@@ -19,12 +19,12 @@ public class FCommentController {
 
 	@RequestMapping(value = "/funding/insertComment", produces = "application/json;charset=UTF-8")
 	@ResponseBody
-	public String insertComment(String id, String content, int fnum) {
+	public String insertComment(String id, String content, int fNum) {
 		FCommentVo fcvo = new FCommentVo();
 		fcvo.setFcNum(fCommentService.getMaxNum() + 1);
 		fcvo.setId(id);
 		fcvo.setContent(content);
-		fcvo.setFnum(fnum);
+		fcvo.setfNum(fNum);
 		JSONObject obj = new JSONObject();
 
 		if (fCommentService.insert(fcvo) > 0)
@@ -37,8 +37,8 @@ public class FCommentController {
 
 	@RequestMapping("/funding/commentList")
 	@ResponseBody
-	public List<FCommentVo> commentList(int fnum) {
-		return fCommentService.commentList(fnum);
+	public List<FCommentVo> commentList(int fNum) {
+		return fCommentService.commentList(fNum);
 	}
 
 }

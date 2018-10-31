@@ -17,11 +17,11 @@ public class FRecommendController {
 
 	@RequestMapping(value = "/funding/fundingIsRecommend", produces = "application/json;charset=UTF-8")
 	@ResponseBody
-	public String isRecomm(String id, int fnum) {
+	public String isRecomm(String id, int fNum) {
 		JSONObject obj = new JSONObject();
 		System.out.println("id: " + id);
-		System.out.println("fnum: " + fnum);
-		FRecommendVo frvo = fRecommendService.isRecomm(new FRecommendVo(0, fnum, id));
+		System.out.println("fNum: " + fNum);
+		FRecommendVo frvo = fRecommendService.isRecomm(new FRecommendVo(0, fNum, id));
 
 		if (frvo == null) {
 			obj.put("result", "ok");
@@ -33,13 +33,13 @@ public class FRecommendController {
 
 	@RequestMapping(value = "/funding/fundingRecommend", produces = "application/json;charset=UTF-8")
 	@ResponseBody
-	public String fundingRecommend(String id, int fnum, String recomm) {
+	public String fundingRecommend(String id, int fNum, String recomm) {
 		JSONObject obj = new JSONObject();
 		if (recomm.equals("recomm")) {
-			FRecommendVo frvo = new FRecommendVo(fRecommendService.getMaxNum() + 1, fnum, id);
+			FRecommendVo frvo = new FRecommendVo(fRecommendService.getMaxNum() + 1, fNum, id);
 			obj.put("recomm", fRecommendService.insert(frvo));
 		} else
-			obj.put("recomm", fRecommendService.delete(new FRecommendVo(0, fnum, id)));
+			obj.put("recomm", fRecommendService.delete(new FRecommendVo(0, fNum, id)));
 		return obj.toString();
 	}
 }

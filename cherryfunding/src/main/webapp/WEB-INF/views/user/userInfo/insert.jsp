@@ -10,6 +10,9 @@
 <body>
 	<h1>회원가입</h1>
 	
+<<<<<<< HEAD
+	
+=======
 	<form method="post" action="${pageContext.request.contextPath}/users/insert">
 		아이디<input type="text" name="id"><br>
 		비밀번호<input type="password" name="pwd"><br>
@@ -22,6 +25,7 @@
 		전화번호<input type="text" name="phone"><br>
 		생일<input type="date" name="birth"><br>
 		<input type="submit" value="회원가입">
+>>>>>>> branch 'master' of https://github.com/ims222/cherryfunding.git
 	</form>
 </body>
 </html>

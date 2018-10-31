@@ -22,8 +22,8 @@ public class FundingService {
 		return dao.list();
 	}
 
-	public FundingVo select(int num) {
-		return dao.select(num);
+	public FundingVo select(int fNum) {
+		return dao.select(fNum);
 	}
 
 	public int insert(FundingVo vo) {
@@ -34,8 +34,8 @@ public class FundingService {
 		return dao.update(vo);
 	}
 
-	public int delete(int num) {
-		return dao.delete(num);
+	public int delete(int fNum) {
+		return dao.delete(fNum);
 	}
 
 	public int getMaxNum() {

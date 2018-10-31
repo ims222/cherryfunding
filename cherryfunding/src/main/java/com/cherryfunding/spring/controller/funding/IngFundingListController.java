@@ -36,9 +36,9 @@ public class IngFundingListController {
 		List<FundingVo> list = ingFundingListService.list(map);
 
 		for (FundingVo vo : list) {
-			String thumbnail = ingFundingListService.thumbnail(vo.getFnum()).getSavename();
+			String thumbnail = ingFundingListService.thumbnail(vo.getfNum()).getSavename();
 			vo.setSavename(s3.getFileURL("funding/"+ thumbnail));
-			vo.setFpinfo(ingFundingListService.thumbnail(vo.getFnum()).getFpinfo());
+			vo.setFpinfo(ingFundingListService.thumbnail(vo.getfNum()).getFpinfo());
 		}
 		
 		model.addAttribute("list", list);
