@@ -270,7 +270,8 @@
 							<c:otherwise>
 								<input type="text" name="id" placeholder="아이디"><br>
 								<input type="text" name="pwd" placeholder="비밀번호">
-								<input type="submit" value="로그인">	
+								<input type="submit" value="로그인">
+								<button type="button" name="회원가입">회원가입</button>
 							</c:otherwise>
 						</c:choose>
 					</form>
