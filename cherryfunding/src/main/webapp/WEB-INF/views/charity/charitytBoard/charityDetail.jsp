@@ -29,16 +29,30 @@
 		  
 	  });
 	  
-	  $("#btn").on('click',function(){
+	/*   $("#btn").on('click',function(){
 		
-		  var markupStr = $('#summernote').summernote('code');
-		  alert(markupStr);
+		  var file = $('#summernote').summernote('code');
+		  var formData = enw FormData();
+		  formData.append("file",file);
+		 	
 	  });
+	  
+	  $.ajax({
+		  
+		  type: "post",
+		  url: "${path}/upload/uploadAjax",
+		  dataType:"text",
+		  processData: false,
+		  contentType:false,
+		  success:function(data){
+			  alert(data);
+		  }
+		  
+	  }); */
 	  
 	  
 	});
   </script>
-
 
 
 </head>
