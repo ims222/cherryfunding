@@ -5,18 +5,17 @@ import java.sql.Date;
 public class FCommentVo {
 	private int fcNum;
 	private String id;
-	private int fnum;
+	private int fNum;
 	private String content;
 	private Date regdate;
 
 	public FCommentVo() {
 	}
 
-	public FCommentVo(int fcNum, String id, int fnum, String content, Date regdate) {
-		super();
+	public FCommentVo(int fcNum, String id, int fNum, String content, Date regdate) {
 		this.fcNum = fcNum;
 		this.id = id;
-		this.fnum = fnum;
+		this.fNum = fNum;
 		this.content = content;
 		this.regdate = regdate;
 	}
@@ -37,12 +36,12 @@ public class FCommentVo {
 		this.id = id;
 	}
 
-	public int getFnum() {
-		return fnum;
+	public int getfNum() {
+		return fNum;
 	}
 
-	public void setFnum(int fnum) {
-		this.fnum = fnum;
+	public void setfNum(int fNum) {
+		this.fNum = fNum;
 	}
 
 	public String getContent() {

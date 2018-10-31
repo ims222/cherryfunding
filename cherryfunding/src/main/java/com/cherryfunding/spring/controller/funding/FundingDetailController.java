@@ -14,9 +14,10 @@ public class FundingDetailController {
 	private FundingDetailService fundingDetailService;
 
 	@RequestMapping("/funding/fundingDetailforUser")
-	public String fundingDetail(int fnum, Model model) {
-		model.addAttribute("vo", fundingDetailService.detail(fnum));
-		model.addAttribute("rewardList", fundingDetailService.rewardList(fnum));
+	public String fundingDetail(int fNum, Model model) {
+		model.addAttribute("vo", fundingDetailService.detail(fNum));
+		model.addAttribute("rewardList", fundingDetailService.rewardList(fNum));
+		fundingDetailService.hitUp(fNum);
 		return ".fundingDetailforUser";
 	}
 }

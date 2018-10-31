@@ -5,7 +5,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.cherryfunding.spring.vo.FHashtagMapper">
 	<insert id="insert" parameterType="fHashtag">
 		insert into fHashtag values(
-			#{ftagNum}, #{fnum}, #{hashtag}
+			#{ftagNum}, #{fNum}, #{hashtag}
 		)
 	</insert>
 	<select id="getMaxNum" resultType="int">
