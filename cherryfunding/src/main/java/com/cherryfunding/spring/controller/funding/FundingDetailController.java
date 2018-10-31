@@ -49,10 +49,7 @@ public class FundingDetailController {
 		for (int i = 0; i < samount.length; i++) {
 			amount[i] = Integer.parseInt(samount[i]);
 		}
-		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!! " + rNum.length + " !!!!!!!!!!!!!!!!!!!");
 		for (int i = 0; i < rNum.length; i++) {
-			System.out.println("rNum" + i + ": " + rNum[i]);
-			System.out.println("amount" + i + ": " + amount[i]);
 			FDetailVo fdvo = new FDetailVo();
 			fdvo.setFdNum(fundingDetailService.getMaxNum() + 1);
 			fdvo.setId(id);
@@ -61,7 +58,6 @@ public class FundingDetailController {
 			fdvo.setAmount(amount[i]);
 			fundingDetailService.insertFDetail(fdvo);
 		}
-
 		return "redirect:/funding/fundingDetailforUser?fNum=" + fNum;
 	}
 }
