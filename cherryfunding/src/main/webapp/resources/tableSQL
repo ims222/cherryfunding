@@ -10,7 +10,7 @@ CREATE TABLE users
     addr       VARCHAR2(100)     NULL, 
     gender     CHAR(3)           NULL, 
     phone      VARCHAR2(40)      NULL, 
-    birth      VARCHAR2(30)      NULL, 
+    birth      DATE              NULL, 
     regDate    DATE              NULL, 
     balance    INT               NULL, 
     CONSTRAINT USERS_PK PRIMARY KEY (id)

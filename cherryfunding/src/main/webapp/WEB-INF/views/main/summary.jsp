@@ -264,7 +264,7 @@
 					<form method="post" action="${pageContext.request.contextPath}/testlogin">
 						<c:choose>
 							<c:when test="${not empty sessionScope.id}">
-								${sessionScope.id} 님 <a href="#">마이페이지</a>
+								${sessionScope.id} 님 <a href="${pageContext.request.contextPath}/mypage">마이페이지</a>
 								<input type="button" value="로그아웃" onclick="location.href='${pageContext.request.contextPath}/testlogout'">
 							</c:when>
 							<c:otherwise>

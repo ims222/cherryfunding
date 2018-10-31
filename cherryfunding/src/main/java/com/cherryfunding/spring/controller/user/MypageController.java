@@ -2,6 +2,7 @@ package com.cherryfunding.spring.controller.user;
 
 
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -24,6 +25,7 @@ public class MypageController {
 	@RequestMapping(value = "/mypage", method = RequestMethod.GET)
 	public String mypage(HttpSession session,Model model) {
 		String id=(String)session.getAttribute("id");
+		System.out.println(id);
 		int charitySum=mpService.charitySum(id);
 		int fundingSum=mpService.fundingSum(id);
 		List<MypageVo> charityList = mpService.charityList(id);
