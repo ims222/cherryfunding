@@ -151,7 +151,17 @@
 		if (day.length < 2)
 			day = '0' + day;
 			return [year, month, day].join('-');
-	} 
+	}
+	
+	function submitReward(){
+		var id = '${sessionScope.id}';
+		console.log("id", id);
+		if(!id){
+			alert("로그인 하셔요");
+			return false;
+		}
+		return true;
+	}
 
 
 </script>
@@ -174,7 +184,7 @@
 						</c:forEach>
 						</select><span id="rewardInfo"></span><br>
 						수량<input type="number" name="amount"><button id="chooseItem">선택</button>
-					<form method="post" action="${pageContext.request.contextPath}/funding/insertFDetail">
+					<form method="post" action="${pageContext.request.contextPath}/funding/insertFDetail" onsubmit="return submitReward();">
 						<input type="hidden" name="fNum" value="${vo.fNum}">
 						<div id="selectedReward">
 							

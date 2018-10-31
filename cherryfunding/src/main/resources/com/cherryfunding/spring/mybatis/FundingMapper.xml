@@ -71,6 +71,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="confirm" parameterType="int">
 		update funding set confirm = 'y' where fNum = #{fNum}
 	</update>
+	
+	<update id="addCamout" parameterType="hashmap">
+		update funding set camout = camout + #{price} where fNum = #{fNum}
+	</update>
 
 
 	<!-- 준비중 펀딩 -->

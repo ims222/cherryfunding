@@ -1,5 +1,7 @@
 package com.cherryfunding.spring.controller.funding;
 
+import java.util.HashMap;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -57,6 +59,10 @@ public class FundingDetailController {
 			fdvo.setrNum(rNum[i]);
 			fdvo.setAmount(amount[i]);
 			fundingDetailService.insertFDetail(fdvo);
+			HashMap<String, Object> map = new HashMap<String, Object>();
+			map.put("price", fundingDetailService.getPrice(rNum[i]));
+			map.put("fNum", fNum);
+			fundingDetailService.addCamout(map);
 		}
 		return "redirect:/funding/fundingDetailforUser?fNum=" + fNum;
 	}

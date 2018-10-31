@@ -1,5 +1,6 @@
 package com.cherryfunding.spring.service.funding;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,5 +47,13 @@ public class FundingDetailService {
 
 	public int getMaxNum() {
 		return fDetailDao.getMaxNum();
+	}
+
+	public int addCamout(HashMap<String, Object> map) {
+		return fundingDao.addCamout(map);
+	}
+
+	public int getPrice(int rNum) {
+		return rewardDao.getPrice(rNum);
 	}
 }
