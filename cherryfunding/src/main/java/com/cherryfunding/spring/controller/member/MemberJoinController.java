@@ -1,5 +1,6 @@
 package com.cherryfunding.spring.controller.member;
 
+import java.sql.Date;
 import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
@@ -37,7 +38,7 @@ public class MemberJoinController {
 	
 	@RequestMapping(value="/insert",method=RequestMethod.POST)
 	public ModelAndView insert(String id , String pwd, String nick, String email,
-								String addr, String gender, String phone, String birth) {
+								String addr, String gender, String phone, Date birth) {
 		
 		
 		ModelAndView mv = new ModelAndView("result");

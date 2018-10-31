@@ -3,21 +3,17 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cherryfunding.spring.vo.FCommentMapper">
-	<select id="list" resultType="fComment">
-		select * from fComment
-	</select>
-
-	<select id="select" parameterType="string" resultType="fComment">
-		select * from fComment where id = #{id}
-	</select>
 
 	<insert id="insert" parameterType="fComment">
-		insert into fComment values()
+		insert into fComment values(#{fcNum}, #{id}, #{fNum}, #{content}, sysdate)
 	</insert>
-	<update id="update" parameterType="fComment">
-		update fComment set #{pwd} where #{id}
-	</update>
-	<delete id="delete" parameterType="string">
-		delete from fComment where id=#{id}
-	</delete>
+	
+	<select id="getMaxNum" resultType="int">
+		select NVL(max(fcNum), 0) from fComment
+	</select>
+	
+	<select id="commentList" parameterType="int" resultType="fComment">
+		select * from fComment where fNum = #{fNum} order by fcNum
+	</select>
+
 </mapper>

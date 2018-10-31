@@ -16,8 +16,9 @@
 </head>
 <body>
 	<h2>상세글 보기</h2>
+	ddd
 	<table border="1" width="500">
-		<tr><td>글번호</td><td>${vo.fnum }</td><tr>
+		<tr><td>글번호</td><td>${vo.fNum }</td><tr>
 		<tr><td>제목</td><td>${vo.title }</td></tr>
 		<tr><td>내용</td><td>${vo.content }</td></tr>
 		<tr><td>목표금액</td><td>${vo.amount }</td></tr>
@@ -33,8 +34,8 @@
 		<tr><td>조회수</td><td>${vo.hit }</td></tr>
 		<tr>
 		  <td>
-		  <a href="<c:url value='/fundingList/update?num=${vo.fnum }'/>">수정</a>
-		  <a href="<c:url value='/fundingList/delete?num=${vo.fnum }'/>">삭제</a>
+		  <a href="<c:url value='/fundingList/update?num=${vo.fNum }'/>">수정</a>
+		  <a href="<c:url value='/fundingList/delete?num=${vo.fNum }'/>">삭제</a>
 		  </td>
 		</tr>
 	</table>
@@ -52,7 +53,8 @@
 이미지 끌어와서 편집하기
 <br>
 <!-- <button id="edit" class="btn btn-primary" onclick="edit()" type="button">편집</button> -->
-<button id="save" class="btn btn-primary" onclick="sendFile()" type="button">저장</button>
+<button id="save" class="btn btn-primary" onclick="fileEdit()" type="button">수정완료</button>
+<!-- <button id="save" class="btn btn-primary" onclick="fileSave()" type="button">저장</button> -->
 <div id="summernote"><p><br></p></div>
 	<script type="text/javascript">
 	$(function() {
@@ -86,13 +88,39 @@
 	//var edit = function() {
 		  //$('#summernote').summernote({focus: true});	//편집창으로 돌아가기
 		//};
-	function sendFile() {
+	function fileEdit() {
 		var val=document.getElementById('summernote');
-		alert('저장해야됨');
+		var markupStr = $('#summernote').summernote('code');
+		$("#space").append(markupStr);
 	}
-	
+	function fileSave(file,el){
+		//var newVal=document.getElementById('space');
+		//alert(newVal.innerHTML);
+		var formData = new FormData();
+		formData.append('file', file);	//orgFilename이 file안에 들어가있어야함
+		alert(file);
+		//console.log('formData', formData);
+		$.ajax({
+			data: formData,
+			type: 'post',
+			url:'${pageContext.request.contextPath}/insertImg',	//이미지파일 저장 
+			cache: false,
+			contentType: false,
+			encType: 'multipart/form-data',
+			processData: false,
+			success: function(url){
+				alert('${pageContext.request.contextPath}/'+ url);
+				//$(el).summernote('editor.insertImage', '${pageContext.request.contextPath}/'+ url);
+				//$summernote.summernote('insertNode', imgNode);
+			}
+		});
+		
+	}	
 
 	</script>
-<div id="theimage"></div>
+<form onsubmit="fileSave()" enctype="multipart/form-data" method="post">
+		<div id="space"></div>
+		<input type="submit" value="저장">
+</form>
 </body>
 </html>

@@ -16,7 +16,7 @@ public class FundingDao {
 
 	private static final String NAMESPACE = "com.cherryfunding.spring.vo.FundingMapper.";
 
-	public int insert(FundingVo vo) { //지원서 작성
+	public int insert(FundingVo vo) { // 지원서 작성
 		return sqlSession.insert(NAMESPACE + "insert", vo);
 	}
 
@@ -28,15 +28,15 @@ public class FundingDao {
 		return sqlSession.delete(NAMESPACE + "delete", num);
 	}
 
-	public FundingVo select(int num) {
-		return sqlSession.selectOne(NAMESPACE + "select", num);
+	public FundingVo select(int fNum) {
+		return sqlSession.selectOne(NAMESPACE + "select", fNum);
 	}
 
-	public List<FundingVo> list() {
+	public List<FundingVo> list() { //전체 목록
 		return sqlSession.selectList(NAMESPACE + "list");
 	}
 
-	public int getMaxNum() { //인덱스
+	public int getMaxNum() { // 인덱스
 		return sqlSession.selectOne(NAMESPACE + "getMaxNum");
 	}
 
@@ -47,24 +47,46 @@ public class FundingDao {
 	public List<FundingVo> end(HashMap<String, Object> map) { // 종료
 		return sqlSession.selectList(NAMESPACE + "end", map);
 	}
+
 	public List<FundingVo> ing(HashMap<String, Object> map) { // 진행
 		return sqlSession.selectList(NAMESPACE + "ing", map);
 	}
-	
-	//메인 요악 
-	public FundingVo mainEnd() {//종료임박
+
+	public int hitUp(int fNum) { // 조회수 증가
+		return sqlSession.update(NAMESPACE + "hitUp", fNum);
+	}
+
+	// 메인 요악
+	public FundingVo mainEnd() {// 종료임박
 		return sqlSession.selectOne(NAMESPACE + "mainEnd");
 	}
-	public FundingVo mainNew() {//새로 시작하는 펀딩
+
+	public FundingVo mainNew() {// 새로 시작하는 펀딩
 		return sqlSession.selectOne(NAMESPACE + "mainNew");
 	}
-	public FundingVo mainHot() {//조회수높은
+
+	public FundingVo mainHot() {// 조회수높은
 		return sqlSession.selectOne(NAMESPACE + "mainHot");
 	}
-	public FundingVo mainPrice() {//참여금액이 제일 높은
+
+	public FundingVo mainPrice() {// 참여금액이 제일 높은
 		return sqlSession.selectOne(NAMESPACE + "mainPrice");
 	}
-	
-	
-	
+
+	public HashMap<String, Object> totFunding() { // 전체 펀딩 갯수, 합계
+		return sqlSession.selectOne(NAMESPACE + "totFunding");
+	}
+
+	public HashMap<String, Object> todayFunding() {
+		return sqlSession.selectOne(NAMESPACE + "todayFunding");
+	}
+
+	public List<FundingVo> waitList() { // 대기목록
+		return sqlSession.selectList(NAMESPACE + "waitList");
+	}
+
+	public int confirm(int fNum) { // 컨펌
+		return sqlSession.update(NAMESPACE + "confirm", fNum);
+	}
+
 }

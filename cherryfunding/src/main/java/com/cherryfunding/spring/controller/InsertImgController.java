@@ -16,12 +16,9 @@ import com.cherryfunding.spring.util.S3Util;
 
 @Controller
 public class InsertImgController {
-
   
-//cherryfundingbucket
 	@RequestMapping(value = "/insertImg", method = RequestMethod.POST)
 	public String insertImg(MultipartFile file, HttpSession session) {
-		System.out.println("살려주세요");
 		String savefilename = null;
 		String uploadPath = session.getServletContext().getRealPath("/resources/upload/");
 		System.out.println("path: " + uploadPath);

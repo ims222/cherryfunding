@@ -26,6 +26,6 @@ public class EndCharityListController {
 		}
 
 		model.addAttribute("list", list);
-		return ".endFundingList";
+		return ".endCharityList";
 	}
 }

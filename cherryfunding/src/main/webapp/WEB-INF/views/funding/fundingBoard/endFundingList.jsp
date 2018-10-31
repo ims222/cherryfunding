@@ -41,15 +41,15 @@
 		</form>
 		<div class="row no-collapse-1">
 			<c:forEach var="vo" items="${list}" varStatus="vs">
-				<section class="4u">
-					<a href="${pageContext.request.contextPath}/fundingList/detail?num=${vo.fnum}" class="image featured"> <img
-						src="${pageContext.request.contextPath}/resources/upload/funding/${vo.savename}"
+				<div class="col-md-4">
+					<a href="${pageContext.request.contextPath}/fundingList/detail?num=${vo.fNum}" class="image featured"> <img
+						src="${vo.savename}"
 						alt="${vo.fpinfo}" height="200px"></a>
 					<div class="box">
 						<p>${vo.title}</p>
 						<p>${vo.id}</p>
-						<p>목표금액: ${vo.amount}</p>
-						<p>현재금액: ${vo.camout}</p>
+						<p>목표금액: ${vo.amount}원</p>
+						<p>현재금액: ${vo.camout}원</p>
 
 						<div class="progress">
 							<c:set var="before" value="${vo.camout * 100 / vo.amount}" />
@@ -61,8 +61,7 @@
 							</div>
 						</div>
 					</div>
-				</section>
-
+				</div>
 			</c:forEach>
 		</div>
 		<div class="row">

@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.cherryfunding.spring.service.TestLoginService;
 import com.cherryfunding.spring.service.funding.FPictureService;
 import com.cherryfunding.spring.service.funding.FundingService;
-import com.cherryfunding.spring.service.funding.IngFundingListService;
 import com.cherryfunding.spring.vo.FPictureVo;
 import com.cherryfunding.spring.vo.FundingVo;
 import com.cherryfunding.spring.vo.UsersVo;
@@ -36,6 +35,11 @@ public class FundingController {
 	public String loginForm() {
 		return "cicadas_login";
 	}
+	@RequestMapping(value="/testlogout")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "redirect:/";
+	}
 
 	@RequestMapping(value = "/testlogin", method = RequestMethod.POST)
 	public String login(HttpServletRequest request, HttpSession session) {
@@ -47,7 +51,7 @@ public class FundingController {
 		if (testLoginService.login(vo) != null) {
 			session.setAttribute("id", vo.getId());
 		}
-		return "cicadas";
+		return "redirect:/";
 	}
 
 	@RequestMapping(value = "/fundingList/showAll", method = RequestMethod.GET)
@@ -70,10 +74,10 @@ public class FundingController {
 	}
 
 	@RequestMapping(value = "/fundingList/delete", method = RequestMethod.GET)
-	public String delete(int num, Model model) {
-		int n = fundingService.delete(num); // �뼨�먯삕 �뜝�럡留믣뜝�럡�돪�뜝�럩�젧�솻洹⑥삕
+	public String delete(int fNum, Model model) {
+		int n = fundingService.delete(fNum); // �뼨�먯삕 �뜝�럡留믣뜝�럡�돪�뜝�럩�젧�솻洹⑥삕
 		if (n > 0) {
-			return "redirect:/fundingList/showAll";
+			return "redirect:/funding/waitList";
 		} else {
 			return "error";
 		}

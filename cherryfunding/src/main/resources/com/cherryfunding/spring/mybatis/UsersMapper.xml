@@ -18,6 +18,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		 #{addr}, #{gender}, #{phone},
 		#{birth}, sysdate, 0)
 	</insert>
+	
+	
+	
+	
 	<update id="update" parameterType="users">
 		update users set pwd=#{pwd}, email=#{email}, nick=#{nick}, addr=#{addr}, phone=#{phone} where id=#{id}
 	</update>

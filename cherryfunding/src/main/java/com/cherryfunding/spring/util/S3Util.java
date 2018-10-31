@@ -5,6 +5,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+
 import com.amazonaws.ClientConfiguration;
 import com.amazonaws.Protocol;
 import com.amazonaws.auth.AWSCredentials;
@@ -15,8 +17,9 @@ import com.amazonaws.services.s3.model.Bucket;
 import com.amazonaws.services.s3.model.GeneratePresignedUrlRequest;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 
+@Component
 public class S3Util {
-
+	private String bucketName = "cherryfundingbucket";
 	private String accessKey = "AKIAJXSPLWJTXD6S2YTA"; // 엑세스 키
 	private String secretKey = "+anpzPJJOv7H8DXs2gMW8TT2r73UCNXzO/nObOZy"; // 보안 엑세스 키
 
@@ -36,17 +39,17 @@ public class S3Util {
 	}
 
 	// 버킷을 생성하는 메서드이다.
-	public Bucket createBucket(String bucketName) {
-		return conn.createBucket(bucketName);
+	public Bucket createBucket(String bucketName1) {
+		return conn.createBucket(bucketName1);
 	}
 
 	// 폴더 생성 (폴더는 파일명 뒤에 "/"를 붙여야한다.)
-	public void createFolder(String bucketName, String folderName) {
+	public void createFolder(String folderName) {
 		conn.putObject(bucketName, folderName + "/", new ByteArrayInputStream(new byte[0]), new ObjectMetadata());
 	}
 
 	// 파일 업로드
-	public void fileUpload(String bucketName, String fileName, byte[] fileData) throws FileNotFoundException {
+	public void fileUpload(String fileName, byte[] fileData) throws FileNotFoundException {
 
 		String filePath = (fileName).replace(File.separatorChar, '/'); // 파일 구별자를 `/`로 설정(\->/) 이게 기존에 / 였어도 넘어오면서 \로
 																		// 바뀌는 거같다.
@@ -60,14 +63,14 @@ public class S3Util {
 	}
 
 	// 파일 삭제
-	public void fileDelete(String bucketName, String fileName) {
+	public void fileDelete(String fileName) {
 		String imgName = (fileName).replace(File.separatorChar, '/');
 		conn.deleteObject(bucketName, imgName);
 		System.out.println("삭제성공");
 	}
 
 	// 파일 URL
-	public String getFileURL(String bucketName, String fileName) {
+	public String getFileURL(String fileName) {
 		System.out.println("넘어오는 파일명 : " + fileName);
 		String imgName = (fileName).replace(File.separatorChar, '/');
 		return conn.generatePresignedUrl(new GeneratePresignedUrlRequest(bucketName, imgName)).toString();

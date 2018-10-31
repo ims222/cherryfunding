@@ -2,15 +2,15 @@ package com.cherryfunding.spring.vo;
 
 public class FHashtagVo {
 	private int ftagNum;
-	private int fnum;
+	private int fNum;
 	private String hashtag;
 
 	public FHashtagVo() {
 	}
 
-	public FHashtagVo(int ftagNum, int fnum, String hashtag) {
+	public FHashtagVo(int ftagNum, int fNum, String hashtag) {
 		this.ftagNum = ftagNum;
-		this.fnum = fnum;
+		this.fNum = fNum;
 		this.hashtag = hashtag;
 	}
 
@@ -22,12 +22,12 @@ public class FHashtagVo {
 		this.ftagNum = ftagNum;
 	}
 
-	public int getFnum() {
-		return fnum;
+	public int getfNum() {
+		return fNum;
 	}
 
-	public void setFnum(int fnum) {
-		this.fnum = fnum;
+	public void setfNum(int fNum) {
+		this.fNum = fNum;
 	}
 
 	public String getHashtag() {

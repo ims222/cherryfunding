@@ -3,7 +3,7 @@ package com.cherryfunding.spring.vo;
 import java.sql.Date;
 
 public class FundingVo {
-	private int fnum;
+	private int fNum;
 	private String title;
 	private String content;
 	private int amount;
@@ -23,10 +23,10 @@ public class FundingVo {
 	public FundingVo() {
 	}
 
-	public FundingVo(int fnum, String title, String content, int amount, int camout, Date sdate, Date edate,
+	public FundingVo(int fNum, String title, String content, int amount, int camout, Date sdate, Date edate,
 			String category, String confirm, String aid, String addr, Date regdate, String id, int hit, String savename,
 			String fpinfo) {
-		this.fnum = fnum;
+		this.fNum = fNum;
 		this.title = title;
 		this.content = content;
 		this.amount = amount;
@@ -44,12 +44,12 @@ public class FundingVo {
 		this.fpinfo = fpinfo;
 	}
 
-	public int getFnum() {
-		return fnum;
+	public int getfNum() {
+		return fNum;
 	}
 
-	public void setFnum(int fnum) {
-		this.fnum = fnum;
+	public void setfNum(int fNum) {
+		this.fNum = fNum;
 	}
 
 	public String getTitle() {

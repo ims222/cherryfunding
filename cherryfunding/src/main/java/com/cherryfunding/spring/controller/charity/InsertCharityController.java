@@ -28,7 +28,7 @@ import com.cherryfunding.spring.vo.CharityVo;
 @Controller
 public class InsertCharityController {
 	@Autowired
-	private CHashtagService cHashtagService;
+	private CHashtagService cHashtagService; 
 
 	@Autowired
 	private CharityService charityService;
@@ -53,6 +53,7 @@ public class InsertCharityController {
 		String category = request.getParameter("category");
 		String sDate = request.getParameter("sDate");
 		String eDate = request.getParameter("eDate");
+		String addr = request.getParameter("addr");
 		String[] hashtags = request.getParameterValues("hashtag");
 		String cPrice = request.getParameter("cPrice");
 		String[] cpinfo = request.getParameterValues("cPinfo");
@@ -69,16 +70,14 @@ public class InsertCharityController {
 			cvo.setTitle(title);
 			cvo.setContent(content);
 			cvo.setAmount(Integer.parseInt(amount));
-			System.out.println("sDate: " + sDate + "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 			java.util.Date jsdate = new SimpleDateFormat("yyyy-MM-dd").parse(sDate);
 			cvo.setsDate(new Date(jsdate.getTime()));
-			System.out.println("jsdate: " + jsdate + "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 			java.util.Date jedate = new SimpleDateFormat("yyyy-MM-dd").parse(eDate);
 			cvo.seteDate(new Date(jedate.getTime()));
 			cvo.setCategory(category);
 			cvo.setcPrice(Integer.parseInt(cPrice));
 			cvo.setConfirm("n");
-			cvo.setAddr("");
+			cvo.setAddr(addr);
 			cvo.setaId("");
 			cvo.setId(id);
 			insertCharityService.cinsert(cvo); // db

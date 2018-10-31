@@ -12,10 +12,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.cherryfunding.spring.service.funding.IngFundingListService;
+import com.cherryfunding.spring.util.S3Util;
 import com.cherryfunding.spring.vo.FundingVo;
 
 @Controller
 public class IngFundingListController {
+	@Autowired
+	private S3Util s3;
 	@Autowired
 	IngFundingListService ingFundingListService;
 
@@ -33,10 +36,11 @@ public class IngFundingListController {
 		List<FundingVo> list = ingFundingListService.list(map);
 
 		for (FundingVo vo : list) {
-			vo.setSavename(ingFundingListService.thumbnail(vo.getFnum()).getSavename());
-			vo.setFpinfo(ingFundingListService.thumbnail(vo.getFnum()).getFpinfo());
+			String thumbnail = ingFundingListService.thumbnail(vo.getfNum()).getSavename();
+			vo.setSavename(s3.getFileURL("funding/"+ thumbnail));
+			vo.setFpinfo(ingFundingListService.thumbnail(vo.getfNum()).getFpinfo());
 		}
-
+		
 		model.addAttribute("list", list);
 		model.addAttribute("category", category);
 		model.addAttribute("field", field);

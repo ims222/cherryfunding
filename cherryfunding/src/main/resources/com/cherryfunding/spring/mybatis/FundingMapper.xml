@@ -3,6 +3,9 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cherryfunding.spring.vo.FundingMapper">
+	<sql id="isConfirm">
+		and confirm = 'y'
+	</sql>
 	<sql id="category">
 		<if
 			test="category != null and category != '' and category != '전체보기'">
@@ -16,32 +19,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</sql>
 	<sql id="sort">
 		<choose>
-			<when test="sort == 'recommend'">
-				order by fnum desc
-			</when>
 			<when test="sort == 'popular'">
-				order by hit desc, fnum desc
+				order by hit desc, fNum desc
 			</when>
 			<when test="sort == 'camount'">
-				order by camout desc, fnum desc
+				order by camout desc, fNum desc
 			</when>
 			<otherwise>
-				order by fnum desc
+				order by fNum desc
 			</otherwise>
 		</choose>
 	</sql>
 
 	<select id="list" resultType="funding">
-		select * from funding
+		select * from funding order by fNum
 	</select>
 
 	<select id="select" parameterType="int" resultType="funding">
 		select * from
-		funding where fnum = #{num}
+		funding where fNum = #{num}
 	</select>
 	<insert id="insert" parameterType="funding">
 		insert into funding
-		values(#{fnum},#{title},#{content},#{amount},
+		values(#{fNum},#{title},#{content},#{amount},
 		0,#{sdate},#{edate},#{category},
 		#{confirm},#{aid},#{addr},sysdate,#{id},0)
 	</insert>
@@ -49,17 +49,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update funding set
 		title=#{title},content=#{content},amount=#{amount},camout=#{camout},
 		sdate=#{sdate},edate=#{edate},category=#{category},confirm=#{confirm},aid=#{aid},
-		addr=#{addr},id=#{id} where fnum = #{fnum}
+		addr=#{addr},id=#{id} where fNum = #{fNum}
 	</update>
 	<delete id="delete" parameterType="int">
 		delete from funding where
-		fnum=#{num}
+		fNum=#{num}
 	</delete>
 	<select id="getMaxNum" resultType="int">
-		select nvl(max(fnum), 0) from
+		select nvl(max(fNum), 0) from
 		funding
 	</select>
 
+	<update id="hitUp" parameterType="int">
+		update funding set hit = hit + 1 where fNum = #{fNum}
+	</update>
+	
+	<select id="waitList" resultType="funding">
+		select * from funding where confirm = 'n'
+	</select>
+		
+	<update id="confirm" parameterType="int">
+		update funding set confirm = 'y' where fNum = #{fNum}
+	</update>
 
 
 	<!-- 준비중 펀딩 -->
@@ -69,7 +80,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<![CDATA[where sdate > sysdate and edate > sysdate]]>
 		<include refid="category" />
 		<include refid="search" />
-		order by fnum desc
+		<include refid="isConfirm"/>
+		order by fNum desc
 	</select>
 
 	<!-- 종료된 펀딩 -->
@@ -78,7 +90,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<![CDATA[where sdate < sysdate and edate < sysdate]]>
 		<include refid="category" />
 		<include refid="search" />
-		order by fnum desc
+		<include refid="isConfirm"/>
+		order by fNum desc
 	</select>
 	
 	<!-- 진행중 펀딩 -->
@@ -89,17 +102,31 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     				select * from funding
     				<![CDATA[where sdate < sysdate and edate > sysdate]]>
 					)aa,(
-					select (edate-sysdate)cal, fnum from funding
+					select (edate-sysdate)cal, fNum from funding
 					<![CDATA[where sdate < sysdate and edate > sysdate]]>
 					)bb
-				where aa.fnum = bb.fnum
+				where aa.fNum = bb.fNum
 				<include refid="category" />
 				<include refid="search" />
 				order by cal asc
 			</when>
+			<when test="sort == 'recommend'">
+				select bb.* from (
+					select * from (
+    					select aa.* from (
+     						select count(f.fNum) cnt, f.fNum fn from (
+       							select * from funding
+       							<![CDATA[where sdate < sysdate and edate > sysdate]]>
+      						) f, frecommend fr where f.fNum = fr.fNum group by f.fNum
+    					)aa
+    				order by cnt desc, fn desc)
+			)aa, (select * from funding )bb
+			where aa.fn = bb.fNum(+) order by cnt
+			</when>
 			<otherwise>
 				select * from funding
 				<![CDATA[where sdate < sysdate and edate > sysdate]]>
+				<include refid="isConfirm"/>
 				<include refid="category" />
 				<include refid="search" />
 				<include refid="sort" />
@@ -115,7 +142,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 					select * from funding
 					<![CDATA[where sdate < sysdate and edate > sysdate]]>
 					and (edate-sysdate) = (select min(edate-sysdate) from funding
-						<![CDATA[where sdate < sysdate and edate > sysdate]]>) order by fnum desc
+						<![CDATA[where sdate < sysdate and edate > sysdate]]>) order by fNum desc
 										)aa
 			) where rnum = 1
 		</select>
@@ -126,10 +153,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				select aa.*, rownum rnum from (
 					select * from funding
 					<![CDATA[where sdate > sysdate and edate > sysdate]]>
-					and (sysdate - sdate) = (select max(sysdate - sdate) fnum from funding
-								<![CDATA[where sdate > sysdate and edate > sysdate]]>) order by fnum desc
+					and (sysdate - sdate) = (select max(sysdate - sdate) fNum from funding
+								<![CDATA[where sdate > sysdate and edate > sysdate]]>) order by fNum desc
 											)aa
-			) where rnum =1
+			) where rnum = 1
 		</select>
 		
 		<!-- 핫 -->
@@ -138,7 +165,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				select aa.*, rownum rnum from (
 					select * from funding
 					<![CDATA[where sdate < sysdate and edate > sysdate]]>
-        			order by fnum desc
+        			order by fNum desc
    				 )aa
 			where hit = (select max(hit) from funding
 				<![CDATA[where sdate < sysdate and edate > sysdate]]>)
@@ -151,7 +178,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				select aa.*, rownum rnum from (
 					select * from funding
 					<![CDATA[where sdate < sysdate and edate > sysdate]]>
-        			order by fnum desc
+        			order by fNum desc
    				 )aa
 			where camout = (select max(camout) from funding
 				<![CDATA[where sdate < sysdate and edate > sysdate]]>)
@@ -159,4 +186,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</select>
 	
 	<!-- ///////// -->
+	
+	<!-- 전체 펀딩 금액, 갯수-->
+	<select id="totFunding" resultType="hashmap">
+		select NVL(count(fNum), 0) cnt, NVL(sum(camout), 0) s from funding
+	</select>
+	<!-- 오늘 펀딩 금액, 갯수 -->
+	<select id="todayFunding" resultType="hashmap">
+		select NVL(count(funding.fNum), 0) cnt, NVL(sum(funding.camout), 0) s from (
+			select * from funding
+			<![CDATA[where sdate < sysdate and edate > sysdate]]>) funding,
+			(select * from fdetail where regdate = sysdate) fdetail
+			where funding.fNum = fdetail.fNum
+	</select>
+	
+	
 </mapper>
