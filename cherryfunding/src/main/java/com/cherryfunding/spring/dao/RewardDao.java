@@ -30,4 +30,8 @@ public class RewardDao {
 	public RewardVo detail(int rNum) {
 		return sqlSession.selectOne(NAMESPACE + "detail", rNum);
 	}
+
+	public int getPrice(int rNum) {
+		return sqlSession.selectOne(NAMESPACE + "getPrice", rNum);
+	}
 }

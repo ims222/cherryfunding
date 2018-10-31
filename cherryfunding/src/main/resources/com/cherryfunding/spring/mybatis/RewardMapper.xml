@@ -21,4 +21,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from reward where rNum = #{rNum}
 	</select>
 	
+	<select id="getPrice" parameterType="int" resultType="int">
+		select price from reward where rNum = #{rNum}
+	</select>
+	
 </mapper>

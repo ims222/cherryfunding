@@ -64,11 +64,11 @@ public class InsertFundingController {
 		String[] fpinfo = request.getParameterValues("fPinfo");
 
 		int fNum = fundingService.getMaxNum() + 1; // 펀딩번호
-		String uploadPath = session.getServletContext().getRealPath("/resources/upload/funding");
-		File f = new File(uploadPath);
-		if (f.exists() == false) { // 파일 생성
-			f.mkdirs();
-		}
+//		String uploadPath = session.getServletContext().getRealPath("/resources/upload/funding");
+//		File f = new File(uploadPath);
+//		if (f.exists() == false) { // 파일 생성
+//			f.mkdirs();
+//		}
 		try { // 펀딩저장
 			FundingVo fvo = new FundingVo();
 			fvo.setfNum(fNum);
