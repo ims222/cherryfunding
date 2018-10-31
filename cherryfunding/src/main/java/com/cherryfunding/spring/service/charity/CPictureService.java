@@ -23,7 +23,7 @@ public class CPictureService {
 		return dao.getMaxNum();
 	}
 	
-	public List<CPictureVo> list(int num) {
-		return dao.list(num);
+	public List<CPictureVo> list(int cNum) {
+		return dao.list(cNum);
 	}
 }
