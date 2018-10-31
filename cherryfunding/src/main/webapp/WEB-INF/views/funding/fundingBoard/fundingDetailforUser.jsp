@@ -6,7 +6,7 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		isRecommed();
-		//commentList();
+		commentList();
 		$("#recommend").on('click', function(){
 			var recomm;
 			var id='${sessionScope.id}';
@@ -16,7 +16,7 @@
 			}
 			$.ajax({
 				url: '${pageContext.request.contextPath}/funding/fundingIsRecommend',
-				data:{id:'${sessionScope.id}', fnum: '${vo.fnum}'},
+				data:{id:'${sessionScope.id}', fNum: '${vo.fNum}'},
 				dataType: 'json',
 				success: function(data){
 					if(data.result === 'ok'){
@@ -26,7 +26,7 @@
 					}
 					$.ajax({
 						url:'${pageContext.request.contextPath}/funding/fundingRecommend',
-						data: {id:id, fnum: '${vo.fnum}', recomm:recomm},
+						data: {id:id, fNum: '${vo.fNum}', recomm:recomm},
 						dataType: 'json',
 						type:'post',
 						success: function(data){
@@ -50,19 +50,20 @@
 				url:'${pageContext.request.contextPath}/funding/insertComment',
 				dataType:'json',
 				type:'post',
-				data: {id:id, content:content, fnum:'${vo.fnum}'},
+				data: {id:id, content:content, fNum:'${vo.fNum}'},
 				success: function(data){
 					$("#insertComment input[name='content']").val('');
 					commentList();
 				}
 			});
 		});
+		
 	});
 	
 	function isRecommed(){
 		$.ajax({
 			url: '${pageContext.request.contextPath}/funding/fundingIsRecommend',
-			data:{id:'${sessionScope.id}', fnum:'${vo.fnum}'},
+			data:{id:'${sessionScope.id}', fNum:'${vo.fNum}'},
 			type:'post',
 			dataType: 'json',
 			success: function(data){
@@ -77,7 +78,7 @@
 	function commentList(){
 		$.ajax({
 			url: '${pageContext.request.contextPath}/funding/commentList',
-			data: {fnum:'${vo.fnum}'},
+			data: {fNum:'${vo.fNum}'},
 			dataType: 'json',
 			type: 'post',
 			success: function(data){
@@ -119,17 +120,22 @@
 		<div class="row no-collapse-1">
 			<section class="6u">
 				<div class="box">
-				 	<p>${vo.title}</p>
-				 	<p>${vo.content}</p>
+				 	<p>제목: ${vo.title}</p>
+				 	<p>내용: ${vo.content}</p>
+				 	<p>조회수: ${vo.hit}</p>
 				</div>
 			</section>
 			<section class="6u">
 				<div class="box">
-					<select>
-					<c:forEach var="reward" items="${rewardList}">
-						<option>리워드명: ${reward.title} 수량: ${reward.amount}</option>
-					</c:forEach>
-					</select>
+					<form method="post" action="${pageContext.request.contextPath}/funding">
+						<select name="reward">
+						<c:forEach var="reward" items="${rewardList}">
+							<option value="${reward.title}">리워드명: ${reward.title} 수량: ${reward.amount}</option>
+						</c:forEach>
+						</select><br>
+						수량<input type="number" name="amount">
+						<input type="submit" value="리워드 신청">
+					</form>
 					<br>
 					<button id="recommend" type="button"></button>
 				</div>
@@ -142,5 +148,6 @@
 			<input type="text" name="content"><br>
 			<input type="submit" value="댓글 등록">
 		</form>
+		<input type="button" value="목록" onclick="javascript:location.href='${pageContext.request.contextPath}/funding/ingFundingList'">
 	</div>
 </div>

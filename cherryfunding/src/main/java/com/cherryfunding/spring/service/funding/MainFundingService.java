@@ -16,7 +16,7 @@ public class MainFundingService {
 
 	@Autowired
 	private S3Util s3;
-	
+
 	@Autowired
 	private FundingDao fdao;
 
@@ -28,9 +28,9 @@ public class MainFundingService {
 		if (fEnd == null) {
 			fEnd = new FundingVo();
 		}
-		String thumbnail = this.thumbnail(fEnd.getFnum()).getSavename();
-		fEnd.setSavename(s3.getFileURL("funding/"+ thumbnail));// 썸네일
-		fEnd.setFpinfo(this.thumbnail(fEnd.getFnum()).getFpinfo()); // 사진정보
+		String thumbnail = this.thumbnail(fEnd.getfNum()).getSavename();
+		fEnd.setSavename(s3.getFileURL("funding/" + thumbnail));// 썸네일
+		fEnd.setFpinfo(this.thumbnail(fEnd.getfNum()).getFpinfo()); // 사진정보
 
 		return fEnd;
 	}
@@ -40,9 +40,9 @@ public class MainFundingService {
 		if (fNew == null) {
 			fNew = new FundingVo();
 		}
-		String thumbnail = this.thumbnail(fNew.getFnum()).getSavename();
-		fNew.setSavename(s3.getFileURL("funding/"+ thumbnail));// 썸네일
-		fNew.setFpinfo(this.thumbnail(fNew.getFnum()).getFpinfo()); // 사진정보
+		String thumbnail = this.thumbnail(fNew.getfNum()).getSavename();
+		fNew.setSavename(s3.getFileURL("funding/" + thumbnail));// 썸네일
+		fNew.setFpinfo(this.thumbnail(fNew.getfNum()).getFpinfo()); // 사진정보
 
 		return fNew;
 	}
@@ -52,9 +52,9 @@ public class MainFundingService {
 		if (fHot == null) {
 			fHot = new FundingVo();
 		}
-		String thumbnail = this.thumbnail(fHot.getFnum()).getSavename();
-		fHot.setSavename(s3.getFileURL("funding/"+ thumbnail));// 썸네일
-		fHot.setFpinfo(this.thumbnail(fHot.getFnum()).getFpinfo()); // 사진정보
+		String thumbnail = this.thumbnail(fHot.getfNum()).getSavename();
+		fHot.setSavename(s3.getFileURL("funding/" + thumbnail));// 썸네일
+		fHot.setFpinfo(this.thumbnail(fHot.getfNum()).getFpinfo()); // 사진정보
 
 		return fHot;
 	}
@@ -64,9 +64,9 @@ public class MainFundingService {
 		if (fPrice == null) {
 			fPrice = new FundingVo();
 		}
-		String thumbnail = this.thumbnail(fPrice.getFnum()).getSavename();
-		fPrice.setSavename(s3.getFileURL("funding/"+ thumbnail));// 썸네일
-		fPrice.setFpinfo(this.thumbnail(fPrice.getFnum()).getFpinfo()); // 사진정보
+		String thumbnail = this.thumbnail(fPrice.getfNum()).getSavename();
+		fPrice.setSavename(s3.getFileURL("funding/" + thumbnail));// 썸네일
+		fPrice.setFpinfo(this.thumbnail(fPrice.getfNum()).getFpinfo()); // 사진정보
 		return fPrice;
 	}
 

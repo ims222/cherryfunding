@@ -28,11 +28,11 @@ public class FundingDao {
 		return sqlSession.delete(NAMESPACE + "delete", num);
 	}
 
-	public FundingVo select(int num) {
-		return sqlSession.selectOne(NAMESPACE + "select", num);
+	public FundingVo select(int fNum) {
+		return sqlSession.selectOne(NAMESPACE + "select", fNum);
 	}
 
-	public List<FundingVo> list() {
+	public List<FundingVo> list() { //전체 목록
 		return sqlSession.selectList(NAMESPACE + "list");
 	}
 
@@ -52,6 +52,10 @@ public class FundingDao {
 		return sqlSession.selectList(NAMESPACE + "ing", map);
 	}
 
+	public int hitUp(int fNum) { // 조회수 증가
+		return sqlSession.update(NAMESPACE + "hitUp", fNum);
+	}
+
 	// 메인 요악
 	public FundingVo mainEnd() {// 종료임박
 		return sqlSession.selectOne(NAMESPACE + "mainEnd");
@@ -69,13 +73,20 @@ public class FundingDao {
 		return sqlSession.selectOne(NAMESPACE + "mainPrice");
 	}
 
-	// 전체 펀딩 갯수, 합계
-	public HashMap<String, Object> totFunding() {
+	public HashMap<String, Object> totFunding() { // 전체 펀딩 갯수, 합계
 		return sqlSession.selectOne(NAMESPACE + "totFunding");
 	}
 
 	public HashMap<String, Object> todayFunding() {
 		return sqlSession.selectOne(NAMESPACE + "todayFunding");
+	}
+
+	public List<FundingVo> waitList() { // 대기목록
+		return sqlSession.selectList(NAMESPACE + "waitList");
+	}
+
+	public int confirm(int fNum) { // 컨펌
+		return sqlSession.update(NAMESPACE + "confirm", fNum);
 	}
 
 }

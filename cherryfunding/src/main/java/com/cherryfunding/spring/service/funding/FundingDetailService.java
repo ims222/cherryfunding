@@ -26,4 +26,8 @@ public class FundingDetailService {
 	public List<RewardVo> rewardList(int fNum) {
 		return rewardDao.rewardItem(fNum);
 	}
+	
+	public int hitUp(int fNum) {
+		return fundingDao.hitUp(fNum);
+	}
 }

@@ -36,9 +36,9 @@ public class EndFundingListController {
 		List<FundingVo> list = endService.list(map);
 
 		for (FundingVo vo : list) {
-			String thumbnail = endService.thumbnail(vo.getFnum()).getSavename();
+			String thumbnail = endService.thumbnail(vo.getfNum()).getSavename();
 			vo.setSavename(s3.getFileURL("funding/" + thumbnail));
-			vo.setFpinfo(endService.thumbnail(vo.getFnum()).getFpinfo());
+			vo.setFpinfo(endService.thumbnail(vo.getfNum()).getFpinfo());
 		}
 
 		model.addAttribute("list", list);

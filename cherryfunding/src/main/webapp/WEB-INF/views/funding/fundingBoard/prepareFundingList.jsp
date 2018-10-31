@@ -42,14 +42,14 @@
 		<div class="row no-collapse-1">
 			<c:forEach var="vo" items="${list}" varStatus="vs">
 				<section class="4u">
-					<a href="${pageContext.request.contextPath}/fundingList/detail?num=${vo.fnum}" class="image featured"> <img
+					<a href="${pageContext.request.contextPath}/fundingList/detail?num=${vo.fNum}" class="image featured"> <img
 						src="${vo.savename}"
 						alt="${vo.fpinfo}" height="200px"></a>
 					<div class="box">
 						<p>${vo.title}</p>
 						<p>${vo.id}</p>
-						<p>목표금액: ${vo.amount}</p>
-						<p>현재금액: ${vo.camout}</p>
+						<p>목표금액: ${vo.amount}원</p>
+						<p>현재금액: ${vo.camout}원</p>
 						
 						<fmt:formatDate value="${vo.sdate}" var="sdate" pattern="yyyyMMdd"/>
 						<fmt:parseDate value="${sdate}" var="sdateDate" pattern="yyyyMMdd"/>
