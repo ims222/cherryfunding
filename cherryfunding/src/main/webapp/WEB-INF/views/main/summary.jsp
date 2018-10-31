@@ -15,8 +15,8 @@
 						<p>종료임박후원</p>
 						<p>${summary.cEnd.title}</p>
 						<p>${summary.cEnd.id}</p>
-						<p>목표금액: ${summary.cEnd.amount}</p>
-						<p>현재금액: ${summary.cEnd.cAmount}</p>
+						<p>목표금액: ${summary.cEnd.amount}원</p>
+						<p>현재금액: ${summary.cEnd.cAmount}원</p>
 						
 						<fmt:formatDate value="${summary.cEnd.eDate}" var="cEndeDate" pattern="yyyyMMdd"/>
 						<fmt:parseDate value="${cEndeDate}" var="cEndeDateDate" pattern="yyyyMMdd"/>
@@ -46,8 +46,8 @@
 						<p>신규 후원</p>
 						<p>${summary.cNew.title}</p>
 						<p>${summary.cNew.id}</p>
-						<p>목표금액: ${summary.cNew.amount}</p>
-						<p>현재금액: ${summary.cNew.cAmount}</p>
+						<p>목표금액: ${summary.cNew.amount}원</p>
+						<p>현재금액: ${summary.cNew.cAmount}원</p>
 					
 						<fmt:formatDate value="${summary.cNew.sDate}" var="cNewsDate" pattern="yyyyMMdd"/>
 						<fmt:parseDate value="${cNewsDate}" var="cNewsDateDate" pattern="yyyyMMdd"/>
@@ -77,8 +77,8 @@
 						<p>주목할만한 후원</p>
 						<p>${summary.cHot.title}</p>
 						<p>${summary.cHot.id}</p>
-						<p>목표금액: ${summary.cHot.amount}</p>
-						<p>현재금액: ${summary.cHot.cAmount}</p>
+						<p>목표금액: ${summary.cHot.amount}원</p>
+						<p>현재금액: ${summary.cHot.cAmount}원</p>
 					
 						<fmt:formatDate value="${summary.cHot.eDate}" var="cHoteDate" pattern="yyyyMMdd"/>
 						<fmt:parseDate value="${cHoteDate}" var="cHoteDateDate" pattern="yyyyMMdd"/>
@@ -108,8 +108,8 @@
 							<p>참여금액이 높은 후원</p>
 							<p>${summary.cPrice.title}</p>
 							<p>${summary.cPrice.id}</p>
-							<p>목표금액: ${summary.cPrice.amount}</p>
-							<p>현재금액: ${summary.cPrice.cAmount}</p>
+							<p>목표금액: ${summary.cPrice.amount}원</p>
+							<p>현재금액: ${summary.cPrice.cAmount}원</p>
 						
 							<fmt:formatDate value="${summary.cPrice.eDate}" var="cPriceeDate" pattern="yyyyMMdd"/>
 							<fmt:parseDate value="${cPriceeDate}" var="cPriceeDateDate" pattern="yyyyMMdd"/>
@@ -134,15 +134,15 @@
 				</div>
 				<div class="row">
 					<div class="col-md-3">
-						<a href="${pageContext.request.contextPath}/fundingList/detail?num=${summary.fEnd.fnum}" class="image featured">
+						<a href="${pageContext.request.contextPath}/fundingList/detail?num=${summary.fEnd.fNum}" class="image featured">
 						<img src="${summary.fEnd.savename}"
 						alt="${summary.fEnd.fpinfo}" height="200px"></a>
 						<div class="box">
 							<p>종료임박펀딩</p>
 							<p>${summary.fEnd.title}</p>
 							<p>${summary.fEnd.id}</p>
-							<p>목표금액: ${summary.fEnd.amount}</p>
-							<p>현재금액: ${summary.fEnd.camout}</p>
+							<p>목표금액: ${summary.fEnd.amount}원</p>
+							<p>현재금액: ${summary.fEnd.camout}원</p>
 						
 							<fmt:formatDate value="${summary.fEnd.edate}" var="fEndEdate" pattern="yyyyMMdd"/>
 							<fmt:parseDate value="${fEndEdate}" var="fEndEdateDate" pattern="yyyyMMdd"/>
@@ -165,15 +165,15 @@
 						</div>
 					</div>
 					<div class="col-md-3">
-						<a href="${pageContext.request.contextPath}/fundingList/detail?num=${summary.fNew.fnum}" class="image featured">
+						<a href="${pageContext.request.contextPath}/fundingList/detail?num=${summary.fNew.fNum}" class="image featured">
 						<img src="${summary.fNew.savename}"
 						alt="${summary.fNew.fpinfo}" height="200px"></a>
 						<div class="box">
 							<p>새로 시작되는 펀딩</p>
 							<p>${summary.fNew.title}</p>
 							<p>${summary.fNew.id}</p>
-							<p>목표금액: ${summary.fNew.amount}</p>
-							<p>현재금액: ${summary.fNew.camout}</p>
+							<p>목표금액: ${summary.fNew.amount}원</p>
+							<p>현재금액: ${summary.fNew.camout}원</p>
 						
 							<fmt:formatDate value="${summary.fNew.sdate}" var="fNewSdate" pattern="yyyyMMdd"/>
 							<fmt:parseDate value="${fNewSdate}" var="fNewSdateDate" pattern="yyyyMMdd"/>
@@ -196,15 +196,15 @@
 						</div>
 					</div>
 					<div class="col-md-3">
-						<a href="${pageContext.request.contextPath}/fundingList/detail?num=${summary.fHot.fnum}" class="image featured">
+						<a href="${pageContext.request.contextPath}/fundingList/detail?num=${summary.fHot.fNum}" class="image featured">
 						<img src="${summary.fHot.savename}"
 						alt="${summary.fHot.fpinfo}" height="200px"></a>
 						<div class="box">
 							<p>가장 많이 주목된 펀딩</p>
 							<p>${summary.fHot.title}</p>
 							<p>${summary.fHot.id}</p>
-							<p>목표금액: ${summary.fHot.amount}</p>
-							<p>현재금액: ${summary.fHot.camout}</p>
+							<p>목표금액: ${summary.fHot.amount}원</p>
+							<p>현재금액: ${summary.fHot.camout}원</p>
 						
 							<fmt:formatDate value="${summary.fHot.edate}" var="fHotEdate" pattern="yyyyMMdd"/>
 							<fmt:parseDate value="${fHotEdate}" var="fHotEdateDate" pattern="yyyyMMdd"/>
@@ -227,15 +227,15 @@
 						</div>
 					</div>
 					<div class="col-md-3">
-						<a href="${pageContext.request.contextPath}/fundingList/detail?num=${summary.fPrice.fnum}" class="image featured">
+						<a href="${pageContext.request.contextPath}/fundingList/detail?num=${summary.fPrice.fNum}" class="image featured">
 						<img src="${summary.fPrice.savename}"
 						alt="${summary.fPrice.fpinfo}" height="200px"></a>
 						<div class="box">
 							<p>참여금액이 제일 많은 펀딩</p>
 							<p>${summary.fPrice.title}</p>
 							<p>${summary.fPrice.id}</p>
-							<p>목표금액: ${summary.fPrice.amount}</p>
-							<p>현재금액: ${summary.fPrice.camout}</p>
+							<p>목표금액: ${summary.fPrice.amount}원</p>
+							<p>현재금액: ${summary.fPrice.camout}원</p>
 						
 							<fmt:formatDate value="${summary.fPrice.edate}" var="fPriceEdate" pattern="yyyyMMdd"/>
 							<fmt:parseDate value="${fPriceEdate}" var="fPriceEdateDate" pattern="yyyyMMdd"/>
@@ -264,14 +264,14 @@
 					<form method="post" action="${pageContext.request.contextPath}/testlogin">
 						<c:choose>
 							<c:when test="${not empty sessionScope.id}">
-								${sessionScope.id} 님 <a href="#">마이페이지</a>
+								${sessionScope.id} 님 <a href="${pageContext.request.contextPath}/mypage">마이페이지</a>
 								<input type="button" value="로그아웃" onclick="location.href='${pageContext.request.contextPath}/testlogout'">
 							</c:when>
 							<c:otherwise>
 								<input type="text" name="id" placeholder="아이디"><br>
 								<input type="text" name="pwd" placeholder="비밀번호">
 								<input type="submit" value="로그인">
-								<button type="button" name="회원가입">회원가입</button>
+								<button type="button" name="회원가입" onclick="javascript:location.href='${pageContext.request.contextPath}/users/insert'">회원가입</button>
 							</c:otherwise>
 						</c:choose>
 					</form>
@@ -280,12 +280,12 @@
 					<p>전체 펀딩 갯수</p>
 					<p>${summary.totFunding.CNT}</p>
 					<p>전체 펀딩 금액</p>
-					<p>${summary.totFunding.S}</p>
+					<p>${summary.totFunding.S}원</p>
 					<br>
 					<p>오늘 펀딩 갯수</p>
 					<p>${summary.todayFunding.CNT}</p>
 					<p>오늘 펀딩 금액</p>
-					<p>${summary.todayFunding.S}</p>
+					<p>${summary.todayFunding.S}원</p>
 					<br>
 				</div>
 			</div>

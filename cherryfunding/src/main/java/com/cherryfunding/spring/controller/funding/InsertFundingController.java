@@ -71,7 +71,7 @@ public class InsertFundingController {
 		}
 		try { // 펀딩저장
 			FundingVo fvo = new FundingVo();
-			fvo.setFnum(fnum);
+			fvo.setfNum(fnum);
 			fvo.setTitle(title);
 			fvo.setContent(content);
 			fvo.setAmount(Integer.parseInt(amount));

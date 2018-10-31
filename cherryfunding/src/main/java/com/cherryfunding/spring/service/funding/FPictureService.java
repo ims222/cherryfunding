@@ -22,7 +22,7 @@ public class FPictureService {
 		return dao.getMaxNum();
 	}
 	
-	public List<FPictureVo> list(int num) {
-		return dao.list(num);
+	public List<FPictureVo> list(int fNum) {
+		return dao.list(fNum);
 	}
 }

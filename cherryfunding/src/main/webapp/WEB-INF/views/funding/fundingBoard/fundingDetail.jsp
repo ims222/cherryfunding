@@ -16,8 +16,9 @@
 </head>
 <body>
 	<h2>상세글 보기</h2>
+	ddd
 	<table border="1" width="500">
-		<tr><td>글번호</td><td>${vo.fnum }</td><tr>
+		<tr><td>글번호</td><td>${vo.fNum }</td><tr>
 		<tr><td>제목</td><td>${vo.title }</td></tr>
 		<tr><td>내용</td><td>${vo.content }</td></tr>
 		<tr><td>목표금액</td><td>${vo.amount }</td></tr>
@@ -33,8 +34,8 @@
 		<tr><td>조회수</td><td>${vo.hit }</td></tr>
 		<tr>
 		  <td>
-		  <a href="<c:url value='/fundingList/update?num=${vo.fnum }'/>">수정</a>
-		  <a href="<c:url value='/fundingList/delete?num=${vo.fnum }'/>">삭제</a>
+		  <a href="<c:url value='/fundingList/update?num=${vo.fNum }'/>">수정</a>
+		  <a href="<c:url value='/fundingList/delete?num=${vo.fNum }'/>">삭제</a>
 		  </td>
 		</tr>
 	</table>

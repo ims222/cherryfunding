@@ -2,16 +2,15 @@ package com.cherryfunding.spring.vo;
 
 public class FRecommendVo {
 	private int frNum;
-	private int fnum;
+	private int fNum;
 	private String id;
 
 	public FRecommendVo() {
 	}
 
-	public FRecommendVo(int frNum, int fnum, String id) {
-		super();
+	public FRecommendVo(int frNum, int fNum, String id) {
 		this.frNum = frNum;
-		this.fnum = fnum;
+		this.fNum = fNum;
 		this.id = id;
 	}
 
@@ -23,12 +22,12 @@ public class FRecommendVo {
 		this.frNum = frNum;
 	}
 
-	public int getFnum() {
-		return fnum;
+	public int getfNum() {
+		return fNum;
 	}
 
-	public void setFnum(int fnum) {
-		this.fnum = fnum;
+	public void setfNum(int fNum) {
+		this.fNum = fNum;
 	}
 
 	public String getId() {

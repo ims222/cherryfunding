@@ -74,10 +74,10 @@ public class FundingController {
 	}
 
 	@RequestMapping(value = "/fundingList/delete", method = RequestMethod.GET)
-	public String delete(int num, Model model) {
-		int n = fundingService.delete(num); // �뼨�먯삕 �뜝�럡留믣뜝�럡�돪�뜝�럩�젧�솻洹⑥삕
+	public String delete(int fNum, Model model) {
+		int n = fundingService.delete(fNum); // �뼨�먯삕 �뜝�럡留믣뜝�럡�돪�뜝�럩�젧�솻洹⑥삕
 		if (n > 0) {
-			return "redirect:/fundingList/showAll";
+			return "redirect:/funding/waitList";
 		} else {
 			return "error";
 		}
