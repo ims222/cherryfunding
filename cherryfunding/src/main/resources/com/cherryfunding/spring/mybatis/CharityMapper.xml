@@ -65,4 +65,56 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<include refid="search"/>
 		order by cNum desc
 	</select>
+	
+	<!-- 메인 요약 -->
+		<!-- 종료임바크 -->
+		<select id="mainEnd" resultType="charity">
+			select * from (
+				select aa.*, rownum rnum from(
+					select * from charity
+					<![CDATA[where sdate < sysdate and edate > sysdate]]>
+					and (edate-sysdate) = (select min(edate-sysdate) from charity
+						<![CDATA[where sdate < sysdate and edate > sysdate]]>) order by cNum desc
+										)aa
+			) where rnum = 1
+		</select>
+		
+		<!-- 새로 시작하는 -->
+		<select id="mainNew" resultType="charity">
+			select * from (
+				select aa.*, rownum rnum from (
+					select * from charity
+					<![CDATA[where sdate > sysdate and edate > sysdate]]>
+					and (sysdate - sdate) = (select max(sysdate - sdate) cNum from funding
+								<![CDATA[where sdate > sysdate and edate > sysdate]]>) order by cnum desc
+											)aa
+			) where rnum =1
+		</select>
+		
+		<!-- 핫 -->
+		<select id="mainHot" resultType="charity">
+			select * from (
+				select aa.*, rownum rnum from (
+					select * from charity
+					<![CDATA[where sdate < sysdate and edate > sysdate]]>
+        			order by cNum desc
+   				 )aa
+			where hit = (select max(hit) from charity
+				<![CDATA[where sdate < sysdate and edate > sysdate]]>)
+			) where rnum = 1
+		</select>
+		
+		<!-- 액수 -->
+		<select id="mainPrice" resultType="charity">
+			select * from (
+				select aa.*, rownum rnum from (
+					select * from charity
+					<![CDATA[where sdate < sysdate and edate > sysdate]]>
+        			order by cNum desc
+   				 )aa
+			where cAmount = (select max(cAmount) from charity
+				<![CDATA[where sdate < sysdate and edate > sysdate]]>)
+			) where rnum = 1
+		</select>
+	
 </mapper>

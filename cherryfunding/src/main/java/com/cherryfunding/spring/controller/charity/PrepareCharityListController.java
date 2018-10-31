@@ -26,6 +26,6 @@ public class PrepareCharityListController {
 		}
 
 		model.addAttribute("list", list);
-		return ".prepareFundingList";
+		return ".prepareCharityList";
 	}
 }

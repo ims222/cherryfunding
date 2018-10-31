@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.cherryfunding.spring.vo.CharityVo;
+import com.cherryfunding.spring.vo.FundingVo;
 
 @Repository
 public class CharityDao {
@@ -49,4 +50,19 @@ public class CharityDao {
 	public List<CharityVo> ing() {
 		return sqlSession.selectList(NAMESPACE + "ing");
 	}
+	//메인 요악 
+	public CharityVo mainEnd() {//종료임박
+		return sqlSession.selectOne(NAMESPACE + "mainEnd");
+	}
+	public CharityVo mainNew() {//새로 시작하는 펀딩
+		return sqlSession.selectOne(NAMESPACE + "mainNew");
+	}
+	public CharityVo mainHot() {//조회수높은
+		return sqlSession.selectOne(NAMESPACE + "mainHot");
+	}
+	public CharityVo mainPrice() {//참여금액이 제일 높은
+		return sqlSession.selectOne(NAMESPACE + "mainPrice");
+	}
+
+	
 }

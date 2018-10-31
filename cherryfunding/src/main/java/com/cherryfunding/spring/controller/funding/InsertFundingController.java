@@ -59,6 +59,7 @@ public class InsertFundingController {
 		String eDate = request.getParameter("eDate");
 		String[] hashtags = request.getParameterValues("hashtag");
 		String[] rewards = request.getParameterValues("reward");
+		String[] fAmount = request.getParameterValues("fAmount");
 		String[] prices = request.getParameterValues("price");
 		String[] fpinfo = request.getParameterValues("fPinfo");
 
@@ -98,6 +99,7 @@ public class InsertFundingController {
 				rvo.setFnum(fnum);
 				rvo.setTitle(rewards[ind]);
 				rvo.setPrice(Integer.parseInt(prices[ind]));
+				rvo.setAmount(Integer.parseInt(fAmount[ind]));
 				insertFundingService.rinsert(rvo);
 			}
 		} catch (Exception e) {
@@ -110,8 +112,7 @@ public class InsertFundingController {
 			for (MultipartFile file : files) { // 사진들
 				S3Util s3 = new S3Util();
 				String orgfilename = file.getOriginalFilename();
-				String exe = orgfilename.substring(orgfilename.lastIndexOf(".") + 1);
-				String savefilename = UUID.randomUUID() + exe;
+				String savefilename = String.valueOf(UUID.randomUUID());
 				long filesize = file.getSize();
 				if (filesize > 0) { // 사진db저장
 					FPictureVo fpvo = new FPictureVo();

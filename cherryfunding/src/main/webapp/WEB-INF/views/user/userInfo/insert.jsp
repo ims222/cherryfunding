@@ -10,10 +10,20 @@
 <body>
 	<h1>회원가입</h1>
 	
-	<form method="post" action="<c:url value='/'/>/insert">
-		
+	<form method="post" action="${pageContext.request.contextPath}/users/insert">
+		<input type="text" name="id"><br>
+		<input type="password" name="pwd"><br>
+		<input type="text" name="nick"><br>
+		<input type="text" name="email">
+		<input type="text" name="addr"><br>
+		<select name="gender">
+			<option value="m">남</option>
+			<option value="w">여</option>
+		</select><br>
+		<input type="text" name="phone"><br>
+		<input type="date" name="birth"><br>
+		<input type="submit" value="회원가입">
 	</form>
-	
-	<!-- 회원가입 -->
 </body>
 </html>
+
