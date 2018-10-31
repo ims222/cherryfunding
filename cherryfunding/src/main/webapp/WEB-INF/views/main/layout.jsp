@@ -29,7 +29,7 @@
 <script src="http://code.responsivevoice.org/responsivevoice.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
-		responsiveVoice.setDefaultVoice("Korean Female");
+		//responsiveVoice.setDefaultVoice("Korean Female");
 		//responsiveVoice.speak("안녕하세요");
 		
 		$('body').on('keyup', function(e){
@@ -39,7 +39,7 @@
 				if($(target).attr('class') === 'image featured'){
 					text = $(target).find('img').attr('alt');
 				}
-				responsiveVoice.speak(text);		
+				//responsiveVoice.speak(text);		
 			}
 		});
 	});

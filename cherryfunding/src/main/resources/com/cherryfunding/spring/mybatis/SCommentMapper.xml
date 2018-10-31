@@ -11,8 +11,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select NVL(max(scNum), 0) from sComment
 	</select>
 
-	<select id="commentList" resultType="sComment" parameterType="int">
-		select * from sComment where sNum = #{sNum} order by scNum;
+	<select id="commentList" parameterType="int" resultType="sComment">
+		select * from sComment where sNum = #{num} order by scNum
 	</select>
 
 </mapper>

@@ -27,8 +27,14 @@
 				var tp = $("<span></span>").text('가격');
 				var pr = $("<input>").attr('type', 'text')
 									.attr('name', 'price');
+				
+				var ta = $("<span></span>").text("수량");
+				var fa = $("<input>").attr("type", "number")
+									.attr("name", "fAmount");
+				
 				$("#inputReward").append(tr).append(rw)
-								.append(tp).append(pr).append('<br>');
+								.append(tp).append(pr)
+								.append(ta).append(fa);
 			}
 		});
 		$("#inputHashtag").on('change', "input[data-hash='ht']", function(){
@@ -137,7 +143,8 @@
 		리워드 등록<br>
 		<div id="inputReward">
 			<span>리워드명</span><input type="text" name="reward">
-			<span>가격</span><input type="text" name="price"><br>
+			<span>가격</span><input type="text" name="price">
+			<span>수량</span><input type="number" name="fAmount">
 		</div>
 		
 		<div id="inputFile">

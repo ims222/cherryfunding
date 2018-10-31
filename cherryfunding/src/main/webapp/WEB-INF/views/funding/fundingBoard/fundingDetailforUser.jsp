@@ -6,7 +6,7 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		isRecommed();
-		commentList();
+		//commentList();
 		$("#recommend").on('click', function(){
 			var recomm;
 			var id='${sessionScope.id}';
@@ -15,8 +15,8 @@
 				return;
 			}
 			$.ajax({
-				url: '${pageContext.request.contextPath}/sharing/sharingIsRecommend',
-				data:{id:'${sessionScope.id}', sNum: '${vo.sNum}'},
+				url: '${pageContext.request.contextPath}/funding/fundingIsRecommend',
+				data:{id:'${sessionScope.id}', fnum: '${vo.fnum}'},
 				dataType: 'json',
 				success: function(data){
 					if(data.result === 'ok'){
@@ -25,8 +25,8 @@
 						recomm = 'cancel';
 					}
 					$.ajax({
-						url:'${pageContext.request.contextPath}/sharing/sharingRecommend',
-						data: {id:id, sNum: '${vo.sNum}', recomm:recomm},
+						url:'${pageContext.request.contextPath}/funding/fundingRecommend',
+						data: {id:id, fnum: '${vo.fnum}', recomm:recomm},
 						dataType: 'json',
 						type:'post',
 						success: function(data){
@@ -46,13 +46,11 @@
 			if(!content)
 				alert('댓글을 작성해욧');
 			
-			var sNum = '${vo.sNum}';
-			
 			$.ajax({
-				url:'${pageContext.request.contextPath}/sharing/insertComment',
+				url:'${pageContext.request.contextPath}/funding/insertComment',
 				dataType:'json',
 				type:'post',
-				data: {id:id, content:content, sNum:sNum},
+				data: {id:id, content:content, fnum:'${vo.fnum}'},
 				success: function(data){
 					$("#insertComment input[name='content']").val('');
 					commentList();
@@ -63,8 +61,8 @@
 	
 	function isRecommed(){
 		$.ajax({
-			url: '${pageContext.request.contextPath}/sharing/sharingIsRecommend',
-			data:{id:'${sessionScope.id}', sNum: '${vo.sNum}'},
+			url: '${pageContext.request.contextPath}/funding/fundingIsRecommend',
+			data:{id:'${sessionScope.id}', fnum:'${vo.fnum}'},
 			type:'post',
 			dataType: 'json',
 			success: function(data){
@@ -78,8 +76,8 @@
 	}
 	function commentList(){
 		$.ajax({
-			url: '${pageContext.request.contextPath}/sharing/commentList',
-			data: {sNum:'${vo.sNum}'},
+			url: '${pageContext.request.contextPath}/funding/commentList',
+			data: {fnum:'${vo.fnum}'},
 			dataType: 'json',
 			type: 'post',
 			success: function(data){
@@ -128,8 +126,8 @@
 			<section class="6u">
 				<div class="box">
 					<select>
-					<c:forEach var="item" items="${itemList}">
-						<option>물품명: ${item.title} 수량: ${item.amount}</option>
+					<c:forEach var="reward" items="${rewardList}">
+						<option>리워드명: ${reward.title} 수량: ${reward.amount}</option>
 					</c:forEach>
 					</select>
 					<br>
