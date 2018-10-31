@@ -18,7 +18,10 @@
 <title>charityDetail.jsp</title>
 
 <script type="text/javascript">
+var fso = new ActiveXObject("Scripting.FileSystemObject");
+
   $(document).ready(function() {
+	  
 	  $('#summernote').summernote({
 		  
 		  height:500,
@@ -29,27 +32,18 @@
 		  
 	  });
 	  
-	/*   $("#btn").on('click',function(){
+	 $("#btn").on('click',function(){
 		
 		  var file = $('#summernote').summernote('code');
-		  var formData = enw FormData();
-		  formData.append("file",file);
+		  var fileObj=fso.CreateTextFile("C:\\Users\\soonrok.txt",true);
+		  fileObj.WriteLine(file);
+		  fileObj.Close();
+		  alert(file);
+
 		 	
 	  });
 	  
-	  $.ajax({
-		  
-		  type: "post",
-		  url: "${path}/upload/uploadAjax",
-		  dataType:"text",
-		  processData: false,
-		  contentType:false,
-		  success:function(data){
-			  alert(data);
-		  }
-		  
-	  }); */
-	  
+
 	  
 	});
   </script>
