@@ -13,9 +13,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="charityList" parameterType="string" resultType="Mypage">
 		select c.title,category,d.amount,d.regdate,d.id from charity c, cDetail d 
-		where c.cnum=d.cnum and id = #{id}
+		where c.cnum=d.cnum and d.id = #{id}
 	</select>
 	<select id="fundingList" parameterType="string" resultType="Mypage">
-		select f.title,category,r.price,d.regdate,d.id from funding f,reward r, fDetail d where f.fnum=d.fnum and d.fnum=r.fnum and d.id=#{id} and d.state='w';
+		select f.title,category,r.price,d.regdate,d.id from funding f,reward r, fDetail d 
+		where f.fnum=d.fnum and d.fnum=r.fnum and d.id=#{id} and state='w'
 	</select>
 </mapper>

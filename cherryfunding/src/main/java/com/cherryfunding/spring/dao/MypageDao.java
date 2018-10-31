@@ -28,6 +28,6 @@ public class MypageDao {
 	}
 	
 	public List<MypageVo> fundingList(String id){
-		return sqlSession.selectList(NAMESPACE + "fungdingList", id);
+		return sqlSession.selectList(NAMESPACE + "fundingList", id);
 	}
 }
