@@ -11,17 +11,16 @@
 	<h1>회원가입</h1>
 	
 	<form method="post" action="${pageContext.request.contextPath}/users/insert">
-		<input type="text" name="id"><br>
-		<input type="password" name="pwd"><br>
-		<input type="text" name="nick"><br>
-		<input type="text" name="email">
-		<input type="text" name="addr"><br>
-		<select name="gender">
-			<option value="m">남</option>
-			<option value="w">여</option>
-		</select><br>
-		<input type="text" name="phone"><br>
-		<input type="date" name="birth"><br>
+		아이디<input type="text" name="id"><br>
+		비밀번호<input type="password" name="pwd"><br>
+		닉네임<input type="text" name="nick"><br>
+		이메일<input type="text" name="email"><br>
+		주소<input type="text" name="addr"><br>
+		성별<br>
+		<label for="m">남</label><input type="radio" name="gender" value="m" id="m">
+		<label for="w">여</label><input type="radio" name="gender" value="w" id="w"><br>
+		전화번호<input type="text" name="phone"><br>
+		생일<input type="date" name="birth"><br>
 		<input type="submit" value="회원가입">
 	</form>
 </body>

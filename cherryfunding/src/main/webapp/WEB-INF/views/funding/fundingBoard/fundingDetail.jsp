@@ -16,6 +16,7 @@
 </head>
 <body>
 	<h2>상세글 보기</h2>
+	ddd
 	<table border="1" width="500">
 		<tr><td>글번호</td><td>${vo.fnum }</td><tr>
 		<tr><td>제목</td><td>${vo.title }</td></tr>

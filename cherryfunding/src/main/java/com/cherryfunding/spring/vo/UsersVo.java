@@ -10,7 +10,7 @@ public class UsersVo {
 	private String addr;
 	private String gender;
 	private String phone;
-	private String birth;
+	private Date birth;
 	private Date regdate;
 	private int balance;
 
@@ -18,8 +18,7 @@ public class UsersVo {
 	}
 
 	public UsersVo(String id, String pwd, String email, String nick, String addr, String gender, String phone,
-			String birth, Date regdate, int balance) {
-		super();
+			Date birth, Date regdate, int balance) {
 		this.id = id;
 		this.pwd = pwd;
 		this.email = email;
@@ -88,11 +87,11 @@ public class UsersVo {
 		this.phone = phone;
 	}
 
-	public String getBirth() {
+	public Date getBirth() {
 		return birth;
 	}
 
-	public void setBirth(String birth) {
+	public void setBirth(Date birth) {
 		this.birth = birth;
 	}
 
