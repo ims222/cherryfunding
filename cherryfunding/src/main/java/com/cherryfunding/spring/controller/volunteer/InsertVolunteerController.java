@@ -101,7 +101,6 @@ public class InsertVolunteerController {
 		}catch(Exception e) {
 			System.out.println(e.getMessage());
 		}
-		
 		return "redirect:/volunteer/volunteerList";
 	}
 }

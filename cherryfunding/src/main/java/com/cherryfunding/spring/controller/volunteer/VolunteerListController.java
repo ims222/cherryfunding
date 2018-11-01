@@ -37,6 +37,6 @@ public class VolunteerListController {
 
 		model.addAttribute("PList", list);
 		model.addAttribute("list", list2);
-		return ".volunteerList";
+		return "/volunteer/volunteerBoard/volunteerList";
 	}
 }
