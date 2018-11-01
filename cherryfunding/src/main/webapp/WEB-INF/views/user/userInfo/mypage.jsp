@@ -1,7 +1,9 @@
 <%@page import="com.cherryfunding.spring.util.S3Util"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 
 <!DOCTYPE html>
 <html>
@@ -36,6 +38,7 @@ table.type04 td {
 }
 </style>
 <body>
+
 <div class="wrap">
 		<div id="profile">
 		  	<img src="<%=humanPicture%>" width="111px">
@@ -82,6 +85,7 @@ table.type04 td {
 			</c:forEach>
 		</table>
 		</div>
+>>>>>>> branch 'master' of https://github.com/ims222/cherryfunding.git
 </body>
 </html>
 

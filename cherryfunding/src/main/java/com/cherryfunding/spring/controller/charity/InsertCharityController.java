@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
 
@@ -21,6 +22,7 @@ import com.cherryfunding.spring.service.charity.CHashtagService;
 import com.cherryfunding.spring.service.charity.CPictureService;
 import com.cherryfunding.spring.service.charity.CharityService;
 import com.cherryfunding.spring.service.charity.InsertCharityService;
+import com.cherryfunding.spring.util.S3Util;
 import com.cherryfunding.spring.vo.CHashtagVo;
 import com.cherryfunding.spring.vo.CPictureVo;
 import com.cherryfunding.spring.vo.CharityVo;
@@ -93,13 +95,14 @@ public class InsertCharityController {
 			System.out.println(e.getMessage());
 		}
 
+		try { // 사진db저장
 		List<MultipartFile> files = request.getFiles("cPicture");
 		int num = 0;
 		for (MultipartFile file : files) { // 사진들
+			S3Util s3 = new S3Util();
 			String orgfilename = file.getOriginalFilename();
-			String savefilename = id + "_" + title + "_" + num + orgfilename;
-			try { // 사진db저장
-				long filesize = file.getSize();
+			String savefilename = String.valueOf(UUID.randomUUID());
+			long filesize = file.getSize();
 				if (filesize > 0) {
 					CPictureVo cpvo = new CPictureVo();
 					cpvo.setCpNum(cPictureService.getMaxNum() + 1);
@@ -109,17 +112,14 @@ public class InsertCharityController {
 					cpvo.setFileSize(filesize);
 					cpvo.setCpinfo(cpinfo[num++]);
 					insertCharityService.cpinsert(cpvo); // 저장
-					InputStream is = file.getInputStream();
-					FileOutputStream fos = new FileOutputStream(uploadPath + "\\" + savefilename);
-					FileCopyUtils.copy(is, fos);
-					is.close();
-					fos.close();
+					s3.fileUpload("charity/" + savefilename, file.getBytes()); // 파일 업로드
 				}
-			} catch (Exception io) {
-				System.out.println(io.getMessage());
-				return "error";
 			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			return "error";
 		}
-		return "redirect:/charity/ingCharityList";
+
+		return "redirect:/charity/ingChairtyList";
 	}
 }

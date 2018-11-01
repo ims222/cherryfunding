@@ -1,5 +1,6 @@
 package com.cherryfunding.spring.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -7,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.cherryfunding.spring.vo.CharityVo;
-import com.cherryfunding.spring.vo.FundingVo;
 
 @Repository
 public class CharityDao {
@@ -27,8 +27,8 @@ public class CharityDao {
 		return sqlSession.delete(NAMESPACE + "delete", num);
 	}
 
-	public CharityVo select(int num) {
-		return sqlSession.selectOne(NAMESPACE + "select", num);
+	public CharityVo select(int cNum) {
+		return sqlSession.selectOne(NAMESPACE + "select", cNum);
 	}
 
 	public List<CharityVo> list() {
@@ -39,17 +39,21 @@ public class CharityDao {
 		return sqlSession.selectOne(NAMESPACE + "getMaxNum");
 	}
 
-	public List<CharityVo> prepare() { 
-		return sqlSession.selectList(NAMESPACE + "prepare");
+	public List<CharityVo> prepare(HashMap<String, Object> map) { 
+		return sqlSession.selectList(NAMESPACE + "prepare", map);
 	}
 
-	public List<CharityVo> end() { 
-		return sqlSession.selectList(NAMESPACE + "end");
+	public List<CharityVo> end(HashMap<String, Object> map) { 
+		return sqlSession.selectList(NAMESPACE + "end", map);
 	}
 	
-	public List<CharityVo> ing() {
-		return sqlSession.selectList(NAMESPACE + "ing");
+	public List<CharityVo> ing(HashMap<String, Object> map) {
+		return sqlSession.selectList(NAMESPACE + "ing", map);
 	}
+	public int hitUp(int cNum) { // 조회수 증가
+		return sqlSession.update(NAMESPACE + "hitUp", cNum);
+	}
+	
 	//메인 요악 
 	public CharityVo mainEnd() {//종료임박
 		return sqlSession.selectOne(NAMESPACE + "mainEnd");
@@ -63,6 +67,20 @@ public class CharityDao {
 	public CharityVo mainPrice() {//참여금액이 제일 높은
 		return sqlSession.selectOne(NAMESPACE + "mainPrice");
 	}
+	public HashMap<String, Object> totCharity() { // 전체 펀딩 갯수, 합계
+		return sqlSession.selectOne(NAMESPACE + "totCharity");
+	}
 
+	public HashMap<String, Object> todayCharity() {
+		return sqlSession.selectOne(NAMESPACE + "todayCharity");
+	}
+
+	public List<CharityVo> waitList() { // 대기목록
+		return sqlSession.selectList(NAMESPACE + "waitList");
+	}
+
+	public int confirm(int cNum) { // 컨펌
+		return sqlSession.update(NAMESPACE + "confirm", cNum);
+	}
 	
 }

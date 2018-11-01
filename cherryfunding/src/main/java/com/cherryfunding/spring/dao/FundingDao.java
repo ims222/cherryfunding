@@ -32,7 +32,7 @@ public class FundingDao {
 		return sqlSession.selectOne(NAMESPACE + "select", fNum);
 	}
 
-	public List<FundingVo> list() { //전체 목록
+	public List<FundingVo> list() { // 전체 목록
 		return sqlSession.selectList(NAMESPACE + "list");
 	}
 
@@ -97,6 +97,10 @@ public class FundingDao {
 	
 	public List<FundingVo> confirmList() { // 컨펌 확인 후 목록
 		return sqlSession.selectList(NAMESPACE + "confirmList");
+	}
+
+	public int addCamout(HashMap<String, Object> map) {
+		return sqlSession.update(NAMESPACE + "addCamout", map);
 	}
 
 }

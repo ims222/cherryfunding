@@ -58,6 +58,47 @@
 			});
 		});
 		
+		$("#chooseItem").on('click', function(){
+			var rNum = $("select[name='reward']").val();
+			$.ajax({
+				url:'${pageContext.request.contextPath}/funding/rewardDetail',
+				data:{rNum: rNum},
+				dataType:'json',
+				type:'post',
+				success: function(data){
+					var price = data.price;
+					var title = data.title;
+					
+					var rNumInput = $("<input>").attr("type", "hidden")
+											.attr("name", 'rNum')
+											.attr('value', rNum);
+					var amount = $("input[name='amount']").val();
+					var amountInput = $("<input>").attr("type", 'hidden')
+												.attr('name', 'amount')
+												.attr('value', amount);
+											
+					var div = $("<div></div>").append("<span>리워드명: " + title + " 수량: " + amount +"</span>")
+									.append(rNumInput).append(amountInput);					
+					$("#selectedReward").append(div);
+					
+				}
+			});
+			
+		});
+		
+		$("select[name='reward']").on('change', function(){
+			$.ajax({
+				url:'${pageContext.request.contextPath}/funding/rewardDetail',
+				data:{rNum: $(this).val()},
+				dataType:'json',
+				type:'post',
+				success: function(data){
+					var price = data.price;
+					var amount = data.amount;
+					$("#rewardInfo").text("가격: " + price + " 남은 수량: " + amount);
+				}
+			});
+		});
 	});
 	
 	function isRecommed(){
@@ -110,36 +151,43 @@
 		if (day.length < 2)
 			day = '0' + day;
 			return [year, month, day].join('-');
-	} 
+	}
+	
+	function submitReward(){
+		var id = '${sessionScope.id}';
+		console.log("id", id);
+		if(!id){
+			alert("로그인 하셔요");
+			return false;
+		}
+		return true;
+	}
 
 
 </script>
 <!-- Main -->
 <div id="main">
 	<div class="container">
-		<div class="row no-collapse-1">
-			<section class="6u">
-				<div class="box">
-				 	<p>제목: ${vo.title}</p>
-				 	<p>내용: ${vo.content}</p>
-				 	<p>조회수: ${vo.hit}</p>
-				</div>
-			</section>
-			<section class="6u">
-				<div class="box">
-					<form method="post" action="${pageContext.request.contextPath}/funding">
-						<select name="reward">
-						<c:forEach var="reward" items="${rewardList}">
-							<option value="${reward.title}">리워드명: ${reward.title} 수량: ${reward.amount}</option>
-						</c:forEach>
-						</select><br>
-						수량<input type="number" name="amount">
-						<input type="submit" value="리워드 신청">
-					</form>
-					<br>
-					<button id="recommend" type="button"></button>
-				</div>
-			</section>
+		<div class="row box">
+			<div class="col-md-8"> 
+			 	제목: ${vo.title}<br>
+			 	내용: ${vo.content}<br>
+			 	조회수: ${vo.hit}<br>
+ 			</div>
+ 			<div class="col-md-4">
+ 				<select name="reward">
+					<c:forEach var="reward" items="${rewardList}">
+					<option value="${reward.rNum}">리워드명: ${reward.title}</option>
+					</c:forEach>
+				</select><br><div id="rewardInfo"></div>
+				수량<input type="number" name="amount"><button id="chooseItem">선택</button>
+				<form method="post" action="${pageContext.request.contextPath}/funding/insertFDetail" onsubmit="return submitReward();">
+					<input type="hidden" name="fNum" value="${vo.fNum}">
+					<div id="selectedReward"></div>
+					<input type="submit" value="리워드 신청">
+				</form><br>
+				<button id="recommend" type="button"></button>
+ 			</div>
 		</div>
 		<div class="row box" id="commment">
 			<!-- 댓글 -->

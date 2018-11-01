@@ -14,7 +14,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="list" parameterType="int" resultType="cPicture">
-		select * from cPicture where cnum=#{num} 
+		select * from cPicture where cNum=#{cNum} 
 	</select>
 	
 	<select id="thumbnail" resultType="cPicture" parameterType="int">
