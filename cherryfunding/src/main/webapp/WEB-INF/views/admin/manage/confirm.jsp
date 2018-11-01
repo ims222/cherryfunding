@@ -93,9 +93,26 @@
     </div>
   </div>
 		
-		
-
 </table>
+
+
+<select>
+
+	 <input type="text" class="form-control" id="search" aria-describedby="emailHelp" placeholder="search">
+
+</select>
+
+
+
+
+
+
+
+
+
+
+
+
 
 </body>
 </html>
