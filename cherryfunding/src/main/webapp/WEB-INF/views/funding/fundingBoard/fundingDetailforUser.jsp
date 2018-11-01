@@ -7,6 +7,7 @@
 	$(document).ready(function(){
 		isRecommed();
 		commentList();
+		updateList()
 		$("#recommend").on('click', function(){
 			var recomm;
 			var id='${sessionScope.id}';
@@ -60,30 +61,22 @@
 		
 		$("#chooseItem").on('click', function(){
 			var rNum = $("select[name='reward']").val();
+			var amount = $("input[name='amount']").val();
+			var selectedRNum = $("#selectedReward").children();
 			$.ajax({
-				url:'${pageContext.request.contextPath}/funding/rewardDetail',
-				data:{rNum: rNum},
+				url:'${pageContext.request.contextPath}/funding/getAmount',
+				data:{rNum: rNum, amount: amount, fNum:'${vo.fNum}'},
 				dataType:'json',
 				type:'post',
 				success: function(data){
-					var price = data.price;
-					var title = data.title;
-					
-					var rNumInput = $("<input>").attr("type", "hidden")
-											.attr("name", 'rNum')
-											.attr('value', rNum);
-					var amount = $("input[name='amount']").val();
-					var amountInput = $("<input>").attr("type", 'hidden')
-												.attr('name', 'amount')
-												.attr('value', amount);
-											
-					var div = $("<div></div>").append("<span>리워드명: " + title + " 수량: " + amount +"</span>")
-									.append(rNumInput).append(amountInput);					
-					$("#selectedReward").append(div);
-					
+					console.log('data', data);
+					if(data.result === 'no'){
+						alert("수량이 부족해요");
+					}else{
+						updateList();
+					}
 				}
 			});
-			
 		});
 		
 		$("select[name='reward']").on('change', function(){
@@ -100,6 +93,34 @@
 			});
 		});
 	});
+	
+	function updateList(){
+		$.ajax({
+			url: '${pageContext.request.contextPath}/funding/getSelectedFundingList',
+			data: {fNum:'${vo.fNum}'},
+			dataType: 'json',
+			type: 'post',
+			success: function(data){
+				$("#selectedReward").empty();
+				for(var i=0;i<data.length;i++){
+					var rNum = data[i].rNum;
+					var title = data[i].title;
+					var amount = data[i].amount;
+					var rNumInput = $("<input>").attr("type", "hidden")
+					.attr("name", 'rNum')
+					.attr('value', rNum);
+					
+					var amountInput = $("<input>").attr("type", 'hidden')
+												.attr('name', 'amount')
+												.attr('value', amount);
+					
+					var div = $("<div></div>").append("<span>리워드명: " + title + " 수량: " + amount +"</span>")
+											.append(rNumInput).append(amountInput);					
+					$("#selectedReward").append(div);
+				}
+			}
+		});
+	}
 	
 	function isRecommed(){
 		$.ajax({

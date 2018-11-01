@@ -39,18 +39,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from
 		funding where fNum = #{num}
 	</select>
+	
 	<insert id="insert" parameterType="funding">
 		insert into funding
 		values(#{fNum},#{title},#{content},#{amount},
 		0,#{sdate},#{edate},#{category},
 		#{confirm},#{aid},#{addr},sysdate,#{id},0)
 	</insert>
+	
 	<update id="update" parameterType="funding">
 		update funding set
 		title=#{title},content=#{content},amount=#{amount},camout=#{camout},
 		sdate=#{sdate},edate=#{edate},category=#{category},confirm=#{confirm},aid=#{aid},
 		addr=#{addr},id=#{id} where fNum = #{fNum}
 	</update>
+	
 	<delete id="delete" parameterType="int">
 		delete from funding where
 		fNum=#{num}
@@ -67,11 +70,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="waitList" resultType="funding">
 		select * from funding where confirm = 'n'
 	</select>
+	
+	<select id="confirmList" resultType="funding">
+		select * from funding where confirm = 'y'
+	</select>
 		
 	<update id="confirm" parameterType="int">
 		update funding set confirm = 'y' where fNum = #{fNum}
 	</update>
 	
+	<update id="wait" parameterType="int">
+		update funding set confirm ='n' where fNum = #{fNum}
+	</update>
+		
 	<update id="addCamout" parameterType="hashmap">
 		update funding set camout = camout + #{price} where fNum = #{fNum}
 	</update>
@@ -160,7 +171,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			select * from (
 				select aa.*, rownum rnum from (
 					select * from funding
-	where sdate > sysdate and edate > sysdate 
+					where sdate > sysdate and edate > sysdate 
 					and (sysdate - sdate) = (select max(sysdate - sdate) fNum from funding
 						where sdate > sysdate and edate > sysdate and confirm = 'y'
                         ) order by fNum desc
@@ -210,6 +221,5 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			(select * from fdetail where regdate = sysdate) fdetail
 			where funding.fNum = fdetail.fNum
 	</select>
-	
 	
 </mapper>

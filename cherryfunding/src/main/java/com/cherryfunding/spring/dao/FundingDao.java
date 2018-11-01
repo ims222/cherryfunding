@@ -88,6 +88,16 @@ public class FundingDao {
 	public int confirm(int fNum) { // 컨펌
 		return sqlSession.update(NAMESPACE + "confirm", fNum);
 	}
+	
+	public int wait(int fNum) { // 컨펌
+		return sqlSession.update(NAMESPACE + "wait", fNum);
+	}
+	
+	
+	
+	public List<FundingVo> confirmList() { // 컨펌 확인 후 목록
+		return sqlSession.selectList(NAMESPACE + "confirmList");
+	}
 
 	public int addCamout(HashMap<String, Object> map) {
 		return sqlSession.update(NAMESPACE + "addCamout", map);

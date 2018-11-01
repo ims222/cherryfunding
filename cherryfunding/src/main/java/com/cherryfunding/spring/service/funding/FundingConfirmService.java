@@ -17,9 +17,17 @@ public class FundingConfirmService {
 	public List<FundingVo> waitList() { // 대기 목록
 		return fundingDao.waitList();
 	}
+	
+	public List<FundingVo> confirmList() { // 대기 목록
+		return fundingDao.confirmList();
+	}
 
 	public int confirm(int fNum) { // 컨펌
 		return fundingDao.confirm(fNum);
+	}
+	
+	public int wait(int fNum) { // 컨펌취소
+		return fundingDao.wait(fNum);
 	}
 
 	public List<FundingVo> list() {
