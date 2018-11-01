@@ -67,9 +67,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="waitList" resultType="funding">
 		select * from funding where confirm = 'n'
 	</select>
+	
+	<select id="confirmList" resultType="funding">
+		select * from funding where confirm = 'y'
+	</select>
 		
 	<update id="confirm" parameterType="int">
 		update funding set confirm = 'y' where fNum = #{fNum}
+	</update>
+	
+	<update id="wait" parameterType="int">
+		update funding set confirm ='n' where fNum = #{fNum}
 	</update>
 
 
