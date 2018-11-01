@@ -1,6 +1,7 @@
 package com.cherryfunding.spring.controller.funding;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.json.JSONObject;
@@ -38,12 +39,12 @@ public class FCommentController {
 
 	@RequestMapping("/funding/commentList")
 	@ResponseBody
-	public List<FCommentVo> commentList(int fNum) {
-		List<FCommentVo> list = fCommentService.commentList(fNum);
-		for(FCommentVo vo: list	) {
-			System.out.println(vo.getRegdate() + " !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+	public List<HashMap<String, Object>> commentList(int fNum) {
+		List<HashMap<String, Object>> list = fCommentService.commentList(fNum);
+		for (HashMap<String, Object> map : list) {
+			System.out.println((String) map.get("ID"));
+			System.out.println((String) map.get("REGDATE") + " !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 		}
 		return list;
 	}
-
 }
