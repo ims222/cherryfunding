@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <script type="text/javascript">
 	$(document).ready(function(){
 		$("#category").on('click', 'button', function(e){
@@ -17,21 +18,21 @@
 <!-- Main -->
 <div id="main">
 	<div class="container">
-		<div class="btn-group" role="group" aria-label="category" id="category">
-			<button type="button" class="btn btn-secondary">전체보기</button>
-			<button type="button" class="btn btn-secondary">테크·가전</button>
-			<button type="button" class="btn btn-secondary">패션·잡화</button>
-			<button type="button" class="btn btn-secondary">푸드</button>
-			<button type="button" class="btn btn-secondary">홈리빙</button>
-			<button type="button" class="btn btn-secondary">디자인소품</button>
-			<button type="button" class="btn btn-secondary">여행·레저</button>
-			<button type="button" class="btn btn-secondary">스포츠·모빌리티</button>
-			<button type="button" class="btn btn-secondary">반려동물</button>
-			<button type="button" class="btn btn-secondary">공연·컬쳐</button>
-			<button type="button" class="btn btn-secondary">소셜·캠페인</button>
-			<button type="button" class="btn btn-secondary">교육·키즈</button>
-			<button type="button" class="btn btn-secondary">게임·취미</button>
-			<button type="button" class="btn btn-secondary">출판</button>
+		<div class="w3-bar" id="category">
+			<button type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">전체보기</button>
+			<button type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">테크·가전</button>
+			<button type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">패션·잡화</button>
+			<button type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">푸드</button>
+			<button type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">홈리빙</button>
+			<button type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">디자인소품</button>
+			<button type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">여행·레저</button>
+			<button type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">스포츠·모빌리티</button>
+			<button type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">반려동물</button>
+			<button type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">공연·컬쳐</button>
+			<button type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">소셜·캠페인</button>
+			<button type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">교육·키즈</button>
+			<button type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">게임·취미</button>
+			<button type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">출판</button>
 		</div>
 		<form method="get" action="${pageContext.request.contextPath}/funding/ingFundingList">
 			<input type="hidden" name="category" value="${category}">
@@ -61,7 +62,6 @@
 						<p>${vo.id}</p>
 						<p>목표금액: ${vo.amount}원</p>
 						<p>현재금액: ${vo.camout}원</p>
-						
 						<fmt:formatDate value="${vo.edate}" var="edate" pattern="yyyyMMdd"/>
 						<fmt:parseDate value="${edate}" var="edateDate" pattern="yyyyMMdd"/>
 						<fmt:parseNumber value="${edateDate.time / (1000 * 60 * 60 * 24)}" var="end" integerOnly="true"/>
@@ -74,7 +74,7 @@
 						<div class="progress">
 							<c:set var="before" value="${vo.camout * 100 / vo.amount}" />
 							<div class="progress-bar" role="progressbar"
-								style="width: <fmt:formatNumber value="${before}" type="percent"/>"
+								style="width: <fmt:formatNumber value="${before/100}" type="percent"/>"
 								aria-valuenow="${before * 100}" aria-valuemin="0"
 								aria-valuemax="100">
 								<fmt:formatNumber value="${before/100}" type="percent" />

@@ -3,57 +3,30 @@ package com.cherryfunding.spring.service.funding;
 import java.util.HashMap;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import com.cherryfunding.spring.dao.FDetailDao;
-import com.cherryfunding.spring.dao.FundingDao;
-import com.cherryfunding.spring.dao.RewardDao;
 import com.cherryfunding.spring.vo.FDetailVo;
 import com.cherryfunding.spring.vo.FundingVo;
 import com.cherryfunding.spring.vo.RewardVo;
 
-@Service
-public class FundingDetailService {
+public interface FundingDetailService {
 
-	@Autowired
-	private FundingDao fundingDao;
+	public FundingVo detail(int fNum);
 
-	@Autowired
-	private RewardDao rewardDao;
+	public List<RewardVo> rewardList(int fNum);
 
-	@Autowired
-	FDetailDao fDetailDao;
+	public int hitUp(int fNum);
 
-	public FundingVo detail(int fNum) {
-		return fundingDao.select(fNum);
-	}
+	public RewardVo rewardDetail(int rNum);
 
-	public List<RewardVo> rewardList(int fNum) {
-		return rewardDao.rewardItem(fNum);
-	}
+	public int fdetailGetMaxNum();
 
-	public int hitUp(int fNum) {
-		return fundingDao.hitUp(fNum);
-	}
+	public int getPrice(int rNum);
 
-	public RewardVo rewardDetail(int rNum) {
-		return rewardDao.detail(rNum);
-	}
+	int insertFDetail(FDetailVo vo);
 
-	public int insertFDetail(FDetailVo vo) {
-		return fDetailDao.insert(vo);
-	}
+	int addCamout(HashMap<String, Object> map);
 
-	public int getMaxNum() {
-		return fDetailDao.getMaxNum();
-	}
+	int updateAmount(HashMap<String, Object> map);
+	
+	int getAmount(int rNum);
 
-	public int addCamout(HashMap<String, Object> map) {
-		return fundingDao.addCamout(map);
-	}
-
-	public int getPrice(int rNum) {
-		return rewardDao.getPrice(rNum);
-	}
 }

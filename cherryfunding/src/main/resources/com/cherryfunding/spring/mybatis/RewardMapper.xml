@@ -25,4 +25,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select price from reward where rNum = #{rNum}
 	</select>
 	
+	<select id="updateAmount" parameterType="hashmap">
+		update reward set amount = amount - #{amount} where rNum = #{rNum}
+	</select>
+	
+	<select id="getAmount" parameterType="int" resultType="int">
+		select amount from reward where rNum = #{rNum}
+	</select>
+	
 </mapper>
