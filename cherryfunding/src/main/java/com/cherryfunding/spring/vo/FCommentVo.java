@@ -1,18 +1,17 @@
 package com.cherryfunding.spring.vo;
 
-import java.sql.Date;
-
 public class FCommentVo {
 	private int fcNum;
 	private String id;
 	private int fNum;
 	private String content;
-	private Date regdate;
+	private String regdate;
 
 	public FCommentVo() {
 	}
 
-	public FCommentVo(int fcNum, String id, int fNum, String content, Date regdate) {
+	public FCommentVo(int fcNum, String id, int fNum, String content, String regdate) {
+		super();
 		this.fcNum = fcNum;
 		this.id = id;
 		this.fNum = fNum;
@@ -52,11 +51,11 @@ public class FCommentVo {
 		this.content = content;
 	}
 
-	public Date getRegdate() {
+	public String getRegdate() {
 		return regdate;
 	}
 
-	public void setRegdate(Date regdate) {
+	public void setRegdate(String regdate) {
 		this.regdate = regdate;
 	}
 

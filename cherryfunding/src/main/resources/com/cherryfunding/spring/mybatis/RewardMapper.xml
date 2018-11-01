@@ -6,8 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<insert id="insert" parameterType="reward">
 		insert into reward values(
-			#{rNum}, #{fNum}, #{title}, #{price},
-			to_date(to_char(sysdate, 'yyyy-MM-dd hh24:mi:ss'), 'yyyy-MM-dd hh24:mi:ss'), #{amount})
+			#{rNum}, #{fNum}, #{title}, #{price}, sysdate, #{amount})
 	</insert>
 	
 	<select id="getMaxNum" resultType="int">

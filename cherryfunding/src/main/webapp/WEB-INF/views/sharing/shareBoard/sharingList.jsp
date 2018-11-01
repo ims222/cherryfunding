@@ -9,8 +9,7 @@
 			<c:forEach var="vo" items="${list}" varStatus="vs">
 				<section class="4u">
 					<a href="${pageContext.request.contextPath}/sharing/sharingDetail?sNum=${vo.sNum}" class="image featured">
-					<img src="${pageContext.request.contextPath}/resources/upload/sharing/${vo.saveName}"
-						alt="${vo.sPinfo}" height="200px"></a>
+					<img src="${vo.saveName}" alt="${vo.sPinfo}" height="200px"></a>
 					<div class="box">
 						<p>${vo.title}</p>
 						<p>${vo.id}</p>

@@ -1,6 +1,5 @@
 package com.cherryfunding.spring.dao;
 
-import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -24,7 +23,7 @@ public class FCommentDao {
 		return sqlSession.selectOne(NAMESPACE + "getMaxNum");
 	}
 
-	public List<HashMap<String, Object>> commentList(int fnum) {
+	public List<FCommentVo> commentList(int fnum) {
 		return sqlSession.selectList(NAMESPACE + "commentList", fnum);
 	}
 }

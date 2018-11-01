@@ -1,6 +1,5 @@
 package com.cherryfunding.spring.service.funding;
 
-import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +22,7 @@ public class FCommentService {
 		return fCommentDao.getMaxNum();
 	}
 
-	public List<HashMap<String, Object>>  commentList(int fNum) {
+	public List<FCommentVo> commentList(int fNum) {
 		return fCommentDao.commentList(fNum);
 	}
 }

@@ -79,10 +79,12 @@ public class FundingDetailController {
 	public ArrayList<Object> getSelectedFundingList(int fNum, HttpSession session) {
 		ArrayList<Object> list = (ArrayList<Object>) session.getAttribute("selectedFundingList");
 		ArrayList<Object> selectedList = new ArrayList<Object>();
-		for (Object l : list) {
-			HashMap<String, Object> map = (HashMap<String, Object>) l;
-			if ((Integer) map.get("fNum") == fNum) {
-				selectedList.add(map);
+		if (list != null) {
+			for (Object l : list) {
+				HashMap<String, Object> map = (HashMap<String, Object>) l;
+				if ((Integer) map.get("fNum") == fNum) {
+					selectedList.add(map);
+				}
 			}
 		}
 		return selectedList;
@@ -91,10 +93,9 @@ public class FundingDetailController {
 	@RequestMapping(value = "/funding/cancelSelectReward")
 	@ResponseBody
 	public HashMap<String, Object> cancelSelectReward(int i, HttpSession session) {
-		System.out.println("i: " + i + " !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 		ArrayList<Object> list = (ArrayList<Object>) session.getAttribute("selectedFundingList");
 		HashMap<String, Object> map = (HashMap<String, Object>) list.remove(i);
-		// session.removeAttribute("selectedFundingList");
+		session.removeAttribute("selectedFundingList");
 		session.setAttribute("selectedFundingList", list);
 		return map;
 	}

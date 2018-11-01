@@ -48,12 +48,16 @@
 		$("#insertComment").on('submit', function(e){
 			e.preventDefault();
 			var id = '${sessionScope.id}';
-			if(!id)
+			if(!id){
 				alert('로그인 해주세욧ㅅ');
+				return;
+			}
 			var content = $("#insertComment input[name='content']").val();
-			if(!content)
+			if(!content){
 				alert('댓글을 작성해욧');
-			
+				return;
+			}
+				
 			$.ajax({
 				url:'${pageContext.request.contextPath}/funding/insertComment',
 				dataType:'json',
@@ -156,7 +160,7 @@
 				}else{
 					$("#recommend").text('추천취소');
 				}
-				//$('#fRecommend').text('추천수: ' + data.fRecommend);
+				$('#fRecommend').text('추천수: ' + data.fRecommend);
 			}
 		});
 	}
@@ -177,35 +181,11 @@
 					$(tr).append('<td>' + id + '</td>');
 					$(tr).append('<td>' + content + '</td>');
 					$(tr).append('<td>' + regdate + '</td>');
-					$(tr).append('<td>'+ formatDate(regdate) +'</td>');			
-					$(table).prepend(tr);
+					$(table).append(tr);
 				});
 				$('#comment').append(table);
 			}
 		});
-	}
-	function formatDate(date) {
-		var d = new Date(date);
-		var month = (d.getMonth() + 1) + '';
-		var day = d.getDate() + '';
-		var year = d.getFullYear();
-		
-		var hh = d.getHours() + '';
-		var mm = d.getMinutes() + '';
-		var ss = d.getSeconds() + '';
-		
-		if (month.length < 2)
-			month = '0' + month;
-		if (day.length < 2)
-			day = '0' + day;
-		if(hh.length < 2)
-			hh = '0' + hh;
-		if(mm.length < 2)
-			mm = '0' + mm;
-		if(ss.length < 2)
-			ss = '0' + ss; 
-		
-			return [year, month, day].join('-') + ' ' + [hh, mm, ss].join(':');
 	}
 	
 	function submitReward(){

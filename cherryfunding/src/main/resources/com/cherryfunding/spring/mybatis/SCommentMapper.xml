@@ -4,8 +4,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cherryfunding.spring.vo.SCommentMapper">
 	<insert id="insert" parameterType="sComment">
-		insert into sComment values(#{scNum}, #{id}, #{content},
-		to_date(to_char(sysdate, 'yyyy-MM-dd hh24:mi:ss'), 'yyyy-MM-dd hh24:mi:ss'), #{sNum})
+		insert into sComment values(#{scNum}, #{id}, #{content}, sysdate, #{sNum})
 	</insert>
 	
 	<select id="getMaxNum" resultType="int">
@@ -13,7 +12,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<select id="commentList" parameterType="int" resultType="sComment">
-		select * from sComment where sNum = #{num} order by scNum
+		select scNum, id, content, to_char(regdate, 'yyyy-mm-dd hh24:mi:ss') regdate,
+		sNum from sComment where sNum = #{num} order by scNum
 	</select>
 
 </mapper>

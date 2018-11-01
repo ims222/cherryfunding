@@ -6,8 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<insert id="insert" parameterType="fPicture">
 		insert into fPicture values(
-			#{fpNum},#{fNum},#{savename},#{orgname},#{filesize},
-			to_date(to_char(sysdate, 'yyyy-MM-dd hh24:mi:ss'), 'yyyy-MM-dd hh24:mi:ss'),#{fpinfo})
+			#{fpNum},#{fNum},#{savename},#{orgname},#{filesize}, sysdate, #{fpinfo})
 	</insert>
 	
 	<select id="getMaxNum" resultType="int">

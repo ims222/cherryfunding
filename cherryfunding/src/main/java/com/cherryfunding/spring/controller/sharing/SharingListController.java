@@ -9,10 +9,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.cherryfunding.spring.service.sharing.SharingListService;
+import com.cherryfunding.spring.util.S3Util;
 import com.cherryfunding.spring.vo.ShareVo;
 
 @Controller
 public class SharingListController {
+
+	@Autowired
+	private S3Util s3;
 
 	@Autowired
 	private SharingListService sharingListService;
@@ -23,7 +27,8 @@ public class SharingListController {
 		List<ShareVo> list = sharingListService.list();
 
 		for (ShareVo vo : list) {
-			vo.setSaveName(sharingListService.thumbnail(vo.getsNum()).getSaveName());
+			String thumbnail = sharingListService.thumbnail(vo.getsNum()).getSaveName();
+			vo.setSaveName(s3.getFileURL("sharing/" + thumbnail));
 			vo.setsPinfo(sharingListService.thumbnail(vo.getsNum()).getsPinfo());
 		}
 
