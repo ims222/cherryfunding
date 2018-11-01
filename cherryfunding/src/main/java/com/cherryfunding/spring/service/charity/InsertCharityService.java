@@ -3,10 +3,9 @@ package com.cherryfunding.spring.service.charity;
 import com.cherryfunding.spring.vo.CHashtagVo;
 import com.cherryfunding.spring.vo.CPictureVo;
 import com.cherryfunding.spring.vo.CharityVo;
-import com.cherryfunding.spring.vo.RewardVo;
 
 public interface InsertCharityService {
-	int cinsert(CharityVo cvo); //???”©
-	int chinsert(CHashtagVo chvo);//?•´?‹œ?ƒœ?¬
-	int cpinsert(CPictureVo cpvo);//???”©?…Œ?´ë¸?
+	int cinsert(CharityVo cvo); //???ï¿½ï¿½
+	int chinsert(CHashtagVo chvo);//?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½
+	int cpinsert(CPictureVo cpvo);//???ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ï¿½?
 }
