@@ -27,6 +27,7 @@ public class FundingDetailController {
 	public String fundingDetail(int fNum, Model model) {
 		model.addAttribute("vo", fundingDetailService.detail(fNum));
 		model.addAttribute("rewardList", fundingDetailService.rewardList(fNum));
+		model.addAttribute("fRecommend", fundingDetailService.getRecommend(fNum));
 		fundingDetailService.hitUp(fNum);
 		return ".fundingDetailforUser";
 	}
@@ -93,7 +94,7 @@ public class FundingDetailController {
 		System.out.println("i: " + i + " !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 		ArrayList<Object> list = (ArrayList<Object>) session.getAttribute("selectedFundingList");
 		HashMap<String, Object> map = (HashMap<String, Object>) list.remove(i);
-		//session.removeAttribute("selectedFundingList");
+		// session.removeAttribute("selectedFundingList");
 		session.setAttribute("selectedFundingList", list);
 		return map;
 	}
@@ -106,30 +107,50 @@ public class FundingDetailController {
 		String[] srNum = request.getParameterValues("rNum");
 		String[] samount = request.getParameterValues("amount");
 		int[] rNum = new int[srNum.length];
-		int[] amount = new int[samount.length];
+		int[] amounts = new int[samount.length];
 
 		for (int i = 0; i < srNum.length; i++) {
 			rNum[i] = Integer.parseInt(srNum[i]);
 		}
 		for (int i = 0; i < samount.length; i++) {
-			amount[i] = Integer.parseInt(samount[i]);
+			amounts[i] = Integer.parseInt(samount[i]);
 		}
+		int totAmount = 0;
 		for (int i = 0; i < rNum.length; i++) {
+			int amount = amounts[i];
+			int price = fundingDetailService.rewardDetail(rNum[i]).getPrice();
+
+			totAmount += (amount * price);
+		}
+
+		if (fundingDetailService.userInfo(id).getBalance() < totAmount) {
+			request.setAttribute("errMsg", "잔액이 부족합니다.");
+			return "forward:/funding/fundingDetailforUser";
+		}
+
+		for (int i = 0; i < rNum.length; i++) {
+			int amount = amounts[i];
+			int price = fundingDetailService.rewardDetail(rNum[i]).getPrice();
+
 			FDetailVo fdvo = new FDetailVo();
 			fdvo.setFdNum(fundingDetailService.fdetailGetMaxNum() + 1);
 			fdvo.setId(id);
 			fdvo.setfNum(fNum);
 			fdvo.setrNum(rNum[i]);
-			fdvo.setAmount(amount[i]);
+			fdvo.setAmount(amount);
 			fundingDetailService.insertFDetail(fdvo); // 펀딩내역
 			HashMap<String, Object> map = new HashMap<String, Object>();
-			map.put("price", fundingDetailService.rewardDetail(rNum[i]).getPrice());
+			map.put("price", price);
 			map.put("fNum", fNum);
 			fundingDetailService.addCamout(map); // 현재금액 추가
 			map.clear();
 			map.put("rNum", rNum[i]);
-			map.put("amount", amount[i]);
+			map.put("amount", amounts[i]);
 			fundingDetailService.updateAmount(map); // 남은 수량 수정
+			map.clear();
+			map.put("id", id);
+			map.put("totAmount", totAmount);
+			fundingDetailService.withdraw(map);
 		}
 		session.removeAttribute("selectedFundingList");
 		return "redirect:/funding/fundingDetailforUser?fNum=" + fNum;

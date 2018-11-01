@@ -8,19 +8,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<select id="select" parameterType="string" resultType="users">
-		select *
-		from users where id = #{id}
+		select * from users where id = #{id}
 	</select>
 
 	<insert id="insert" parameterType="users">
 		insert into users values(
 		#{id}, #{pwd}, #{nick}, #{email},
 		 #{addr}, #{gender}, #{phone},
-		#{birth}, sysdate, 0)
+		#{birth}, to_date(to_char(sysdate, 'yyyy-MM-dd hh24:mi:ss'), 'yyyy-MM-dd hh24:mi:ss'), 0)
 	</insert>
 	
-	
-	
+	<update id="withdraw" parameterType="hashmap">
+		update users set balance = balance - #{totAmount} where id = #{id}
+	</update>
 	
 	<update id="update" parameterType="users">
 		update users set pwd=#{pwd}, email=#{email}, nick=#{nick}, addr=#{addr}, phone=#{phone} where id=#{id}

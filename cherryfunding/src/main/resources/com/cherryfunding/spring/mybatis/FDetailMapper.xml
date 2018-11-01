@@ -5,7 +5,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.cherryfunding.spring.vo.FDetailMapper">
 
 	<insert id="insert" parameterType="fDetail">
-		insert into fDetail values(#{fdNum}, #{id}, #{fNum}, #{rNum}, sysdate, '예약', #{amount})
+		insert into fDetail
+		values(#{fdNum}, #{id}, #{fNum}, #{rNum}, to_date(to_char(sysdate, 'yyyy-MM-dd hh24:mi:ss'),
+		'yyyy-MM-dd hh24:mi:ss'), '예약', #{amount})
 	</insert>
 	
 	<select id="getMaxNum" resultType="int">

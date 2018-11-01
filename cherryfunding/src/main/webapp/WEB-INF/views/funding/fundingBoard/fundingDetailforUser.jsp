@@ -9,6 +9,12 @@
 		commentList();
 		updateList();
 		rewardDetail();
+		var errMsg = '${errMsg}';
+		
+		if(errMsg){
+			alert(errMsg);
+		}
+		
 		$("#recommend").on('click', function(){
 			var recomm;
 			var id='${sessionScope.id}';
@@ -150,6 +156,7 @@
 				}else{
 					$("#recommend").text('추천취소');
 				}
+				//$('#fRecommend').text('추천수: ' + data.fRecommend);
 			}
 		});
 	}
@@ -167,13 +174,13 @@
 					var content = value.content;
 					var regdate = value.regdate;
 					var tr = $('<tr></tr>');
-					$(tr).append('<td>' + id + '</td>')
-					$(tr).append('<td>' + content + '</td>')
-					$(tr).append('<td>'+ formatDate(regdate) +'</td>')
+					$(tr).append('<td>' + id + '</td>');
+					$(tr).append('<td>' + content + '</td>');
+					$(tr).append('<td>' + regdate + '</td>');
+					$(tr).append('<td>'+ formatDate(regdate) +'</td>');			
 					$(table).prepend(tr);
 				});
 				$('#comment').append(table);
-				
 			}
 		});
 	}
@@ -183,11 +190,22 @@
 		var day = d.getDate() + '';
 		var year = d.getFullYear();
 		
+		var hh = d.getHours() + '';
+		var mm = d.getMinutes() + '';
+		var ss = d.getSeconds() + '';
+		
 		if (month.length < 2)
 			month = '0' + month;
 		if (day.length < 2)
 			day = '0' + day;
-			return [year, month, day].join('-');
+		if(hh.length < 2)
+			hh = '0' + hh;
+		if(mm.length < 2)
+			mm = '0' + mm;
+		if(ss.length < 2)
+			ss = '0' + ss; 
+		
+			return [year, month, day].join('-') + ' ' + [hh, mm, ss].join(':');
 	}
 	
 	function submitReward(){
@@ -210,6 +228,7 @@
 			 	제목: ${vo.title}<br>
 			 	내용: ${vo.content}<br>
 			 	조회수: ${vo.hit}<br>
+			 	<span id="fRecommend"></span>
  			</div>
  			<div class="col-md-4">
  				<select name="reward">
@@ -223,7 +242,7 @@
 					<div id="selectedReward"></div>
 					<input type="submit" value="리워드 신청">
 				</form><br>
-				<button id="recommend" type="button"></button>
+				<button id="recommend" type="button">추천</button>
  			</div>
 		</div>
 		<div class="row box" id="commment">
