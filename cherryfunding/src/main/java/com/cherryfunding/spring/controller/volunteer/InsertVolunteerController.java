@@ -87,7 +87,7 @@ public class InsertVolunteerController {
 					vpvo.setvNum(vNum);
 					vpvo.setOrgName(orgfilename);
 					vpvo.setSaveName(savefilename);
-					vpvo.setFileSize(Long.toString(filesize));
+					vpvo.setFileSize(filesize);
 					vpvo.setVpInfo(vPinfo[num++]);
 					
 					vPictureService.insert(vpvo);
@@ -101,7 +101,6 @@ public class InsertVolunteerController {
 		}catch(Exception e) {
 			System.out.println(e.getMessage());
 		}
-		
 		return "redirect:/volunteer/volunteerList";
 	}
 }

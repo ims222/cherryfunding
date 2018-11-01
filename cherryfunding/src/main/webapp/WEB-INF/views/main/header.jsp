@@ -13,7 +13,7 @@
 			<li class="active"><a href="${pageContext.request.contextPath}/charity/ingCharityList">후원</a></li>
 			<li><a href="${pageContext.request.contextPath}/funding/ingFundingList">펀딩</a></li>
 			<li><a href="${pageContext.request.contextPath}/sharing/sharingList">나눔</a></li>
-			<li><a href="${pageContext.request.contextPath}/volunteer/insertVolunteer">봉사</a></li>
+			<li><a href="${pageContext.request.contextPath}/volunteer/volunteerList">봉사</a></li>
 		</ul>
 	</nav>
 </div>

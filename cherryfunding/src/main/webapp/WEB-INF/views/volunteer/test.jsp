@@ -4,11 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>home.jsp</title>
+<title>test.jsp</title>
 </head>
 <body>
-	<h1>home_home_home_</h1>
-	
-	<!-- 관리자 -->
+test test
 </body>
 </html>
