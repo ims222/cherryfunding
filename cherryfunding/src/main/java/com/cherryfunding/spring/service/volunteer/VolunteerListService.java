@@ -19,8 +19,8 @@ public class VolunteerListService {
 	@Autowired
 	private VPictureDao vPictureDao;
 	
-	public List<VPictureVo> list(){
-		return vPictureDao.list();
+	public List<VolunteerVo> list(){
+		return volunteerDao.list();
 	}
 	
 	public VPictureVo thumbnail(int vNum) {

@@ -17,7 +17,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="detail" parameterType="string" resultType="vPicture">
 		select * from vPicture where vpNum = #{vpNum}
 	</select>
-
+	
 	<insert id="insert" parameterType="vPicture">
 		insert into vPicture values(#{vpNum}, #{vNum}, #{saveName}, #{orgName}, #{fileSize}, sysdate, #{vpInfo})
 	</insert>
@@ -28,4 +28,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		delete from vPicture where vpNum = #{vpNum}
 	</delete>
 	
+	<select id="thumbnail" resultType="vPicture" parameterType="int">
+		select * from (
+			select aa.*, rownum rnum from (
+				select * from vPicture where vNum = #{vNum} order by vpNum
+			)aa
+		) where rnum = 1
+	</select>
 </mapper>
