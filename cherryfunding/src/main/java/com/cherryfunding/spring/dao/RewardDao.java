@@ -1,5 +1,6 @@
 package com.cherryfunding.spring.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -33,5 +34,13 @@ public class RewardDao {
 
 	public int getPrice(int rNum) {
 		return sqlSession.selectOne(NAMESPACE + "getPrice", rNum);
+	}
+
+	public int updateAmount(HashMap<String, Object> map) {
+		return sqlSession.update(NAMESPACE + "updateAmount", map);
+	}
+
+	public int getAmount(int rNum) {
+		return sqlSession.selectOne(NAMESPACE + "getAmount", rNum);
 	}
 }
