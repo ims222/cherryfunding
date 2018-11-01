@@ -7,7 +7,7 @@
 		<div class="row no-collapse-1">
 			<c:forEach var="vo" items="${list}" varStatus="vs">
 				<section class="4u">
-					<a href="${pageContext.request.contextPath}/volunteer/volunteerList?vNum=${vo.vNum}" class="image featured">
+					<a href="${pageContext.request.contextPath}/volunteer/volunteerDetail?vNum=${vo.vNum}" class="image featured">
 					<img src="${pageContext.request.contextPath}/resources/upload/volunteer/${vo.saveName}"
 						alt="${vo.vpInfo}" height="200px"></a>
 					<div class="box">
