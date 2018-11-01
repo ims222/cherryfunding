@@ -87,6 +87,17 @@ public class FundingDetailController {
 		return selectedList;
 	}
 
+	@RequestMapping(value = "/funding/cancelSelectReward")
+	@ResponseBody
+	public HashMap<String, Object> cancelSelectReward(int i, HttpSession session) {
+		System.out.println("i: " + i + " !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+		ArrayList<Object> list = (ArrayList<Object>) session.getAttribute("selectedFundingList");
+		HashMap<String, Object> map = (HashMap<String, Object>) list.remove(i);
+		//session.removeAttribute("selectedFundingList");
+		session.setAttribute("selectedFundingList", list);
+		return map;
+	}
+
 	@RequestMapping(value = "/funding/insertFDetail", method = RequestMethod.POST)
 	public String insertFDetail(HttpSession session, HttpServletRequest request) {
 		String id = (String) session.getAttribute("id");
