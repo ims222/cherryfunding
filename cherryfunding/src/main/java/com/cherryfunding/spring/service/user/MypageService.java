@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.cherryfunding.spring.dao.MypageDao;
 import com.cherryfunding.spring.vo.MypageVo;
+import com.cherryfunding.spring.vo.UsersVo;
 
 @Service
 public class MypageService {
@@ -25,5 +26,15 @@ public class MypageService {
 	}
 	public List<MypageVo> fundingList(String id) {
 		return dao.fundingList(id);
+	}
+	public int nowBalance(String id) {
+		return dao.nowBalance(id);
+	}
+	
+	public UsersVo getInfo(String id) {
+		return dao.getInfo(id);
+	}
+	public int updateUsers(String id) {
+		return dao.updateUsers(id);
 	}
 }

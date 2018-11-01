@@ -1,9 +1,8 @@
 <%@page import="com.cherryfunding.spring.util.S3Util"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 
 <!DOCTYPE html>
 <html>
@@ -38,16 +37,23 @@ table.type04 td {
 }
 </style>
 <body>
-
 <div class="wrap">
-		<div id="profile">
+	<table class="type04">
+		<tr>
+		  <td>	
 		  	<img src="<%=humanPicture%>" width="111px">
-			<p>${sessionScope.id}님</p>
-		</div>
-		<div id="total">
-			<p>나의 총 후원금액 : ${charitySum }</p>
-			<p>나의 총 펀딩금액 : ${fundingSum }</p>
-		</div>
+			<p style="font-size: 20px;font-weight: bold">&nbsp;&nbsp;${sessionScope.id}님</p>
+		  </td>
+		  <td>	
+			<p>내 잔고 : <fmt:formatNumber value="${balance }" pattern="#,###.##"/> 원</p>
+			<p>총 후원금액 : <fmt:formatNumber value="${charitySum }" pattern="#,###.##"/> 원</p>
+			<p>총 펀딩금액 : <fmt:formatNumber value="${fundingSum }" pattern="#,###.##"/> 원</p>
+		  </td>
+		  <td>
+		     <a href="${pageContext.request.contextPath}/users/getInfo">회원정보수정</a>
+		  </td>
+		 </tr>
+		</table>
 		<p> 후원 목록 </p>
 		<table class="type04">
 			<tr>
@@ -60,7 +66,7 @@ table.type04 td {
 				<tr>
 					<td>${vo.title}</td>
 					<td>${vo.category}</td>	
-					<td>${vo.amount}</td>
+					<td><fmt:formatNumber value="${vo.amount }" pattern="#,###.##"/> 원</td>
 					<td>${vo.regdate}</td>
 				</tr>
 			</c:forEach>
@@ -79,13 +85,12 @@ table.type04 td {
 				<tr>
 					<td>${vo.title}</td>
 					<td>${vo.category}</td>	
-					<td>${vo.price}</td>
+					<td><fmt:formatNumber value="${vo.price }" pattern="#,###.##"/> 원</td>
 					<td>${vo.regdate}</td>
 				</tr>
 			</c:forEach>
 		</table>
 		</div>
->>>>>>> branch 'master' of https://github.com/ims222/cherryfunding.git
 </body>
 </html>
 
