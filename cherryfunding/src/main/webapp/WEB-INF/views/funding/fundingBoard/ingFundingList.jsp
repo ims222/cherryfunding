@@ -77,7 +77,7 @@
 								style="width: <fmt:formatNumber value="${before}" type="percent"/>"
 								aria-valuenow="${before * 100}" aria-valuemin="0"
 								aria-valuemax="100">
-								<fmt:formatNumber value="${before}" type="percent" />
+								<fmt:formatNumber value="${before/100}" type="percent" />
 							</div>
 						</div>
 					</div>

@@ -168,34 +168,26 @@
 <!-- Main -->
 <div id="main">
 	<div class="container">
-		<div class="row no-collapse-1">
-			<section class="6u">
-				<div class="box">
-				 	<p>제목: ${vo.title}</p>
-				 	<p>내용: ${vo.content}</p>
-				 	<p>조회수: ${vo.hit}</p>
-				</div>
-			</section>
-			<section class="6u">
-				<div class="box">
-				<select name="reward">
-						<c:forEach var="reward" items="${rewardList}">
-							<option value="${reward.rNum}">리워드명: ${reward.title}</option>
-						</c:forEach>
-						</select><span id="rewardInfo"></span><br>
-						수량<input type="number" name="amount"><button id="chooseItem">선택</button>
-					<form method="post" action="${pageContext.request.contextPath}/funding/insertFDetail" onsubmit="return submitReward();">
-						<input type="hidden" name="fNum" value="${vo.fNum}">
-						<div id="selectedReward">
-							
-						</div>
-						
-						<input type="submit" value="리워드 신청">
-					</form>
-					<br>
-					<button id="recommend" type="button"></button>
-				</div>
-			</section>
+		<div class="row box">
+			<div class="col-md-8"> 
+			 	제목: ${vo.title}<br>
+			 	내용: ${vo.content}<br>
+			 	조회수: ${vo.hit}<br>
+ 			</div>
+ 			<div class="col-md-4">
+ 				<select name="reward">
+					<c:forEach var="reward" items="${rewardList}">
+					<option value="${reward.rNum}">리워드명: ${reward.title}</option>
+					</c:forEach>
+				</select><br><div id="rewardInfo"></div>
+				수량<input type="number" name="amount"><button id="chooseItem">선택</button>
+				<form method="post" action="${pageContext.request.contextPath}/funding/insertFDetail" onsubmit="return submitReward();">
+					<input type="hidden" name="fNum" value="${vo.fNum}">
+					<div id="selectedReward"></div>
+					<input type="submit" value="리워드 신청">
+				</form><br>
+				<button id="recommend" type="button"></button>
+ 			</div>
 		</div>
 		<div class="row box" id="commment">
 			<!-- 댓글 -->
