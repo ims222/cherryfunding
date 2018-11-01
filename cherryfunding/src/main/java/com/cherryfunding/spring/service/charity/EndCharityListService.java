@@ -1,5 +1,6 @@
 package com.cherryfunding.spring.service.charity;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,12 +19,12 @@ public class EndCharityListService {
 	@Autowired
 	private CPictureDao cpdao;
 
-	public List<CharityVo> list() {
-		return dao.end();
+	public List<CharityVo> list(HashMap<String, Object> map) {
+		return dao.end(map);
 	}
 
-	public CPictureVo thumbnail(int fNum) {
-		return cpdao.thumbnail(fNum);
+	public CPictureVo thumbnail(int cNum) {
+		return cpdao.thumbnail(cNum);
 	}
 
 }

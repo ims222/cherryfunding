@@ -14,20 +14,14 @@
 <div id="main">
 	<div class="container">
 		<div class="btn-group" role="group" aria-label="category" id="category">
-				<button type="button" class="btn btn-secondary">전체보기</button>
-				<button type="button" class="btn btn-secondary">테크·가전</button>
-				<button type="button" class="btn btn-secondary">패션·잡화</button>
-				<button type="button" class="btn btn-secondary">푸드</button>
-				<button type="button" class="btn btn-secondary">홈리빙</button>
-				<button type="button" class="btn btn-secondary">디자인소품</button>
-				<button type="button" class="btn btn-secondary">여행·레저</button>
-				<button type="button" class="btn btn-secondary">스포츠·모빌리티</button>
-				<button type="button" class="btn btn-secondary">반려동물</button>
-				<button type="button" class="btn btn-secondary">공연·컬쳐</button>
-				<button type="button" class="btn btn-secondary">소셜·캠페인</button>
-				<button type="button" class="btn btn-secondary">교육·키즈</button>
-				<button type="button" class="btn btn-secondary">게임·취미</button>
-				<button type="button" class="btn btn-secondary">출판</button>
+			<button type="button" class="btn btn-secondary">전체보기</button>
+			<button type="button" class="btn btn-secondary">아동·청소년</button>
+			<button type="button" class="btn btn-secondary">어르신</button>
+			<button type="button" class="btn btn-secondary">다문화</button>
+			<button type="button" class="btn btn-secondary">장애인</button>
+			<button type="button" class="btn btn-secondary">사회운동</button>
+			<button type="button" class="btn btn-secondary">동물</button>
+			<button type="button" class="btn btn-secondary">환경</button>
 			</div>
 			<form method="get" action="${pageContext.request.contextPath}/charity/prepareCharityList">
 				<input type="hidden" name="category" value="${category}">
@@ -42,15 +36,24 @@
 		<div class="row no-collapse-1">
 			<c:forEach var="vo" items="${list}" varStatus="vs">
 				<section class="4u">
-					<a href="${pageContext.request.contextPath}/charityList/detail?num=${vo.cNum}" class="image featured"> <img
-						src="${pageContext.request.contextPath}/resources/upload/charity/${vo.savename}"
-						alt="${vo.cpinfo}" height="200px"></a>
+					<a href="${pageContext.request.contextPath}/charityList/detail?num=${vo.cNum}" class="image featured"> 
+					<img src="${vo.savename}" alt="${vo.cpinfo}" height="200px"></a>
 					<div class="box">
 						<p>${vo.title}</p>
 						<p>${vo.id}</p>
 						<p>목표금액: ${vo.amount}</p>
 						<p>현재금액: ${vo.cAmount}</p>
+						
+						fmt:formatDate value="${vo.sDate}" var="sDate" pattern="yyyyMMdd"/>
+						<fmt:parseDate value="${sDate}" var="sdateDate" pattern="yyyyMMdd"/>
+						<fmt:parseNumber value="${sDateDate.time / (1000 * 60 * 60 * 24)}" var="start" integerOnly="true"/>
 
+						<jsp:useBean id="today" class="java.util.Date"/>
+						<fmt:formatDate value="${today}" var="todayDate" pattern="yyyyMMdd"/>
+						<fmt:parseDate value="${todayDate}" var="nowDate" pattern="yyyyMMdd"/>
+						<fmt:parseNumber value="${nowDate.time / (1000 * 60 * 60 * 24)}" var="now" integerOnly="true"/>
+						<p>D${now - start}</p>
+						
 						<div class="progress">
 							<c:set var="before" value="${vo.cAmount * 100 / vo.amount}" />
 							<div class="progress-bar" role="progressbar"

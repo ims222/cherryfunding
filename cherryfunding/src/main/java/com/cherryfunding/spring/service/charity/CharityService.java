@@ -22,8 +22,8 @@ public class CharityService {
 		return dao.list();
 	}
 
-	public CharityVo select(int num) {
-		return dao.select(num);
+	public CharityVo select(int cNum) {
+		return dao.select(cNum);
 	}
 
 	public int insert(CharityVo vo) {
@@ -34,16 +34,16 @@ public class CharityService {
 		return dao.update(vo);
 	}
 
-	public int delete(int num) {
-		return dao.delete(num);
+	public int delete(int cNum) {
+		return dao.delete(cNum);
 	}
 
 	public int getMaxNum() {
 		return dao.getMaxNum();
 	}
 
-	public CPictureVo thumbnail(int fNum) {
-		return cpdao.thumbnail(fNum);
+	public CPictureVo thumbnail(int cNum) {
+		return cpdao.thumbnail(cNum);
 	}
 
 }

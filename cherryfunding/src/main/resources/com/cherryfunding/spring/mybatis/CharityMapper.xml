@@ -3,6 +3,9 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cherryfunding.spring.vo.CharityMapper">
+	<sql id="isConfirm">
+		and confirm = 'y'
+	</sql>
 	<sql id="category">
 		<if test="category != null and category != '' and category != '전체보기'">
 			and category = #{category}
@@ -13,9 +16,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			and ${field} like '%' || #{keyword} || '%'
 		</if>
 	</sql>
+	<sql id="sort">
+		<choose>
+			<when test="sort == 'popular'">
+				order by hit desc, cNum desc
+			</when>
+			<when test="sort == 'cAmount'">
+				order by cAmount desc, cNum desc
+			</when>
+			<otherwise>
+				order by cNum desc
+			</otherwise>
+		</choose>
+	</sql>
 	
 	<select id="list" resultType="charity">
-		select * from charity
+		select * from charity order by cNum
 	</select>
 	
 	<select id="select" parameterType="int" resultType="charity">
@@ -37,7 +53,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getMaxNum" resultType="int">
 		select nvl(max(cNum), 0) from charity
 	</select>
+	<update id="hitUp" parameterType="int">
+		update charity set hit = hit + 1 where cNum = #{cNum}
+	</update>
 	
+	<select id="waitList" resultType="charity">
+		select * from charity where confirm = 'n'
+	</select>
+		
+	<update id="confirm" parameterType="int">
+		update charity set confirm = 'y' where cNum = #{cNum}
+	</update>
 	
 	
 	<!-- 준비중 펀딩 -->
@@ -58,12 +84,43 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		order by cNum desc
 	</select>
 	<!-- 진행중 펀딩 -->
-	<select id="ing" parameterType= "hashmap" resultType="charity">
-		select * from charity
-		<![CDATA[where sdate < sysdate and edate > sysdate]]>
-		<include refid="category"/>
-		<include refid="search"/>
-		order by cNum desc
+	<select id="ing" parameterType="hashmap" resultType="charity">
+		<choose>
+			<when test="sort == 'end'">
+				select * from (
+    				select * from charity
+    				<![CDATA[where sdate < sysdate and edate > sysdate]]>
+					)aa,(
+					select (edate-sysdate)cal, cNum from charity
+					<![CDATA[where sdate < sysdate and edate > sysdate]]>
+					)bb
+				where aa.cNum = bb.cNum
+				<include refid="category" />
+				<include refid="search" />
+				order by cal asc
+			</when>
+			<when test="sort == 'recommend'">
+				select bb.* from (
+					select * from (
+    					select aa.* from (
+     						select count(c.cNum) cnt, c.cNum cn from (
+       							select * from charity
+       							<![CDATA[where sdate < sysdate and edate > sysdate]]>
+      						) c, crecommend cr where c.cNum = cr.cNum group by c.cNum
+    					)aa
+    				order by cnt desc, cn desc)
+			)aa, (select * from charity )bb
+			where aa.cn = bb.cNum(+) order by cnt
+			</when>
+			<otherwise>
+				select * from charity
+				<![CDATA[where sdate < sysdate and edate > sysdate]]>
+				<include refid="isConfirm"/>
+				<include refid="category" />
+				<include refid="search" />
+				<include refid="sort" />
+			</otherwise>
+		</choose>
 	</select>
 	
 	<!-- 메인 요약 -->
@@ -85,8 +142,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				select aa.*, rownum rnum from (
 					select * from charity
 					<![CDATA[where sdate > sysdate and edate > sysdate]]>
-					and (sysdate - sdate) = (select max(sysdate - sdate) cNum from funding
-								<![CDATA[where sdate > sysdate and edate > sysdate]]>) order by cnum desc
+					and (sysdate - sdate) = (select max(sysdate - sdate) cNum from charity
+								<![CDATA[where sdate > sysdate and edate > sysdate]]>) order by cNum desc
 											)aa
 			) where rnum =1
 		</select>
@@ -116,5 +173,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				<![CDATA[where sdate < sysdate and edate > sysdate]]>)
 			) where rnum = 1
 		</select>
-	
+			<!-- 전체 펀딩 금액, 갯수-->
+	<select id="totCharity" resultType="hashmap">
+		select NVL(count(cNum), 0) cnt, NVL(sum(cAmount), 0) s from charity
+	</select>
+	<!-- 오늘 펀딩 금액, 갯수 -->
+	<select id="todayCharity" resultType="hashmap">
+		select NVL(count(charity.cNum), 0) cnt, NVL(sum(charity.cAmount), 0) s from (
+			select * from charity
+			<![CDATA[where sdate < sysdate and edate > sysdate]]>) charity,
+			(select * from cdetail where regdate = sysdate) cdetail
+			where charity.cNum = cdetail.cNum
+	</select>
 </mapper>
