@@ -13,8 +13,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select NVL(max(fdNum), 0) from fDetail
 	</select>
 	
-	<select id="listByfNum" resultType="fDetail">
-		select * from fDetail where fNum = #{fNum}
+	<select id="listByfNum" resultType="hashmap" parameterType="int">
+		select id, sum(fd.amount * price) sumPrice from fDetail fd, reward r
+		where fd.rNum = r.rNum and r.fNum = #{fNum} group by id
 	</select>
 
 </mapper>

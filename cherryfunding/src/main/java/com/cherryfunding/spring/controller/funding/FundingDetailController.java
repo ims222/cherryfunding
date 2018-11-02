@@ -116,19 +116,6 @@ public class FundingDetailController {
 		for (int i = 0; i < samount.length; i++) {
 			amounts[i] = Integer.parseInt(samount[i]);
 		}
-		int totAmount = 0;
-		for (int i = 0; i < rNum.length; i++) {
-			int amount = amounts[i];
-			int price = fundingDetailService.rewardDetail(rNum[i]).getPrice();
-
-			totAmount += (amount * price);
-		}
-
-		if (fundingDetailService.userInfo(id).getBalance() < totAmount) {
-			request.setAttribute("errMsg", "잔액이 부족합니다.");
-			return "forward:/funding/fundingDetailforUser";
-		}
-
 		for (int i = 0; i < rNum.length; i++) {
 			int amount = amounts[i];
 			int price = fundingDetailService.rewardDetail(rNum[i]).getPrice();
@@ -148,10 +135,6 @@ public class FundingDetailController {
 			map.put("rNum", rNum[i]);
 			map.put("amount", amounts[i]);
 			fundingDetailService.updateAmount(map); // 남은 수량 수정
-			map.clear();
-			map.put("id", id);
-			map.put("totAmount", totAmount);
-			fundingDetailService.withdraw(map);
 		}
 		session.removeAttribute("selectedFundingList");
 		return "redirect:/funding/fundingDetailforUser?fNum=" + fNum;

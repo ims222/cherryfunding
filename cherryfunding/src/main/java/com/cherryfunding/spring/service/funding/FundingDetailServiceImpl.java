@@ -87,16 +87,6 @@ public class FundingDetailServiceImpl implements FundingDetailService {
 	}
 
 	@Override
-	public UsersVo userInfo(String id) {
-		return usersDao.select(id);
-	}
-
-	@Override
-	public int withdraw(HashMap<String, Object> map) {
-		return usersDao.withdraw(map);
-	}
-
-	@Override
 	public int getRecommend(int fNum) {
 		return fRecommendDao.getRecommend(fNum);
 	}
