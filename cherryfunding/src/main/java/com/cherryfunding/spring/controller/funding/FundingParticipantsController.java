@@ -1,6 +1,5 @@
 package com.cherryfunding.spring.controller.funding;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -11,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cherryfunding.spring.service.funding.FundingParticipantsService;
-import com.cherryfunding.spring.vo.FDetailVo;
 
 @Controller
 public class FundingParticipantsController {
@@ -20,24 +18,20 @@ public class FundingParticipantsController {
 	private FundingParticipantsService fundingParticipantsService;
 
 	@RequestMapping("/funding/fundingParticipation")
-	public String fundingParticipation(int fNum, Model model) {
+	public String fundingParticipation(int fNum, Model model) { // 펀딩 참여자 목록
 		model.addAttribute("fNum", fNum);
-		return "funding/fundingBoard/fundingParticipants";
+		return ".fundingParticipants";
 	}
 
 	@RequestMapping("/funding/fundingParticipants")
 	@ResponseBody
-	public HashMap<String, List<FDetailVo>> fundingParticipants(int fNum) {
-		List<FDetailVo> list = fundingParticipantsService.listByfNum(fNum);
-
-		HashMap<String, List<FDetailVo>> listByUsers = new HashMap<String, List<FDetailVo>>();
-		for (FDetailVo vo : list) {
-			String id = vo.getId();
-			if (!listByUsers.containsKey(id)) {
-				listByUsers.put(id, new ArrayList<FDetailVo>());
-			}
-			listByUsers.get(id).add(vo);
+	public List<HashMap<String, Object>> fundingParticipants(int fNum) { // 펀딩 참여자 목록
+		List<HashMap<String, Object>> list = fundingParticipantsService.listByfNum(fNum);
+		for (HashMap<String, Object> map : list) {
+			String id = (String) map.get("ID");
+			String nick = fundingParticipantsService.usersInfo(id).getNick();
+			map.put("nick", nick); // 닉네임
 		}
-		return listByUsers;
+		return list;
 	}
 }

@@ -29,9 +29,18 @@
 						<p>D${cEndNow-cEndEnd}</p>
 						<div class="progress">
 							<c:set var="cEndBefore" value="${summary.cEnd.cAmount * 100 / summary.cEnd.amount}" />
+							<c:set var="before" value="${vo.camout * 100 / vo.amount}" />
+							<c:choose>
+								<c:when test="${cEndBefore >= 1000}">
+									<c:set var="barcEndBefore" value="100"/>
+								</c:when>
+								<c:otherwise>
+									<c:set var="barcEndBefore" value="${barcEndBefore}" />
+								</c:otherwise>
+							</c:choose>
 							<div class="progress-bar" role="progressbar"
-								style="width: <fmt:formatNumber value="${cEndBefore/100}" type="percent"/>"
-								aria-valuenow="${cEndBefore * 100}" aria-valuemin="0"
+								style="width: <fmt:formatNumber value="${barcEndBefore/100}" type="percent"/>"
+								aria-valuenow="${barcEndBefore * 10000}" aria-valuemin="0"
 								aria-valuemax="100">
 								<fmt:formatNumber value="${cEndBefore/100}" type="percent" />
 							</div>
@@ -60,9 +69,17 @@
 						<p>D${cNewNow - cNewStart}</p>
 						<div class="progress">
 							<c:set var="cNewBefore" value="${summary.cNew.cAmount * 100 / summary.cNew.amount}" />
+							<c:choose>
+								<c:when test="${cNewBefore >= 1000}">
+									<c:set var="barcNewBefore" value="100"/>
+								</c:when>
+								<c:otherwise>
+									<c:set var="barcNewBefore" value="${cNewBefore}" />
+								</c:otherwise>
+							</c:choose>
 							<div class="progress-bar" role="progressbar"
-								style="width: <fmt:formatNumber value="${cNewBefore/100}" type="percent"/>"
-								aria-valuenow="${cNewBefore * 100}" aria-valuemin="0"
+								style="width: <fmt:formatNumber value="${barcNewBefore/100}" type="percent"/>"
+								aria-valuenow="${barcNewBefore * 100000}" aria-valuemin="0"
 								aria-valuemax="100">
 								<fmt:formatNumber value="${cNewBefore/100}" type="percent" />
 							</div>
@@ -91,9 +108,17 @@
 						<p>D${cHotNow-cHotEnd}</p>
 						<div class="progress">
 							<c:set var="cHotBefore" value="${summary.cHot.cAmount * 100 / summary.cHot.amount}" />
+							<c:choose>
+								<c:when test="${cHotBefore >= 1000}">
+									<c:set var="barcHotBefore" value="100"/>
+								</c:when>
+								<c:otherwise>
+									<c:set var="barcHotBefore" value="${barcHotBefore}" />
+								</c:otherwise>
+							</c:choose>
 							<div class="progress-bar" role="progressbar"
-								style="width: <fmt:formatNumber value="${cHotBefore/100}" type="percent"/>"
-								aria-valuenow="${cHotBefore * 100}" aria-valuemin="0"
+								style="width: <fmt:formatNumber value="${barcHotBefore/100}" type="percent"/>"
+								aria-valuenow="${barcHotBefore * 100}" aria-valuemin="0"
 								aria-valuemax="100">
 								<fmt:formatNumber value="${cHotBefore/100}" type="percent" />
 							</div>
@@ -122,9 +147,17 @@
 							<p>D${cPriceNow-cPriceEnd}</p>
 							<div class="progress">
 								<c:set var="cPriceBefore" value="${summary.cPrice.cAmount * 100 / summary.cPrice.amount}" />
+								<c:choose>
+									<c:when test="${cPriceBefore >= 1000}">
+										<c:set var="barcPriceBefore" value="100"/>
+									</c:when>
+									<c:otherwise>
+										<c:set var="barcPriceBefore" value="${cPriceBefore}" />
+									</c:otherwise>
+								</c:choose>
 								<div class="progress-bar" role="progressbar"
-									style="width: <fmt:formatNumber value="${cPriceBefore/100}" type="percent"/>"
-									aria-valuenow="${cPriceBefore * 100}" aria-valuemin="0"
+									style="width: <fmt:formatNumber value="${barcPriceBefore/100}" type="percent"/>"
+									aria-valuenow="${barcPriceBefore * 10000}" aria-valuemin="0"
 									aria-valuemax="100">
 									<fmt:formatNumber value="${cPriceBefore/100}" type="percent" />
 								</div>
@@ -155,9 +188,17 @@
 							<p>D${fEndNow-fEndEnd}</p>
 							<div class="progress">
 								<c:set var="fEndBefore" value="${summary.fEnd.camout * 100 / summary.fEnd.amount}" />
+								<c:choose>
+									<c:when test="${fEndBefore >= 1000}">
+										<c:set var="barfEndBefore" value="100"/>
+									</c:when>
+									<c:otherwise>
+										<c:set var="barfEndBefore" value="${fEndBefore}" />
+									</c:otherwise>
+								</c:choose>
 								<div class="progress-bar" role="progressbar"
-									style="width: <fmt:formatNumber value="${fEndBefore/100}" type="percent"/>"
-									aria-valuenow="${fEndBefore * 100}" aria-valuemin="0"
+									style="width: <fmt:formatNumber value="${barfEndBefore/100}" type="percent"/>"
+									aria-valuenow="${barfEndBefore * 10000}" aria-valuemin="0"
 									aria-valuemax="100">
 									<fmt:formatNumber value="${fEndBefore/100}" type="percent" />
 								</div>
@@ -186,9 +227,17 @@
 							<p>D${fNewNow - fNewStart}</p>
 							<div class="progress">
 								<c:set var="fNewBefore" value="${summary.fNew.camout * 100 / summary.fNew.amount}" />
+								<c:choose>
+									<c:when test="${fNewBefore >= 1000}">
+										<c:set var="barfNewBefore" value="100"/>
+									</c:when>
+									<c:otherwise>
+										<c:set var="barfNewBefore" value="${fNewBefore}" />
+									</c:otherwise>
+								</c:choose>
 								<div class="progress-bar" role="progressbar"
-									style="width: <fmt:formatNumber value="${fNewBefore/100}" type="percent"/>"
-									aria-valuenow="${fNewBefore * 100}" aria-valuemin="0"
+									style="width: <fmt:formatNumber value="${barfNewBefore/100}" type="percent"/>"
+									aria-valuenow="${barfNewBefore * 10000}" aria-valuemin="0"
 									aria-valuemax="100">
 									<fmt:formatNumber value="${fNewBefore/100}" type="percent" />
 								</div>
@@ -217,9 +266,17 @@
 							<p>D${fHotNow-fHotEnd}</p>
 							<div class="progress">
 								<c:set var="fHotBefore" value="${summary.fHot.camout * 100 / summary.fHot.amount}" />
+								<c:choose>
+									<c:when test="${fHotBefore >= 1000}">
+										<c:set var="barfHotBefore" value="100"/>
+									</c:when>
+									<c:otherwise>
+										<c:set var="barfHotBefore" value="${fHotBefore}" />
+									</c:otherwise>
+								</c:choose>
 								<div class="progress-bar" role="progressbar"
-									style="width: <fmt:formatNumber value="${fHotBefore/100}" type="percent"/>"
-									aria-valuenow="${fHotBefore * 100}" aria-valuemin="0"
+									style="width: <fmt:formatNumber value="${barfHotBefore/100}" type="percent"/>"
+									aria-valuenow="${barfHotBefore * 10000}" aria-valuemin="0"
 									aria-valuemax="100">
 									<fmt:formatNumber value="${fHotBefore/100}" type="percent" />
 								</div>
@@ -248,9 +305,17 @@
 							<p>D${fPriceNow-fPriceEnd}</p>
 							<div class="progress">
 								<c:set var="fPriceBefore" value="${summary.fPrice.camout * 100 / summary.fPrice.amount}" />
+								<c:choose>
+									<c:when test="${fPriceBefore >= 1000}">
+										<c:set var="barfPriceBefore" value="100"/>
+									</c:when>
+									<c:otherwise>
+										<c:set var="barfPriceBefore" value="${fPriceBefore}" />
+									</c:otherwise>
+								</c:choose>
 								<div class="progress-bar" role="progressbar"
-									style="width: <fmt:formatNumber value="${fPriceBefore/100}" type="percent"/>"
-									aria-valuenow="${fPriceBefore * 100}" aria-valuemin="0"
+									style="width: <fmt:formatNumber value="${barfPriceBefore/100}" type="percent"/>"
+									aria-valuenow="${barfPriceBefore * 10000}" aria-valuemin="0"
 									aria-valuemax="100">
 									<fmt:formatNumber value="${fPriceBefore/100}" type="percent" />
 								</div>

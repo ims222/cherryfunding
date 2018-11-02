@@ -73,7 +73,12 @@
 		$("#chooseItem").on('click', function(){
 			var rNum = $("select[name='reward']").val();
 			var amount = $("input[name='amount']").val();
-			var selectedRNum = $("#selectedReward").children();
+			
+			if(!amount){
+				alert("수량을 입력하셔요");
+				return;
+			}
+			
 			$.ajax({
 				url:'${pageContext.request.contextPath}/funding/getAmount',
 				data:{rNum: rNum, amount: amount, fNum:'${vo.fNum}'},
@@ -222,7 +227,8 @@
 					<div id="selectedReward"></div>
 					<input type="submit" value="리워드 신청">
 				</form><br>
-				<button id="recommend" type="button">추천</button>
+				<button id="recommend" type="button">추천</button><br>
+				<a href="${pageContext.request.contextPath}/funding/fundingParticipation?fNum=${vo.fNum}">펀딩 참여자</a>
  			</div>
 		</div>
 		<div class="row box" id="commment">

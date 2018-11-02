@@ -73,9 +73,17 @@
 						<p>D${now-end}</p>
 						<div class="progress">
 							<c:set var="before" value="${vo.camout * 100 / vo.amount}" />
+							<c:choose>
+								<c:when test="${before >= 1000}">
+									<c:set var="barBefore" value="100"/>
+								</c:when>
+								<c:otherwise>
+									<c:set var="barBefore" value="${before}" />
+								</c:otherwise>
+							</c:choose>
 							<div class="progress-bar" role="progressbar"
-								style="width: <fmt:formatNumber value="${before/100}" type="percent"/>"
-								aria-valuenow="${before * 100}" aria-valuemin="0"
+								style="width: <fmt:formatNumber value="${barBefore/100}" type="percent"/>"
+								aria-valuenow="${barBefore * 10000}" aria-valuemin="0"
 								aria-valuemax="100">
 								<fmt:formatNumber value="${before/100}" type="percent" />
 							</div>
@@ -85,7 +93,6 @@
 			</c:forEach>
 		</div>
 		<div class="row">
-
 			<!-- Content -->
 			<div class="6u">
 				<section>

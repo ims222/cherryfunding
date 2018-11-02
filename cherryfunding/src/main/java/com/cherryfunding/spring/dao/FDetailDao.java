@@ -1,5 +1,6 @@
 package com.cherryfunding.spring.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -23,7 +24,7 @@ public class FDetailDao {
 		return sqlSession.selectOne(NAMESPACE + "getMaxNum");
 	}
 
-	public List<FDetailVo> listByfNum(int fNum) {
+	public List<HashMap<String, Object>> listByfNum(int fNum) {
 		return sqlSession.selectList(NAMESPACE + "listByfNum", fNum);
 	}
 }

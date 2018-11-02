@@ -1,11 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -15,20 +9,22 @@
 			dataType:'json',
 			type:'post',
 			success:function(data){
-				console.log(Object.keys(data));
-				for(var n in data){
-					console.log(data[n]);
-					var fDetail = data[n];
-					for(var i=0;i<fDetail.length;i++){
-						$('body').append('fdNum: ' + fDetail[i].fdNum + ', id: ' + fDetail[i].id + ', fNum: ' + fDetail[i].fNum + '<br>');	
+				if(data.length > 0){
+					for(var i=0;i<data.length;i++){
+						$('#fundingParticipants').append(data[i].nick + '님이 ' + data[i].SUMPRICE + '원 펀딩으로 참여하였습니다.<br>');	
 					}
+				}else{
+					$('#fundingParticipants').append('아직 참여자가 없어요 ㅜㅜ<br>')
+											.append('<strong>첫번째 주인공</strong>')
+											.append('이 되세요!!!');
 				}
 			}
 		});
 	});
 </script>
-<body>
-
-
-</body>
-</html>
+<!-- Main -->
+<div id="main">
+	<div class="container">
+		<div class="box" id="fundingParticipants"></div>
+	</div>
+</div>

@@ -30,10 +30,6 @@ public interface FundingDetailService {
 
 	int getAmount(int rNum);
 
-	UsersVo userInfo(String id);
-
-	int withdraw(HashMap<String, Object> map);
-	
 	int getRecommend(int fNum);
 
 }
