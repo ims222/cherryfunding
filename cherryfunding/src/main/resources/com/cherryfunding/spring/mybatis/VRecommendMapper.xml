@@ -3,21 +3,20 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cherryfunding.spring.vo.VRecommendMapper">
-	<select id="list" resultType="vRecommend">
-		select * from vRecommend
-	</select>
 
-	<select id="select" parameterType="string" resultType="vRecommend">
-		select * from vRecommend where id = #{id}
+	<select id="isRecomm" parameterType="vRecommend" resultType="vRecommend">
+		select * from vRecommend where vNum=#{vNum} and id=#{id}
 	</select>
 
 	<insert id="insert" parameterType="vRecommend">
-		insert into vRecommend values()
+		insert into vRecommend values(#{vrNum}, #{vNum}, #{id})
 	</insert>
-	<update id="update" parameterType="vRecommend">
-		update vRecommend set #{pwd} where #{id}
-	</update>
-	<delete id="delete" parameterType="string">
-		delete from vRecommend where id=#{id}
+	
+	<select id="getMaxNum" resultType="int">
+		select NVL(max(vrNum), 0) from vRecommend
+	</select>
+	
+	<delete id="delete" parameterType="vRecommend">
+		delete from vRecommend where vNum=#{vNum} and id=#{id}
 	</delete>
 </mapper>
