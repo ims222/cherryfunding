@@ -44,7 +44,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into funding
 		values(#{fNum},#{title},#{content},#{amount},
 		0,#{sdate},#{edate},#{category},
-		#{confirm},#{aid},#{addr}, sysdate, #{id},0)
+		#{confirm},#{aid},#{addr}, (sysdate + (1/24)*9), #{id},0)
 	</insert>
 	
 	<update id="update" parameterType="funding">
@@ -157,15 +157,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 메인 요약 -->
 		<!-- 종료임바크 -->
 		<select id="mainEnd" resultType="funding">
-			select * from (
-				select aa.*, rownum rnum from(
-					select * from funding
-					<![CDATA[where sdate < sysdate and edate > sysdate]]>
-					and (edate-sysdate) = (select min(edate-sysdate) from funding
-						<![CDATA[where sdate < sysdate and edate > sysdate]]>) order by fNum desc
-										)aa
-			) where rnum = 1 
-			<include refid="isConfirm"/>
+			select * from(
+				select f.*, rownum rnum from funding f
+				<![CDATA[where sdate < sysdate and edate > sysdate]]>
+				<include refid="isConfirm"/>
+				and ceil(edate-sysdate) = (  select ceil(min(edate-sysdate)) from funding
+				<![CDATA[where sdate < sysdate and edate > sysdate]]>
+				<include refid="isConfirm"/>)
+			)where rnum = 1
 		</select>
 		
 		<!-- 새로 시작하는 -->
@@ -213,7 +212,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 전체 펀딩 금액, 갯수-->
 	<select id="totFunding" resultType="hashmap">
-		select NVL(count(fNum), 0) cnt, NVL(sum(camout), 0) s from funding
+		select NVL(count(fNum), 0) cnt, NVL(sum(camout), 0) s from funding where confirm = 'y'
 	</select>
 	<!-- 오늘 펀딩 금액, 갯수 -->
 	<select id="todayFunding" resultType="hashmap">

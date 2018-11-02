@@ -5,7 +5,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.cherryfunding.spring.vo.FCommentMapper">
 
 	<insert id="insert" parameterType="fComment">
-		insert into fComment values(#{fcNum}, #{id}, #{fNum}, #{content}, sysdate)
+		insert into fComment values(#{fcNum}, #{id}, #{fNum}, #{content}, (sysdate + (1/24)*9))
 	</insert>
 	
 	<select id="getMaxNum" resultType="int">

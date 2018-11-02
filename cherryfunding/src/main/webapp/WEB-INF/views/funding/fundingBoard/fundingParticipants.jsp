@@ -9,9 +9,14 @@
 			dataType:'json',
 			type:'post',
 			success:function(data){
-				console.log("data", data);
-				for(var i=0;i<data.length;i++){
-					$('#fundingParticipants').append(data[i].nick + '님이 ' + data[i].SUMPRICE + '원 펀딩으로 참여하였습니다.<br>');	
+				if(data.length > 0){
+					for(var i=0;i<data.length;i++){
+						$('#fundingParticipants').append(data[i].nick + '님이 ' + data[i].SUMPRICE + '원 펀딩으로 참여하였습니다.<br>');	
+					}
+				}else{
+					$('#fundingParticipants').append('아직 참여자가 없어요 ㅜㅜ<br>')
+											.append('<strong>첫번째 주인공</strong>')
+											.append('이 되세요!!!');
 				}
 			}
 		});

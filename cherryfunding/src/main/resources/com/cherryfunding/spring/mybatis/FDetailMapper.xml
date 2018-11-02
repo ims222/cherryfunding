@@ -6,7 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<insert id="insert" parameterType="fDetail">
 		insert into fDetail
-		values(#{fdNum}, #{id}, #{fNum}, #{rNum}, sysdate, '예약', #{amount})
+		values(#{fdNum}, #{id}, #{fNum}, #{rNum}, (sysdate + (1/24)*9), '예약', #{amount})
 	</insert>
 	
 	<select id="getMaxNum" resultType="int">
