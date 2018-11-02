@@ -130,10 +130,21 @@
 		<br>
 		
 		
-		<span>해시태그</span>
-		<label for="hashtag">#1</label><input type="checkbox" name="hashtag" value="n1">
-		<label for="hashtag">#2</label><input type="checkbox" name="hashtag" value="n2">
-		<label for="hashtag">#3</label><input type="checkbox" name="hashtag" value="n3">
+		해시태그<br>
+		<input type="checkbox" name="hashtag" value="테크·가전" id="tech"><label for="tech">#테크·가전&nbsp</label>
+		<input type="checkbox" name="hashtag" value="패션·잡화" id="fashion"><label for="fashion">#패션·잡화&nbsp</label>
+		<input type="checkbox" name="hashtag" value="뷰티" id="beauty"><label for="beauty">#뷰티&nbsp</label>
+		<input type="checkbox" name="hashtag" value="푸드" id="food"><label for="food">#푸드&nbsp</label>
+		<input type="checkbox" name="hashtag" value="홈리빙" = id="homeliving"><label for="homeliving">#홈리빙&nbsp</label>
+		<input type="checkbox" name="hashtag" value="디자인소품" id="design"><label for="design">#디자인소품&nbsp</label>
+		<input type="checkbox" name="hashtag" value="여행·레저" id="tour"><label for="tour">#여행·레저&nbsp</label>
+		<input type="checkbox" name="hashtag" value="스포츠·모빌리티" id="sports"><label for="sports">#스포츠·모빌리티&nbsp</label>
+		<input type="checkbox" name="hashtag" value="반려동물" id="animal"><label for="animal">#반려동물&nbsp</label>
+		<input type="checkbox" name="hashtag" value="공연·컬쳐" id="culture"><label for="culture">#공연·컬쳐&nbsp</label>
+		<input type="checkbox" name="hashtag" value="소셜·캠페인" id="social"><label for="social">#소셜·캠페인&nbsp</label>
+		<input type="checkbox" name="hashtag" value="교육·키즈" id="education"><label for="education">#교육·키즈&nbsp</label>
+		<input type="checkbox" name="hashtag" value="게임·취미" id="game"><label for="game">#게임·취미&nbsp</label>
+		<input type="checkbox" name="hashtag" value="출판" id="book"><label for="book">#출판&nbsp</label>
 		<br>
 		<div id="inputHashtag">
 			<input type="text" name="hashtag" data-hash="ht"><br>
