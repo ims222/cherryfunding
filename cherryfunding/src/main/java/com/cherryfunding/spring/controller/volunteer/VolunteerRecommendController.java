@@ -4,11 +4,11 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cherryfunding.spring.service.volunteer.VRecommendService;
-import com.cherryfunding.spring.vo.SRecommendVo;
+
 import com.cherryfunding.spring.vo.VRecommendVo;
 
 
@@ -22,6 +22,7 @@ public class VolunteerRecommendController {
 	@RequestMapping(value="/volunteer/volunteerIsRecommend", produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String volunteerIsRecommend(String id, int vNum) {
+		System.out.println("추천/////////////////////");
 		JSONObject obj=new JSONObject();
 		VRecommendVo vo=vRecommendService.isRecomm(new VRecommendVo(0, vNum, id));
 		if(vo==null) {
