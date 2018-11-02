@@ -30,7 +30,7 @@
 						dataType: 'json',
 						type:'post',
 						success: function(data){
-							isRecommend();
+							isRecommed();
 						}
 					});
 				}
@@ -49,7 +49,7 @@
 			var vNum = '${vo.vNum}';
 			
 			$.ajax({
-				url:'${pageContext.request.contextPath}/sharing/insertComment',
+				url:'${pageContext.request.contextPath}/volunteer/insertComment',
 				dataType:'json',
 				type:'post',
 				data: {id:id, content:content, vNum:vNum},
@@ -61,7 +61,7 @@
 		});
 	});
 	
-	function isRecommend(){
+	function isRecommed(){
 		$.ajax({
 			url: '${pageContext.request.contextPath}/volunteer/volunteerIsRecommend',
 			data:{id:'${sessionScope.id}', vNum: '${vo.vNum}'},
@@ -92,48 +92,38 @@
 					var tr = $('<tr></tr>');
 					$(tr).append('<td>' + id + '</td>')
 					$(tr).append('<td>' + content + '</td>')
-					$(tr).append('<td>'+ formatDate(regdate) +'</td>')
-					$(table).prepend(tr);
+					$(tr).append('<td>'+ regdate +'</td>')
+					$(table).append(tr);
 				});
 				$('#comment').append(table);
 				
 			}
 		});
 	}
-	function formatDate(date) {
-		var d = new Date(date);
-		var month = (d.getMonth() + 1) + '';
-		var day = d.getDate() + '';
-		var year = d.getFullYear();
-		
-		if (month.length < 2)
-			month = '0' + month;
-		if (day.length < 2)
-			day = '0' + day;
-			return [year, month, day].join('-');
-	} 
-
 
 </script>
+<!-- Main -->
 <div id="main">
 	<div class="container">
 		<div class="row no-collapse-1">
 			<section class="12u">
-			 <div class="box">
-			 	<p>제목: ${vo.title}</p>
-			 	<p>내용: ${vo.content}</p>
-			 	<p>인원: ${vo.members}</p>
-			 	<p>장소: ${vo.place}</p>
-			 	<p>날짜: ${vo.dDay}</p>
-			 	<button id="recommend" type="button">추천</button>
-			 </div>
+				<div class="box">
+				 	<p>제목: ${vo.title}</p>
+				 	<p>내용: ${vo.content}</p>
+				 	<p>날짜: ${vo.dDay }</p>
+				 	<p>장소: ${vo.place }</p>
+				 	<p>모집인원: ${vo.members }</p>
+				 	 
+				 	<button id="recommend" type="button"></button>
+				</div>
+				
 			</section>
+			
 		</div>
+		<div class="row box" id="commment"></div>
+		<form id="insertComment">
+			<input type="text" name="content"><br>
+			<input type="submit" value="댓글 등록">
+		</form>
 	</div>
-	<br>
-	<!-- <br><div class="row box" id="commment"></div>	-->
-	<form id="insertComment">
-		<input type="text" name="content"><br>
-		<input type="submit" value="댓글 등록">
-	</form>
 </div>
