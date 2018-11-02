@@ -6,27 +6,34 @@ import java.util.List;
 import com.cherryfunding.spring.vo.FDetailVo;
 import com.cherryfunding.spring.vo.FundingVo;
 import com.cherryfunding.spring.vo.RewardVo;
+import com.cherryfunding.spring.vo.UsersVo;
 
 public interface FundingDetailService {
 
-	public FundingVo detail(int fNum);
+	FundingVo detail(int fNum);
 
-	public List<RewardVo> rewardList(int fNum);
+	List<RewardVo> rewardList(int fNum);
 
-	public int hitUp(int fNum);
+	int hitUp(int fNum);
 
-	public RewardVo rewardDetail(int rNum);
+	RewardVo rewardDetail(int rNum);
 
-	public int fdetailGetMaxNum();
+	int fdetailGetMaxNum();
 
-	public int getPrice(int rNum);
+	int getPrice(int rNum);
 
 	int insertFDetail(FDetailVo vo);
 
 	int addCamout(HashMap<String, Object> map);
 
 	int updateAmount(HashMap<String, Object> map);
-	
+
 	int getAmount(int rNum);
+
+	UsersVo userInfo(String id);
+
+	int withdraw(HashMap<String, Object> map);
+	
+	int getRecommend(int fNum);
 
 }

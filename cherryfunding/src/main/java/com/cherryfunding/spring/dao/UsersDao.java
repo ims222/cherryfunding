@@ -14,28 +14,36 @@ public class UsersDao {
 	@Autowired
 	SqlSession sqlSession;
 	private static final String NAMESPACE = "com.cherryfunding.spring.mybatis.UsersMapper.";
-	
+
 	public int insert(UsersVo vo) {
 		return sqlSession.insert(NAMESPACE + "insert", vo);
 	}
-	
+
 	public UsersVo login(UsersVo vo) {
 		return sqlSession.selectOne(NAMESPACE + "login", vo);
 	}
-	public List<UsersVo> list(){
+
+	public List<UsersVo> list() {
 		return sqlSession.selectList(NAMESPACE + "list");
 	}
+
 	public UsersVo select(String id) {
-		return sqlSession.selectOne(NAMESPACE + "select",id);
+		return sqlSession.selectOne(NAMESPACE + "select", id);
 	}
+
 	public int update(UsersVo vo) {
-		return sqlSession.update(NAMESPACE + "update",vo);
+		return sqlSession.update(NAMESPACE + "update", vo);
 	}
+
 	public int delete(HashMap<String, String> map) {
-		return sqlSession.delete(NAMESPACE + "delete",map);
+		return sqlSession.delete(NAMESPACE + "delete", map);
 	}
-	
+
 	public UsersVo userlogin(HashMap<String, String> map) {
 		return sqlSession.selectOne(NAMESPACE + "userlogin", map);
+	}
+
+	public int withdraw(HashMap<String, Object> map) {
+		return sqlSession.update(NAMESPACE + "withdraw", map);
 	}
 }

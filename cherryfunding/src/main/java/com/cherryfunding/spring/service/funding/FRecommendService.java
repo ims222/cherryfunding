@@ -28,4 +28,8 @@ public class FRecommendService {
 		return fRecommendDao.delete(vo);
 	}
 
+	public int getRecommend(int fNum) {
+		return fRecommendDao.getRecommend(fNum);
+	}
+
 }

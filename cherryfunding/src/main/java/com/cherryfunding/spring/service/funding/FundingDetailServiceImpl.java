@@ -8,11 +8,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.cherryfunding.spring.dao.FDetailDao;
+import com.cherryfunding.spring.dao.FRecommendDao;
 import com.cherryfunding.spring.dao.FundingDao;
 import com.cherryfunding.spring.dao.RewardDao;
+import com.cherryfunding.spring.dao.UsersDao;
 import com.cherryfunding.spring.vo.FDetailVo;
 import com.cherryfunding.spring.vo.FundingVo;
 import com.cherryfunding.spring.vo.RewardVo;
+import com.cherryfunding.spring.vo.UsersVo;
 
 @Transactional
 @Service
@@ -25,7 +28,13 @@ public class FundingDetailServiceImpl implements FundingDetailService {
 	private RewardDao rewardDao;
 
 	@Autowired
-	FDetailDao fDetailDao;
+	private FDetailDao fDetailDao;
+
+	@Autowired
+	private UsersDao usersDao;
+
+	@Autowired
+	private FRecommendDao fRecommendDao;
 
 	@Override
 	public FundingVo detail(int fNum) {
@@ -75,6 +84,21 @@ public class FundingDetailServiceImpl implements FundingDetailService {
 	@Override
 	public int getAmount(int rNum) {
 		return rewardDao.getAmount(rNum);
+	}
+
+	@Override
+	public UsersVo userInfo(String id) {
+		return usersDao.select(id);
+	}
+
+	@Override
+	public int withdraw(HashMap<String, Object> map) {
+		return usersDao.withdraw(map);
+	}
+
+	@Override
+	public int getRecommend(int fNum) {
+		return fRecommendDao.getRecommend(fNum);
 	}
 
 }

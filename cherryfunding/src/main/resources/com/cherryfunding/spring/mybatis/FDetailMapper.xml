@@ -5,11 +5,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.cherryfunding.spring.vo.FDetailMapper">
 
 	<insert id="insert" parameterType="fDetail">
-		insert into fDetail values(#{fdNum}, #{id}, #{fNum}, #{rNum}, sysdate, '예약', #{amount})
+		insert into fDetail
+		values(#{fdNum}, #{id}, #{fNum}, #{rNum}, sysdate, '예약', #{amount})
 	</insert>
 	
 	<select id="getMaxNum" resultType="int">
 		select NVL(max(fdNum), 0) from fDetail
+	</select>
+	
+	<select id="listByfNum" resultType="fDetail">
+		select * from fDetail where fNum = #{fNum}
 	</select>
 
 </mapper>

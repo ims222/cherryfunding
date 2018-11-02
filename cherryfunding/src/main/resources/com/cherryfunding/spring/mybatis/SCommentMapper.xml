@@ -12,7 +12,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<select id="commentList" parameterType="int" resultType="sComment">
-		select * from sComment where sNum = #{num} order by scNum
+		select scNum, id, content, to_char(regdate, 'yyyy-mm-dd hh24:mi:ss') regdate,
+		sNum from sComment where sNum = #{num} order by scNum
 	</select>
 
 </mapper>

@@ -8,8 +8,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<select id="select" parameterType="string" resultType="users">
-		select *
-		from users where id = #{id}
+		select * from users where id = #{id}
 	</select>
 
 	<insert id="insert" parameterType="users">
@@ -19,8 +18,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		#{birth}, sysdate, 0)
 	</insert>
 	
-	
-	
+	<update id="withdraw" parameterType="hashmap">
+		update users set balance = balance - #{totAmount} where id = #{id}
+	</update>
 	
 	<update id="update" parameterType="users">
 		update users set pwd=#{pwd}, email=#{email}, nick=#{nick}, addr=#{addr}, phone=#{phone} where id=#{id}

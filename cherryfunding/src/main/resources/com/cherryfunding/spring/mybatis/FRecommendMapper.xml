@@ -20,4 +20,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		delete from fRecommend where fNum=#{fNum} and id=#{id}
 	</delete>
 	
+	<select id="getRecommend" parameterType="int" resultType="int">
+		select NVL(count(frNum), 0) from frecommend where fNum = #{fNum}
+	</select>
+	
 </mapper>

@@ -44,7 +44,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into funding
 		values(#{fNum},#{title},#{content},#{amount},
 		0,#{sdate},#{edate},#{category},
-		#{confirm},#{aid},#{addr},sysdate,#{id},0)
+		#{confirm},#{aid},#{addr}, sysdate, #{id},0)
 	</insert>
 	
 	<update id="update" parameterType="funding">
@@ -79,12 +79,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update funding set confirm = 'y' where fNum = #{fNum}
 	</update>
 	
+
 	<update id="wait" parameterType="int">
 		update funding set confirm ='n' where fNum = #{fNum}
 	</update>
-		
+
 	<update id="addCamout" parameterType="hashmap">
 		update funding set camout = camout + #{price} where fNum = #{fNum}
+
 	</update>
 
 

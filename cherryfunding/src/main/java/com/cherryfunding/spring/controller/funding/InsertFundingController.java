@@ -41,6 +41,9 @@ public class InsertFundingController {
 
 	@Autowired
 	private InsertFundingService insertFundingService;
+	
+	@Autowired
+	private S3Util s3;
 
 	@RequestMapping(value = "/funding/fundingApplication", method = RequestMethod.GET)
 	public String fundingForm() {
@@ -109,7 +112,6 @@ public class InsertFundingController {
 			List<MultipartFile> files = request.getFiles("fPicture");
 			int num = 0;
 			for (MultipartFile file : files) { // 사진들
-				S3Util s3 = new S3Util();
 				String orgfilename = file.getOriginalFilename();
 				String savefilename = String.valueOf(UUID.randomUUID());
 				long filesize = file.getSize();

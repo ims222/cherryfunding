@@ -30,10 +30,10 @@
 						<div class="progress">
 							<c:set var="cEndBefore" value="${summary.cEnd.cAmount * 100 / summary.cEnd.amount}" />
 							<div class="progress-bar" role="progressbar"
-								style="width: <fmt:formatNumber value="${cEndBefore}" type="percent"/>"
+								style="width: <fmt:formatNumber value="${cEndBefore/100}" type="percent"/>"
 								aria-valuenow="${cEndBefore * 100}" aria-valuemin="0"
 								aria-valuemax="100">
-								<fmt:formatNumber value="${cEndBefore}" type="percent" />
+								<fmt:formatNumber value="${cEndBefore/100}" type="percent" />
 							</div>
 						</div>
 					</div>
@@ -61,10 +61,10 @@
 						<div class="progress">
 							<c:set var="cNewBefore" value="${summary.cNew.cAmount * 100 / summary.cNew.amount}" />
 							<div class="progress-bar" role="progressbar"
-								style="width: <fmt:formatNumber value="${cNewBefore}" type="percent"/>"
+								style="width: <fmt:formatNumber value="${cNewBefore/100}" type="percent"/>"
 								aria-valuenow="${cNewBefore * 100}" aria-valuemin="0"
 								aria-valuemax="100">
-								<fmt:formatNumber value="${cNewBefore}" type="percent" />
+								<fmt:formatNumber value="${cNewBefore/100}" type="percent" />
 							</div>
 						</div>
 					</div>
@@ -92,10 +92,10 @@
 						<div class="progress">
 							<c:set var="cHotBefore" value="${summary.cHot.cAmount * 100 / summary.cHot.amount}" />
 							<div class="progress-bar" role="progressbar"
-								style="width: <fmt:formatNumber value="${cHotBefore}" type="percent"/>"
+								style="width: <fmt:formatNumber value="${cHotBefore/100}" type="percent"/>"
 								aria-valuenow="${cHotBefore * 100}" aria-valuemin="0"
 								aria-valuemax="100">
-								<fmt:formatNumber value="${cHotBefore}" type="percent" />
+								<fmt:formatNumber value="${cHotBefore/100}" type="percent" />
 							</div>
 						</div>
 					</div>
@@ -123,10 +123,10 @@
 							<div class="progress">
 								<c:set var="cPriceBefore" value="${summary.cPrice.cAmount * 100 / summary.cPrice.amount}" />
 								<div class="progress-bar" role="progressbar"
-									style="width: <fmt:formatNumber value="${cPriceBefore}" type="percent"/>"
+									style="width: <fmt:formatNumber value="${cPriceBefore/100}" type="percent"/>"
 									aria-valuenow="${cPriceBefore * 100}" aria-valuemin="0"
 									aria-valuemax="100">
-									<fmt:formatNumber value="${cPriceBefore}" type="percent" />
+									<fmt:formatNumber value="${cPriceBefore/100}" type="percent" />
 								</div>
 							</div>
 						</div>
@@ -156,10 +156,10 @@
 							<div class="progress">
 								<c:set var="fEndBefore" value="${summary.fEnd.camout * 100 / summary.fEnd.amount}" />
 								<div class="progress-bar" role="progressbar"
-									style="width: <fmt:formatNumber value="${fEndBefore}" type="percent"/>"
+									style="width: <fmt:formatNumber value="${fEndBefore/100}" type="percent"/>"
 									aria-valuenow="${fEndBefore * 100}" aria-valuemin="0"
 									aria-valuemax="100">
-									<fmt:formatNumber value="${fEndBefore}" type="percent" />
+									<fmt:formatNumber value="${fEndBefore/100}" type="percent" />
 								</div>
 							</div>
 						</div>
@@ -187,10 +187,10 @@
 							<div class="progress">
 								<c:set var="fNewBefore" value="${summary.fNew.camout * 100 / summary.fNew.amount}" />
 								<div class="progress-bar" role="progressbar"
-									style="width: <fmt:formatNumber value="${fNewBefore}" type="percent"/>"
+									style="width: <fmt:formatNumber value="${fNewBefore/100}" type="percent"/>"
 									aria-valuenow="${fNewBefore * 100}" aria-valuemin="0"
 									aria-valuemax="100">
-									<fmt:formatNumber value="${fNewBefore}" type="percent" />
+									<fmt:formatNumber value="${fNewBefore/100}" type="percent" />
 								</div>
 							</div>
 						</div>
@@ -218,10 +218,10 @@
 							<div class="progress">
 								<c:set var="fHotBefore" value="${summary.fHot.camout * 100 / summary.fHot.amount}" />
 								<div class="progress-bar" role="progressbar"
-									style="width: <fmt:formatNumber value="${fHotBefore}" type="percent"/>"
+									style="width: <fmt:formatNumber value="${fHotBefore/100}" type="percent"/>"
 									aria-valuenow="${fHotBefore * 100}" aria-valuemin="0"
 									aria-valuemax="100">
-									<fmt:formatNumber value="${fHotBefore}" type="percent" />
+									<fmt:formatNumber value="${fHotBefore/100}" type="percent" />
 								</div>
 							</div>
 						</div>
@@ -249,10 +249,10 @@
 							<div class="progress">
 								<c:set var="fPriceBefore" value="${summary.fPrice.camout * 100 / summary.fPrice.amount}" />
 								<div class="progress-bar" role="progressbar"
-									style="width: <fmt:formatNumber value="${fPriceBefore}" type="percent"/>"
+									style="width: <fmt:formatNumber value="${fPriceBefore/100}" type="percent"/>"
 									aria-valuenow="${fPriceBefore * 100}" aria-valuemin="0"
 									aria-valuemax="100">
-									<fmt:formatNumber value="${fPriceBefore}" type="percent" />
+									<fmt:formatNumber value="${fPriceBefore/100}" type="percent" />
 								</div>
 							</div>
 						</div>

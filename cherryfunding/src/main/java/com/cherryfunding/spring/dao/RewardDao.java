@@ -43,4 +43,5 @@ public class RewardDao {
 	public int getAmount(int rNum) {
 		return sqlSession.selectOne(NAMESPACE + "getAmount", rNum);
 	}
+
 }

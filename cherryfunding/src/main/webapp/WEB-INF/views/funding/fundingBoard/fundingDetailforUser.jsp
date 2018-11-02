@@ -7,7 +7,14 @@
 	$(document).ready(function(){
 		isRecommed();
 		commentList();
-		updateList()
+		updateList();
+		rewardDetail();
+		var errMsg = '${errMsg}';
+		
+		if(errMsg){
+			alert(errMsg);
+		}
+		
 		$("#recommend").on('click', function(){
 			var recomm;
 			var id='${sessionScope.id}';
@@ -41,12 +48,16 @@
 		$("#insertComment").on('submit', function(e){
 			e.preventDefault();
 			var id = '${sessionScope.id}';
-			if(!id)
+			if(!id){
 				alert('로그인 해주세욧ㅅ');
+				return;
+			}
 			var content = $("#insertComment input[name='content']").val();
-			if(!content)
+			if(!content){
 				alert('댓글을 작성해욧');
-			
+				return;
+			}
+				
 			$.ajax({
 				url:'${pageContext.request.contextPath}/funding/insertComment',
 				dataType:'json',
@@ -79,20 +90,22 @@
 			});
 		});
 		
-		$("select[name='reward']").on('change', function(){
-			$.ajax({
-				url:'${pageContext.request.contextPath}/funding/rewardDetail',
-				data:{rNum: $(this).val()},
-				dataType:'json',
-				type:'post',
-				success: function(data){
-					var price = data.price;
-					var amount = data.amount;
-					$("#rewardInfo").text("가격: " + price + " 남은 수량: " + amount);
-				}
-			});
-		});
+		$("select[name='reward']").on('change', rewardDetail);
 	});
+	
+	function rewardDetail(){
+		$.ajax({
+			url:'${pageContext.request.contextPath}/funding/rewardDetail',
+			data:{rNum: $("select[name='reward']").val()},
+			dataType:'json',
+			type:'post',
+			success: function(data){
+				var price = data.price;
+				var amount = data.amount;
+				$("#rewardInfo").text("가격: " + price + " 남은 수량: " + amount);
+			}
+		});
+	}
 	
 	function updateList(){
 		$.ajax({
@@ -102,7 +115,7 @@
 			type: 'post',
 			success: function(data){
 				$("#selectedReward").empty();
-				for(var i=0;i<data.length;i++){
+				for(let i=0;i<data.length;i++){
 					var rNum = data[i].rNum;
 					var title = data[i].title;
 					var amount = data[i].amount;
@@ -113,9 +126,22 @@
 					var amountInput = $("<input>").attr("type", 'hidden')
 												.attr('name', 'amount')
 												.attr('value', amount);
+					var cancelReward = $("<a></a>").text('삭제')
+														.attr('href', '#')
+														.click(function(){
+															$.ajax({
+																url: '${pageContext.request.contextPath}/funding/cancelSelectReward',
+																data: {i:i},
+																dataType: 'json',
+																type:'post',
+																success: function(data){
+																	updateList();
+																}
+															});
+														});
 					
 					var div = $("<div></div>").append("<span>리워드명: " + title + " 수량: " + amount +"</span>")
-											.append(rNumInput).append(amountInput);					
+											.append(rNumInput).append(amountInput).append(cancelReward);					
 					$("#selectedReward").append(div);
 				}
 			}
@@ -134,6 +160,7 @@
 				}else{
 					$("#recommend").text('추천취소');
 				}
+				$('#fRecommend').text('추천수: ' + data.fRecommend);
 			}
 		});
 	}
@@ -151,27 +178,14 @@
 					var content = value.content;
 					var regdate = value.regdate;
 					var tr = $('<tr></tr>');
-					$(tr).append('<td>' + id + '</td>')
-					$(tr).append('<td>' + content + '</td>')
-					$(tr).append('<td>'+ formatDate(regdate) +'</td>')
-					$(table).prepend(tr);
+					$(tr).append('<td>' + id + '</td>');
+					$(tr).append('<td>' + content + '</td>');
+					$(tr).append('<td>' + regdate + '</td>');
+					$(table).append(tr);
 				});
 				$('#comment').append(table);
-				
 			}
 		});
-	}
-	function formatDate(date) {
-		var d = new Date(date);
-		var month = (d.getMonth() + 1) + '';
-		var day = d.getDate() + '';
-		var year = d.getFullYear();
-		
-		if (month.length < 2)
-			month = '0' + month;
-		if (day.length < 2)
-			day = '0' + day;
-			return [year, month, day].join('-');
 	}
 	
 	function submitReward(){
@@ -194,6 +208,7 @@
 			 	제목: ${vo.title}<br>
 			 	내용: ${vo.content}<br>
 			 	조회수: ${vo.hit}<br>
+			 	<span id="fRecommend"></span>
  			</div>
  			<div class="col-md-4">
  				<select name="reward">
@@ -207,7 +222,7 @@
 					<div id="selectedReward"></div>
 					<input type="submit" value="리워드 신청">
 				</form><br>
-				<button id="recommend" type="button"></button>
+				<button id="recommend" type="button">추천</button>
  			</div>
 		</div>
 		<div class="row box" id="commment">

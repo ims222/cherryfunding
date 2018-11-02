@@ -13,7 +13,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="commentList" parameterType="int" resultType="fComment">
-		select * from fComment where fNum = #{fNum} order by fcNum
+		select fcNum, id, fNum, content, to_char(regdate, 'yyyy-mm-dd hh24:mi:ss') regdate from fComment
+		where fNum = #{fNum} order by fcNum
 	</select>
 
 </mapper>
+

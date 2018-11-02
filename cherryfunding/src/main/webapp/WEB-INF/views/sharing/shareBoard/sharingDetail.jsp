@@ -92,27 +92,14 @@
 					var tr = $('<tr></tr>');
 					$(tr).append('<td>' + id + '</td>')
 					$(tr).append('<td>' + content + '</td>')
-					$(tr).append('<td>'+ formatDate(regdate) +'</td>')
-					$(table).prepend(tr);
+					$(tr).append('<td>'+ regdate +'</td>')
+					$(table).append(tr);
 				});
 				$('#comment').append(table);
 				
 			}
 		});
 	}
-	function formatDate(date) {
-		var d = new Date(date);
-		var month = (d.getMonth() + 1) + '';
-		var day = d.getDate() + '';
-		var year = d.getFullYear();
-		
-		if (month.length < 2)
-			month = '0' + month;
-		if (day.length < 2)
-			day = '0' + day;
-			return [year, month, day].join('-');
-	} 
-
 
 </script>
 <!-- Main -->

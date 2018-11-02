@@ -28,6 +28,7 @@ public class FRecommendController {
 		} else {
 			obj.put("result", "no");
 		}
+		obj.put("fRecommend", fRecommendService.getRecommend(fNum));
 		return obj.toString();
 	}
 
