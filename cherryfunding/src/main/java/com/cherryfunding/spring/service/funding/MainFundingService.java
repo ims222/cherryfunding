@@ -78,8 +78,12 @@ public class MainFundingService {
 		return fdao.totFunding();
 	}
 
-	public HashMap<String, Object> todayFunding() {
-		return fdao.todayFunding();
+	public int todayFundingPrice() { // 오늘 펀딩 금액
+		return fdao.todayFundingPrice();
+	}
+
+	public int todayFundingCount() { // 오늘 펀딩 갯수
+		return fdao.todayFundingCount();
 	}
 
 }

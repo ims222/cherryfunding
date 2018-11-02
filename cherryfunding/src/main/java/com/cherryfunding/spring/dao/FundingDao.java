@@ -77,8 +77,12 @@ public class FundingDao {
 		return sqlSession.selectOne(NAMESPACE + "totFunding");
 	}
 
-	public HashMap<String, Object> todayFunding() {
-		return sqlSession.selectOne(NAMESPACE + "todayFunding");
+	public int todayFundingPrice() { //오늘 펀딩 금액
+		return sqlSession.selectOne(NAMESPACE + "todayFundingPrice");
+	}
+
+	public int todayFundingCount() { //오늘 펀딩 갯수
+		return sqlSession.selectOne(NAMESPACE + "todayFundingCount");
 	}
 
 	public List<FundingVo> waitList() { // 대기목록
@@ -88,13 +92,11 @@ public class FundingDao {
 	public int confirm(int fNum) { // 컨펌
 		return sqlSession.update(NAMESPACE + "confirm", fNum);
 	}
-	
+
 	public int wait(int fNum) { // 컨펌
 		return sqlSession.update(NAMESPACE + "wait", fNum);
 	}
-	
-	
-	
+
 	public List<FundingVo> confirmList() { // 컨펌 확인 후 목록
 		return sqlSession.selectList(NAMESPACE + "confirmList");
 	}

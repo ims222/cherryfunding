@@ -17,7 +17,7 @@ public class HomeController {
 
 	@Autowired
 	private MainCharityService mcService;
-	
+
 	@Autowired
 	private MainFundingService mfService;
 
@@ -30,15 +30,16 @@ public class HomeController {
 		summary.put("cNew", mcService.mainNew()); // 새로 시작하는 펀딩
 		summary.put("cHot", mcService.mainHot()); // 진행중 펀딩중 조회수가 가장 높은
 		summary.put("cPrice", mcService.mainPrice()); // 진행중 펀딩중 참여금액이 제일 높은
-		//펀딩 요약
+		// 펀딩 요약
 		summary.put("fEnd", mfService.mainEnd()); // 종료임박
 		summary.put("fNew", mfService.mainNew()); // 새로 시작하는 펀딩
 		summary.put("fHot", mfService.mainHot()); // 진행중 펀딩중 조회수가 가장 높은
-		summary.put("fPrice",  mfService.mainPrice()); // 진행중 펀딩중 참여금액이 제일 높은
+		summary.put("fPrice", mfService.mainPrice()); // 진행중 펀딩중 참여금액이 제일 높은
 		summary.put("totFunding", mfService.totFunding());
-		summary.put("todayFunding", mfService.todayFunding());
+		summary.put("todayFundingPrice", mfService.todayFundingPrice()); // 오늘 펀딩 금액
+		summary.put("todayFundingCount", mfService.todayFundingCount()); // 오늘 펀딩 갯수
 		model.addAttribute("summary", summary);
-		
+
 		return ".main";
 	}
 

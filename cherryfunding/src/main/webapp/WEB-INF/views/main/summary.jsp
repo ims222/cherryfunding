@@ -348,9 +348,9 @@
 					<p>${summary.totFunding.S}원</p>
 					<br>
 					<p>오늘 펀딩 갯수</p>
-					<p>${summary.todayFunding.CNT}</p>
+					<p>${summary.todayFundingCount}</p>
 					<p>오늘 펀딩 금액</p>
-					<p>${summary.todayFunding.S}원</p>
+					<p>${summary.todayFundingPrice}원</p>
 					<br>
 				</div>
 			</div>
