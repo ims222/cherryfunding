@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -50,18 +51,18 @@
 		
 	});
 	function appCommit(){
-		if(!$("#title").val()){
-		 alert("제목을 입력해주세욧");
-		 return false;
-		}
-		if(!$("#content").val()){
-			alert("내용을 입력해주세욧");
-			 return false;
-		}
-		if(!$("#amount").val()){
-			alert("목표금액을 설정하세욧");
-			return false;
-		}
+		//if(!$("#title").val()){
+		// alert("제목을 입력해주세욧");
+		// return false;
+		//}
+		//if(!$("#content").val()){
+		//	alert("내용을 입력해주세욧");
+		//	 return false;
+		//}
+		//if(!$("#amount").val()){
+		//	alert("목표금액을 설정하세욧");
+		//	return false;
+		//}
 		if(!$("#sdate").val()){
 			alert("시작일자를 선택하세요");
 			return false;
@@ -95,7 +96,8 @@
 </script>
 </head>
 <body>
-	<form method="post" action="${pageContext.request.contextPath}/funding/fundingApplication" enctype="multipart/form-data">
+	<form method="post" action="${pageContext.request.contextPath}/funding/fundingApplication"
+	enctype="multipart/form-data" onsubmit="return appCommit()">
 		<input type="hidden" name="id" value="${sessionScope.id}">
 		<label for="title">제목</label>
 		<input type="text" name="title" id="title" value="${fvo.title}" placeholder="제목을 입력하세요">
@@ -106,13 +108,13 @@
 		<span><form:errors path="fvo.content"/></span><br>
 		
 		<label for="amount">목표금액</label>
-		<input type="number" name="amount" id="amount" value="${fvo.amount}" placeholder="목표금액을 입력하세요">
+		<input type="number" name="amount" id="amount" value="1000" min="1000" step="1000">
 		<span><form:errors path="fvo.amount"/></span><br>
 		
 		<label for="sdate">시작날짜</label>
-		<input type="date" name="sdate" id="sdate" value="${fvo.sdate}"><span><form:errors path="fvo.sdate"/></span><br>
+		<input type="date" name="sdate" id="sdate" value="${fvo.sdate}"><span></span><br>
 		<label for="edate">종료날짜</label>
-		<input type="date" name="edate" id="edate" value="${fvo.edate}"><span><form:errors path="fvo.edate"/></span><br>
+		<input type="date" name="edate" id="edate" value="${fvo.edate}"><span></span><br>
 		
 		<label for="category">카테고리</label>
 		<select name="category">
@@ -132,7 +134,6 @@
 			<option value="출판">출판</option>
 		</select>
 		<br>
-		
 		
 		해시태그<br>
 		<input type="checkbox" name="hashtag" value="테크·가전" id="tech"><label for="tech">#테크·가전&nbsp</label>
