@@ -12,7 +12,7 @@
 				if(data.length > 0){
 					for(var i=0;i<data.length;i++){
 						console.log(data[i]);
-						var a = $('<a></a>').attr('href', '#').text('수락');
+						var a = $('<a></a>').attr('href', '${pageContext.request.contextPath}/shring/sharingConfirm?slNum=' + data[i].SLNUM).text('수락');
 						$('#sharingParticipants').append('신청번호: ' + data[i].SLNUM + ' ')
 												.append('아이템번호: ' + data[i].SINUM + ' ')
 												.append('아이디: ' + data[i].ID + ' ')

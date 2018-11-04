@@ -28,4 +28,11 @@ public class SListDao {
 		return sqlSession.selectList(NAMESPACE + "listBysNum", sNum);
 	}
 
+	public int confirm(int slNum) {
+		return sqlSession.update(NAMESPACE + "confirm", slNum);
+	}
+
+	public SListVo select(int slNum) {
+		return sqlSession.selectOne(NAMESPACE + "select", slNum);
+	}
 }

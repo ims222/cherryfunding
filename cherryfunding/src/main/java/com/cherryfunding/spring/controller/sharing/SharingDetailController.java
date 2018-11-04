@@ -120,12 +120,7 @@ public class SharingDetailController {
 				int amount = (Integer) map.get("amount");
 				SListVo sListVo = new SListVo(0, sNum, id, null, null, siNum, amount);
 				sharingDetailService.sListInsert(sListVo); // 나눔 신청자 등록
-				// 남은 수량 수정
-//				HashMap<String, Object> updateMap = new HashMap<String, Object>();
-//				updateMap.put("siNum", siNum);
-//				updateMap.put("amount", amount);
-				//sharingDetailService.updateAmount(updateMap);
-				iterator.remove();
+				iterator.remove(); //아이템 삭제
 			}
 		}
 		return "redirect:/sharing/sharingDetail?sNum=" + sNum;
