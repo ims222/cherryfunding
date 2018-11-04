@@ -1,5 +1,6 @@
 package com.cherryfunding.spring.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -26,4 +27,13 @@ public class SItemDao {
 	public List<SItemVo> itemList(int sNum) {
 		return sqlSession.selectList(NAMESPACE + "itemList", sNum);
 	}
+
+	public SItemVo detail(int siNum) {
+		return sqlSession.selectOne(NAMESPACE + "detail", siNum);
+	}
+
+	public int updateAmount(HashMap<String, Object> map) {
+		return sqlSession.update(NAMESPACE + "updateAmount", map);
+	}
+
 }

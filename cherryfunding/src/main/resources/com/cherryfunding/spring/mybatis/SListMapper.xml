@@ -3,17 +3,16 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cherryfunding.spring.vo.SListMapper">
-	<select id="list" resultType="sList">
-		select * from sList
-	</select>
-
-	<select id="select" parameterType="string" resultType="sList">
-		select * from sList where id = #{id}
-	</select>
 
 	<insert id="insert" parameterType="sList">
-		insert into sList values()
+		insert into sList values(#{slNum}, #{sNum}, #{id}, 'n', null, #{siNum})
 	</insert>
+	
+	<select id="getMaxNum" resultType="int">
+		select NVL(max(slNum), 0) from sList
+	</select>
+	
+
 	<update id="update" parameterType="sList">
 		update sList set #{pwd} where #{id}
 	</update>

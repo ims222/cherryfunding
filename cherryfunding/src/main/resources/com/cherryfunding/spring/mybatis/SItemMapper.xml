@@ -6,6 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="insert" parameterType="sItem">
 		insert into sitem values(#{siNum}, #{sNum}, #{title}, #{amount})
 	</insert>
+	
 	<select id="getMaxNum" resultType="int">
 		select NVL(max(sinum), 0) from sitem
 	</select>
@@ -13,11 +14,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="itemList" parameterType="int" resultType="sItem">
 		select * from sItem where sNum = #{sNum}
 	</select>
-
-	<update id="update" parameterType="sItem">
-		update sItem set #{pwd} where #{id}
+	
+	<select id="detail" parameterType="int" resultType="sItem">
+		select * from sItem where siNum = #{siNum}
+	</select>
+	
+	<update id="updateAmount" parameterType="hashmap">
+		update sItem set amount = amount - #{amount} where siNum = #{siNum}
 	</update>
-	<delete id="delete" parameterType="string">
-		delete from sItem where id=#{id}
-	</delete>
+	
 </mapper>

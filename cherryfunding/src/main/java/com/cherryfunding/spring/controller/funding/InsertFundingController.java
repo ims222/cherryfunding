@@ -58,7 +58,6 @@ public class InsertFundingController {
 	@RequestMapping(value = "/funding/fundingApplication", method = RequestMethod.POST)
 	public String fundingApplication(@ModelAttribute("fvo") @Valid FundingVo fvo, BindingResult result,
 			MultipartHttpServletRequest request, HttpSession session) {
-		System.out.println("!!! " + fvo.getContent().length() + "   dddd");
 		if (result.hasErrors()) {
 			return ".inputFunding";
 		}
