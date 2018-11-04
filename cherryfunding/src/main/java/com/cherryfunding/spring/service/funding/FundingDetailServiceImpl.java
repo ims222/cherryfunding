@@ -71,8 +71,9 @@ public class FundingDetailServiceImpl implements FundingDetailService {
 	}
 
 	@Override
-	public int insertFDetail(FDetailVo vo) {
-		return fDetailDao.insert(vo);
+	public int insertFDetail(FDetailVo fDetailVo) {
+		fDetailVo.setFdNum(this.fdetailGetMaxNum() + 1);
+		return fDetailDao.insert(fDetailVo);
 	}
 
 	@Override

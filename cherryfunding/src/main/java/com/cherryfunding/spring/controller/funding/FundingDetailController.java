@@ -2,6 +2,7 @@ package com.cherryfunding.spring.controller.funding;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -16,7 +17,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.cherryfunding.spring.service.funding.FundingDetailService;
 import com.cherryfunding.spring.vo.FDetailVo;
 import com.cherryfunding.spring.vo.RewardVo;
-import com.cherryfunding.spring.vo.SListVo;
 
 @Controller
 public class FundingDetailController {
@@ -107,19 +107,15 @@ public class FundingDetailController {
 		String id = (String) session.getAttribute("id");
 		int fNum = Integer.parseInt(request.getParameter("fNum"));
 		ArrayList<Object> list = (ArrayList<Object>) session.getAttribute("selectedFundingList");
+		Iterator iterator = list.iterator();
 
-		for (Object l : list) {
-			HashMap<String, Object> map = (HashMap<String, Object>) l;
+		while (iterator.hasNext()) {
+			HashMap<String, Object> map = (HashMap<String, Object>) iterator.next();
 			if ((Integer) map.get("fNum") == fNum) {
 				int rNum = (Integer) map.get("rNum");
 				int amount = (Integer) map.get("amount");
 
-				FDetailVo fdvo = new FDetailVo();
-				fdvo.setFdNum(fundingDetailService.fdetailGetMaxNum() + 1);
-				fdvo.setId(id);
-				fdvo.setfNum(fNum);
-				fdvo.setrNum(rNum);
-				fdvo.setAmount(amount);
+				FDetailVo fdvo = new FDetailVo(0, id, fNum, rNum, null, null, amount);
 				fundingDetailService.insertFDetail(fdvo); // 펀딩내역
 				HashMap<String, Object> rewardMap = new HashMap<String, Object>();
 				rewardMap.put("price", fundingDetailService.rewardDetail(rNum).getPrice());
@@ -129,10 +125,9 @@ public class FundingDetailController {
 				rewardMap.put("rNum", rNum);
 				rewardMap.put("amount", amount);
 				fundingDetailService.updateAmount(rewardMap); // 남은 수량 수정
+				iterator.remove(); // 리워드 지우기
 			}
-			// list.remove((Object) l);
 		}
-		session.removeAttribute("selectedFundingList");
 		return "redirect:/funding/fundingDetailforUser?fNum=" + fNum;
 	}
 }
