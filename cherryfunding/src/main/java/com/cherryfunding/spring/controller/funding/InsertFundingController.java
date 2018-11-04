@@ -74,14 +74,13 @@ public class InsertFundingController {
 
 			for (String hashtag : hashtags) { // 해시태그 저장
 				if (hashtag != null && !hashtag.equals("")) {
-					FHashtagVo fhvo = new FHashtagVo(fHashtagService.getMaxNum() + 1, fNum, hashtag);
+					FHashtagVo fhvo = new FHashtagVo(0, fNum, hashtag);
 					insertFundingService.fhinsert(fhvo);
 				}
 			}
 
 			for (int ind = 0; ind < rewards.length; ind++) { // 리와드 저장
 				RewardVo rvo = new RewardVo();
-				rvo.setrNum(rewardService.getMaxNum() + 1);
 				rvo.setfNum(fNum);
 				rvo.setTitle(rewards[ind]);
 				rvo.setPrice(Integer.parseInt(prices[ind]));
@@ -101,7 +100,6 @@ public class InsertFundingController {
 				long filesize = file.getSize();
 				if (filesize > 0) { // 사진db저장
 					FPictureVo fpvo = new FPictureVo();
-					fpvo.setFpNum(fPictureService.getMaxNum() + 1);
 					fpvo.setfNum(fNum);
 					fpvo.setSavename(savefilename);
 					fpvo.setOrgname(orgfilename);
