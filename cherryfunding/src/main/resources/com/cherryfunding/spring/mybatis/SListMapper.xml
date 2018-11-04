@@ -5,18 +5,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.cherryfunding.spring.vo.SListMapper">
 
 	<insert id="insert" parameterType="sList">
-		insert into sList values(#{slNum}, #{sNum}, #{id}, 'n', null, #{siNum})
+		insert into sList values(#{slNum}, #{sNum}, #{id}, 'n', null, #{siNum}, #{amount})
 	</insert>
 	
 	<select id="getMaxNum" resultType="int">
 		select NVL(max(slNum), 0) from sList
 	</select>
 	
+	<select id="listBysNum" parameterType="int" resultType="hashmap">
+		select slNum, id, si.siNum, sl.sNum, si.title, sl.amount from sitem si, slist sl
+		where si.sNum = sl.sNum and si.sNum = #{sNum}
+	</select>
+	
 
-	<update id="update" parameterType="sList">
-		update sList set #{pwd} where #{id}
-	</update>
-	<delete id="delete" parameterType="string">
-		delete from sList where id=#{id}
-	</delete>
 </mapper>

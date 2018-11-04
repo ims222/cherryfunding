@@ -7,17 +7,20 @@ public class SListVo {
 	private String confirm;
 	private String content;
 	private int siNum;
+	private int amount;
 
 	public SListVo() {
 	}
 
-	public SListVo(int slNum, int sNum, String id, String confirm, String content, int siNum) {
+	public SListVo(int slNum, int sNum, String id, String confirm, String content, int siNum, int amount) {
+		super();
 		this.slNum = slNum;
 		this.sNum = sNum;
 		this.id = id;
 		this.confirm = confirm;
 		this.content = content;
 		this.siNum = siNum;
+		this.amount = amount;
 	}
 
 	public int getSlNum() {
@@ -67,4 +70,13 @@ public class SListVo {
 	public void setSiNum(int siNum) {
 		this.siNum = siNum;
 	}
+
+	public int getAmount() {
+		return amount;
+	}
+
+	public void setAmount(int amount) {
+		this.amount = amount;
+	}
+
 }

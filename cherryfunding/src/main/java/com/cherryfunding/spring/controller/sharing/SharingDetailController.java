@@ -113,18 +113,18 @@ public class SharingDetailController {
 		ArrayList<Object> list = (ArrayList<Object>) session.getAttribute("selectedSharingList");
 		Iterator iterator = list.iterator();
 
-		if (iterator.hasNext()) {
+		while (iterator.hasNext()) {
 			HashMap<String, Object> map = (HashMap<String, Object>) iterator.next();
 			if ((Integer) map.get("sNum") == sNum) {
 				int siNum = (Integer) map.get("siNum");
 				int amount = (Integer) map.get("amount");
-				SListVo sListVo = new SListVo(0, sNum, id, null, null, siNum);
+				SListVo sListVo = new SListVo(0, sNum, id, null, null, siNum, amount);
 				sharingDetailService.sListInsert(sListVo); // 나눔 신청자 등록
 				// 남은 수량 수정
-				HashMap<String, Object> updateMap = new HashMap<String, Object>();
-				updateMap.put("siNum", siNum);
-				updateMap.put("amount", amount);
-				sharingDetailService.updateAmount(updateMap);
+//				HashMap<String, Object> updateMap = new HashMap<String, Object>();
+//				updateMap.put("siNum", siNum);
+//				updateMap.put("amount", amount);
+				//sharingDetailService.updateAmount(updateMap);
 				iterator.remove();
 			}
 		}
