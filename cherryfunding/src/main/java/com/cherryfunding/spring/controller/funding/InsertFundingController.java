@@ -1,7 +1,5 @@
 package com.cherryfunding.spring.controller.funding;
 
-import java.sql.Date;
-import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.UUID;
 
@@ -11,19 +9,14 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import com.cherryfunding.spring.service.funding.FHashtagService;
-import com.cherryfunding.spring.service.funding.FPictureService;
 import com.cherryfunding.spring.service.funding.FundingService;
 import com.cherryfunding.spring.service.funding.InsertFundingService;
-import com.cherryfunding.spring.service.funding.RewardService;
-import com.cherryfunding.spring.util.FundingValidator;
 import com.cherryfunding.spring.util.S3Util;
 import com.cherryfunding.spring.vo.FHashtagVo;
 import com.cherryfunding.spring.vo.FPictureVo;
@@ -32,17 +25,9 @@ import com.cherryfunding.spring.vo.RewardVo;
 
 @Controller
 public class InsertFundingController {
-	@Autowired
-	private FHashtagService fHashtagService;
-
-	@Autowired
-	private RewardService rewardService;
 
 	@Autowired
 	private FundingService fundingService;
-
-	@Autowired
-	private FPictureService fPictureService;
 
 	@Autowired
 	private InsertFundingService insertFundingService;

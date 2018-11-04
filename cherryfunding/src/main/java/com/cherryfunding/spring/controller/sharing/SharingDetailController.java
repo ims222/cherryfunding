@@ -2,6 +2,7 @@ package com.cherryfunding.spring.controller.sharing;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -16,7 +17,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.cherryfunding.spring.service.sharing.SItemService;
 import com.cherryfunding.spring.service.sharing.ShareService;
 import com.cherryfunding.spring.service.sharing.SharingDetailServiceImpl;
-import com.cherryfunding.spring.vo.FDetailVo;
 import com.cherryfunding.spring.vo.SItemVo;
 import com.cherryfunding.spring.vo.SListVo;
 
@@ -111,9 +111,10 @@ public class SharingDetailController {
 		String id = (String) session.getAttribute("id");
 		int sNum = Integer.parseInt(request.getParameter("sNum"));
 		ArrayList<Object> list = (ArrayList<Object>) session.getAttribute("selectedSharingList");
+		Iterator iterator = list.iterator();
 
-		for (Object l : list) {
-			HashMap<String, Object> map = (HashMap<String, Object>) l;
+		if (iterator.hasNext()) {
+			HashMap<String, Object> map = (HashMap<String, Object>) iterator.next();
 			if ((Integer) map.get("sNum") == sNum) {
 				int siNum = (Integer) map.get("siNum");
 				int amount = (Integer) map.get("amount");
@@ -124,10 +125,9 @@ public class SharingDetailController {
 				updateMap.put("siNum", siNum);
 				updateMap.put("amount", amount);
 				sharingDetailService.updateAmount(updateMap);
+				iterator.remove();
 			}
 		}
-		session.removeAttribute("selectedSharingList");
 		return "redirect:/sharing/sharingDetail?sNum=" + sNum;
 	}
-
 }
