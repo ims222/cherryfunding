@@ -61,17 +61,17 @@
 			alert("목표금액을 설정하세욧");
 			return false;
 		}
-		if(!$("#sDate").val()){
+		if(!$("#sdate").val()){
 			alert("시작일자를 선택하세요");
 			return false;
 		}
-		if(!$("#eDate").val()){
+		if(!$("#edate").val()){
 			alert("종료일자를 선택하세요");
 			return false;
 		}
 		
-		var sd = new Date($("#sDate").val());
-		var ed = new Date($("#eDate").val());
+		var sd = new Date($("#sdate").val());
+		var ed = new Date($("#edate").val());
 		if(sd.getTime() > ed.getTime()){
 			alert("시작보다 종료를 더 먼저 입력했어여");
 			return false;
@@ -94,21 +94,21 @@
 </script>
 </head>
 <body>
-	<form method="post" action="${pageContext.request.contextPath}/funding/fundingApplication" enctype="multipart/form-data" onsubmit="return appCommit()">
+	<form method="post" action="${pageContext.request.contextPath}/funding/fundingApplication" enctype="multipart/form-data">
 		<input type="hidden" name="id" value="${sessionScope.id}">
 		<label for="title">제목</label>
-		<input type="text" name="title" id="title"><br>
+		<input type="text" name="title" id="title" value="${fundingVo.title}"><br>
 		
 		<label for="content">내용</label><br>
-		<textarea rows="5" cols="50" name="content" id="content"></textarea><br>
+		<textarea rows="5" cols="50" name="content" id="content">${fundingVo.content}</textarea><br>
 		
 		<label for="amount">목표금액</label>
-		<input type="number" name="amount" id="amount"><br>
+		<input type="number" name="amount" id="amount" value="${fundingVo.amount}"><br>
 		
-		<label for="sDate">시작날짜</label>
-		<input type="date" name="sDate" id="sDate"><br>
-		<label for="eDate">종료날짜</label>
-		<input type="date" name="eDate" id="eDate"><br>
+		<label for="sdate">시작날짜</label>
+		<input type="date" name="sdate" id="sdate"><br>
+		<label for="edate">종료날짜</label>
+		<input type="date" name="edate" id="edate"><br>
 		
 		<label for="category">카테고리</label>
 		<select name="category">

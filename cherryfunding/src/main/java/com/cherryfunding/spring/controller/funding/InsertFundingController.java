@@ -6,9 +6,12 @@ import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
@@ -19,6 +22,7 @@ import com.cherryfunding.spring.service.funding.FPictureService;
 import com.cherryfunding.spring.service.funding.FundingService;
 import com.cherryfunding.spring.service.funding.InsertFundingService;
 import com.cherryfunding.spring.service.funding.RewardService;
+import com.cherryfunding.spring.util.FundingValidator;
 import com.cherryfunding.spring.util.S3Util;
 import com.cherryfunding.spring.vo.FHashtagVo;
 import com.cherryfunding.spring.vo.FPictureVo;
@@ -41,7 +45,7 @@ public class InsertFundingController {
 
 	@Autowired
 	private InsertFundingService insertFundingService;
-	
+
 	@Autowired
 	private S3Util s3;
 
@@ -51,14 +55,18 @@ public class InsertFundingController {
 	}
 
 	@RequestMapping(value = "/funding/fundingApplication", method = RequestMethod.POST)
-	public String fundingApplication(MultipartHttpServletRequest request, HttpSession session) {
+	public String fundingApplication(@ModelAttribute("fundingVo") @Valid FundingVo fundingVo, BindingResult result,
+			MultipartHttpServletRequest request, HttpSession session) {
+		if (result.hasErrors()) {
+			return ".inputFunding";
+		}
 		String title = request.getParameter("title"); // 지원서 양식
 		String id = request.getParameter("id");
 		String content = request.getParameter("content");
 		String amount = request.getParameter("amount");
 		String category = request.getParameter("category");
-		String sDate = request.getParameter("sDate");
-		String eDate = request.getParameter("eDate");
+		String sdate = request.getParameter("sdate");
+		String edate = request.getParameter("sdate");
 		String[] hashtags = request.getParameterValues("hashtag");
 		String[] rewards = request.getParameterValues("reward");
 		String[] fAmount = request.getParameterValues("fAmount");
@@ -66,20 +74,15 @@ public class InsertFundingController {
 		String[] fpinfo = request.getParameterValues("fPinfo");
 
 		int fNum = fundingService.getMaxNum() + 1; // 펀딩번호
-//		String uploadPath = session.getServletContext().getRealPath("/resources/upload/funding");
-//		File f = new File(uploadPath);
-//		if (f.exists() == false) { // 파일 생성
-//			f.mkdirs();
-//		}
 		try { // 펀딩저장
 			FundingVo fvo = new FundingVo();
 			fvo.setfNum(fNum);
 			fvo.setTitle(title);
 			fvo.setContent(content);
 			fvo.setAmount(Integer.parseInt(amount));
-			java.util.Date jsdate = new SimpleDateFormat("yyyy-MM-dd").parse(sDate);
+			java.util.Date jsdate = new SimpleDateFormat("yyyy-MM-dd").parse(sdate);
 			fvo.setSdate(new Date(jsdate.getTime()));
-			java.util.Date jedate = new SimpleDateFormat("yyyy-MM-dd").parse(eDate);
+			java.util.Date jedate = new SimpleDateFormat("yyyy-MM-dd").parse(edate);
 			fvo.setEdate(new Date(jedate.getTime()));
 			fvo.setCategory(category);
 			fvo.setConfirm("n");

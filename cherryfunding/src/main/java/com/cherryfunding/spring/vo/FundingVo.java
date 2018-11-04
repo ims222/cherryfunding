@@ -2,19 +2,27 @@ package com.cherryfunding.spring.vo;
 
 import java.sql.Date;
 
+import javax.validation.constraints.NotNull;
+
 public class FundingVo {
 	private int fNum;
+	@NotNull(message="제목을 입력하세요.")
 	private String title;
+	@NotNull(message="내용을 입력하세요.")
 	private String content;
+	@NotNull
 	private int amount;
 	private int camout;
+	@NotNull
 	private Date sdate;
+	@NotNull
 	private Date edate;
 	private String category;
 	private String confirm;
 	private String aid;
 	private String addr;
 	private Date regdate;
+	@NotNull
 	private String id;
 	private int hit;
 	private String savename;

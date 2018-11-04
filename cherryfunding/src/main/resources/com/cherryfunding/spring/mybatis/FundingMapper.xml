@@ -3,6 +3,15 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cherryfunding.spring.vo.FundingMapper">
+	<sql id="ing">
+		<![CDATA[where sdate < (sysdate + (1/24)*9) and edate > (sysdate + (1/24)*9)]]>
+	</sql>
+	<sql id="prepare">
+		<![CDATA[where sdate > (sysdate + (1/24)*9) and edate > (sysdate + (1/24)*9)]]>
+	</sql>
+	<sql id="end">
+		<![CDATA[where sdate < (sysdate + (1/24)*9) and edate < (sysdate + (1/24)*9)]]>
+	</sql>
 	<sql id="isConfirm">
 		and confirm = 'y'
 	</sql>
@@ -94,7 +103,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="prepare" parameterType="hashmap"
 		resultType="funding">
 		select * from funding
-		<![CDATA[where sdate > sysdate and edate > sysdate]]>
+		<include refid="prepare"/>
 		<include refid="category" />
 		<include refid="search" />
 		<include refid="isConfirm"/>
@@ -104,7 +113,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 종료된 펀딩 -->
 	<select id="end" parameterType="hashmap" resultType="funding">
 		select * from funding
-		<![CDATA[where sdate < sysdate and edate < sysdate]]>
+		<include refid="end"/>
 		<include refid="category" />
 		<include refid="search" />
 		<include refid="isConfirm"/>
@@ -117,10 +126,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<when test="sort == 'end'">
 				select * from (
     				select * from funding
-    				<![CDATA[where sdate < sysdate and edate > sysdate]]>
+    				<include refid="ing"/>
 					)aa,(
 					select (edate-sysdate)cal, fNum from funding
-					<![CDATA[where sdate < sysdate and edate > sysdate]]>
+					<include refid="ing"/>
 					)bb
 				where aa.fNum = bb.fNum
 				<include refid="category" />
@@ -134,18 +143,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     					select aa.* from (
      						select count(f.fNum) cnt, f.fNum fn from (
        							select * from funding
-       							<![CDATA[where sdate < sysdate and edate > sysdate]]>
+       							<include refid="ing"/>
       						) f, frecommend fr where f.fNum = fr.fNum group by f.fNum
     					)aa
     				order by cnt desc, fn desc)
 			)aa, (select * from funding )bb
 			where aa.fn = bb.fNum(+)
 			<include refid="isConfirm"/>
-			 order by cnt
+			order by cnt
 			</when>
 			<otherwise>
 				select * from funding
-				<![CDATA[where sdate < sysdate and edate > sysdate]]>
+				<include refid="ing"/>
 				<include refid="isConfirm"/>
 				<include refid="category" />
 				<include refid="search" />
@@ -159,10 +168,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<select id="mainEnd" resultType="funding">
 			select * from(
 				select f.*, rownum rnum from funding f
-				<![CDATA[where sdate < sysdate and edate > sysdate]]>
+				<include refid="ing"/>
 				<include refid="isConfirm"/>
 				and ceil(edate-sysdate) = (  select ceil(min(edate-sysdate)) from funding
-				<![CDATA[where sdate < sysdate and edate > sysdate]]>
+				<include refid="ing"/>
 				<include refid="isConfirm"/>)
 			)where rnum = 1
 		</select>
@@ -185,11 +194,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			select * from (
 				select aa.*, rownum rnum from (
 					select * from funding
-					<![CDATA[where sdate < sysdate and edate > sysdate]]>
+					<include refid="ing"/>
         			order by fNum desc
    				 )aa
 			where hit = (select max(hit) from funding
-				<![CDATA[where sdate < sysdate and edate > sysdate]]>)
+				<include refid="ing"/>
+				)
 			) where rnum = 1
 			<include refid="isConfirm"/>
 		</select>
@@ -199,11 +209,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			select * from (
 				select aa.*, rownum rnum from (
 					select * from funding
-					<![CDATA[where sdate < sysdate and edate > sysdate]]>
+					<include refid="ing"/>
         			order by fNum desc
    				 )aa
 			where camout = (select max(camout) from funding
-				<![CDATA[where sdate < sysdate and edate > sysdate]]>)
+				<include refid="ing"/>
+				)
 			) where rnum = 1
 			<include refid="isConfirm"/>
 		</select>
@@ -216,13 +227,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	<!-- 오늘 펀딩 금액, 갯수 -->
 	<select id="todayFundingPrice" resultType="int">
-		select sum(f.amount * price) sumPrice from fdetail f, reward r
+		select NVL(sum(f.amount * price), 0) sumPrice from fdetail f, reward r
             where  to_date(f.regdate, 'yyyy-mm-dd') = to_date(sysdate, 'yyyy-mm-dd')
             and f.rNum = r.rnum
 		order by f.regdate desc
 	</select>
 	<select id="todayFundingCount" resultType="int">
-		select NVL(count(fNum),0) from funding <![CDATA[where sdate < sysdate and edate > sysdate]]>
+		select NVL(count(fNum),0) from funding
+		<include refid="ing"/>
+		<include refid="isConfirm"/>
 	</select>
 	
 </mapper>
