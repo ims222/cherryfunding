@@ -16,12 +16,19 @@ public class SharingConfirmController {
 
 	@RequestMapping("/shring/sharingConfirm")
 	public String sharingConfirm(int slNum) {
-		sharingConfirmService.confirm(slNum);
+		int siNum = sharingConfirmService.slDetail(slNum).getSiNum();
+		int amount = sharingConfirmService.slDetail(slNum).getAmount();
+		int totAmount = sharingConfirmService.siDetail(siNum).getAmount();
+		
+		if(totAmount > amount) { //신청 수량 보다 남은 게 많으면
+			sharingConfirmService.confirm(slNum);
 
-		HashMap<String, Object> updateMap = new HashMap<String, Object>();
-		updateMap.put("siNum", sharingConfirmService.select(slNum).getSiNum());
-		updateMap.put("amount", sharingConfirmService.select(slNum).getAmount());
-		sharingConfirmService.updateAmount(updateMap);// 남은 수량 수정
-		return "redirect:/sharing/sharingParticipation?sNum=" + sharingConfirmService.select(slNum).getsNum();
+			HashMap<String, Object> updateMap = new HashMap<String, Object>();
+			updateMap.put("siNum", siNum);
+			updateMap.put("amount", amount);
+			sharingConfirmService.updateAmount(updateMap);// 남은 수량 수정
+		}
+
+		return "redirect:/sharing/sharingParticipation?sNum=" + sharingConfirmService.slDetail(slNum).getsNum();
 	}
 }

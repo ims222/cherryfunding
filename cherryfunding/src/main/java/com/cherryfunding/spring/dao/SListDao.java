@@ -28,11 +28,16 @@ public class SListDao {
 		return sqlSession.selectList(NAMESPACE + "listBysNum", sNum);
 	}
 
+	public List<HashMap<String, Object>> isConfirm(int sNum) {
+		return sqlSession.selectList(NAMESPACE + "isConfirm", sNum);
+	}
+
 	public int confirm(int slNum) {
 		return sqlSession.update(NAMESPACE + "confirm", slNum);
 	}
 
-	public SListVo select(int slNum) {
-		return sqlSession.selectOne(NAMESPACE + "select", slNum);
+	public SListVo detail(int slNum) {
+		return sqlSession.selectOne(NAMESPACE + "detail", slNum);
 	}
+
 }

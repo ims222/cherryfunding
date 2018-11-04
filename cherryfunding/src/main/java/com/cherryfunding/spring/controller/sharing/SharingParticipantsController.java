@@ -34,4 +34,16 @@ public class SharingParticipantsController {
 		}
 		return list;
 	}
+
+	@RequestMapping("/sharing/sharingConfirmList")
+	@ResponseBody
+	public List<HashMap<String, Object>> isConfirm(int sNum) {
+		List<HashMap<String, Object>> list = sharingParticipantsService.isConfirm(sNum);
+		for (HashMap<String, Object> map : list) {
+			String id = (String) map.get("ID");
+			String nick = sharingParticipantsService.usersInfo(id).getNick();
+			map.put("nick", nick); // 닉네임
+		}
+		return list;
+	}
 }

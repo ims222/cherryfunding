@@ -24,6 +24,10 @@ public class SharingParticipantsService {
 		return sListDao.listBysNum(sNum);
 	}
 
+	public List<HashMap<String, Object>> isConfirm(int sNum) {
+		return sListDao.isConfirm(sNum);
+	}
+
 	public UsersVo usersInfo(String id) {
 		return usersDao.select(id);
 	}

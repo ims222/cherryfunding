@@ -189,31 +189,29 @@
 <!-- Main -->
 <div id="main">
 	<div class="container">
-		<div class="row no-collapse-1">
-			<section class="6u">
-				<div class="box">
-				 	<p>${vo.title}</p>
-				 	<p>${vo.content}</p>
-				</div>
-			</section>
-			<section class="6u">
-				<div class="box">
-					<select name="item">
+		<div class="row box">
+			<div class="col-md-8">
+				<p>제목: ${vo.title}</p>
+				<p>내용: ${vo.content}</p>
+				<p>조회수: </p>
+				<span id="fRecommend"></span>
+			</div>
+			<div class="col-md-4">
+				<select name="item">
 					<c:forEach var="item" items="${itemList}">
 						<option value="${item.siNum}">물품명: ${item.title}</option>
 					</c:forEach>
-					</select><br><div id="itemInfo"></div>
-					수량<input type="number" name="amount"><button id="chooseItem">선택</button>
+				</select><br><div id="itemInfo"></div>
+				수량<input type="number" name="amount"><button id="chooseItem">선택</button>
 					
-					<form method="post" action="${pageContext.request.contextPath}/sharing/insertSItem" onsubmit="return submitItem();">
-						<input type="hidden" name="sNum" value="${vo.sNum}">
+				<form method="post" action="${pageContext.request.contextPath}/sharing/insertSItem" onsubmit="return submitItem();">
+					<input type="hidden" name="sNum" value="${vo.sNum}">
 						<div id="selectedItem"></div>
 						<input type="submit" value="나눔 신청">
-					</form><br>
-					<button id="recommend" type="button">추천</button><br>
-					<a href="${pageContext.request.contextPath}/sharing/sharingParticipation?sNum=${vo.sNum}">나눔 신청자</a>
-				</div>
-			</section>
+				</form><br>
+				<button id="recommend" type="button">추천</button><br>
+				<a href="${pageContext.request.contextPath}/sharing/sharingParticipation?sNum=${vo.sNum}">나눔 신청자</a>
+			</div>
 		</div>
 		<div class="row box" id="commment">
 			<!-- 댓글 -->

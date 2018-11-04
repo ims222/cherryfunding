@@ -14,14 +14,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="listBysNum" parameterType="int" resultType="hashmap">
 		select slNum, id, si.siNum, sl.sNum, si.title, sl.amount from sitem si, slist sl
-		where si.sNum = sl.sNum and si.sNum = #{sNum} and confirm = 'n'
+		where si.siNum = sl.siNum and si.sNum = #{sNum} and confirm = 'n'
+	</select>
+	
+	<select id="isConfirm" parameterType="int" resultType="hashMap">
+		select slNum, id, si.siNum, sl.sNum, si.title, sl.amount from sitem si, slist sl
+		where si.siNum = sl.siNum and si.sNum = #{sNum} and confirm = 'y'
 	</select>
 	
 	<update id="confirm" parameterType="int">
 		update sList set confirm = 'y' where slNum = #{slNum}
 	</update>
 	
-	<select id="select" parameterType="int" resultType="sList">
+	<select id="detail" parameterType="int" resultType="sList">
 		select * from sList where slNum = #{slNum}
 	</select>
 
