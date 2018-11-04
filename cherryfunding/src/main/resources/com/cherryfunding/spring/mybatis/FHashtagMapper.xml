@@ -9,5 +9,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getMaxNum" resultType="int">
 		select NVL(max(ftagnum), 0) from fhashtag
 	</select>
+	
+	<select id="listByfNum" parameterType="int" resultType="fHashtag">
+		select * from fHashtag where fNum = #{fNum}
+	</select>
 </mapper>
 

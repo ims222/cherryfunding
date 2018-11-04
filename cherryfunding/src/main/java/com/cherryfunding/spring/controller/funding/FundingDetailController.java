@@ -28,6 +28,7 @@ public class FundingDetailController {
 		model.addAttribute("vo", fundingDetailService.detail(fNum));
 		model.addAttribute("rewardList", fundingDetailService.rewardList(fNum));
 		model.addAttribute("fRecommend", fundingDetailService.getRecommend(fNum));
+		model.addAttribute("hashtag", fundingDetailService.hashtag(fNum));
 		fundingDetailService.hitUp(fNum);
 		return ".fundingDetailforUser";
 	}

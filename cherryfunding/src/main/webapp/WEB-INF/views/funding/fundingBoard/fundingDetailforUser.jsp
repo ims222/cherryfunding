@@ -214,6 +214,11 @@
 			 	내용: ${vo.content}<br>
 			 	조회수: ${vo.hit}<br>
 			 	<span id="fRecommend"></span>
+			 	<div id="fHashtag">
+			 		<c:forEach var="ht" items="${hashtag}">
+			 			<a href="#">#${ht.hashtag}</a>
+			 		</c:forEach>
+			 	</div>
  			</div>
  			<div class="col-md-4">
  				<select name="reward">
