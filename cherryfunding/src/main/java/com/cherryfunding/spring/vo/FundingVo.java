@@ -2,20 +2,22 @@ package com.cherryfunding.spring.vo;
 
 import java.sql.Date;
 
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Future;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 public class FundingVo {
 	private int fNum;
-	@NotNull(message="제목을 입력하세요.")
+	@Size(min = 10, max = 100, message = "{min}자에서 {max}자 사이로 입력하세요")
 	private String title;
-	@NotNull(message="내용을 입력하세요.")
+	@Min(value = 10, message = "{value}자 이상 입력하세요")
 	private String content;
-	@NotNull
+	@DecimalMin(value = "1", message = "수량을 입력하세요")
 	private int amount;
 	private int camout;
-	@NotNull
 	private Date sdate;
-	@NotNull
 	private Date edate;
 	private String category;
 	private String confirm;

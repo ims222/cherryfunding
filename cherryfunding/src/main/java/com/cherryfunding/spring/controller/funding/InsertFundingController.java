@@ -11,6 +11,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -55,16 +56,11 @@ public class InsertFundingController {
 	}
 
 	@RequestMapping(value = "/funding/fundingApplication", method = RequestMethod.POST)
-	public String fundingApplication(@ModelAttribute("fundingVo") @Valid FundingVo fundingVo, BindingResult result,
+	public String fundingApplication(@ModelAttribute("fvo") @Valid FundingVo fvo, BindingResult result,
 			MultipartHttpServletRequest request, HttpSession session) {
 		if (result.hasErrors()) {
 			return ".inputFunding";
 		}
-		String title = request.getParameter("title"); // 지원서 양식
-		String id = request.getParameter("id");
-		String content = request.getParameter("content");
-		String amount = request.getParameter("amount");
-		String category = request.getParameter("category");
 		String sdate = request.getParameter("sdate");
 		String edate = request.getParameter("sdate");
 		String[] hashtags = request.getParameterValues("hashtag");
@@ -75,20 +71,10 @@ public class InsertFundingController {
 
 		int fNum = fundingService.getMaxNum() + 1; // 펀딩번호
 		try { // 펀딩저장
-			FundingVo fvo = new FundingVo();
-			fvo.setfNum(fNum);
-			fvo.setTitle(title);
-			fvo.setContent(content);
-			fvo.setAmount(Integer.parseInt(amount));
 			java.util.Date jsdate = new SimpleDateFormat("yyyy-MM-dd").parse(sdate);
 			fvo.setSdate(new Date(jsdate.getTime()));
 			java.util.Date jedate = new SimpleDateFormat("yyyy-MM-dd").parse(edate);
 			fvo.setEdate(new Date(jedate.getTime()));
-			fvo.setCategory(category);
-			fvo.setConfirm("n");
-			fvo.setAddr("");
-			fvo.setAid("");
-			fvo.setId(id);
 			insertFundingService.finsert(fvo); // db
 
 			for (String hashtag : hashtags) { // 해시태그 저장

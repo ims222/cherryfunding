@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -97,18 +98,21 @@
 	<form method="post" action="${pageContext.request.contextPath}/funding/fundingApplication" enctype="multipart/form-data">
 		<input type="hidden" name="id" value="${sessionScope.id}">
 		<label for="title">제목</label>
-		<input type="text" name="title" id="title" value="${fundingVo.title}"><br>
+		<input type="text" name="title" id="title" value="${fvo.title}" placeholder="제목을 입력하세요">
+		<span><form:errors path="fvo.title"/></span><br>
 		
 		<label for="content">내용</label><br>
-		<textarea rows="5" cols="50" name="content" id="content">${fundingVo.content}</textarea><br>
+		<textarea rows="5" cols="50" name="content" id="content" placeholder="내용을 입력하세요">${fvo.content}</textarea>
+		<span><form:errors path="fvo.content"/></span><br>
 		
 		<label for="amount">목표금액</label>
-		<input type="number" name="amount" id="amount" value="${fundingVo.amount}"><br>
+		<input type="number" name="amount" id="amount" value="${fvo.amount}" placeholder="목표금액을 입력하세요">
+		<span><form:errors path="fvo.amount"/></span><br>
 		
 		<label for="sdate">시작날짜</label>
-		<input type="date" name="sdate" id="sdate"><br>
+		<input type="date" name="sdate" id="sdate" value="${fvo.sdate}"><span><form:errors path="fvo.sdate"/></span><br>
 		<label for="edate">종료날짜</label>
-		<input type="date" name="edate" id="edate"><br>
+		<input type="date" name="edate" id="edate" value="${fvo.edate}"><span><form:errors path="fvo.edate"/></span><br>
 		
 		<label for="category">카테고리</label>
 		<select name="category">
