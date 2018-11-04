@@ -35,17 +35,18 @@ public class IngFundingListController {
 		map.put("sort", sort);
 		List<FundingVo> list = ingFundingListService.list(map);
 
-		for (FundingVo vo : list) {
-			String thumbnail = ingFundingListService.thumbnail(vo.getfNum()).getSavename();
-			vo.setSavename(s3.getFileURL("funding/"+ thumbnail));
-			vo.setFpinfo(ingFundingListService.thumbnail(vo.getfNum()).getFpinfo());
-		}
-		
 		model.addAttribute("list", list);
 		model.addAttribute("category", category);
 		model.addAttribute("field", field);
 		model.addAttribute("keyword", keyword);
 		model.addAttribute("sort", sort);
+		return ".ingFundingList";
+	}
+
+	@RequestMapping(value = "/funding/searchHashtag")
+	public String searchHashtag(String hashtag, Model model) {
+		List<FundingVo> searchHashtag = ingFundingListService.searchHashtag(hashtag);
+		model.addAttribute("list", searchHashtag);
 		return ".ingFundingList";
 	}
 }

@@ -216,7 +216,7 @@
 			 	<span id="fRecommend"></span>
 			 	<div id="fHashtag">
 			 		<c:forEach var="ht" items="${hashtag}">
-			 			<a href="#">#${ht.hashtag}</a>
+			 			<a href="${pageContext.request.contextPath}/funding/searchHashtag?hashtag=${ht.hashtag}">#${ht.hashtag}</a>
 			 		</c:forEach>
 			 	</div>
  			</div>

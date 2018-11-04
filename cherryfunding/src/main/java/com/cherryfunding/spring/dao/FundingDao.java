@@ -77,11 +77,11 @@ public class FundingDao {
 		return sqlSession.selectOne(NAMESPACE + "totFunding");
 	}
 
-	public int todayFundingPrice() { //오늘 펀딩 금액
+	public int todayFundingPrice() { // 오늘 펀딩 금액
 		return sqlSession.selectOne(NAMESPACE + "todayFundingPrice");
 	}
 
-	public int todayFundingCount() { //오늘 펀딩 갯수
+	public int todayFundingCount() { // 오늘 펀딩 갯수
 		return sqlSession.selectOne(NAMESPACE + "todayFundingCount");
 	}
 
@@ -103,6 +103,10 @@ public class FundingDao {
 
 	public int addCamout(HashMap<String, Object> map) {
 		return sqlSession.update(NAMESPACE + "addCamout", map);
+	}
+
+	public List<FundingVo> hashtag(String hashtag) {
+		return sqlSession.selectList(NAMESPACE + "hashtag", hashtag);
 	}
 
 }

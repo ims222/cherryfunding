@@ -97,6 +97,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update funding set camout = camout + #{price} where fNum = #{fNum}
 
 	</update>
+	
+	<select id="hashtag" parameterType="string" resultType="funding">
+		select * from (
+			select * from funding
+			<include refid="ing"/>
+			<include refid="isConfirm"/>
+		) where title like '%' || #{hashtag} || '%'
+			or content like '%' || #{hashtag} || '%'
+			or category like '%' || #{hashtag} || '%'
+		order by fNum desc
+	</select>
 
 
 	<!-- 준비중 펀딩 -->
