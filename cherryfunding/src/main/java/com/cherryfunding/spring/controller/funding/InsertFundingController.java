@@ -58,11 +58,10 @@ public class InsertFundingController {
 	@RequestMapping(value = "/funding/fundingApplication", method = RequestMethod.POST)
 	public String fundingApplication(@ModelAttribute("fvo") @Valid FundingVo fvo, BindingResult result,
 			MultipartHttpServletRequest request, HttpSession session) {
+		System.out.println("!!! " + fvo.getContent().length() + "   dddd");
 		if (result.hasErrors()) {
 			return ".inputFunding";
 		}
-		String sdate = request.getParameter("sdate");
-		String edate = request.getParameter("sdate");
 		String[] hashtags = request.getParameterValues("hashtag");
 		String[] rewards = request.getParameterValues("reward");
 		String[] fAmount = request.getParameterValues("fAmount");
@@ -71,10 +70,7 @@ public class InsertFundingController {
 
 		int fNum = fundingService.getMaxNum() + 1; // 펀딩번호
 		try { // 펀딩저장
-			java.util.Date jsdate = new SimpleDateFormat("yyyy-MM-dd").parse(sdate);
-			fvo.setSdate(new Date(jsdate.getTime()));
-			java.util.Date jedate = new SimpleDateFormat("yyyy-MM-dd").parse(edate);
-			fvo.setEdate(new Date(jedate.getTime()));
+			fvo.setfNum(fNum);
 			insertFundingService.finsert(fvo); // db
 
 			for (String hashtag : hashtags) { // 해시태그 저장

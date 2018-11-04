@@ -51,9 +51,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<insert id="insert" parameterType="funding">
 		insert into funding
-		values(#{fNum},#{title},#{content},#{amount},
-		0,#{sdate},#{edate},#{category},
-		#{confirm},#{aid},#{addr}, (sysdate + (1/24)*9), #{id},0)
+		values(#{fNum}, #{title}, #{content}, #{amount},
+		0, #{sdate}, #{edate}, #{category},
+		'n', null, null, (sysdate + (1/24)*9), #{id},0)
 	</insert>
 	
 	<update id="update" parameterType="funding">
