@@ -24,4 +24,8 @@ public class VListService {
 	public int delete(VListVo vo) {
 		return vListDao.delete(vo);
 	}
+	
+	public int getTotal(int vNum) {
+		return vListDao.getTotal(vNum);
+	}
 }

@@ -14,7 +14,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="list" resultType="volunteer">
 		select * from volunteer
 	</select>
-
+	<select id="getMembers" parameterType="int" resultType="int">
+		select NVL(members,0) from volunteer where vnum = #{vnum,jdbcType=INTEGER} 	
+	</select>
 	<select id="select" parameterType="string" resultType="volunteer">
 		select * from volunteer where id = #{id}
 	</select>

@@ -61,12 +61,19 @@
 						dataType: 'json',
 						type:'post',
 						success: function(data){
-							isApply();
+							if(data.result === 'insertok' || data.result === 'deleteok'){	
+								isApply();
+							}else{
+								alert("모집인원수 초과로 신청이 불가합니다.");
+								return;
+							}
 						}
 					});
 				}
 			});
 		});
+			
+
 		
 		$("#insertComment").on('submit', function(e){
 			e.preventDefault();

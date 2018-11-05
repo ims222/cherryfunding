@@ -26,4 +26,9 @@ public class VolunteerDao {
 	public int getMaxNum() {
 		return sqlSession.selectOne(NAMESPACE + "getMaxNum");
 	}
+	
+	public int getMembers(int vNum) {
+		return sqlSession.selectOne(NAMESPACE + "getMembers", vNum);
+	}
+	
 }

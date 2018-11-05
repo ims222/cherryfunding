@@ -25,6 +25,10 @@ public class VolunteerService {
 		return volunteerDao.detail(vNum);
 	}
 	
+	public int getMembers(int vNum) {
+		return volunteerDao.getMembers(vNum);
+	}
+	
 	public List<VolunteerVo> list(){
 		return volunteerDao.list();
 	}
