@@ -45,8 +45,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<select id="select" parameterType="int" resultType="funding">
-		select * from
-		funding where fNum = #{num}
+		select * from funding where fNum = #{num}
+	</select>
+	
+	<select id="detail" parameterType="int" resultType="funding">
+		select * from funding where fNum = #{fNum}
 	</select>
 	
 	<insert id="insert" parameterType="funding">
@@ -61,6 +64,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		title=#{title},content=#{content},amount=#{amount},camout=#{camout},
 		sdate=#{sdate},edate=#{edate},category=#{category},confirm=#{confirm},aid=#{aid},
 		addr=#{addr},id=#{id} where fNum = #{fNum}
+	</update>
+	<update id="editContent" parameterType="hashmap">
+		update funding set content = #{content} where fNum = #{fNum}
 	</update>
 	
 	<delete id="delete" parameterType="int">
@@ -139,7 +145,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     				select * from funding
     				<include refid="ing"/>
 					)aa,(
-					select (edate-sysdate)cal, fNum from funding
+					select (edate-(sysdate + (1/24)*9))cal, fNum from funding
 					<include refid="ing"/>
 					)bb
 				where aa.fNum = bb.fNum
@@ -181,7 +187,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				select f.*, rownum rnum from funding f
 				<include refid="ing"/>
 				<include refid="isConfirm"/>
-				and ceil(edate-sysdate) = (  select ceil(min(edate-sysdate)) from funding
+				and ceil(edate-(sysdate + (1/24)*9)) = (  select ceil(min(edate-(sysdate + (1/24)*9))) from funding
 				<include refid="ing"/>
 				<include refid="isConfirm"/>)
 			)where rnum = 1
@@ -192,9 +198,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			select * from (
 				select aa.*, rownum rnum from (
 					select * from funding
-					where sdate > sysdate and edate > sysdate 
-					and (sysdate - sdate) = (select max(sysdate - sdate) fNum from funding
-						where sdate > sysdate and edate > sysdate and confirm = 'y'
+					<include refid="prepare"/>
+					and (sysdate - (sysdate + (1/24)*9)) = (select max((sysdate + (1/24)*9) - sdate) fNum from funding
+					<include refid="ing"/>
+					 <include refid="isConfirm"/>
                         ) order by fNum desc
 											)aa
 			) where rnum = 1

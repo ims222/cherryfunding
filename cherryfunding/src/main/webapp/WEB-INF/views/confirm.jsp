@@ -31,7 +31,7 @@
 	<c:forEach var="vo" items="${waitListFunding}">
 		<tr>
 			<td>${vo.fNum}</td>	
-			<td>${vo.title}</td>
+			<td><a href="${pageContext.request.contextPath}/funding/detail?fNum=${vo.fNum}">${vo.title}</a></td>
 			<td>${vo.amount}</td>
 			<td>${vo.sdate}</td>
 			<td>${vo.edate}</td>

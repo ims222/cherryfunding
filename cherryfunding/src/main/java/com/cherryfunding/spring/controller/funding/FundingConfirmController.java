@@ -32,6 +32,13 @@ public class FundingConfirmController {
 		return "redirect:/funding/waitList";
 	}
 
+	@RequestMapping("/funding/detail")
+	public String fundingDetail(int fNum, Model model) {
+		model.addAttribute("vo", fundingConfirmService.detail(fNum));
+		model.addAttribute("fPictureList", fundingConfirmService.fPictureList(fNum));
+		return "funding/application/fundingEdit";
+	}
+
 	@RequestMapping("/funding/confirmCancel")
 	public String fundingConfirmCancel(int fNum) {
 		fundingConfirmService.wait(fNum);
