@@ -84,6 +84,14 @@ public class CharityDao {
 	public int confirm(int cNum) { // 컨펌
 		return sqlSession.update(NAMESPACE + "confirm", cNum);
 	}
+	
+	public List<CharityVo> confirmList(){
+		return sqlSession.selectList(NAMESPACE + "confirmList");
+	}
+
+	public int wait(int cNum) {
+		return sqlSession.update(NAMESPACE + "wait", cNum);
+	}
 
 	public HashMap<String, Object> totCharity() { // 전체 후원 갯수, 합계
 		return sqlSession.selectOne(NAMESPACE + "totCharity");

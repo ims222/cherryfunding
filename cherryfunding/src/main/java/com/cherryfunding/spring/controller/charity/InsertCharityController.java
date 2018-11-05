@@ -117,6 +117,6 @@ public class InsertCharityController {
 			return "error";
 		}
 
-		return "redirect:/charity/ingChairtyList";
+		return "redirect:/charity/ingCharityList";
 	}
 }
