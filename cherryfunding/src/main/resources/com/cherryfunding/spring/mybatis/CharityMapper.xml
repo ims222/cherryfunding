@@ -89,6 +89,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<include refid="prepare"/>
 		<include refid="category"/>
 		<include refid="search"/>
+		<include refid="isConfirm"/>
 		order by cNum desc
 	</select>
 	
@@ -98,6 +99,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<include refid="end"/>
 		<include refid="category"/>
 		<include refid="search"/>
+		<include refid="isConfirm"/>
 		order by cNum desc
 	</select>
 	<!-- 진행중 후원 -->
@@ -114,6 +116,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				where aa.cNum = bb.cNum
 				<include refid="category" />
 				<include refid="search" />
+				<include refid="isConfirm"/>
 				order by cal asc
 			</when>
 			<when test="sort == 'recommend'">
@@ -148,7 +151,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 					select * from charity
 					<![CDATA[where sdate < sysdate and edate > sysdate]]>
 					and (edate-(sysdate + (1/24)*9)) = (select min(edate-(sysdate + (1/24)*9)) from charity
-					<include refid="ing"/>) order by cNum desc
+					<include refid="ing"/>
+					<include refid="isConfirm"/>) order by cNum desc
 										)aa
 			) where rnum = 1
 		</select>
@@ -161,6 +165,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 					<include refid="prepare"/>
 					and ((sysdate + (1/24)*9) - sdate) = (select max((sysdate + (1/24)*9) - sdate) cNum from charity
 								<include refid="prepare"/>
+								<include refid="isConfirm"/>
 								) order by cNum desc
 											)aa
 			) where rnum =1
@@ -177,6 +182,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			where hit = (select max(hit) from charity
 			<include refid="ing"/>)
 			) where rnum = 1
+			<include refid="isConfirm"/>
 		</select>
 		
 		<!-- 액수 -->
@@ -190,6 +196,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			where cAmount = (select max(cAmount) from charity
 			<include refid="ing"/>)
 			) where rnum = 1
+			<include refid="isConfirm"/>
 		</select>
 	<!-- 전체 후원 금액, 갯수-->
 	<select id="totCharity" resultType="hashmap">

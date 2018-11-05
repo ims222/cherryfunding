@@ -109,4 +109,12 @@ public class FundingDao {
 		return sqlSession.selectList(NAMESPACE + "hashtag", hashtag);
 	}
 
+	public FundingVo detail(int fNum) {
+		return sqlSession.selectOne(NAMESPACE + "detail", fNum);
+	}
+
+	public int editContent(HashMap<String, Object> map) {
+		return sqlSession.update(NAMESPACE + "editContent", map);
+	}
+
 }
