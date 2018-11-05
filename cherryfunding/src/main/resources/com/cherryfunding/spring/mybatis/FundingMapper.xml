@@ -239,7 +239,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 오늘 펀딩 금액, 갯수 -->
 	<select id="todayFundingPrice" resultType="int">
 		select NVL(sum(f.amount * price), 0) sumPrice from fdetail f, reward r
-            where  to_date(f.regdate, 'yyyy-mm-dd') = to_date(sysdate, 'yyyy-mm-dd')
+            where  f.regdate = (sysdate + (1/24)*9)
             and f.rNum = r.rnum
 		order by f.regdate desc
 	</select>
