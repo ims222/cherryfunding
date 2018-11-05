@@ -207,13 +207,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			select * from (
 				select aa.*, rownum rnum from (
 					select * from funding
-					<include refid="prepare"/>
-					and (sysdate - (sysdate + (1/24)*9)) = (select max((sysdate + (1/24)*9) - sdate) fNum from funding
-					<include refid="ing"/>
-					 <include refid="isConfirm"/>
-                        ) order by fNum desc
-											)aa
-			) where rnum = 1
+					where ((sysdate + (1/24)*9) - sdate) = (select max((sysdate + (1/24)*9) - sdate) fNum from funding
+									where sdate > (sysdate + (1/24)*9) and edate > (sysdate + (1/24)*9)
+					) order by fNum desc
+				)aa
+			) where rnum = 1 and confirm = 'y'
 		</select>
 		
 		<!-- 핫 -->
