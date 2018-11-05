@@ -28,4 +28,14 @@ public class InputUsersServiceImpl implements InputUsersService {
 		return userSettingDao.insert(id);
 	}
 
+	@Override
+	public UsersVo usersInfo(String id) {
+		return usersDao.detail(id);
+	}
+
+	@Override
+	public UsersVo nickCheck(String nick) {
+		return usersDao.nickCheck(nick);
+	}
+
 }

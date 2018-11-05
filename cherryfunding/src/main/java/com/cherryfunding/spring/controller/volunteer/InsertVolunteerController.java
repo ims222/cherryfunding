@@ -19,7 +19,6 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.cherryfunding.spring.service.volunteer.VPictureService;
 import com.cherryfunding.spring.service.volunteer.VolunteerService;
-import com.cherryfunding.spring.vo.SPictureVo;
 import com.cherryfunding.spring.vo.VPictureVo;
 import com.cherryfunding.spring.vo.VolunteerVo;
 

@@ -7,8 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.cherryfunding.spring.vo.CPictureVo;
-import com.cherryfunding.spring.vo.FPictureVo;
-import com.cherryfunding.spring.vo.SPictureVo;
 
 @Repository
 public class CPictureDao {

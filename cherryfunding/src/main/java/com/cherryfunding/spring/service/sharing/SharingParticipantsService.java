@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import com.cherryfunding.spring.dao.SListDao;
 import com.cherryfunding.spring.dao.UsersDao;
-import com.cherryfunding.spring.vo.SListVo;
 import com.cherryfunding.spring.vo.UsersVo;
 
 @Service
@@ -29,6 +28,6 @@ public class SharingParticipantsService {
 	}
 
 	public UsersVo usersInfo(String id) {
-		return usersDao.select(id);
+		return usersDao.detail(id);
 	}
 }

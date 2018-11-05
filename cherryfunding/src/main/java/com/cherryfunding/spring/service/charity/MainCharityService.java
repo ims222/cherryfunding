@@ -1,12 +1,14 @@
 package com.cherryfunding.spring.service.charity;
 
+import java.util.HashMap;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.cherryfunding.spring.dao.CPictureDao;
 import com.cherryfunding.spring.dao.CharityDao;
 import com.cherryfunding.spring.vo.CPictureVo;
 import com.cherryfunding.spring.vo.CharityVo;
-
 
 @Service
 public class MainCharityService {
@@ -27,7 +29,7 @@ public class MainCharityService {
 
 		return cEnd;
 	}
-	
+
 	public CharityVo mainNew() {
 		CharityVo cNew = cdao.mainNew();
 		if (cNew == null) {
@@ -38,7 +40,7 @@ public class MainCharityService {
 
 		return cNew;
 	}
-	
+
 	public CharityVo mainHot() {
 		CharityVo cHot = cdao.mainHot();
 		if (cHot == null) {
@@ -49,7 +51,7 @@ public class MainCharityService {
 
 		return cHot;
 	}
-	
+
 	public CharityVo mainPrice() {
 		CharityVo cPrice = cdao.mainPrice();
 		if (cPrice == null) {
@@ -63,6 +65,18 @@ public class MainCharityService {
 
 	public CPictureVo thumbnail(int cNum) {
 		return cfdao.thumbnail(cNum);
+	}
+
+	public HashMap<String, Object> totCharity() {
+		return cdao.totCharity();
+	}
+
+	public int todayCharityPrice() {
+		return cdao.todayCharityPrice();
+	}
+
+	public int todayCharityCount() {
+		return cdao.todayCharityCount();
 	}
 
 }

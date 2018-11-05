@@ -7,7 +7,6 @@ import com.cherryfunding.spring.vo.FDetailVo;
 import com.cherryfunding.spring.vo.FHashtagVo;
 import com.cherryfunding.spring.vo.FundingVo;
 import com.cherryfunding.spring.vo.RewardVo;
-import com.cherryfunding.spring.vo.UsersVo;
 
 public interface FundingDetailService {
 

@@ -8,11 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-
 import com.cherryfunding.spring.service.volunteer.VolunteerListService;
-import com.cherryfunding.spring.service.volunteer.VolunteerService;
-import com.cherryfunding.spring.vo.ShareVo;
-import com.cherryfunding.spring.vo.VPictureVo;
 import com.cherryfunding.spring.vo.VolunteerVo;
 
 @Controller

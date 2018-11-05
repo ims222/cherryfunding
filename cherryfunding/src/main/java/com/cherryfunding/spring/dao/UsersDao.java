@@ -27,8 +27,8 @@ public class UsersDao {
 		return sqlSession.selectList(NAMESPACE + "list");
 	}
 
-	public UsersVo select(String id) {
-		return sqlSession.selectOne(NAMESPACE + "select", id);
+	public UsersVo detail(String id) {
+		return sqlSession.selectOne(NAMESPACE + "detail", id);
 	}
 
 	public int update(UsersVo vo) {
@@ -46,4 +46,13 @@ public class UsersDao {
 	public int withdraw(HashMap<String, Object> map) {
 		return sqlSession.update(NAMESPACE + "withdraw", map);
 	}
+
+	public UsersVo nickCheck(String nick) {
+		return sqlSession.selectOne(NAMESPACE + "nickCheck", nick);
+	}
+
+	public int deposit(HashMap<String, Object> map) {
+		return sqlSession.update(NAMESPACE + "deposit", map);
+	}
+
 }

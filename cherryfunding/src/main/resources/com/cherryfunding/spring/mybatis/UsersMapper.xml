@@ -7,7 +7,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from users
 	</select>
 
-	<select id="select" parameterType="string" resultType="users">
+	<select id="detail" parameterType="string" resultType="users">
 		select * from users where id = #{id}
 	</select>
 
@@ -18,8 +18,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		#{birth}, (sysdate + (1/24)*9), 0)
 	</insert>
 	
+	<select id="nickCheck" parameterType="string" resultType="users">
+		select * from users where nick = #{nick}
+	</select>
+	
 	<update id="withdraw" parameterType="hashmap">
 		update users set balance = balance - #{totAmount} where id = #{id}
+	</update>
+	
+	<update id="deposit" parameterType="hashmap">
+		update users set balance = balance + #{deposit} where id = #{id}
 	</update>
 	
 	<update id="update" parameterType="users">
@@ -31,6 +39,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="login" parameterType="users" resultType="users">
 		select * from users where id=#{id} and pwd=#{pwd}
 	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	<!-- 20181026 심광보가 추가 -->
 	<select id="userlogin" parameterType="hashmap" resultType="users">
 		select * from users where id=#{id} and pwd=#{pwd}

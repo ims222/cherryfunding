@@ -2,9 +2,12 @@ package com.cherryfunding.spring.vo;
 
 import java.sql.Date;
 
+import org.hibernate.validator.constraints.Email;
+
 public class UsersVo {
 	private String id;
 	private String pwd;
+	@Email(message = "이메일 형식이 아닙니다")
 	private String email;
 	private String nick;
 	private String addr;

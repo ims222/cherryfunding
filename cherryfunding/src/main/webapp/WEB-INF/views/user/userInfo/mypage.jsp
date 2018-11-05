@@ -36,6 +36,30 @@ table.type04 td {
     border-bottom: 1px solid #ccc;
 }
 </style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+	function prom(e){
+		e.preventDefault();
+		var id = '${sessionScope.id}';
+		var deposit = prompt("충전할 금액", 0);
+		$.ajax({
+			url:'${pageContext.request.contextPath}/users/usersDeposit',
+			data:{id:id, deposit:deposit},
+			dataType:'json',
+			type:'post',
+			success:function(data){
+				const formatter = new Intl.NumberFormat('en-US', {
+					  style: 'currency',
+					  currency: 'KRW',
+					  minimumFractionDigits: 2
+					});
+
+				$('#balance').empty();
+				$("#balance").append("내 잔고 : " +  formatter.format(data.deposit) + " 원 <a href='#' onclick='prom(event)'>충전</a>");
+			}
+		});
+	}
+</script>
 <body>
 <div class="wrap">
 	<table class="type04">
@@ -45,9 +69,9 @@ table.type04 td {
 			<p style="font-size: 20px;font-weight: bold">&nbsp;&nbsp;${sessionScope.id}님</p>
 		  </td>
 		  <td>	
-			<p>내 잔고 : <fmt:formatNumber value="${balance }" pattern="#,###.##"/> 원</p>
-			<p>총 후원금액 : <fmt:formatNumber value="${charitySum }" pattern="#,###.##"/> 원</p>
-			<p>총 펀딩금액 : <fmt:formatNumber value="${fundingSum }" pattern="#,###.##"/> 원</p>
+			<p id="balance">내 잔고 : <fmt:formatNumber value="${balance}" pattern="#,###.##"/> 원 <a href="#" onclick="prom(event)">충전</a></p>
+			<p>총 후원금액 : <fmt:formatNumber value="${charitySum}" pattern="#,###.##"/> 원</p>
+			<p>총 펀딩금액 : <fmt:formatNumber value="${fundingSum}" pattern="#,###.##"/> 원</p>
 		  </td>
 		  <td>
 		     <a href="${pageContext.request.contextPath}/users/getInfo">회원정보수정</a>

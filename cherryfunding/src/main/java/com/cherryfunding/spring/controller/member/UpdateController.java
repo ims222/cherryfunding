@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
 import com.cherryfunding.spring.service.TestLoginService;
-
 import com.cherryfunding.spring.vo.UsersVo;
 
 
@@ -21,7 +20,7 @@ public class UpdateController {
 	
 	@ModelAttribute("vo")
 	public UsersVo user(String id) {
-		UsersVo vo = service.select(id);
+		UsersVo vo = service.detail(id);
 		return vo;
 	}
 	
