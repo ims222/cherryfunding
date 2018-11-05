@@ -6,6 +6,13 @@ public class VListVo {
     private String id;
     private String content;
     public VListVo() {}
+    
+	public VListVo(int vNum, String id) {
+		super();
+		this.vNum = vNum;
+		this.id = id;
+	}
+
 	public VListVo(int vlNum, int vNum, String id, String content) {
 		super();
 		this.vlNum = vlNum;

@@ -5,7 +5,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
-		isRecommed();
+		isRecommend();
+		isApply();
 		commentList();
 		$("#recommend").on('click', function(){
 			var recomm;
@@ -30,7 +31,37 @@
 						dataType: 'json',
 						type:'post',
 						success: function(data){
-							isRecommed();
+							isRecommend();
+						}
+					});
+				}
+			});
+		});
+		
+		$("#apply").on('click', function(){
+			var apply;
+			var id='${sessionScope.id}';
+			if(!id){
+				alert("로그인 해주세욧");
+				return;
+			}
+			$.ajax({
+				url: '${pageContext.request.contextPath}/volunteer/volunteerIsApply',
+				data:{id:'${sessionScope.id}', vNum: '${vo.vNum}'},
+				dataType: 'json',
+				success: function(data){
+					if(data.result === 'ok'){
+						apply = 'apply';
+					}else{
+						apply = 'cancel';
+					}
+					$.ajax({
+						url:'${pageContext.request.contextPath}/volunteer/volunteerApply',
+						data: {id:id, vNum: '${vo.vNum}', apply:apply},
+						dataType: 'json',
+						type:'post',
+						success: function(data){
+							isApply();
 						}
 					});
 				}
@@ -61,7 +92,7 @@
 		});
 	});
 	
-	function isRecommed(){
+	function isRecommend(){
 		$.ajax({
 			url: '${pageContext.request.contextPath}/volunteer/volunteerIsRecommend',
 			data:{id:'${sessionScope.id}', vNum: '${vo.vNum}'},
@@ -76,6 +107,23 @@
 			}
 		});
 	}
+	
+	function isApply(){
+		$.ajax({
+			url: '${pageContext.request.contextPath}/volunteer/volunteerIsApply',
+			data:{id:'${sessionScope.id}', vNum:'${vo.vNum}'},
+			type:'post',
+			dataType:'json',
+			success: function(data){
+				if(data.result === 'ok'){
+					$("#apply").text('신청');
+				}else{
+					$("#apply").text('신청취소');
+				}
+			}
+		});
+	}
+	
 	function commentList(){
 		$.ajax({
 			url: '${pageContext.request.contextPath}/volunteer/commentList',
@@ -115,6 +163,7 @@
 				 	<p>모집인원: ${vo.members }</p>
 				 	 
 				 	<button id="recommend" type="button"></button>
+				 	<button id="apply" type="button"></button>
 				</div>
 				
 			</section>
