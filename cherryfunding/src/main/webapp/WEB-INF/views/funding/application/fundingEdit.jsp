@@ -58,8 +58,9 @@
 <button class="btn btn-primary" onclick="save()">save</button>
 <div id="summernote">${vo.content}</div>
 	<script type="text/javascript">
-		$(function() {
-			$('#summernote').summernote({
+	$(function() {
+		$('#summernote').summernote({
+			lang: 'ko-KR',
 			disableDragAndDrop: true,
 	    	height: 300,
 			codemirror: {

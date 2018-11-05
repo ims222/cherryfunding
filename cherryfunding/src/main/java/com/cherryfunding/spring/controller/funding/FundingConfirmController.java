@@ -35,6 +35,8 @@ public class FundingConfirmController {
 	@RequestMapping("/funding/detail")
 	public String fundingDetail(int fNum, Model model) {
 		model.addAttribute("vo", fundingConfirmService.detail(fNum));
+		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+		System.out.println(fundingConfirmService.detail(fNum).getContent());
 		model.addAttribute("fPictureList", fundingConfirmService.fPictureList(fNum));
 		return "funding/application/fundingEdit";
 	}

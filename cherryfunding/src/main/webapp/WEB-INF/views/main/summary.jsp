@@ -167,7 +167,7 @@
 				</div>
 				<div class="row">
 					<div class="col-md-3">
-						<a href="${pageContext.request.contextPath}/funding/fundingDetailforUser?fNum=${summary.fEnd.fNum}" class="image featured">
+						<a href="${pageContext.request.contextPath}/funding/ingFundingDetailforUser?fNum=${summary.fEnd.fNum}" class="image featured">
 						<img src="${summary.fEnd.savename}"
 						alt="${summary.fEnd.fpinfo}" height="200px"></a>
 						<div class="box">
@@ -206,7 +206,7 @@
 						</div>
 					</div>
 					<div class="col-md-3">
-						<a href="${pageContext.request.contextPath}/funding/fundingDetailforUser?fNum=${summary.fNew.fNum}" class="image featured">
+						<a href="${pageContext.request.contextPath}/funding/prepareFundingDetailforUser?fNum=${summary.fNew.fNum}" class="image featured">
 						<img src="${summary.fNew.savename}"
 						alt="${summary.fNew.fpinfo}" height="200px"></a>
 						<div class="box">
@@ -245,7 +245,7 @@
 						</div>
 					</div>
 					<div class="col-md-3">
-						<a href="${pageContext.request.contextPath}/funding/fundingDetailforUser?fNum=${summary.fHot.fNum}" class="image featured">
+						<a href="${pageContext.request.contextPath}/funding/ingFundingDetailforUser?fNum=${summary.fHot.fNum}" class="image featured">
 						<img src="${summary.fHot.savename}"
 						alt="${summary.fHot.fpinfo}" height="200px"></a>
 						<div class="box">
@@ -284,7 +284,7 @@
 						</div>
 					</div>
 					<div class="col-md-3">
-						<a href="${pageContext.request.contextPath}/funding/fundingDetailforUser?fNum=${summary.fPrice.fNum}" class="image featured">
+						<a href="${pageContext.request.contextPath}/funding/ingFundingDetailforUser?fNum=${summary.fPrice.fNum}" class="image featured">
 						<img src="${summary.fPrice.savename}"
 						alt="${summary.fPrice.fpinfo}" height="200px"></a>
 						<div class="box">
