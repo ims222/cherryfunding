@@ -40,7 +40,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</sql>
 	
 	<select id="list" resultType="charity">
-		select * from charity order by cNum
+		select * from charity order by cNum desc
 	</select>
 	
 	<select id="select" parameterType="int" resultType="charity">
@@ -69,13 +69,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="waitList" resultType="charity">
 		select * from charity where confirm = 'n'
 	</select>
+	
+	<select id="confirmList" resultType="charity">
+		select * from charity where confirm = 'y'
+	</select>
 		
 	<update id="confirm" parameterType="int">
 		update charity set confirm = 'y' where cNum = #{cNum}
 	</update>
 	
+	<update id="wait" parameterType="int">
+		update charity set confirm ='n' where cNum = #{cNum}
+	</update>
 	
-	<!-- 준비중 펀딩 -->
+	
+	<!-- 준비중 후원 -->
 	<select id="prepare" parameterType= "hashmap" resultType="charity">
 		select * from charity
 		<include refid="prepare"/>
@@ -84,7 +92,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		order by cNum desc
 	</select>
 	
-	<!-- 종료된 펀딩 -->
+	<!-- 종료된 후원 -->
 	<select id="end" parameterType= "hashmap"  resultType="charity">
 		select * from charity
 		<include refid="end"/>
@@ -92,7 +100,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<include refid="search"/>
 		order by cNum desc
 	</select>
-	<!-- 진행중 펀딩 -->
+	<!-- 진행중 후원 -->
 	<select id="ing" parameterType="hashmap" resultType="charity">
 		<choose>
 			<when test="sort == 'end'">

@@ -41,7 +41,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</sql>
 
 	<select id="list" resultType="funding">
-		select * from funding order by fNum
+		select * from funding order by fNum desc
 	</select>
 
 	<select id="select" parameterType="int" resultType="funding">

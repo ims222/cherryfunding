@@ -18,7 +18,7 @@ public class FundingConfirmService {
 		return fundingDao.waitList();
 	}
 	
-	public List<FundingVo> confirmList() { // 대기 목록
+	public List<FundingVo> confirmList() { // 승인 목록
 		return fundingDao.confirmList();
 	}
 
@@ -30,7 +30,7 @@ public class FundingConfirmService {
 		return fundingDao.wait(fNum);
 	}
 
-	public List<FundingVo> list() {
+	public List<FundingVo> list() { //전체목록
 		return fundingDao.list();
 	}
 
