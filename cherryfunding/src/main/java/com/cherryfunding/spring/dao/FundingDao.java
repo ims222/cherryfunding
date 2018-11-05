@@ -113,8 +113,4 @@ public class FundingDao {
 		return sqlSession.selectOne(NAMESPACE + "detail", fNum);
 	}
 
-	public int editContent(HashMap<String, Object> map) {
-		return sqlSession.update(NAMESPACE + "editContent", map);
-	}
-
 }
