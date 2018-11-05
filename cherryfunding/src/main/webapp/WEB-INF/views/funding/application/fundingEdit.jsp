@@ -12,7 +12,6 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.css" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.js"></script>
-<script src="https://html2canvas.hertzen.com/build/html2canvas.js"></script>
 </head>
 <body>
 	<table border="1">
@@ -96,7 +95,6 @@
 			dataType:'json',
 			type:'post',
 			success: function(data){
-				//$('#' + col).html("");
 				var btn = $('<button></button>').attr('class', 'btn btn-primary')
 												.attr('onclick', "updateFunding('"+ col +"')")
 												.text('수정');

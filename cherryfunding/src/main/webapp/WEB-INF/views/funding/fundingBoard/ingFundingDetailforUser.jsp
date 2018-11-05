@@ -176,19 +176,12 @@
 			dataType: 'json',
 			type: 'post',
 			success: function(data){
-				var table = $('<table></table>');
-				$("#commment").empty().append(table);
+				var result = "";
+				var html = document.querySelector("#commentLine").innerHTML;
 				data.forEach(function(value){
-					var id = value.id;
-					var content = value.content;
-					var regdate = value.regdate;
-					var tr = $('<tr></tr>');
-					$(tr).append('<td>' + id + '</td>');
-					$(tr).append('<td>' + content + '</td>');
-					$(tr).append('<td>' + regdate + '</td>');
-					$(table).append(tr);
+					result += html.replace("{id}", value.id).replace("{content}", value.content).replace("{regdate}", value.regdate);
 				});
-				$('#comment').append(table);
+				document.querySelector('#comment').innerHTML = result;
 			}
 		});
 	}
@@ -204,6 +197,13 @@
 	}
 
 
+</script>
+<script id="commentLine" type="text/template">
+	<tr>
+		<td>{id}</td>
+		<td>{content}</td>
+		<td>{regdate}</td>
+	</tr>
 </script>
 <!-- Main -->
 <div id="main">
@@ -236,8 +236,11 @@
 				<a href="${pageContext.request.contextPath}/funding/fundingParticipation?fNum=${vo.fNum}">펀딩 참여자</a>
  			</div>
 		</div>
-		<div class="row box" id="commment">
+		<div class="row box">
 			<!-- 댓글 -->
+			<table id="comment">
+			
+			</table>
 		</div>
 		<form id="insertComment">
 			<input type="text" name="content"><br>
