@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.cherryfunding.spring.vo.VListVo;
-import com.cherryfunding.spring.vo.VRecommendVo;
+
 
 @Repository
 public class VListDao {
@@ -28,5 +28,10 @@ public class VListDao {
 
 	public int delete(VListVo vo) {
 		return sqlSession.delete(NAMESPACE + "delete", vo);
+	}
+	
+	
+	public int getTotal(int vNum) {
+		return sqlSession.selectOne(NAMESPACE + "getTotal", vNum);
 	}
 }
