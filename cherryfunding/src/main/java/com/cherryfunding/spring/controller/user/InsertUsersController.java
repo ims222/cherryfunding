@@ -1,6 +1,5 @@
 package com.cherryfunding.spring.controller.user;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.json.JSONObject;

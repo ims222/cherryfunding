@@ -14,7 +14,7 @@
 		$("input[name='id']").on('keyup', function(){ //아이디 체크
 			var length = $(this).val().length
 			if(length < 5 || length > 20){
-				$('#idCheck').text('5~20자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능합니다.');
+				$('#idCheck').text('5~20자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능합니다');
 				return;
 			}
 			var id = $(this).val();
@@ -35,7 +35,7 @@
 		$("input[name='pwd']").on('keyup', function(){
 			var length = $(this).val();
 			if(length<8 || length >16){
-				$('#pwdCheck').text("	8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요.");
+				$('#pwdCheck').text("8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요");
 			}
 				
 		});
@@ -76,8 +76,10 @@
 	<h1>회원가입</h1>
 	
 	<form method="post" action="${pageContext.request.contextPath}/users/insert">
-		아이디<input type="text" name="id" placeholder="아이디를 입력하세요" value="${users.id}"><span id="idCheck"></span><br>
-		비밀번호<input type="password" name="pwd" placeholder="비밀번호를 입력하세요" value="${users.pwd}"><span id="pwdCheck"></span><br>
+		아이디<input type="text" name="id" placeholder="아이디를 입력하세요" value="${users.id}">
+		<span id="idCheck"><form:errors path="users.id"/></span><br>
+		비밀번호<input type="password" name="pwd" placeholder="비밀번호를 입력하세요" value="${users.pwd}">
+		<span id="pwdCheck"><form:errors path="users.pwd"/></span><br>
 		비밀번호 확인<input type="password" name="pwdCheck" placeholder="비밀번호를 확인하세요"><span id="matchingPwd"></span><br>
 		닉네임<input type="text" name="nick" placeholder="닉네임을 입력하세요" value="${users.nick}"><span id="nickCheck"></span><br>
 		이메일<input type="text" name="email" placeholder="이메일을 입력하세요" value="${users.email}">
