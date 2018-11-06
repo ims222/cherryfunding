@@ -3,12 +3,16 @@ package com.cherryfunding.spring.vo;
 import java.sql.Date;
 
 import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
 
 public class UsersVo {
+	@NotEmpty(message = "필수 입력사항입니다")
 	private String id;
+	@NotEmpty(message = "필수 입력사항입니다")
 	private String pwd;
 	@Email(message = "이메일 형식이 아닙니다")
 	private String email;
+	@NotEmpty(message = "필수 입력사항입니다")
 	private String nick;
 	private String addr;
 	private String gender;

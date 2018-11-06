@@ -9,7 +9,7 @@
 				<div class="row">
 					<div class="col-md-3">
 					<a href="${pageContext.request.contextPath}/charityList/detail?num=${summary.cEnd.cNum}" class="image featured">
-					<img src="${pageContext.request.contextPath}/resources/upload/funding/${summary.cEnd.savename}"
+					<img src="${summary.cEnd.savename}"
 					alt="${summary.cEnd.cpinfo}" height="200px"></a>
 					<div class="box">
 						<p>종료임박후원</p>
@@ -49,7 +49,7 @@
 				</div>
 					<div class="col-md-3">
 					<a href="${pageContext.request.contextPath}/fundingList/detail?num=${summary.cNew.cNum}" class="image featured">
-					<img src="${pageContext.request.contextPath}/resources/upload/funding/${summary.cNew.savename}"
+					<img src="${summary.cNew.savename}"
 					alt="${summary.cNew.cpinfo}" height="200px"></a>
 					<div class="box">
 						<p>신규 후원</p>
@@ -88,7 +88,7 @@
 				</div>
 					<div class="col-md-3">
 					<a href="${pageContext.request.contextPath}/fundingList/detail?num=${summary.cHot.cNum}" class="image featured">
-					<img src="${pageContext.request.contextPath}/resources/upload/funding/${summary.cHot.savename}"
+					<img src="${summary.cHot.savename}"
 					alt="${summary.cHot.cpinfo}" height="200px"></a>
 					<div class="box">
 						<p>주목할만한 후원</p>
@@ -127,7 +127,7 @@
 				</div>
 					<div class="col-md-3">
 						<a href="${pageContext.request.contextPath}/fundingList/detail?num=${summary.cPrice.cNum}" class="image featured">
-						<img src="${pageContext.request.contextPath}/resources/upload/funding/${summary.cPrice.savename}"
+						<img src="${summary.cPrice.savename}"
 						alt="${summary.cPrice.cpinfo}" height="200px"></a>
 						<div class="box">
 							<p>참여금액이 높은 후원</p>
@@ -167,7 +167,7 @@
 				</div>
 				<div class="row">
 					<div class="col-md-3">
-						<a href="${pageContext.request.contextPath}/funding/fundingDetailforUser?fNum=${summary.fEnd.fNum}" class="image featured">
+						<a href="${pageContext.request.contextPath}/funding/ingFundingDetailforUser?fNum=${summary.fEnd.fNum}" class="image featured">
 						<img src="${summary.fEnd.savename}"
 						alt="${summary.fEnd.fpinfo}" height="200px"></a>
 						<div class="box">
@@ -206,7 +206,7 @@
 						</div>
 					</div>
 					<div class="col-md-3">
-						<a href="${pageContext.request.contextPath}/funding/fundingDetailforUser?fNum=${summary.fNew.fNum}" class="image featured">
+						<a href="${pageContext.request.contextPath}/funding/prepareFundingDetailforUser?fNum=${summary.fNew.fNum}" class="image featured">
 						<img src="${summary.fNew.savename}"
 						alt="${summary.fNew.fpinfo}" height="200px"></a>
 						<div class="box">
@@ -245,7 +245,7 @@
 						</div>
 					</div>
 					<div class="col-md-3">
-						<a href="${pageContext.request.contextPath}/funding/fundingDetailforUser?fNum=${summary.fHot.fNum}" class="image featured">
+						<a href="${pageContext.request.contextPath}/funding/ingFundingDetailforUser?fNum=${summary.fHot.fNum}" class="image featured">
 						<img src="${summary.fHot.savename}"
 						alt="${summary.fHot.fpinfo}" height="200px"></a>
 						<div class="box">
@@ -284,7 +284,7 @@
 						</div>
 					</div>
 					<div class="col-md-3">
-						<a href="${pageContext.request.contextPath}/funding/fundingDetailforUser?fNum=${summary.fPrice.fNum}" class="image featured">
+						<a href="${pageContext.request.contextPath}/funding/ingFundingDetailforUser?fNum=${summary.fPrice.fNum}" class="image featured">
 						<img src="${summary.fPrice.savename}"
 						alt="${summary.fPrice.fpinfo}" height="200px"></a>
 						<div class="box">

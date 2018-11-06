@@ -60,14 +60,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	<update id="update" parameterType="funding">
-		update funding set
-		title=#{title},content=#{content},amount=#{amount},camout=#{camout},
-		sdate=#{sdate},edate=#{edate},category=#{category},confirm=#{confirm},aid=#{aid},
-		addr=#{addr},id=#{id} where fNum = #{fNum}
+		update funding
+		<set>
+			<if test="title != null">title = #{title},</if>
+			<if test="content != null">content = #{content},</if>
+			<if test="amount != null">amount = #{amount},</if>
+			<if test="camout != null">camout = #{camout},</if>
+			<if test="sdate != null">sdate = #{sdate},</if>
+			<if test="edate != null">edate = #{edate},</if>
+			<if test="category != null">category = #{category},</if>
+			<if test="confirm != null">confirm = #{confirm},</if>
+			<if test="aid != null">aid = #{aid},</if>
+			<if test="addr != null">addr = #{addr},</if>
+			<if test="aid != null">aid = #{aid},</if>
+		</set>
+		where fNum = #{fNum}
 	</update>
-	<update id="editContent" parameterType="hashmap">
-		update funding set content = #{content} where fNum = #{fNum}
-	</update>
+	
 	
 	<delete id="delete" parameterType="int">
 		delete from funding where
@@ -195,15 +204,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		
 		<!-- 새로 시작하는 -->
 		<select id="mainNew" resultType="funding">
-			select * from (
+			select * from(
 				select aa.*, rownum rnum from (
-					select * from funding
-					<include refid="prepare"/>
-					and (sysdate - (sysdate + (1/24)*9)) = (select max((sysdate + (1/24)*9) - sdate) fNum from funding
-					<include refid="ing"/>
-					 <include refid="isConfirm"/>
-                        ) order by fNum desc
-											)aa
+					select fNum, title, content, amount, camout, sdate, edate, category, confirm, aid, addr, regdate, id, hit, (sysdate + (1/24)*9) - sdate s from funding
+					where sdate > (sysdate + (1/24)*9) and edate > (sysdate + (1/24)*9) and confirm = 'y' order by s desc
+				)aa
 			) where rnum = 1
 		</select>
 		

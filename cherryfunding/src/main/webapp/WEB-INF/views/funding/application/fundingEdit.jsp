@@ -12,7 +12,6 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.css" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.js"></script>
-<script src="https://html2canvas.hertzen.com/build/html2canvas.js"></script>
 </head>
 <body>
 	<table border="1">
@@ -25,20 +24,18 @@
 			<th>카테고리</th>
 			<th>승인구분</th>
 			<th>승인자</th>
-			<th>주소</th>
 			<th>신청일</th>
 			<th>신청자</th>
 		</tr>
 		<tr>
 			<td>${vo.fNum}</td>	
-			<td><a href="${pageContext.request.contextPath}/funding/detail?fNum=${vo.fNum}">${vo.title}</a></td>
-			<td>${vo.amount}</td>
-			<td>${vo.sdate}</td>
-			<td>${vo.edate}</td>
-			<td>${vo.category}</td>
+			<td id="title">${vo.title}<button class="btn btn-primary" onclick="updateFunding('title')">수정</button></td>
+			<td id="amount">${vo.amount}<button class="btn btn-primary" onclick="updateFunding('amount')">수정</button></td>
+			<td id="sdate">${vo.sdate}</td>
+			<td id="edate">${vo.edate}</td>
+			<td id="category">${vo.category}<button class="btn btn-primary" onclick="updateFunding('category')">수정</button></td>
 			<td>${vo.confirm}</td>
-			<td>${vo.aid}</td>
-			<td>${vo.addr}</td>
+			<td id="aid">${vo.aid}<button class="btn btn-primary" onclick="updateFunding('aid')">수정</button></td>
 			<td>${vo.regdate}</td>
 			<td>${vo.id}</td>
 		</tr>
@@ -56,13 +53,13 @@
 <br>
 이미지 끌어와서 편집하기
 <br>
-<!-- <button id="save" class="btn btn-primary" onclick="fileEdit()" type="button">수정완료</button> -->
 <button class="btn btn-primary" onclick="edit()">edit</button>
 <button class="btn btn-primary" onclick="save()">save</button>
 <div id="summernote">${vo.content}</div>
 	<script type="text/javascript">
-		$(function() {
-			$('#summernote').summernote({
+	$(function() {
+		$('#summernote').summernote({
+			lang: 'ko-KR',
 			disableDragAndDrop: true,
 	    	height: 300,
 			codemirror: {
@@ -90,12 +87,28 @@
 			}
 		});
 	};
+	var updateFunding = function(col){
+		var val = prompt("수정할 " + col + " 입력", '');
+		$.ajax({
+			url:'${pageContext.request.contextPath}/funding/editContent',
+			data:{ [col] : val, fNum:'${vo.fNum}'},
+			dataType:'json',
+			type:'post',
+			success: function(data){
+				var btn = $('<button></button>').attr('class', 'btn btn-primary')
+												.attr('onclick', "updateFunding('"+ col +"')")
+												.text('수정');
+					
+				$('#' + col).text(data[col]).append(btn);
+			}
+		});
+	};
 		
 		
 	var fileSave = function() {
 		$('#space').empty();
 		alert($('#summernote').summernote('code'));
-	}
+	};
 
 	</script>
 	<form onsubmit="fileSave()" enctype="multipart/form-data" method="post">

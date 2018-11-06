@@ -32,9 +32,6 @@ public class FundingDetailServiceImpl implements FundingDetailService {
 	private FDetailDao fDetailDao;
 
 	@Autowired
-	private UsersDao usersDao;
-
-	@Autowired
 	private FRecommendDao fRecommendDao;
 
 	@Autowired

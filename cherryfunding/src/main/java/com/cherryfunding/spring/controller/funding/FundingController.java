@@ -50,6 +50,7 @@ public class FundingController {
 		vo.setPwd(pwd);
 		if (testLoginService.login(vo) != null) {
 			session.setAttribute("id", vo.getId());
+			session.setAttribute("login", vo);
 		}
 		return "redirect:/";
 	}

@@ -42,7 +42,7 @@
 		<div class="row no-collapse-1">
 			<c:forEach var="vo" items="${list}" varStatus="vs">
 				<div class="col-md-4">
-					<a href="${pageContext.request.contextPath}/fundingList/detail?num=${vo.fNum}" class="image featured"> <img
+					<a href="${pageContext.request.contextPath}/funding/endFundingDetailforUser?fNum=${vo.fNum}" class="image featured"> <img
 						src="${vo.savename}"
 						alt="${vo.fpinfo}" height="200px"></a>
 					<div class="box">

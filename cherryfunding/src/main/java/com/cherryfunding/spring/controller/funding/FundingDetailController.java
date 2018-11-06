@@ -24,14 +24,34 @@ public class FundingDetailController {
 	@Autowired
 	private FundingDetailService fundingDetailService;
 
-	@RequestMapping("/funding/fundingDetailforUser")
-	public String fundingDetail(int fNum, Model model) {
+	@RequestMapping("/funding/ingFundingDetailforUser")
+	public String ingFundingDetail(int fNum, Model model) {
 		model.addAttribute("vo", fundingDetailService.detail(fNum));
 		model.addAttribute("rewardList", fundingDetailService.rewardList(fNum));
 		model.addAttribute("fRecommend", fundingDetailService.getRecommend(fNum));
 		model.addAttribute("hashtag", fundingDetailService.hashtag(fNum));
 		fundingDetailService.hitUp(fNum);
-		return ".fundingDetailforUser";
+		return ".ingFundingDetailforUser";
+	}
+	
+	@RequestMapping("/funding/prepareFundingDetailforUser")
+	public String prepareFundingDetail(int fNum, Model model) {
+		model.addAttribute("vo", fundingDetailService.detail(fNum));
+		model.addAttribute("rewardList", fundingDetailService.rewardList(fNum));
+		model.addAttribute("fRecommend", fundingDetailService.getRecommend(fNum));
+		model.addAttribute("hashtag", fundingDetailService.hashtag(fNum));
+		fundingDetailService.hitUp(fNum);
+		return ".prepareFundingDetailforUser";
+	}
+	
+	@RequestMapping("/funding/endFundingDetailforUser")
+	public String endFundingDetail(int fNum, Model model) {
+		model.addAttribute("vo", fundingDetailService.detail(fNum));
+		model.addAttribute("rewardList", fundingDetailService.rewardList(fNum));
+		model.addAttribute("fRecommend", fundingDetailService.getRecommend(fNum));
+		model.addAttribute("hashtag", fundingDetailService.hashtag(fNum));
+		fundingDetailService.hitUp(fNum);
+		return ".endFundingDetailforUser";
 	}
 
 	@RequestMapping("/funding/rewardDetail")
@@ -128,6 +148,6 @@ public class FundingDetailController {
 				iterator.remove(); // 리워드 지우기
 			}
 		}
-		return "redirect:/funding/fundingDetailforUser?fNum=" + fNum;
+		return "redirect:/funding/ingFundingDetailforUser?fNum=" + fNum;
 	}
 }
