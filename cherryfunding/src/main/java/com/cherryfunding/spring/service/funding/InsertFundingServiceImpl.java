@@ -35,16 +35,19 @@ public class InsertFundingServiceImpl implements InsertFundingService {
 
 	@Override
 	public int fhinsert(FHashtagVo fhvo) {
+		fhvo.setFtagNum(fHashtagDao.getMaxNum() + 1);
 		return fHashtagDao.insert(fhvo);
 	}
 
 	@Override
 	public int rinsert(RewardVo rvo) {
+		rvo.setrNum(rewardDao.getMaxNum() + 1);
 		return rewardDao.insert(rvo);
 	}
 
 	@Override
 	public int fpinsert(FPictureVo fpvo) {
+		fpvo.setFpNum(fPictureDao.getMaxNum() + 1);
 		return fPictureDao.insert(fpvo);
 	}
 

@@ -5,15 +5,15 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <script type="text/javascript">
 	$(document).ready(function(){
-		$("#category").on('click', 'button', function(e){
-			var value = $(this).text();
-			location.href= "${pageContext.request.contextPath}/funding/ingFundingList?category=" + value;
-		});
-		$("#sort").on('change', function(){
-			var value = $(this).val();
-			location.href= "${pageContext.request.contextPath}/funding/ingFundingList?sort=" + value;
-		});
+		$("#category").on('click', 'button', selectionOption);
+		$("#sort").on('change', selectionOption);
+		
 	});
+	function selectionOption(){
+		var category = $(this).text();
+		var sort = $(this).val();
+		location.href= "${pageContext.request.contextPath}/funding/ingFundingList?sort=" + sort + "&category=" + category;
+	}
 </script>
 <!-- Main -->
 <div id="main">
@@ -45,16 +45,16 @@
 			<input type="submit" value="검색">		
 		</form>
 		<select id="sort">
-			<option value="latest">최신순</option>
-			<option value="recommend">추천순</option>
-			<option value="popular">인기순</option>
-			<option value="camount">참여금액순</option>
-			<option value="end">종료임박순</option>
+			<option value="latest" <c:if test="${sort eq 'latest'}">selected="selected"</c:if>>최신순</option>
+			<option value="recommend" <c:if test="${sort eq 'recommend'}">selected="selected"</c:if>>추천순</option>
+			<option value="popular" <c:if test="${sort eq 'popular'}">selected="selected"</c:if>>인기순</option>
+			<option value="camount" <c:if test="${sort eq 'camount'}">selected="selected"</c:if>>참여금액순</option>
+			<option value="end" <c:if test="${sort eq 'end'}">selected="selected"</c:if>>종료임박순</option>
 		</select>
 		<div class="row no-collapse-1">
 			<c:forEach var="vo" items="${list}" varStatus="vs">
 				<section class="4u">
-					<a href="${pageContext.request.contextPath}/funding/fundingDetailforUser?fNum=${vo.fNum}"
+					<a href="${pageContext.request.contextPath}/funding/ingFundingDetailforUser?fNum=${vo.fNum}"
 					class="image featured">
 					<img src="${vo.savename}" alt="${vo.fpinfo}" height="200px"></a>
 					<div class="box">
@@ -73,9 +73,17 @@
 						<p>D${now-end}</p>
 						<div class="progress">
 							<c:set var="before" value="${vo.camout * 100 / vo.amount}" />
+							<c:choose>
+								<c:when test="${before >= 1000}">
+									<c:set var="barBefore" value="100"/>
+								</c:when>
+								<c:otherwise>
+									<c:set var="barBefore" value="${before}" />
+								</c:otherwise>
+							</c:choose>
 							<div class="progress-bar" role="progressbar"
-								style="width: <fmt:formatNumber value="${before/100}" type="percent"/>"
-								aria-valuenow="${before * 100}" aria-valuemin="0"
+								style="width: <fmt:formatNumber value="${barBefore/100}" type="percent"/>"
+								aria-valuenow="${barBefore * 10000}" aria-valuemin="0"
 								aria-valuemax="100">
 								<fmt:formatNumber value="${before/100}" type="percent" />
 							</div>
@@ -85,7 +93,6 @@
 			</c:forEach>
 		</div>
 		<div class="row">
-
 			<!-- Content -->
 			<div class="6u">
 				<section>

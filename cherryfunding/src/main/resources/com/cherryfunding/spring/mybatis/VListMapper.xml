@@ -6,18 +6,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="list" resultType="vList">
 		select * from vList
 	</select>
-
-	<select id="select" parameterType="string" resultType="vList">
-		select * from vList where id = #{id}
+	<select id="isApply" parameterType="vList" resultType="vList">
+		select * from vList where id = #{id} and vNum = #{vNum}
 	</select>
-
+	<select id="getMaxNum" resultType="int">
+		select NVL(max(vlNum), 0) from vList
+	</select>
+	<select id="getTotal" parameterType="int" resultType="int">
+		select NVL(count(vlNum),0) from vList where vNum = #{vNum}
+	</select>
 	<insert id="insert" parameterType="vList">
-		insert into vList values()
+		insert into vList values(#{vlNum},#{vNum},#{id},#{content})
 	</insert>
-	<update id="update" parameterType="vList">
-		update vList set #{pwd} where #{id}
-	</update>
-	<delete id="delete" parameterType="string">
-		delete from vList where id=#{id}
+	<delete id="delete" parameterType="vList">
+		delete from vList where id=#{id} and vNum=#{vNum}
 	</delete>
 </mapper>

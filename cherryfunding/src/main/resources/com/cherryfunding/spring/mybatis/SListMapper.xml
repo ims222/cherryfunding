@@ -3,21 +3,31 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cherryfunding.spring.vo.SListMapper">
-	<select id="list" resultType="sList">
-		select * from sList
-	</select>
-
-	<select id="select" parameterType="string" resultType="sList">
-		select * from sList where id = #{id}
-	</select>
 
 	<insert id="insert" parameterType="sList">
-		insert into sList values()
+		insert into sList values(#{slNum}, #{sNum}, #{id}, 'n', null, #{siNum}, #{amount})
 	</insert>
-	<update id="update" parameterType="sList">
-		update sList set #{pwd} where #{id}
+	
+	<select id="getMaxNum" resultType="int">
+		select NVL(max(slNum), 0) from sList
+	</select>
+	
+	<select id="listBysNum" parameterType="int" resultType="hashmap">
+		select slNum, id, si.siNum, sl.sNum, si.title, sl.amount from sitem si, slist sl
+		where si.siNum = sl.siNum and si.sNum = #{sNum} and confirm = 'n'
+	</select>
+	
+	<select id="isConfirm" parameterType="int" resultType="hashMap">
+		select slNum, id, si.siNum, sl.sNum, si.title, sl.amount from sitem si, slist sl
+		where si.siNum = sl.siNum and si.sNum = #{sNum} and confirm = 'y'
+	</select>
+	
+	<update id="confirm" parameterType="int">
+		update sList set confirm = 'y' where slNum = #{slNum}
 	</update>
-	<delete id="delete" parameterType="string">
-		delete from sList where id=#{id}
-	</delete>
+	
+	<select id="detail" parameterType="int" resultType="sList">
+		select * from sList where slNum = #{slNum}
+	</select>
+
 </mapper>

@@ -42,7 +42,7 @@
 		<div class="row no-collapse-1">
 			<c:forEach var="vo" items="${list}" varStatus="vs">
 				<div class="col-md-4">
-					<a href="${pageContext.request.contextPath}/fundingList/detail?num=${vo.fNum}" class="image featured"> <img
+					<a href="${pageContext.request.contextPath}/funding/endFundingDetailforUser?fNum=${vo.fNum}" class="image featured"> <img
 						src="${vo.savename}"
 						alt="${vo.fpinfo}" height="200px"></a>
 					<div class="box">
@@ -50,14 +50,22 @@
 						<p>${vo.id}</p>
 						<p>목표금액: ${vo.amount}원</p>
 						<p>현재금액: ${vo.camout}원</p>
-
+						<c:set var="before" value="${vo.camout * 100 / vo.amount}" />
+							<c:choose>
+								<c:when test="${before >= 1000}">
+									<c:set var="barBefore" value="100"/>
+								</c:when>
+								<c:otherwise>
+									<c:set var="barBefore" value="${before}" />
+								</c:otherwise>
+							</c:choose>
 						<div class="progress">
 							<c:set var="before" value="${vo.camout * 100 / vo.amount}" />
 							<div class="progress-bar" role="progressbar"
-								style="width: <fmt:formatNumber value="${before}" type="percent"/>"
-								aria-valuenow="${before * 100}" aria-valuemin="0"
+								style="width: <fmt:formatNumber value="${barBefore/100}" type="percent"/>"
+								aria-valuenow="${before * 100000}" aria-valuemin="0"
 								aria-valuemax="100">
-								<fmt:formatNumber value="${before}" type="percent" />
+								<fmt:formatNumber value="${before/100}" type="percent" />
 							</div>
 						</div>
 					</div>

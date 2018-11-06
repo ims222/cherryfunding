@@ -18,6 +18,8 @@ public class ImgUpload {
 
 	@RequestMapping(value = "/imgUpload", method = RequestMethod.POST)
 	public String imgUpload(MultipartHttpServletRequest request, Model model) {
+		System.out.println("!!!!!!!!!!!!!!!!!!!!!");
+		System.out.println(request.getMethod());
 		S3Util s3util = new S3Util();
 		List<MultipartFile> files = request.getFiles("file");
 		ArrayList<String> filenames = new ArrayList<String>();

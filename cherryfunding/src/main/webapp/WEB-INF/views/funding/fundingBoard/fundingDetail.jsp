@@ -42,7 +42,7 @@
 	<h2>첨부 이미지</h2>
 	<table border="1">
 	<tr>
-	<c:forEach var="vo" items="${list }">
+	<c:forEach var="vo" items="${fPictureList}">
 	<td>${vo.fpNum}</td>
 	<td>${vo.orgname}</td>
 	<td><img src="${pageContext.request.contextPath}/resources/upload/funding/${vo.savename}" height="170px"></td>

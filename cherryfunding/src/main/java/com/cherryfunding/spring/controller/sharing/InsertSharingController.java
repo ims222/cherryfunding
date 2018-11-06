@@ -1,15 +1,13 @@
 package com.cherryfunding.spring.controller.sharing;
 
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.InputStream;
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
@@ -19,6 +17,7 @@ import com.cherryfunding.spring.service.sharing.InsertSharingService;
 import com.cherryfunding.spring.service.sharing.SItemService;
 import com.cherryfunding.spring.service.sharing.SPictureService;
 import com.cherryfunding.spring.service.sharing.ShareService;
+import com.cherryfunding.spring.util.S3Util;
 import com.cherryfunding.spring.vo.SItemVo;
 import com.cherryfunding.spring.vo.SPictureVo;
 import com.cherryfunding.spring.vo.ShareVo;
@@ -37,6 +36,9 @@ public class InsertSharingController {
 
 	@Autowired
 	private InsertSharingService insertSharingService;
+	
+	@Autowired
+	private S3Util s3;
 
 	@RequestMapping(value = "/sharing/insertSharing", method = RequestMethod.GET)
 	public String inputSharingForm() {
@@ -85,7 +87,7 @@ public class InsertSharingController {
 			int num = 0;
 			for (MultipartFile file : files) {
 				String orgfilename = file.getOriginalFilename();
-				String savefilename = id + "_" + title + "_" + num + orgfilename;
+				String savefilename = String.valueOf(UUID.randomUUID());
 				long filesize = file.getSize();
 				if (filesize > 0) {
 					SPictureVo spvo = new SPictureVo();
@@ -97,11 +99,7 @@ public class InsertSharingController {
 					spvo.setsPinfo(sPinfos[num++]);
 
 					insertSharingService.spInsert(spvo); // 저장
-					InputStream is = file.getInputStream();
-					FileOutputStream fos = new FileOutputStream(uploadPath + "\\" + savefilename);
-					FileCopyUtils.copy(is, fos);
-					is.close();
-					fos.close();
+					s3.fileUpload("sharing/" + savefilename, file.getBytes()); // 파일 업로드
 				}
 			}
 		} catch (Exception e) {

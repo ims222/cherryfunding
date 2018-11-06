@@ -1,15 +1,21 @@
 package com.cherryfunding.spring.service.charity;
 
+import java.util.HashMap;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.cherryfunding.spring.dao.CPictureDao;
 import com.cherryfunding.spring.dao.CharityDao;
+import com.cherryfunding.spring.util.S3Util;
 import com.cherryfunding.spring.vo.CPictureVo;
 import com.cherryfunding.spring.vo.CharityVo;
 
-
 @Service
 public class MainCharityService {
+	
+	@Autowired
+	private S3Util s3;
 
 	@Autowired
 	private CharityDao cdao;
@@ -22,40 +28,44 @@ public class MainCharityService {
 		if (cEnd == null) {
 			cEnd = new CharityVo();
 		}
-		cEnd.setSavename(this.thumbnail(cEnd.getcNum()).getSaveName());// 썸네일
+		String thumbnail = this.thumbnail(cEnd.getcNum()).getSaveName();
+		cEnd.setSavename(s3.getFileURL("charity/" + thumbnail));// 썸네일
 		cEnd.setCpinfo(this.thumbnail(cEnd.getcNum()).getCpinfo()); // 사진정보
 
 		return cEnd;
 	}
-	
+
 	public CharityVo mainNew() {
 		CharityVo cNew = cdao.mainNew();
 		if (cNew == null) {
 			cNew = new CharityVo();
 		}
-		cNew.setSavename(this.thumbnail(cNew.getcNum()).getSaveName());// 썸네일
+		String thumbnail = this.thumbnail(cNew.getcNum()).getSaveName();
+		cNew.setSavename(s3.getFileURL("charity/" + thumbnail));// 썸네일
 		cNew.setCpinfo(this.thumbnail(cNew.getcNum()).getCpinfo()); // 사진정보
 
 		return cNew;
 	}
-	
+
 	public CharityVo mainHot() {
 		CharityVo cHot = cdao.mainHot();
 		if (cHot == null) {
 			cHot = new CharityVo();
 		}
-		cHot.setSavename(this.thumbnail(cHot.getcNum()).getSaveName());// 썸네일
+		String thumbnail = this.thumbnail(cHot.getcNum()).getSaveName();
+		cHot.setSavename(s3.getFileURL("charity/" + thumbnail));// 썸네일
 		cHot.setCpinfo(this.thumbnail(cHot.getcNum()).getCpinfo()); // 사진정보
 
 		return cHot;
 	}
-	
+
 	public CharityVo mainPrice() {
 		CharityVo cPrice = cdao.mainPrice();
 		if (cPrice == null) {
 			cPrice = new CharityVo();
 		}
-		cPrice.setSavename(this.thumbnail(cPrice.getcNum()).getSaveName());// 썸네일
+		String thumbnail = this.thumbnail(cPrice.getcNum()).getSaveName();
+		cPrice.setSavename(s3.getFileURL("charity/" + thumbnail));// 썸네일
 		cPrice.setCpinfo(this.thumbnail(cPrice.getcNum()).getCpinfo()); // 사진정보
 
 		return cPrice;
@@ -63,6 +73,18 @@ public class MainCharityService {
 
 	public CPictureVo thumbnail(int cNum) {
 		return cfdao.thumbnail(cNum);
+	}
+
+	public HashMap<String, Object> totCharity() {
+		return cdao.totCharity();
+	}
+
+	public int todayCharityPrice() {
+		return cdao.todayCharityPrice();
+	}
+
+	public int todayCharityCount() {
+		return cdao.todayCharityCount();
 	}
 
 }

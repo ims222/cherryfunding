@@ -9,7 +9,7 @@
 				<div class="row">
 					<div class="col-md-3">
 					<a href="${pageContext.request.contextPath}/charityList/detail?num=${summary.cEnd.cNum}" class="image featured">
-					<img src="${pageContext.request.contextPath}/resources/upload/funding/${summary.cEnd.savename}"
+					<img src="${summary.cEnd.savename}"
 					alt="${summary.cEnd.cpinfo}" height="200px"></a>
 					<div class="box">
 						<p>종료임박후원</p>
@@ -29,18 +29,27 @@
 						<p>D${cEndNow-cEndEnd}</p>
 						<div class="progress">
 							<c:set var="cEndBefore" value="${summary.cEnd.cAmount * 100 / summary.cEnd.amount}" />
+							<c:set var="before" value="${vo.camout * 100 / vo.amount}" />
+							<c:choose>
+								<c:when test="${cEndBefore >= 1000}">
+									<c:set var="barcEndBefore" value="100"/>
+								</c:when>
+								<c:otherwise>
+									<c:set var="barcEndBefore" value="${barcEndBefore}" />
+								</c:otherwise>
+							</c:choose>
 							<div class="progress-bar" role="progressbar"
-								style="width: <fmt:formatNumber value="${cEndBefore}" type="percent"/>"
-								aria-valuenow="${cEndBefore * 100}" aria-valuemin="0"
+								style="width: <fmt:formatNumber value="${barcEndBefore/100}" type="percent"/>"
+								aria-valuenow="${barcEndBefore * 10000}" aria-valuemin="0"
 								aria-valuemax="100">
-								<fmt:formatNumber value="${cEndBefore}" type="percent" />
+								<fmt:formatNumber value="${cEndBefore/100}" type="percent" />
 							</div>
 						</div>
 					</div>
 				</div>
 					<div class="col-md-3">
 					<a href="${pageContext.request.contextPath}/fundingList/detail?num=${summary.cNew.cNum}" class="image featured">
-					<img src="${pageContext.request.contextPath}/resources/upload/funding/${summary.cNew.savename}"
+					<img src="${summary.cNew.savename}"
 					alt="${summary.cNew.cpinfo}" height="200px"></a>
 					<div class="box">
 						<p>신규 후원</p>
@@ -60,18 +69,26 @@
 						<p>D${cNewNow - cNewStart}</p>
 						<div class="progress">
 							<c:set var="cNewBefore" value="${summary.cNew.cAmount * 100 / summary.cNew.amount}" />
+							<c:choose>
+								<c:when test="${cNewBefore >= 1000}">
+									<c:set var="barcNewBefore" value="100"/>
+								</c:when>
+								<c:otherwise>
+									<c:set var="barcNewBefore" value="${cNewBefore}" />
+								</c:otherwise>
+							</c:choose>
 							<div class="progress-bar" role="progressbar"
-								style="width: <fmt:formatNumber value="${cNewBefore}" type="percent"/>"
-								aria-valuenow="${cNewBefore * 100}" aria-valuemin="0"
+								style="width: <fmt:formatNumber value="${barcNewBefore/100}" type="percent"/>"
+								aria-valuenow="${barcNewBefore * 100000}" aria-valuemin="0"
 								aria-valuemax="100">
-								<fmt:formatNumber value="${cNewBefore}" type="percent" />
+								<fmt:formatNumber value="${cNewBefore/100}" type="percent" />
 							</div>
 						</div>
 					</div>
 				</div>
 					<div class="col-md-3">
 					<a href="${pageContext.request.contextPath}/fundingList/detail?num=${summary.cHot.cNum}" class="image featured">
-					<img src="${pageContext.request.contextPath}/resources/upload/funding/${summary.cHot.savename}"
+					<img src="${summary.cHot.savename}"
 					alt="${summary.cHot.cpinfo}" height="200px"></a>
 					<div class="box">
 						<p>주목할만한 후원</p>
@@ -91,18 +108,26 @@
 						<p>D${cHotNow-cHotEnd}</p>
 						<div class="progress">
 							<c:set var="cHotBefore" value="${summary.cHot.cAmount * 100 / summary.cHot.amount}" />
+							<c:choose>
+								<c:when test="${cHotBefore >= 1000}">
+									<c:set var="barcHotBefore" value="100"/>
+								</c:when>
+								<c:otherwise>
+									<c:set var="barcHotBefore" value="${barcHotBefore}" />
+								</c:otherwise>
+							</c:choose>
 							<div class="progress-bar" role="progressbar"
-								style="width: <fmt:formatNumber value="${cHotBefore}" type="percent"/>"
-								aria-valuenow="${cHotBefore * 100}" aria-valuemin="0"
+								style="width: <fmt:formatNumber value="${barcHotBefore/100}" type="percent"/>"
+								aria-valuenow="${barcHotBefore * 100}" aria-valuemin="0"
 								aria-valuemax="100">
-								<fmt:formatNumber value="${cHotBefore}" type="percent" />
+								<fmt:formatNumber value="${cHotBefore/100}" type="percent" />
 							</div>
 						</div>
 					</div>
 				</div>
 					<div class="col-md-3">
 						<a href="${pageContext.request.contextPath}/fundingList/detail?num=${summary.cPrice.cNum}" class="image featured">
-						<img src="${pageContext.request.contextPath}/resources/upload/funding/${summary.cPrice.savename}"
+						<img src="${summary.cPrice.savename}"
 						alt="${summary.cPrice.cpinfo}" height="200px"></a>
 						<div class="box">
 							<p>참여금액이 높은 후원</p>
@@ -122,11 +147,19 @@
 							<p>D${cPriceNow-cPriceEnd}</p>
 							<div class="progress">
 								<c:set var="cPriceBefore" value="${summary.cPrice.cAmount * 100 / summary.cPrice.amount}" />
+								<c:choose>
+									<c:when test="${cPriceBefore >= 1000}">
+										<c:set var="barcPriceBefore" value="100"/>
+									</c:when>
+									<c:otherwise>
+										<c:set var="barcPriceBefore" value="${cPriceBefore}" />
+									</c:otherwise>
+								</c:choose>
 								<div class="progress-bar" role="progressbar"
-									style="width: <fmt:formatNumber value="${cPriceBefore}" type="percent"/>"
-									aria-valuenow="${cPriceBefore * 100}" aria-valuemin="0"
+									style="width: <fmt:formatNumber value="${barcPriceBefore/100}" type="percent"/>"
+									aria-valuenow="${barcPriceBefore * 10000}" aria-valuemin="0"
 									aria-valuemax="100">
-									<fmt:formatNumber value="${cPriceBefore}" type="percent" />
+									<fmt:formatNumber value="${cPriceBefore/100}" type="percent" />
 								</div>
 							</div>
 						</div>
@@ -134,7 +167,7 @@
 				</div>
 				<div class="row">
 					<div class="col-md-3">
-						<a href="${pageContext.request.contextPath}/funding/fundingDetailforUser?fNum=${summary.fEnd.fNum}" class="image featured">
+						<a href="${pageContext.request.contextPath}/funding/ingFundingDetailforUser?fNum=${summary.fEnd.fNum}" class="image featured">
 						<img src="${summary.fEnd.savename}"
 						alt="${summary.fEnd.fpinfo}" height="200px"></a>
 						<div class="box">
@@ -155,17 +188,25 @@
 							<p>D${fEndNow-fEndEnd}</p>
 							<div class="progress">
 								<c:set var="fEndBefore" value="${summary.fEnd.camout * 100 / summary.fEnd.amount}" />
+								<c:choose>
+									<c:when test="${fEndBefore >= 1000}">
+										<c:set var="barfEndBefore" value="100"/>
+									</c:when>
+									<c:otherwise>
+										<c:set var="barfEndBefore" value="${fEndBefore}" />
+									</c:otherwise>
+								</c:choose>
 								<div class="progress-bar" role="progressbar"
-									style="width: <fmt:formatNumber value="${fEndBefore}" type="percent"/>"
-									aria-valuenow="${fEndBefore * 100}" aria-valuemin="0"
+									style="width: <fmt:formatNumber value="${barfEndBefore/100}" type="percent"/>"
+									aria-valuenow="${barfEndBefore * 10000}" aria-valuemin="0"
 									aria-valuemax="100">
-									<fmt:formatNumber value="${fEndBefore}" type="percent" />
+									<fmt:formatNumber value="${fEndBefore/100}" type="percent" />
 								</div>
 							</div>
 						</div>
 					</div>
 					<div class="col-md-3">
-						<a href="${pageContext.request.contextPath}/funding/fundingDetailforUser?fNum=${summary.fNew.fNum}" class="image featured">
+						<a href="${pageContext.request.contextPath}/funding/prepareFundingDetailforUser?fNum=${summary.fNew.fNum}" class="image featured">
 						<img src="${summary.fNew.savename}"
 						alt="${summary.fNew.fpinfo}" height="200px"></a>
 						<div class="box">
@@ -186,17 +227,25 @@
 							<p>D${fNewNow - fNewStart}</p>
 							<div class="progress">
 								<c:set var="fNewBefore" value="${summary.fNew.camout * 100 / summary.fNew.amount}" />
+								<c:choose>
+									<c:when test="${fNewBefore >= 1000}">
+										<c:set var="barfNewBefore" value="100"/>
+									</c:when>
+									<c:otherwise>
+										<c:set var="barfNewBefore" value="${fNewBefore}" />
+									</c:otherwise>
+								</c:choose>
 								<div class="progress-bar" role="progressbar"
-									style="width: <fmt:formatNumber value="${fNewBefore}" type="percent"/>"
-									aria-valuenow="${fNewBefore * 100}" aria-valuemin="0"
+									style="width: <fmt:formatNumber value="${barfNewBefore/100}" type="percent"/>"
+									aria-valuenow="${barfNewBefore * 10000}" aria-valuemin="0"
 									aria-valuemax="100">
-									<fmt:formatNumber value="${fNewBefore}" type="percent" />
+									<fmt:formatNumber value="${fNewBefore/100}" type="percent" />
 								</div>
 							</div>
 						</div>
 					</div>
 					<div class="col-md-3">
-						<a href="${pageContext.request.contextPath}/funding/fundingDetailforUser?fNum=${summary.fHot.fNum}" class="image featured">
+						<a href="${pageContext.request.contextPath}/funding/ingFundingDetailforUser?fNum=${summary.fHot.fNum}" class="image featured">
 						<img src="${summary.fHot.savename}"
 						alt="${summary.fHot.fpinfo}" height="200px"></a>
 						<div class="box">
@@ -217,17 +266,25 @@
 							<p>D${fHotNow-fHotEnd}</p>
 							<div class="progress">
 								<c:set var="fHotBefore" value="${summary.fHot.camout * 100 / summary.fHot.amount}" />
+								<c:choose>
+									<c:when test="${fHotBefore >= 1000}">
+										<c:set var="barfHotBefore" value="100"/>
+									</c:when>
+									<c:otherwise>
+										<c:set var="barfHotBefore" value="${fHotBefore}" />
+									</c:otherwise>
+								</c:choose>
 								<div class="progress-bar" role="progressbar"
-									style="width: <fmt:formatNumber value="${fHotBefore}" type="percent"/>"
-									aria-valuenow="${fHotBefore * 100}" aria-valuemin="0"
+									style="width: <fmt:formatNumber value="${barfHotBefore/100}" type="percent"/>"
+									aria-valuenow="${barfHotBefore * 10000}" aria-valuemin="0"
 									aria-valuemax="100">
-									<fmt:formatNumber value="${fHotBefore}" type="percent" />
+									<fmt:formatNumber value="${fHotBefore/100}" type="percent" />
 								</div>
 							</div>
 						</div>
 					</div>
 					<div class="col-md-3">
-						<a href="${pageContext.request.contextPath}/funding/fundingDetailforUser?fNum=${summary.fPrice.fNum}" class="image featured">
+						<a href="${pageContext.request.contextPath}/funding/ingFundingDetailforUser?fNum=${summary.fPrice.fNum}" class="image featured">
 						<img src="${summary.fPrice.savename}"
 						alt="${summary.fPrice.fpinfo}" height="200px"></a>
 						<div class="box">
@@ -248,11 +305,19 @@
 							<p>D${fPriceNow-fPriceEnd}</p>
 							<div class="progress">
 								<c:set var="fPriceBefore" value="${summary.fPrice.camout * 100 / summary.fPrice.amount}" />
+								<c:choose>
+									<c:when test="${fPriceBefore >= 1000}">
+										<c:set var="barfPriceBefore" value="100"/>
+									</c:when>
+									<c:otherwise>
+										<c:set var="barfPriceBefore" value="${fPriceBefore}" />
+									</c:otherwise>
+								</c:choose>
 								<div class="progress-bar" role="progressbar"
-									style="width: <fmt:formatNumber value="${fPriceBefore}" type="percent"/>"
-									aria-valuenow="${fPriceBefore * 100}" aria-valuemin="0"
+									style="width: <fmt:formatNumber value="${barfPriceBefore/100}" type="percent"/>"
+									aria-valuenow="${barfPriceBefore * 10000}" aria-valuemin="0"
 									aria-valuemax="100">
-									<fmt:formatNumber value="${fPriceBefore}" type="percent" />
+									<fmt:formatNumber value="${fPriceBefore/100}" type="percent" />
 								</div>
 							</div>
 						</div>
@@ -277,56 +342,29 @@
 					</form>
 				</div>
 				<div class="box">
+					<p>전체 후원 갯수</p>
+					<p>${summary.totCharity.CNT}</p>
+					<p>전체 후원 금액</p>
+					<p>${summary.totCharity.S}원</p>
+					<br>
+					<p>오늘 후원 갯수</p>
+					<p>${summary.todayCharityCount}</p>
+					<p>오늘 후원 금액</p>
+					<p>${summary.todayCharityPrice}원</p>
+					<br>
+				
+				
 					<p>전체 펀딩 갯수</p>
 					<p>${summary.totFunding.CNT}</p>
 					<p>전체 펀딩 금액</p>
 					<p>${summary.totFunding.S}원</p>
 					<br>
 					<p>오늘 펀딩 갯수</p>
-					<p>${summary.todayFunding.CNT}</p>
+					<p>${summary.todayFundingCount}</p>
 					<p>오늘 펀딩 금액</p>
-					<p>${summary.todayFunding.S}원</p>
+					<p>${summary.todayFundingPrice}원</p>
 					<br>
 				</div>
 			</div>
-		</div>
-	</div>
-	<div class="row">
-		<!-- Content -->
-		<div class="6u">
-			<section>
-				<ul class="style">
-					<li class="fa fa-wrench">
-						<h3>Integer ultrices</h3> <span>In posuere eleifend odio.
-							Quisque semper augue mattis wisi. Maecenas ligula. Pellentesque
-							viverra vulputate enim. Aliquam erat volutpat. Maecenas
-							condimentum enim tincidunt risus accumsan.</span>
-					</li>
-					<li class="fa fa-leaf">
-						<h3>Aliquam luctus</h3> <span>In posuere eleifend odio.
-							Quisque semper augue mattis wisi. Maecenas ligula. Pellentesque
-							viverra vulputate enim. Aliquam erat volutpat. Maecenas
-							condimentum enim tincidunt risus accumsan.</span>
-					</li>
-				</ul>
-			</section>
-		</div>
-		<div class="6u">
-			<section>
-				<ul class="style">
-					<li class="fa fa-cogs">
-						<h3>Integer ultrices</h3> <span>In posuere eleifend odio.
-							Quisque semper augue mattis wisi. Maecenas ligula. Pellentesque
-							viverra vulputate enim. Aliquam erat volutpat. Maecenas
-							condimentum enim tincidunt risus accumsan.</span>
-					</li>
-					<li class="fa fa-road">
-						<h3>Aliquam luctus</h3> <span>In posuere eleifend odio.
-							Quisque semper augue mattis wisi. Maecenas ligula. Pellentesque
-							viverra vulputate enim. Aliquam erat volutpat. Maecenas
-							condimentum enim tincidunt risus accumsan.</span>
-					</li>
-				</ul>
-			</section>
 		</div>
 	</div>

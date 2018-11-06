@@ -21,4 +21,8 @@ public class SItemService {
 	public List<SItemVo> itemList(int sNum) {
 		return sItemDao.itemList(sNum);
 	}
+
+	public SItemVo detail(int siNum) {
+		return sItemDao.detail(siNum);
+	}
 }

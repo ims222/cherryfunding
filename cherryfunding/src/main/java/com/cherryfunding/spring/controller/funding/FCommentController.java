@@ -40,5 +40,4 @@ public class FCommentController {
 	public List<FCommentVo> commentList(int fNum) {
 		return fCommentService.commentList(fNum);
 	}
-
 }

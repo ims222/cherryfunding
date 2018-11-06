@@ -2,6 +2,7 @@ package com.cherryfunding.spring.controller.funding;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -23,12 +24,34 @@ public class FundingDetailController {
 	@Autowired
 	private FundingDetailService fundingDetailService;
 
-	@RequestMapping("/funding/fundingDetailforUser")
-	public String fundingDetail(int fNum, Model model) {
+	@RequestMapping("/funding/ingFundingDetailforUser")
+	public String ingFundingDetail(int fNum, Model model) {
 		model.addAttribute("vo", fundingDetailService.detail(fNum));
 		model.addAttribute("rewardList", fundingDetailService.rewardList(fNum));
+		model.addAttribute("fRecommend", fundingDetailService.getRecommend(fNum));
+		model.addAttribute("hashtag", fundingDetailService.hashtag(fNum));
 		fundingDetailService.hitUp(fNum);
-		return ".fundingDetailforUser";
+		return ".ingFundingDetailforUser";
+	}
+	
+	@RequestMapping("/funding/prepareFundingDetailforUser")
+	public String prepareFundingDetail(int fNum, Model model) {
+		model.addAttribute("vo", fundingDetailService.detail(fNum));
+		model.addAttribute("rewardList", fundingDetailService.rewardList(fNum));
+		model.addAttribute("fRecommend", fundingDetailService.getRecommend(fNum));
+		model.addAttribute("hashtag", fundingDetailService.hashtag(fNum));
+		fundingDetailService.hitUp(fNum);
+		return ".prepareFundingDetailforUser";
+	}
+	
+	@RequestMapping("/funding/endFundingDetailforUser")
+	public String endFundingDetail(int fNum, Model model) {
+		model.addAttribute("vo", fundingDetailService.detail(fNum));
+		model.addAttribute("rewardList", fundingDetailService.rewardList(fNum));
+		model.addAttribute("fRecommend", fundingDetailService.getRecommend(fNum));
+		model.addAttribute("hashtag", fundingDetailService.hashtag(fNum));
+		fundingDetailService.hitUp(fNum);
+		return ".endFundingDetailforUser";
 	}
 
 	@RequestMapping("/funding/rewardDetail")
@@ -78,10 +101,12 @@ public class FundingDetailController {
 	public ArrayList<Object> getSelectedFundingList(int fNum, HttpSession session) {
 		ArrayList<Object> list = (ArrayList<Object>) session.getAttribute("selectedFundingList");
 		ArrayList<Object> selectedList = new ArrayList<Object>();
-		for (Object l : list) {
-			HashMap<String, Object> map = (HashMap<String, Object>) l;
-			if ((Integer) map.get("fNum") == fNum) {
-				selectedList.add(map);
+		if (list != null) {
+			for (Object l : list) {
+				HashMap<String, Object> map = (HashMap<String, Object>) l;
+				if ((Integer) map.get("fNum") == fNum) {
+					selectedList.add(map);
+				}
 			}
 		}
 		return selectedList;
@@ -90,10 +115,9 @@ public class FundingDetailController {
 	@RequestMapping(value = "/funding/cancelSelectReward")
 	@ResponseBody
 	public HashMap<String, Object> cancelSelectReward(int i, HttpSession session) {
-		System.out.println("i: " + i + " !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 		ArrayList<Object> list = (ArrayList<Object>) session.getAttribute("selectedFundingList");
 		HashMap<String, Object> map = (HashMap<String, Object>) list.remove(i);
-		//session.removeAttribute("selectedFundingList");
+		session.removeAttribute("selectedFundingList");
 		session.setAttribute("selectedFundingList", list);
 		return map;
 	}
@@ -103,35 +127,27 @@ public class FundingDetailController {
 		String id = (String) session.getAttribute("id");
 		int fNum = Integer.parseInt(request.getParameter("fNum"));
 		ArrayList<Object> list = (ArrayList<Object>) session.getAttribute("selectedFundingList");
-		String[] srNum = request.getParameterValues("rNum");
-		String[] samount = request.getParameterValues("amount");
-		int[] rNum = new int[srNum.length];
-		int[] amount = new int[samount.length];
+		Iterator iterator = list.iterator();
 
-		for (int i = 0; i < srNum.length; i++) {
-			rNum[i] = Integer.parseInt(srNum[i]);
+		while (iterator.hasNext()) {
+			HashMap<String, Object> map = (HashMap<String, Object>) iterator.next();
+			if ((Integer) map.get("fNum") == fNum) {
+				int rNum = (Integer) map.get("rNum");
+				int amount = (Integer) map.get("amount");
+
+				FDetailVo fdvo = new FDetailVo(0, id, fNum, rNum, null, null, amount);
+				fundingDetailService.insertFDetail(fdvo); // 펀딩내역
+				HashMap<String, Object> rewardMap = new HashMap<String, Object>();
+				rewardMap.put("price", fundingDetailService.rewardDetail(rNum).getPrice());
+				rewardMap.put("fNum", fNum);
+				fundingDetailService.addCamout(rewardMap); // 현재금액 추가
+				rewardMap.clear();
+				rewardMap.put("rNum", rNum);
+				rewardMap.put("amount", amount);
+				fundingDetailService.updateAmount(rewardMap); // 남은 수량 수정
+				iterator.remove(); // 리워드 지우기
+			}
 		}
-		for (int i = 0; i < samount.length; i++) {
-			amount[i] = Integer.parseInt(samount[i]);
-		}
-		for (int i = 0; i < rNum.length; i++) {
-			FDetailVo fdvo = new FDetailVo();
-			fdvo.setFdNum(fundingDetailService.fdetailGetMaxNum() + 1);
-			fdvo.setId(id);
-			fdvo.setfNum(fNum);
-			fdvo.setrNum(rNum[i]);
-			fdvo.setAmount(amount[i]);
-			fundingDetailService.insertFDetail(fdvo); // 펀딩내역
-			HashMap<String, Object> map = new HashMap<String, Object>();
-			map.put("price", fundingDetailService.rewardDetail(rNum[i]).getPrice());
-			map.put("fNum", fNum);
-			fundingDetailService.addCamout(map); // 현재금액 추가
-			map.clear();
-			map.put("rNum", rNum[i]);
-			map.put("amount", amount[i]);
-			fundingDetailService.updateAmount(map); // 남은 수량 수정
-		}
-		session.removeAttribute("selectedFundingList");
-		return "redirect:/funding/fundingDetailforUser?fNum=" + fNum;
+		return "redirect:/funding/ingFundingDetailforUser?fNum=" + fNum;
 	}
 }

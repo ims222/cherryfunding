@@ -2,9 +2,15 @@ package com.cherryfunding.spring.vo;
 
 import java.sql.Date;
 
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
+
 public class FundingVo {
 	private int fNum;
+	@Size(min = 10, max = 100, message = "{min}자에서 {max}자 사이로 입력하세요")
 	private String title;
+	@NotEmpty(message = "내용을 입력하세요")
 	private String content;
 	private int amount;
 	private int camout;
@@ -15,6 +21,7 @@ public class FundingVo {
 	private String aid;
 	private String addr;
 	private Date regdate;
+	@NotEmpty
 	private String id;
 	private int hit;
 	private String savename;

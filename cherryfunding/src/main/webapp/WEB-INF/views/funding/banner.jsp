@@ -1,5 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<script type="text/javascript">
+	function loginPlease(){
+		var id = '${sessionScope.id}';
+		if(!id){
+			alert('로그인 플리즈');
+			return false;
+		}
+		return true;
+	}
+</script>
 <!-- Banner -->
 <div id="banner" class="container">
 	<section>
@@ -9,7 +19,7 @@
 			<a href="http://twitter.com/templatedco">Twitter</a>.
 			
 			<a href="${pageContext.request.contextPath}/funding/fundingApplication"
-			class="button medium">펀딩신청하기</a>
+			class="button medium" onclick="return loginPlease();">펀딩신청하기</a>
 		</p>
 		
 		

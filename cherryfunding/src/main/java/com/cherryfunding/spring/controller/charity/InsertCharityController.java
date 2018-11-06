@@ -1,8 +1,6 @@
 package com.cherryfunding.spring.controller.charity;
 
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.InputStream;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -12,7 +10,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
@@ -120,6 +117,6 @@ public class InsertCharityController {
 			return "error";
 		}
 
-		return "redirect:/charity/ingChairtyList";
+		return "redirect:/charity/ingCharityList";
 	}
 }

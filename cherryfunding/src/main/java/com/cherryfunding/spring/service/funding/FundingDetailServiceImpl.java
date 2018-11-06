@@ -8,9 +8,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.cherryfunding.spring.dao.FDetailDao;
+import com.cherryfunding.spring.dao.FHashtagDao;
+import com.cherryfunding.spring.dao.FRecommendDao;
 import com.cherryfunding.spring.dao.FundingDao;
 import com.cherryfunding.spring.dao.RewardDao;
+import com.cherryfunding.spring.dao.UsersDao;
 import com.cherryfunding.spring.vo.FDetailVo;
+import com.cherryfunding.spring.vo.FHashtagVo;
 import com.cherryfunding.spring.vo.FundingVo;
 import com.cherryfunding.spring.vo.RewardVo;
 
@@ -25,7 +29,13 @@ public class FundingDetailServiceImpl implements FundingDetailService {
 	private RewardDao rewardDao;
 
 	@Autowired
-	FDetailDao fDetailDao;
+	private FDetailDao fDetailDao;
+
+	@Autowired
+	private FRecommendDao fRecommendDao;
+
+	@Autowired
+	private FHashtagDao fHashtagDao;
 
 	@Override
 	public FundingVo detail(int fNum) {
@@ -58,8 +68,9 @@ public class FundingDetailServiceImpl implements FundingDetailService {
 	}
 
 	@Override
-	public int insertFDetail(FDetailVo vo) {
-		return fDetailDao.insert(vo);
+	public int insertFDetail(FDetailVo fDetailVo) {
+		fDetailVo.setFdNum(this.fdetailGetMaxNum() + 1);
+		return fDetailDao.insert(fDetailVo);
 	}
 
 	@Override
@@ -75,6 +86,16 @@ public class FundingDetailServiceImpl implements FundingDetailService {
 	@Override
 	public int getAmount(int rNum) {
 		return rewardDao.getAmount(rNum);
+	}
+
+	@Override
+	public int getRecommend(int fNum) {
+		return fRecommendDao.getRecommend(fNum);
+	}
+
+	@Override
+	public List<FHashtagVo> hashtag(int fNum) {
+		return fHashtagDao.listByfNum(fNum);
 	}
 
 }

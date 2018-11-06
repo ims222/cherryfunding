@@ -1,8 +1,5 @@
 package com.cherryfunding.spring.controller.user;
 
-
-
-import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -25,15 +22,16 @@ public class MypageController {
 	@RequestMapping(value = "/mypage", method = RequestMethod.GET)
 	public String mypage(HttpSession session,Model model) {
 		String id=(String)session.getAttribute("id");
-		System.out.println(id);
 		int charitySum=mpService.charitySum(id);
 		int fundingSum=mpService.fundingSum(id);
+		int balance=mpService.nowBalance(id);
 		List<MypageVo> charityList = mpService.charityList(id);
 		List<MypageVo> fundingList = mpService.fundingList(id);
 		model.addAttribute("charitySum",charitySum);
 		model.addAttribute("fundingSum",fundingSum);
 		model.addAttribute("charityList",charityList);
 		model.addAttribute("fundingList",fundingList);
+		model.addAttribute("balance",balance);
 		return "user/userInfo/mypage";
 	}
 }

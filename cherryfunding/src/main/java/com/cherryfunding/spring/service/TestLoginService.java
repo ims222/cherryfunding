@@ -24,7 +24,7 @@ public class TestLoginService {
 	public int insert(UsersVo vo) {
 		return dao.insert(vo);
 	}
-	public UsersVo select(String id) {
+	public UsersVo detail(String id) {
 		return dao.select(id);
 	}
 	public int update(UsersVo vo) {

@@ -41,4 +41,17 @@ public class UsersDao {
 	public UsersVo userlogin(HashMap<String, String> map) {
 		return sqlSession.selectOne(NAMESPACE + "userlogin", map);
 	}
+
+	public int withdraw(HashMap<String, Object> map) {
+		return sqlSession.update(NAMESPACE + "withdraw", map);
+	}
+
+	public UsersVo nickCheck(String nick) {
+		return sqlSession.selectOne(NAMESPACE + "nickCheck", nick);
+	}
+
+	public int deposit(HashMap<String, Object> map) {
+		return sqlSession.update(NAMESPACE + "deposit", map);
+	}
+
 }
