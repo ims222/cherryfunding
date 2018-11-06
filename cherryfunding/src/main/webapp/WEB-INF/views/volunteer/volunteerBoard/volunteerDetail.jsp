@@ -8,6 +8,7 @@
 		isRecommend();
 		isApply();
 		commentList();
+		applicant();
 		$("#recommend").on('click', function(){
 			var recomm;
 			var id='${sessionScope.id}';
@@ -155,6 +156,18 @@
 			}
 		});
 	}
+	
+	function applicant(){
+		$.ajax({
+			url: '${pageContext.request.contextPath}/volunteer/applicantCount',
+			data: {vNum: '${vo.vNum}'},
+			dataType: 'text',
+			type: 'get',
+			success: function(data){
+				$("#applicant").append(data);
+			}
+		});
+	}
 
 </script>
 <!-- Main -->
@@ -168,7 +181,7 @@
 				 	<p>날짜: ${vo.dDay }</p>
 				 	<p>장소: ${vo.place }</p>
 				 	<p>모집인원: ${vo.members }</p>
-				 	 
+				 	<div id="applicant">현재 신청 인원:</div><br>
 				 	<button id="recommend" type="button"></button>
 				 	<button id="apply" type="button"></button>
 				</div>

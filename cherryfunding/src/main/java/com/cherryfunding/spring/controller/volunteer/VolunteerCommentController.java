@@ -21,7 +21,6 @@ public class VolunteerCommentController {
 	@RequestMapping(value = "/volunteer/insertComment", produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String insertComment(String id, String content, int vNum) {
-		System.out.println("코멘트////////////////////////////");
 		VCommentVo vcvo = new VCommentVo();
 		vcvo.setVcNum(volunteerCommentService.getMaxNum() + 1);
 		vcvo.setId(id);
