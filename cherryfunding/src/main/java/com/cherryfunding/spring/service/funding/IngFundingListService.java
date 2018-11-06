@@ -46,4 +46,8 @@ public class IngFundingListService {
 		}
 		return list;
 	}
+
+	public int getTotCount() {
+		return fundingDao.getTotCount();
+	}
 }

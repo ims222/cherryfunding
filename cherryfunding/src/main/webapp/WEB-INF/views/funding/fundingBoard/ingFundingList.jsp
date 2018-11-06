@@ -2,18 +2,66 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <script type="text/javascript">
 	$(document).ready(function(){
+		showMore();
 		$("#category").on('click', 'button', selectionOption);
 		$("#sort").on('change', selectionOption);
-		
+		$("#showMore").on('click', showMore);
 	});
+	var showMore = function(){
+		var pageNum = $('#pageNum').val();
+			$.ajax({
+			url:'${pageContext.request.contextPath}/funding/moreIngFundingList',
+			data:{pageNum:pageNum},
+			dataType:'json',
+			type:'post',
+			success:function(data){
+				var result = $('#list').html(); 
+				var html = document.querySelector('#fundingList2').innerHTML;
+				data.list.forEach(function(value){
+					result +=	html.replace(/{fNum}/gi, value.fNum)
+								.replace("{savename}", value.savename)
+								.replace("{fpinfo}", value.fpinfo)
+								.replace("{title}", value.title)
+								.replace("{id}", value.id)
+								.replace("{amount}", value.amount)
+								.replace("{camout}", value.camout);
+								//.replace("{edate}", "18-08-11");
+								//.replace("{edate}", new Date(value.edate).toString());
+				});
+				document.querySelector('#list').innerHTML = result;
+				console.log('data.pageNum', data.pageNum);
+				$('#pageNum').val(data.pageNum);
+				console.log('pageNum', $('#pageNum').val());
+			}
+		});	
+	}
+	function replaceAll(str, searchStr, replaceStr) {
+		  return str.split(searchStr).join(replaceStr);
+	}
 	function selectionOption(){
 		var category = $(this).text();
 		var sort = $(this).val();
 		location.href= "${pageContext.request.contextPath}/funding/ingFundingList?sort=" + sort + "&category=" + category;
 	}
+</script>
+
+<script id="fundingList2" type="text/template">
+<section class="4u">
+	<a href="${pageContext.request.contextPath}/funding/ingFundingDetailforUser?fNum={fNum}"
+	class="image featured">
+	<img src="{savename}" alt="{fpinfo}" height="200px"></a>
+	<div class="box">
+		<p>펀딩번호: {fNum}</p>
+		<p>{title}</p>
+		<p>{id}</p>
+		<p>목표금액: {amount}원</p>
+		<p>현재금액: {camout}원</p>
+	</div>
+</section>
 </script>
 <!-- Main -->
 <div id="main">
@@ -51,47 +99,10 @@
 			<option value="camount" <c:if test="${sort eq 'camount'}">selected="selected"</c:if>>참여금액순</option>
 			<option value="end" <c:if test="${sort eq 'end'}">selected="selected"</c:if>>종료임박순</option>
 		</select>
-		<div class="row no-collapse-1">
-			<c:forEach var="vo" items="${list}" varStatus="vs">
-				<section class="4u">
-					<a href="${pageContext.request.contextPath}/funding/ingFundingDetailforUser?fNum=${vo.fNum}"
-					class="image featured">
-					<img src="${vo.savename}" alt="${vo.fpinfo}" height="200px"></a>
-					<div class="box">
-						<p>${vo.title}</p>
-						<p>${vo.id}</p>
-						<p>목표금액: ${vo.amount}원</p>
-						<p>현재금액: ${vo.camout}원</p>
-						<fmt:formatDate value="${vo.edate}" var="edate" pattern="yyyyMMdd"/>
-						<fmt:parseDate value="${edate}" var="edateDate" pattern="yyyyMMdd"/>
-						<fmt:parseNumber value="${edateDate.time / (1000 * 60 * 60 * 24)}" var="end" integerOnly="true"/>
-						
-						<jsp:useBean id="today" class="java.util.Date"/>
-						<fmt:formatDate value="${today}" var="todayDate" pattern="yyyyMMdd"/>
-						<fmt:parseDate value="${todayDate}" var="nowDate" pattern="yyyyMMdd"/>
-						<fmt:parseNumber value="${nowDate.time / (1000 * 60 * 60 * 24)}" var="now" integerOnly="true"/>
-						<p>D${now-end}</p>
-						<div class="progress">
-							<c:set var="before" value="${vo.camout * 100 / vo.amount}" />
-							<c:choose>
-								<c:when test="${before >= 1000}">
-									<c:set var="barBefore" value="100"/>
-								</c:when>
-								<c:otherwise>
-									<c:set var="barBefore" value="${before}" />
-								</c:otherwise>
-							</c:choose>
-							<div class="progress-bar" role="progressbar"
-								style="width: <fmt:formatNumber value="${barBefore/100}" type="percent"/>"
-								aria-valuenow="${barBefore * 10000}" aria-valuemin="0"
-								aria-valuemax="100">
-								<fmt:formatNumber value="${before/100}" type="percent" />
-							</div>
-						</div>
-					</div>
-				</section>
-			</c:forEach>
+		<input type="hidden" id="pageNum" value="">
+		<div class="row no-collapse-1" id="list">
 		</div>
+		<button id="showMore">더보기</button>
 		<div class="row">
 			<!-- Content -->
 			<div class="6u">

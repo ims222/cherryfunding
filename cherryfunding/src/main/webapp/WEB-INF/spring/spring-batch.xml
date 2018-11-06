@@ -22,7 +22,7 @@
     <property name="cronExpression" value="0 0/1 * * * ?"/>
 </bean>
  
-<!-- 3. Cron 실행 -->
+<!-- 3. Cron 실행 
 <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
     <property name="triggers">
         <list>
@@ -40,6 +40,6 @@
         </props>
     </property>
 </bean>
-
+-->
 
 </beans>

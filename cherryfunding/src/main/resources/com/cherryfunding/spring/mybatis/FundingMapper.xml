@@ -141,8 +141,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<update id="addCamout" parameterType="hashmap">
 		update funding set camout = camout + #{price} where fNum = #{fNum}
-
 	</update>
+	
+	<select id="getTotCount" resultType="int">
+		select NVL(count(fNum), 0) from funding
+	</select>
 	
 	<select id="hashtag" parameterType="string" resultType="funding">
 		select * from (
@@ -210,12 +213,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			order by cnt
 			</when>
 			<otherwise>
-				select * from funding
-				<include refid="ing"/>
-				<include refid="isConfirm"/>
-				<include refid="category" />
-				<include refid="search" />
-				<include refid="sort" />
+				select * from (
+					select aa.*, rownum rnum from (
+						select * from funding
+						<include refid="ing"/>
+						<include refid="isConfirm"/>
+						<include refid="category" />
+						<include refid="search" />
+						<include refid="sort" />
+					)aa
+				) <![CDATA[where rnum >=#{startRow} and rnum <=#{endRow}]]>
 			</otherwise>
 		</choose>
 	</select>
