@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.cherryfunding.spring.vo.CharityVo;
+import com.cherryfunding.spring.vo.FundingVo;
 
 @Repository
 public class CharityDao {
@@ -74,13 +75,35 @@ public class CharityDao {
 	public HashMap<String, Object> todayCharity() {
 		return sqlSession.selectOne(NAMESPACE + "todayCharity");
 	}
+	
+	public int wait(int cNum) { // 컨펌
+		return sqlSession.update(NAMESPACE + "wait", cNum);
+	}
 
 	public List<CharityVo> waitList() { // 대기목록
 		return sqlSession.selectList(NAMESPACE + "waitList");
+	}
+	
+	public List<CharityVo> searchwaitList(HashMap<String, String>map){
+		return sqlSession.selectList(NAMESPACE+ "searchwaitList",map);
+	}
+	
+	public List<CharityVo> searchconfirmList(HashMap<String, String>map){
+		return sqlSession.selectList(NAMESPACE+ "searchconfirmList",map);
 	}
 
 	public int confirm(int cNum) { // 컨펌
 		return sqlSession.update(NAMESPACE + "confirm", cNum);
 	}
+	
+	public List<CharityVo> confirmList() { // 컨펌 확인 후 목록
+		return sqlSession.selectList(NAMESPACE + "confirmList");
+	}
+
+	
+	
+	
+	
+	
 	
 }

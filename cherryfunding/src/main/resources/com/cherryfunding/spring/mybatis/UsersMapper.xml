@@ -19,7 +19,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		#{birth}, sysdate, 0)
 	</insert>
 	
-	
+	<delete id="sdelete" parameterType="string">
+		delete from users where id=#{id}
+	</delete>
 	
 	
 	<update id="update" parameterType="users">

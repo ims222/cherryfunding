@@ -34,6 +34,9 @@ public class UsersDao {
 	public int delete(HashMap<String, String> map) {
 		return sqlSession.delete(NAMESPACE + "delete",map);
 	}
+	public int sdelete(String id) {//관리자 -> 유저 선택 삭제
+		return sqlSession.delete(NAMESPACE+"sdelete",id);
+	}
 	
 	public UsersVo userlogin(HashMap<String, String> map) {
 		return sqlSession.selectOne(NAMESPACE + "userlogin", map);

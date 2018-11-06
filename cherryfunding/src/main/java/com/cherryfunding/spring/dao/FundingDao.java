@@ -93,7 +93,13 @@ public class FundingDao {
 		return sqlSession.update(NAMESPACE + "wait", fNum);
 	}
 	
+	public List<FundingVo> searchwaitList(HashMap<String, String>map){
+		return sqlSession.selectList(NAMESPACE+"searchwaitList",map);
+	}
 	
+	public List<FundingVo> searchconfirmList(HashMap<String, String>map){
+		return sqlSession.selectList(NAMESPACE+"searchconfirmList",map);
+	}
 	
 	public List<FundingVo> confirmList() { // 컨펌 확인 후 목록
 		return sqlSession.selectList(NAMESPACE + "confirmList");

@@ -13,9 +13,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</sql>
 	<sql id="search">
 		<if test="field!=null and field!=''">
-			and ${field} like '%' || #{keyword} || '%'
+			or ${field} like '%' || #{keyword} || '%'
 		</if>
 	</sql>
+	
+	<sql id="searchcharity">
+		<if test="keyword!='null' and keyword!=''">
+			and ${field} like #{keyword} || '%'
+		</if>
+	</sql>
+	
 	<sql id="sort">
 		<choose>
 			<when test="sort == 'popular'">
@@ -57,13 +64,31 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update charity set hit = hit + 1 where cNum = #{cNum}
 	</update>
 	
+	<select id="searchwaitList" parameterType="hashmap" resultType="charity">
+		select * from charity where confirm = 'n'
+		<include refid="searchcharity"/>
+	</select>
+	
 	<select id="waitList" resultType="charity">
 		select * from charity where confirm = 'n'
 	</select>
-		
+	
+	<update id="wait" parameterType="int">
+		update charity set confirm ='n' where cNum = #{cNum}
+	</update>
+	
 	<update id="confirm" parameterType="int">
 		update charity set confirm = 'y' where cNum = #{cNum}
 	</update>
+	
+	<select id="confirmList" resultType="charity">
+		select * from charity where confirm = 'y'
+	</select>
+	
+	<select id="searchconfirmList" parameterType="hashmap" resultType="charity">
+		select * from charity where confirm = 'y'
+		<include refid="searchcharity"/>
+	</select>
 	
 	
 	<!-- 준비중 펀딩 -->

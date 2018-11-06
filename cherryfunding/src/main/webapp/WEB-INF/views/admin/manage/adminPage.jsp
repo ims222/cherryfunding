@@ -36,7 +36,7 @@
 	
 	<a href="<c:url value='/admypagea'/>">승인관리</a>
 	<a href="<c:url value='/confirmList'/>">승인확인</a>
-	<a href="#">회원관리</a>
+	<a href="<c:url value='/usermanage'/>">회원관리</a>
 	<a href="#">통계</a>
 	
 	<div class="jumbotron" id="confrim">

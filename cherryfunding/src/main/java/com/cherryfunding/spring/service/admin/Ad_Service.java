@@ -13,13 +13,11 @@ public class Ad_Service {
 	
 	@Autowired private Admin_DAO dao;
 	
-	public int insert(AdminVo vo) {
-		System.out.println("services 접근");
+	public int insert(AdminVo vo) { //관리자 회원가입
 		return dao.insert(vo);
 	}
 	
-	public AdminVo login(HashMap<String, String> map) {
-		System.out.println("services 접근");
+	public AdminVo login(HashMap<String, String> map) { //관리자 로그인
 		return dao.login(map);
 	}
 	
