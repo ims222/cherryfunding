@@ -38,7 +38,7 @@ public class MypageDao {
 	public UsersVo getInfo(String id) {
 		return sqlSession.selectOne(NAMESPACE + "getInfo", id);
 	}
-	public int updateUsers(String id) {
-		return sqlSession.update(NAMESPACE + "updateUsers", id);
+	public int updateUsers(UsersVo vo) {
+		return sqlSession.update(NAMESPACE + "updateUsers", vo);
 	}
 }

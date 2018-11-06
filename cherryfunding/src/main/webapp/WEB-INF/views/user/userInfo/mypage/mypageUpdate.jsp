@@ -45,24 +45,20 @@ table.type04 p {
 }
 </style>
 <script type="text/javascript">
-$(function(){
-	$("#btn1").click(function(){
-		var nick=$("#newNick").val();
+	var updateInfo = function(e){
+		var col=$(e.target).attr("data-target");	
+		var val=$("#new" + col).val();
 		$.ajax({
-			url:"${pageContext.request.contextPath}/users/update",
-			type: 'get',
-			
-			success:function(data){
-				var using=$(data).find("using").text();
-				if(using=='true'){
-					$("#idcheck").html("사용중인 아이디입니다.");
-				}else{
-					$("#idcheck").html("사용 가능한 아이디입니다.");
-				}
+			url:'${pageContext.request.contextPath}/users/updateUsers',
+			data: { [col]:val,id:'${vo.id}'},
+			dataType:'json',
+			type:'post',
+			success: function(data){
+				$('#' + col).empty();
+				$('#' + col).text(data[col]);
 			}
 		});
-	});
-});
+	};
 </script>
 <body>
 <div class="wrap">
@@ -71,29 +67,29 @@ $(function(){
 	<p>회원정보는 개인정보처리방침에 따라 안전하게 보호되며, 회원님의 동의 없이는 공개 또는 제 3자에게 제공되지 않습니다.<p>
 	<table class="type04">
 		<tr>
-		  <td><p>아이디</p></td>
-		  <td><p>${vo.id}</p></td>
+		  <td>아이디</td>
+		  <td>${vo.id}</td>
 		  <td></td>
 		</tr>
 		<tr>
-		  <td><p>닉네임</p></td>
-		  <td><p>${vo.nick}</p></td>
-		  <td><button type="button" class="btn" data-toggle="modal" data-target="#Modal_nick">수정</button></td>
+		  <td>닉네임</td>
+		  <td id="nick">${vo.nick}</td>
+		  <td><button type="button" class="btn" data-toggle="modal" data-target="#Modal_nick" name="nick">수정</button></td>
 		</tr>
 		<tr>
-		  <td><p>이메일</p></td>
-		  <td><p>${vo.email}</p></td>
-		  <td><button type="button" class="btn" data-toggle="modal" data-target="#Modal_email">수정</button></td>
+		  <td>이메일</td>
+		  <td id="email">${vo.email}</td>
+		  <td><button type="button" class="btn" data-toggle="modal" data-target="#Modal_email" name="email">수정</button></td>
 		</tr>
 		<tr>
-		  <td><p>연락처</p></td>
-		  <td><p>${vo.phone}</p></td>
-		  <td><button type="button" class="btn" data-toggle="modal" data-target="#Modal_phone">수정</button></td>
+		  <td>연락처</td>
+		  <td id="phone">${vo.phone}</td>
+		  <td><button type="button" class="btn" data-toggle="modal" data-target="#Modal_phone" name="phone">수정</button></td>
 		</tr>
 		<tr>
-		  <td><p>주소</p></td>
-		  <td><p>${vo.addr}</p></td>
-		  <td><button type="button" class="btn" data-toggle="modal" data-target="#Modal_addr">수정</button></td>
+		  <td>주소</td>
+		  <td id="addr">${vo.addr}</td>
+		  <td><button type="button" class="btn" data-toggle="modal" data-target="#Modal_addr" name="addr" onclick="updateInfo(event)">수정</button></td>
 		</tr>
 		</table>
 		</div>
@@ -107,10 +103,10 @@ $(function(){
         </div>
         <div class="modal-body">
           <p>원하는 닉네임을 입력해 주세요</p>
-          <input type="text" id="newNick" name="newNick">
+          <input type="text" id="newnick" name="newnick">
         </div>
         <div class="modal-footer">
-          <button type="button" id="btn1" class="btn btn-default" data-dismiss="modal">저장</button>
+          <button type="button" id="btn1" class="btn btn-default" data-dismiss="modal" data-target="nick" onclick="updateInfo(event);">저장</button>
         </div>
       </div>
     </div>
@@ -124,10 +120,10 @@ $(function(){
         </div>
         <div class="modal-body">
           <p>원하는 이메일을 입력해 주세요</p>
-          <input type="text" id="newEamil" name="newEmail">
+          <input type="text" id="newemail" name="newemail">
         </div>
         <div class="modal-footer">
-          <button type="button" id="btn2" class="btn btn-default" data-dismiss="modal">저장</button>
+          <button type="button" id="btn2" class="btn btn-default" data-dismiss="modal" data-target="email" onclick="updateInfo(event);">저장</button>
         </div>
       </div>
     </div>
@@ -141,10 +137,10 @@ $(function(){
         </div>
         <div class="modal-body">
           <p>원하는 연락처을 입력해 주세요</p>
-          <input type="text" id="newPhone" name="newPhone">
+          <input type="text" id="newphone" name="newphone">
         </div>
         <div class="modal-footer">
-          <button type="button" id="btn3" class="btn btn-default" data-dismiss="modal">저장</button>
+          <button type="button" id="btn3" class="btn btn-default" data-dismiss="modal" data-target="phone" onclick="updateInfo(event);">저장</button>
         </div>
       </div>
     </div>
@@ -158,10 +154,10 @@ $(function(){
         </div>
         <div class="modal-body">
           <p>원하는 주소를 입력해 주세요</p>
-          <input type="text" id="newAddr" name="newAddr">
+          <input type="text" id="newaddr" name="newaddr">
         </div>
         <div class="modal-footer">
-          <button type="button" id="btn4" class="btn btn-default" data-dismiss="modal">저장</button>
+          <button type="button" id="btn4" class="btn btn-default" data-dismiss="modal" data-target="addr" onclick="updateInfo(event);">저장</button>
         </div>
       </div>
     </div>
