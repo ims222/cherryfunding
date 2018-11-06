@@ -20,7 +20,6 @@ public class VolunteerRecommendController {
 	@RequestMapping(value="/volunteer/volunteerIsRecommend", produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String volunteerIsRecommend(String id, int vNum) {
-		System.out.println("추천/////////////////////");
 		JSONObject obj=new JSONObject();
 		VRecommendVo vo=vRecommendService.isRecomm(new VRecommendVo(0, vNum, id));
 		if(vo==null) {
