@@ -45,8 +45,63 @@ table.type04 p {
 }
 </style>
 <script type="text/javascript">
+	function fnChkByte(obj) {
+	    var maxByte = 16; //최대 입력 바이트 수
+	    var str = obj.value;
+	    var str_len = str.length;
+	 
+	    var rbyte = 0;
+	    var rlen = 0;
+	    var one_char = "";
+	    var str2 = "";
+	 
+	    for (var i = 0; i < str_len; i++) {
+	        one_char = str.charAt(i);
+	 
+	        if (escape(one_char).length > 4) {
+	            rbyte += 2; //한글2Byte
+	        } else {
+	            rbyte++; //영문 등 나머지 1Byte
+	        }
+	 
+	        if (rbyte <= maxByte) {
+	            rlen = i + 1; //return할 문자열 갯수
+	        }
+	    }
+	    if (rbyte > maxByte) {
+	        alert("한글 " + (maxByte / 2) + "자 / 영문 " + maxByte + "자를 초과 입력할 수 없습니다.");
+	        str2 = str.substr(0, rlen); //문자열 자르기
+	        obj.value = str2;
+	        fnChkByte(obj, maxByte);
+	    } else {
+	        document.getElementById('byteInfo').innerText = rbyte+"/16byte";
+	    }
+	}
+	
+	//닉네임 한글 및 영대소문자만
+	function isValidId(obj){
+ 		 let regx = /[^\w]/;
+ 		if(!regx.test(obj)===false){
+ 			alert("한글 및 영대소문자만 입력 가능합니다");
+ 			$("#newnick").val("");
+ 			$("#newnick").focus();
+ 		}else{
+ 			return true;
+ 		}
+	}
+	//이메일 유효성 인증
+	function validateEmail(obj) {
+		var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+		var email = $("#newemail").val();
+		if (email == '' || !re.test(email) {
+		alert("올바른 이메일 주소를 입력하세요");
+		return false;
+		}
+	}
+	
+	// 데이터 수정
 	var updateInfo = function(e){
-		var col=$(e.target).attr("data-target");	
+		var col=$(e.target).attr("data-target");
 		var val=$("#new" + col).val();
 		$.ajax({
 			url:'${pageContext.request.contextPath}/users/updateUsers',
@@ -103,10 +158,11 @@ table.type04 p {
         </div>
         <div class="modal-body">
           <p>원하는 닉네임을 입력해 주세요</p>
-          <input type="text" id="newnick" name="newnick">
+          <input type="text" id="newnick" name="newnick" onkeyup="fnChkByte(this);">
+          <span id="byteInfo"></span>
         </div>
         <div class="modal-footer">
-          <button type="button" id="btn1" class="btn btn-default" data-dismiss="modal" data-target="nick" onclick="updateInfo(event);">저장</button>
+          <button type="button" id="btn1" class="btn btn-default" data-dismiss="modal" data-target="nick" onclick="isValidId(this);updateInfo(event)">저장</button>
         </div>
       </div>
     </div>
@@ -123,7 +179,7 @@ table.type04 p {
           <input type="text" id="newemail" name="newemail">
         </div>
         <div class="modal-footer">
-          <button type="button" id="btn2" class="btn btn-default" data-dismiss="modal" data-target="email" onclick="updateInfo(event);">저장</button>
+          <button type="button" id="btn2" class="btn btn-default" data-dismiss="modal" data-target="email" onclick="validateEmail(this);updateInfo(event)">저장</button>
         </div>
       </div>
     </div>

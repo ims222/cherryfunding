@@ -74,7 +74,8 @@ table.type04 td {
 			<p>총 펀딩금액 : <fmt:formatNumber value="${fundingSum}" pattern="#,###.##"/> 원</p>
 		  </td>
 		  <td>
-		     <a href="${pageContext.request.contextPath}/users/getInfo">회원정보수정</a>
+		     <p><a href="${pageContext.request.contextPath}/users/getInfo">회원정보수정</a></p>
+		     <p><a href="${pageContext.request.contextPath}/userSetting">환경설정</a></p>
 		  </td>
 		 </tr>
 		</table>

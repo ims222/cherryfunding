@@ -34,5 +34,6 @@ public class UpdateUsersController {
 		mpService.updateUsers(vo);
 		return mpService.getInfo(vo.getId());
 	}
+	
 
 }
