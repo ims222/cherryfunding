@@ -254,12 +254,12 @@
             element: document.getElementById("fine-uploader-gallery"),
             template: 'qq-template-gallery',
             request: {
-                endpoint: '/server/uploads'
+                endpoint:'${pageContext.request.contextPath}/imgUpload'
             },
             thumbnails: {
                 placeholders: {
-                    waitingPath: '/source/placeholders/waiting-generic.png',
-                    notAvailablePath: '/source/placeholders/not_available-generic.png'
+                    waitingPath: '${pageContext.request.contextPath}/resources/css/fine-uploader/placeholders/waiting-generic.png',
+                    notAvailablePath: '${pageContext.request.contextPath}/resources/css/fine-uploader/placeholders/not_available-generic.png'
                 }
             },
             validation: {

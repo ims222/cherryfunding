@@ -73,7 +73,8 @@ public class S3Util {
 	public String getFileURL(String fileName) {
 		System.out.println("넘어오는 파일명 : " + fileName);
 		String imgName = (fileName).replace(File.separatorChar, '/');
-		return conn.generatePresignedUrl(new GeneratePresignedUrlRequest(bucketName, imgName)).toString();
+		//return conn.generatePresignedUrl(new GeneratePresignedUrlRequest(bucketName, imgName)).toString();
+		return "https://s3.ap-northeast-2.amazonaws.com/cherryfundingbucket/" + fileName;
 	}
 
 }
