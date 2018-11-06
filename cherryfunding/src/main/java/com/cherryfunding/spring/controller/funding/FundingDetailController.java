@@ -148,6 +148,6 @@ public class FundingDetailController {
 				iterator.remove(); // 리워드 지우기
 			}
 		}
-		return "redirect:/funding/fundingDetailforUser?fNum=" + fNum;
+		return "redirect:/funding/ingFundingDetailforUser?fNum=" + fNum;
 	}
 }

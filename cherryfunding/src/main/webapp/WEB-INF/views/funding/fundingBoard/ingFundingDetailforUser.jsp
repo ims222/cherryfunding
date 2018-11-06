@@ -233,7 +233,7 @@
 					<input type="submit" value="리워드 신청">
 				</form><br>
 				<button id="recommend" type="button">추천</button><br>
-				<a href="${pageContext.request.contextPath}/funding/fundingParticipation?fNum=${vo.fNum}">펀딩 참여자</a>
+				<a href="${pageContext.request.contextPath}/funding/ingFundingParticipation?fNum=${vo.fNum}">펀딩 참여자</a>
  			</div>
 		</div>
 		<div class="row box">
