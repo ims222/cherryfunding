@@ -9,6 +9,7 @@ import com.cherryfunding.spring.dao.CPictureDao;
 import com.cherryfunding.spring.dao.CharityDao;
 import com.cherryfunding.spring.vo.CPictureVo;
 import com.cherryfunding.spring.vo.CharityVo;
+import com.cherryfunding.spring.vo.FundingVo;
 
 @Service
 public class CharityService {
@@ -45,5 +46,26 @@ public class CharityService {
 	public CPictureVo thumbnail(int cNum) {
 		return cpdao.thumbnail(cNum);
 	}
+	
+	public int wait(int cNum) { // 컨펌취소
+		return dao.wait(cNum);
+	}
+	
+	public List<CharityVo> waitList() { // 대기 목록
+		return dao.waitList();
+	}
+	
+	public int confirm(int cNum) { // 컨펌
+		return dao.confirm(cNum);
+	}
+	public List<CharityVo> confirmList() { // 대기 목록
+		return dao.confirmList();
+	}
+
+	
+	
+	
+	
+	
 
 }

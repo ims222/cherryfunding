@@ -34,7 +34,7 @@ public class MypageService {
 	public UsersVo getInfo(String id) {
 		return dao.getInfo(id);
 	}
-	public int updateUsers(String id) {
-		return dao.updateUsers(id);
+	public int updateUsers(UsersVo vo) {
+		return dao.updateUsers(vo);
 	}
 }

@@ -28,6 +28,6 @@ public class SharingParticipantsService {
 	}
 
 	public UsersVo usersInfo(String id) {
-		return usersDao.detail(id);
+		return usersDao.select(id);
 	}
 }

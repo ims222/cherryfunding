@@ -27,8 +27,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from users where id=#{id}
 	</select>
 	
-	<update id="updateUsers" parameterType="Mypage">
-		update users set pwd=#{pwd},nick=#{nick},email=#{email},addr=#{addr},
-		gender=#{gender},phone=#{phone},birth=#{birth} where id=#{id}
+	<update id="updateUsers" parameterType="Users">
+		update users
+		<set>
+			<if test="nick != null">nick =#{nick},</if>
+			<if test="email != null">email=#{email},</if>
+			<if test="phone != null">phone=#{phone},</if>
+			<if test="addr != null">addr =#{addr},</if>
+		</set>
+		where id=#{id}
 	</update>
 </mapper>

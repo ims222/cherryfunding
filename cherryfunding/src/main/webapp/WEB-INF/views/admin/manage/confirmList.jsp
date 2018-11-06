@@ -12,28 +12,26 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   
    <script type="text/javascript">
-  		
-  	 /* 	$(document).ready(function(){
-  			
-  			$("#id1").click(function(){
-  				
-  				$('#myModal').modal('show');
-  				
-  			});
-  			
-  	
-  			
-  			
 
-  			
-  		}); */
-  	 	function abc(cc){
+  	 	function modalshow(num){
  
   			$('#myModal').modal('show');
   			
   			$('#btn1').click(function(){
-  				var value = cc;
+  				var value = num;
   				var url = "<c:url value='/admypage/wait?num="+value+"'/>";
+  				location.href=url;  				
+  			});
+  			
+  	 	};
+  	 	
+  	 	function modalshow2(num){
+  	 	 
+  			$('#myModal').modal('show');
+  			
+  			$('#btn1').click(function(){
+  				var value = num;
+  				var url = "<c:url value='/admypage/cwait?num="+value+"'/>";
   				location.href=url;  				
   			});
   			
@@ -45,7 +43,7 @@
   
 </head>
 <body>
-	<h2>승인 목록</h2>
+	<h2><a href="/cherryfunding/confirmList">승인 목록</a></h2>
 	<table class="table table-condensed" border="1" width="500">
 		<tr>
 			<th>글번호</th>
@@ -57,7 +55,7 @@
 			<th>승인여부</th>
 			
 		</tr>
-	
+		<c:if test="${vo ne 'null'}">
 		<c:forEach var="vo" items="${vo }">
 			<tr>
 				<td>${vo.fNum }</td>
@@ -66,10 +64,26 @@
 				<td>${vo.category }</td>
 				<td>${vo.regdate }</td>
 				<td><a href="<c:url value='/fundingList/detail?num=${vo.fNum }'/>">보기</a></td>
-				<td id="mm"><a data-toggle="modal" href="javascript:abc('${vo.fNum}');">${vo.confirm }</a></td>
+				<td id="mm"><a data-toggle="modal" href="javascript:modalshow('${vo.fNum}');">${vo.confirm }</a></td>
 			
 			</tr>
 		</c:forEach>
+		</c:if>
+		
+		<c:if test="${co ne 'null'}">
+	 	<c:forEach var="co" items="${co }">
+			<tr>
+				<td>${co.cNum }</td>
+				<td>${co.id }</td>
+				<td>${co.title }</td>
+				<td>${co.category }</td>
+				<td>${co.regdate }</td>
+				<td><a href="<c:url value='/charityList/detail?num=${co.cNum }'/>">보기</a></td>
+				<td id="mm"><a data-toggle="modal" href="javascript:modalshow2('${co.cNum}');">${co.confirm }</a></td>
+			
+			</tr>
+		</c:forEach>
+		</c:if>
 		
 		
 			 <!-- Modal -->
@@ -93,6 +107,23 @@
 		
 
 </table>
+
+<form action="${pageContext.request.contextPath }/admin/csearch" method="post">
+<select name="kinds">
+	<option value='chirty' <c:if test="${kinds eq 'chirty' }">selected="selected"</c:if>>기부</option>
+	<option value='funding'<c:if test="${kinds eq 'funding' }">selected="selected"</c:if>>펀딩</option>
+
+</select>
+
+<select name="field">
+	<option value='id' <c:if test="${field eq 'id' }">selected="selected"</c:if>>아이디</option>
+	<option value='title' <c:if test="${field eq 'title' }">selected="selected"</c:if>>글제목</option>
+</select>
+
+<input type="text" class="form-control" name="keyword" placeholder="search">
+<input type="submit" value="찾기">
+
+</form>
 
 </body>
 </html>

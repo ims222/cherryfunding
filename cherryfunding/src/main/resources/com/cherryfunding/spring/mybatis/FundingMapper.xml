@@ -26,6 +26,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			and ${field} like '%' || #{keyword} || '%'
 		</if>
 	</sql>
+	
+	<sql id="searchwaite">
+		
+		<choose>
+			<when test="keyword!=null and keyword!=''">
+				<choose>
+					<when test="field == 'id'">
+						and aid like #{keyword} || '%'
+					</when>
+					<otherwise>
+						and title like #{keyword} || '%'
+					</otherwise>
+				</choose>
+			</when>
+		</choose>
+	
+	</sql>
+	
+	
 	<sql id="sort">
 		<choose>
 			<when test="sort == 'popular'">
@@ -95,9 +114,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from funding where confirm = 'n'
 	</select>
 	
+	<select id="searchwaitList" parameterType="hashmap" resultType="funding">
+		select * from funding where confirm = 'n'
+		<include refid="searchwaite"/>
+	</select>
+	
 	<select id="confirmList" resultType="funding">
 		select * from funding where confirm = 'y'
 	</select>
+	
+	<select id="searchconfirmList" parameterType="hashmap" resultType="funding">
+		select * from funding where confirm = 'y'
+		<include refid="searchwaite"/>
+	</select>
+	
+	
 		
 	<update id="confirm" parameterType="int">
 		update funding set confirm = 'y' where fNum = #{fNum}
