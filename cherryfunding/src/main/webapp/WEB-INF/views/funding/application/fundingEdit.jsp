@@ -10,8 +10,10 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.css" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/summernote/summernote-bs4.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/summernote/summernote-ko-KR.min.js"></script>
+<link href="${pageContext.request.contextPath}/resources/css/summernote/summernote-bs4.css" type="text/css" rel="stylesheet">
+
 </head>
 <body>
 	<table border="1">
@@ -60,7 +62,7 @@
 	$(function() {
 		$('#summernote').summernote({
 			lang: 'ko-KR',
-			disableDragAndDrop: true,
+			disableDragAndDrop: true, 
 	    	height: 300,
 			codemirror: {
 				mode: 'text/html',
@@ -91,7 +93,7 @@
 		var val = prompt("수정할 " + col + " 입력", '');
 		$.ajax({
 			url:'${pageContext.request.contextPath}/funding/editContent',
-			data:{ [col] : val, fNum:'${vo.fNum}'},
+			data:{ [col]:val, fNum:'${vo.fNum}'},
 			dataType:'json',
 			type:'post',
 			success: function(data){
