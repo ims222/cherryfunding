@@ -30,7 +30,7 @@ public class InputUsersServiceImpl implements InputUsersService {
 
 	@Override
 	public UsersVo usersInfo(String id) {
-		return usersDao.detail(id);
+		return usersDao.select(id);
 	}
 
 	@Override

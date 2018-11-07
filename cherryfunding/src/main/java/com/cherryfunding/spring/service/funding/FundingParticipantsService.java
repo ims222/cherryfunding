@@ -24,6 +24,6 @@ public class FundingParticipantsService {
 	}
 
 	public UsersVo usersInfo(String id) {
-		return usersDao.detail(id);
+		return usersDao.select(id);
 	}
 }

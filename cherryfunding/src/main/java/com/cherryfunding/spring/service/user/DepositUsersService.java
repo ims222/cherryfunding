@@ -19,6 +19,6 @@ public class DepositUsersService {
 	}
 
 	public UsersVo userInfo(String id) {
-		return usersDao.detail(id);
+		return usersDao.select(id);
 	}
 }

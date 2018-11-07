@@ -54,4 +54,8 @@ public class IngFundingListService {
 		List<String> list = fundingDao.relatedWords(map);
 		return list;
 	}
+		
+	public int getTotCount() {
+		return fundingDao.getTotCount();
+	}
 }

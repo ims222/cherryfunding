@@ -18,6 +18,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		#{birth}, (sysdate + (1/24)*9), 0)
 	</insert>
 	
+	<delete id="sdelete" parameterType="string">
+		delete from users where id=#{id}
+	</delete>
 	<select id="nickCheck" parameterType="string" resultType="users">
 		select * from users where nick = #{nick}
 	</select>

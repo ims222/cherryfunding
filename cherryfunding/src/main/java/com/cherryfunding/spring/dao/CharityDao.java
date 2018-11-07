@@ -76,21 +76,29 @@ public class CharityDao {
 	public HashMap<String, Object> todayCharity() {
 		return sqlSession.selectOne(NAMESPACE + "todayCharity");
 	}
+	
+	public int wait(int cNum) { // 컨펌
+		return sqlSession.update(NAMESPACE + "wait", cNum);
+	}
 
 	public List<CharityVo> waitList() { // 대기목록
 		return sqlSession.selectList(NAMESPACE + "waitList");
+	}
+	
+	public List<CharityVo> searchwaitList(HashMap<String, String>map){
+		return sqlSession.selectList(NAMESPACE+ "searchwaitList",map);
+	}
+	
+	public List<CharityVo> searchconfirmList(HashMap<String, String>map){
+		return sqlSession.selectList(NAMESPACE+ "searchconfirmList",map);
 	}
 
 	public int confirm(int cNum) { // 컨펌
 		return sqlSession.update(NAMESPACE + "confirm", cNum);
 	}
-	
+
 	public List<CharityVo> confirmList(){
 		return sqlSession.selectList(NAMESPACE + "confirmList");
-	}
-
-	public int wait(int cNum) {
-		return sqlSession.update(NAMESPACE + "wait", cNum);
 	}
 
 	public HashMap<String, Object> totCharity() { // 전체 후원 갯수, 합계
