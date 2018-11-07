@@ -45,6 +45,24 @@ table.type04 p {
 }
 </style>
 <script type="text/javascript">
+
+	// 데이터 수정
+	var updateInfo = function(e){
+		var col=$(e.target).attr("data-target");
+		var val=$("#new" + col).val();
+		$.ajax({
+			url:'${pageContext.request.contextPath}/users/updateUsers',
+			data: { [col]:val,id:'${vo.id}'},
+			dataType:'json',
+			type:'post',
+			success: function(data){
+				$('#' + col).empty();
+				$('#' + col).text(data[col]);
+			}
+		});
+	};
+	
+	//닉네임 글자 수 제한
 	function fnChkByte(obj) {
 	    var maxByte = 16; //최대 입력 바이트 수
 	    var str = obj.value;
@@ -76,44 +94,48 @@ table.type04 p {
 	    } else {
 	        document.getElementById('byteInfo').innerText = rbyte+"/16byte";
 	    }
-	}
-	
-	//닉네임 한글 및 영대소문자만
-	function isValidId(obj){
- 		 let regx = /[^\w]/;
- 		if(!regx.test(obj)===false){
- 			alert("한글 및 영대소문자만 입력 가능합니다");
- 			$("#newnick").val("");
- 			$("#newnick").focus();
- 		}else{
- 			return true;
- 		}
-	}
-	//이메일 유효성 인증
-	function validateEmail(obj) {
-		var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
-		var email = $("#newemail").val();
-		if (email == '' || !re.test(email) {
-		alert("올바른 이메일 주소를 입력하세요");
-		return false;
-		}
-	}
-	
-	// 데이터 수정
-	var updateInfo = function(e){
-		var col=$(e.target).attr("data-target");
-		var val=$("#new" + col).val();
-		$.ajax({
-			url:'${pageContext.request.contextPath}/users/updateUsers',
-			data: { [col]:val,id:'${vo.id}'},
-			dataType:'json',
-			type:'post',
-			success: function(data){
-				$('#' + col).empty();
-				$('#' + col).text(data[col]);
-			}
-		});
 	};
+	
+	//닉네임 유효성 인증(한글 및 영대소문자만)
+	function isValidId(e){
+ 		var regx = /^[가-힣a-zA-Z]+$/;
+ 		if(!regx.test($("#newnick").val())) { 
+ 			alert("한글 및 영대소문자만 입력 가능합니다");
+ 			$("#newnick").val('');
+		    $("#newnick").focus(); 
+ 		}else{
+			   updateInfo(event);
+			   $("#Modal_nick").modal('hide');
+		}
+	};
+	
+	//이메일 유효성 인증
+	function isValidEmail(e){
+		var regExp = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
+			if(!regExp.test($("#newemail").val())) { 
+			      alert("이메일 주소가 유효하지 않습니다"); 
+			      $("#newemail").val('');
+			      $("#newemail").focus(); 
+			   }else{
+				   updateInfo(event);
+				   $("#Modal_email").modal('hide');
+			   }
+		};
+	//연락처 유효성 인증
+	function isValidPhone(e){
+		var phone=$("#newphone").val()
+		var p=phone.split('-').join('');
+		var regPhone = /^((01[1|6|7|8|9])[1-9]+[0-9]{6,7})|(010[1-9][0-9]{7})$/;
+			if(!regPhone.test(p)) { 
+			      alert("연락처 형식이 유효하지 않습니다. 숫자 또는 '-'기호를 사용해 입력해 주십시오"); 
+			      $("#newphone").val('');
+			      $("#newphone").focus(); 
+			   }else{
+				   updateInfo(event);
+				   $("#Modal_phone").modal('hide');
+			   }
+		};
+
 </script>
 <body>
 <div class="wrap">
@@ -144,7 +166,7 @@ table.type04 p {
 		<tr>
 		  <td>주소</td>
 		  <td id="addr">${vo.addr}</td>
-		  <td><button type="button" class="btn" data-toggle="modal" data-target="#Modal_addr" name="addr" onclick="updateInfo(event)">수정</button></td>
+		  <td><button type="button" class="btn" data-toggle="modal" data-target="#Modal_addr" name="addr">수정</button></td>
 		</tr>
 		</table>
 		</div>
@@ -162,7 +184,7 @@ table.type04 p {
           <span id="byteInfo"></span>
         </div>
         <div class="modal-footer">
-          <button type="button" id="btn1" class="btn btn-default" data-dismiss="modal" data-target="nick" onclick="isValidId(this);updateInfo(event)">저장</button>
+          <button type="button" id="btn1" class="btn btn-default" data-target="nick" onclick="isValidId(this)">저장</button>
         </div>
       </div>
     </div>
@@ -179,7 +201,7 @@ table.type04 p {
           <input type="text" id="newemail" name="newemail">
         </div>
         <div class="modal-footer">
-          <button type="button" id="btn2" class="btn btn-default" data-dismiss="modal" data-target="email" onclick="validateEmail(this);updateInfo(event)">저장</button>
+          <button type="button" id="btn2" class="btn btn-default" data-target="email" onclick="isValidEmail(this);">저장</button>
         </div>
       </div>
     </div>
@@ -189,14 +211,14 @@ table.type04 p {
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">연락처 변경</h4>
+          <h4 class="modal-title">휴대폰번호 변경</h4>
         </div>
         <div class="modal-body">
-          <p>원하는 연락처을 입력해 주세요</p>
+          <p>원하는 휴대폰번호를 입력해 주세요</p>
           <input type="text" id="newphone" name="newphone">
         </div>
         <div class="modal-footer">
-          <button type="button" id="btn3" class="btn btn-default" data-dismiss="modal" data-target="phone" onclick="updateInfo(event);">저장</button>
+          <button type="button" id="btn3" class="btn btn-default" data-target="phone" onclick="isValidPhone(this);">저장</button>
         </div>
       </div>
     </div>
