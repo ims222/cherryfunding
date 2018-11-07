@@ -261,4 +261,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<include refid="isConfirm"/>
 	</select>
 	
+	<!-- 연관검색어 추출 -->
+	<select id="related" parameterType="hashmap" resultType="string">
+		select ${field} from funding where 
+		
+			<if test="field == 'title'">title</if>
+			<if test="field == 'content'">content</if>
+			<if test="field == 'id'">id</if>
+		
+		like '%' || #{keyword} || '%'
+	</select>
 </mapper>

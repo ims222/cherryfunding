@@ -3,16 +3,31 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
 		$("#category").on('click', 'button', selectionOption);
 		$("#sort").on('change', selectionOption);
-		
+		$("#keyword").on('keyup', related);
 	});
 	function selectionOption(){
 		var category = $(this).text();
 		var sort = $(this).val();
 		location.href= "${pageContext.request.contextPath}/funding/ingFundingList?sort=" + sort + "&category=" + category;
+	}
+	function related(){
+		var keyword = $("#keyword").val();
+		var field = $("#field option:selected").text();
+		$.ajax({
+			url:'${pageContext.request.contextPath}/funding/relatedWords',
+			data: {keyword: keyword, field: field},
+			dataType: 'json',
+			type:'get',
+			success: function(data){
+				alert(data);
+			}
+		});
+		
 	}
 </script>
 <!-- Main -->
@@ -35,13 +50,14 @@
 			<button type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">출판</button>
 		</div>
 		<form method="get" action="${pageContext.request.contextPath}/funding/ingFundingList">
-			<input type="hidden" name="category" value="${category}">
-			<select name="field">
+			<input type="hidden" name="category" id="category" value="${category}">
+			<select name="field" id="field">
 				<option value="title" <c:if test="${field eq 'title'}">selected="selected"</c:if>>제목</option>
 				<option value="content" <c:if test="${field eq 'content'}">selected="selected"</c:if>>내용</option>
 				<option value="id" <c:if test="${field eq 'id'}">selected="selected"</c:if>>글쓴이</option>
 			</select>
-			<input type="text" name="keyword" value="${keyword}">
+			<input type="text" name="keyword" id="keyword" value="${keyword}">
+			<div id="result"></div>
 			<input type="submit" value="검색">		
 		</form>
 		<select id="sort">

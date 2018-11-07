@@ -46,4 +46,12 @@ public class IngFundingListService {
 		}
 		return list;
 	}
+	
+	public List<String> relatedWords(String keyword, String field){
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("keyword", keyword);
+		map.put("field", field);
+		List<String> list = fundingDao.relatedWords(map);
+		return list;
+	}
 }

@@ -112,5 +112,9 @@ public class FundingDao {
 	public FundingVo detail(int fNum) {
 		return sqlSession.selectOne(NAMESPACE + "detail", fNum);
 	}
+	
+	public List<String> relatedWords(HashMap<String, Object> map){
+		return sqlSession.selectList(NAMESPACE + "related", map);
+	}
 
 }
