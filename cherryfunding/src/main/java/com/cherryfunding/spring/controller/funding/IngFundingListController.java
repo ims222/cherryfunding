@@ -30,7 +30,7 @@ public class IngFundingListController {
 
 	@Autowired
 	IngFundingListService ingFundingListService;
-		
+
 	@RequestMapping(value = "/funding/ingFundingList", method = RequestMethod.GET)
 	public String ingFundingList() {
 		return ".ingFundingList";
@@ -38,8 +38,8 @@ public class IngFundingListController {
 
 	@RequestMapping("/funding/moreIngFundingList")
 	@ResponseBody
-	public HashMap<String, Object> ingFundingList(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum, Model model,
-			HttpServletRequest request) {
+	public HashMap<String, Object> ingFundingList(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
+			Model model, HttpServletRequest request) {
 		String category = request.getParameter("category");
 		String field = request.getParameter("field");
 		String keyword = request.getParameter("keyword");
@@ -53,16 +53,20 @@ public class IngFundingListController {
 		map.put("keyword", keyword);
 		map.put("sort", sort);
 		List<FundingVo> list = ingFundingListService.list(map);
-		
 //		Date date = ...; // wherever you get this from
 //		 
 //		DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
 //		String text = df.format(date);
-		 
+
 //		System.out.println("The date is: " + text);
-		
-		map.put("list", list);
-		map.put("pageNum", pageNum + 1);
+		if (list.size() == 0) {
+			map.put("list", "no");
+			map.put("pageNum", pageNum);
+		} else {
+			map.put("list", list);
+			map.put("pageNum", pageNum + 1);
+		}
+
 		return map;
 	}
 
@@ -71,20 +75,20 @@ public class IngFundingListController {
 	public List<String> ingFundingMist(Model model, HttpServletRequest request) {
 		String keyword = request.getParameter("keyword");
 		String field = request.getParameter("field");
-		//한글로 넘어온 필드를 원 컬럼명으로 변경
-		if(field.equals("제목")) {
+		// 한글로 넘어온 필드를 원 컬럼명으로 변경
+		if (field.equals("제목")) {
 			field = "title";
-		}else if(field.equals("내용")) {
+		} else if (field.equals("내용")) {
 			field = "content";
-		}else {
+		} else {
 			field = "id";
 		}
-		//해당 field에서 keyword가 포함된 단어 5개를 List<String>로 얻어오기
+		// 해당 field에서 keyword가 포함된 단어 5개를 List<String>로 얻어오기
 		List<String> list = ingFundingListService.relatedWords(keyword, field);
 		model.addAttribute("list", list);
 		return list;
 	}
-	
+
 	@RequestMapping(value = "/funding/searchHashtag")
 	public String searchHashtag(String hashtag, Model model) {
 		List<FundingVo> searchHashtag = ingFundingListService.searchHashtag(hashtag);
