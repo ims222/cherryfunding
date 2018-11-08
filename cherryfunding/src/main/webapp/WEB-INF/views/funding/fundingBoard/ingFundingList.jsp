@@ -4,14 +4,32 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script type="text/javascript">
+	
+	var array = [];
+  
 	$(document).ready(function(){
 		showMore();
 		$("#category").on('click', 'button', selectionOption);
 		$("#sort").on('change', selectionOption);
 		$("#keyword").on('keyup', related);
 		$("#showMore").on('click', showMore);
+		 /*
+			var array = [
+             "김밥",
+             "김치",
+             "김치찌개",
+             "김치김밥",
+             "김밥천국",
+             "참치김밥",
+             "김밥나라"
+         	];
+		*/
+		
+        $("#keyword").autocomplete({source: array});
+
 	});
 	var showMore = function(){
 		var pageNum = $('#pageNum').val();
@@ -57,13 +75,16 @@
 	function related(){
 		var keyword = $("#keyword").val();
 		var field = $("#field option:selected").text();
+		
 		$.ajax({
 			url:'${pageContext.request.contextPath}/funding/relatedWords',
 			data: {keyword: keyword, field: field},
 			dataType: 'json',
 			type:'get',
 			success: function(data){
-				alert(data);
+				for(var i=0; i<data.length; i++){
+					array[i]=data[i];
+				}
 			}
 		});
 		
@@ -86,7 +107,7 @@
 	</div>
 </section>
 </script>
-<!-- Main -->
+
 <div id="main">
 	<div class="container">
 		<div class="w3-bar" id="category">
@@ -113,7 +134,6 @@
 				<option value="id" <c:if test="${field eq 'id'}">selected="selected"</c:if>>글쓴이</option>
 			</select>
 			<input type="text" name="keyword" id="keyword" value="${keyword}">
-			<div id="result"></div>
 			<input type="submit" value="검색">		
 		</form>
 		<select id="sort">
