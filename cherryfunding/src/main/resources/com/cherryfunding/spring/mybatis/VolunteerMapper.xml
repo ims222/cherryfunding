@@ -30,7 +30,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 	<update id="ended">
 		update volunteer set title = 
-		<![CDATA[ '마감' + title w]]> 
+		<![CDATA[ '마감' + title where dday < sysdate]]> 
 	</update>
 	<delete id="delete" parameterType="string">
 		delete from volunteer where id=#{id}

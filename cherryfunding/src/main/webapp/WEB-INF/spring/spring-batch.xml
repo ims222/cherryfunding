@@ -18,11 +18,8 @@
 <bean id="cronQuartz2" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
     <property name="jobClass" value="com.cherryfunding.spring.batch.CronQuartz2"/>
 </bean>
-<bean id="volunteerBatch1" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
-	<property name="targetObject" ref="volunteerBatch"/>
-	<property name="targetMethod" ref="execute"/>
-	<property name="concurrent" value="false"/>
-</bean>
+
+
 <bean id="cronTrigger2" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
     <property name="jobDetail" ref="cronQuartz2"/>
     <property name="cronExpression" value="0 0/1 * * * ?"/>
