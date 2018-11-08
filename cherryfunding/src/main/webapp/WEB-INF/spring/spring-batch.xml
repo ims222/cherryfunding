@@ -4,6 +4,7 @@
 	xmlns:context="http://www.springframework.org/schema/context"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+		
  <bean id="batch" class="com.cherryfunding.spring.batch.VolunteerBatch"/>
  
 <context:component-scan base-package="com.cherryfunding.spring.batch"/>
@@ -22,16 +23,11 @@
 	<property name="targetMethod" ref="execute"/>
 	<property name="concurrent" value="false"/>
 </bean>
-<<<<<<< HEAD
 <bean id="cronTrigger2" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
     <property name="jobDetail" ref="cronQuartz2"/>
     <property name="cronExpression" value="0 0/1 * * * ?"/>
 </bean>
  
-<!-- 3. Cron 실행 -->
-=======
-
-
 <!-- 
 2. Cron 시간 설정 
 -->
@@ -43,7 +39,6 @@
 
 <!--  
 3. Cron 실행 
->>>>>>> branch 'master' of https://github.com/ims222/cherryfunding.git
 <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
     <property name="triggers">
         <list>
@@ -61,10 +56,6 @@
         </props>
     </property>
 </bean>
-<<<<<<< HEAD
-
-
-=======
 -->
 <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
     <property name="triggers">
@@ -82,5 +73,4 @@
         </props>
     </property>
 </bean>
->>>>>>> branch 'master' of https://github.com/ims222/cherryfunding.git
 </beans>
