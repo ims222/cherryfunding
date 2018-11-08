@@ -49,8 +49,8 @@
 						var amount = parseInt(value.AMOUNT);
 						var before = Math.ceil((camout * 100) / amount);
 						if(isNaN(before))
-							before = 1;
-						var barBefore = 1;
+							before = 0;
+						var barBefore = 0;
 						if(before >= 100)
 							barBefore = 100;
 						else
