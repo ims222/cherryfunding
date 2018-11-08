@@ -28,7 +28,7 @@
 			type:'post',
 			success:function(data){
 				var result = $('#list').html(); 
-				var html = document.querySelector('#fundingList2').innerHTML;
+				var html = document.querySelector('#fundingList').innerHTML;
 				if(data.list === 'no'){
 					alert('마지막 페이지 입니다');
 				}else{
@@ -92,7 +92,7 @@
 	}
 </script>
 
-<script id="fundingList2" type="text/template">
+<script id="fundingList" type="text/template">
 <section class="4u">
 	<a href="${pageContext.request.contextPath}/funding/ingFundingDetailforUser?fNum={fNum}"
 	class="image featured">
