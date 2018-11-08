@@ -7,15 +7,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into userSetting values(#{id}, 'kor', 'n', 'n')
 	</insert>
 
-	<select id="select" parameterType="string" resultType="userSetting">
-		select * from userSetting where id = #{id}
-	</select>
-
-	
 	<update id="update" parameterType="userSetting">
-		update userSetting set #{pwd} where #{id}
+		update userSetting set lang=#{lang},voice=#{voice},alarm=#{alarm} where id = #{id}
 	</update>
+	
 	<delete id="delete" parameterType="string">
 		delete from userSetting where id=#{id}
 	</delete>
+	
+	<select id="getInfo" parameterType="string" resultType="userSetting">
+		select * from userSetting where id=#{id}
+	</select>
 </mapper>
