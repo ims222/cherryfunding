@@ -12,23 +12,27 @@
   
 	$(document).ready(function(){
 		showMore();
-		$("#category").on('click', 'button', selectionOption);
+		$("#category").on('click', 'button', selectCategory);
 		$("#sort").on('change', selectionOption);
 		$("#keyword").on('keyup', related);
 		$("#showMore").on('click', showMore);
 		$("#keyword").autocomplete({source: array});
-
+		
+		$('#search').on('click', function(){
+			$("#list").empty();
+			$('#pageNum').val(1);
+			showMore();
+		});
 	});
-	var showMore = function(page, category){
+	var showMore = function(){
 		var pageNum = $('#pageNum').val();
-		if(page = 1)
-			pageNum = 1;
-		var sort;
-		var keyword;
-		var field;
+		var category = $('#category').val();
+		var sort = $('#sort').val();
+		var keyword = $('#keyword').val();
+		var field = $('#field').val();
 			$.ajax({
 			url:'${pageContext.request.contextPath}/funding/moreIngFundingList',
-			data:{pageNum:pageNum, category:category},
+			data:{pageNum:pageNum, category:category, sort:sort, keyword:keyword, field:field},
 			dataType:'json',
 			type:'post',
 			success:function(data){
@@ -75,11 +79,18 @@
 		});	
 	}
 	
-	function selectionOption(){
-		var category = $(this).text();
-		var sort = $(this).val();
+	function selectCategory(){
 		$("#list").empty();
-		showMore(1, category);
+		$('#pageNum').val(1);
+		$('#keyword').val('');
+		$('#category').val($(this).text());
+		showMore();
+	}
+	function selectionOption(){
+		$("#list").empty();
+		$('#pageNum').val(1);
+		//var sort = $(this).val();
+		showMore();
 		//location.href= "${pageContext.request.contextPath}/funding/moreIngFundingList?sort=" + sort + "&category=" + category;
 	}
 	function related(){
@@ -148,7 +159,7 @@
 				<option value="id" <c:if test="${field eq 'id'}">selected="selected"</c:if>>글쓴이</option>
 			</select>
 			<input type="text" name="keyword" id="keyword" value="${keyword}">
-			<input type="submit" value="검색">		
+			<input type="button" id="search" value="검색">
 		</form>
 		<select id="sort">
 			<option value="latest" <c:if test="${sort eq 'latest'}">selected="selected"</c:if>>최신순</option>

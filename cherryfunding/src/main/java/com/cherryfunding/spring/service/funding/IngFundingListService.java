@@ -68,7 +68,7 @@ public class IngFundingListService {
 		return list;
 	}
 
-	public int getTotCount() {
-		return fundingDao.getTotCount();
+	public int getTotCount(HashMap<String, Object> map) {
+		return fundingDao.getTotCount(map);
 	}
 }

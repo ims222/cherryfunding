@@ -22,7 +22,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</if>
 	</sql>
 	<sql id="search">
-		<if test="field!=null and field!=''">
+		<if test="field!=null and field!='' and keyword!=''">
 			and ${field} like '%' || #{keyword} || '%'
 		</if>
 	</sql>
@@ -143,8 +143,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update funding set camout = camout + #{price} where fNum = #{fNum}
 	</update>
 	
-	<select id="getTotCount" resultType="int">
+	<select id="getTotCount" resultType="int" parameterType="hashmap">
 		select NVL(count(fNum), 0) from funding
+		<include refid="ing"/>
+		<include refid="isConfirm"/>
+		<include refid="category" />
+		<include refid="search" />
+		<include refid="sort" />
 	</select>
 	
 	<select id="hashtag" parameterType="string" resultType="funding">
@@ -184,18 +189,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="ing" parameterType="hashmap" resultType="hashmap">
 		<choose>
 			<when test="sort == 'end'">
-				select * from (
+				select * from (select ad.*, rownum rnum from (
+   					(select aa.FNUM fnum, aa.TITLE title, aa.CONTENT content,
+					aa.AMOUNT amount, aa.CAMOUT camout, to_char(aa.SDATE, 'yy-mm-dd') sdate,
+					to_char(aa.EDATE, 'yy-mm-dd') edate, (ceil(edate - (sysdate + (1/24)*9)) * -1) dday, aa.CATEGORY category, aa.CONFIRM confirm,
+					aa.AID aid, aa.ADDR addr, aa.REGDATE regdate, aa.ID id, aa.HIT hit from (
     				select * from funding
     				<include refid="ing"/>
 					)aa,(
-					select (edate-(sysdate + (1/24)*9))cal, fNum from funding
+					select ((sysdate + (1/24)*9) - edate )cal, fNum from funding
 					<include refid="ing"/>
-					)bb
-				where aa.fNum = bb.fNum
-				<include refid="category" />
-				<include refid="search" />
-				<include refid="isConfirm"/>
-				order by cal asc
+                    )bb
+					where aa.fNum = bb.fNum 
+					<include refid="category" />
+					<include refid="search" />
+					<include refid="isConfirm"/>
+					order by cal desc)
+					)ad)
+					<![CDATA[where rnum >=#{startRow} and rnum <=#{endRow}]]>
 			</when>
 			<when test="sort == 'recommend'">
 				select bb.* from (

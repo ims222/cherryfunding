@@ -41,20 +41,26 @@ public class IngFundingListController {
 	public HashMap<String, Object> ingFundingList(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
 			Model model, HttpServletRequest request) {
 		String category = request.getParameter("category");
-		System.out.println("!!!!!!!!!!!!1");
-		System.out.println(pageNum);
-		System.out.println(category);
 		String field = request.getParameter("field");
 		String keyword = request.getParameter("keyword");
 		String sort = request.getParameter("sort");
-		PageUtil pageUtil = new PageUtil(pageNum, ingFundingListService.getTotCount());
+		
+		System.out.println("!!!!!!!!!!!!!");
+		System.out.println("pageNum: " + pageNum);
+		System.out.println("category: " + category);
+		System.out.println("field: " + field);
+		System.out.println("keyword: " + keyword);
+		System.out.println("sort: " + sort);
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("startRow", pageUtil.getStartRow());
-		map.put("endRow", pageUtil.getEndRow());
 		map.put("category", category);
 		map.put("field", field);
 		map.put("keyword", keyword);
 		map.put("sort", sort);
+		PageUtil pageUtil = new PageUtil(pageNum, ingFundingListService.getTotCount(map));
+		
+		map.put("startRow", pageUtil.getStartRow());
+		map.put("endRow", pageUtil.getEndRow());
+		
 		List<HashMap<String, Object>> list = ingFundingListService.list(map);
 		if (list.size() == 0 && pageNum > 1) {
 			map.put("list", "no");
