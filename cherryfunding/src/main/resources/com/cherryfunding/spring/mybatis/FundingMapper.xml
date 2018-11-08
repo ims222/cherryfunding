@@ -181,7 +181,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<!-- 진행중 펀딩 -->
-	<select id="ing" parameterType="hashmap" resultType="funding">
+	<select id="ing" parameterType="hashmap" resultType="hashmap">
 		<choose>
 			<when test="sort == 'end'">
 				select * from (
@@ -214,7 +214,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			</when>
 			<otherwise>
 				select * from (
-					select aa.*, rownum rnum from (
+					select aa.FNUM fnum, aa.TITLE title, aa.CONTENT content,
+					aa.AMOUNT amount, aa.CAMOUT camout, to_char(aa.SDATE, 'yy-mm-dd') sdate,
+					to_char(aa.EDATE, 'yy-mm-dd') edate, (ceil(edate - (sysdate + (1/24)*9)) * -1) dday, aa.CATEGORY category, aa.CONFIRM confirm,
+					aa.AID aid, aa.ADDR addr, aa.REGDATE regdate, aa.ID id, aa.HIT hit, rownum rnum from (
 						select * from funding
 						<include refid="ing"/>
 						<include refid="isConfirm"/>

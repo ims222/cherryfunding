@@ -52,13 +52,7 @@ public class IngFundingListController {
 		map.put("field", field);
 		map.put("keyword", keyword);
 		map.put("sort", sort);
-		List<FundingVo> list = ingFundingListService.list(map);
-//		Date date = ...; // wherever you get this from
-//		 
-//		DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
-//		String text = df.format(date);
-
-//		System.out.println("The date is: " + text);
+		List<HashMap<String, Object>> list = ingFundingListService.list(map);
 		if (list.size() == 0) {
 			map.put("list", "no");
 			map.put("pageNum", pageNum);

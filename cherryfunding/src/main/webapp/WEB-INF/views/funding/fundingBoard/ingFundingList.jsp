@@ -10,9 +10,7 @@
 		showMore();
 		$("#category").on('click', 'button', selectionOption);
 		$("#sort").on('change', selectionOption);
-
 		$("#keyword").on('keyup', related);
-
 		$("#showMore").on('click', showMore);
 	});
 	var showMore = function(){
@@ -25,19 +23,23 @@
 			success:function(data){
 				var result = $('#list').html(); 
 				var html = document.querySelector('#fundingList2').innerHTML;
+				console.log('data', data);
+				console.log('data.list', data.list);
 				if(data.list === 'no'){
 					alert('마지막 페이지 입니다');
 				}else{
+					
 					data.list.forEach(function(value){
-						result +=	html.replace(/{fNum}/gi, value.fNum)
+						result +=	html.replace(/{fNum}/gi, value.FNUM)
 									.replace("{savename}", value.savename)
 									.replace("{fpinfo}", value.fpinfo)
-									.replace("{title}", value.title)
-									.replace("{id}", value.id)
-									.replace("{amount}", value.amount)
-									.replace("{camout}", value.camout);
-									//.replace("{edate}", "18-08-11");
-									//.replace("{edate}", new Date(value.edate).toString());
+									.replace("{title}", value.TITLE)
+									.replace("{id}", value.ID)
+									.replace("{amount}", value.AMOUNT)
+									.replace("{camout}", value.CAMOUT)
+									.replace("{sdate}", value.SDATE)
+									.replace("{edate}", value.EDATE)
+									.replace("{dday}", value.DDAY);
 					});
 					document.querySelector('#list').innerHTML = result;
 					console.log('data.pageNum', data.pageNum);
@@ -46,9 +48,6 @@
 				}
 			}
 		});	
-	}
-	function replaceAll(str, searchStr, replaceStr) {
-		  return str.split(searchStr).join(replaceStr);
 	}
 	function selectionOption(){
 		var category = $(this).text();
@@ -77,11 +76,13 @@
 	class="image featured">
 	<img src="{savename}" alt="{fpinfo}" height="200px"></a>
 	<div class="box">
-		<p>펀딩번호: {fNum}</p>
 		<p>{title}</p>
 		<p>{id}</p>
 		<p>목표금액: {amount}원</p>
 		<p>현재금액: {camout}원</p>
+		<p>시작: {sdate} </p>
+		<p>종료: {edate} </p>
+		<p>dday: {dday}</p>
 	</div>
 </section>
 </script>

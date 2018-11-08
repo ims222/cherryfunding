@@ -8,8 +8,8 @@
 		<p>${id}</p>
 		<p>목표금액: {amount}원</p>
 		<p>현재금액: {camout}원</p>
-		<fmt:formatDate value="{edate}" var="_edate" pattern="yyyyMMdd"/>
-		<fmt:parseDate value="${_edate}" var="edateDate" pattern="yyyyMMdd"/>
+		<fmt:formatDate value="{edate}" var="edate" pattern="yyyyMMdd"/>
+		<fmt:parseDate value="${edate}" var="edateDate" pattern="yyyyMMdd"/>
 		<fmt:parseNumber value="${edateDate.time / (1000 * 60 * 60 * 24)}" var="end" integerOnly="true"/>
 		
 		<jsp:useBean id="today" class="java.util.Date"/>

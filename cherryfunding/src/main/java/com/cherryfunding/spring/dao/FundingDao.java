@@ -48,7 +48,7 @@ public class FundingDao {
 		return sqlSession.selectList(NAMESPACE + "end", map);
 	}
 
-	public List<FundingVo> ing(HashMap<String, Object> map) { // 진행
+	public List<HashMap<String, Object>> ing(HashMap<String, Object> map) { // 진행
 		return sqlSession.selectList(NAMESPACE + "ing", map);
 	}
 
@@ -120,8 +120,8 @@ public class FundingDao {
 	public FundingVo detail(int fNum) {
 		return sqlSession.selectOne(NAMESPACE + "detail", fNum);
 	}
-	
-	public List<String> relatedWords(HashMap<String, Object> map){
+
+	public List<String> relatedWords(HashMap<String, Object> map) {
 		return sqlSession.selectList(NAMESPACE + "related", map);
 	}
 
