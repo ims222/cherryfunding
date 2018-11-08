@@ -8,15 +8,7 @@
 		<p>${id}</p>
 		<p>목표금액: {amount}원</p>
 		<p>현재금액: {camout}원</p>
-		<fmt:formatDate value="{edate}" var="_edate" pattern="yyyyMMdd"/>
-		<fmt:parseDate value="${_edate}" var="edateDate" pattern="yyyyMMdd"/>
-		<fmt:parseNumber value="${edateDate.time / (1000 * 60 * 60 * 24)}" var="end" integerOnly="true"/>
-		
-		<jsp:useBean id="today" class="java.util.Date"/>
-		<fmt:formatDate value="${today}" var="todayDate" pattern="yyyyMMdd"/>
-		<fmt:parseDate value="${todayDate}" var="nowDate" pattern="yyyyMMdd"/>
-		<fmt:parseNumber value="${nowDate.time / (1000 * 60 * 60 * 24)}" var="now" integerOnly="true"/>
-		<p>D${now-end}</p>
+
 		<div class="progress">
 			<c:set var="before" value="${camout * 100 / amount}" />
 			<c:choose>

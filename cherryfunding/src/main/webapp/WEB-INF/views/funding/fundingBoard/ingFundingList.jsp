@@ -33,26 +33,40 @@
 					alert('마지막 페이지 입니다');
 				}else{
 					data.list.forEach(function(value){
-						result +=	html.replace(/{fNum}/gi, value.fNum)
+						var camout = parseInt(value.CAMOUT);
+						var amount = parseInt(value.AMOUNT);
+						var before = Math.ceil((camout * 100) / amount);
+						if(isNaN(before))
+							before = 0;
+						var barBefore = 0;
+						if(before >= 100)
+							barBefore = 100;
+						else
+							barBefore = before;
+						
+						result +=	html.replace(/{fNum}/gi, value.FNUM)
 									.replace("{savename}", value.savename)
 									.replace("{fpinfo}", value.fpinfo)
-									.replace("{title}", value.title)
-									.replace("{id}", value.id)
-									.replace("{amount}", value.amount)
-									.replace("{camout}", value.camout);
-									//.replace("{edate}", "18-08-11");
-									//.replace("{edate}", new Date(value.edate).toString());
+									.replace("{title}", value.TITLE)
+									.replace("{id}", value.ID)
+									.replace("{amount}", amount)
+									.replace("{camout}", camout)
+									.replace("{sdate}", value.SDATE)
+									.replace("{edate}", value.EDATE)
+									.replace("{dday}", value.DDAY)
+									.replace("{width}", (barBefore) + "%" )
+									.replace("{valuenow}", barBefore)
+									.replace("{percent}", ((before/100) * 100) + "%");
+						console.log("before", before);
+						console.log("(barBefore/100)", (barBefore));
+						console.log("barBefore * 10000", barBefore * 10000);
+						console.log("((before/100) * 100)", ((before/100) * 100));
 					});
 					document.querySelector('#list').innerHTML = result;
-					console.log('data.pageNum', data.pageNum);
 					$('#pageNum').val(data.pageNum);
-					console.log('pageNum', $('#pageNum').val());	
 				}
 			}
 		});	
-	}
-	function replaceAll(str, searchStr, replaceStr) {
-		  return str.split(searchStr).join(replaceStr);
 	}
 	function selectionOption(){
 		var category = $(this).text();
@@ -84,11 +98,17 @@
 	class="image featured">
 	<img src="{savename}" alt="{fpinfo}" height="200px"></a>
 	<div class="box">
-		<p>펀딩번호: {fNum}</p>
 		<p>{title}</p>
 		<p>{id}</p>
 		<p>목표금액: {amount}원</p>
 		<p>현재금액: {camout}원</p>
+		<p>시작: {sdate} </p>
+		<p>종료: {edate} </p>
+		<p>D{dday}</p>
+
+		<div class="progress-bar" role="progressbar" style="width: {width}"
+			aria-valuenow="{valuenow}" aria-valuemin="0" aria-valuemax="100">{percent}
+		</div>
 	</div>
 </section>
 </script>

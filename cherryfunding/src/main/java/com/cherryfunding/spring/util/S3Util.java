@@ -19,8 +19,8 @@ import com.amazonaws.services.s3.model.ObjectMetadata;
 @Component
 public class S3Util {
 	private String bucketName = "cherryfundingbucket";
-	private String accessKey = "AKIAJXSPLWJTXD6S2YTA"; // 엑세스 키
-	private String secretKey = "+anpzPJJOv7H8DXs2gMW8TT2r73UCNXzO/nObOZy"; // 보안 엑세스 키
+	private String accessKey = "AKIAIPEL5FPE3Z5WBCLQ"; // 엑세스 키
+	private String secretKey = "U72ZGp15586WPRkr7fa563J2mJycTt7PNyOq05Qx"; // 보안 엑세스 키
 
 	private AmazonS3 conn;
 
