@@ -25,21 +25,25 @@
 			success:function(data){
 				var result = $('#list').html(); 
 				var html = document.querySelector('#fundingList2').innerHTML;
-				data.list.forEach(function(value){
-					result +=	html.replace(/{fNum}/gi, value.fNum)
-								.replace("{savename}", value.savename)
-								.replace("{fpinfo}", value.fpinfo)
-								.replace("{title}", value.title)
-								.replace("{id}", value.id)
-								.replace("{amount}", value.amount)
-								.replace("{camout}", value.camout);
-								//.replace("{edate}", "18-08-11");
-								//.replace("{edate}", new Date(value.edate).toString());
-				});
-				document.querySelector('#list').innerHTML = result;
-				console.log('data.pageNum', data.pageNum);
-				$('#pageNum').val(data.pageNum);
-				console.log('pageNum', $('#pageNum').val());
+				if(data.list === 'no'){
+					alert('마지막 페이지 입니다');
+				}else{
+					data.list.forEach(function(value){
+						result +=	html.replace(/{fNum}/gi, value.fNum)
+									.replace("{savename}", value.savename)
+									.replace("{fpinfo}", value.fpinfo)
+									.replace("{title}", value.title)
+									.replace("{id}", value.id)
+									.replace("{amount}", value.amount)
+									.replace("{camout}", value.camout);
+									//.replace("{edate}", "18-08-11");
+									//.replace("{edate}", new Date(value.edate).toString());
+					});
+					document.querySelector('#list').innerHTML = result;
+					console.log('data.pageNum', data.pageNum);
+					$('#pageNum').val(data.pageNum);
+					console.log('pageNum', $('#pageNum').val());	
+				}
 			}
 		});	
 	}
