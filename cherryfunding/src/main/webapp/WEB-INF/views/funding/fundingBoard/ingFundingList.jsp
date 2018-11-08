@@ -1,11 +1,8 @@
-	<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
 <script type="text/javascript">
 	
 	var array = [];
@@ -60,12 +57,13 @@
 									.replace("{id}", value.ID)
 									.replace("{amount}", amount)
 									.replace("{camout}", camout)
+									.replace("{category}", value.CATEGORY)
 									.replace("{sdate}", value.SDATE)
 									.replace("{edate}", value.EDATE)
 									.replace("{dday}", value.DDAY)
-									.replace("{width}", (barBefore) + "%" )
+									.replace(/{width}/gi, (barBefore) + "%" )
 									.replace("{valuenow}", barBefore)
-									.replace("{percent}", ((before/100) * 100) + "%");
+									.replace(/{percent}/gi, ((before/100) * 100) + "%"); 
 					});
 					document.querySelector('#list').innerHTML = result;
 					$('#pageNum').val(data.pageNum);
@@ -108,31 +106,43 @@
 				}
 			}
 		});
-		
+	}
+	function openCity(cityName) {
+	    var i;
+	    var x = document.getElementsByClassName("city");
+	    for (i = 0; i < x.length; i++) {
+	        x[i].style.display = "none"; 
+	    }
+	    document.getElementById(cityName).style.display = "block"; 
 	}
 </script>
-
 <script id="fundingList" type="text/template">
-<section class="4u">
-	<a href="${pageContext.request.contextPath}/funding/ingFundingDetailforUser?fNum={fNum}"
-	class="image featured">
-	<img src="{savename}" alt="{fpinfo}" height="200px"></a>
-	<div class="box">
-		<p>{title}</p>
-		<p>{id}</p>
-		<p>목표금액: {amount}원</p>
-		<p>현재금액: {camout}원</p>
-		<p>시작: {sdate} </p>
-		<p>종료: {edate} </p>
-		<p>D{dday}</p>
+<div style="padding: 20px;">
+	<a href="${pageContext.request.contextPath}/funding/ingFundingDetailforUser?fNum={fNum}">
+	<img src="{savename}" class="w3-round" alt="{fpinfo}" height="200px" width="100%"></a>
+	<div style="height:30%; overflow-x:hidden;overflow-y:hidden">
+		<p class="w3-left-align" style="word-break:break-all;">
+			<a href="${pageContext.request.contextPath}/funding/ingFundingDetailforUser?fNum={fNum}">
+			<strong></strong>{title}</a></p>
+		
+		<p class="w3-left-align">{category} | {id}</p>
 
-		<div class="progress-bar" role="progressbar" style="width: {width}"
-			aria-valuenow="{valuenow}" aria-valuemin="0" aria-valuemax="100">{percent}
+		<div class="w3-border">
+			<div class="w3-blue" style="height:5px;width:{width}"></div>
 		</div>
+		<div class="w3-left-align" style="float:left;"><p>{percent} · {camout}원</p></div>
+		<div class="w3-right-align"><p>{dday}일 남음</p></div>
 	</div>
-</section>
+</div>
 </script>
-
+<style type="text/css">
+	#list {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		grid-gap: 10px;
+		grid-auto-rows: minmax(100px, auto);
+	}
+</style>
 <div id="main">
 	<div class="container">
 		<div class="w3-bar" id="category">
@@ -158,9 +168,29 @@
 				<option value="content" <c:if test="${field eq 'content'}">selected="selected"</c:if>>내용</option>
 				<option value="id" <c:if test="${field eq 'id'}">selected="selected"</c:if>>글쓴이</option>
 			</select>
-			<input type="text" name="keyword" id="keyword" value="${keyword}">
-			<input type="button" id="search" value="검색">
 		</form>
+		
+		<div class="row">
+			<div class="col-lg-6">
+				<div class="input-group">
+					<div class="input-group-btn">
+						<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">제목<span class="caret"></span></button>
+						<ul class="dropdown-menu" role="menu">
+							<li><a href="#" onclick="alert('ww')">제목</a></li>
+							<li><a href="#">내용</a></li>
+							<li><a href="#">글쓴이</a></li>
+						</ul>
+					</div><!-- /btn-group -->
+					<input type="text" id="keyword" value="" class="form-control" aria-label="...">
+					<span class="input-group-btn">
+						<button class="btn btn-default" id="search" type="button">검색</button>
+					</span>
+				</div><!-- /input-group -->
+			</div><!-- /.col-lg-6 -->
+		</div><!-- /.row -->
+
+
+
 		<select id="sort">
 			<option value="latest" <c:if test="${sort eq 'latest'}">selected="selected"</c:if>>최신순</option>
 			<option value="recommend" <c:if test="${sort eq 'recommend'}">selected="selected"</c:if>>추천순</option>
@@ -169,47 +199,8 @@
 			<option value="end" <c:if test="${sort eq 'end'}">selected="selected"</c:if>>종료임박순</option>
 		</select>
 		<input type="hidden" id="pageNum" value="">
-		<div class="row no-collapse-1" id="list">
+		<div id="list">
 		</div>
 		<button id="showMore">더보기</button>
-		<div class="row">
-			<!-- Content -->
-			<div class="6u">
-				<section>
-					<ul class="style">
-						<li class="fa fa-wrench">
-							<h3>Integer ultrices</h3> <span>In posuere eleifend odio.
-								Quisque semper augue mattis wisi. Maecenas ligula. Pellentesque
-								viverra vulputate enim. Aliquam erat volutpat. Maecenas
-								condimentum enim tincidunt risus accumsan.</span>
-						</li>
-						<li class="fa fa-leaf">
-							<h3>Aliquam luctus</h3> <span>In posuere eleifend odio.
-								Quisque semper augue mattis wisi. Maecenas ligula. Pellentesque
-								viverra vulputate enim. Aliquam erat volutpat. Maecenas
-								condimentum enim tincidunt risus accumsan.</span>
-						</li>
-					</ul>
-				</section>
-			</div>
-			<div class="6u">
-				<section>
-					<ul class="style">
-						<li class="fa fa-cogs">
-							<h3>Integer ultrices</h3> <span>In posuere eleifend odio.
-								Quisque semper augue mattis wisi. Maecenas ligula. Pellentesque
-								viverra vulputate enim. Aliquam erat volutpat. Maecenas
-								condimentum enim tincidunt risus accumsan.</span>
-						</li>
-						<li class="fa fa-road">
-							<h3>Aliquam luctus</h3> <span>In posuere eleifend odio.
-								Quisque semper augue mattis wisi. Maecenas ligula. Pellentesque
-								viverra vulputate enim. Aliquam erat volutpat. Maecenas
-								condimentum enim tincidunt risus accumsan.</span>
-						</li>
-					</ul>
-				</section>
-			</div>
-		</div>
 	</div>
 </div>

@@ -45,12 +45,6 @@ public class IngFundingListController {
 		String keyword = request.getParameter("keyword");
 		String sort = request.getParameter("sort");
 		
-		System.out.println("!!!!!!!!!!!!!");
-		System.out.println("pageNum: " + pageNum);
-		System.out.println("category: " + category);
-		System.out.println("field: " + field);
-		System.out.println("keyword: " + keyword);
-		System.out.println("sort: " + sort);
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("category", category);
 		map.put("field", field);
