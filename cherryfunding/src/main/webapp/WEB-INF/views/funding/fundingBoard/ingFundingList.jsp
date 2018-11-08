@@ -16,19 +16,7 @@
 		$("#sort").on('change', selectionOption);
 		$("#keyword").on('keyup', related);
 		$("#showMore").on('click', showMore);
-		 /*
-			var array = [
-             "김밥",
-             "김치",
-             "김치찌개",
-             "김치김밥",
-             "김밥천국",
-             "참치김밥",
-             "김밥나라"
-         	];
-		*/
-		
-        $("#keyword").autocomplete({source: array});
+		$("#keyword").autocomplete({source: array});
 
 	});
 	var showMore = function(){
