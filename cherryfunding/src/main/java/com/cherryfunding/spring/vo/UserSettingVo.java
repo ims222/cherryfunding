@@ -1,50 +1,50 @@
 package com.cherryfunding.spring.vo;
 
-public class UsersSettingVo {
+public class UserSettingVo {
 	private String id;
 	private String lang;
 	private String voice;
 	private String alarm;
 
-	public UsersSettingVo() {
+	public UserSettingVo() {
 	}
 
-	public UsersSettingVo(String id, String lang, String voice, String alarm) {
+	public UserSettingVo(String id, String lang, String voice, String alarm) {
 		this.id = id;
 		this.lang = lang;
 		this.voice = voice;
 		this.alarm = alarm;
 	}
 
-	String getId() {
+	public String getId() {
 		return id;
 	}
 
-	void setId(String id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
-	String getLang() {
+	public String getLang() {
 		return lang;
 	}
 
-	void setLang(String lang) {
+	public void setLang(String lang) {
 		this.lang = lang;
 	}
 
-	String getVoice() {
+	public String getVoice() {
 		return voice;
 	}
 
-	void setVoice(String voice) {
+	public void setVoice(String voice) {
 		this.voice = voice;
 	}
 
-	String getAlarm() {
+	public String getAlarm() {
 		return alarm;
 	}
 
-	void setAlarm(String alarm) {
+	public void setAlarm(String alarm) {
 		this.alarm = alarm;
 	}
 
