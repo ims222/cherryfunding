@@ -4,6 +4,7 @@
 	xmlns:context="http://www.springframework.org/schema/context"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+ <bean id="batch" class="com.cherryfunding.spring.batch.VolunteerBatch"/>
  
 <context:component-scan base-package="com.cherryfunding.spring.batch"/>
 
@@ -16,18 +17,33 @@
 <bean id="cronQuartz2" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
     <property name="jobClass" value="com.cherryfunding.spring.batch.CronQuartz2"/>
 </bean>
- 
-<!-- 2. Cron 시간 설정 -->
-<bean id="cronTrigger1" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
-    <property name="jobDetail" ref="cronQuartz1"/>
-    <property name="cronExpression" value="0/5 * * * * ?"/>
+<bean id="volunteerBatch1" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+	<property name="targetObject" ref="volunteerBatch"/>
+	<property name="targetMethod" ref="execute"/>
+	<property name="concurrent" value="false"/>
 </bean>
+<<<<<<< HEAD
 <bean id="cronTrigger2" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
     <property name="jobDetail" ref="cronQuartz2"/>
     <property name="cronExpression" value="0 0/1 * * * ?"/>
 </bean>
  
 <!-- 3. Cron 실행 -->
+=======
+
+
+<!-- 
+2. Cron 시간 설정 
+-->
+
+<bean id="volunteerTrigger1" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+	<property name="jobDetail" ref="volunteerBatch1"/>
+	<property name="cronExpression" value="0/5 * * * * ?"/>
+</bean> 
+
+<!--  
+3. Cron 실행 
+>>>>>>> branch 'master' of https://github.com/ims222/cherryfunding.git
 <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
     <property name="triggers">
         <list>
@@ -45,6 +61,26 @@
         </props>
     </property>
 </bean>
+<<<<<<< HEAD
 
 
+=======
+-->
+<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+    <property name="triggers">
+        <list>
+            <ref bean="volunteerTrigger1"/>
+        </list>
+    </property>
+    <property name="quartzProperties">
+        <props>
+            <prop key="org.quartz.threadPool.class">org.quartz.simpl.SimpleThreadPool</prop>
+            <prop key="org.quartz.threadPool.threadCount">3</prop>
+            <prop key="org.quartz.threadPool.threadPriority">4</prop>
+            <prop key="org.quartz.jobStore.class">org.quartz.simpl.RAMJobStore</prop>
+            <prop key="org.quartz.jobStore.misfireThreshold">60000</prop>
+        </props>
+    </property>
+</bean>
+>>>>>>> branch 'master' of https://github.com/ims222/cherryfunding.git
 </beans>

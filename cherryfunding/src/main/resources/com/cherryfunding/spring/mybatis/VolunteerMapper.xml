@@ -28,6 +28,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="update" parameterType="volunteer">
 		update volunteer set #{pwd} where #{id}
 	</update>
+	<update id="ended">
+		update volunteer set title = 
+		<![CDATA[ '마감' + title w]]> 
+	</update>
 	<delete id="delete" parameterType="string">
 		delete from volunteer where id=#{id}
 	</delete>
