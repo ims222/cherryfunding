@@ -19,11 +19,16 @@
 		$("#keyword").autocomplete({source: array});
 
 	});
-	var showMore = function(){
+	var showMore = function(page, category){
 		var pageNum = $('#pageNum').val();
+		if(page = 1)
+			pageNum = 1;
+		var sort;
+		var keyword;
+		var field;
 			$.ajax({
 			url:'${pageContext.request.contextPath}/funding/moreIngFundingList',
-			data:{pageNum:pageNum},
+			data:{pageNum:pageNum, category:category},
 			dataType:'json',
 			type:'post',
 			success:function(data){
@@ -57,21 +62,25 @@
 									.replace("{width}", (barBefore) + "%" )
 									.replace("{valuenow}", barBefore)
 									.replace("{percent}", ((before/100) * 100) + "%");
-						console.log("before", before);
-						console.log("(barBefore/100)", (barBefore));
-						console.log("barBefore * 10000", barBefore * 10000);
-						console.log("((before/100) * 100)", ((before/100) * 100));
 					});
 					document.querySelector('#list').innerHTML = result;
 					$('#pageNum').val(data.pageNum);
+					$('#category').val(data.category);
+					$("#field option").filter(function() {
+					    return $(this).text() == data.field; 
+					}).prop('selected', true);
+					$('#keyword').val(data.keyword);
 				}
 			}
 		});	
 	}
+	
 	function selectionOption(){
 		var category = $(this).text();
 		var sort = $(this).val();
-		location.href= "${pageContext.request.contextPath}/funding/ingFundingList?sort=" + sort + "&category=" + category;
+		$("#list").empty();
+		showMore(1, category);
+		//location.href= "${pageContext.request.contextPath}/funding/moreIngFundingList?sort=" + sort + "&category=" + category;
 	}
 	function related(){
 		var keyword = $("#keyword").val();

@@ -41,6 +41,9 @@ public class IngFundingListController {
 	public HashMap<String, Object> ingFundingList(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
 			Model model, HttpServletRequest request) {
 		String category = request.getParameter("category");
+		System.out.println("!!!!!!!!!!!!1");
+		System.out.println(pageNum);
+		System.out.println(category);
 		String field = request.getParameter("field");
 		String keyword = request.getParameter("keyword");
 		String sort = request.getParameter("sort");
@@ -53,7 +56,7 @@ public class IngFundingListController {
 		map.put("keyword", keyword);
 		map.put("sort", sort);
 		List<HashMap<String, Object>> list = ingFundingListService.list(map);
-		if (list.size() == 0) {
+		if (list.size() == 0 && pageNum > 1) {
 			map.put("list", "no");
 			map.put("pageNum", pageNum);
 		} else {
