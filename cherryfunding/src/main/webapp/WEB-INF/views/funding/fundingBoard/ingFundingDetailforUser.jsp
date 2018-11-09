@@ -203,15 +203,13 @@
 
 </script>
 <script id="commentLine" type="text/template">
-	<div>
-		<div><img src="{savename}"></div>
+	<div style=" margin-bottom: 25px;">
+		<div style="float:left; margin-right:10px; height:100%;"><img src="{savename}" width="50px"></div>
 		<div>
-			<div>{nick}</div>
-			<div>{regdate}<div>
+			<div class="w3-large">{nick}</div>
+			<div class="w3-small">{regdate}</div>
 		</div>
-		
-		{content}<br>
-		
+		<div class="w3-medium">{content}</div>
 	</div>
 </script>
 <style type="text/css">
