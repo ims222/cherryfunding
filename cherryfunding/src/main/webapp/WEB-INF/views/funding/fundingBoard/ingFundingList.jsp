@@ -54,12 +54,13 @@
 									.replace("{savename}", value.savename)
 									.replace("{fpinfo}", value.fpinfo)
 									.replace("{title}", value.TITLE)
-									.replace("{id}", value.ID)
+									.replace("{nick}", value.nick)
 									.replace("{amount}", amount)
 									.replace("{camout}", camout)
 									.replace("{category}", value.CATEGORY)
 									.replace("{sdate}", value.SDATE)
 									.replace("{edate}", value.EDATE)
+									.replace("{recomm}", value.recomm)
 									.replace("{dday}", value.DDAY)
 									.replace(/{width}/gi, (barBefore) + "%" )
 									.replace("{valuenow}", barBefore)
@@ -121,19 +122,21 @@
 	<a href="${pageContext.request.contextPath}/funding/ingFundingDetailforUser?fNum={fNum}">
 	<img src="{savename}" class="w3-round" alt="{fpinfo}" height="200px" width="100%"></a>
 	<div>
-		<div style="height: 90px; overflow-x:hidden;overflow-y:hidden>
+		<div style="height: 50px;>
 			<p class="w3-left-align" style="word-break:break-all;">
 				<a href="${pageContext.request.contextPath}/funding/ingFundingDetailforUser?fNum={fNum}">
 				<h4>{title}</h4></a>
-				<span>{category} | {id}</span>
 			</p>
 		</div>
-
-		<div class="w3-border">
-			<div class="w3-blue" style="height:5px;width:{width}"></div>
+		<div>
+			<div class="w3-left-align" style="float:left;">{category} | {nick}</div>
+			<div class="w3-right-align"><p>추천 <span class="w3-badge w3-green">{recomm}</span></p></div>
+			<div class="w3-border">
+				<div class="w3-blue" style="height:5px;width:{width}"></div>
+			</div>
+			<div class="w3-left-align" style="float:left;">{percent} · {camout}원</div>
+			<div class="w3-right-align">{dday}일 남음</div>
 		</div>
-		<div class="w3-left-align" style="float:left;"><p>{percent} · {camout}원</p></div>
-		<div class="w3-right-align"><p>{dday}일 남음</p></div>
 	</div>
 </div>
 </script>
@@ -173,14 +176,6 @@
 		<div class="row">
 			<div class="col-lg-6">
 				<div class="input-group">
-					<div class="input-group-btn">
-						<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">제목<span class="caret"></span></button>
-						<ul class="dropdown-menu" role="menu">
-							<li><a href="#" onclick="alert('ww')">제목</a></li>
-							<li><a href="#">내용</a></li>
-							<li><a href="#">글쓴이</a></li>
-						</ul>
-					</div><!-- /btn-group -->
 					<input type="text" id="keyword" value="" class="form-control" aria-label="...">
 					<span class="input-group-btn">
 						<button class="btn btn-default" id="search" type="button">검색</button>
@@ -188,8 +183,6 @@
 				</div><!-- /input-group -->
 			</div><!-- /.col-lg-6 -->
 		</div><!-- /.row -->
-
-
 
 		<select id="sort">
 			<option value="latest" <c:if test="${sort eq 'latest'}">selected="selected"</c:if>>최신순</option>

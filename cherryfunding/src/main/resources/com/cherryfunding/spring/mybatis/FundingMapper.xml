@@ -22,13 +22,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</if>
 	</sql>
 	<sql id="search">
-		<if test="field!=null and field!='' and keyword!=''">
-			and ${field} like '%' || #{keyword} || '%'
+		<if test="keyword != null and keyword!=''">
+			and (title like '%' || #{keyword} || '%'
+				or content like '%' || #{keyword} || '%'
+				or id like '%' || #{keyword} || '%'
+				or id = any(select id from users where nick like '%' || #{keyword} || '%')
+			)
 		</if>
 	</sql>
 	
 	<sql id="searchwaite">
-		
 		<choose>
 			<when test="keyword!=null and keyword!=''">
 				<choose>
@@ -43,7 +46,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</choose>
 	
 	</sql>
-	
 	
 	<sql id="sort">
 		<choose>
@@ -127,8 +129,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from funding where confirm = 'y'
 		<include refid="searchwaite"/>
 	</select>
-	
-	
 		
 	<update id="confirm" parameterType="int">
 		update funding set confirm = 'y' where fNum = #{fNum}
@@ -206,10 +206,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 					<include refid="isConfirm"/>
 					order by cal desc)
 					)ad)
-					<![CDATA[where rnum >=#{startRow} and rnum <=#{endRow}]]>
+					<![CDATA[where rnum >= #{startRow} and rnum <= #{endRow}]]>
 			</when>
 			<when test="sort == 'recommend'">
-				select bb.* from (
+				select * from (select aa.cnt, bb.FNUM fnum, bb.TITLE title, bb.CONTENT content,
+					bb.AMOUNT amount, bb.CAMOUT camout, to_char(bb.SDATE, 'yy-mm-dd') sdate,
+					to_char(bb.EDATE, 'yy-mm-dd') edate, (ceil(edate - (sysdate + (1/24)*9)) * -1) dday, bb.CATEGORY category, bb.CONFIRM confirm,
+					bb.AID aid, bb.ADDR addr, bb.REGDATE regdate, bb.ID id, bb.HIT hit, rownum rnum from (
 					select * from (
     					select aa.* from (
      						select count(f.fNum) cnt, f.fNum fn from (
@@ -219,9 +222,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     					)aa
     				order by cnt desc, fn desc)
 			)aa, (select * from funding )bb
-			where aa.fn = bb.fNum(+)
-			<include refid="isConfirm"/>
-			order by cnt
+			where 
+			 <include refid="isConfirm"/>
+			order by cnt desc)
+			<![CDATA[where rnum >= #{startRow} and rnum <= #{endRow}]]>
 			</when>
 			<otherwise>
 				select * from (

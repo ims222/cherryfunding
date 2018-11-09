@@ -9,12 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cherryfunding.spring.dao.FPictureDao;
+import com.cherryfunding.spring.dao.FRecommendDao;
 import com.cherryfunding.spring.dao.FundingDao;
+import com.cherryfunding.spring.dao.UsersDao;
 import com.cherryfunding.spring.util.S3Util;
 import com.cherryfunding.spring.vo.FPictureVo;
 import com.cherryfunding.spring.vo.FundingVo;
-
-import freemarker.template.utility.StringUtil;
+import com.cherryfunding.spring.vo.UsersVo;
 
 @Service
 public class IngFundingListService {
@@ -23,6 +24,12 @@ public class IngFundingListService {
 
 	@Autowired
 	private FPictureDao fpdao;
+
+	@Autowired
+	private UsersDao usersDao;
+
+	@Autowired
+	private FRecommendDao fRecommendDao;
 
 	@Autowired
 	private S3Util s3;
@@ -42,6 +49,8 @@ public class IngFundingListService {
 			String thumbnail = this.thumbnail(fNum).getSavename();
 			l.put("savename", s3.getFileURL("funding/" + thumbnail));
 			l.put("fpinfo", this.thumbnail(((BigDecimal) l.get("FNUM")).intValue()).getFpinfo());
+			l.put("nick", usersDao.select((String) l.get("ID")).getNick());
+			l.put("recomm", fRecommendDao.getRecommend(((BigDecimal) l.get("FNUM")).intValue()));
 		}
 		return list;
 	}
@@ -70,5 +79,9 @@ public class IngFundingListService {
 
 	public int getTotCount(HashMap<String, Object> map) {
 		return fundingDao.getTotCount(map);
+	}
+
+	public UsersVo userInfo(String id) {
+		return usersDao.select(id);
 	}
 }
