@@ -117,7 +117,7 @@
 	}
 </script>
 <script id="fundingList" type="text/template">
-<div style="padding: 20px;">
+<div class="w3-col m4 l4" style="padding: 20px;">
 	<a href="${pageContext.request.contextPath}/funding/ingFundingDetailforUser?fNum={fNum}">
 	<img src="{savename}" class="w3-round" alt="{fpinfo}" height="200px" width="100%"></a>
 	<div>
@@ -140,10 +140,6 @@
 <style type="text/css">
 	@import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
 	#list {
-		display: grid;
-		grid-template-columns: repeat(3, 1fr);
-		grid-gap: 10px;
-		grid-auto-rows: minmax(100px, auto);
 		font-family: 'Hanna', serif;
 	}
 </style>
@@ -203,7 +199,7 @@
 			<option value="end" <c:if test="${sort eq 'end'}">selected="selected"</c:if>>종료임박순</option>
 		</select>
 		<input type="hidden" id="pageNum" value="">
-		<div id="list">
+		<div id="list" class="w3-row">
 		</div>
 		<button id="showMore">더보기</button>
 	</div>
