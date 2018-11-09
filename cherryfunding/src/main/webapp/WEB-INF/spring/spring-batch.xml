@@ -16,23 +16,29 @@
 <bean id="cronQuartz2" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
     <property name="jobClass" value="com.cherryfunding.spring.batch.CronQuartz2"/>
 </bean>
-<bean id="cronTrigger2" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
-    <property name="jobDetail" ref="cronQuartz2"/>
-    <property name="cronExpression" value="0 0/1 * * * ?"/>
+<bean id="cronQuartz3" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+	<property name="targetObject" ref="emailController"/>
+	<property name="targetMethod" value="method"/>
+	<property name="concurrent" value="false"/>
 </bean>
  
+<!-- 2. Cron 시간 설정 -->
+<bean id="cronTrigger1" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+    <property name="jobDetail" ref="cronQuartz1"/>
+    <property name="cronExpression" value="30 30 14 * * ?"/>
+</bean>
 <!-- 
-2. Cron 시간 설정 
+<bean id="cronTrigger3" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+	<property name="jobDetail" ref="cronQuartz3"/>
+	<property name="cronExpression" value="0 0 0 * * ?"/>
+</bean>
 -->
-
-
 <!--  
-3. Cron 실행 
+3. Cron 실행 -->
 <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
     <property name="triggers">
         <list>
             <ref bean="cronTrigger1"/>
-            <ref bean="cronTrigger2"/>
         </list>
     </property>
     <property name="quartzProperties">
@@ -45,6 +51,6 @@
         </props>
     </property>
 </bean>
--->
+
 
 </beans>
