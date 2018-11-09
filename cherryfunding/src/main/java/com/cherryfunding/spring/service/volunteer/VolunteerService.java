@@ -1,5 +1,6 @@
 package com.cherryfunding.spring.service.volunteer;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,5 +32,13 @@ public class VolunteerService {
 	
 	public List<VolunteerVo> list(){
 		return volunteerDao.list();
+	}
+	
+	public HashMap<String, Object> getEnded(){
+		return volunteerDao.getEnded();
+	}
+	
+	public int updateEnded(HashMap<String, Object> map) {
+		return volunteerDao.updateEnded(map);
 	}
 }
