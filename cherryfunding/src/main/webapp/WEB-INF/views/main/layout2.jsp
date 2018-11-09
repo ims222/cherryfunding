@@ -41,6 +41,7 @@
 
 </script>
 <style type="text/css">
+	@import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
 	*{
 		maring:0px;
 		padding:0px;

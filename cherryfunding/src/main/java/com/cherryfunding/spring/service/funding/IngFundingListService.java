@@ -12,6 +12,7 @@ import com.cherryfunding.spring.dao.FPictureDao;
 import com.cherryfunding.spring.dao.FRecommendDao;
 import com.cherryfunding.spring.dao.FundingDao;
 import com.cherryfunding.spring.dao.UsersDao;
+import com.cherryfunding.spring.util.ClobToString;
 import com.cherryfunding.spring.util.S3Util;
 import com.cherryfunding.spring.vo.FPictureVo;
 import com.cherryfunding.spring.vo.FundingVo;
@@ -41,10 +42,13 @@ public class IngFundingListService {
 			if ((BigDecimal) l.get("FNUM") instanceof BigDecimal) {
 				fNum = ((BigDecimal) l.get("FNUM")).intValue();
 			}
-			String content = "";
 			if ((Clob) l.get("CONTENT") instanceof Clob) {
-				content = String.valueOf((Clob) l.get("CONTENT"));
-				l.put("CONTENT", content);
+				try {
+					String content = ClobToString.clobToString((Clob) l.get("CONTENT"));
+					l.put("CONTENT", content);
+				} catch (Exception e) {
+					System.out.println(e.getMessage());
+				}
 			}
 			String thumbnail = this.thumbnail(fNum).getSavename();
 			l.put("savename", s3.getFileURL("funding/" + thumbnail));

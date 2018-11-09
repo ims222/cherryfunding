@@ -141,7 +141,6 @@
 </div>
 </script>
 <style type="text/css">
-	@import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
 	#list {
 		font-family: 'Hanna', serif;
 	}

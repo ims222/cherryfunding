@@ -12,7 +12,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select NVL(max(fcNum), 0) from fComment
 	</select>
 	
-	<select id="commentList" parameterType="int" resultType="fComment">
+	<select id="commentList" parameterType="int" resultType="hashmap">
 		select fcNum, id, fNum, content, to_char(regdate, 'yyyy-mm-dd hh24:mi:ss') regdate from fComment
 		where fNum = #{fNum} order by fcNum
 	</select>

@@ -75,5 +75,6 @@ public class S3Util {
 		//return conn.generatePresignedUrl(new GeneratePresignedUrlRequest(bucketName, imgName)).toString();
 		return "https://s3.ap-northeast-2.amazonaws.com/cherryfundingbucket/" + fileName;
 	}
+	
 
 }

@@ -176,10 +176,14 @@
 			dataType: 'json',
 			type: 'post',
 			success: function(data){
+				console.log(data);
 				var result = "";
 				var html = document.querySelector("#commentLine").innerHTML;
 				data.forEach(function(value){
-					result += html.replace("{id}", value.id).replace("{content}", value.content).replace("{regdate}", value.regdate);
+					result +=	html.replace("{nick}", value.nick)
+								.replace("{savename}", value.savename)
+								.replace("{content}", value.CONTENT)
+								.replace("{regdate}", value.REGDATE);
 				});
 				document.querySelector('#comment').innerHTML = result;
 			}
@@ -199,21 +203,28 @@
 
 </script>
 <script id="commentLine" type="text/template">
-	<tr>
-		<td>{id}</td>
-		<td>{content}</td>
-		<td>{regdate}</td>
-	</tr>
+	<div>
+		<div><img src="{savename}"></div>
+		<div>
+			<div>{nick}</div>
+			<div>{regdate}<div>
+		</div>
+		
+		{content}<br>
+		
+	</div>
 </script>
+<style type="text/css">
+	#comment {
+		font-family: 'Hanna', serif;
+	}
+</style>
 <!-- Main -->
 <div id="main">
 	<div class="container">
-		<div class="row box">
+		<div class="row">
 			<div class="col-md-8"> 
-			 	제목: ${vo.title}<br>
-			 	내용: ${vo.content}<br>
-			 	조회수: ${vo.hit}<br>
-			 	<span id="fRecommend"></span>
+			 	${vo.content}
 			 	<div id="fHashtag">
 			 		<c:forEach var="ht" items="${hashtag}">
 			 			<a href="${pageContext.request.contextPath}/funding/searchHashtag?hashtag=${ht.hashtag}">#${ht.hashtag}</a>
@@ -221,6 +232,14 @@
 			 	</div>
  			</div>
  			<div class="col-md-4">
+ 				<c:forEach var="reward" items="${rewardList}">
+ 					<div>
+ 						<p>${reward.rNum}</p>
+ 						<p>${reward.title}</p>
+ 					</div>
+ 				</c:forEach>
+ 				
+ 				
  				<select name="reward">
 					<c:forEach var="reward" items="${rewardList}">
 					<option value="${reward.rNum}">리워드명: ${reward.title}</option>
@@ -230,17 +249,20 @@
 				<form method="post" action="${pageContext.request.contextPath}/funding/insertFDetail" onsubmit="return submitReward();">
 					<input type="hidden" name="fNum" value="${vo.fNum}">
 					<div id="selectedReward"></div>
-					<input type="submit" value="리워드 신청">
+					<input type="submit" value="펀딩 신청">
 				</form><br>
 				<button id="recommend" type="button">추천</button><br>
 				<a href="${pageContext.request.contextPath}/funding/fundingParticipation?fNum=${vo.fNum}">펀딩 참여자</a>
+				<br>
+				조회수: ${vo.hit}
+				<span id="fRecommend"></span>
  			</div>
 		</div>
-		<div class="row box">
+		<div class="row">
 			<!-- 댓글 -->
-			<table id="comment">
+			<div id="comment">
 			
-			</table>
+			</div>
 		</div>
 		<form id="insertComment">
 			<input type="text" name="content"><br>

@@ -1,5 +1,6 @@
 package com.cherryfunding.spring.controller.funding;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.json.JSONObject;
@@ -37,7 +38,8 @@ public class FCommentController {
 
 	@RequestMapping("/funding/commentList")
 	@ResponseBody
-	public List<FCommentVo> commentList(int fNum) {
-		return fCommentService.commentList(fNum);
+	public List<HashMap<String, Object>> commentList(int fNum) {
+		List<HashMap<String, Object>> list = fCommentService.commentList(fNum);
+		return list;
 	}
 }
