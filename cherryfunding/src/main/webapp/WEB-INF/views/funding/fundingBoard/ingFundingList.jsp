@@ -1,34 +1,40 @@
-	<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
 <script type="text/javascript">
 	
 	var array = [];
   
 	$(document).ready(function(){
 		showMore();
-		$("#category").on('click', 'button', selectionOption);
+		$("#category").on('click', 'button', selectCategory);
 		$("#sort").on('change', selectionOption);
 		$("#keyword").on('keyup', related);
 		$("#showMore").on('click', showMore);
 		$("#keyword").autocomplete({source: array});
-
+		
+		$('#search').on('click', function(){
+			$("#list").empty();
+			$('#pageNum').val(1);
+			showMore();
+		});
 	});
 	var showMore = function(){
 		var pageNum = $('#pageNum').val();
+		var category = $('#category').val();
+		var sort = $('#sort').val();
+		var keyword = $('#keyword').val();
+		var field = $('#field').val();
 			$.ajax({
 			url:'${pageContext.request.contextPath}/funding/moreIngFundingList',
-			data:{pageNum:pageNum},
+			data:{pageNum:pageNum, category:category, sort:sort, keyword:keyword, field:field},
 			dataType:'json',
 			type:'post',
 			success:function(data){
 				var result = $('#list').html(); 
-				var html = document.querySelector('#fundingList2').innerHTML;
+				var html = document.querySelector('#fundingList').innerHTML;
 				if(data.list === 'no'){
 					alert('마지막 페이지 입니다');
 				}else{
@@ -51,27 +57,39 @@
 									.replace("{id}", value.ID)
 									.replace("{amount}", amount)
 									.replace("{camout}", camout)
+									.replace("{category}", value.CATEGORY)
 									.replace("{sdate}", value.SDATE)
 									.replace("{edate}", value.EDATE)
 									.replace("{dday}", value.DDAY)
-									.replace("{width}", (barBefore) + "%" )
+									.replace(/{width}/gi, (barBefore) + "%" )
 									.replace("{valuenow}", barBefore)
-									.replace("{percent}", ((before/100) * 100) + "%");
-						console.log("before", before);
-						console.log("(barBefore/100)", (barBefore));
-						console.log("barBefore * 10000", barBefore * 10000);
-						console.log("((before/100) * 100)", ((before/100) * 100));
+									.replace(/{percent}/gi, ((before/100) * 100) + "%"); 
 					});
 					document.querySelector('#list').innerHTML = result;
 					$('#pageNum').val(data.pageNum);
+					$('#category').val(data.category);
+					$("#field option").filter(function() {
+					    return $(this).text() == data.field; 
+					}).prop('selected', true);
+					$('#keyword').val(data.keyword);
 				}
 			}
 		});	
 	}
+	
+	function selectCategory(){
+		$("#list").empty();
+		$('#pageNum').val(1);
+		$('#keyword').val('');
+		$('#category').val($(this).text());
+		showMore();
+	}
 	function selectionOption(){
-		var category = $(this).text();
-		var sort = $(this).val();
-		location.href= "${pageContext.request.contextPath}/funding/ingFundingList?sort=" + sort + "&category=" + category;
+		$("#list").empty();
+		$('#pageNum').val(1);
+		//var sort = $(this).val();
+		showMore();
+		//location.href= "${pageContext.request.contextPath}/funding/moreIngFundingList?sort=" + sort + "&category=" + category;
 	}
 	function related(){
 		var keyword = $("#keyword").val();
@@ -88,31 +106,43 @@
 				}
 			}
 		});
-		
+	}
+	function openCity(cityName) {
+	    var i;
+	    var x = document.getElementsByClassName("city");
+	    for (i = 0; i < x.length; i++) {
+	        x[i].style.display = "none"; 
+	    }
+	    document.getElementById(cityName).style.display = "block"; 
 	}
 </script>
-
-<script id="fundingList2" type="text/template">
-<section class="4u">
-	<a href="${pageContext.request.contextPath}/funding/ingFundingDetailforUser?fNum={fNum}"
-	class="image featured">
-	<img src="{savename}" alt="{fpinfo}" height="200px"></a>
-	<div class="box">
-		<p>{title}</p>
-		<p>{id}</p>
-		<p>목표금액: {amount}원</p>
-		<p>현재금액: {camout}원</p>
-		<p>시작: {sdate} </p>
-		<p>종료: {edate} </p>
-		<p>D{dday}</p>
-
-		<div class="progress-bar" role="progressbar" style="width: {width}"
-			aria-valuenow="{valuenow}" aria-valuemin="0" aria-valuemax="100">{percent}
+<script id="fundingList" type="text/template">
+<div class="w3-col m4 l4" style="padding: 20px;">
+	<a href="${pageContext.request.contextPath}/funding/ingFundingDetailforUser?fNum={fNum}">
+	<img src="{savename}" class="w3-round" alt="{fpinfo}" height="200px" width="100%"></a>
+	<div>
+		<div style="height: 90px; overflow-x:hidden;overflow-y:hidden>
+			<p class="w3-left-align" style="word-break:break-all;">
+				<a href="${pageContext.request.contextPath}/funding/ingFundingDetailforUser?fNum={fNum}">
+				<h4>{title}</h4></a>
+				<span>{category} | {id}</span>
+			</p>
 		</div>
-	</div>
-</section>
-</script>
 
+		<div class="w3-border">
+			<div class="w3-blue" style="height:5px;width:{width}"></div>
+		</div>
+		<div class="w3-left-align" style="float:left;"><p>{percent} · {camout}원</p></div>
+		<div class="w3-right-align"><p>{dday}일 남음</p></div>
+	</div>
+</div>
+</script>
+<style type="text/css">
+	@import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
+	#list {
+		font-family: 'Hanna', serif;
+	}
+</style>
 <div id="main">
 	<div class="container">
 		<div class="w3-bar" id="category">
@@ -138,9 +168,29 @@
 				<option value="content" <c:if test="${field eq 'content'}">selected="selected"</c:if>>내용</option>
 				<option value="id" <c:if test="${field eq 'id'}">selected="selected"</c:if>>글쓴이</option>
 			</select>
-			<input type="text" name="keyword" id="keyword" value="${keyword}">
-			<input type="submit" value="검색">		
 		</form>
+		
+		<div class="row">
+			<div class="col-lg-6">
+				<div class="input-group">
+					<div class="input-group-btn">
+						<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">제목<span class="caret"></span></button>
+						<ul class="dropdown-menu" role="menu">
+							<li><a href="#" onclick="alert('ww')">제목</a></li>
+							<li><a href="#">내용</a></li>
+							<li><a href="#">글쓴이</a></li>
+						</ul>
+					</div><!-- /btn-group -->
+					<input type="text" id="keyword" value="" class="form-control" aria-label="...">
+					<span class="input-group-btn">
+						<button class="btn btn-default" id="search" type="button">검색</button>
+					</span>
+				</div><!-- /input-group -->
+			</div><!-- /.col-lg-6 -->
+		</div><!-- /.row -->
+
+
+
 		<select id="sort">
 			<option value="latest" <c:if test="${sort eq 'latest'}">selected="selected"</c:if>>최신순</option>
 			<option value="recommend" <c:if test="${sort eq 'recommend'}">selected="selected"</c:if>>추천순</option>
@@ -149,47 +199,8 @@
 			<option value="end" <c:if test="${sort eq 'end'}">selected="selected"</c:if>>종료임박순</option>
 		</select>
 		<input type="hidden" id="pageNum" value="">
-		<div class="row no-collapse-1" id="list">
+		<div id="list" class="w3-row">
 		</div>
 		<button id="showMore">더보기</button>
-		<div class="row">
-			<!-- Content -->
-			<div class="6u">
-				<section>
-					<ul class="style">
-						<li class="fa fa-wrench">
-							<h3>Integer ultrices</h3> <span>In posuere eleifend odio.
-								Quisque semper augue mattis wisi. Maecenas ligula. Pellentesque
-								viverra vulputate enim. Aliquam erat volutpat. Maecenas
-								condimentum enim tincidunt risus accumsan.</span>
-						</li>
-						<li class="fa fa-leaf">
-							<h3>Aliquam luctus</h3> <span>In posuere eleifend odio.
-								Quisque semper augue mattis wisi. Maecenas ligula. Pellentesque
-								viverra vulputate enim. Aliquam erat volutpat. Maecenas
-								condimentum enim tincidunt risus accumsan.</span>
-						</li>
-					</ul>
-				</section>
-			</div>
-			<div class="6u">
-				<section>
-					<ul class="style">
-						<li class="fa fa-cogs">
-							<h3>Integer ultrices</h3> <span>In posuere eleifend odio.
-								Quisque semper augue mattis wisi. Maecenas ligula. Pellentesque
-								viverra vulputate enim. Aliquam erat volutpat. Maecenas
-								condimentum enim tincidunt risus accumsan.</span>
-						</li>
-						<li class="fa fa-road">
-							<h3>Aliquam luctus</h3> <span>In posuere eleifend odio.
-								Quisque semper augue mattis wisi. Maecenas ligula. Pellentesque
-								viverra vulputate enim. Aliquam erat volutpat. Maecenas
-								condimentum enim tincidunt risus accumsan.</span>
-						</li>
-					</ul>
-				</section>
-			</div>
-		</div>
 	</div>
 </div>

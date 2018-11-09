@@ -44,16 +44,19 @@ public class IngFundingListController {
 		String field = request.getParameter("field");
 		String keyword = request.getParameter("keyword");
 		String sort = request.getParameter("sort");
-		PageUtil pageUtil = new PageUtil(pageNum, ingFundingListService.getTotCount());
+		
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("startRow", pageUtil.getStartRow());
-		map.put("endRow", pageUtil.getEndRow());
 		map.put("category", category);
 		map.put("field", field);
 		map.put("keyword", keyword);
 		map.put("sort", sort);
+		PageUtil pageUtil = new PageUtil(pageNum, ingFundingListService.getTotCount(map));
+		
+		map.put("startRow", pageUtil.getStartRow());
+		map.put("endRow", pageUtil.getEndRow());
+		
 		List<HashMap<String, Object>> list = ingFundingListService.list(map);
-		if (list.size() == 0) {
+		if (list.size() == 0 && pageNum > 1) {
 			map.put("list", "no");
 			map.put("pageNum", pageNum);
 		} else {

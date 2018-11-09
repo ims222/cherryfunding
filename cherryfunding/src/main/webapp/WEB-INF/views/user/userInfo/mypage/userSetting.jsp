@@ -1,3 +1,4 @@
+<%@page import="com.cherryfunding.spring.vo.UserSettingVo"%>
 <%@page import="com.cherryfunding.spring.util.S3Util"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -13,8 +14,139 @@
 </head>
 <style>
 
-  .toggleBG{background: #CCCCCC; width: 70px; height: 30px; border: 1px solid #CCCCCC; border-radius: 15px;}
+/* 라디오버튼 */
+
+label.btn span {
+  font-size: 1.2em ;
+}
+
+label input[type="radio"] ~ i.fa.fa-circle-o{
+    color: #c8c8c8;    display: inline;
+}
+label input[type="radio"] ~ i.fa.fa-dot-circle-o{
+    display: none;
+}
+label input[type="radio"]:checked ~ i.fa.fa-circle-o{
+    display: none;
+}
+label input[type="radio"]:checked ~ i.fa.fa-dot-circle-o{
+    color: #0000FF;    display: inline;
+}
+label:hover input[type="radio"] ~ i.fa {
+color: #7AA3CC;
+}
+
+div[data-toggle="buttons"] label.active{
+    color: #0000FF;
+}
+
+div[data-toggle="buttons"] label {
+display: inline-block;
+padding: 6px 12px;
+margin-bottom: 0;
+font-size: 14px;
+font-weight: normal;
+line-height: 2em;
+text-align: left;
+white-space: nowrap;
+vertical-align: top;
+cursor: pointer;
+background-color: none;
+border: 0px solid 
+#c8c8c8;
+border-radius: 3px;
+color: #c8c8c8;
+-webkit-user-select: none;
+-moz-user-select: none;
+-ms-user-select: none;
+-o-user-select: none;
+user-select: none;
+}
+
+div[data-toggle="buttons"] label:hover {
+color: #7AA3CC;
+}
+
+div[data-toggle="buttons"] label:active, div[data-toggle="buttons"] label.active {
+-webkit-box-shadow: none;
+box-shadow: none;
+}
+
+
+/* 토글 
+
+  .toggleBG1{background: #CCCCCC; width: 70px; height: 30px; border: 1px solid #CCCCCC; border-radius: 15px;}
+  .toggleBG2{background: #CCCCCC; width: 70px; height: 30px; border: 1px solid #CCCCCC; border-radius: 15px;}
   .toggleFG{background: #FFFFFF; width: 30px; height: 30px; border: none; border-radius: 15px; position: relative; left: 0px;}
+*/
+
+* {box-sizing:border-box}
+  .cmn-toggle {
+    position: absolute;
+    margin-left: -9999px;
+    visibility: hidden;
+  }
+  .cmn-toggle + label {
+    display: block;
+    position: relative;
+    cursor: pointer;
+    outline: none;
+    user-select: none;    
+  }
+
+  
+  
+  input.cmn-toggle-round-flat + label {
+    padding: 2px;
+    width: 52px;
+    height: 21px;
+    background-color:#b3b3b3;
+    border-radius:13px;
+    transition: background 0.4s;
+  }
+  
+  
+  input.cmn-toggle-round-flat + label:after {
+    display: block;
+    position: absolute; 
+    content: "";
+  }
+  input.cmn-toggle-round-flat + label:after {
+    top: 2px;
+    left: 2px;
+    bottom: 4px;
+    width: 17px;
+    height:17px;
+    background-color: #fff;
+    border-radius:50%;
+    transition: margin 0.4s, background 0.4s;
+    
+  }
+  /*
+  input.cmn-toggle-round-flat + label:before {
+    top: 2px;
+    left: 2px;
+    bottom: 2px;
+    right: 2px;
+    background-color:#b3b3b3;
+    border-radius:50%;
+    transition: background 0.4s;   
+  }
+  
+  */
+  input.cmn-toggle-round-flat:checked + label {
+    background-color: #0000FF;    
+  }
+  input.cmn-toggle-round-flat:checked + label:after {
+    margin-left: 32px;
+    background-color: #fff;
+  }
+
+  input.cmn-toggle + label span:after {font-size:13px; font-weight:500; color:#fff}
+
+  input.cmn-toggle + label span:after {display:block; position:absolute; top:1px; right:7px }
+  input.cmn-toggle:checked + label span:after {display:block; position:absolute; top:1px; left:10px}
+/* 테이블 */
 
 .wrap{
 	margin-left : 100px;
@@ -48,36 +180,36 @@ table.type04 p {
 }
 </style>
 <script type="text/javascript">
-$(document).on('click', '.toggleBG', function () {
-    var toggleBG = $(this);
-    var toggleFG = $(this).find('.toggleFG');
-    var left = toggleFG.css('left');
-    if(left == '40px') {
-        toggleBG.css('background', '#CCCCCC');
-        toggleActionStart(toggleFG, 'TO_LEFT');
-    }else if(left == '0px') {
-        toggleBG.css('background', '#53FF4C');
-        toggleActionStart(toggleFG, 'TO_RIGHT');
-    }
-});
- 
-// 토글 버튼 이동 모션 함수
-function toggleActionStart(toggleBtn, LR) {
-    // 0.01초 단위로 실행
-    var intervalID = setInterval(
-        function() {
-            // 버튼 이동
-            var left = parseInt(toggleBtn.css('left'));
-            left += (LR == 'TO_RIGHT') ? 5 : -5;
-            if(left >= 0 && left <= 40) {
-                left += 'px';
-                toggleBtn.css('left', left);
-            }
-        }, 10);
-    setTimeout(function(){
-        clearInterval(intervalID);
-    }, 201);
-}
+	$(document).on('click','#toggle1',function(){
+		if($('#toggle1').val()=='y'){
+			$('#toggle1').val("n");
+		}else{
+			$('#toggle1').val("y");
+		}
+		console.log($("#toggle1").val());
+	});
+	
+	$(document).on('click','#toggle2',function(){
+		if($('#toggle2').val()=='y'){
+			$('#toggle2').val("n");
+		}else{
+			$('#toggle2').val("y");
+		}
+		console.log($("#toggle2").val());
+	});
+	
+	function updateSetting(){
+		var lang=$("input:radio[name='lang']:checked").val();
+		console.log(lang);
+		var voice=$("#toggle1").val();
+		var alarm=$("#toggle2").val();
+		$.ajax({
+			url:'${pageContext.request.contextPath}/updateSettings',
+			data: {id:"${sessionScope.id}",lang:lang,voice:voice,alarm:alarm},
+			dataType: 'json',
+			type: 'post'
+		});
+	}
 </script>
 <body>
 <div class="wrap">
@@ -88,17 +220,42 @@ function toggleActionStart(toggleBtn, LR) {
 	<table class="type04">
 		<tr>
 		  <td>언어</td>
-		  <td>
-				</td>
-		  <td></td>
+		  <td> 
+		      <div class="btn-group" data-toggle="buttons" onchange="updateSetting()">
+		        <label class="btn <c:if test="${vo.lang eq 'kor'}">active</c:if>">
+		          <input type="radio" name='lang' value="kor" <c:if test="${vo.lang eq 'kor'}">checked</c:if>><i class="fa fa-circle-o fa-2x"></i><i class="fa fa-check-circle-o fa-2x"></i>
+		          <span>한국어</span>
+		        </label>
+		        <label class="btn <c:if test="${vo.lang eq 'eng'}">active</c:if>">
+		          <input type="radio" name='lang' value="eng" <c:if test="${vo.lang eq 'eng'}">checked</c:if>><i class="fa fa-circle-o fa-2x"></i><i class="fa fa-check-circle-o fa-2x"></i>
+		          <span>English</span>
+		        </label>
+		        <label class="btn <c:if test="${vo.lang eq 'jap'}">active</c:if>">
+		          <input type="radio" name='lang' value="jap" <c:if test="${vo.lang eq 'jap'}">checked</c:if>><i class="fa fa-circle-o fa-2x"></i><i class="fa fa-check-circle-o fa-2x"></i>
+		          <span>日本語</span>
+		        </label>
+      		   </div>
+		  </td>
 		</tr>
 		<tr>
 		  <td>음성지원</td>
-		  <td><div class='toggleBG'><button class='toggleFG'></button></div></td>
-		  <td></td>
+		  <td>
+			<div class="switch">
+			   <input id="toggle1" class="cmn-toggle cmn-toggle-round-flat" type="checkbox" value="${vo.voice}" onchange="updateSetting()" <c:if test="${vo.voice eq 'y'}">checked</c:if>>
+			   <label for="toggle1"><span></span></label>
+			 </div>
+		  </td>
+		</tr>
+		<tr>
+		  <td>알람설정</td>
+		  <td>
+		   <div class="switch">
+			   <input id="toggle2" class="cmn-toggle cmn-toggle-round-flat" type="checkbox" value="${vo.alarm}" onchange="updateSetting()" <c:if test="${vo.alarm eq 'y'}">checked</c:if>>
+			   <label for="toggle2"><span></span></label>
+			 </div>
+		  </td>
 		</tr>
 	</table>
 </div>
 </body>
 </html>
-

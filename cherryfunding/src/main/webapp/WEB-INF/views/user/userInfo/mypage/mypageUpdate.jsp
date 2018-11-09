@@ -56,6 +56,7 @@ table.type04 p {
 			dataType:'json',
 			type:'post',
 			success: function(data){
+				console.log(data);
 				$('#' + col).empty();
 				$('#' + col).text(data[col]);
 			}

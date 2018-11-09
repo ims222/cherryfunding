@@ -33,7 +33,7 @@ public class FundingDetailController {
 		fundingDetailService.hitUp(fNum);
 		return ".ingFundingDetailforUser";
 	}
-	
+
 	@RequestMapping("/funding/prepareFundingDetailforUser")
 	public String prepareFundingDetail(int fNum, Model model) {
 		model.addAttribute("vo", fundingDetailService.detail(fNum));
@@ -43,7 +43,7 @@ public class FundingDetailController {
 		fundingDetailService.hitUp(fNum);
 		return ".prepareFundingDetailforUser";
 	}
-	
+
 	@RequestMapping("/funding/endFundingDetailforUser")
 	public String endFundingDetail(int fNum, Model model) {
 		model.addAttribute("vo", fundingDetailService.detail(fNum));

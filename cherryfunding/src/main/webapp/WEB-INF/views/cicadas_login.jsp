@@ -60,6 +60,18 @@
 						success: function(authObj) {
 							getKakaotalkUserProfile();
 							createKakaotalkLogout();
+							Kakao.API.request({
+								url:'kapi.kakao.com/v1/push/send',
+							});
+							$.ajax({
+								url:'kapi.kakao.com/v1/push/send',
+								data:{ Authorization: 'KakaoAK 94993e59908d14bc4fff4e15168f2d01'},
+								dataType:'json',
+								type:'post',
+								success: function(data){
+									alert(data);
+								}
+							});
 						},
 						fail: function(err) {
 							console.log(err);

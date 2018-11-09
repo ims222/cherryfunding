@@ -110,8 +110,8 @@ public class KakaoLogin {
 		final List<NameValuePair> postParams = new ArrayList<NameValuePair>();
 		postParams.add(new BasicNameValuePair("object_type", "text"));
 		postParams.add(new BasicNameValuePair("text", "testmsg"));
-		//postParams.add(new BasicNameValuePair("link", "http://www.google.co.kr"));
-		//postParams.add(new BasicNameValuePair("button_title", "버튼"));
+		// postParams.add(new BasicNameValuePair("link", "http://www.google.co.kr"));
+		// postParams.add(new BasicNameValuePair("button_title", "버튼"));
 
 		try {
 			post.setEntity(new UrlEncodedFormEntity(postParams));

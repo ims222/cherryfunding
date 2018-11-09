@@ -125,8 +125,8 @@ public class FundingDao {
 		return sqlSession.selectList(NAMESPACE + "related", map);
 	}
 
-	public int getTotCount() {
-		return sqlSession.selectOne(NAMESPACE + "getTotCount");
+	public int getTotCount(HashMap<String, Object> map) {
+		return sqlSession.selectOne(NAMESPACE + "getTotCount", map);
 	}
 
 }

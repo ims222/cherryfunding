@@ -51,6 +51,7 @@ public class KakaoController {
 		testKakaoTalk();
 		testPush();
 		
+		
 		return"cicadas_login";
 	}
 
@@ -204,22 +205,18 @@ public class KakaoController {
 
         // 푸시 알림 관련 API를 테스트하시려면 admin key 지정해야 합니다.
 
-        /*
         // 푸시 등록
         paramMap = new HashMap<String, String>();
         paramMap.put("uuid", "10000");
         paramMap.put("push_type", "gcm");
-        paramMap.put("push_token", "xxxxxxxxxx");
-        paramMap.put("device_id", "");
+        paramMap.put("push_token", "APA91bEZ3fjwrKV2mxAFvZMC960zKBWBVffLErwZgFzsFnzzsxgi5lSQlq3zvzObZBe4OnbwkTZfMqV7_a6fF0AJNgUjt5Scpo2BTaHyLVlK54QmwIQBahUwJprKjj0YvF_rh8l7CTvl6TRxqlqO_NIwaoAcI0MssA");
+        paramMap.put("device_id", "0f365b39-c33d-39be-bdfc-74aaf5534470");
         apiHelper.registerPush(paramMap);
-        */
 
-        /*
         // 푸시 토큰 조회
         paramMap = new HashMap<String, String>();
         paramMap.put("uuid", "10000");
         apiHelper.getPushTokens(paramMap);
-        */
 
         /*
         // 푸시 해제
@@ -230,12 +227,10 @@ public class KakaoController {
         apiHelper.deregisterPush(paramMap);
         */
 
-        /*
         // 푸시 보내기
         paramMap = new HashMap<String, String>();
         paramMap.put("uuids", "[\"1\",\"2\", \"3\"]");
         apiHelper.sendPush(paramMap);
-        */
     }
 
 }

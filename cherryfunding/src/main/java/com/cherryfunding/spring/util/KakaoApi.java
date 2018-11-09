@@ -55,8 +55,9 @@ public class KakaoApi {
 	private static final String PUSH_SEND_PATH = "/v1/push/send";
 
 	private static final ObjectMapper JACKSON_OBJECT_MAPPER = new ObjectMapper();
-	// private static final Gson GSON = new Gson();
 	private static final String PROPERTIES_PARAM_NAME = "properties";
+
+	private static final String SEND_ME = "/v2/api/talk/memo/default/send";
 
 	private static final List<String> adminApiPaths = new ArrayList<String>();
 
@@ -162,6 +163,10 @@ public class KakaoApi {
 
 	public String getLinkInfo(String url) {
 		return request(HttpMethodType.GET, STORY_LINKINFO_PATH, "?url=" + url);
+	}
+
+	public String send_me(final Map<String, Object> params) {
+		return request(HttpMethodType.POST, SEND_ME, mapToJsonStr2(params));
 	}
 
 	public String uploadMulti(File[] files) {
@@ -410,6 +415,15 @@ public class KakaoApi {
 			jsonProcessingException.printStackTrace();
 		}
 		return mapToJsonStr;
-		// return GSON.toJson(map);
+	}
+	
+	public String mapToJsonStr2(Map<String, Object> map) {
+		String mapToJsonStr = "";
+		try {
+			mapToJsonStr = JACKSON_OBJECT_MAPPER.writeValueAsString(map);
+		} catch (JsonProcessingException jsonProcessingException) {
+			jsonProcessingException.printStackTrace();
+		}
+		return mapToJsonStr;
 	}
 }
