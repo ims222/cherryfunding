@@ -120,12 +120,14 @@
 <div style="padding: 20px;">
 	<a href="${pageContext.request.contextPath}/funding/ingFundingDetailforUser?fNum={fNum}">
 	<img src="{savename}" class="w3-round" alt="{fpinfo}" height="200px" width="100%"></a>
-	<div style="height:30%; overflow-x:hidden;overflow-y:hidden">
-		<p class="w3-left-align" style="word-break:break-all;">
-			<a href="${pageContext.request.contextPath}/funding/ingFundingDetailforUser?fNum={fNum}">
-			<strong></strong>{title}</a></p>
-		
-		<p class="w3-left-align">{category} | {id}</p>
+	<div>
+		<div style="height: 90px; overflow-x:hidden;overflow-y:hidden>
+			<p class="w3-left-align" style="word-break:break-all;">
+				<a href="${pageContext.request.contextPath}/funding/ingFundingDetailforUser?fNum={fNum}">
+				<h4>{title}</h4></a>
+				<span>{category} | {id}</span>
+			</p>
+		</div>
 
 		<div class="w3-border">
 			<div class="w3-blue" style="height:5px;width:{width}"></div>
@@ -136,11 +138,13 @@
 </div>
 </script>
 <style type="text/css">
+	@import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
 	#list {
 		display: grid;
 		grid-template-columns: repeat(3, 1fr);
 		grid-gap: 10px;
 		grid-auto-rows: minmax(100px, auto);
+		font-family: 'Hanna', serif;
 	}
 </style>
 <div id="main">
