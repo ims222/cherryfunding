@@ -22,9 +22,6 @@ import com.cherryfunding.spring.vo.FundingVo;
 public class IngFundingListController {
 
 	@Autowired
-	private S3Util s3; // 이미지 저장
-
-	@Autowired
 	IngFundingListService ingFundingListService;
 
 	@RequestMapping(value = "/funding/ingFundingList", method = RequestMethod.GET)
@@ -37,13 +34,11 @@ public class IngFundingListController {
 	public HashMap<String, Object> ingFundingList(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
 			Model model, HttpServletRequest request) {
 		String category = request.getParameter("category");
-		String field = request.getParameter("field");
 		String keyword = request.getParameter("keyword");
 		String sort = request.getParameter("sort");
 
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("category", category);
-		map.put("field", field);
 		map.put("keyword", keyword);
 		map.put("sort", sort);
 		PageUtil pageUtil = new PageUtil(pageNum, ingFundingListService.getTotCount(map));
@@ -52,6 +47,8 @@ public class IngFundingListController {
 		map.put("endRow", pageUtil.getEndRow());
 
 		List<HashMap<String, Object>> list = ingFundingListService.list(map);
+		System.out.println("!!!!!!!!!!");
+		System.out.println(list);
 		if (list.size() == 0 && pageNum > 1) {
 			map.put("list", "no");
 			map.put("pageNum", pageNum);
@@ -59,7 +56,8 @@ public class IngFundingListController {
 			map.put("list", list);
 			map.put("pageNum", pageNum + 1);
 		}
-
+		
+		System.out.println(map);
 		return map;
 	}
 

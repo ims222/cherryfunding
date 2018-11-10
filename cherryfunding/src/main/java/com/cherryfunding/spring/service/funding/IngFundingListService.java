@@ -53,7 +53,15 @@ public class IngFundingListService {
 			String thumbnail = this.thumbnail(fNum).getSavename();
 			l.put("savename", s3.getFileURL("funding/" + thumbnail));
 			l.put("fpinfo", this.thumbnail(((BigDecimal) l.get("FNUM")).intValue()).getFpinfo());
-			l.put("nick", usersDao.select((String) l.get("ID")).getNick());
+			
+			String id = (String) l.get("ID");
+			String nick = "";
+			if(id == null) {
+				nick = "AnonymousUser";
+			}else {
+				nick = usersDao.select(id).getNick();
+			}
+			l.put("nick", nick);
 			l.put("recomm", fRecommendDao.getRecommend(((BigDecimal) l.get("FNUM")).intValue()));
 		}
 		return list;

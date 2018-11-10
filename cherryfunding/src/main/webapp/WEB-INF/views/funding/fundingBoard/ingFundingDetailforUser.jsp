@@ -256,7 +256,7 @@
 				<span id="fRecommend"></span>
  			</div>
 		</div>
-		<div class="row">
+		<div class="w3-margin-top">
 			<!-- 댓글 -->
 			<div id="comment">
 			
