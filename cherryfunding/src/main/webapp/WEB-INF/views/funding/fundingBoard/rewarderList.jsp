@@ -132,6 +132,11 @@ ul {
 		return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 	}
 	
+	function uncomma(str) {
+	    str = String(str);
+	    return str.replace(/[^\d]+/g, '');
+	}
+	
 	function rewardDetail(rNum){
 		$.ajax({
 			url:'${pageContext.request.contextPath}/funding/rewardDetail',
@@ -152,6 +157,8 @@ ul {
 							.replace(/{amount}/gi, amount)
 							.replace("{rNum}", rNum);
 				$('#rewardList').append(result);
+				var totPrice = parseInt(uncomma($('#totPrice').text()));
+				$('#totPrice').text(numberWithCommas(price + totPrice));
 			}
 		});
 	}
@@ -247,16 +254,16 @@ ul {
 			</ul>
 		</div>
 		<div style="clear:both;">
-			<div class="w3-right-align">
-				<span>총 결제금액</span>
-				<strong id="totPrice">0</strong>
-				<span>원</span>
+			<div class="w3-right-align" style="padding: 20px">
+				<span class="w3-xlarge">총 결제금액</span>
+				<strong class="w3-xlarge" id="totPrice">0</strong>
+				<span class="w3-xlarge">원</span>
 			</div>
-			<div class="w3-center">
-				결제하신 금액은 별도 수수료 없이 펀딩을 진행하는 펀더에게 100% 전달됩니다.
+			<div class="w3-center w3-border-top" style="padding: 10px">
+				<span class="w3-xlarge">결제하신 금액은 별도 수수료 없이 펀딩을 진행하는 펀더에게 100% 전달됩니다.</span>
 			</div>
 			<div>
-				<button>펀딩 참여하기</button>
+				<button class="w3-btn w3-block w3-teal">펀딩 참여하기</button>
 			</div>
 		</div>
 	</div>
