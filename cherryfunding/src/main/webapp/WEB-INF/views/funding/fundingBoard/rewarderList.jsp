@@ -99,11 +99,11 @@ ul {
 		<input type="hidden" name="rNum" value="{rNum}">
 		<input type="hidden" name="price" value="{price}">
 		<div class="rSpan">
-			<span>{title} (남은수량 {amount}개)</span>
+			<span data-amount="{amount}">{title} (남은수량 {amount}개)</span>
 		</div>
 		
 		<button class="rBtn decreaseAmount">-</button>
-		<input type="text" class="rInput" name="amount" value="1">
+		<input type="text" class="rInput inputAmount" name="amount" value="1">
 		<button class="rBtn increaseAmount">+</button>
 		<input type="text" class="rInput totPrice" value="{price}" name="totPrice" style="width:100px; margin-left:10px;" readOnly="readOnly">
 		<button class="rBtn" style="margin-left: 10px;">x</button>
@@ -144,14 +144,13 @@ ul {
 				var amount = data.amount;
 				var rNum = data.rNum;
 				var html = document.querySelector('#selectedReward').innerHTML;
-				var result = document.querySelector('#rewardList').innerHTML;
+				var result = "";
 				
 				result +=	html.replace("{title}", title)
 							.replace(/{price}/gi, numberWithCommas(price))
-							.replace("{amount}", amount)
+							.replace(/{amount}/gi, amount)
 							.replace("{rNum}", rNum);
-				
-				document.querySelector('#rewardList').innerHTML = result;
+				$('#rewardList').append(result);
 			}
 		});
 	}
@@ -159,6 +158,10 @@ ul {
 	function increaseAmount(e){
 		var target = e.target;
 		var curAmount = parseInt($(e.target).siblings("input[name='amount']").val());
+		var limit = parseInt($(e.target).siblings(".rSpan").children('span').attr("data-amount"));
+		if(limit === curAmount)
+			return;
+			
 		var incAmount = curAmount + 1;
 		var price = parseInt($(e.target).siblings("input[name='price']").val());
 		$(target).siblings("input[name='amount']").val(incAmount);
@@ -167,10 +170,29 @@ ul {
 	function decreaseAmount(e){
 		var target = e.target;
 		var curAmount = parseInt($(e.target).siblings("input[name='amount']").val());
+		if(curAmount === 1)
+			return;
 		var incAmount = curAmount - 1;
 		var price = parseInt($(e.target).siblings("input[name='price']").val());
 		$(target).siblings("input[name='amount']").val(incAmount);
 		$(target).siblings("input[name='totPrice']").val(numberWithCommas((incAmount * price) + ""));
+	}
+	
+	function inputAmount(e){
+		var curAmount = parseInt($(e.target).val());
+		var price = parseInt($(e.target).siblings("input[name='price']").val());
+		var limit = parseInt($(e.target).siblings(".rSpan").children('span').attr("data-amount"));
+		if(e.keyCode < 48 || 57 < e.keyCode || e.keyCode != 8) {
+			if(isNaN(curAmount)){
+				$(e.target).siblings("input[name='totPrice']").val(0);
+				return;
+			}
+			$(e.target).val(curAmount);
+		}
+		if(limit < curAmount){
+			$(e.target).val(limit);
+		}
+		$(e.target).siblings("input[name='totPrice']").val(numberWithCommas((curAmount * price) + ""));
 	}
 	
 	
@@ -188,6 +210,7 @@ ul {
 		
 		$('#rewardInfo').on('click', '.increaseAmount', increaseAmount);
 		$('#rewardInfo').on('click', '.decreaseAmount', decreaseAmount);
+		$('#rewardInfo').on('keyup', '.inputAmount', inputAmount);
 	});
 </script>
 <div class="container w3-border">
