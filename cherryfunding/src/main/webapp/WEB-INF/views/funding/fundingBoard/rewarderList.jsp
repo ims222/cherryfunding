@@ -89,6 +89,7 @@ ul {
 #rewardInfo li {
 	text-align: right;
     list-style-position: inside;
+    margin-bottom: 15px;
     float: right;
 	clear: both;
 }
