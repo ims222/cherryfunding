@@ -85,8 +85,8 @@
 }
 </style>
 <script id="selectedReward" type="text/template">
-	<div class="w3-border">
-		<input type="hidden" value="{rNum}">
+	<div class="selectedReward w3-container" style="float:right;">
+		<input type="hidden" name="rNum" value="{rNum}">
 		<div class="rSpan">
 			<span>{title} (남은수량 {amount}개)</span>
 		</div>
@@ -94,8 +94,8 @@
 		<button class="rBtn">-</button>
 		<input type="text" class="rInput" value="1">
 		<button class="rBtn">+</button>
-		<input type="text" class="rInput" value="{price}" style="width:100px;">
-		<button class="rBtn">x</button>
+		<input type="text" class="rInput" value="{price}" style="width:100px; margin-left:10px;" readOnly="readOnly">
+		<button class="rBtn" style="margin-left: 10px;">x</button>
 	</div>
 </script>
 
@@ -131,9 +131,8 @@
 				var price = data.price;
 				var amount = data.amount;
 				var rNum = data.rNum;
-				//var reward = $('<div>').text("리워드명: " + title + " 가격: " + price + " 남은 수량: " + amount);
 				var html = document.querySelector('#selectedReward').innerHTML;
-				var result = "";
+				var result = document.querySelector('#rewardInfo').innerHTML;
 				
 				result +=	html.replace("{title}", title)
 							.replace("{price}", numberWithCommas(price))
@@ -147,18 +146,19 @@
 	
 	$(document).ready(function(){
 		$('#myDropdown').on('click', 'a', function(){
-			var rNum = $(this).attr('data-num'); 
-			console.log($('#rewardInfo').find('.selectReward'));
-			//$('#rewardInfo').find('.selectReward').forEach(function(value){
-			//	if(rNum == value.attr('data-num'))
-			//		return;
-			//});
+			var rNum = $(this).attr('data-num');
+			var a = $(".selectedReward>input[name='rNum']");
+			for(var i = 0; i<a.length;i++){
+				if(rNum == $(a[i]).val()){
+					return;
+				}
+			}
 			rewardDetail(rNum);
 		});
 	});
 </script>
-<div class="container">
-	<div class="dropdown">
+<div class="container w3-border">
+	<div class="dropdown w3-right-align">
 		<button onclick="myFunction()" class="dropbtn">리워드 선택</button>
 		<div id="myDropdown" class="dropdown-content">
 			<c:forEach var="r" items="${rewardList}">
@@ -166,7 +166,7 @@
 			</c:forEach>
 		</div>
 	</div>
-	<div id="rewardInfo">
+	<div id="rewardInfo" class="">
 		<form method="post" action="">
 			
 		</form>
