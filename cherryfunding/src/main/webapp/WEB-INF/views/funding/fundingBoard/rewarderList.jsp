@@ -158,18 +158,26 @@
 	});
 </script>
 <div class="container w3-border">
-	<div class="dropdown w3-right-align">
-		<button onclick="myFunction()" class="dropbtn">리워드 선택</button>
-		<div id="myDropdown" class="dropdown-content">
-			<c:forEach var="r" items="${rewardList}">
-				<a href="#" data-num="${r.rNum}">${r.title}</a>
-			</c:forEach>
+	<div class="w3-border">
+		<div class="dropdown">
+			<button onclick="myFunction()" class="dropbtn">리워드 선택</button>
+			<div id="myDropdown" class="dropdown-content">
+				<c:forEach var="r" items="${rewardList}">
+					<a href="#" data-num="${r.rNum}">${r.title}</a>
+				</c:forEach>
+			</div>
 		</div>
-	</div>
-	<div id="rewardInfo" class="">
-		<form method="post" action="">
-			
-		</form>
+		<div id="rewardInfo" class="">
+			<form method="post" action="">
+				
+			</form>
+		</div>
+		<div style="clear:both;">
+			결제하신 금액은 별도 수수료 없이 펀딩을 진행하는 펀더에게 100% 전달됩니다.
+		</div>
+		<div>
+			<button>펀딩 참여하기</button>
+		</div>
 	</div>
 </div>
 
