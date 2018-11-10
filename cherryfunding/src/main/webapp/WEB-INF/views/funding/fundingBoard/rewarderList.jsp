@@ -172,8 +172,9 @@ ul {
 	function decreaseAmount(e){
 		var target = e.target;
 		var curAmount = parseInt($(e.target).siblings("input[name='amount']").val());
-		if(curAmount === 1)
+		if(curAmount <= 1){
 			return;
+		}
 		var incAmount = curAmount - 1;
 		var price = parseInt($(e.target).siblings("input[name='price']").val());
 		$(target).siblings("input[name='amount']").val(incAmount);
@@ -181,22 +182,22 @@ ul {
 		totPrice();
 	}
 	
-	function inputAmount(e){
-		var curAmount = parseInt($(e.target).val());
-		var price = parseInt($(e.target).siblings("input[name='price']").val());
-		var limit = parseInt($(e.target).siblings(".rSpan").children('span').attr("data-amount"));
-		if(e.keyCode < 48 || 57 < e.keyCode || e.keyCode != 8) {
-			if(isNaN(curAmount)){
-				$(e.target).siblings("input[name='totPrice']").val(0);
-				return;
-			}
-			$(e.target).val(curAmount);
+	function inputAmount(){
+		var curAmount = parseInt($(this).val());
+		var price = $(this).siblings("input[name='price']").val();
+		var limit = parseInt($(this).siblings(".rSpan").children('span').attr("data-amount"));
+		$(this).val($(this).val().replace(/[^0-9]/g,""));
+		
+		if(isNaN(curAmount)){
+			$(this).val(0);
+			curAmount = 0;
 		}
-		if(limit < curAmount){
-			$(e.target).val(limit);
-			return;
+		
+		if(limit < curAmount) { //초과 검사
+			$(this).val(limit);
+			curAmount = limit;
 		}
-		$(e.target).siblings("input[name='totPrice']").val(numberWithCommas((curAmount * price) + ""));
+		$(this).siblings("input[name='totPrice']").val(numberWithCommas((curAmount * price) + ""));
 		totPrice();
 	}
 	
