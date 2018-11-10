@@ -97,7 +97,7 @@ ul {
 <li>
 	<div class="selectedReward w3-container">
 		<input type="hidden" name="rNum" value="{rNum}">
-		<input type="hidden" name="price" value="{price}">
+		<input type="hidden" name="price" value="{orgPrice}">
 		<div class="rSpan">
 			<span data-amount="{amount}">{title} (남은수량 {amount}개)</span>
 		</div>
@@ -147,6 +147,7 @@ ul {
 				var result = "";
 				
 				result +=	html.replace("{title}", title)
+							.replace("{orgPrice}", price)
 							.replace(/{price}/gi, numberWithCommas(price))
 							.replace(/{amount}/gi, amount)
 							.replace("{rNum}", rNum);
@@ -166,6 +167,7 @@ ul {
 		var price = parseInt($(e.target).siblings("input[name='price']").val());
 		$(target).siblings("input[name='amount']").val(incAmount);
 		$(target).siblings("input[name='totPrice']").val(numberWithCommas((incAmount * price) + ""));
+		totPrice();
 	}
 	function decreaseAmount(e){
 		var target = e.target;
@@ -176,6 +178,7 @@ ul {
 		var price = parseInt($(e.target).siblings("input[name='price']").val());
 		$(target).siblings("input[name='amount']").val(incAmount);
 		$(target).siblings("input[name='totPrice']").val(numberWithCommas((incAmount * price) + ""));
+		totPrice();
 	}
 	
 	function inputAmount(e){
@@ -191,8 +194,22 @@ ul {
 		}
 		if(limit < curAmount){
 			$(e.target).val(limit);
+			return;
 		}
 		$(e.target).siblings("input[name='totPrice']").val(numberWithCommas((curAmount * price) + ""));
+		totPrice();
+	}
+	
+	function totPrice(){
+		var select = $('.selectedReward');
+		var totPrice = 0;
+		for(let i = 0; i<select.length; i++){
+			var price = parseInt($(select[i]).find("input[name='price']").val());
+			var amount = parseInt($(select[i]).find("input[name='amount']").val());
+			
+			totPrice += (price * amount);
+		}
+		$('#totPrice').text(numberWithCommas(totPrice));
 	}
 	
 	
@@ -229,10 +246,17 @@ ul {
 			</ul>
 		</div>
 		<div style="clear:both;">
-			결제하신 금액은 별도 수수료 없이 펀딩을 진행하는 펀더에게 100% 전달됩니다.
-		</div>
-		<div>
-			<button>펀딩 참여하기</button>
+			<div class="w3-right-align">
+				<span>총 결제금액</span>
+				<strong id="totPrice">0</strong>
+				<span>원</span>
+			</div>
+			<div class="w3-center">
+				결제하신 금액은 별도 수수료 없이 펀딩을 진행하는 펀더에게 100% 전달됩니다.
+			</div>
+			<div>
+				<button>펀딩 참여하기</button>
+			</div>
 		</div>
 	</div>
 </div>
