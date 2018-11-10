@@ -49,7 +49,6 @@
 	display:table;
 	float: left;
 	margin-right: 10px;
-	text-align: right;
 	vertical-align: middle;
 	height: 33px;
 }
@@ -83,20 +82,33 @@
     text-align: center;
     font-weight: bold;
 }
+ul {
+	list-style: none;
+}
+
+#rewardInfo li {
+	text-align: right;
+    list-style-position: inside;
+    float: right;
+	clear: both;
+}
 </style>
 <script id="selectedReward" type="text/template">
-	<div class="selectedReward w3-container" style="float:right;">
+<li>
+	<div class="selectedReward w3-container">
 		<input type="hidden" name="rNum" value="{rNum}">
+		<input type="hidden" name="price" value="{price}">
 		<div class="rSpan">
 			<span>{title} (남은수량 {amount}개)</span>
 		</div>
 		
-		<button class="rBtn">-</button>
-		<input type="text" class="rInput" value="1">
-		<button class="rBtn">+</button>
-		<input type="text" class="rInput" value="{price}" style="width:100px; margin-left:10px;" readOnly="readOnly">
+		<button class="rBtn decreaseAmount">-</button>
+		<input type="text" class="rInput" name="amount" value="1">
+		<button class="rBtn increaseAmount">+</button>
+		<input type="text" class="rInput totPrice" value="{price}" name="totPrice" style="width:100px; margin-left:10px;" readOnly="readOnly">
 		<button class="rBtn" style="margin-left: 10px;">x</button>
 	</div>
+</li>
 </script>
 
 <script type="text/javascript">
@@ -132,17 +144,35 @@
 				var amount = data.amount;
 				var rNum = data.rNum;
 				var html = document.querySelector('#selectedReward').innerHTML;
-				var result = document.querySelector('#rewardInfo').innerHTML;
+				var result = document.querySelector('#rewardList').innerHTML;
 				
 				result +=	html.replace("{title}", title)
-							.replace("{price}", numberWithCommas(price))
+							.replace(/{price}/gi, numberWithCommas(price))
 							.replace("{amount}", amount)
 							.replace("{rNum}", rNum);
 				
-				document.querySelector('#rewardInfo').innerHTML = result;
+				document.querySelector('#rewardList').innerHTML = result;
 			}
 		});
 	}
+	
+	function increaseAmount(e){
+		var target = e.target;
+		var curAmount = parseInt($(e.target).siblings("input[name='amount']").val());
+		var incAmount = curAmount + 1;
+		var price = parseInt($(e.target).siblings("input[name='price']").val());
+		$(target).siblings("input[name='amount']").val(incAmount);
+		$(target).siblings("input[name='totPrice']").val(numberWithCommas((incAmount * price) + ""));
+	}
+	function decreaseAmount(e){
+		var target = e.target;
+		var curAmount = parseInt($(e.target).siblings("input[name='amount']").val());
+		var incAmount = curAmount - 1;
+		var price = parseInt($(e.target).siblings("input[name='price']").val());
+		$(target).siblings("input[name='amount']").val(incAmount);
+		$(target).siblings("input[name='totPrice']").val(numberWithCommas((incAmount * price) + ""));
+	}
+	
 	
 	$(document).ready(function(){
 		$('#myDropdown').on('click', 'a', function(){
@@ -155,6 +185,9 @@
 			}
 			rewardDetail(rNum);
 		});
+		
+		$('#rewardInfo').on('click', '.increaseAmount', increaseAmount);
+		$('#rewardInfo').on('click', '.decreaseAmount', decreaseAmount);
 	});
 </script>
 <div class="container w3-border">
@@ -167,10 +200,10 @@
 				</c:forEach>
 			</div>
 		</div>
-		<div id="rewardInfo" class="">
-			<form method="post" action="">
+		<div id="rewardInfo">
+			<ul id="rewardList">
 				
-			</form>
+			</ul>
 		</div>
 		<div style="clear:both;">
 			결제하신 금액은 별도 수수료 없이 펀딩을 진행하는 펀더에게 100% 전달됩니다.
