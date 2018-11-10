@@ -212,11 +212,6 @@
 		<div class="w3-medium">{content}</div>
 	</div>
 </script>
-<style type="text/css">
-	#comment {
-		font-family: 'Hanna', serif;
-	}
-</style>
 <!-- Main -->
 <div id="main">
 	<div class="container">
@@ -254,6 +249,8 @@
 				<br>
 				조회수: ${vo.hit}
 				<span id="fRecommend"></span>
+				
+				<a href="${pageContext.request.contextPath}/funding/rewardList?fNum=${vo.fNum}">펀딩신청하기요</a>
  			</div>
 		</div>
 		<div class="w3-margin-top">

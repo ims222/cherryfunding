@@ -34,6 +34,12 @@ public class FundingDetailController {
 		return ".ingFundingDetailforUser";
 	}
 
+	@RequestMapping("/funding/rewardList")
+	public String rewardList(int fNum, Model model) { //리워드 리스트
+		model.addAttribute("rewardList", fundingDetailService.rewardList(fNum));
+		return ".rewardList";
+	}
+
 	@RequestMapping("/funding/prepareFundingDetailforUser")
 	public String prepareFundingDetail(int fNum, Model model) {
 		model.addAttribute("vo", fundingDetailService.detail(fNum));
