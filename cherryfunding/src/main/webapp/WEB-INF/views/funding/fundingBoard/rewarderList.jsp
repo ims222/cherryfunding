@@ -102,11 +102,13 @@ ul {
 			<span data-amount="{amount}">{title} (남은수량 {amount}개)</span>
 		</div>
 		
-		<button class="rBtn decreaseAmount">-</button>
+		<button class="rBtn decreaseAmount"><i class="fas fa-minus"></i></button>
 		<input type="text" class="rInput inputAmount" name="amount" value="1">
-		<button class="rBtn increaseAmount">+</button>
+		<button class="rBtn increaseAmount"><i class="fas fa-plus"></i></button>
 		<input type="text" class="rInput totPrice" value="{price}" name="totPrice" style="width:100px; margin-left:10px;" readOnly="readOnly">
-		<button class="rBtn" style="margin-left: 10px;">x</button>
+		<button class="rBtn removeReward" style="margin-left: 10px;"><i class="fa fa-remove"></i></button>
+
+
 	</div>
 </li>
 </script>
@@ -220,6 +222,11 @@ ul {
 		$('#totPrice').text(numberWithCommas(totPrice));
 	}
 	
+	function removeReward(){
+		$(this).closest('li').remove();
+		totPrice();
+	}
+	
 	
 	$(document).ready(function(){
 		$('#myDropdown').on('click', 'a', function(){
@@ -236,10 +243,11 @@ ul {
 		$('#rewardInfo').on('click', '.increaseAmount', increaseAmount);
 		$('#rewardInfo').on('click', '.decreaseAmount', decreaseAmount);
 		$('#rewardInfo').on('keyup', '.inputAmount', inputAmount);
+		$('#rewardInfo').on('click', '.removeReward', removeReward);
 	});
 </script>
 <div class="container w3-border">
-	<div class="w3-border">
+	<div class="container w3-border">
 		<div class="dropdown">
 			<button onclick="myFunction()" class="dropbtn">리워드 선택</button>
 			<div id="myDropdown" class="dropdown-content">
