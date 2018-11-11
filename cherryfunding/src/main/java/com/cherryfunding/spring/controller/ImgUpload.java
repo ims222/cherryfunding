@@ -31,7 +31,7 @@ public class ImgUpload {
 		MultipartFile file = request.getFile("qqfile");
 		try {
 			String orgName = file.getOriginalFilename();
-			System.out.println(orgName);
+			String caption = request.getParameter("caption");
 			String saveName = UUID.randomUUID() + "";
 			s3.fileUpload(saveName, file.getBytes()); // 파일 업로드
 			System.out.println((s3.getFileURL(saveName))); // 파일이름 불러오기
