@@ -225,6 +225,46 @@
 			 	</div>
  			</div>
  			<div class="col-md-4">
+ 				<div>
+					<fmt:formatDate value="${vo.edate}" var="eDate" pattern="yyyyMMdd"/>
+					<fmt:parseDate value="${eDate}" var="eDateDate" pattern="yyyyMMdd"/>
+					<fmt:parseNumber value="${eDateDate.time / (1000 * 60 * 60 * 24)}" var="end" integerOnly="true"/>
+					
+					<jsp:useBean id="today" class="java.util.Date"/>
+					<fmt:formatDate value="${today}" var="todayDate" pattern="yyyyMMdd"/>
+					<fmt:parseDate value="${todayDate}" var="nowDate" pattern="yyyyMMdd"/>
+					<fmt:parseNumber value="${nowDate.time / (1000 * 60 * 60 * 24)}" var="now" integerOnly="true"/>
+					
+ 					<span>${end - now}</span><span>일 남음</span>
+ 				</div>
+ 			
+ 				<c:set var="before" value="${vo.camout * 100 / vo.amount}" />
+ 				<c:choose>
+					<c:when test="${before >= 100}">
+						<c:set var="barBefore" value="100"/>
+					</c:when>
+					<c:otherwise>
+						<c:set var="barBefore" value="${before}" />
+					</c:otherwise>
+				</c:choose>
+				
+ 				<div>
+ 					
+					<div class="w3-border">
+						<div class="w3-blue" style="height:5px;width:<fmt:formatNumber value="${barBefore/100}" type="percent"/>"></div>
+					</div>
+ 				</div>
+ 				
+ 				<div>
+ 					<span><fmt:formatNumber value="${before/100}" type="percent"/></span><span>달성</span>
+ 				</div>
+ 				
+ 				<div>
+ 					<span><fmt:formatNumber value="${vo.camout}" pattern="#,###"/></span><span>원 펀딩</span>
+ 				</div>
+ 				
+ 			
+ 			
  				<c:forEach var="reward" items="${rewardList}">
  					<div>
  						<p>${reward.rNum}</p>
