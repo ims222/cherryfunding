@@ -245,6 +245,40 @@ ul {
 		$('#rewardInfo').on('click', '.decreaseAmount', decreaseAmount);
 		$('#rewardInfo').on('keyup', '.inputAmount', inputAmount);
 		$('#rewardInfo').on('click', '.removeReward', removeReward);
+		$('#applicationReward').on('click', function(){
+			var select = $('.selectedReward');
+			if(select.length === 0){
+				alert('리워드를 선택하세요');
+				return;
+			}
+			var obj = new Object();
+			obj.id='${sessionScope.id}';
+			var arr = new Array();
+			for(var i = 0; i< select.length; i++) {
+				var o = new Object();
+				o.rNum = $(select[i]).find("input[name='rNum']").val();
+				o.price = $(select[i]).find("input[name='price']").val();
+				o.amount = $(select[i]).find("input[name='amount']").val();
+				arr.push(o);
+			}
+			obj.reward = arr;
+			$.ajax({
+				url:'${pageContext.request.contextPath}/funding/applicationReward',
+				data:{fNum:'${fNum}', reward:JSON.stringify(obj)},
+				dataType:'json',
+				type:'post',
+				success: function(data){
+					if(data.result === 'ok')
+						alert('신청 성공!');
+					else if(data.result === 'amountOver')
+						alert('수량이 부족합니다');
+					else if(data.result === 'wrongId')
+						alert('로그인이 필요한 서비스입니다');
+					else
+						alert('리워드 신청 실패');
+				}
+			});
+		});
 	});
 </script>
 <div class="container w3-border">
@@ -272,7 +306,7 @@ ul {
 				<span class="w3-xlarge">결제하신 금액은 별도 수수료 없이 펀딩을 진행하는 펀더에게 100% 전달됩니다.</span>
 			</div>
 			<div>
-				<button class="w3-btn w3-block w3-teal">펀딩 참여하기</button>
+				<button id="applicationReward" class="w3-btn w3-block w3-teal">펀딩 참여하기</button>
 			</div>
 		</div>
 	</div>
