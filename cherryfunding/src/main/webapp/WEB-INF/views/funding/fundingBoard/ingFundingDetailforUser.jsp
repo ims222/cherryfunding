@@ -203,7 +203,7 @@
 
 </script>
 <script id="commentLine" type="text/template">
-	<div style=" margin-bottom: 25px;">
+	<div style="margin-bottom: 25px;">
 		<div style="float:left; margin-right:10px; height:100%;"><img src="{savename}" width="50px"></div>
 		<div>
 			<div class="w3-large">{nick}</div>
@@ -217,7 +217,23 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-8"> 
-			 	${vo.content}
+				<div>
+					<h3>${vo.category}</h3>
+					<h1>${vo.title}</h1>
+				</div>
+				
+				<div class="w3-sand" style="padding:20px;">
+					목표 금액 <fmt:formatNumber value="${vo.amount}" pattern="#,###"/>원 
+					펀딩기간 <fmt:formatDate value="${vo.sdate}" pattern="yyyy.MM.dd"/>-<fmt:formatDate value="${vo.edate}" pattern="yyyy.MM.dd"/>
+					<br>
+					100% 이상 모이면 펀딩이 성공되는 프로젝트<br>
+					이 프로젝트는 펀딩 마감일까지 목표 금액이 100% 모이지 않으면 결제가 진행되지 않습니다
+				</div>
+				
+				<div>
+					${vo.content}
+				</div>
+			
 			 	<div id="fHashtag">
 			 		<c:forEach var="ht" items="${hashtag}">
 			 			<a href="${pageContext.request.contextPath}/funding/searchHashtag?hashtag=${ht.hashtag}">#${ht.hashtag}</a>
@@ -249,7 +265,6 @@
 				</c:choose>
 				
  				<div>
- 					
 					<div class="w3-border">
 						<div class="w3-blue" style="height:5px;width:<fmt:formatNumber value="${barBefore/100}" type="percent"/>"></div>
 					</div>
@@ -262,16 +277,6 @@
  				<div>
  					<span><fmt:formatNumber value="${vo.camout}" pattern="#,###"/></span><span>원 펀딩</span>
  				</div>
- 				
- 			
- 			
- 				<c:forEach var="reward" items="${rewardList}">
- 					<div>
- 						<p>${reward.rNum}</p>
- 						<p>${reward.title}</p>
- 					</div>
- 				</c:forEach>
- 				
  				
  				<select name="reward">
 					<c:forEach var="reward" items="${rewardList}">
