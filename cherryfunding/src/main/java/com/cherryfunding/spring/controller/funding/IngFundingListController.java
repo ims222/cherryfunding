@@ -47,8 +47,6 @@ public class IngFundingListController {
 		map.put("endRow", pageUtil.getEndRow());
 
 		List<HashMap<String, Object>> list = ingFundingListService.list(map);
-		System.out.println("!!!!!!!!!!");
-		System.out.println(list);
 		if (list.size() == 0 && pageNum > 1) {
 			map.put("list", "no");
 			map.put("pageNum", pageNum);

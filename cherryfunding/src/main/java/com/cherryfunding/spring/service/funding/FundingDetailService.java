@@ -3,6 +3,8 @@ package com.cherryfunding.spring.service.funding;
 import java.util.HashMap;
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.cherryfunding.spring.vo.FDetailVo;
 import com.cherryfunding.spring.vo.FHashtagVo;
 import com.cherryfunding.spring.vo.FundingVo;
