@@ -53,12 +53,12 @@ public class IngFundingListService {
 			String thumbnail = this.thumbnail(fNum).getSavename();
 			l.put("savename", s3.getFileURL("funding/" + thumbnail));
 			l.put("fpinfo", this.thumbnail(((BigDecimal) l.get("FNUM")).intValue()).getFpinfo());
-			
+
 			String id = (String) l.get("ID");
 			String nick = "";
-			if(id == null) {
+			if (id == null) {
 				nick = "AnonymousUser";
-			}else {
+			} else {
 				nick = usersDao.select(id).getNick();
 			}
 			l.put("nick", nick);

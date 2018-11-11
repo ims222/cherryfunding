@@ -142,17 +142,6 @@
 </div>
 </script>
 <style type="text/css">
-	#list {
-		font-family: 'Hanna', serif;
-	}
-	
-	
-	* {box-sizing: border-box;}
-
-body {
-  margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
-}
 
 .topnav {
   overflow: hidden;

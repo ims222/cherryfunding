@@ -22,6 +22,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/layout2.css" type="text/css">
 
 <script src="http://code.responsivevoice.org/responsivevoice.js"></script>
 <script type="text/javascript">
@@ -42,16 +43,6 @@
 	});
 
 </script>
-<style type="text/css">
-	@import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
-	*{
-		maring:0px;
-		padding:0px;
-	}
-	body{
-		font-family: 'Hanna', serif;
-	}
-</style>
 </head>
 <body>
 	<!-- Wrapper -->
