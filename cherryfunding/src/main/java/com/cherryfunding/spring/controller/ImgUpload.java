@@ -1,13 +1,13 @@
 package com.cherryfunding.spring.controller;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
+import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -16,25 +16,30 @@ import com.cherryfunding.spring.util.S3Util;
 @Controller
 public class ImgUpload {
 
-	@RequestMapping(value = "/imgUpload", method = RequestMethod.POST)
-	public String imgUpload(MultipartHttpServletRequest request, Model model) {
-		System.out.println("!!!!!!!!!!!!!!!!!!!!!");
-		System.out.println(request.getMethod());
-		S3Util s3util = new S3Util();
-		List<MultipartFile> files = request.getFiles("file");
-		ArrayList<String> filenames = new ArrayList<String>();
-		for (MultipartFile file : files) {
-			try {
-				String orgName = file.getOriginalFilename();
-				String exe = orgName.substring(orgName.lastIndexOf("."), orgName.length());
-				String saveName = UUID.randomUUID() + exe;
-				s3util.fileUpload("/funding/" + saveName, file.getBytes()); // 파일 업로드
-				filenames.add(s3util.getFileURL("/funding/" + saveName)); // 파일이름 불러오기
-			} catch (Exception e) {
-				System.out.println(e.getMessage());
-			}
+	@Autowired
+	private S3Util s3;
+
+//	qqfilename
+//	qquuid
+//	qqtotalfilesize
+//	qqfile
+
+	@RequestMapping(value = "/imgUpload", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String imgUpload(MultipartHttpServletRequest request) {
+		JSONObject obj = new JSONObject();
+		MultipartFile file = request.getFile("qqfile");
+		try {
+			String orgName = file.getOriginalFilename();
+			String caption = request.getParameter("caption");
+			String saveName = UUID.randomUUID() + "";
+			s3.fileUpload(saveName, file.getBytes()); // 파일 업로드
+			System.out.println((s3.getFileURL(saveName))); // 파일이름 불러오기
+			obj.put("success", "true");
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			obj.put("success", "false");
 		}
-		model.addAttribute("filenames", filenames);
-		return "cicadas";
+		return obj.toString();
 	}
 }

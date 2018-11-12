@@ -331,6 +331,7 @@
 							<c:when test="${not empty sessionScope.id}">
 								${sessionScope.id} 님 <a href="${pageContext.request.contextPath}/mypage">마이페이지</a>
 								<input type="button" value="로그아웃" onclick="location.href='${pageContext.request.contextPath}/testlogout'">
+								
 							</c:when>
 							<c:otherwise>
 								<input type="text" name="id" placeholder="아이디"><br>

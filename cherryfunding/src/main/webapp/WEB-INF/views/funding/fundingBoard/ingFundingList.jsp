@@ -33,6 +33,7 @@
 			dataType:'json',
 			type:'post',
 			success:function(data){
+				console.log(data);
 				var result = $('#list').html(); 
 				var html = document.querySelector('#fundingList').innerHTML;
 				if(data.list === 'no'){
@@ -141,10 +142,93 @@
 </div>
 </script>
 <style type="text/css">
-	@import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
-	#list {
-		font-family: 'Hanna', serif;
-	}
+
+.topnav {
+  overflow: hidden;
+  background-color: #e9e9e9;
+}
+
+.topnav a {
+  float: left;
+  display: block;
+  color: black;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+.topnav span{
+	float: left;
+	display: block;
+	color: black;
+	text-align: center;
+	padding: 14px 16px;
+	font-size: 17px;
+}
+.topnav button{
+	float: right;
+	padding: 6px;
+	margin-top: 8px;
+	margin-right: 16px;
+	font-size: 17px;
+	border: none;
+	cursor: pointer;
+}
+
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.topnav a.active {
+  background-color: #2196F3;
+  color: white;
+}
+
+.topnav .search-container {
+  float: right;
+}
+
+.topnav input[type=text] {
+  padding: 6px;
+  margin-top: 8px;
+  font-size: 17px;
+  border: none;
+}
+
+.topnav .search-container button {
+  float: right;
+  padding: 6px;
+  margin-top: 8px;
+  margin-right: 16px;
+  background: #ddd;
+  font-size: 17px;
+  border: none;
+  cursor: pointer;
+}
+
+.topnav .search-container button:hover {
+  background: #ccc;
+}
+
+@media screen and (max-width: 600px) {
+  .topnav .search-container {
+    float: none;
+  }
+  .topnav a, .topnav input[type=text], .topnav .search-container button {
+    float: none;
+    display: block;
+    text-align: left;
+    width: 100%;
+    margin: 0;
+    padding: 14px;
+  }
+  .topnav input[type=text] {
+    border: 1px solid #ccc;  
+  }
+}
+	
+	
 </style>
 <div id="main">
 	<div class="container">
@@ -180,9 +264,36 @@
 					<span class="input-group-btn">
 						<button class="btn btn-default" id="search" type="button">검색</button>
 					</span>
+					<div class="input-group-btn">
+						<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Action <span class="caret"></span></button>
+						<ul class="dropdown-menu" role="menu">
+							<li><a href="#">Action</a></li>
+							<li><a href="#">Another action</a></li>
+							<li><a href="#">Something else here</a></li>
+							<li class="divider"></li>
+							<li><a href="#">Separated link</a></li>
+						</ul>
+					</div><!-- /btn-group -->
 				</div><!-- /input-group -->
 			</div><!-- /.col-lg-6 -->
 		</div><!-- /.row -->
+		<div class="topnav">
+			<span>진행중 펀딩</span>
+			<div class="w3-dropdown-hover">
+				<button class="w3-button">Hover Over Me!</button>
+				<div class="w3-dropdown-content w3-bar-block w3-border">
+					<a href="#" class="w3-bar-item w3-button">Link 1</a>
+					<a href="#" class="w3-bar-item w3-button">Link 2</a>
+					<a href="#" class="w3-bar-item w3-button">Link 3</a>
+				</div>
+			</div>
+ 			<div class="search-container">
+				<form action="/action_page.php">
+					<input type="text" placeholder="Search.." name="search">
+					<button type="submit">Submit</button>
+				</form>
+			</div>
+		</div>
 
 		<select id="sort">
 			<option value="latest" <c:if test="${sort eq 'latest'}">selected="selected"</c:if>>최신순</option>
@@ -194,6 +305,6 @@
 		<input type="hidden" id="pageNum" value="">
 		<div id="list" class="w3-row">
 		</div>
-		<button id="showMore">더보기</button>
+		<button id="showMore" class="w3-btn w3-block w3-teal">더보기</button>
 	</div>
 </div>
