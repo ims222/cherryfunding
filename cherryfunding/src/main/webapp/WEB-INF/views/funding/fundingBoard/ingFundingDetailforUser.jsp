@@ -241,7 +241,7 @@
 			 	</div>
  			</div>
  			<div class="col-md-4">
- 				<div>
+ 				<div style="margin-bottom:20px;">
 					<fmt:formatDate value="${vo.edate}" var="eDate" pattern="yyyyMMdd"/>
 					<fmt:parseDate value="${eDate}" var="eDateDate" pattern="yyyyMMdd"/>
 					<fmt:parseNumber value="${eDateDate.time / (1000 * 60 * 60 * 24)}" var="end" integerOnly="true"/>
@@ -251,7 +251,7 @@
 					<fmt:parseDate value="${todayDate}" var="nowDate" pattern="yyyyMMdd"/>
 					<fmt:parseNumber value="${nowDate.time / (1000 * 60 * 60 * 24)}" var="now" integerOnly="true"/>
 					
- 					<span>${end - now}</span><span>일 남음</span>
+ 					<span class="w3-xxlarge">${end - now}</span><span class="w3-xxlarge">일 남음</span>
  				</div>
  			
  				<c:set var="before" value="${vo.camout * 100 / vo.amount}" />
@@ -264,38 +264,28 @@
 					</c:otherwise>
 				</c:choose>
 				
- 				<div>
+ 				<div style="margin-bottom:20px;">
 					<div class="w3-border">
 						<div class="w3-blue" style="height:5px;width:<fmt:formatNumber value="${barBefore/100}" type="percent"/>"></div>
 					</div>
  				</div>
  				
- 				<div>
- 					<span><fmt:formatNumber value="${before/100}" type="percent"/></span><span>달성</span>
+ 				<div style="margin-bottom:20px;">
+ 					<span class="w3-xxlarge"><fmt:formatNumber value="${before/100}" type="percent"/></span><span class="w3-xxlarge"> 달성</span>
  				</div>
  				
- 				<div>
- 					<span><fmt:formatNumber value="${vo.camout}" pattern="#,###"/></span><span>원 펀딩</span>
+ 				<div style="maring-bottom:20px;">
+ 					<span class="w3-xxlarge"><fmt:formatNumber value="${vo.camout}" pattern="#,###"/></span><span class="w3-xxlarge">원 펀딩</span>
  				</div>
  				
- 				<select name="reward">
-					<c:forEach var="reward" items="${rewardList}">
-					<option value="${reward.rNum}">리워드명: ${reward.title}</option>
-					</c:forEach>
-				</select><br><div id="rewardInfo"></div>
-				수량<input type="number" name="amount"><button id="chooseItem">선택</button>
-				<form method="post" action="${pageContext.request.contextPath}/funding/insertFDetail" onsubmit="return submitReward();">
-					<input type="hidden" name="fNum" value="${vo.fNum}">
-					<div id="selectedReward"></div>
-					<input type="submit" value="펀딩 신청">
-				</form><br>
+				<button class="w3-btn w3-block w3-teal w3-xxlarge" onclick="location.href='${pageContext.request.contextPath}/funding/rewardList?fNum=${vo.fNum}';">펀딩 신청</button>
+				
 				<button id="recommend" type="button">추천</button><br>
-				<a href="${pageContext.request.contextPath}/funding/fundingParticipation?fNum=${vo.fNum}">펀딩 참여자</a>
+				<a href="${pageContext.request.contextPath}/funding/fundingParticipation?fNum=${vo.fNum}">참여내역</a>
 				<br>
 				조회수: ${vo.hit}
 				<span id="fRecommend"></span>
 				
-				<a href="${pageContext.request.contextPath}/funding/rewardList?fNum=${vo.fNum}">펀딩신청하기요</a>
  			</div>
 		</div>
 		<div class="w3-margin-top">
