@@ -22,11 +22,11 @@
 	</p>
 	
 	<div class="w3-bar w3-center">
-		<button class="w3-btn"
+		<button class="w3-btn w3-large"
 		onclick="location.href='${pageContext.request.contextPath}/funding/prepareFundingList'">준비중 펀딩</button>
 		<button class="w3-btn w3-large"
 		onclick="location.href='${pageContext.request.contextPath}/funding/ingFundingList'">진행중 펀딩</button>
-		<button class="w3-btn"
+		<button class="w3-btn w3-large"
 		onclick="location.href='${pageContext.request.contextPath}/funding/endFundingList'">종료된 펀딩</button>
 	</div>
 </div>
