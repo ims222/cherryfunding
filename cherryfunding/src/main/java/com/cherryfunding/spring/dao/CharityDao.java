@@ -113,4 +113,8 @@ public class CharityDao {
 		return sqlSession.selectOne(NAMESPACE + "todayCharityCount");
 	}
 
+	public List<String> relatedWords(HashMap<String, Object> map) {
+		System.out.println("다오");
+		return sqlSession.selectList(NAMESPACE + "related", map);
+	}
 }

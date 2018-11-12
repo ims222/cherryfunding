@@ -318,7 +318,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="related" parameterType="hashmap" resultType="string">
 		select title from(
 		select aa.*, rownum rnum from(
-			select ${field} from funding  
+			select title from funding  
 			<!-- 연관검색어는 제목만 검색되도록 설정
 				<if test="field == 'title'">title</if>
 				<if test="field == 'content'">content</if>
