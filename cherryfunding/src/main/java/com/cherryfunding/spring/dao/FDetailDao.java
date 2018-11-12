@@ -27,4 +27,8 @@ public class FDetailDao {
 	public List<HashMap<String, Object>> listByfNum(int fNum) {
 		return sqlSession.selectList(NAMESPACE + "listByfNum", fNum);
 	}
+
+	public int countFdetailbyfNum(int fNum) {
+		return sqlSession.selectOne(NAMESPACE + "countFdetailbyfNum", fNum);
+	}
 }

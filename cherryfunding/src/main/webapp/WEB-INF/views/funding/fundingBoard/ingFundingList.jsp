@@ -33,7 +33,6 @@
 			dataType:'json',
 			type:'post',
 			success:function(data){
-				console.log(data);
 				var result = $('#list').html(); 
 				var html = document.querySelector('#fundingList').innerHTML;
 				if(data.list === 'no'){

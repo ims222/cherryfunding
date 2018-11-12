@@ -17,5 +17,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select id, sum(fd.amount * price) sumPrice from fDetail fd, reward r
 		where fd.rNum = r.rNum and r.fNum = #{fNum} group by id
 	</select>
+	
+	<select id="countFdetailbyfNum" resultType="int" parameterType="int">
+		select count(count(id))
+		from fDetail fd, reward r
+		where fd.rNum = r.rNum and r.fNum = #{fNum}
+		group by id
+	</select>
 
 </mapper>
