@@ -22,14 +22,14 @@ public class FPictureDao {
 	public int getMaxNum() {
 		return sqlSession.selectOne(NAMESPACE + "getMaxNum");
 	}
-	
+
 	public List<FPictureVo> list(int num) {
 		return sqlSession.selectList(NAMESPACE + "list", num);
 	}
-	
+
 	public FPictureVo thumbnail(int fNum) {
 		FPictureVo fPictureVo = sqlSession.selectOne(NAMESPACE + "thumbnail", fNum);
-		if(fPictureVo == null){
+		if (fPictureVo == null) {
 			fPictureVo = new FPictureVo();
 			fPictureVo.setfNum(fNum);
 			fPictureVo.setSavename("default");
@@ -37,5 +37,5 @@ public class FPictureDao {
 		}
 		return fPictureVo;
 	}
-	
+
 }

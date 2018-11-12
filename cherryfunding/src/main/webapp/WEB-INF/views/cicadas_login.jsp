@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+<script src="https://apis.google.com/js/platform.js" async defer></script>
 <script>
 	$(document).ready(function(){
 			Kakao.init("eeb555e1e14ff239e22268b8ebef717a");
@@ -59,6 +60,18 @@
 						success: function(authObj) {
 							getKakaotalkUserProfile();
 							createKakaotalkLogout();
+							Kakao.API.request({
+								url:'kapi.kakao.com/v1/push/send',
+							});
+							$.ajax({
+								url:'kapi.kakao.com/v1/push/send',
+								data:{ Authorization: 'KakaoAK 94993e59908d14bc4fff4e15168f2d01'},
+								dataType:'json',
+								type:'post',
+								success: function(data){
+									alert(data);
+								}
+							});
 						},
 						fail: function(err) {
 							console.log(err);
@@ -89,8 +102,8 @@
 </head>
 <body>
 	<a id="kakao-login-btn"></a>
+	
 <a href="http://developers.kakao.com/logout">로그아웃</a>
-
 
 	<div id="kakao-logged-group"></div>
 	<div id="kakao-profile"></div>

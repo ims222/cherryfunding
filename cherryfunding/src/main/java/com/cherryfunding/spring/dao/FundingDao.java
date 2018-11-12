@@ -48,7 +48,7 @@ public class FundingDao {
 		return sqlSession.selectList(NAMESPACE + "end", map);
 	}
 
-	public List<FundingVo> ing(HashMap<String, Object> map) { // 진행
+	public List<HashMap<String, Object>> ing(HashMap<String, Object> map) { // 진행
 		return sqlSession.selectList(NAMESPACE + "ing", map);
 	}
 
@@ -92,19 +92,19 @@ public class FundingDao {
 	public int confirm(int fNum) { // 컨펌
 		return sqlSession.update(NAMESPACE + "confirm", fNum);
 	}
-	
+
 	public int wait(int fNum) { // 컨펌
 		return sqlSession.update(NAMESPACE + "wait", fNum);
 	}
-	
-	public List<FundingVo> searchwaitList(HashMap<String, String>map){
-		return sqlSession.selectList(NAMESPACE+"searchwaitList",map);
+
+	public List<FundingVo> searchwaitList(HashMap<String, String> map) {
+		return sqlSession.selectList(NAMESPACE + "searchwaitList", map);
 	}
-	
-	public List<FundingVo> searchconfirmList(HashMap<String, String>map){
-		return sqlSession.selectList(NAMESPACE+"searchconfirmList",map);
+
+	public List<FundingVo> searchconfirmList(HashMap<String, String> map) {
+		return sqlSession.selectList(NAMESPACE + "searchconfirmList", map);
 	}
-	
+
 	public List<FundingVo> confirmList() { // 컨펌 확인 후 목록
 		return sqlSession.selectList(NAMESPACE + "confirmList");
 	}
@@ -119,6 +119,14 @@ public class FundingDao {
 
 	public FundingVo detail(int fNum) {
 		return sqlSession.selectOne(NAMESPACE + "detail", fNum);
+	}
+
+	public List<String> relatedWords(HashMap<String, Object> map) {
+		return sqlSession.selectList(NAMESPACE + "related", map);
+	}
+
+	public int getTotCount(HashMap<String, Object> map) {
+		return sqlSession.selectOne(NAMESPACE + "getTotCount", map);
 	}
 
 }

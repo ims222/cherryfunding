@@ -1,5 +1,7 @@
 package com.cherryfunding.spring.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -30,8 +32,11 @@ public class VListDao {
 		return sqlSession.delete(NAMESPACE + "delete", vo);
 	}
 	
-	
 	public int getTotal(int vNum) {
 		return sqlSession.selectOne(NAMESPACE + "getTotal", vNum);
+	}
+	
+	public List<String> getNearId(int vNum){
+		return sqlSession.selectList(NAMESPACE + "getNearId", vNum);
 	}
 }

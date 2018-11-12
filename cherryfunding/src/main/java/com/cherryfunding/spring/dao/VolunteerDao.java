@@ -1,5 +1,6 @@
 package com.cherryfunding.spring.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -26,9 +27,18 @@ public class VolunteerDao {
 	public int getMaxNum() {
 		return sqlSession.selectOne(NAMESPACE + "getMaxNum");
 	}
-	
 	public int getMembers(int vNum) {
 		return sqlSession.selectOne(NAMESPACE + "getMembers", vNum);
 	}
+	public HashMap<String, Object> getEnded() {
+		return sqlSession.selectOne(NAMESPACE + "getEnded");
+	}
 	
+	public int updateEnded(HashMap<String, Object> map) {
+		return sqlSession.update(NAMESPACE + "updateEnded", map);
+	}
+	
+	public List<Integer> getNearNum(){
+		return sqlSession.selectList(NAMESPACE + "getNearNum");
+	}
 }

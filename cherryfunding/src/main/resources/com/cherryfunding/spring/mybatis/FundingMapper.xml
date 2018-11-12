@@ -22,13 +22,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</if>
 	</sql>
 	<sql id="search">
-		<if test="field!=null and field!=''">
-			and ${field} like '%' || #{keyword} || '%'
+		<if test="keyword != null and keyword!=''">
+			and (title like '%' || #{keyword} || '%'
+				or content like '%' || #{keyword} || '%'
+				or id like '%' || #{keyword} || '%'
+				or id = any(select id from users where nick like '%' || #{keyword} || '%')
+			)
 		</if>
 	</sql>
 	
 	<sql id="searchwaite">
-		
 		<choose>
 			<when test="keyword!=null and keyword!=''">
 				<choose>
@@ -43,7 +46,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</choose>
 	
 	</sql>
-	
 	
 	<sql id="sort">
 		<choose>
@@ -127,8 +129,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from funding where confirm = 'y'
 		<include refid="searchwaite"/>
 	</select>
-	
-	
 		
 	<update id="confirm" parameterType="int">
 		update funding set confirm = 'y' where fNum = #{fNum}
@@ -141,8 +141,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<update id="addCamout" parameterType="hashmap">
 		update funding set camout = camout + #{price} where fNum = #{fNum}
-
 	</update>
+	
+	<select id="getTotCount" resultType="int" parameterType="hashmap">
+		select NVL(count(fNum), 0) from funding
+		<include refid="ing"/>
+		<include refid="isConfirm"/>
+		<include refid="category" />
+		<include refid="search" />
+		<include refid="sort" />
+	</select>
 	
 	<select id="hashtag" parameterType="string" resultType="funding">
 		select * from (
@@ -178,24 +186,33 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<!-- 진행중 펀딩 -->
-	<select id="ing" parameterType="hashmap" resultType="funding">
+	<select id="ing" parameterType="hashmap" resultType="hashmap">
 		<choose>
 			<when test="sort == 'end'">
-				select * from (
+				select * from (select ad.*, rownum rnum from (
+   					(select aa.FNUM fnum, aa.TITLE title, aa.CONTENT content,
+					aa.AMOUNT amount, aa.CAMOUT camout, to_char(aa.SDATE, 'yy-mm-dd') sdate,
+					to_char(aa.EDATE, 'yy-mm-dd') edate, ceil(edate - (sysdate + (1/24)*9)) dday, aa.CATEGORY category, aa.CONFIRM confirm,
+					aa.AID aid, aa.ADDR addr, aa.REGDATE regdate, aa.ID id, aa.HIT hit from (
     				select * from funding
     				<include refid="ing"/>
 					)aa,(
-					select (edate-(sysdate + (1/24)*9))cal, fNum from funding
+					select ((sysdate + (1/24)*9) - edate )cal, fNum from funding
 					<include refid="ing"/>
-					)bb
-				where aa.fNum = bb.fNum
-				<include refid="category" />
-				<include refid="search" />
-				<include refid="isConfirm"/>
-				order by cal asc
+                    )bb
+					where aa.fNum = bb.fNum 
+					<include refid="category" />
+					<include refid="search" />
+					<include refid="isConfirm"/>
+					order by cal desc)
+					)ad)
+					<![CDATA[where rnum >= #{startRow} and rnum <= #{endRow}]]>
 			</when>
 			<when test="sort == 'recommend'">
-				select bb.* from (
+				select * from (select aa.cnt, bb.FNUM fnum, bb.TITLE title, bb.CONTENT content,
+					bb.AMOUNT amount, bb.CAMOUT camout, to_char(bb.SDATE, 'yy-mm-dd') sdate,
+					to_char(bb.EDATE, 'yy-mm-dd') edate, (ceil(edate - (sysdate + (1/24)*9)) * -1) dday, bb.CATEGORY category, bb.CONFIRM confirm,
+					bb.AID aid, bb.ADDR addr, bb.REGDATE regdate, bb.ID id, bb.HIT hit, rownum rnum from (
 					select * from (
     					select aa.* from (
      						select count(f.fNum) cnt, f.fNum fn from (
@@ -205,17 +222,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     					)aa
     				order by cnt desc, fn desc)
 			)aa, (select * from funding )bb
-			where aa.fn = bb.fNum(+)
-			<include refid="isConfirm"/>
-			order by cnt
+			where 
+			 <include refid="isConfirm"/>
+			order by cnt desc)
+			<![CDATA[where rnum >= #{startRow} and rnum <= #{endRow}]]>
 			</when>
 			<otherwise>
-				select * from funding
-				<include refid="ing"/>
-				<include refid="isConfirm"/>
-				<include refid="category" />
-				<include refid="search" />
-				<include refid="sort" />
+				select * from (
+					select aa.FNUM fnum, aa.TITLE title, aa.CONTENT content,
+					aa.AMOUNT amount, aa.CAMOUT camout, to_char(aa.SDATE, 'yy-mm-dd') sdate,
+					to_char(aa.EDATE, 'yy-mm-dd') edate, ceil(edate - (sysdate + (1/24)*9)) dday, aa.CATEGORY category, aa.CONFIRM confirm,
+					aa.AID aid, aa.ADDR addr, aa.REGDATE regdate, aa.ID id, aa.HIT hit, rownum rnum from (
+						select * from funding
+						<include refid="ing"/>
+						<include refid="isConfirm"/>
+						<include refid="category" />
+						<include refid="search" />
+						<include refid="sort" />
+					)aa
+				) <![CDATA[where rnum >=#{startRow} and rnum <=#{endRow}]]>
 			</otherwise>
 		</choose>
 	</select>
@@ -281,10 +306,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	<!-- 오늘 펀딩 금액, 갯수 -->
 	<select id="todayFundingPrice" resultType="int">
-		select NVL(sum(f.amount * price), 0) sumPrice from fdetail f, reward r
-            where  f.regdate = (sysdate + (1/24)*9)
-            and f.rNum = r.rnum
-		order by f.regdate desc
+		select NVL(sum(price * f.amount), 0) from fdetail f, reward r where f.rnum = r.rnum and to_date(f.regdate, 'yyyy-MM-dd') = to_date(sysdate + (1/24) * 9, 'yyyy-mm-dd')
 	</select>
 	<select id="todayFundingCount" resultType="int">
 		select NVL(count(fNum),0) from funding
@@ -292,4 +314,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<include refid="isConfirm"/>
 	</select>
 	
+	<!-- 연관검색어 추출 -->
+	<select id="related" parameterType="hashmap" resultType="string">
+		select title from(
+		select aa.*, rownum rnum from(
+			select ${field} from funding  
+			<!-- 연관검색어는 제목만 검색되도록 설정
+				<if test="field == 'title'">title</if>
+				<if test="field == 'content'">content</if>
+				<if test="field == 'id'">id</if>
+			-->
+			where title like '%' || #{keyword} || '%' order by title
+			)aa
+		)
+		<![CDATA[where rnum<6]]>	
+	</select>
 </mapper>

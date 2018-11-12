@@ -1,0 +1,31 @@
+<script id="fundingList" type="text/template">
+<section class="4u">
+	<a href="${pageContext.request.contextPath}/funding/ingFundingDetailforUser?fNum={fNum}"
+	class="image featured">
+	<img src="{savename}" alt="{fpinfo}" height="200px"></a>
+	<div class="box">
+		<p>${title}</p>
+		<p>${id}</p>
+		<p>목표금액: {amount}원</p>
+		<p>현재금액: {camout}원</p>
+
+		<div class="progress">
+			<c:set var="before" value="${camout * 100 / amount}" />
+			<c:choose>
+				<c:when test="${before >= 1000}">
+					<c:set var="barBefore" value="100"/>
+				</c:when>
+				<c:otherwise>
+					<c:set var="barBefore" value="${before}" />
+				</c:otherwise>
+			</c:choose>
+			<div class="progress-bar" role="progressbar"
+				style="width: <fmt:formatNumber value="${barBefore/100}" type="percent"/>"
+				aria-valuenow="${barBefore * 10000}" aria-valuemin="0"
+				aria-valuemax="100">
+				<fmt:formatNumber value="${before/100}" type="percent" />
+			</div>
+		</div>
+	</div>
+</section>
+</script>

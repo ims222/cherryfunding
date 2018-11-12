@@ -42,7 +42,7 @@
 			<td>${vo.id}</td>
 			<td>${vo.hit}</td>
 			<td><a href="${pageContext.request.contextPath}/funding/confirm?fNum=${vo.fNum}">승인</a></td>
-			<td><a href="${pageContext.request.contextPath}/fundingList/delete/delete?fNum=${vo.fNum}">삭제</a></td>
+			<td><a href="${pageContext.request.contextPath}/fundingList/delete?fNum=${vo.fNum}">삭제</a></td>
 		</tr>
 	</c:forEach>
 	</table>
@@ -67,7 +67,7 @@
 	<c:forEach var="vo" items="${fundingList}">
 		<tr>
 			<td>${vo.fNum}</td>	
-			<td>${vo.title}</td>
+			<td><a href="${pageContext.request.contextPath}/funding/detail?fNum=${vo.fNum}">${vo.title}</a></td>
 			<td>${vo.amount}</td>
 			<td>${vo.sdate}</td>
 			<td>${vo.edate}</td>

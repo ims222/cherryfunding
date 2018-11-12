@@ -105,17 +105,6 @@
 			}
 		});
 	};
-		
-		
-	var fileSave = function() {
-		$('#space').empty();
-		alert($('#summernote').summernote('code'));
-	};
-
 	</script>
-	<form onsubmit="fileSave()" enctype="multipart/form-data" method="post">
-		<div id="space"></div>
-		<input type="submit" value="저장">
-	</form>	
 </body>
 </html>

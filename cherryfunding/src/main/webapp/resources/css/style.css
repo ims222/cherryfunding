@@ -454,7 +454,7 @@ input[type="submit"].medium, input[type="reset"].medium, input[type="button"].me
 .wrapper.style1 {
 	padding-top: 10em;
 	padding-bottom: 2em;
-	background: url(../images/BG.gif) no-repeat center top;
+	background: url(../images/catcat.jpg) no-repeat center top;
 	background-size: cover;
 	background-attachment: fixed;
 	-webkit-backface-visibility: hidden;

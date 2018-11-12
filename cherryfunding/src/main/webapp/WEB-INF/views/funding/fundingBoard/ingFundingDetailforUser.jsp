@@ -176,10 +176,14 @@
 			dataType: 'json',
 			type: 'post',
 			success: function(data){
+				console.log(data);
 				var result = "";
 				var html = document.querySelector("#commentLine").innerHTML;
 				data.forEach(function(value){
-					result += html.replace("{id}", value.id).replace("{content}", value.content).replace("{regdate}", value.regdate);
+					result +=	html.replace("{nick}", value.nick)
+								.replace("{savename}", value.savename)
+								.replace("{content}", value.CONTENT)
+								.replace("{regdate}", value.REGDATE);
 				});
 				document.querySelector('#comment').innerHTML = result;
 			}
@@ -199,21 +203,37 @@
 
 </script>
 <script id="commentLine" type="text/template">
-	<tr>
-		<td>{id}</td>
-		<td>{content}</td>
-		<td>{regdate}</td>
-	</tr>
+	<div style="margin-bottom: 25px;">
+		<div style="float:left; margin-right:10px; height:100%;"><img src="{savename}" width="50px"></div>
+		<div>
+			<div class="w3-large">{nick}</div>
+			<div class="w3-small">{regdate}</div>
+		</div>
+		<div class="w3-medium">{content}</div>
+	</div>
 </script>
 <!-- Main -->
 <div id="main">
 	<div class="container">
-		<div class="row box">
+		<div class="row">
 			<div class="col-md-8"> 
-			 	제목: ${vo.title}<br>
-			 	내용: ${vo.content}<br>
-			 	조회수: ${vo.hit}<br>
-			 	<span id="fRecommend"></span>
+				<div>
+					<h3>${vo.category}</h3>
+					<h1>${vo.title}</h1>
+				</div>
+				
+				<div class="w3-sand" style="padding:20px;">
+					목표 금액 <fmt:formatNumber value="${vo.amount}" pattern="#,###"/>원 
+					펀딩기간 <fmt:formatDate value="${vo.sdate}" pattern="yyyy.MM.dd"/>-<fmt:formatDate value="${vo.edate}" pattern="yyyy.MM.dd"/>
+					<br>
+					100% 이상 모이면 펀딩이 성공되는 프로젝트<br>
+					이 프로젝트는 펀딩 마감일까지 목표 금액이 100% 모이지 않으면 결제가 진행되지 않습니다
+				</div>
+				
+				<div>
+					${vo.content}
+				</div>
+			
 			 	<div id="fHashtag">
 			 		<c:forEach var="ht" items="${hashtag}">
 			 			<a href="${pageContext.request.contextPath}/funding/searchHashtag?hashtag=${ht.hashtag}">#${ht.hashtag}</a>
@@ -221,26 +241,58 @@
 			 	</div>
  			</div>
  			<div class="col-md-4">
- 				<select name="reward">
-					<c:forEach var="reward" items="${rewardList}">
-					<option value="${reward.rNum}">리워드명: ${reward.title}</option>
-					</c:forEach>
-				</select><br><div id="rewardInfo"></div>
-				수량<input type="number" name="amount"><button id="chooseItem">선택</button>
-				<form method="post" action="${pageContext.request.contextPath}/funding/insertFDetail" onsubmit="return submitReward();">
-					<input type="hidden" name="fNum" value="${vo.fNum}">
-					<div id="selectedReward"></div>
-					<input type="submit" value="리워드 신청">
-				</form><br>
+ 				<div style="margin-bottom:20px;">
+					<fmt:formatDate value="${vo.edate}" var="eDate" pattern="yyyyMMdd"/>
+					<fmt:parseDate value="${eDate}" var="eDateDate" pattern="yyyyMMdd"/>
+					<fmt:parseNumber value="${eDateDate.time / (1000 * 60 * 60 * 24)}" var="end" integerOnly="true"/>
+					
+					<jsp:useBean id="today" class="java.util.Date"/>
+					<fmt:formatDate value="${today}" var="todayDate" pattern="yyyyMMdd"/>
+					<fmt:parseDate value="${todayDate}" var="nowDate" pattern="yyyyMMdd"/>
+					<fmt:parseNumber value="${nowDate.time / (1000 * 60 * 60 * 24)}" var="now" integerOnly="true"/>
+					
+ 					<span class="w3-xxlarge">${end - now}</span><span class="w3-xxlarge">일 남음</span>
+ 				</div>
+ 			
+ 				<c:set var="before" value="${vo.camout * 100 / vo.amount}" />
+ 				<c:choose>
+					<c:when test="${before >= 100}">
+						<c:set var="barBefore" value="100"/>
+					</c:when>
+					<c:otherwise>
+						<c:set var="barBefore" value="${before}" />
+					</c:otherwise>
+				</c:choose>
+				
+ 				<div style="margin-bottom:20px;">
+					<div class="w3-border">
+						<div class="w3-blue" style="height:5px;width:<fmt:formatNumber value="${barBefore/100}" type="percent"/>"></div>
+					</div>
+ 				</div>
+ 				
+ 				<div style="margin-bottom:20px;">
+ 					<span class="w3-xxlarge"><fmt:formatNumber value="${before/100}" type="percent"/></span><span class="w3-xxlarge"> 달성</span>
+ 				</div>
+ 				
+ 				<div style="maring-bottom:20px;">
+ 					<span class="w3-xxlarge"><fmt:formatNumber value="${vo.camout}" pattern="#,###"/></span><span class="w3-xxlarge">원 펀딩</span>
+ 				</div>
+ 				
+				<button class="w3-btn w3-block w3-teal w3-xxlarge" onclick="location.href='${pageContext.request.contextPath}/funding/rewardList?fNum=${vo.fNum}';">펀딩 신청</button>
+				
 				<button id="recommend" type="button">추천</button><br>
-				<a href="${pageContext.request.contextPath}/funding/fundingParticipation?fNum=${vo.fNum}">펀딩 참여자</a>
+				<a href="${pageContext.request.contextPath}/funding/fundingParticipation?fNum=${vo.fNum}">참여내역</a>
+				<br>
+				조회수: ${vo.hit}
+				<span id="fRecommend"></span>
+				
  			</div>
 		</div>
-		<div class="row box">
+		<div class="w3-margin-top">
 			<!-- 댓글 -->
-			<table id="comment">
+			<div id="comment">
 			
-			</table>
+			</div>
 		</div>
 		<form id="insertComment">
 			<input type="text" name="content"><br>

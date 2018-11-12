@@ -17,7 +17,7 @@
 		<typeAlias type="com.cherryfunding.spring.vo.CategoryVo" alias="category"/>
 		<typeAlias type="com.cherryfunding.spring.vo.PaymentVo" alias="payment"/>
 		<typeAlias type="com.cherryfunding.spring.vo.FDetailVo" alias="fDetail"/>
-		<typeAlias type="com.cherryfunding.spring.vo.UsersSettingVo" alias="userSetting"/>
+		<typeAlias type="com.cherryfunding.spring.vo.UserSettingVo" alias="userSetting"/>
 		<typeAlias type="com.cherryfunding.spring.vo.SItemVo" alias="sItem"/>
 		<typeAlias type="com.cherryfunding.spring.vo.CCommentVo" alias="cComment"/>
 		<typeAlias type="com.cherryfunding.spring.vo.ECommentVo" alias="eComment"/>

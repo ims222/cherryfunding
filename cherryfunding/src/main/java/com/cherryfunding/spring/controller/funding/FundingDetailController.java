@@ -1,15 +1,20 @@
 package com.cherryfunding.spring.controller.funding;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -17,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.cherryfunding.spring.service.funding.FundingDetailService;
 import com.cherryfunding.spring.vo.FDetailVo;
 import com.cherryfunding.spring.vo.RewardVo;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Controller
 public class FundingDetailController {
@@ -33,7 +39,13 @@ public class FundingDetailController {
 		fundingDetailService.hitUp(fNum);
 		return ".ingFundingDetailforUser";
 	}
-	
+
+	@RequestMapping("/funding/rewardList")
+	public String rewardList(@ModelAttribute("fNum") int fNum, Model model) { // 리워드 리스트
+		model.addAttribute("rewardList", fundingDetailService.rewardList(fNum));
+		return ".rewardList";
+	}
+
 	@RequestMapping("/funding/prepareFundingDetailforUser")
 	public String prepareFundingDetail(int fNum, Model model) {
 		model.addAttribute("vo", fundingDetailService.detail(fNum));
@@ -43,7 +55,7 @@ public class FundingDetailController {
 		fundingDetailService.hitUp(fNum);
 		return ".prepareFundingDetailforUser";
 	}
-	
+
 	@RequestMapping("/funding/endFundingDetailforUser")
 	public String endFundingDetail(int fNum, Model model) {
 		model.addAttribute("vo", fundingDetailService.detail(fNum));
@@ -150,4 +162,51 @@ public class FundingDetailController {
 		}
 		return "redirect:/funding/ingFundingDetailforUser?fNum=" + fNum;
 	}
+
+	@RequestMapping(value = "/funding/applicationReward", produces = "application/json;charset=utf-8")
+	@ResponseBody
+	public String applicationReward(int fNum, HttpSession session, HttpServletRequest request) {
+		String id = (String) session.getAttribute("id");
+		String reward = request.getParameter("reward");
+		JSONObject obj = new JSONObject();
+		if (reward != null) {
+			try {
+				Map<String, Object> map = new ObjectMapper().readValue(reward, HashMap.class);
+				if (id.equals(map.get("id"))) {
+					List<HashMap<String, String>> r = (List<HashMap<String, String>>) map.get("reward");
+					for (HashMap<String, String> rewardInfo : r) { // 리워드 배열 받아서
+						int rNum = Integer.parseInt(rewardInfo.get("rNum"));
+						int price = Integer.parseInt(rewardInfo.get("price"));
+						int amount = Integer.parseInt(rewardInfo.get("amount"));
+						int getAmount = fundingDetailService.getAmount(rNum);
+
+						if (getAmount < amount) {// 수량 체크하고
+							obj.put("result", "amountOver");
+							return obj.toString();
+						}
+						FDetailVo fdvo = new FDetailVo(0, id, fNum, rNum, null, null, amount);
+						fundingDetailService.insertFDetail(fdvo); // 펀딩내역
+						HashMap<String, Object> rewardMap = new HashMap<String, Object>();
+						rewardMap.put("price", price * amount);
+						rewardMap.put("fNum", fNum);
+						fundingDetailService.addCamout(rewardMap); // 현재금액 추가
+						rewardMap.clear();
+						rewardMap.put("rNum", rNum);
+						rewardMap.put("amount", amount);
+						fundingDetailService.updateAmount(rewardMap); // 남은 수량 수정
+						obj.put("result", "ok");
+					}
+				} else {
+					obj.put("result", "wrongId");
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.out.println(e.getMessage());
+			}
+		} else {
+			obj.put("result", "no");
+		}
+		return obj.toString();
+	}
+
 }

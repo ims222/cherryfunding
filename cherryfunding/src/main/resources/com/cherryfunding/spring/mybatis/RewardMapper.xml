@@ -14,7 +14,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="rewardList" parameterType="int" resultType="reward">
-		select * from reward where fNum = #{fNum}
+		select * from reward where fNum = #{fNum} order by rNum asc
 	</select>
 	
 	<select id="detail" parameterType="int" resultType="reward">

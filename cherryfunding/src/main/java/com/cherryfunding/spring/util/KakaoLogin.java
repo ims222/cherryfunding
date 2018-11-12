@@ -18,13 +18,16 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class KakaoLogin {
+	private final static String adminKey = "94993e59908d14bc4fff4e15168f2d01";
+
 	public static JsonNode getAccessToken(String autorize_code) {
 		final String RequestUrl = "https://kauth.kakao.com/oauth/token";
 
 		final List<NameValuePair> postParams = new ArrayList<NameValuePair>();
 		postParams.add(new BasicNameValuePair("grant_type", "authorization_code"));
 		postParams.add(new BasicNameValuePair("client_id", "89f185a407f3d617bfbb42e27e8f07c9")); // REST API KEY
-		postParams.add(new BasicNameValuePair("redirect_uri", "http://localhost:9090/cherryfunding/oauth")); // 리다이렉트 URI
+		postParams.add(new BasicNameValuePair("redirect_uri", "http://localhost:9090/cherryfunding/oauth")); // 리다이렉트
+																												// URI
 		postParams.add(new BasicNameValuePair("code", autorize_code)); // 로그인 과정중 얻은 code 값
 
 		final HttpClient client = HttpClientBuilder.create().build();
@@ -92,6 +95,48 @@ public class KakaoLogin {
 		}
 		return returnNode;
 
+	}
+
+	public static JsonNode sendText(String autorize_code) {
+		final String RequestUrl = "https://kapi.kakao.com/v2/api/talk/memo/default/send";
+
+		final HttpClient client = HttpClientBuilder.create().build();
+		final HttpPost post = new HttpPost(RequestUrl);
+		JsonNode returnNode = null;
+
+		// add header
+		post.addHeader("Authorization", "Bearer " + autorize_code);
+
+		final List<NameValuePair> postParams = new ArrayList<NameValuePair>();
+		postParams.add(new BasicNameValuePair("object_type", "text"));
+		postParams.add(new BasicNameValuePair("text", "testmsg"));
+		// postParams.add(new BasicNameValuePair("link", "http://www.google.co.kr"));
+		// postParams.add(new BasicNameValuePair("button_title", "버튼"));
+
+		try {
+			post.setEntity(new UrlEncodedFormEntity(postParams));
+			final HttpResponse response = client.execute(post);
+			final int responseCode = response.getStatusLine().getStatusCode();
+
+			System.out.println("\nSending 'POST' request to URL : " + RequestUrl);
+			System.out.println("Post parameters : " + postParams);
+			System.out.println("Response Code : " + responseCode);
+
+			// JSON 형태 반환값 처리
+			ObjectMapper mapper = new ObjectMapper();
+			returnNode = mapper.readTree(response.getEntity().getContent());
+
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		} catch (ClientProtocolException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			// clear resources
+		}
+
+		return returnNode;
 	}
 
 //	public static UserVO changeData(JsonNode userInfo) {

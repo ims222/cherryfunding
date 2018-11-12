@@ -5,10 +5,25 @@ PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
 
 <tiles-definitions>
 	<!-- funding -->
-		<definition name=".ingFundingList" extends = ".main">
+		<definition name=".ingFundingList" template="/WEB-INF/views/main/layout2.jsp">
+			<put-attribute name="header" value="/WEB-INF/views/main/header.jsp"/>
 			<put-attribute name="banner" value="/WEB-INF/views/funding/banner.jsp"/>
 			<put-attribute name="content" value="/WEB-INF/views/funding/fundingBoard/ingFundingList.jsp"/>
+			<put-attribute name="footer" value="/WEB-INF/views/main/footer.jsp"/>
 		</definition>
+		
+		<definition name=".ingFundingDetailforUser" extends=".ingFundingList">
+			<put-attribute name="content" value="/WEB-INF/views/funding/fundingBoard/ingFundingDetailforUser.jsp"/>
+		</definition>
+		
+		<definition name=".inputFunding" extends = ".ingFundingList">
+			<put-attribute name="content" value="/WEB-INF/views/funding/application/fundingApplicationProcess.jsp"/>
+		</definition>
+		
+		<definition name=".rewardList" extends = ".ingFundingList">
+			<put-attribute name="content" value="/WEB-INF/views/funding/fundingBoard/rewarderList.jsp"/>
+		</definition>
+		
 		
 		<definition name=".prepareFundingList" extends = ".main">
 			<put-attribute name="banner" value="/WEB-INF/views/funding/banner.jsp"/>
@@ -20,15 +35,8 @@ PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
 			<put-attribute name="content" value="/WEB-INF/views/funding/fundingBoard/endFundingList.jsp"/>
 		</definition>
 		
-		<definition name=".inputFunding" extends = ".main">
-			<put-attribute name="banner" value="/WEB-INF/views/funding/application/banner.jsp"/>
-			<put-attribute name="content" value="/WEB-INF/views/funding/application/fundingApplicationProcess.jsp"/>
-		</definition>
 		
-		<definition name=".ingFundingDetailforUser" extends = ".main">
-			<put-attribute name="banner" value="/WEB-INF/views/funding/application/banner.jsp"/>
-			<put-attribute name="content" value="/WEB-INF/views/funding/fundingBoard/ingFundingDetailforUser.jsp"/>
-		</definition>
+		
 		<definition name=".prepareFundingDetailforUser" extends = ".main">
 			<put-attribute name="banner" value="/WEB-INF/views/funding/application/banner.jsp"/>
 			<put-attribute name="content" value="/WEB-INF/views/funding/fundingBoard/prepareFundingDetailforUser.jsp"/>
