@@ -36,6 +36,10 @@ public class FCommentService {
 		return fCommentDao.getMaxNum();
 	}
 
+	public int getCommentCount(int fNum) {
+		return fCommentDao.getCommentCount(fNum);
+	}
+
 	public List<HashMap<String, Object>> commentList(int fNum) {
 		List<HashMap<String, Object>> list = fCommentDao.commentList(fNum);
 		for (HashMap<String, Object> l : list) {

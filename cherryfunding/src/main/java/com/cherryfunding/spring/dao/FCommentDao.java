@@ -27,4 +27,8 @@ public class FCommentDao {
 	public List<HashMap<String, Object>> commentList(int fNum) {
 		return sqlSession.selectList(NAMESPACE + "commentList", fNum);
 	}
+
+	public int getCommentCount(int fNum) {
+		return sqlSession.selectOne(NAMESPACE + "getCommentCount", fNum);
+	}
 }

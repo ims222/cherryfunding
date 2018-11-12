@@ -42,4 +42,12 @@ public class FCommentController {
 		List<HashMap<String, Object>> list = fCommentService.commentList(fNum);
 		return list;
 	}
+
+	@RequestMapping(value = "/funding/commentCount", produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String getCommentCount(int fNum) {
+		JSONObject obj = new JSONObject();
+		obj.put("commentCount", fCommentService.getCommentCount(fNum));
+		return obj.toString();
+	}
 }

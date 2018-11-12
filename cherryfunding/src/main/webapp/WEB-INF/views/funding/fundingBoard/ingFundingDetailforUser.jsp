@@ -3,12 +3,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/comment.css" type="text/css">
 <script type="text/javascript">
 	$(document).ready(function(){
 		isRecommed();
+		commentCount();
 		commentList();
 		updateList();
-		rewardDetail();
 		var errMsg = '${errMsg}';
 		
 		if(errMsg){
@@ -65,6 +66,7 @@
 				data: {id:id, content:content, fNum:'${vo.fNum}'},
 				success: function(data){
 					$("#insertComment input[name='content']").val('');
+					commentCount();
 					commentList();
 				}
 			});
@@ -95,22 +97,7 @@
 			});
 		});
 		
-		$("select[name='reward']").on('change', rewardDetail);
 	});
-	
-	function rewardDetail(){
-		$.ajax({
-			url:'${pageContext.request.contextPath}/funding/rewardDetail',
-			data:{rNum: $("select[name='reward']").val()},
-			dataType:'json',
-			type:'post',
-			success: function(data){
-				var price = data.price;
-				var amount = data.amount;
-				$("#rewardInfo").text("가격: " + price + " 남은 수량: " + amount);
-			}
-		});
-	}
 	
 	function updateList(){
 		$.ajax({
@@ -176,10 +163,12 @@
 			dataType: 'json',
 			type: 'post',
 			success: function(data){
-				console.log(data);
 				var result = "";
 				var html = document.querySelector("#commentLine").innerHTML;
 				data.forEach(function(value){
+					
+					console.log(calDate(value.REGDATE));
+					
 					result +=	html.replace("{nick}", value.nick)
 								.replace("{savename}", value.savename)
 								.replace("{content}", value.CONTENT)
@@ -189,28 +178,59 @@
 			}
 		});
 	}
+	function calDate(time){
+		var elapsedTime = new Date(time);
+		var mSec = Math.ceil((new Date() - elapsedTime) / 1000);
+		var str = "";
+		if(mSec > (60 * 60 * 24)){
+			var minute = Math.ceil(mSec / 60);
+			var hour = Math.ceil();
+		}else if(mSec > (60 * 60)){
+			var minute = Math.ceil(mSec / 60);
+			str += Math.ceil(minute / 60) + "시간";
+		}else if(mSec > 60){
+			str += Math.ceil(mSec / 60) + "분";
+		}else{
+			str += mSec + '초';
+		}
+		return str;
+	}
 	
 	function submitReward(){
 		var id = '${sessionScope.id}';
-		console.log("id", id);
 		if(!id){
 			alert("로그인 하셔요");
 			return false;
 		}
 		return true;
 	}
+	
+	var commentCount = function(){
+		$.ajax({
+			url:'${pageContext.request.contextPath}/funding/commentCount',
+			data:{fNum: '${vo.fNum}'},
+			dataType:'json',
+			type:'post',
+			success: function(data){
+				$('#commentCount').text(data.commentCount);
+			}
+		});
+	}
 
 
 </script>
 <script id="commentLine" type="text/template">
-	<div style="margin-bottom: 25px;">
-		<div style="float:left; margin-right:10px; height:100%;"><img src="{savename}" width="50px"></div>
-		<div>
-			<div class="w3-large">{nick}</div>
-			<div class="w3-small">{regdate}</div>
-		</div>
-		<div class="w3-medium">{content}</div>
+<div class="media">
+	<p class="pull-right"><small>5 days ago {regdate} </small></p>
+	<a class="media-left" href="#">
+		<img src="{savename}">
+	</a>
+	<div class="media-body">
+		<h4 class="media-heading user_name">{nick}</h4>
+		{content}
+		<p><small><a href="">Like</a> - <a href="">Share</a></small></p>
 	</div>
+</div>
 </script>
 <!-- Main -->
 <div id="main">
@@ -292,12 +312,16 @@
 				
  			</div>
 		</div>
-		<div class="w3-margin-top">
-			<!-- 댓글 -->
-			<div id="comment">
-			
+		
+		<div class="row">
+			<div class="col-md-8">
+				<div class="page-header">
+					<h1>댓글 <span id="commentCount"></span></h1>
+				</div> 
+				<div id="comment" class="comments-list"></div>
 			</div>
 		</div>
+		
 		<form id="insertComment">
 			<input type="text" name="content"><br>
 			<input type="submit" value="댓글 등록">
