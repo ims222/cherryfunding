@@ -4,6 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeAliases>
+		<typeAlias type="com.cherryfunding.spring.vo.VisitorVo" alias="Visitor"/>
 		<typeAlias type="com.cherryfunding.spring.vo.UsersVo" alias="users"/>
 		<typeAlias type="com.cherryfunding.spring.vo.AdminVo" alias="AdminVo"/>
 		<typeAlias type="com.cherryfunding.spring.vo.CharityVo" alias="charity"/>
@@ -51,6 +52,7 @@
 		
 	</typeAliases>
 	<mappers>
+		<mapper resource="com/cherryfunding/spring/mybatis/VisitorMapper.xml"/>
 		<mapper resource="com/cherryfunding/spring/mybatis/UsersMapper.xml"/>
 		<mapper resource="com/cherryfunding/spring/mybatis/AdminMapper.xml"/>
 		<mapper resource="com/cherryfunding/spring/mybatis/CharityMapper.xml"/>
