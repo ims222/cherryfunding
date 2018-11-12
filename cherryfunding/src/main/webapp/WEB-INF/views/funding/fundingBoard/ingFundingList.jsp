@@ -56,7 +56,7 @@
 									.replace("{title}", value.TITLE)
 									.replace("{nick}", value.nick)
 									.replace("{amount}", amount)
-									.replace("{camout}", camout)
+									.replace("{camout}", comma(camout))
 									.replace("{category}", value.CATEGORY)
 									.replace("{sdate}", value.SDATE)
 									.replace("{edate}", value.EDATE)

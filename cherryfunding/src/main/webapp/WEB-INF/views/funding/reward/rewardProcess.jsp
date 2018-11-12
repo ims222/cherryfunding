@@ -108,8 +108,6 @@ ul {
 		<button class="rBtn increaseAmount"><i class="fas fa-plus"></i></button>
 		<input type="text" class="rInput totPrice" value="{price}" name="totPrice" style="width:100px; margin-left:10px;" readOnly="readOnly">
 		<button class="rBtn removeReward" style="margin-left: 10px;"><i class="fa fa-remove"></i></button>
-
-
 	</div>
 </li>
 </script>
@@ -131,14 +129,6 @@ ul {
 			}
 		}
 	}
-	function numberWithCommas(x) {
-		return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-	}
-	
-	function uncomma(str) {
-	    str = String(str);
-	    return str.replace(/[^\d]+/g, '');
-	}
 	
 	function rewardDetail(rNum){
 		$.ajax({
@@ -156,12 +146,12 @@ ul {
 				
 				result +=	html.replace("{title}", title)
 							.replace("{orgPrice}", price)
-							.replace(/{price}/gi, numberWithCommas(price))
+							.replace(/{price}/gi, comma(price))
 							.replace(/{amount}/gi, amount)
 							.replace("{rNum}", rNum);
 				$('#rewardList').append(result);
 				var totPrice = parseInt(uncomma($('#totPrice').text()));
-				$('#totPrice').text(numberWithCommas(price + totPrice));
+				$('#totPrice').text(comma(price + totPrice));
 			}
 		});
 	}
@@ -176,7 +166,7 @@ ul {
 		var incAmount = curAmount + 1;
 		var price = parseInt($(e.target).siblings("input[name='price']").val());
 		$(target).siblings("input[name='amount']").val(incAmount);
-		$(target).siblings("input[name='totPrice']").val(numberWithCommas((incAmount * price) + ""));
+		$(target).siblings("input[name='totPrice']").val(comma((incAmount * price) + ""));
 		totPrice();
 	}
 	function decreaseAmount(e){
@@ -188,7 +178,7 @@ ul {
 		var incAmount = curAmount - 1;
 		var price = parseInt($(e.target).siblings("input[name='price']").val());
 		$(target).siblings("input[name='amount']").val(incAmount);
-		$(target).siblings("input[name='totPrice']").val(numberWithCommas((incAmount * price) + ""));
+		$(target).siblings("input[name='totPrice']").val(comma((incAmount * price) + ""));
 		totPrice();
 	}
 	
@@ -207,7 +197,7 @@ ul {
 			$(this).val(limit);
 			curAmount = limit;
 		}
-		$(this).siblings("input[name='totPrice']").val(numberWithCommas((curAmount * price) + ""));
+		$(this).siblings("input[name='totPrice']").val(comma((curAmount * price) + ""));
 		totPrice();
 	}
 	
@@ -220,7 +210,7 @@ ul {
 			
 			totPrice += (price * amount);
 		}
-		$('#totPrice').text(numberWithCommas(totPrice));
+		$('#totPrice').text(comma(totPrice));
 	}
 	
 	function removeReward(){
