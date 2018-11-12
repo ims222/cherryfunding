@@ -53,7 +53,7 @@
 				alert('로그인 해주세욧ㅅ');
 				return;
 			}
-			var content = $("#insertComment input[name='content']").val();
+			var content = $("#insertComment textarea[name='content']").val();
 			if(!content){
 				alert('댓글을 작성해욧');
 				return;
@@ -65,7 +65,7 @@
 				type:'post',
 				data: {id:id, content:content, fNum:'${vo.fNum}'},
 				success: function(data){
-					$("#insertComment input[name='content']").val('');
+					$("#insertComment textarea[name='content']").val('');
 					commentCount();
 					commentList();
 				}
@@ -166,35 +166,16 @@
 				var result = "";
 				var html = document.querySelector("#commentLine").innerHTML;
 				data.forEach(function(value){
-					
-					console.log(calDate(value.REGDATE));
-					
 					result +=	html.replace("{nick}", value.nick)
 								.replace("{savename}", value.savename)
 								.replace("{content}", value.CONTENT)
-								.replace("{regdate}", value.REGDATE);
+								.replace("{regdate}", calDate(value.REGDATE));
 				});
 				document.querySelector('#comment').innerHTML = result;
 			}
 		});
 	}
-	function calDate(time){
-		var elapsedTime = new Date(time);
-		var mSec = Math.ceil((new Date() - elapsedTime) / 1000);
-		var str = "";
-		if(mSec > (60 * 60 * 24)){
-			var minute = Math.ceil(mSec / 60);
-			var hour = Math.ceil();
-		}else if(mSec > (60 * 60)){
-			var minute = Math.ceil(mSec / 60);
-			str += Math.ceil(minute / 60) + "시간";
-		}else if(mSec > 60){
-			str += Math.ceil(mSec / 60) + "분";
-		}else{
-			str += mSec + '초';
-		}
-		return str;
-	}
+	
 	
 	function submitReward(){
 		var id = '${sessionScope.id}';
@@ -221,7 +202,7 @@
 </script>
 <script id="commentLine" type="text/template">
 <div class="media">
-	<p class="pull-right"><small>5 days ago {regdate} </small></p>
+	<p class="pull-right"><small> {regdate} </small></p>
 	<a class="media-left" href="#">
 		<img src="{savename}">
 	</a>
@@ -312,7 +293,10 @@
 				
  			</div>
 		</div>
-		
+		<form id="insertComment">
+			<textarea name="content"></textarea><br>
+			<input type="submit" value="댓글 등록">
+		</form>
 		<div class="row">
 			<div class="col-md-8">
 				<div class="page-header">
@@ -322,10 +306,6 @@
 			</div>
 		</div>
 		
-		<form id="insertComment">
-			<input type="text" name="content"><br>
-			<input type="submit" value="댓글 등록">
-		</form>
 		<input type="button" value="목록" onclick="javascript:location.href='${pageContext.request.contextPath}/funding/ingFundingList'">
 	</div>
 </div>
