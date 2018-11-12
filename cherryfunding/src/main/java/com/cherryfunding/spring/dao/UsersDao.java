@@ -60,5 +60,10 @@ public class UsersDao {
 	public int deposit(HashMap<String, Object> map) {
 		return sqlSession.update(NAMESPACE + "deposit", map);
 	}
+	
+	public String getEmail(String id) {
+		return sqlSession.selectOne(NAMESPACE + "getEmail", id);
+	}
+	
 
 }

@@ -26,5 +26,14 @@ public class IngCharityListService {
 	public CPictureVo thumbnail(int cNum) {
 		return cpdao.thumbnail(cNum);
 	}
+	public List<String> relatedWords(String keyword, String field) {
+		System.out.println("서비스");
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("keyword", keyword);
+		map.put("field", field);
+		List<String> list = dao.relatedWords(map);
+		return list;
+	}
+
 }
 

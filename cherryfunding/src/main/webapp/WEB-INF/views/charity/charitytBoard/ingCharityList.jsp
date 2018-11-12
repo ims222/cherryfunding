@@ -2,7 +2,11 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script type="text/javascript">
+	var array = [];
 	$(document).ready(function(){
 		$("#category").on('click', 'button', function(e){
 			var value = $(this).text();
@@ -12,7 +16,24 @@
 			var value = $(this).val();
 			location.href= "${pageContext.request.contextPath}/charity/ingCharityList?sort=" + value;
 		});
+		$("#keyword").on('keyup', related);
+		$("#keyword").autocomplete({source: array});
 	});
+	function related(){
+		var keyword = $("#keyword").val();
+		var field = $("#field option:selected").text();
+		$.ajax({
+			url:'${pageContext.request.contextPath}/charity/relatedWords',
+			data: {keyword: keyword, field: field},
+			dataType: 'json',
+			type:'get',
+			success: function(data){
+				for(var i=0; i<data.length; i++){
+					array[i]=data[i];
+				}
+			}
+		});
+	}
 </script>
 <!-- Main -->
 <div id="main">
@@ -34,7 +55,7 @@
 				<option value="content" <c:if test="${field eq 'content'}">selected="selected"</c:if>>내용</option>
 				<option value="id" <c:if test="${field eq 'id'}">selected="selected"</c:if>>글쓴이</option>
 			</select>
-			<input type="text" name="keyword" value="${keyword}">
+			<input type="text" name="keyword" id="keyword" value="${keyword}">
 			<input type="submit" value="검색">		
 		</form>
 		<select id="sort">

@@ -38,4 +38,7 @@ public class VolunteerDao {
 		return sqlSession.update(NAMESPACE + "updateEnded", map);
 	}
 	
+	public List<Integer> getNearNum(){
+		return sqlSession.selectList(NAMESPACE + "getNearNum");
+	}
 }

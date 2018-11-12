@@ -15,6 +15,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getTotal" parameterType="int" resultType="int">
 		select NVL(count(vlNum),0) from vList where vNum = #{vNum}
 	</select>
+	<select id="getNearId" parameterType="int" resultType="String">
+		select id from vList where vNum = #{vNum}
+	</select>
 	<insert id="insert" parameterType="vList">
 		insert into vList values(#{vlNum},#{vNum},#{id},#{content})
 	</insert>

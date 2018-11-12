@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cherryfunding.spring.vo.VisitorMapper">
+
+	<insert id="insert" parameterType="Visitor">
+		insert into visitor values(#{v_ip},#{v_refer},sysdate)
+	</insert>
+	
+	<select id="visitorcount" resultType="int">
+		select count(*) from visitor
+		where to_char(v_date,'yyyymmdd') in to_char(SYSDATE,'yyyymmdd')
+	</select>
+	<select id = "dvisitorcount" parameterType="string" resultType="int">
+		select count(*) from visitor
+		where to_char(v_date,'yyyy/mm/dd') = #{date}
+	</select>
+	
+	<select id="ftotalprice" resultType="int"> <!-- 전체 펀딩금액  -->
+		select sum(f.amount * price) from fdetail f, reward r
+		where f.rNum = r.rnum
+	</select>
+	
+	<select id="ctotalprice" resultType="int"> <!-- 전체 후원금액 -->
+		select NVL(sum(amount), 0) sumPrice from cDetail
+	</select>
+	
+	<select id="tfprice" parameterType="string" resultType="int"><!-- 오늘 펀딩 금액  -->
+		select NVL(sum(f.amount * price),0) from fdetail f, reward r
+		where TO_CHAR(f.regdate,'yymmdd') = #{today} and f.rNum = r.rnum
+	</select>
+	
+	<select id="tcprice" parameterType="string" resultType="int"><!-- 오늘 후원 금액 -->
+		select NVL(sum(amount), 0) sumPrice from cDetail
+		where TO_CHAR(regdate,'yymmdd') = #{today}
+	</select>
+
+</mapper>

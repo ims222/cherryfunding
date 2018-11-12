@@ -41,4 +41,8 @@ public class VolunteerService {
 	public int updateEnded(HashMap<String, Object> map) {
 		return volunteerDao.updateEnded(map);
 	}
+	
+	public List<Integer> getNearNum(){
+		return volunteerDao.getNearNum();
+	}
 }

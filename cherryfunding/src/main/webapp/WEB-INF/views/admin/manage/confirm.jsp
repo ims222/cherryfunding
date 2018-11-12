@@ -46,7 +46,7 @@
 </head>
 <body>
 	<h2><a href="/cherryfunding/admypagea">승인 목록</a></h2>
-	
+	<h1>인원<%=session.getAttribute("count")%></h1>
 	<table class="table table-condensed" border="1" width="500">
 		<tr>
 			<th>글번호</th>

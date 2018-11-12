@@ -18,4 +18,5 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getInfo" parameterType="string" resultType="userSetting">
 		select * from userSetting where id=#{id}
 	</select>
+	
 </mapper>

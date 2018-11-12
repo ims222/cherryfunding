@@ -30,6 +30,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="detail" parameterType="int" resultType="volunteer">
 		select * from volunteer where vnum = #{vnum}
 	</select>
+	<!-- dday가 sysdate 하루 전인 봉사글의 vNum을 (volunteer로부터) List<Integer>로 얻어오기 -->
+	<select id="getNearNum" resultType="int">
+		select vNum from volunteer <![CDATA[where dday =  trunc(sysdate+1)]]>
+	</select>
 
 	<update id="update" parameterType="volunteer">
 		update volunteer set #{pwd} where #{id}
