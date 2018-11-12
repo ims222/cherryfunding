@@ -88,9 +88,7 @@
 	function selectionOption(){
 		$("#list").empty();
 		$('#pageNum').val(1);
-		//var sort = $(this).val();
 		showMore();
-		//location.href= "${pageContext.request.contextPath}/funding/moreIngFundingList?sort=" + sort + "&category=" + category;
 	}
 	function related(){
 		var keyword = $("#keyword").val();
@@ -107,14 +105,6 @@
 				}
 			}
 		});
-	}
-	function openCity(cityName) {
-	    var i;
-	    var x = document.getElementsByClassName("city");
-	    for (i = 0; i < x.length; i++) {
-	        x[i].style.display = "none"; 
-	    }
-	    document.getElementById(cityName).style.display = "block"; 
 	}
 </script>
 <script id="fundingList" type="text/template">
