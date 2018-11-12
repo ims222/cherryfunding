@@ -14,7 +14,6 @@ public class BatchController {
 	private VolunteerService volunteerService;
 
 	public void method() {	//마감일 지난 봉사 게시물 제목에 [마감] 붙이기(하루 1회 실행)
-		System.out.println("배치");
 		int maxNum = volunteerService.getMaxNum();
 		for(int i=0; i<maxNum; i++) {	//마감일 지난 게시물이 몇 개 있는지 모르므로 그냥 전체 게시물 수만큼 검사.. 	
 			HashMap<String, Object> map = volunteerService.getEnded();	//마감일이 지난 title, vNum을 작은번호부터 가져옴

@@ -1,5 +1,7 @@
 package com.cherryfunding.spring.service.volunteer;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,8 +26,10 @@ public class VListService {
 	public int delete(VListVo vo) {
 		return vListDao.delete(vo);
 	}
-	
 	public int getTotal(int vNum) {
 		return vListDao.getTotal(vNum);
+	}
+	public List<String> getNearId(int vNum){
+		return vListDao.getNearId(vNum);
 	}
 }
