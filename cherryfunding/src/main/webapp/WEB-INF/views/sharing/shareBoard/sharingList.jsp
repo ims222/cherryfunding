@@ -24,7 +24,7 @@
 					alert('마지막 페이지 입니다');
 				}else{
 					data.list.forEach(function(value){
-						result +=	html.replace(/{fNum}/gi, value.SNUM)
+						result +=	html.replace(/{sNum}/gi, value.SNUM)
 									.replace("{savename}", value.savename)
 									.replace("{spinfo}", value.spinfo)
 									.replace("{title}", value.TITLE)
@@ -40,7 +40,7 @@
 </script>
 <script id="sharingList" type="text/template">
 <div class="w3-col m4 l4" style="padding: 20px;">
-	<a href="#">
+	<a href="${pageContext.request.contextPath}/sharing/sharingDetail?sNum={sNum}">
 	<img src="{savename}" class="w3-round" alt="{spinfo}" height="200px" width="100%"></a>
 	<div>
 		<div style="height: 50px;>
