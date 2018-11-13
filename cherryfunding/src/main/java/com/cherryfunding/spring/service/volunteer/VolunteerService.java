@@ -45,4 +45,8 @@ public class VolunteerService {
 	public List<Integer> getNearNum(){
 		return volunteerDao.getNearNum();
 	}
+	
+	public String getTitle(int vNum) {
+		return volunteerDao.getTitle(vNum);
+	}
 }

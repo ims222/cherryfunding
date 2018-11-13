@@ -34,7 +34,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getNearNum" resultType="int">
 		select vNum from volunteer <![CDATA[where dday =  trunc(sysdate+1)]]>
 	</select>
-
+	<select id="getTitle" parameterType="int" resultType="string">
+		select title from volunteer where vnum = #{vnum}
+	</select>
 	<update id="update" parameterType="volunteer">
 		update volunteer set #{pwd} where #{id}
 	</update>

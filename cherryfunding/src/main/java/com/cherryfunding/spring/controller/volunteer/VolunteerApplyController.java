@@ -39,15 +39,21 @@ public class VolunteerApplyController {
 	public String volunteerApply(String id, int vNum, String apply) {
 		JSONObject obj = new JSONObject();
 		if (apply.equals("apply")) {	//신청이 들어왔을 경우
-			int members = volunteerService.getMembers(vNum);	//필요인원 가져오기
-			int membersNow = vListService.getTotal(vNum);	//현재까지의 신청자 수 가져오기
-			if(members > membersNow) {
-				//필요인원이 초과되지 않았을 경우
-				VListVo vlvo = new VListVo(vListService.getMaxNum() + 1, vNum, id, "내용");
-				vListService.insert(vlvo);
-				obj.put("result", "insertok");
-			}else {	//필요인원이 초과되었을 경우
-				obj.put("result", "no");
+			//신청글의 제목을 가져옴
+			String title = volunteerService.getTitle(vNum);
+			if(!title.startsWith("[마감]")) {	//제목이 [마감]으로 시작하지 않을 경우
+				int members = volunteerService.getMembers(vNum);	//필요인원 가져오기
+				int membersNow = vListService.getTotal(vNum);	//현재까지의 신청자 수 가져오기
+				if(members > membersNow) {
+					//필요인원이 초과되지 않았을 경우
+					VListVo vlvo = new VListVo(vListService.getMaxNum() + 1, vNum, id, "내용");
+					vListService.insert(vlvo);
+					obj.put("result", "insertok");
+				}else {	//필요인원이 초과되었을 경우
+					obj.put("result", "no");
+				}
+			}else{	
+				obj.put("result", "finished");
 			}
 		}else{	//신청취소가 들어왔을 경우
 			vListService.delete(new VListVo(0, vNum, id, "내용"));
