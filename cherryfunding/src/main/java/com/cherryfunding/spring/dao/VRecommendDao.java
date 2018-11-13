@@ -28,4 +28,8 @@ public class VRecommendDao {
 	public int delete(VRecommendVo vo) {
 		return sqlSession.delete(NAMESPACE + "delete", vo);
 	}
+	
+	public int getRecomm(int vNum) {
+		return sqlSession.selectOne(NAMESPACE + "getRecomm", vNum);
+	}
 }

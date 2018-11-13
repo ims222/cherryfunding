@@ -7,7 +7,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="isRecomm" parameterType="vRecommend" resultType="vRecommend">
 		select * from vRecommend where vNum=#{vNum} and id=#{id}
 	</select>
-
+	<select id="getRecomm" parameterType="int" resultType="int">
+		select NVL(count(vrNum), 0) from vRecommend where vNum=#{vNum}
+	</select>
 	<insert id="insert" parameterType="vRecommend">
 		insert into vRecommend values(#{vrNum}, #{vNum}, #{id})
 	</insert>
