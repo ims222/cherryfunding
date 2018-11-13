@@ -8,25 +8,18 @@
 		<div>
 			<div class="row">
 				<!-- 요약 -->
-				<div class="col-md-3">
-					<p>전체 후원 갯수</p>
-					<p>${summary.totCharity.CNT}</p>
-					<p>전체 후원 금액</p>
-					<p>${summary.totCharity.S}원</p>
-					<br>
-					<p>오늘 후원 갯수</p>
-					<p>${summary.todayCharityCount}</p>
-					<p>오늘 후원 금액</p>
-					<p>${summary.todayCharityPrice}원</p>
+				<div class="col-md-3 mainContent">
+					
 				</div>
 				<!-- 종료임박후원 -->
-				<div class="col-md-3">
+				<div class="col-md-3 mainContent">
 					<a href="${pageContext.request.contextPath}/charityList/detail?num=${summary.cEnd.cNum}">
-					<img src="${summary.cEnd.savename}"	alt="${summary.cEnd.cpinfo}" class="w3-round listImage"></a>
+					<img src="${summary.cEnd.savename}"	alt="${summary.cEnd.cpinfo}" class="w3-round listImage">
+					</a><div class="top-left">종료임박후원</div>
 					<div>
 						<div class="listTitle">
 							<p class="w3-left-align">
-								<h4><a href="#">${summary.cEnd.title} 종료임박후원</a></h4>
+								<h4><a href="#">${summary.cEnd.title}</a></h4>
 							</p>
 						</div>
 						<fmt:formatDate value="${summary.cEnd.eDate}" var="cEndeDate" pattern="yyyyMMdd"/>
@@ -51,21 +44,24 @@
 							<div class="w3-left-align" style="float:left;">${summary.cEnd.category} | ${summary.cEnd.id}</div>
 							<div class="w3-right-align"><p>추천 <span class="w3-badge w3-green">{recomm}</span></p></div>
 							<div class="w3-border">
-								<div class="w3-blue" style="height:5px;width:${barcEndBefore/100}"></div>
+								<div class="w3-blue" style="height:5px;width:${barcEndBefore/10000}"></div>
 							</div>
-							<div class="w3-left-align" style="float:left;"><fmt:formatNumber value="${cEndBefore/100}" type="percent"/> · ${summary.cEnd.cAmount}원</div>
+							<div class="w3-left-align" style="float:left;">
+							<fmt:formatNumber value="${cEndBefore/100}" type="percent" pattern="0%"/> ·
+							<fmt:formatNumber value="${summary.cEnd.cAmount}" pattern="#,###"/>원</div>
 							<div class="w3-right-align">${cEndEnd - cEndNow}일 남음</div>
 						</div>
 					</div>
 				</div>
 				<!-- 주목할만한 후원 -->
-				<div class="col-md-3">
+				<div class="col-md-3 mainContent">
 					<a href="${pageContext.request.contextPath}/fundingList/detail?num=${summary.cHot.cNum}">
-					<img src="${summary.cHot.savename}"	alt="${summary.cHot.cpinfo}" class="w3-round listImage"></a>
+					<img src="${summary.cHot.savename}"	alt="${summary.cHot.cpinfo}" class="w3-round listImage">
+					</a><div class="top-left">주목할만한 후원</div>
 					<div>
 						<div class="listTitle">
 							<p class="w3-left-align">
-								<h4><a href="#">${summary.cHot.title} 주목할만한 후원</a></h4>
+								<h4><a href="#">${summary.cHot.title}</a></h4>
 							</p>
 						</div>
 						<fmt:formatDate value="${summary.cHot.eDate}" var="cHoteDate" pattern="yyyyMMdd"/>
@@ -93,19 +89,22 @@
 							<div class="w3-border">
 								<div class="w3-blue" style="height:5px;width:${barcHotBefore/100}"></div>
 							</div>
-							<div class="w3-left-align" style="float:left;"><fmt:formatNumber value="${cHotBefore/100}" type="percent"/> · ${summary.cHot.cAmount}원</div>
+							<div class="w3-left-align" style="float:left;">
+							<fmt:formatNumber value="${cHotBefore/10000}" type="percent" pattern="0%"/> ·
+							<fmt:formatNumber value="${summary.cHot.cAmount}" pattern="#,###"/>원</div>
 							<div class="w3-right-align">${cHotEnd - cHotNow}일 남음</div>
 						</div>
 					</div>
 				</div>
 				<!-- 참여금액이 높은 후원 -->
-				<div class="col-md-3">
+				<div class="col-md-3 mainContent">
 					<a href="${pageContext.request.contextPath}/fundingList/detail?num=${summary.cPrice.cNum}">
-					<img src="${summary.cPrice.savename}"	alt="${summary.cPrice.cpinfo}" class="w3-round listImage"></a>
+					<img src="${summary.cPrice.savename}"	alt="${summary.cPrice.cpinfo}" class="w3-round listImage">
+					</a><div class="top-left">참여금액이 높은 후원</div>
 					<div>
 						<div class="listTitle">
 							<p class="w3-left-align">
-								<h4><a href="#">${summary.cPrice.title} 참여금액이 높은 후원</a></h4>
+								<h4><a href="#">${summary.cPrice.title}</a></h4>
 							</p>
 						</div>
 						<fmt:formatDate value="${summary.cPrice.eDate}" var="cPriceeDate" pattern="yyyyMMdd"/>
@@ -133,7 +132,9 @@
 							<div class="w3-border">
 								<div class="w3-blue" style="height:5px;width:${barcPriceBefore/100}"></div>
 							</div>
-							<div class="w3-left-align" style="float:left;"><fmt:formatNumber value="${cPriceBefore/100}" type="percent"/> · ${summary.cPrice.cAmount}원</div>
+							<div class="w3-left-align" style="float:left;">
+							<fmt:formatNumber value="${cPriceBefore/10000}" type="percent" pattern="0%"/> ·
+							<fmt:formatNumber value="${summary.cPrice.cAmount}" pattern="#,###"/>원</div>
 							<div class="w3-right-align">${cPriceEnd - cPriceNow}일 남음</div>
 						</div>
 					</div>
@@ -141,25 +142,26 @@
 			</div>
 			<div class="row">
 				<!-- 요약 -->
-				<div class="col-md-3">
-					<p>전체 펀딩 갯수</p>
-					<p>${summary.totFunding.CNT}</p>
-					<p>전체 펀딩 금액</p>
-					<p>${summary.totFunding.S}원</p>
+				<div class="col-md-3 mainContent">
+					<p style="display:none;">전체 펀딩 갯수 ${summary.totFunding.CNT}</p>
+					<p>전체 펀딩 금액 <fmt:formatNumber value="${summary.totFunding.S}" pattern="#,###" />원</p>
+					<p style="display:none;">오늘 펀딩 갯수 ${summary.todayFundingCount}</p>
+					<p>오늘 펀딩 금액 <fmt:formatNumber value="${summary.todayFundingPrice}" pattern="#,###"/>원</p>
 					<br>
-					<p>오늘 펀딩 갯수</p>
-					<p>${summary.todayFundingCount}</p>
-					<p>오늘 펀딩 금액</p>
-					<p>${summary.todayFundingPrice}원</p>
+					<p style="display: none;">전체 후원 갯수 ${summary.totCharity.CNT}</p>
+					<p>전체 후원 금액 <fmt:formatNumber value="${summary.totCharity.S}" pattern="#,###"/>원</p>
+					<p style="display: none;">오늘 후원 갯수 ${summary.todayCharityCount}</p>
+					<p>오늘 후원 금액 <fmt:formatNumber value="${summary.todayCharityPrice}" pattern="#,###"/>원</p>
 				</div>
 				<!-- 종료임박펀딩 -->
-				<div class="col-md-3">
+				<div class="col-md-3 mainContent">
 					<a href="${pageContext.request.contextPath}/funding/ingFundingDetailforUser?fNum=${summary.fEnd.fNum}">
-					<img src="${summary.fEnd.savename}"	alt="${summary.fEnd.fpinfo}" class="w3-round listImage"></a>
+					<img src="${summary.fEnd.savename}"	alt="${summary.fEnd.fpinfo}" class="w3-round listImage">
+					</a><div class="top-left">종료임박펀딩</div>
 					<div>
 						<div class="listTitle">
 							<p class="w3-left-align">
-								<h4><a href="#">${summary.fEnd.title} 종료임박펀딩</a></h4>
+								<h4><a href="#">${summary.fEnd.title}</a></h4>
 							</p>
 						</div>
 						<fmt:formatDate value="${summary.fEnd.edate}" var="fEndEdate" pattern="yyyyMMdd"/>
@@ -187,19 +189,22 @@
 							<div class="w3-border">
 								<div class="w3-blue" style="height:5px;width:${barfEndBefore/100}"></div>
 							</div>
-							<div class="w3-left-align" style="float:left;"><fmt:formatNumber value="${fEndBefore/100}" type="percent"/> · ${summary.fEnd.camout}원</div>
+							<div class="w3-left-align" style="float:left;">
+							<fmt:formatNumber value="${fEndBefore/10000}" type="percent" pattern="0%"/> ·
+							<fmt:formatNumber value="${summary.fEnd.camout}" pattern="#,###"/>원</div>
 							<div class="w3-right-align">${fEndEnd - fEndNow}일 남음</div>
 						</div>
 					</div>
 				</div>
 				<!-- 가장 많이 주목된 펀딩 -->
-				<div class="col-md-3">
+				<div class="col-md-3 mainContent">
 					<a href="${pageContext.request.contextPath}/funding/ingFundingDetailforUser?fNum=${summary.fHot.fNum}">
-					<img src="${summary.fHot.savename}"	alt="${summary.fHot.fpinfo}" class="w3-round listImage"></a>
+					<img src="${summary.fHot.savename}"	alt="${summary.fHot.fpinfo}" class="w3-round listImage">
+					</a><div class="top-left">가장 많이 주목된 펀딩</div>
 					<div>
 						<div class="listTitle">
 							<p class="w3-left-align">
-								<h4><a>${summary.fHot.title} 가장 많이 주목된 펀딩</a></h4>
+								<h4><a>${summary.fHot.title}</a></h4>
 							</p>
 						</div>
 						<fmt:formatDate value="${summary.fHot.edate}" var="fHotEdate" pattern="yyyyMMdd"/>
@@ -227,19 +232,22 @@
 							<div class="w3-border">
 								<div class="w3-blue" style="height:5px;width:${barfHotBefore/100}"></div>
 							</div>
-							<div class="w3-left-align" style="float:left;"><fmt:formatNumber value="${fHotBefore/100}" type="percent"/> · ${summary.fHot.camout}원</div>
+							<div class="w3-left-align" style="float:left;">
+							<fmt:formatNumber value="${fHotBefore/10000}" type="percent" pattern="0%"/> ·
+							<fmt:formatNumber value="${summary.fHot.camout}" pattern="#,###"/>원</div>
 							<div class="w3-right-align">${fHotEnd - fHotNow}일 남음</div>
 						</div>
 					</div>
 				</div>
-				<!-- 참여금액이 제일 많은 펀딩 -->
-				<div class="col-md-3">
+				<!-- 참여금액이 가장 높은 펀딩 -->
+				<div class="col-md-3 mainContent">
 					<a href="${pageContext.request.contextPath}/funding/ingFundingDetailforUser?fNum=${summary.fPrice.fNum}">
-					<img src="${summary.fPrice.savename}"	alt="${summary.fPrice.fpinfo}" class="w3-round listImage"></a>
+					<img src="${summary.fPrice.savename}" alt="${summary.fPrice.fpinfo}" class="w3-round listImage">
+					</a><div class="top-left">참여금액이 가장 높은 펀딩</div>
 					<div>
 						<div class="listTitle">
 							<p class="w3-left-align">
-								<h4><a href="#">${summary.fPrice.title} 가장 많이 주목된 펀딩</a></h4>
+								<h4><a href="#">${summary.fPrice.title}</a></h4>
 							</p>
 						</div>
 						<fmt:formatDate value="${summary.fPrice.edate}" var="fPriceEdate" pattern="yyyyMMdd"/>
@@ -267,7 +275,9 @@
 							<div class="w3-border">
 								<div class="w3-blue" style="height:5px;width:${barfPriceBefore/100}"></div>
 							</div>
-							<div class="w3-left-align" style="float:left;"><fmt:formatNumber value="${fPriceBefore/100}" type="percent"/> · ${summary.fPrice.camout}원</div>
+							<div class="w3-left-align" style="float:left;">
+							<fmt:formatNumber value="${fPriceBefore/10000}" type="percent" pattern="0%"/> ·
+							 <fmt:formatNumber value="${summary.fPrice.camout}" pattern="#,###"/>원</div>
 							<div class="w3-right-align">${fHotEnd - fHotNow}일 남음</div>
 						</div>
 					</div>

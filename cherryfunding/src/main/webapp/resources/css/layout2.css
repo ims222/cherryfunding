@@ -116,3 +116,17 @@ body {
 .listTitle p {
 	word-break: break-all;
 }
+
+.mainContent {
+	padding: 20px;
+}
+
+.mainContent .top-left {
+	position: absolute;
+	top: 25px;
+	left: 30px;
+	background-color: white;
+	opacity: 0.6;
+	padding: 1px 5px 1px 5px;
+	border-bottom: 1px solid black;
+}
