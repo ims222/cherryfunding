@@ -37,3 +37,6 @@ function calDate(time){
 	}
 	return str + ' 전';
 }
+
+
+

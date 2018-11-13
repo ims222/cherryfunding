@@ -5,7 +5,7 @@ PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
 
 <tiles-definitions>
 	<!-- charity -->
-	<definition name=".mypage" extends = ".main">
+	<definition name=".mypage" extends = ".ingFundingList">
 		<put-attribute name="content" value="/WEB-INF/views/user/userInfo/mypage.jsp"/>
 	</definition>
 	

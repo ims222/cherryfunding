@@ -12,6 +12,7 @@ body {
 }
 
 #header {
+	
 }
 
 .navbar {
@@ -44,4 +45,56 @@ body {
 		float: none;
 		display: block;
 	}
+}
+
+.rBtn {
+	display: inline-block;
+	position: relative;
+	overflow: hidden;
+	margin-left: -1px;
+	float: left;
+	width: 33px;
+	height: 33px;
+	border: 1px solid #ccc;
+	background-color: #fff;
+	vertical-align: middle;
+}
+
+.rBtn i {
+	z-index: -1;
+}
+
+.rBtn:hover {
+	border-color: #666;
+}
+
+.rInput {
+	vertical-align: middle;
+	margin-left: -1px;
+	float: left;
+	height: 33px;
+	width: 41px;
+	border: 1px solid #ccc;
+	text-align: center;
+	font-weight: bold;
+}
+
+#qq-template-gallery {
+	color: white;
+	background-color: #00ABC7;
+	font-size: 14px;
+	padding: 7px 20px;
+	background-image: none;
+}
+
+#qq-template-gallery .qq-upload-button {
+	margin-right: 15px;
+}
+
+#qq-template-gallery .buttons {
+	width: 36%;
+}
+
+#qq-template-gallery .qq-uploader .qq-total-progress-bar-container {
+	width: 60%;
 }
