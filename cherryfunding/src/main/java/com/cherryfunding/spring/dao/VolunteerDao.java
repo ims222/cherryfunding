@@ -41,4 +41,8 @@ public class VolunteerDao {
 	public List<Integer> getNearNum(){
 		return sqlSession.selectList(NAMESPACE + "getNearNum");
 	}
+	
+	public String getTitle(int vNum) {
+		return sqlSession.selectOne(NAMESPACE + "getTitle", vNum);
+	}
 }

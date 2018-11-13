@@ -68,9 +68,11 @@
 						success: function(data){
 							if(data.result === 'insertok' || data.result === 'deleteok'){	
 								isApply();
-							}else{
+							}else if(data.result === 'no'){
 								$("#myModal").modal('show');
 								return;
+							}else{
+								alert("마감된 게시글입니다.");
 							}
 						}
 					});	
