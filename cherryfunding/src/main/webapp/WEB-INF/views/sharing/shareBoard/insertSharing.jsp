@@ -66,10 +66,11 @@
 		<br>
 		카테고리<br>
 		<select name="category">
-			<option value="1">1</option>
-			<option value="2">2</option>
-			<option value="3">3</option>
-			<option value="4">4</option>
+			<option value="의류">의류</option>
+			<option value="도서">도서</option>
+			<option value="악세서리">악세서리</option>
+			<option value="가전제품">가전제품</option>
+			<option value="인테리어">인테리어</option>
 		</select>
 		<br>
 		

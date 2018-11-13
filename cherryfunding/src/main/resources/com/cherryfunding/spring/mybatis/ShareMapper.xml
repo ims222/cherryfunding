@@ -12,15 +12,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select NVL(max(sNum), 0) from sharing
 	</select>
 	
-	<select id="list" resultType="share">
-		select * from sharing order by sNum desc
+	<select id="getTotCount" resultType="int">
+		select NVL(count(sNum), 0) from sharing
+	</select>
+	
+	<select id="list" resultType="hashmap" parameterType="hashmap">
+		select * from (
+			select aa.*, rownum rnum from(
+    			select * from sharing order by sNum desc
+			)aa
+		) <![CDATA[where rnum >= #{startRow} and rnum <= #{endRow}]]>
 	</select>
 	
 	<select id="detail" parameterType="int" resultType="share">
 		select * from sharing where sNum = #{sNum}
 	</select>
-	
-	
 	
 
 	<select id="select" parameterType="string" resultType="share">

@@ -1,5 +1,6 @@
 package com.cherryfunding.spring.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -23,11 +24,15 @@ public class ShareDao {
 		return sqlSession.selectOne(NAMESPACE + "getMaxNum");
 	}
 
-	public List<ShareVo> list() {
-		return sqlSession.selectList(NAMESPACE + "list");
+	public List<HashMap<String, Object>> list(HashMap<String, Object> map) {
+		return sqlSession.selectList(NAMESPACE + "list", map);
 	}
 
 	public ShareVo detail(int sNum) {
 		return sqlSession.selectOne(NAMESPACE + "detail", sNum);
+	}
+
+	public int getTotCount() {
+		return sqlSession.selectOne(NAMESPACE + "getTotCount");
 	}
 }

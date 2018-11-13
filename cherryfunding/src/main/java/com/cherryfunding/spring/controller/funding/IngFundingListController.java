@@ -55,7 +55,6 @@ public class IngFundingListController {
 			map.put("pageNum", pageNum + 1);
 		}
 		
-		System.out.println(map);
 		return map;
 	}
 
