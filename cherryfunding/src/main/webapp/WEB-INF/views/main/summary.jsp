@@ -5,6 +5,27 @@
 <!-- Main -->
 <div id="main">
 	<div class="container">
+		<div class="bg-img">
+			<form action="${pageContext.request.contextPath}/testlogin" method="post" class="container">
+			<!-- <h1>로그인</h1> -->
+				<c:choose>
+					<c:when test="${not empty sessionScope.id}">
+						${sessionScope.id} 님 <a href="${pageContext.request.contextPath}/mypage">마이페이지</a>
+						<input type="button" class="btn" value="로그아웃" onclick="location.href='${pageContext.request.contextPath}/testlogout'">
+					</c:when>
+					<c:otherwise>
+						<label for="id"><b>아이디</b></label>
+						<input type="text" placeholder="아이디" name="id" required>
+
+						<label for="pwd"><b>패스워드</b></label>
+						<input type="password" placeholder="패스워드" name="pwd" required>
+
+						<button type="submit" class="btn">로그인</button>
+						<button type="button" name="회원가입" class="btn" onclick="javascript:location.href='${pageContext.request.contextPath}/users/insert'">회원가입</button>
+					</c:otherwise>
+				</c:choose>
+			</form>
+		</div>
 		<div>
 			<div class="row">
 				<!-- 종료임박후원 -->
@@ -135,23 +156,17 @@
 						</div>
 					</div>
 				</div>
-				<!-- 로그인 -->
+				<!-- 요약 -->
 				<div class="col-md-3 mainContent">
-					<form method="post" action="${pageContext.request.contextPath}/testlogin">
-						<c:choose>
-							<c:when test="${not empty sessionScope.id}">
-								${sessionScope.id} 님 <a href="${pageContext.request.contextPath}/mypage">마이페이지</a>
-								<input type="button" value="로그아웃" onclick="location.href='${pageContext.request.contextPath}/testlogout'">
-								
-							</c:when>
-							<c:otherwise>
-								<input type="text" name="id" placeholder="아이디"><br>
-								<input type="text" name="pwd" placeholder="비밀번호">
-								<input type="submit" value="로그인">
-								<button type="button" name="회원가입" onclick="javascript:location.href='${pageContext.request.contextPath}/users/insert'">회원가입</button>
-							</c:otherwise>
-						</c:choose>
-					</form>
+					<p style="display:none;">전체 펀딩 갯수 ${summary.totFunding.CNT}</p>
+					<p>전체 펀딩 금액 <fmt:formatNumber value="${summary.totFunding.S}" pattern="#,###" />원</p>
+					<p style="display:none;">오늘 펀딩 갯수 ${summary.todayFundingCount}</p>
+					<p>오늘 펀딩 금액 <fmt:formatNumber value="${summary.todayFundingPrice}" pattern="#,###"/>원</p>
+					<br>
+					<p style="display: none;">전체 후원 갯수 ${summary.totCharity.CNT}</p>
+					<p>전체 후원 금액 <fmt:formatNumber value="${summary.totCharity.S}" pattern="#,###"/>원</p>
+					<p style="display: none;">오늘 후원 갯수 ${summary.todayCharityCount}</p>
+					<p>오늘 후원 금액 <fmt:formatNumber value="${summary.todayCharityPrice}" pattern="#,###"/>원</p>
 				</div>
 			</div>
 			<div class="row">
@@ -284,17 +299,25 @@
 						</div>
 					</div>
 				</div>
-				<!-- 요약 -->
+				<!-- 로그인 -->
 				<div class="col-md-3 mainContent">
-					<p style="display:none;">전체 펀딩 갯수 ${summary.totFunding.CNT}</p>
-					<p>전체 펀딩 금액 <fmt:formatNumber value="${summary.totFunding.S}" pattern="#,###" />원</p>
-					<p style="display:none;">오늘 펀딩 갯수 ${summary.todayFundingCount}</p>
-					<p>오늘 펀딩 금액 <fmt:formatNumber value="${summary.todayFundingPrice}" pattern="#,###"/>원</p>
-					<br>
-					<p style="display: none;">전체 후원 갯수 ${summary.totCharity.CNT}</p>
-					<p>전체 후원 금액 <fmt:formatNumber value="${summary.totCharity.S}" pattern="#,###"/>원</p>
-					<p style="display: none;">오늘 후원 갯수 ${summary.todayCharityCount}</p>
-					<p>오늘 후원 금액 <fmt:formatNumber value="${summary.todayCharityPrice}" pattern="#,###"/>원</p>
+					<!-- 
+					<form method="post" action="${pageContext.request.contextPath}/testlogin">
+						<c:choose>
+							<c:when test="${not empty sessionScope.id}">
+								${sessionScope.id} 님 <a href="${pageContext.request.contextPath}/mypage">마이페이지</a>
+								<input type="button" value="로그아웃" onclick="location.href='${pageContext.request.contextPath}/testlogout'">
+								
+							</c:when>
+							<c:otherwise>
+								<input type="text" name="id" placeholder="아이디"><br>
+								<input type="text" name="pwd" placeholder="비밀번호">
+								<input type="submit" value="로그인">
+								<button type="button" name="회원가입" onclick="javascript:location.href='${pageContext.request.contextPath}/users/insert'">회원가입</button>
+							</c:otherwise>
+						</c:choose>
+					</form>
+					 -->
 				</div>
 			</div>
 		</div>
