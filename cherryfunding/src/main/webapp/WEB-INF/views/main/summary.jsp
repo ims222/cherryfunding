@@ -7,10 +7,6 @@
 	<div class="container">
 		<div>
 			<div class="row">
-				<!-- 요약 -->
-				<div class="col-md-3 mainContent">
-					
-				</div>
 				<!-- 종료임박후원 -->
 				<div class="col-md-3 mainContent">
 					<a href="${pageContext.request.contextPath}/charityList/detail?num=${summary.cEnd.cNum}">
@@ -139,20 +135,26 @@
 						</div>
 					</div>
 				</div>
+				<!-- 로그인 -->
+				<div class="col-md-3 mainContent">
+					<form method="post" action="${pageContext.request.contextPath}/testlogin">
+						<c:choose>
+							<c:when test="${not empty sessionScope.id}">
+								${sessionScope.id} 님 <a href="${pageContext.request.contextPath}/mypage">마이페이지</a>
+								<input type="button" value="로그아웃" onclick="location.href='${pageContext.request.contextPath}/testlogout'">
+								
+							</c:when>
+							<c:otherwise>
+								<input type="text" name="id" placeholder="아이디"><br>
+								<input type="text" name="pwd" placeholder="비밀번호">
+								<input type="submit" value="로그인">
+								<button type="button" name="회원가입" onclick="javascript:location.href='${pageContext.request.contextPath}/users/insert'">회원가입</button>
+							</c:otherwise>
+						</c:choose>
+					</form>
+				</div>
 			</div>
 			<div class="row">
-				<!-- 요약 -->
-				<div class="col-md-3 mainContent">
-					<p style="display:none;">전체 펀딩 갯수 ${summary.totFunding.CNT}</p>
-					<p>전체 펀딩 금액 <fmt:formatNumber value="${summary.totFunding.S}" pattern="#,###" />원</p>
-					<p style="display:none;">오늘 펀딩 갯수 ${summary.todayFundingCount}</p>
-					<p>오늘 펀딩 금액 <fmt:formatNumber value="${summary.todayFundingPrice}" pattern="#,###"/>원</p>
-					<br>
-					<p style="display: none;">전체 후원 갯수 ${summary.totCharity.CNT}</p>
-					<p>전체 후원 금액 <fmt:formatNumber value="${summary.totCharity.S}" pattern="#,###"/>원</p>
-					<p style="display: none;">오늘 후원 갯수 ${summary.todayCharityCount}</p>
-					<p>오늘 후원 금액 <fmt:formatNumber value="${summary.todayCharityPrice}" pattern="#,###"/>원</p>
-				</div>
 				<!-- 종료임박펀딩 -->
 				<div class="col-md-3 mainContent">
 					<a href="${pageContext.request.contextPath}/funding/ingFundingDetailforUser?fNum=${summary.fEnd.fNum}">
@@ -281,6 +283,18 @@
 							<div class="w3-right-align">${fHotEnd - fHotNow}일 남음</div>
 						</div>
 					</div>
+				</div>
+				<!-- 요약 -->
+				<div class="col-md-3 mainContent">
+					<p style="display:none;">전체 펀딩 갯수 ${summary.totFunding.CNT}</p>
+					<p>전체 펀딩 금액 <fmt:formatNumber value="${summary.totFunding.S}" pattern="#,###" />원</p>
+					<p style="display:none;">오늘 펀딩 갯수 ${summary.todayFundingCount}</p>
+					<p>오늘 펀딩 금액 <fmt:formatNumber value="${summary.todayFundingPrice}" pattern="#,###"/>원</p>
+					<br>
+					<p style="display: none;">전체 후원 갯수 ${summary.totCharity.CNT}</p>
+					<p>전체 후원 금액 <fmt:formatNumber value="${summary.totCharity.S}" pattern="#,###"/>원</p>
+					<p style="display: none;">오늘 후원 갯수 ${summary.todayCharityCount}</p>
+					<p>오늘 후원 금액 <fmt:formatNumber value="${summary.todayCharityPrice}" pattern="#,###"/>원</p>
 				</div>
 			</div>
 		</div>
