@@ -57,31 +57,6 @@
 	vertical-align: middle;
 }
 
-.rBtn {
-	display: inline-block;
-    position: relative;
-	overflow: hidden;
-	margin-left: -1px;
-	float: left;
-	width: 33px;
-	height: 33px;
-	border: 1px solid #ccc;
-	background-color: #fff;
-	vertical-align: middle;
-}
-.rBtn:hover {
-	border-color: #666;
-}
-.rInput {
-	vertical-align: middle;
-	margin-left: -1px;
-	float: left;
-	height: 33px;
-	width:41px;
-    border: 1px solid #ccc;
-    text-align: center;
-    font-weight: bold;
-}
 ul {
 	list-style: none;
 }

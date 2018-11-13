@@ -1,19 +1,11 @@
-<%@page import="com.cherryfunding.spring.util.S3Util"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<!DOCTYPE html>
-<html>
-<head>
-<title>mypage.jsp</title>
-</head>
-<% 
-	S3Util s3=new S3Util();
-	String humanPicture=s3.getFileURL("images/1457899384.png");
-%>
-<style>
+<link href="${pageContext.request.contextPath}/resources/css/fine-uploader/fine-uploader-new.min.css" type="text/css" rel="stylesheet">
+<script src="${pageContext.request.contextPath}/resources/js/fine-uploader/fine-uploader.min.js"></script>
+<style type="text/css">
 table.type04 {
     border-collapse: separate;
     border-spacing: 1px;
@@ -48,25 +40,66 @@ table.type04 td {
 			dataType:'json',
 			type:'post',
 			success:function(data){
-				const formatter = new Intl.NumberFormat('en-US', {
-					  style: 'currency',
-					  currency: 'KRW',
-					  minimumFractionDigits: 2
-					});
-
 				$('#balance').empty();
-				$("#balance").append("내 잔고 : " +  formatter.format(data.deposit) + " 원 <a href='#' onclick='prom(event)'>충전</a>");
+				$("#balance").append("내 잔고 : " +  comma(data.deposit) + " 원 <a href='#' onclick='prom(event)'>충전</a>");
+			}
+		});
+	}
+	
+	$(document).ready(function(){
+		getProfileImg();
+		
+	});
+	function getProfileImg(){
+		$.ajax({
+			url:'${pageContext.request.contextPath}/users/getProfileImg',
+			type:'post',
+			dataType:'json',
+			success: function(data){
+				$('#profileImg').attr("src", data.savename);
 			}
 		});
 	}
 </script>
-<body>
-<div class="wrap">
+<script type="text/template" id="qq-template-gallery">
+     <div class="qq-uploader-selector qq-uploader" qq-drop-area-text="사진을 드래그해주세요">
+            <div class="qq-total-progress-bar-container-selector qq-total-progress-bar-container">
+                <div role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" class="qq-total-progress-bar-selector qq-progress-bar qq-total-progress-bar"></div>
+            </div>
+            <div class="qq-upload-drop-area-selector qq-upload-drop-area" qq-hide-dropzone>
+                <span class="qq-upload-drop-area-text-selector"></span>
+            </div>
+            <div class="buttons">
+                <div class="qq-upload-button-selector qq-upload-button">
+                    <div>사진 선택</div>
+                </div>
+            </div>
+            <span class="qq-drop-processing-selector qq-drop-processing">
+                <span>Processing dropped files...</span>
+                <span class="qq-drop-processing-spinner-selector qq-drop-processing-spinner"></span>
+            </span>
+            <ul class="qq-upload-list-selector qq-upload-list" aria-live="polite" aria-relevant="additions removals">
+                <li>
+                    <div class="qq-progress-bar-container-selector">
+                        <div role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" class="qq-progress-bar-selector qq-progress-bar"></div>
+                    </div>
+                    <span class="qq-upload-spinner-selector qq-upload-spinner"></span>
+                    <img class="qq-thumbnail-selector" qq-max-size="100" qq-server-scale>
+                    <button type="button" class="qq-btn qq-upload-cancel-selector qq-upload-cancel">Cancel</button>
+                    <button type="button" class="qq-btn qq-upload-retry-selector qq-upload-retry">Retry</button>
+                    <button type="button" class="qq-btn qq-upload-delete-selector qq-upload-delete">Delete</button>
+                    <span role="status" class="qq-upload-status-text-selector qq-upload-status-text"></span>
+                </li>
+            </ul>
+        </div>
+</script>
+<div class="container">
 	<table class="type04">
 		<tr>
-		  <td>	
-		  	<img src="<%=humanPicture%>" width="111px">
-			<p style="font-size: 20px;font-weight: bold">&nbsp;&nbsp;${sessionScope.id}님</p>
+			<td>	
+				<img id="profileImg" src="" width="111px">
+				<p style="font-size: 20px;font-weight: bold">&nbsp;&nbsp;${sessionScope.id}님</p>
+				<button type="button" class="rBtn" data-toggle="modal" data-target="#profileModal">프로필 변경</button>
 		  </td>
 		  <td>	
 			<p id="balance">내 잔고 : <fmt:formatNumber value="${balance}" pattern="#,###.##"/> 원 <a href="#" onclick="prom(event)">충전</a></p>
@@ -116,6 +149,57 @@ table.type04 td {
 			</c:forEach>
 		</table>
 		</div>
-</body>
-</html>
+
+
+<!-- modal -->
+  	<div class="modal fade" id="profileModal" role="dialog">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">프로필 사진 변경</h4>
+        </div>
+        <div class="modal-body">
+        	<div id="fine-uploader-gallery"></div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="saveProfile" class="btn btn-default" data-dismiss="modal">저장</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+	<script type="text/javascript">
+		var galleryUploader = new qq.FineUploader(
+				{
+					autoUpload : false,
+					element : document.getElementById("fine-uploader-gallery"),
+					template : 'qq-template-gallery',
+					request : {
+						endpoint : '${pageContext.request.contextPath}/users/imgUpload'
+					},
+					thumbnails : {
+						placeholders : {
+							waitingPath : '${pageContext.request.contextPath}/resources/css/fine-uploader/placeholders/waiting-generic.png',
+							notAvailablePath : '${pageContext.request.contextPath}/resources/css/fine-uploader/placeholders/not_available-generic.png'
+						}
+					},
+					validation : {
+						allowedExtensions : [ 'jpeg', 'jpg', 'gif', 'png' ]
+					},
+					callbacks : {
+						onComplete : function(thumbnailUrl) {
+							$('#profileImg').attr("src", $('.qq-thumbnail-selector').attr('src'));
+							$('.qq-upload-success').remove();
+							//$('#fine-uploader-gallery').remove();
+						}
+					}
+				});
+		qq(document.getElementById("saveProfile")).attach("click", function() {
+			galleryUploader.uploadStoredFiles();
+        });
+	</script>
+
+
 
