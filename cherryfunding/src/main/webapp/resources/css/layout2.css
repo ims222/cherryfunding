@@ -103,3 +103,16 @@ body {
 	padding-top: 20px;
 	padding-bottom: 20px;
 }
+
+.listImage {
+	height: 200px;
+	width: 100%;
+}
+
+.listTitle {
+	height: 50px;
+}
+
+.listTitle p {
+	word-break: break-all;
+}
