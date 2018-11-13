@@ -103,7 +103,7 @@ table.type04 td {
 	<table class="type04">
 		<tr>
 			<td>	
-				<img id="profileImg" src="" width="111px">
+				<img id="profileImg" class="w3-circle" src="" width="111px" height="111px">
 				<p style="font-size: 20px;font-weight: bold">&nbsp;&nbsp;${sessionScope.id}님</p>
 				<button type="button" class="rBtn" data-toggle="modal" data-target="#profileModal">프로필 변경</button>
 			</td>
