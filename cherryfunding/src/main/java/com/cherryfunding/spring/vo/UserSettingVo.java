@@ -5,15 +5,18 @@ public class UserSettingVo {
 	private String lang;
 	private String voice;
 	private String alarm;
+	private String profile;
 
 	public UserSettingVo() {
 	}
 
-	public UserSettingVo(String id, String lang, String voice, String alarm) {
+	public UserSettingVo(String id, String lang, String voice, String alarm, String profile) {
+		super();
 		this.id = id;
 		this.lang = lang;
 		this.voice = voice;
 		this.alarm = alarm;
+		this.profile = profile;
 	}
 
 	public String getId() {
@@ -46,6 +49,14 @@ public class UserSettingVo {
 
 	public void setAlarm(String alarm) {
 		this.alarm = alarm;
+	}
+
+	public String getProfile() {
+		return profile;
+	}
+
+	public void setProfile(String profile) {
+		this.profile = profile;
 	}
 
 }

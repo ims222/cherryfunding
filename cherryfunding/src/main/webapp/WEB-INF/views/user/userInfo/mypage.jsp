@@ -57,7 +57,13 @@ table.type04 td {
 			dataType:'json',
 			success: function(data){
 				$('#profileImg').attr("src", data.savename);
-			}
+			},
+			statusCode: {
+				404: function() {
+					alert('404404');
+		        	$('#profileImg').attr("src", "https://s3.ap-northeast-2.amazonaws.com/cherryfundingbucket/profile/default");
+				}
+		    }
 		});
 	}
 </script>
@@ -100,38 +106,36 @@ table.type04 td {
 				<img id="profileImg" src="" width="111px">
 				<p style="font-size: 20px;font-weight: bold">&nbsp;&nbsp;${sessionScope.id}님</p>
 				<button type="button" class="rBtn" data-toggle="modal" data-target="#profileModal">프로필 변경</button>
-		  </td>
-		  <td>	
-			<p id="balance">내 잔고 : <fmt:formatNumber value="${balance}" pattern="#,###.##"/> 원 <a href="#" onclick="prom(event)">충전</a></p>
-			<p>총 후원금액 : <fmt:formatNumber value="${charitySum}" pattern="#,###.##"/> 원</p>
-			<p>총 펀딩금액 : <fmt:formatNumber value="${fundingSum}" pattern="#,###.##"/> 원</p>
-		  </td>
-		  <td>
-		     <p><a href="${pageContext.request.contextPath}/users/getInfo">회원정보수정</a></p>
-		     <p><a href="${pageContext.request.contextPath}/userSetting">환경설정</a></p>
-		  </td>
-		 </tr>
-		</table>
-		<p> 후원 목록 </p>
-		<table class="type04">
+			</td>
+			<td>	
+				<p id="balance">내 잔고 : <fmt:formatNumber value="${balance}" pattern="#,###.##"/> 원 <a href="#" onclick="prom(event)">충전</a></p>
+				<p>총 후원금액 : <fmt:formatNumber value="${charitySum}" pattern="#,###"/> 원</p>
+				<p>총 펀딩금액 : <fmt:formatNumber value="${fundingSum}" pattern="#,###"/> 원</p>
+			</td>
+			<td>
+				<p><a href="${pageContext.request.contextPath}/users/getInfo">회원정보수정</a></p>
+				<p><a href="${pageContext.request.contextPath}/userSetting">환경설정</a></p>
+			</td>
+		</tr>
+	</table>
+	<p> 후원 목록 </p>
+	<table class="type04">
+		<tr>
+			<td>제목</td>
+			<td>카테고리</td>
+			<td>금액</td>
+			<td>후원날짜</td>
+		</tr>
+		<c:forEach var="vo" items="${charityList}">
 			<tr>
-				<td>제목</td>
-				<td>카테고리</td>
-				<td>금액</td>
-				<td>후원날짜</td>
+				<td>${vo.title}</td>
+				<td>${vo.category}</td>	
+				<td><fmt:formatNumber value="${vo.amount }" pattern="#,###.##"/> 원</td>
+				<td>${vo.regdate}</td>
 			</tr>
-			<c:forEach var="vo" items="${charityList}">
-				<tr>
-					<td>${vo.title}</td>
-					<td>${vo.category}</td>	
-					<td><fmt:formatNumber value="${vo.amount }" pattern="#,###.##"/> 원</td>
-					<td>${vo.regdate}</td>
-				</tr>
-			</c:forEach>
-		</table>
-		</div>
-		<div>
-		<p> 펀딩 목록 </p>
+		</c:forEach>
+	</table>
+	<p> 펀딩 목록 </p>
 		<table class="type04">
 			<tr>
 				<td>제목</td>
@@ -147,8 +151,9 @@ table.type04 td {
 					<td>${vo.regdate}</td>
 				</tr>
 			</c:forEach>
-		</table>
-		</div>
+	</table>
+</div>
+		
 
 
 <!-- modal -->

@@ -8,7 +8,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 
 	<update id="update" parameterType="userSetting">
-		update userSetting set lang=#{lang},voice=#{voice},alarm=#{alarm} where id = #{id}
+		update userSetting
+			<set>
+				<if test="lang != null">lang = #{lang},</if>
+				<if test="voice != null">voice = #{voice},</if>
+				<if test="alarm != null">alarm = #{alarm},</if>
+				<if test="profile != null">profile = #{profile},</if>
+			</set>
+		where id = #{id}
 	</update>
 	
 	<delete id="delete" parameterType="string">
