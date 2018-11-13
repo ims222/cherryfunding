@@ -53,7 +53,7 @@ body {
 	overflow: hidden;
 	margin-left: -1px;
 	float: left;
-	width: 33px;
+	min-width: 33px;
 	height: 33px;
 	border: 1px solid #ccc;
 	background-color: #fff;
