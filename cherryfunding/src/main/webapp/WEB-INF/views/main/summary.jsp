@@ -26,7 +26,7 @@
 					<div>
 						<div class="listTitle">
 							<p class="w3-left-align">
-								<a href="#">${summary.cEnd.title} 종료임박후원</a>
+								<h4><a href="#">${summary.cEnd.title} 종료임박후원</a></h4>
 							</p>
 						</div>
 						<fmt:formatDate value="${summary.cEnd.eDate}" var="cEndeDate" pattern="yyyyMMdd"/>
@@ -65,7 +65,7 @@
 					<div>
 						<div class="listTitle">
 							<p class="w3-left-align">
-								<a href="#">${summary.cHot.title} 주목할만한 후원</a>
+								<h4><a href="#">${summary.cHot.title} 주목할만한 후원</a></h4>
 							</p>
 						</div>
 						<fmt:formatDate value="${summary.cHot.eDate}" var="cHoteDate" pattern="yyyyMMdd"/>
@@ -105,7 +105,7 @@
 					<div>
 						<div class="listTitle">
 							<p class="w3-left-align">
-								<a href="#">${summary.cPrice.title} 참여금액이 높은 후원</a>
+								<h4><a href="#">${summary.cPrice.title} 참여금액이 높은 후원</a></h4>
 							</p>
 						</div>
 						<fmt:formatDate value="${summary.cPrice.eDate}" var="cPriceeDate" pattern="yyyyMMdd"/>
@@ -159,7 +159,7 @@
 					<div>
 						<div class="listTitle">
 							<p class="w3-left-align">
-								<a href="#">${summary.fEnd.title} 종료임박펀딩</a>
+								<h4><a href="#">${summary.fEnd.title} 종료임박펀딩</a></h4>
 							</p>
 						</div>
 						<fmt:formatDate value="${summary.fEnd.edate}" var="fEndEdate" pattern="yyyyMMdd"/>
@@ -199,7 +199,7 @@
 					<div>
 						<div class="listTitle">
 							<p class="w3-left-align">
-								<a>${summary.fHot.title} 가장 많이 주목된 펀딩</a>
+								<h4><a>${summary.fHot.title} 가장 많이 주목된 펀딩</a></h4>
 							</p>
 						</div>
 						<fmt:formatDate value="${summary.fHot.edate}" var="fHotEdate" pattern="yyyyMMdd"/>
@@ -239,7 +239,7 @@
 					<div>
 						<div class="listTitle">
 							<p class="w3-left-align">
-								<a href="#">${summary.fPrice.title} 가장 많이 주목된 펀딩</a>
+								<h4><a href="#">${summary.fPrice.title} 가장 많이 주목된 펀딩</a></h4>
 							</p>
 						</div>
 						<fmt:formatDate value="${summary.fPrice.edate}" var="fPriceEdate" pattern="yyyyMMdd"/>
