@@ -28,4 +28,8 @@ public class VRecommendService {
 		return vRecommendDao.delete(vo);
 	}
 	
+	public int getRecomm(int vNum) {
+		return vRecommendDao.getRecomm(vNum);
+	}
+	
 }

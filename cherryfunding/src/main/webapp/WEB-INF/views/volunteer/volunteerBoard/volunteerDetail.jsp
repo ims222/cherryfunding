@@ -7,9 +7,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 <script type="text/javascript">
-
 	$(document).ready(function(){
 		isRecommend();
+		getRecommend();
 		isApply();
 		commentList();
 		applicant();
@@ -70,7 +70,6 @@
 								isApply();
 							}else{
 								$("#myModal").modal('show');
-								
 								return;
 							}
 						}
@@ -78,8 +77,6 @@
 				}
 			});
 		});
-			
-
 		
 		$("#insertComment").on('submit', function(e){
 			e.preventDefault();
@@ -114,11 +111,26 @@
 			success: function(data){
 				if(data.result === 'ok'){
 					$("#recommend").text('추천');
+					getRecommend();
 				}else{
 					$("#recommend").text('추천취소');
+					getRecommend();
 				}
 			}
 		});
+	}
+	
+	function getRecommend(){
+		$.ajax({
+			url: '${pageContext.request.contextPath}/volunteer/volunteerGetRecommend',
+			data: {vNum: '${vo.vNum}'},
+			type: 'get',
+			dataType: 'text',
+			success: function(data){
+				$("#showRecomm").empty();
+				$("#showRecomm").append(data);
+			}
+		})
 	}
 	
 	function isApply(){
@@ -130,8 +142,10 @@
 			success: function(data){
 				if(data.result === 'ok'){
 					$("#apply").text('신청');
+					applicant();
 				}else{
 					$("#apply").text('신청취소');
+					applicant();
 				}
 			}
 		});
@@ -169,6 +183,7 @@
 			dataType: 'text',
 			type: 'get',
 			success: function(data){
+				$("#applicant").empty();
 				$("#applicant").append(data);
 			}
 		});
@@ -198,7 +213,8 @@
 				 	<p>날짜: ${vo.dDay }</p>
 				 	<p>장소: ${vo.place }</p>
 				 	<p>모집인원: ${vo.members }</p>
-				 	<div id="applicant">현재 신청 인원:</div><br>
+				 	추천 수:<div id="showRecomm"></div>
+				 	현재 신청 인원:<div id="applicant"></div><br>
 				 	<button id="recommend" type="button"></button>
 				 	<button id="apply" type="button"></button>
 				</div>
