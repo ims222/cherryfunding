@@ -16,6 +16,10 @@
 			alert(errMsg);
 		}
 		
+		$( "#commentModal" ).on('show', function(){
+		    alert("I want this to appear after the modal has opened!");
+		});
+		
 		$("#recommend").on('click', function(){
 			var recomm;
 			var id='${sessionScope.id}';
@@ -46,31 +50,7 @@
 			});
 		});
 		
-		$("#insertComment").on('submit', function(e){
-			e.preventDefault();
-			var id = '${sessionScope.id}';
-			if(!id){
-				alert('로그인 해주세욧ㅅ');
-				return;
-			}
-			var content = $("#insertComment textarea[name='content']").val();
-			if(!content){
-				alert('댓글을 작성해욧');
-				return;
-			}
-				
-			$.ajax({
-				url:'${pageContext.request.contextPath}/funding/insertComment',
-				dataType:'json',
-				type:'post',
-				data: {id:id, content:content, fNum:'${vo.fNum}'},
-				success: function(data){
-					$("#insertComment textarea[name='content']").val('');
-					commentCount();
-					commentList();
-				}
-			});
-		});
+		$("#insertComment").on('submit', insertComment);
 		
 		$("#chooseItem").on('click', function(){
 			var rNum = $("select[name='reward']").val();
@@ -197,6 +177,32 @@
 			}
 		});
 	}
+	
+	function insertComment(e){
+		e.preventDefault();
+		var id = '${sessionScope.id}';
+		if(!id){
+			alert('로그인 해주세욧ㅅ');
+			return;
+		}
+		var content = $("#insertComment textarea[name='content']").val();
+		if(!content){
+			alert('댓글을 작성해욧');
+			return;
+		}
+			
+		$.ajax({
+			url:'${pageContext.request.contextPath}/funding/insertComment',
+			dataType:'json',
+			type:'post',
+			data: {id:id, content:content, fNum:'${vo.fNum}'},
+			success: function(data){
+				$("#insertComment textarea[name='content']").val('');
+				commentCount();
+				commentList();
+			}
+		});
+	}
 
 
 </script>
@@ -217,8 +223,8 @@
 <div id="main">
 	<div class="container">
 		<div class="row">
-			<div class="col-md-8"> 
-				<div>
+			<div class="col-md-8 w3-border-bottom"> 
+				<div class="mContent">
 					<h3>${vo.category}</h3>
 					<h1>${vo.title}</h1>
 				</div>
@@ -231,7 +237,7 @@
 					이 프로젝트는 펀딩 마감일까지 목표 금액이 100% 모이지 않으면 결제가 진행되지 않습니다
 				</div>
 				
-				<div>
+				<div class="contentStyle">
 					${vo.content}
 				</div>
 			
@@ -290,13 +296,17 @@
 				<br>
 				조회수: ${vo.hit}
 				<span id="fRecommend"></span>
-				
  			</div>
 		</div>
-		<form id="insertComment">
-			<textarea name="content"></textarea><br>
-			<input type="submit" value="댓글 등록">
-		</form>
+		<div class="row">
+			<div class="col-md-8">
+				<div class="w3-right-align">
+					<button type="button" class="w3-button" data-toggle="modal" data-target="#commentModal">댓글 작성</button>
+					<button type="button" class="w3-button" onclick="javascript:location.href='${pageContext.request.contextPath}/funding/ingFundingList'">목록</button>
+				</div>
+			</div>
+		</div>
+		
 		<div class="row">
 			<div class="col-md-8">
 				<div class="page-header">
@@ -305,7 +315,26 @@
 				<div id="comment" class="comments-list"></div>
 			</div>
 		</div>
-		
-		<input type="button" value="목록" onclick="javascript:location.href='${pageContext.request.contextPath}/funding/ingFundingList'">
+	</div>
+</div>
+
+
+<div class="modal fade" id="commentModal" role="dialog">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">댓글 작성</h4>
+			</div>
+			<div class="modal-body" style="overflow:hidden;">
+				<form id="insertComment">
+					<textarea name="content" rows="10" cols="94"></textarea><br>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default"
+				data-dismiss="modal" onclick="insertComment(event)">저장</button>
+			</div>
+		</div>
 	</div>
 </div>
