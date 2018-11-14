@@ -30,30 +30,7 @@ public class FundingController {
 	@Autowired
 	private FPictureService fPictureService;
 
-	// for Testing
-	@RequestMapping(value = "/testlogin", method = RequestMethod.GET)
-	public String loginForm() {
-		return "cicadas_login";
-	}
-	@RequestMapping(value="/testlogout")
-	public String logout(HttpSession session) {
-		session.invalidate();
-		return "redirect:/";
-	}
-
-	@RequestMapping(value = "/testlogin", method = RequestMethod.POST)
-	public String login(HttpServletRequest request, HttpSession session) {
-		String id = request.getParameter("id");
-		String pwd = request.getParameter("pwd");
-		UsersVo vo = new UsersVo();
-		vo.setId(id);
-		vo.setPwd(pwd);
-		if (testLoginService.login(vo) != null) {
-			session.setAttribute("id", vo.getId());
-			session.setAttribute("login", vo);
-		}
-		return "redirect:/";
-	}
+	
 
 	@RequestMapping(value = "/fundingList/showAll", method = RequestMethod.GET)
 	public String list(Model model) { // 占쎌읈筌ｏ옙 占쏙옙占쎈뎃疫뀐옙 �겫�뜄�쑎占쎌궎疫뀐옙

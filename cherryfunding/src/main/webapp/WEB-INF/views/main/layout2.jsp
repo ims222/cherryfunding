@@ -54,6 +54,5 @@
 		<tiles:insertAttribute name="content" />
 		<tiles:insertAttribute name="footer" />
 	</div>
-
 </body>
 </html>

@@ -71,6 +71,9 @@
 					}).prop('selected', true);
 					$('#keyword').val(data.keyword);
 				}
+			},
+			complete :function(){
+				$('.loading').hide();
 			}
 		});	
 	}
@@ -87,6 +90,8 @@
 		$('#pageNum').val(1);
 		showMore();
 	}
+	
+	
 	function related(){
 		var keyword = $("#keyword").val();
 		var field = $("#field option:selected").text();
@@ -105,7 +110,7 @@
 	}
 </script>
 <script id="fundingList" type="text/template">
-<div class="w3-col m4 l4" style="padding: 20px;">
+<div class="w3-col m4 l4 " style="padding: 20px;">
 	<a href="${pageContext.request.contextPath}/funding/ingFundingDetailforUser?fNum={fNum}">
 	<img src="{savename}" class="w3-round" alt="{fpinfo}" height="200px" width="100%"></a>
 	<div>
@@ -243,6 +248,7 @@
 			</select>
 		</form>
 		
+				
 		<div class="row">
 			<div class="col-lg-6">
 				<div class="input-group">
@@ -289,7 +295,17 @@
 			<option value="end" <c:if test="${sort eq 'end'}">selected="selected"</c:if>>종료임박순</option>
 		</select>
 		<input type="hidden" id="pageNum" value="">
+		
 		<div id="list" class="w3-row">
+		
+			<div class="spinner loading">
+			  <div class="rect1"></div>
+			  <div class="rect2"></div>
+			  <div class="rect3"></div>
+			  <div class="rect4"></div>
+			  <div class="rect5"></div>
+			</div>
+			
 		</div>
 		<button id="showMore" class="w3-btn w3-block w3-teal">더보기</button>
 	</div>
