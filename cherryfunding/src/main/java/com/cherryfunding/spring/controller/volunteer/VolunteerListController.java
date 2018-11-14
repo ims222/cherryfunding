@@ -18,13 +18,12 @@ public class VolunteerListController {
 	
 	@RequestMapping(value = "/volunteer/volunteerList", method = RequestMethod.GET)
 	public String sharingList(Model model) {
-		List<VolunteerVo> list = volunteerListService.list();
+		List<VolunteerVo> list = volunteerListService.getFirstSix();
 		for (VolunteerVo vo : list) {
 			vo.setSaveName(volunteerListService.thumbnail(vo.getvNum()).getSaveName());
 			vo.setVpInfo(volunteerListService.thumbnail(vo.getvNum()).getVpInfo());
 		}
 		model.addAttribute("list", list);
-
 		return ".volunteerList";
 	}
 }

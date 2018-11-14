@@ -23,6 +23,10 @@ public class VolunteerListService {
 		return volunteerDao.list();
 	}
 	
+	public List<VolunteerVo> getFirstSix(){
+		return volunteerDao.getFirstSix();
+	}
+	
 	public VPictureVo thumbnail(int vNum) {
 		return vPictureDao.thumbnail(vNum);
 	}
