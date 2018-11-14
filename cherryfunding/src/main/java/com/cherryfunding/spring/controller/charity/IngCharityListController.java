@@ -10,12 +10,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cherryfunding.spring.service.charity.IngCharityListService;
+import com.cherryfunding.spring.util.PageUtil;
 import com.cherryfunding.spring.util.S3Util;
 import com.cherryfunding.spring.vo.CharityVo;
-
 
 @Controller
 public class IngCharityListController {
@@ -25,7 +26,14 @@ public class IngCharityListController {
 	IngCharityListService ingCharityListService;
 
 	@RequestMapping(value = "/charity/ingCharityList", method = RequestMethod.GET)
-	public String ingCharityList(Model model, HttpServletRequest request) {
+	public String ingCharityList() {
+		return ".ingCharityList";
+	}
+
+	@RequestMapping("/charity/moreIngCharityList")
+	@ResponseBody
+	public HashMap<String, Object> ingCharityList(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
+			Model model, HttpServletRequest request) {
 		String category = request.getParameter("category");
 		String field = request.getParameter("field");
 		String keyword = request.getParameter("keyword");
@@ -35,22 +43,23 @@ public class IngCharityListController {
 		map.put("field", field);
 		map.put("keyword", keyword);
 		map.put("sort", sort);
-		List<CharityVo> list = ingCharityListService.list(map);
 
-		for (CharityVo vo : list) {
-			String thumbnail = ingCharityListService.thumbnail(vo.getcNum()).getSaveName();
-			vo.setSavename(s3.getFileURL("charity/"+ thumbnail));
-			vo.setCpinfo(ingCharityListService.thumbnail(vo.getcNum()).getCpinfo());
-		}
+		PageUtil pageUtil = new PageUtil(pageNum, ingCharityListService.getTotCount(map));
+		map.put("startRow", pageUtil.getStartRow());
+		map.put("endRow", pageUtil.getEndRow());
 		
-		model.addAttribute("list", list);
-		model.addAttribute("category", category);
-		model.addAttribute("field", field);
-		model.addAttribute("keyword", keyword);
-		model.addAttribute("sort", sort);
-		return ".ingCharityList";
+		List<HashMap<String, Object>> list = ingCharityListService.list(map);
+		if (list.size() == 0 && pageNum > 1) {
+			map.put("list", "no");
+			map.put("pageNum", pageNum);
+		} else {
+			map.put("list", list);
+			map.put("pageNum", pageNum + 1);
+		}
+
+		return map;
 	}
-	
+
 	@RequestMapping(value = "/charity/relatedWords", method = RequestMethod.GET)
 	@ResponseBody
 	public List<String> relatedWords(Model model, HttpServletRequest request) {
