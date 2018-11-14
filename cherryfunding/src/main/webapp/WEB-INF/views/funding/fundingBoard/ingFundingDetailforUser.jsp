@@ -258,7 +258,7 @@
 					<fmt:parseDate value="${todayDate}" var="nowDate" pattern="yyyyMMdd"/>
 					<fmt:parseNumber value="${nowDate.time / (1000 * 60 * 60 * 24)}" var="now" integerOnly="true"/>
 					
- 					<span class="w3-xxlarge">${end - now}</span><span class="w3-xxlarge">일 남음</span>
+ 					<span class="w3-xxlarge">${end - now}</span><span class="w3-xlarge">일 남음</span>
  				</div>
  			
  				<c:set var="before" value="${vo.camout * 100 / vo.amount}" />
@@ -273,20 +273,20 @@
 				
  				<div style="margin-bottom:20px;">
 					<div class="w3-border">
-						<div class="w3-blue" style="height:5px;width:<fmt:formatNumber value="${barBefore/100}" type="percent"/>"></div>
+						<div class="w3-blue" style="height:5px;width:<fmt:formatNumber value="${barBefore/100}" type="percent" pattern="0%"/>"></div>
 					</div>
  				</div>
  				
  				<div style="margin-bottom:20px;">
- 					<span class="w3-xxlarge"><fmt:formatNumber value="${before/100}" type="percent"/></span><span class="w3-xxlarge"> 달성</span>
+ 					<span class="w3-xxlarge"><fmt:formatNumber value="${before/100}" type="percent" pattern="0%"/></span><span class="w3-xlarge"> 달성</span>
  				</div>
  				
  				<div style="margin-bottom:20px;">
- 					<span class="w3-xxlarge"><fmt:formatNumber value="${vo.camout}" pattern="#,###"/></span><span class="w3-xxlarge">원 펀딩</span>
+ 					<span class="w3-xxlarge"><fmt:formatNumber value="${vo.camout}" pattern="#,###"/></span><span class="w3-xlarge">원 펀딩</span>
  				</div>
  				
  				<div style="margin-bottom:20px;">
- 				<span class="w3-xxlarge">${countSupporter}</span><span class="w3-xxlarge"> 명의 서포터</span>
+ 				<span class="w3-xxlarge">${countSupporter}</span><span class="w3-xlarge"> 명의 서포터</span>
  				</div>
  				
 				<button class="w3-btn w3-block w3-teal w3-xxlarge" onclick="location.href='${pageContext.request.contextPath}/funding/rewardList?fNum=${vo.fNum}';">펀딩 신청</button>
