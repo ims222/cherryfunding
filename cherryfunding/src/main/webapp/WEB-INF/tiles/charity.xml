@@ -5,26 +5,22 @@ PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
 
 <tiles-definitions>
 	<!-- charity -->
-	<definition name=".ingCharityList" extends = ".admin">
-		<put-attribute name="header" value="/WEB-INF/views/main/header.jsp"/>
+	<definition name=".ingCharityList" extends = ".main">
 		<put-attribute name="banner" value="/WEB-INF/views/charity/banner.jsp"/>
 		<put-attribute name="content" value="/WEB-INF/views/charity/charitytBoard/ingCharityList.jsp"/>
 	</definition>
 	
-	<definition name=".prepareCharityList" extends = ".admin">
-		<put-attribute name="header" value="/WEB-INF/views/main/header.jsp"/>
+	<definition name=".prepareCharityList" extends = ".main">
 		<put-attribute name="banner" value="/WEB-INF/views/charity/banner.jsp"/>
 		<put-attribute name="content" value="/WEB-INF/views/charity/charitytBoard/prepareCharityList.jsp"/>
 	</definition>
 	
-	<definition name=".endCharityList" extends = ".admin">
-		<put-attribute name="header" value="/WEB-INF/views/main/header.jsp"/>
+	<definition name=".endCharityList" extends = ".main">
 		<put-attribute name="banner" value="/WEB-INF/views/charity/banner.jsp"/>
 		<put-attribute name="content" value="/WEB-INF/views/charity/charitytBoard/endCharityList.jsp"/>
 	</definition>
 	
-	<definition name=".inputCharity" extends = ".admin">
-		<put-attribute name="header" value="/WEB-INF/views/main/header.jsp"/>
+	<definition name=".inputCharity" extends = ".main">
 		<put-attribute name="banner" value="/WEB-INF/views/charity/application/banner.jsp"/>
 		<put-attribute name="content" value="/WEB-INF/views/charity/application/charityApplicationProcess.jsp"/>
 	</definition>
