@@ -22,6 +22,7 @@
 		});
 	});
 	var showMore = function(){
+		$('#list').append(document.querySelector('#loadingTemplate').innerHTML);
 		var pageNum = $('#pageNum').val();
 		var category = $('#category').val();
 		var sort = $('#sort').val();
@@ -73,7 +74,7 @@
 				}
 			},
 			complete :function(){
-				$('.loading').hide();
+				$('.loading').remove();
 			}
 		});	
 	}
@@ -130,6 +131,15 @@
 			<div class="w3-right-align">{dday}일 남음</div>
 		</div>
 	</div>
+</div>
+</script>
+<script id="loadingTemplate" type="text/template">
+<div class="spinner loading">
+	<div class="rect1"></div>
+	<div class="rect2"></div>
+	<div class="rect3"></div>
+	<div class="rect4"></div>
+	<div class="rect5"></div>
 </div>
 </script>
 <style type="text/css">
@@ -297,15 +307,6 @@
 		<input type="hidden" id="pageNum" value="">
 		
 		<div id="list" class="w3-row">
-		
-			<div class="spinner loading">
-			  <div class="rect1"></div>
-			  <div class="rect2"></div>
-			  <div class="rect3"></div>
-			  <div class="rect4"></div>
-			  <div class="rect5"></div>
-			</div>
-			
 		</div>
 		<button id="showMore" class="w3-btn w3-block w3-teal">더보기</button>
 	</div>
