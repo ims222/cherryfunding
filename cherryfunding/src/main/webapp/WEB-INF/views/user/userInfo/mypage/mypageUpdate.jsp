@@ -99,9 +99,9 @@ table.type04 p {
 	
 	//닉네임 유효성 인증(한글 및 영대소문자만)
 	function isValidId(e){
- 		var regx = /^[가-힣a-zA-Z]+$/;
+ 		var regx = /[0-9]|[a-z]|[A-Z]|[가-힣]/;
  		if(!regx.test($("#newnick").val())) { 
- 			alert("한글 및 영대소문자만 입력 가능합니다");
+ 			alert("영대소문자, 한글 및 숫자만 가능합니다");
  			$("#newnick").val('');
 		    $("#newnick").focus(); 
  		}else{
