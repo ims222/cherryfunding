@@ -31,7 +31,6 @@
 		    		html += '<div class="box">';
 		    		html += data.list[i].vNum;
 		    		html += '<p>' + data.list[i].title + '</p>';
-					html += '<p>' + data.list[i].id + '</p>';
 		    		html += '</div>';
 		    		html += '</section>';
 		    	}
