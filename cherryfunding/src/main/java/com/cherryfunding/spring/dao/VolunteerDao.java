@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -23,6 +24,9 @@ public class VolunteerDao {
 	}
 	public List<VolunteerVo> list(){
 		return sqlSession.selectList(NAMESPACE + "list");
+	}
+	public List<VolunteerVo> getFirstSix(){
+		return sqlSession.selectList(NAMESPACE + "getFirstSix");
 	}
 	public int getMaxNum() {
 		return sqlSession.selectOne(NAMESPACE + "getMaxNum");
@@ -44,5 +48,9 @@ public class VolunteerDao {
 	
 	public String getTitle(int vNum) {
 		return sqlSession.selectOne(NAMESPACE + "getTitle", vNum);
+	}
+	
+	public List<VolunteerVo> showMore(HashMap<String, Object> map){
+		return sqlSession.selectList(NAMESPACE + "showMore", map);
 	}
 }

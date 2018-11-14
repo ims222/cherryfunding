@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 import com.cherryfunding.spring.dao.VolunteerDao;
 import com.cherryfunding.spring.vo.VolunteerVo;
 
@@ -48,5 +49,9 @@ public class VolunteerService {
 	
 	public String getTitle(int vNum) {
 		return volunteerDao.getTitle(vNum);
+	}
+	
+	public List<VolunteerVo> showMore(HashMap<String, Object> map){
+		return volunteerDao.showMore(map);
 	}
 }
