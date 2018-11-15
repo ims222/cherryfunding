@@ -62,7 +62,7 @@
 									.replace("{dday}", value.DDAY)
 									.replace(/{width}/gi, (barBefore) + "%" )
 									.replace("{valuenow}", barBefore)
-									.replace(/{percent}/gi, ((before/100) * 100) + "%"); 
+									.replace(/{percent}/gi, Math.ceil((before/100) * 100) + "%"); 
 					});
 					document.querySelector('#list').innerHTML = result;
 					$('#pageNum').val(data.pageNum);
@@ -115,7 +115,7 @@
 	<a href="${pageContext.request.contextPath}/funding/ingFundingDetailforUser?fNum={fNum}">
 	<img src="{savename}" class="w3-round" alt="{fpinfo}" height="200px" width="100%"></a>
 	<div>
-		<div style="height: 50px;>
+		<div style="height: 50px; overflow:auto;>
 			<p class="w3-left-align" style="word-break:break-all;">
 				<a href="${pageContext.request.contextPath}/funding/ingFundingDetailforUser?fNum={fNum}">
 				<h4>{title}</h4></a>
@@ -145,7 +145,6 @@
 <style type="text/css">
 
 .topnav {
-  overflow: hidden;
   background-color: #e9e9e9;
 }
 
@@ -282,8 +281,8 @@
 		<div class="topnav">
 			<span>진행중 펀딩</span>
 			<div class="w3-dropdown-hover">
-				<button class="w3-button">Hover Over Me!</button>
-				<div class="w3-dropdown-content w3-bar-block w3-border">
+				<button class="w3-button">선택하세요<i class="fa fa-caret-down"></i></button>
+				<div class="w3-dropdown-content w3-bar-block w3-border" style="top:45px;">
 					<a href="#" class="w3-bar-item w3-button">Link 1</a>
 					<a href="#" class="w3-bar-item w3-button">Link 2</a>
 					<a href="#" class="w3-bar-item w3-button">Link 3</a>
