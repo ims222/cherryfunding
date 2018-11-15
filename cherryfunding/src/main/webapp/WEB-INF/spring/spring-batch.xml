@@ -61,7 +61,6 @@
             <ref bean="cronTrigger1"/>
             <ref bean="cronTrigger3"/>
             
-            <ref bean="fundingResultTrigger"/>
         </list>
     </property>
     <property name="quartzProperties">
