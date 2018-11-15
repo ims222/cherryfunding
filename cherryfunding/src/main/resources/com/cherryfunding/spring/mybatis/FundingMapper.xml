@@ -13,7 +13,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<![CDATA[where sdate < (sysdate + (1/24)*9) and edate < (sysdate + (1/24)*9)]]>
 	</sql>
 	<sql id="isConfirm">
-		and confirm = 'y'
+		and confirm = 'y' 
 	</sql>
 	<sql id="category">
 		<if
@@ -329,4 +329,5 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		)
 		<![CDATA[where rnum<6]]>	
 	</select>
+
 </mapper>

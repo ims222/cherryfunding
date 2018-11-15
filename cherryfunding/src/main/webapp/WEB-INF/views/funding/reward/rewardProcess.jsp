@@ -233,9 +233,38 @@ ul {
 				dataType:'json',
 				type:'post',
 				success: function(data){
-					if(data.result === 'ok')
-						alert('신청 성공!');
-					else if(data.result === 'amountOver')
+					if(data.result === 'ok'){
+						console.log('reward', data.reward);
+						var r = data.reward;
+						
+						var form = document.createElement("form");
+					    form.setAttribute("method", "POST");
+					    form.setAttribute("action", "${pageContext.request.contextPath}/funding/rewardOk");
+					    
+					    for(var i=0;i<r.length;i++){
+							
+							var hiddenField1 = document.createElement("input");
+				            hiddenField1.setAttribute("type", "hidden");
+				            hiddenField1.setAttribute("name", 'rNum');
+				            hiddenField1.setAttribute("value", r[i].rNum);
+				            form.appendChild(hiddenField1);
+				            
+				            var hiddenField2 = document.createElement("input");
+				            hiddenField2.setAttribute("type", "hidden");
+				            hiddenField2.setAttribute("name", 'price');
+				            hiddenField2.setAttribute("value", r[i].price);
+				            form.appendChild(hiddenField2);
+				            
+				            var hiddenField3 = document.createElement("input");
+				            hiddenField3.setAttribute("type", "hidden");
+				            hiddenField3.setAttribute("name", 'amount');
+				            hiddenField3.setAttribute("value", r[i].amount);
+				            form.appendChild(hiddenField3);
+						}
+
+					    document.body.appendChild(form);
+					    form.submit();
+					}else if(data.result === 'amountOver')
 						alert('수량이 부족합니다');
 					else if(data.result === 'wrongId')
 						alert('로그인이 필요한 서비스입니다');

@@ -2,6 +2,7 @@ package com.cherryfunding.spring.controller.funding;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -166,7 +167,7 @@ public class FundingDetailController {
 
 	@RequestMapping(value = "/funding/applicationReward", produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public String applicationReward(int fNum, HttpSession session, HttpServletRequest request) {
+	public String applicationReward(int fNum, HttpSession session, Model model, HttpServletRequest request) {
 		String id = (String) session.getAttribute("id");
 		String reward = request.getParameter("reward");
 		JSONObject obj = new JSONObject();
@@ -196,6 +197,7 @@ public class FundingDetailController {
 						rewardMap.put("amount", amount);
 						fundingDetailService.updateAmount(rewardMap); // 남은 수량 수정
 						obj.put("result", "ok");
+						obj.put("reward", r);
 					}
 				} else {
 					obj.put("result", "wrongId");
@@ -208,6 +210,24 @@ public class FundingDetailController {
 			obj.put("result", "no");
 		}
 		return obj.toString();
+	}
+
+	@RequestMapping(value = "/funding/rewardOk", method = RequestMethod.POST)
+	public String applicationRewardOk(int[] rNum, int[] price, int[] amount, Model model) {
+		List<HashMap<String, Object>> rList = new ArrayList<HashMap<String, Object>>();
+		for (int i = 0; i < rNum.length; i++) {
+			HashMap<String, Object> hm = new HashMap<String, Object>();
+			hm.put("rNum", rNum[i]);
+			hm.put("price", price[i]);
+			hm.put("amount", amount[i]);
+
+			String title = fundingDetailService.rewardDetail(rNum[i]).getTitle();
+			hm.put("title", title);
+
+			rList.add(hm);
+		}
+		model.addAttribute("rewardList", rList);
+		return ".rewardOk";
 	}
 
 }

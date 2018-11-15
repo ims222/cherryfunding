@@ -21,6 +21,16 @@
 	<property name="targetMethod" value="mailSender"/>
 	<property name="concurrent" value="false"/>
 </bean>
+
+<!-- 펀딩 배치 으흥 -->
+<bean id="fundingResult" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+	<property name="targetObject" ref="fundingResultBatch" />
+    <property name="targetMethod" value="fundingResult" />
+    <property name="concurrent" value="false" />
+</bean>
+<!-- /////////// -->
+
+<!-- //////////////////////////////////////////////////////////////////////// -->
  
 <!-- 2. Cron 시간 설정 -->
 <bean id="cronTrigger1" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
@@ -32,13 +42,26 @@
 	<property name="cronExpression" value="0 0 9 * * ?"/>
 </bean>
 
-<!--  
-3. Cron 실행 -->
+<!-- 펀딩 배치 으흐흥 -->
+<bean id="fundingResultTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+    <property name="jobDetail" ref="fundingResult"/>
+    <property name="cronExpression" value="0/10 * * * * ?"/>
+</bean>
+<!-- /////////// -->
+
+
+
+<!-- //////////////////////////////////////////////////////////////////////// -->
+
+
+<!-- 3. Cron 실행 -->
 <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
     <property name="triggers">
         <list>
             <ref bean="cronTrigger1"/>
             <ref bean="cronTrigger3"/>
+            
+            <ref bean="fundingResultTrigger"/>
         </list>
     </property>
     <property name="quartzProperties">

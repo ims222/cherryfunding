@@ -60,7 +60,7 @@
 									.replace("{category}", value.CATEGORY)
 									.replace("{recomm}", value.recomm)
 									.replace("{dday}", value.DDAY)
-									.replace(/{width}/gi, (barBefore) + "%" )
+									.replace(/{width}/gi, barBefore + "%" )
 									.replace("{valuenow}", barBefore)
 									.replace(/{percent}/gi, Math.ceil((before/100) * 100) + "%"); 
 					});
