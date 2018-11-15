@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.cherryfunding.spring.dao.FDetailDao;
+import com.cherryfunding.spring.dao.UsersDao;
 import com.cherryfunding.spring.vo.FDetailVo;
+import com.cherryfunding.spring.vo.UsersVo;
 
 @Transactional
 @Service
@@ -17,6 +19,7 @@ public class FundingResultServiceImpl implements FundingResultService {
 	@Autowired
 	private FDetailDao fDetailDao;
 
+
 	public List<HashMap<String, Object>> isSuccess() {
 		return fDetailDao.isSuccess();
 	}
@@ -24,4 +27,5 @@ public class FundingResultServiceImpl implements FundingResultService {
 	public int update(FDetailVo vo) {
 		return fDetailDao.update(vo);
 	}
+
 }

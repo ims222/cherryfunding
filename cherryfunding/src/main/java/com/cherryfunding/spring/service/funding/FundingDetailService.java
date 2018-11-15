@@ -9,6 +9,7 @@ import com.cherryfunding.spring.vo.FDetailVo;
 import com.cherryfunding.spring.vo.FHashtagVo;
 import com.cherryfunding.spring.vo.FundingVo;
 import com.cherryfunding.spring.vo.RewardVo;
+import com.cherryfunding.spring.vo.UsersVo;
 
 public interface FundingDetailService {
 
@@ -35,6 +36,8 @@ public interface FundingDetailService {
 	int getRecommend(int fNum);
 
 	List<FHashtagVo> hashtag(int fNum);
-	
+
 	int countFdetailbyfNum(int fNum);
+
+	UsersVo userInfo(String id);
 }

@@ -17,6 +17,7 @@ import com.cherryfunding.spring.vo.FDetailVo;
 import com.cherryfunding.spring.vo.FHashtagVo;
 import com.cherryfunding.spring.vo.FundingVo;
 import com.cherryfunding.spring.vo.RewardVo;
+import com.cherryfunding.spring.vo.UsersVo;
 
 @Transactional
 @Service
@@ -36,6 +37,9 @@ public class FundingDetailServiceImpl implements FundingDetailService {
 
 	@Autowired
 	private FHashtagDao fHashtagDao;
+
+	@Autowired
+	private UsersDao usersDao;
 
 	@Override
 	public FundingVo detail(int fNum) {
@@ -101,6 +105,11 @@ public class FundingDetailServiceImpl implements FundingDetailService {
 	@Override
 	public int countFdetailbyfNum(int fNum) {
 		return fDetailDao.countFdetailbyfNum(fNum);
+	}
+
+	@Override
+	public UsersVo userInfo(String id) {
+		return usersDao.select(id);
 	}
 
 }

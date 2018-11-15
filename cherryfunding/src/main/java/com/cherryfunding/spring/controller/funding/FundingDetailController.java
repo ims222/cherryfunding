@@ -1,8 +1,6 @@
 package com.cherryfunding.spring.controller.funding;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -196,6 +194,7 @@ public class FundingDetailController {
 						rewardMap.put("rNum", rNum);
 						rewardMap.put("amount", amount);
 						fundingDetailService.updateAmount(rewardMap); // 남은 수량 수정
+						//펀딩 결과 등록
 						obj.put("result", "ok");
 						obj.put("reward", r);
 					}
@@ -213,7 +212,7 @@ public class FundingDetailController {
 	}
 
 	@RequestMapping(value = "/funding/rewardOk", method = RequestMethod.POST)
-	public String applicationRewardOk(int[] rNum, int[] price, int[] amount, Model model) {
+	public String applicationRewardOk(int[] rNum, int[] price, int[] amount, Model model, HttpSession session) {
 		List<HashMap<String, Object>> rList = new ArrayList<HashMap<String, Object>>();
 		for (int i = 0; i < rNum.length; i++) {
 			HashMap<String, Object> hm = new HashMap<String, Object>();
@@ -226,7 +225,10 @@ public class FundingDetailController {
 
 			rList.add(hm);
 		}
+		String id = (String) session.getAttribute("id");
+
 		model.addAttribute("rewardList", rList);
+		model.addAttribute("vo", fundingDetailService.userInfo(id));
 		return ".rewardOk";
 	}
 

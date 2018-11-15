@@ -26,7 +26,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="isSuccess" resultType="hashmap">
-		select e.fNum fNum, e.amount amount, e.camout camout, fdetail.fdNum fdNum from(
+		select e.fNum fNum, e.amount amount, e.camout camout, fdetail.fdNum fdNum, fdetail.id id from(
 			select * from funding
 			<![CDATA[where sdate < (sysdate + (1/24)*9) and edate < (sysdate + (1/24)*9)]]>
 			and confirm = 'y' ) e, (
