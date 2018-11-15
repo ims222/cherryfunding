@@ -1,4 +1,4 @@
-package com.cherryfunding.spring.controller.funding;
+package com.cherryfunding.spring.controller.visit;
 
 import java.util.List;
 import java.util.UUID;

@@ -56,4 +56,5 @@
   <listener>
   	<listener-class>com.cherryfunding.spring.controller.visit.VisitorStatistics</listener-class>
   </listener>
+  
 </web-app>

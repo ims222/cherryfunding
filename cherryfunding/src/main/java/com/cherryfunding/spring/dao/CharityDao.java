@@ -48,7 +48,7 @@ public class CharityDao {
 		return sqlSession.selectList(NAMESPACE + "end", map);
 	}
 
-	public List<CharityVo> ing(HashMap<String, Object> map) {
+	public List<HashMap<String, Object>> ing(HashMap<String, Object> map) {
 		return sqlSession.selectList(NAMESPACE + "ing", map);
 	}
 
@@ -76,7 +76,7 @@ public class CharityDao {
 	public HashMap<String, Object> todayCharity() {
 		return sqlSession.selectOne(NAMESPACE + "todayCharity");
 	}
-	
+
 	public int wait(int cNum) { // 컨펌
 		return sqlSession.update(NAMESPACE + "wait", cNum);
 	}
@@ -84,20 +84,20 @@ public class CharityDao {
 	public List<CharityVo> waitList() { // 대기목록
 		return sqlSession.selectList(NAMESPACE + "waitList");
 	}
-	
-	public List<CharityVo> searchwaitList(HashMap<String, String>map){
-		return sqlSession.selectList(NAMESPACE+ "searchwaitList",map);
+
+	public List<CharityVo> searchwaitList(HashMap<String, String> map) {
+		return sqlSession.selectList(NAMESPACE + "searchwaitList", map);
 	}
-	
-	public List<CharityVo> searchconfirmList(HashMap<String, String>map){
-		return sqlSession.selectList(NAMESPACE+ "searchconfirmList",map);
+
+	public List<CharityVo> searchconfirmList(HashMap<String, String> map) {
+		return sqlSession.selectList(NAMESPACE + "searchconfirmList", map);
 	}
 
 	public int confirm(int cNum) { // 컨펌
 		return sqlSession.update(NAMESPACE + "confirm", cNum);
 	}
 
-	public List<CharityVo> confirmList(){
+	public List<CharityVo> confirmList() {
 		return sqlSession.selectList(NAMESPACE + "confirmList");
 	}
 
@@ -113,4 +113,11 @@ public class CharityDao {
 		return sqlSession.selectOne(NAMESPACE + "todayCharityCount");
 	}
 
+	public List<String> relatedWords(HashMap<String, Object> map) {
+		return sqlSession.selectList(NAMESPACE + "related", map);
+	}
+
+	public int getTotCount(HashMap<String, Object> map) {
+		return sqlSession.selectOne(NAMESPACE + "getTotCount", map);
+	}
 }

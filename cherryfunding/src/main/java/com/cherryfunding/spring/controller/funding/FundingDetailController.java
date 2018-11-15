@@ -36,6 +36,7 @@ public class FundingDetailController {
 		model.addAttribute("rewardList", fundingDetailService.rewardList(fNum));
 		model.addAttribute("fRecommend", fundingDetailService.getRecommend(fNum));
 		model.addAttribute("hashtag", fundingDetailService.hashtag(fNum));
+		model.addAttribute("countSupporter", fundingDetailService.countFdetailbyfNum(fNum));
 		fundingDetailService.hitUp(fNum);
 		return ".ingFundingDetailforUser";
 	}
@@ -43,7 +44,7 @@ public class FundingDetailController {
 	@RequestMapping("/funding/rewardList")
 	public String rewardList(@ModelAttribute("fNum") int fNum, Model model) { // 리워드 리스트
 		model.addAttribute("rewardList", fundingDetailService.rewardList(fNum));
-		return ".rewardList";
+		return ".rewardProcess";
 	}
 
 	@RequestMapping("/funding/prepareFundingDetailforUser")

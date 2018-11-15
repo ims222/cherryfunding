@@ -99,6 +99,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<include refid="searchcharity"/>
 	</select>
 	
+	<select id="getTotCount" parameterType="hashmap" resultType="int">
+		select NVL(count(cNum), 0) from charity
+		<include refid="ing"/>
+		<include refid="isConfirm"/>
+		<include refid="category" />
+		<include refid="search" />
+		<include refid="sort" />
+	</select>
+	
 	
 	
 	<!-- 준비중 후원 -->
@@ -121,7 +130,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		order by cNum desc
 	</select>
 	<!-- 진행중 후원 -->
-	<select id="ing" parameterType="hashmap" resultType="charity">
+	<select id="ing" parameterType="hashmap" resultType="hashmap">
 		<choose>
 			<when test="sort == 'end'">
 				select * from (
@@ -151,12 +160,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			where aa.cn = bb.cNum(+) order by cnt
 			</when>
 			<otherwise>
-				select * from charity
-				<include refid="ing"/>
-				<include refid="isConfirm"/>
-				<include refid="category" />
-				<include refid="search" />
-				<include refid="sort" />
+				select * from (
+					select aa.CNUM cnum, aa.TITLE title, aa.CONTENT content,
+					aa.AMOUNT amount, aa.CAMOUNT camount, to_char(aa.SDATE, 'yy-mm-dd') sdate,
+					to_char(aa.EDATE, 'yy-mm-dd') edate, ceil(edate - (sysdate + (1/24)*9)) dday,
+					aa.CATEGORY category, aa.CONFIRM confirm,
+					aa.AID aid, aa.ADDR addr, aa.REGDATE regdate, aa.ID id, aa.HIT hit, aa.CPRICE cprice, rownum rnum from (
+						select * from charity
+						<include refid="ing"/>
+						<include refid="isConfirm"/>
+						<include refid="category" />
+						<include refid="search" />
+						<include refid="sort" />
+					)aa
+				) <![CDATA[where rnum >=#{startRow} and rnum <=#{endRow}]]>
 			</otherwise>
 		</choose>
 	</select>
@@ -228,5 +245,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="todayCharityCount" resultType="int">
 		select NVL(count(cNum), 0) cnt from charity where confirm = 'y'
 		and regdate = (sysdate + (1/24)*9)
+	</select>
+	<!-- 연관검색어 추출 -->
+	<select id="related" parameterType="hashmap" resultType="string">
+		select title from(
+		select aa.*, rownum rnum from(
+			select title from charity
+			where title like '%' || #{keyword} || '%' order by title
+			)aa
+		)
+		<![CDATA[where rnum<6]]>	
 	</select>
 </mapper>

@@ -22,6 +22,7 @@
 		});
 	});
 	var showMore = function(){
+		$('#list').append(document.querySelector('#loadingTemplate').innerHTML);
 		var pageNum = $('#pageNum').val();
 		var category = $('#category').val();
 		var sort = $('#sort').val();
@@ -33,7 +34,6 @@
 			dataType:'json',
 			type:'post',
 			success:function(data){
-				console.log(data);
 				var result = $('#list').html(); 
 				var html = document.querySelector('#fundingList').innerHTML;
 				if(data.list === 'no'){
@@ -56,16 +56,13 @@
 									.replace("{fpinfo}", value.fpinfo)
 									.replace("{title}", value.TITLE)
 									.replace("{nick}", value.nick)
-									.replace("{amount}", amount)
-									.replace("{camout}", camout)
+									.replace("{camout}", comma(camout))
 									.replace("{category}", value.CATEGORY)
-									.replace("{sdate}", value.SDATE)
-									.replace("{edate}", value.EDATE)
 									.replace("{recomm}", value.recomm)
 									.replace("{dday}", value.DDAY)
 									.replace(/{width}/gi, (barBefore) + "%" )
 									.replace("{valuenow}", barBefore)
-									.replace(/{percent}/gi, ((before/100) * 100) + "%"); 
+									.replace(/{percent}/gi, Math.ceil((before/100) * 100) + "%"); 
 					});
 					document.querySelector('#list').innerHTML = result;
 					$('#pageNum').val(data.pageNum);
@@ -75,6 +72,9 @@
 					}).prop('selected', true);
 					$('#keyword').val(data.keyword);
 				}
+			},
+			complete :function(){
+				$('.loading').remove();
 			}
 		});	
 	}
@@ -89,10 +89,10 @@
 	function selectionOption(){
 		$("#list").empty();
 		$('#pageNum').val(1);
-		//var sort = $(this).val();
 		showMore();
-		//location.href= "${pageContext.request.contextPath}/funding/moreIngFundingList?sort=" + sort + "&category=" + category;
 	}
+	
+	
 	function related(){
 		var keyword = $("#keyword").val();
 		var field = $("#field option:selected").text();
@@ -109,21 +109,13 @@
 			}
 		});
 	}
-	function openCity(cityName) {
-	    var i;
-	    var x = document.getElementsByClassName("city");
-	    for (i = 0; i < x.length; i++) {
-	        x[i].style.display = "none"; 
-	    }
-	    document.getElementById(cityName).style.display = "block"; 
-	}
 </script>
 <script id="fundingList" type="text/template">
-<div class="w3-col m4 l4" style="padding: 20px;">
+<div class="w3-col m4 l4 " style="padding: 20px;">
 	<a href="${pageContext.request.contextPath}/funding/ingFundingDetailforUser?fNum={fNum}">
 	<img src="{savename}" class="w3-round" alt="{fpinfo}" height="200px" width="100%"></a>
 	<div>
-		<div style="height: 50px;>
+		<div style="height: 50px; overflow:auto;>
 			<p class="w3-left-align" style="word-break:break-all;">
 				<a href="${pageContext.request.contextPath}/funding/ingFundingDetailforUser?fNum={fNum}">
 				<h4>{title}</h4></a>
@@ -141,10 +133,18 @@
 	</div>
 </div>
 </script>
+<script id="loadingTemplate" type="text/template">
+<div class="spinner loading">
+	<div class="rect1"></div>
+	<div class="rect2"></div>
+	<div class="rect3"></div>
+	<div class="rect4"></div>
+	<div class="rect5"></div>
+</div>
+</script>
 <style type="text/css">
 
 .topnav {
-  overflow: hidden;
   background-color: #e9e9e9;
 }
 
@@ -257,6 +257,7 @@
 			</select>
 		</form>
 		
+				
 		<div class="row">
 			<div class="col-lg-6">
 				<div class="input-group">
@@ -280,8 +281,8 @@
 		<div class="topnav">
 			<span>진행중 펀딩</span>
 			<div class="w3-dropdown-hover">
-				<button class="w3-button">Hover Over Me!</button>
-				<div class="w3-dropdown-content w3-bar-block w3-border">
+				<button class="w3-button">선택하세요<i class="fa fa-caret-down"></i></button>
+				<div class="w3-dropdown-content w3-bar-block w3-border" style="top:45px;">
 					<a href="#" class="w3-bar-item w3-button">Link 1</a>
 					<a href="#" class="w3-bar-item w3-button">Link 2</a>
 					<a href="#" class="w3-bar-item w3-button">Link 3</a>
@@ -303,6 +304,7 @@
 			<option value="end" <c:if test="${sort eq 'end'}">selected="selected"</c:if>>종료임박순</option>
 		</select>
 		<input type="hidden" id="pageNum" value="">
+		
 		<div id="list" class="w3-row">
 		</div>
 		<button id="showMore" class="w3-btn w3-block w3-teal">더보기</button>

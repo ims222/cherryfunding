@@ -4,24 +4,23 @@ PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
 "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 
 <tiles-definitions>
-	<definition name=".insertSharing" extends = ".main">
+	<definition name=".insertSharing" template="/WEB-INF/views/main/layout2.jsp">
+		<put-attribute name="header" value="/WEB-INF/views/main/header.jsp"/>
 		<put-attribute name="banner" value="/WEB-INF/views/sharing/banner.jsp"/>
 		<put-attribute name="content" value="/WEB-INF/views/sharing/shareBoard/insertSharing.jsp"/>
+		<put-attribute name="footer" value="/WEB-INF/views/main/footer.jsp"/>
 	</definition>
 	
-	<definition name=".sharingList" extends = ".main">
-		<put-attribute name="banner" value="/WEB-INF/views/sharing/banner.jsp"/>
+	<definition name=".sharingList" extends = ".insertSharing">
 		<put-attribute name="content" value="/WEB-INF/views/sharing/shareBoard/sharingList.jsp"/>
 	</definition>
 	
-	<definition name=".sharingDetail" extends = ".main">
-		<put-attribute name="banner" value="/WEB-INF/views/sharing/banner.jsp"/>
+	<definition name=".sharingDetail" extends = ".insertSharing">
 		<put-attribute name="content" value="/WEB-INF/views/sharing/shareBoard/sharingDetail.jsp"/>
 	</definition>
 	
-	<definition name=".sharingParticipants" extends = ".main">
-			<put-attribute name="banner" value="/WEB-INF/views/sharing/banner.jsp"/>
-			<put-attribute name="content" value="/WEB-INF/views/sharing/shareBoard/sharingParticipants.jsp"/>
-		</definition>
+	<definition name=".sharingParticipants" extends = ".insertSharing">
+		<put-attribute name="content" value="/WEB-INF/views/sharing/shareBoard/sharingParticipants.jsp"/>
+	</definition>
 	
 </tiles-definitions>

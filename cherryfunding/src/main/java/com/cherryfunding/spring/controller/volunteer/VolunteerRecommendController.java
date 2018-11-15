@@ -4,6 +4,7 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cherryfunding.spring.service.volunteer.VRecommendService;
@@ -42,6 +43,13 @@ public class VolunteerRecommendController {
 			obj.put("recomm", vRecommendService.delete(new VRecommendVo(0, vNum, id)));
 
 		return obj.toString();
+	}
+	
+	@RequestMapping(value="/volunteer/volunteerGetRecommend", produces="text/plain", method=RequestMethod.GET)
+	@ResponseBody
+	public String volunteerGetRecommend(int vNum) {	//해당 글의 추천 수 조회
+		String getRecomm = Integer.toString(vRecommendService.getRecomm(vNum));
+		return getRecomm;
 	}
 
 }

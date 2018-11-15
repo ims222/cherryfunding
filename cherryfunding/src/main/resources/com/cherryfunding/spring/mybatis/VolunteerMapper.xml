@@ -11,7 +11,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select NVL(max(vNum), 0) from volunteer
 	</select>
 	<select id="list" resultType="volunteer">
-		select * from volunteer
+		select * from volunteer order by regdate desc
+	</select>
+	<select id="getFirstSix" resultType="volunteer">
+		select aa.*, rownum from(
+			select * from volunteer order by regdate desc
+			)aa
+		where <![CDATA[rownum<7]]>	
 	</select>
 	<select id="getMembers" parameterType="int" resultType="int">
 		select NVL(members,0) from volunteer where vnum = #{vnum,jdbcType=INTEGER} 	
@@ -34,7 +40,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getNearNum" resultType="int">
 		select vNum from volunteer <![CDATA[where dday =  trunc(sysdate+1)]]>
 	</select>
-
+	<select id="getTitle" parameterType="int" resultType="string">
+		select title from volunteer where vnum = #{vnum}
+	</select>
+	<select id="showMore" parameterType="map" resultType="volunteer">
+		select * from(
+		select aa.*, rownum from(
+			select * from volunteer where <![CDATA[vnum<#{vNum}]]> order by regdate desc
+		)aa
+		)
+		where <![CDATA[rownum<7]]>
+	</select>
+	
 	<update id="update" parameterType="volunteer">
 		update volunteer set #{pwd} where #{id}
 	</update>

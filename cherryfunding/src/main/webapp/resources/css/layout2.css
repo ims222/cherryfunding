@@ -12,6 +12,7 @@ body {
 }
 
 #header {
+	
 }
 
 .navbar {
@@ -44,4 +45,189 @@ body {
 		float: none;
 		display: block;
 	}
+}
+
+.rBtn {
+	display: inline-block;
+	position: relative;
+	overflow: hidden;
+	margin-left: -1px;
+	float: left;
+	min-width: 33px;
+	height: 33px;
+	border: 1px solid #ccc;
+	background-color: #fff;
+	vertical-align: middle;
+}
+
+.rBtn i {
+	z-index: -1;
+}
+
+.rBtn:hover {
+	border-color: #666;
+}
+
+.rInput {
+	vertical-align: middle;
+	margin-left: -1px;
+	float: left;
+	height: 33px;
+	width: 41px;
+	border: 1px solid #ccc;
+	text-align: center;
+	font-weight: bold;
+}
+
+#qq-template-gallery {
+	color: white;
+	background-color: #00ABC7;
+	font-size: 14px;
+	padding: 7px 20px;
+	background-image: none;
+}
+
+#qq-template-gallery .qq-upload-button {
+	margin-right: 15px;
+}
+
+#qq-template-gallery .buttons {
+	width: 36%;
+}
+
+#qq-template-gallery .qq-uploader .qq-total-progress-bar-container {
+	width: 60%;
+}
+
+.contentStyle {
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
+.listImage {
+	height: 200px;
+	width: 100%;
+}
+
+.listTitle {
+	height: 50px;
+}
+
+.listTitle p {
+	word-break: break-all;
+}
+
+.mainContent {
+	padding: 20px;
+}
+
+.mainContent .top-left {
+	position: absolute;
+	top: 25px;
+	left: 30px;
+	background-color: white;
+	opacity: 0.6;
+	padding: 1px 5px 1px 5px;
+	border-bottom: 1px solid black;
+}
+
+.bg-img {
+	/* The image used */
+	background-image: url(../images/crowd3.png);
+	/* Control the height of the image */
+	min-height: 380px;
+	/* Center and scale the image nicely */
+	background-position: top;
+	background-repeat: repeat;
+	background-size: inherit;
+	position: relative;
+}
+
+.bg-img .container {
+	position: absolute;
+	right: 0;
+	margin: 20px;
+	max-width: 300px;
+	padding: 16px;
+	background-color: white;
+}
+
+.bg-img input[type=text], input[type=password] {
+	width: 100%;
+	padding: 15px;
+	margin: 5px 0 22px 0;
+	border: none;
+	background: #f1f1f1;
+}
+
+.bg-img input[type=text]:focus, input[type=password]:focus {
+	background-color: #ddd;
+	outline: none;
+}
+
+.bg-img .btn {
+	background-color: #4CAF50;
+	color: white;
+	padding: 16px 20px;
+	border: none;
+	cursor: pointer;
+	width: 100%;
+	opacity: 0.9;
+}
+
+.bg-img .btn:hover {
+	opacity: 1;
+}
+
+.spinner {
+  margin: 100px auto;
+  width: 50px;
+  height: 40px;
+  text-align: center;
+  font-size: 10px;
+}
+
+.spinner > div {
+  background-color: #668cff;
+  height: 100%;
+  width: 6px;
+  display: inline-block;
+  
+  -webkit-animation: sk-stretchdelay 1.2s infinite ease-in-out;
+  animation: sk-stretchdelay 1.2s infinite ease-in-out;
+}
+
+.spinner .rect2 {
+  -webkit-animation-delay: -1.1s;
+  animation-delay: -1.1s;
+}
+
+.spinner .rect3 {
+  -webkit-animation-delay: -1.0s;
+  animation-delay: -1.0s;
+}
+
+.spinner .rect4 {
+  -webkit-animation-delay: -0.9s;
+  animation-delay: -0.9s;
+}
+
+.spinner .rect5 {
+  -webkit-animation-delay: -0.8s;
+  animation-delay: -0.8s;
+}
+
+@-webkit-keyframes sk-stretchdelay {
+  0%, 40%, 100% { -webkit-transform: scaleY(0.4) }  
+  20% { -webkit-transform: scaleY(1.0) }
+}
+
+@keyframes sk-stretchdelay {
+  0%, 40%, 100% { 
+    transform: scaleY(0.4);
+    -webkit-transform: scaleY(0.4);
+  }  20% { 
+    transform: scaleY(1.0);
+    -webkit-transform: scaleY(1.0);
+  }
 }

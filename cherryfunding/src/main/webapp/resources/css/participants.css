@@ -1,0 +1,22 @@
+@charset "UTF-8";
+
+.participants {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.profileDiv {
+	float: left;
+	left: 0;
+    width: 46px;
+    height: 46px;
+}
+
+.participants {
+	padding: 30px;
+}
+
+.profile {
+	position: relative;
+	width: 40px;
+}

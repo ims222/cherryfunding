@@ -2,8 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<link href="${pageContext.request.contextPath}/resources/css/fine-uploader/fine-uploader-new.min.css" type="text/css" rel="stylesheet">
-<script src="${pageContext.request.contextPath}/resources/js/fine-uploader/fine-uploader.min.js"></script>
 <link href="${pageContext.request.contextPath}/resources/css/datepicker/datepicker.min.css" type="text/css" rel="stylesheet">
 <script src="${pageContext.request.contextPath}/resources/js/datepicker/datepicker.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/datepicker/datepicker.en.js"></script>
@@ -185,27 +183,6 @@
         </div>
 </script>
 </head>
-<style>
-#qq-template-gallery {
-	color: white;
-	background-color: #00ABC7;
-	font-size: 14px;
-	padding: 7px 20px;
-	background-image: none;
-}
-
-#qq-template-gallery .qq-upload-button {
-	margin-right: 15px;
-}
-
-#qq-template-gallery .buttons {
-	width: 36%;
-}
-
-#qq-template-gallery .qq-uploader .qq-total-progress-bar-container {
-	width: 60%;
-}
-</style>
 <div class="container">
 	<form method="post" action="${pageContext.request.contextPath}/funding/fundingApplication" enctype="multipart/form-data" onsubmit="return appCommit()">
 		<input type="hidden" name="id" value="${sessionScope.id}">
@@ -277,7 +254,7 @@
 		<input type="submit" value="제출">
 	</form>
 	<div id="fine-uploader-gallery"></div>
-	<script>
+	<script type="text/javascript">
 		var galleryUploader = new qq.FineUploader(
 				{
 					autoUpload : false,

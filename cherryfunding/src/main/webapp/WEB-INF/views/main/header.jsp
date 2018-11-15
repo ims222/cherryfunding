@@ -8,5 +8,6 @@
 		<a href="${pageContext.request.contextPath}/funding/ingFundingList"><i class='fas fa-piggy-bank'></i> 펀딩</a>
 		<a href="${pageContext.request.contextPath}/sharing/sharingList"><i class='fas fa-gift'></i> 나눔</a>
 		<a href="${pageContext.request.contextPath}/volunteer/volunteerList"><i class='fas fa-hand-holding-heart'></i> 봉사</a>
+		<a href="${pageContext.request.contextPath}/security/login"><i class='fas fa-hand-holding-heart'></i> 로그인</a>
 	</div>
 </div>

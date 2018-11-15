@@ -35,4 +35,6 @@ public interface FundingDetailService {
 	int getRecommend(int fNum);
 
 	List<FHashtagVo> hashtag(int fNum);
+	
+	int countFdetailbyfNum(int fNum);
 }

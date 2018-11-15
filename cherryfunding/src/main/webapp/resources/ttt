@@ -1,31 +1,111 @@
-<script id="fundingList" type="text/template">
-<section class="4u">
-	<a href="${pageContext.request.contextPath}/funding/ingFundingDetailforUser?fNum={fNum}"
-	class="image featured">
-	<img src="{savename}" alt="{fpinfo}" height="200px"></a>
-	<div class="box">
-		<p>${title}</p>
-		<p>${id}</p>
-		<p>목표금액: {amount}원</p>
-		<p>현재금액: {camout}원</p>
-
-		<div class="progress">
-			<c:set var="before" value="${camout * 100 / amount}" />
-			<c:choose>
-				<c:when test="${before >= 1000}">
-					<c:set var="barBefore" value="100"/>
-				</c:when>
-				<c:otherwise>
-					<c:set var="barBefore" value="${before}" />
-				</c:otherwise>
-			</c:choose>
-			<div class="progress-bar" role="progressbar"
-				style="width: <fmt:formatNumber value="${barBefore/100}" type="percent"/>"
-				aria-valuenow="${barBefore * 10000}" aria-valuemin="0"
-				aria-valuemax="100">
-				<fmt:formatNumber value="${before/100}" type="percent" />
+<div class="col-md-3">
+				<div class="box">
+					
+				</div>
+				<div class="box">
+				
+				
+					
+					<br>
+				</div>
 			</div>
-		</div>
-	</div>
-</section>
-</script>
+			
+			
+			
+			
+			
+			<a href="${pageContext.request.contextPath}/fundingList/detail?num=${summary.cNew.cNum}" class="image featured">
+					<img src="${summary.cNew.savename}"
+					alt="${summary.cNew.cpinfo}" height="200px"></a>
+					<div class="box">
+						<p>신규 후원</p>
+						<p>${summary.cNew.title}</p>
+						<p>${summary.cNew.id}</p>
+						<p>목표금액: ${summary.cNew.amount}원</p>
+						<p>현재금액: ${summary.cNew.cAmount}원</p>
+					
+						<fmt:formatDate value="${summary.cNew.sDate}" var="cNewsDate" pattern="yyyyMMdd"/>
+						<fmt:parseDate value="${cNewsDate}" var="cNewsDateDate" pattern="yyyyMMdd"/>
+						<fmt:parseNumber value="${cNewsDateDate.time / (1000 * 60 * 60 * 24)}" var="cNewStart" integerOnly="true"/>
+						
+						<jsp:useBean id="cNewToday" class="java.util.Date"/>
+						<fmt:formatDate value="${cNewToday}" var="cNewTodayDate" pattern="yyyyMMdd"/>
+						<fmt:parseDate value="${cNewTodayDate}" var="cNewNowDate" pattern="yyyyMMdd"/>
+						<fmt:parseNumber value="${cNewNowDate.time / (1000 * 60 * 60 * 24)}" var="cNewNow" integerOnly="true"/>
+						<p>D${cNewNow - cNewStart}</p>
+						<div class="progress">
+							<c:set var="cNewBefore" value="${summary.cNew.cAmount * 100 / summary.cNew.amount}" />
+							<c:choose>
+								<c:when test="${cNewBefore >= 1000}">
+									<c:set var="barcNewBefore" value="100"/>
+								</c:when>
+								<c:otherwise>
+									<c:set var="barcNewBefore" value="${cNewBefore}" />
+								</c:otherwise>
+							</c:choose>
+							<div class="progress-bar" role="progressbar"
+								style="width: <fmt:formatNumber value="${barcNewBefore/100}" type="percent"/>"
+								aria-valuenow="${barcNewBefore * 100000}" aria-valuemin="0"
+								aria-valuemax="100">
+								<fmt:formatNumber value="${cNewBefore/100}" type="percent" />
+							</div>
+						</div>
+					</div>
+					
+					
+					
+<div class="col-md-3">
+						<a href="${pageContext.request.contextPath}/funding/prepareFundingDetailforUser?fNum=${summary.fNew.fNum}" class="image featured">
+						<img src="${summary.fNew.savename}"
+						alt="${summary.fNew.fpinfo}" height="200px"></a>
+						<div class="box">
+							<p>새로 시작되는 펀딩</p>
+							<p>${summary.fNew.title}</p>
+							<p>${summary.fNew.id}</p>
+							<p>목표금액: ${summary.fNew.amount}원</p>
+							<p>현재금액: ${summary.fNew.camout}원</p>
+						
+							<fmt:formatDate value="${summary.fNew.sdate}" var="fNewSdate" pattern="yyyyMMdd"/>
+							<fmt:parseDate value="${fNewSdate}" var="fNewSdateDate" pattern="yyyyMMdd"/>
+							<fmt:parseNumber value="${fNewSdateDate.time / (1000 * 60 * 60 * 24)}" var="fNewStart" integerOnly="true"/>
+							
+							<jsp:useBean id="fNewToday" class="java.util.Date"/>
+							<fmt:formatDate value="${fNewToday}" var="fNewTodayDate" pattern="yyyyMMdd"/>
+							<fmt:parseDate value="${fNewTodayDate}" var="fNewNowDate" pattern="yyyyMMdd"/>
+							<fmt:parseNumber value="${fNewNowDate.time / (1000 * 60 * 60 * 24)}" var="fNewNow" integerOnly="true"/>
+							<p>D${fNewNow - fNewStart}</p>
+							<div class="progress">
+								<c:set var="fNewBefore" value="${summary.fNew.camout * 100 / summary.fNew.amount}" />
+								<c:choose>
+									<c:when test="${fNewBefore >= 1000}">
+										<c:set var="barfNewBefore" value="100"/>
+									</c:when>
+									<c:otherwise>
+										<c:set var="barfNewBefore" value="${fNewBefore}" />
+									</c:otherwise>
+								</c:choose>
+								<div class="progress-bar" role="progressbar"
+									style="width: <fmt:formatNumber value="${barfNewBefore/100}" type="percent"/>"
+									aria-valuenow="${barfNewBefore * 10000}" aria-valuemin="0"
+									aria-valuemax="100">
+									<fmt:formatNumber value="${fNewBefore/100}" type="percent" />
+								</div>
+							</div>
+						</div>
+					</div>				
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+
+					
+					
+					
+					

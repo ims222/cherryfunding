@@ -98,4 +98,9 @@ public class FundingDetailServiceImpl implements FundingDetailService {
 		return fHashtagDao.listByfNum(fNum);
 	}
 
+	@Override
+	public int countFdetailbyfNum(int fNum) {
+		return fDetailDao.countFdetailbyfNum(fNum);
+	}
+
 }

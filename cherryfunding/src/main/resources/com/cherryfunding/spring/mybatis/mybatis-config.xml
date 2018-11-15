@@ -47,7 +47,7 @@
 		<typeAlias type="com.cherryfunding.spring.vo.FResultVo" alias="fResult"/>
 		<typeAlias type="com.cherryfunding.spring.vo.EventVo" alias="event"/>
 		<typeAlias type="com.cherryfunding.spring.vo.MypageVo" alias="Mypage"/>
-		
+		<typeAlias type="com.cherryfunding.spring.vo.UserInfoVo" alias="userInfo"/>
 		
 		
 	</typeAliases>
@@ -94,5 +94,6 @@
 		<mapper resource="com/cherryfunding/spring/mybatis/FResultMapper.xml"/>
 		<mapper resource="com/cherryfunding/spring/mybatis/EventMapper.xml"/>
 		<mapper resource="com/cherryfunding/spring/mybatis/MypageMapper.xml"/>
+		<mapper resource="com/cherryfunding/spring/mybatis/UserInfoMapper.xml"/>
 	</mappers>
 </configuration>

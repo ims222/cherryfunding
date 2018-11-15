@@ -4,17 +4,20 @@ PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
 "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 
 <tiles-definitions>
-	<definition name=".insertVolunteer" extends = ".main">
+	<definition name=".insertVolunteer" extends = ".admin">
+		<put-attribute name="header" value="/WEB-INF/views/main/header.jsp"/>
 		<put-attribute name="banner" value="/WEB-INF/views/volunteer/banner.jsp"/>
 		<put-attribute name="content" value="/WEB-INF/views/volunteer/volunteerBoard/insertVolunteer.jsp"/>
 	</definition>
 	
-	<definition name=".volunteerList" extends = ".main">
+	<definition name=".volunteerList" extends = ".admin">
+		<put-attribute name="header" value="/WEB-INF/views/main/header.jsp"/>
 		<put-attribute name="banner" value="/WEB-INF/views/volunteer/banner.jsp"/>
 		<put-attribute name="content" value="/WEB-INF/views/volunteer/volunteerBoard/volunteerList.jsp"/>
 	</definition>
 	
-	<definition name=".VolunteerDetail" extends = ".main">
+	<definition name=".VolunteerDetail" extends = ".admin">
+		<put-attribute name="header" value="/WEB-INF/views/main/header.jsp"/>
 		<put-attribute name="banner" value="/WEB-INF/views/volunteer/banner.jsp"/>
 		<put-attribute name="content" value="/WEB-INF/views/volunteer/volunteerBoard/volunteerDetail.jsp"/>
 	</definition>

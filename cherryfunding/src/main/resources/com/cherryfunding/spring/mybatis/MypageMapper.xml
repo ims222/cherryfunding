@@ -4,11 +4,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cherryfunding.spring.vo.MypageMapper">
 	<select id="charitySum" parameterType="string" resultType="int">
-		select nvl(sum(amount),0) from cDetail where id=#{id}
+		select NVL(sum(amount),0) from cDetail where id=#{id}
 	</select>
 	
 	<select id="fundingSum" parameterType="string" resultType="int">
-		select nvl(sum(amount),0) from fDetail where id = #{id}
+		select NVL(sum(amount),0) from fDetail where id = #{id}
 	</select>
 	
 	<select id="charityList" parameterType="string" resultType="Mypage">
@@ -37,4 +37,5 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</set>
 		where id=#{id}
 	</update>
+	
 </mapper>

@@ -112,6 +112,6 @@
 	<a href="https://kauth.kakao.com/oauth/authorize?client_id=89f185a407f3d617bfbb42e27e8f07c9&redirect_uri=http://localhost:9090/cherryfunding/oauth&response_type=code">카카오 로그인 ㅎ</a>
 	
 	
-	
+	<a href="${pageContext.request.contextPath}/mainTest">테스트 중</a>
 </body>
 </html>

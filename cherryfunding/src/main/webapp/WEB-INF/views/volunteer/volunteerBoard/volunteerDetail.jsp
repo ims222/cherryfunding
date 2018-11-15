@@ -3,9 +3,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
 		isRecommend();
+		getRecommend();
 		isApply();
 		commentList();
 		applicant();
@@ -64,17 +68,17 @@
 						success: function(data){
 							if(data.result === 'insertok' || data.result === 'deleteok'){	
 								isApply();
-							}else{
-								alert("모집인원수 초과로 신청이 불가합니다.");
+							}else if(data.result === 'no'){
+								$("#myModal").modal('show');
 								return;
+							}else{
+								alert("마감된 게시글입니다.");
 							}
 						}
-					});
+					});	
 				}
 			});
 		});
-			
-
 		
 		$("#insertComment").on('submit', function(e){
 			e.preventDefault();
@@ -109,11 +113,26 @@
 			success: function(data){
 				if(data.result === 'ok'){
 					$("#recommend").text('추천');
+					getRecommend();
 				}else{
 					$("#recommend").text('추천취소');
+					getRecommend();
 				}
 			}
 		});
+	}
+	
+	function getRecommend(){
+		$.ajax({
+			url: '${pageContext.request.contextPath}/volunteer/volunteerGetRecommend',
+			data: {vNum: '${vo.vNum}'},
+			type: 'get',
+			dataType: 'text',
+			success: function(data){
+				$("#showRecomm").empty();
+				$("#showRecomm").append(data);
+			}
+		})
 	}
 	
 	function isApply(){
@@ -125,8 +144,10 @@
 			success: function(data){
 				if(data.result === 'ok'){
 					$("#apply").text('신청');
+					applicant();
 				}else{
 					$("#apply").text('신청취소');
+					applicant();
 				}
 			}
 		});
@@ -164,12 +185,25 @@
 			dataType: 'text',
 			type: 'get',
 			success: function(data){
+				$("#applicant").empty();
 				$("#applicant").append(data);
 			}
 		});
 	}
 
 </script>
+<style type="text/css">
+.modal{
+      position: auto;
+      top: 10%;
+      z-index: 1050;
+      width: auto;
+      outline: none;
+      }
+.modal-backdrop{
+  z-index: -1;
+}
+</style>
 <!-- Main -->
 <div id="main">
 	<div class="container">
@@ -181,13 +215,13 @@
 				 	<p>날짜: ${vo.dDay }</p>
 				 	<p>장소: ${vo.place }</p>
 				 	<p>모집인원: ${vo.members }</p>
-				 	<div id="applicant">현재 신청 인원:</div><br>
+				 	추천 수:<div id="showRecomm"></div>
+				 	현재 신청 인원:<div id="applicant"></div><br>
 				 	<button id="recommend" type="button"></button>
 				 	<button id="apply" type="button"></button>
 				</div>
 				
 			</section>
-			
 		</div>
 		<div class="row box" id="commment"></div>
 		<form id="insertComment">
@@ -195,4 +229,21 @@
 			<input type="submit" value="댓글 등록">
 		</form>
 	</div>
+	<!-- modal -->
+	<div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p>죄송합니다.</p>
+                    <p>신청 마감되었습니다.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+                </div>
+            </div>
+        </div>
+    </div>  
 </div>
