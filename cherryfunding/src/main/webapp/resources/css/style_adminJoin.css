@@ -1,0 +1,78 @@
+@charset "UTF-8";
+
+
+#idcheck{
+    color: red;
+    font-size: 12px;
+    }
+    
+    #pwdcheck{
+    color: red;
+    font-size: 12px;
+    }
+    
+    #aid_span{
+    	width: 366px;
+    	height: 51px;
+    	border:1px solid gray;
+    }
+    #pwd_span{
+    	width: 366px;
+    	height: 51px;
+    	border:1px solid gray;
+    }
+    
+    #nick_span{
+    	width: 366px;
+    	height: 51px;
+    	border:1px solid gray;
+    }
+    
+            
+	#aid {
+
+    	width: 318px;
+   		height: 25px;
+    	border: 1px solid white;
+    	margin: 9px 5px 16px 8px;
+
+	}
+	#pwd {
+
+    	width: 334px;
+    	height: 29px;		
+    	border: 1px solid white;
+    	margin: 9px 5px 16px 8px;	
+	}
+	#nick {
+	
+    	width: 334px;
+    	height: 29px;
+    	border: 1px solid white;
+    	margin: 9px 5px 16px 8px;
+	}
+	
+	#container_row{
+		width: 500px;
+    	height:700px;
+    	margin:auto;
+	
+	}
+	#lock{
+	}
+	
+	#nick_name{
+		margin-top: 42px;
+	}
+	
+	#send{
+		background: limegreen;
+    	font-size: 20px;
+    	color: white;
+    	width: 366px;
+    	height: 51px;
+    	outline: 0px;
+    	border: 0px;
+    	margin-top: 40px;
+    	cursor: pointer;
+	}

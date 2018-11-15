@@ -1,9 +1,11 @@
 package com.cherryfunding.spring.controller.admin;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.cherryfunding.spring.service.admin.Ad_Service;
@@ -17,6 +19,11 @@ public class JoinController {
 	@RequestMapping(value="/adjoin",method = RequestMethod.GET)
 	public String adjoin() {
 		return "admin/manage/adminJoin";
+	}
+	
+	@RequestMapping(value="/adjoinagree",method = RequestMethod.GET)
+	public String adjoinagree() {
+		return "admin/manage/adjoinagree";
 	}
 	
 	@RequestMapping(value="/adjoin",method = RequestMethod.POST)
@@ -34,6 +41,26 @@ public class JoinController {
 		
 		return mv;
 		
+	}
+	
+	
+	@RequestMapping(value="/adjoin/confirm",method=RequestMethod.GET)
+	@ResponseBody
+	public String joinconfirm(String aid) {
+		
+		String result = service.search(aid);
+		JSONObject json = new JSONObject();
+		System.out.println(result);
+		if(result!=null) {
+			
+			json.put("using", true);
+			
+		}else {
+			
+			json.put("using", false);
+		}
+		
+		return json.toString();
 	}
 	
 	

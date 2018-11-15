@@ -12,6 +12,11 @@
   	<select id="login" parameterType="hashmap" resultType="AdminVo">
   		select * from admin where aid=#{aid} and pwd=#{pwd}
   	</select>
+  	
+  	
+  	<select id="search" parameterType="string" resultType="string">
+  		select * from admin where aid=#{aid} 
+  	</select>
   
   
   </mapper>

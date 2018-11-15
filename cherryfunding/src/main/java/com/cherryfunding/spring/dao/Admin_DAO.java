@@ -24,6 +24,10 @@ public class Admin_DAO {
 		return sqlsession.selectOne(NAMESPACE+".login",map);
 	}
 	
+	public String search(String aid) {
+		return sqlsession.selectOne(NAMESPACE+".search",aid);
+	}
+	
 	
 
 }

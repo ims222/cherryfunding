@@ -152,7 +152,7 @@
         			var data = google.visualization.arrayToDataTable([
         				
         				['항목','인원'],
-        				['하루 일일 통계',${todaycount}],
+        				['하루 일일 통계',${todaycount}]
         			]);
         			
         		var options = {
@@ -180,7 +180,7 @@
         			var data = google.visualization.arrayToDataTable([
         				
         				['항목','원'],
-        				['총 펀딩 금액',${ftotalprice}],
+        				['총 펀딩 금액',${ftotalprice}]
         			]);
         			
         		var options = {
@@ -210,7 +210,7 @@
         			var data = google.visualization.arrayToDataTable([
         				
         				['항목','원'],
-        				['총 기부 금액',${ctotalprice}],
+        				['총 기부 금액',${ctotalprice}]
         			]);
         			
         		var options = {
@@ -239,7 +239,7 @@
         			var data = google.visualization.arrayToDataTable([
         				
         				['항목','원'],
-        				['하루 모인 펀딩 금액',${tfprice}],
+        				['하루 모인 펀딩 금액',${tfprice}]
         			]);
         			
         		var options = {
@@ -268,7 +268,7 @@
         			var data = google.visualization.arrayToDataTable([
         				
         				['항목','원'],
-        				['하루 모인 기부 금액',${tcprice}],
+        				['하루 모인 기부 금액',${tcprice}]
         			]);
         			
         		var options = {
