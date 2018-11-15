@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.cherryfunding.spring.vo.FDetailVo;
 import com.cherryfunding.spring.vo.FHashtagVo;
+import com.cherryfunding.spring.vo.FResultVo;
 import com.cherryfunding.spring.vo.FundingVo;
 import com.cherryfunding.spring.vo.RewardVo;
 import com.cherryfunding.spring.vo.UsersVo;
@@ -40,4 +41,8 @@ public interface FundingDetailService {
 	int countFdetailbyfNum(int fNum);
 
 	UsersVo userInfo(String id);
+
+	int fResultGetMaxNum();
+
+	int insertFResult(FResultVo vo);
 }

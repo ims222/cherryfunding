@@ -19,7 +19,4 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="update" parameterType="fResult">
 		update fResult set #{pwd} where #{id}
 	</update>
-	<delete id="delete" parameterType="string">
-		delete from fResult where id=#{id}
-	</delete>
 </mapper>

@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cherryfunding.spring.service.funding.FundingDetailService;
 import com.cherryfunding.spring.vo.FDetailVo;
+import com.cherryfunding.spring.vo.FResultVo;
 import com.cherryfunding.spring.vo.RewardVo;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -184,7 +185,8 @@ public class FundingDetailController {
 							obj.put("result", "amountOver");
 							return obj.toString();
 						}
-						FDetailVo fdvo = new FDetailVo(0, id, fNum, rNum, null, null, amount);
+						int fdNum = fundingDetailService.fdetailGetMaxNum() + 1;
+						FDetailVo fdvo = new FDetailVo(fdNum, id, fNum, rNum, null, null, amount);
 						fundingDetailService.insertFDetail(fdvo); // 펀딩내역
 						HashMap<String, Object> rewardMap = new HashMap<String, Object>();
 						rewardMap.put("price", price * amount);
@@ -194,7 +196,8 @@ public class FundingDetailController {
 						rewardMap.put("rNum", rNum);
 						rewardMap.put("amount", amount);
 						fundingDetailService.updateAmount(rewardMap); // 남은 수량 수정
-						//펀딩 결과 등록
+						FResultVo frvo = new FResultVo(0, fdNum, null);
+						fundingDetailService.insertFResult(frvo);// 펀딩 결과 등록
 						obj.put("result", "ok");
 						obj.put("reward", r);
 					}
