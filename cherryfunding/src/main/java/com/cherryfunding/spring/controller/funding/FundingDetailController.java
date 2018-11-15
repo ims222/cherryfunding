@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -22,6 +23,7 @@ import com.cherryfunding.spring.service.funding.FundingDetailService;
 import com.cherryfunding.spring.vo.FDetailVo;
 import com.cherryfunding.spring.vo.FResultVo;
 import com.cherryfunding.spring.vo.RewardVo;
+import com.cherryfunding.spring.vo.UsersVo;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Controller
@@ -185,6 +187,7 @@ public class FundingDetailController {
 							obj.put("result", "amountOver");
 							return obj.toString();
 						}
+
 						int fdNum = fundingDetailService.fdetailGetMaxNum() + 1;
 						FDetailVo fdvo = new FDetailVo(fdNum, id, fNum, rNum, null, null, amount);
 						fundingDetailService.insertFDetail(fdvo); // 펀딩내역
@@ -212,6 +215,13 @@ public class FundingDetailController {
 			obj.put("result", "no");
 		}
 		return obj.toString();
+	}
+
+	@RequestMapping("/funding/getUserInfo")
+	@ResponseBody
+	public UsersVo getUserInfo(HttpSession session) {
+		String id = (String) session.getAttribute("id");
+		return fundingDetailService.userInfo(id);
 	}
 
 	@RequestMapping(value = "/funding/rewardOk", method = RequestMethod.POST)

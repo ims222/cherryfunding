@@ -210,6 +210,27 @@ ul {
 		$('#rewardInfo').on('click', '.decreaseAmount', decreaseAmount);
 		$('#rewardInfo').on('keyup', '.inputAmount', inputAmount);
 		$('#rewardInfo').on('click', '.removeReward', removeReward);
+		$('#getUserInfo').on('click', function(){
+			$.ajax({
+				url:'${pageContext.request.contextPath}/funding/getUserInfo',
+				dataType:'json',
+				type:'post',
+				success: function(data){
+					
+					$('#nick').text(data.nick);
+					$('#balance').text(data.balance);
+					var totPrice = uncomma($('#totPrice').text());
+					console.log('totPrice', totPrice);
+					$('#paymentAmount').text(totPrice);
+					
+					var afterBalance = parseInt(data.balance) - parseInt(totPrice);
+					$('#afterBalance').text(afterBalance);
+					$('#pDate').text(new Date());
+					
+					$('#userInfo').show();
+				}
+			});
+		});
 		$('#applicationReward').on('click', function(){
 			var select = $('.selectedReward');
 			if(select.length === 0){
@@ -300,8 +321,16 @@ ul {
 				<span class="w3-xlarge">결제하신 금액은 별도 수수료 없이 펀딩을 진행하는 펀더에게 100% 전달됩니다.</span>
 			</div>
 			<div>
-				<button id="applicationReward" class="w3-btn w3-block w3-teal">펀딩 참여하기</button>
+				<button id="getUserInfo" class="w3-btn w3-block w3-teal">결제</button>
 			</div>
+		</div>
+		<div id="userInfo" style="display:none;">
+			닉네임:: <span id="nick"></span> <br>
+			잔액:: <span id="balance"></span> <br>
+			결제금액:: <span id="paymentAmount"></span><br>
+			결제후 잔액:: <span id="afterBalance"></span><br>
+			결제일:: <span id="pDate"></span><br>
+		<button id="applicationReward" class="w3-btn w3-block w3-teal">펀딩 참여하기</button>
 		</div>
 	</div>
 </div>
