@@ -21,5 +21,10 @@ public class Ad_Service {
 		return dao.login(map);
 	}
 	
+	public String search(String aid) {
+		return dao.search(aid);
+	}
+	
+	
 
 }
