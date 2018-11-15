@@ -22,7 +22,6 @@
 			닉네임::${vo.nick}<br>
 			합계::<fmt:formatNumber value="${totPrice}" pattern="#,###"/>원<br>
 			잔고::${vo.balance}<br>
-			<button>결제</button>
 			<button>목록</button>
 		</div>
 		

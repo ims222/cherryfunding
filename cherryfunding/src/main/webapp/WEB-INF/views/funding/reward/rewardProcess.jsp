@@ -330,6 +330,8 @@ ul {
 			결제금액:: <span id="paymentAmount"></span><br>
 			결제후 잔액:: <span id="afterBalance"></span><br>
 			결제일:: <span id="pDate"></span><br>
+			
+			결제를 계속 진행 하시려면 펀딩 참여하기 버튼을 눌러주세욧.
 		<button id="applicationReward" class="w3-btn w3-block w3-teal">펀딩 참여하기</button>
 		</div>
 	</div>
