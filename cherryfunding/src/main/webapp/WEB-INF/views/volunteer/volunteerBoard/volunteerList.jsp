@@ -26,7 +26,7 @@
 		    	}
 		    	for(var i=0; i<data.list.length; i++){
 		    		vNum = data.list[i].vNum;
-		    		html += '<section class="4u">';
+		    		html += '<div class="w3-col m4 l4 " style="padding: 20px;">';
 		    		html += '<a href="${pageContext.request.contextPath}/volunteer/volunteerDetail?vNum='
 			    			+ data.list[i].vNum
 		    				+ '" class="image featured">';		    				
@@ -35,10 +35,9 @@
 		    			+ data.list[i].vpInfo 
 		    			+'" height="200px"></a>';
 		    		html += '<div class="box">';
-		    		html += data.list[i].vNum;
-		    		html += '<p>' + data.list[i].title + '</p>';
+		    		html += '<h4>' + data.list[i].title + '</h4>';
 		    		html += '</div>';
-		    		html += '</section>';
+		    		html += '</div>';
 		    	}
 		    	$("#showDiv").append(html);
 		    }	
@@ -63,7 +62,7 @@
 	<div class="container">
 		<div class="row no-collapse-1">
 			<c:forEach var="vo" items="${list}" varStatus="vs">
-				<section class="4u">
+				<div class="w3-col m4 l4" style="padding: 20px;">
 					<a href="${pageContext.request.contextPath}/volunteer/volunteerDetail?vNum=${vo.vNum}" class="image featured">
 					<script>
 					vNum = ${vo.vNum}
@@ -71,10 +70,9 @@
 					<img src="${pageContext.request.contextPath}/resources/upload/volunteer/${vo.saveName}"
 						alt="${vo.vpInfo}" height="200px"></a>
 					<div class="box">
-						<p>${vo.vNum}</p>
-						<p>${vo.title}</p>
+						<h4>${vo.title}</h4>
 					</div>
-				</section>
+				</div>
 			</c:forEach>
 		</div>
 	<div id="showDiv" class="row no-collapse-1"></div><br>
