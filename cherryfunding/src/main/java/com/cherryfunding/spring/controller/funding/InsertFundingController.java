@@ -48,7 +48,7 @@ public class InsertFundingController {
 		if (result.hasErrors()) {
 			return ".inputFunding";
 		}
-		String[] dateRange = request.getParameter("dataRange").trim().split("-");
+		String[] dateRange = request.getParameter("dateRange").replaceAll(" ", "").split("-");
 		String[] hashtags = request.getParameterValues("hashtag");
 		String[] rewards = request.getParameterValues("reward");
 		String[] fAmount = request.getParameterValues("fAmount");
@@ -58,8 +58,8 @@ public class InsertFundingController {
 		int fNum = fundingService.getMaxNum() + 1; // 펀딩번호
 		try { // 펀딩저장
 			fvo.setfNum(fNum);
-			String sDate = dateRange[0];
-			String eDate = dateRange[1];
+			String sDate = dateRange[0].replaceAll("/", "-");
+			String eDate = dateRange[1].replaceAll("/", "-");
 
 			java.util.Date jsdate = new SimpleDateFormat("yyyy-MM-dd").parse(sDate);
 			fvo.setSdate(new Date(jsdate.getTime()));
