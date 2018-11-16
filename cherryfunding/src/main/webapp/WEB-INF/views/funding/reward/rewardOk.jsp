@@ -20,8 +20,8 @@
 				<c:set value="${totPrice + reward.price}" var="totPrice"/>
 			</c:forEach>
 			닉네임::${vo.nick}<br>
-			합계::<fmt:formatNumber value="${totPrice}" pattern="#,###"/>원<br>
-			잔고::${vo.balance}<br>
+			합계::<fmt:formatNumber value="${totPrice}" pattern="#,###"/> 원<br>
+			잔고::<fmt:formatNumber value="${vo.balance}" pattern="#,###"/> 원<br>
 			<button>목록</button>
 		</div>
 		

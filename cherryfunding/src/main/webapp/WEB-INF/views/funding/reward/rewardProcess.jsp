@@ -218,16 +218,15 @@ ul {
 				success: function(data){
 					
 					$('#nick').text(data.nick);
-					$('#balance').text(data.balance);
+					$('#balance').text(comma(data.balance) + " 원");
 					var totPrice = uncomma($('#totPrice').text());
-					console.log('totPrice', totPrice);
-					$('#paymentAmount').text(totPrice);
+					$('#paymentAmount').text(comma(totPrice) + " 원");
 					
 					var afterBalance = parseInt(data.balance) - parseInt(totPrice);
-					$('#afterBalance').text(afterBalance);
-					$('#pDate').text(new Date());
+					$('#afterBalance').text(comma(afterBalance) + " 원");
+					$('#pDate').text(formatDate(new Date()));
 					
-					$('#userInfo').show();
+					$('#userInfo').fadeIn();
 				}
 			});
 		});
@@ -331,7 +330,7 @@ ul {
 			결제후 잔액:: <span id="afterBalance"></span><br>
 			결제일:: <span id="pDate"></span><br>
 			
-			결제를 계속 진행 하시려면 펀딩 참여하기 버튼을 눌러주세욧.
+			결제를 계속 진행 하시려면 결제 버튼을 눌러주세요.
 		<button id="applicationReward" class="w3-btn w3-block w3-teal">결제</button>
 		</div>
 	</div>

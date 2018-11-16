@@ -197,25 +197,13 @@
 				
 		<div class="topnav">
 			<span>진행중 펀딩</span>
-			<select id="sort">
+			<select id="sort" class="dropbtn w3-button">
 				<option value="latest" <c:if test="${sort eq 'latest'}">selected="selected"</c:if>>최신순</option>
 				<option value="recommend" <c:if test="${sort eq 'recommend'}">selected="selected"</c:if>>추천순</option>
 				<option value="popular" <c:if test="${sort eq 'popular'}">selected="selected"</c:if>>인기순</option>
 				<option value="camount" <c:if test="${sort eq 'camount'}">selected="selected"</c:if>>참여금액순</option>
 				<option value="end" <c:if test="${sort eq 'end'}">selected="selected"</c:if>>종료임박순</option>
 			</select>
-			<div class="dropdown">
-				<button onclick="dropdown()" class="w3-button dropbtn">최신순<i class="fa fa-caret-down"></i></button>
-				<div id="myDropdown" class="dropdown-content" style="top:45px;">
-					<ul>
-						<li><a href="#">최신순</a></li>
-						<li><a href="#">추천순</a></li>
-						<li><a href="#">인기순</a></li>
-						<li><a href="#">참여금액순</a></li>
-						<li><a href="#">종료임박순</a></li>
-					</ul>
-				</div>
-			</div>
  			<div class="search-container">
 					<input type="text" id="keyword" placeholder="Search.." name="search">
 					<button id="search" type="submit">검색</button>
