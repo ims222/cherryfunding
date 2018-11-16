@@ -26,4 +26,7 @@ public class SharingCommentService {
 		return sCommentDao.commentList(sNum);
 	}
 
+	public int getCommentCount(int sNum) {
+		return sCommentDao.getCommentCount(sNum);
+	}
 }

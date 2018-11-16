@@ -15,5 +15,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select scNum, id, content, to_char(regdate, 'yyyy-mm-dd hh24:mi:ss') regdate,
 		sNum from sComment where sNum = #{num} order by scNum
 	</select>
+	
+	<select id="getCommentCount" parameterType="int" resultType="int">
+		select NVL(count(scnum),0) from sComment where sNum = #{sNum}
+	</select>
 
 </mapper>

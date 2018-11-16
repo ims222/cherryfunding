@@ -275,10 +275,6 @@
 				<div id="comment" class="comments-list"></div>
 			</div>
 		</div>
-		<form id="insertComment">
-			<input type="text" name="content"><br>
-			<input type="submit" value="댓글 등록">
-		</form>
 	</div>
 </div>
 
