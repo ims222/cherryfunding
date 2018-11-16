@@ -85,8 +85,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<set>
 			<if test="title != null">title = #{title},</if>
 			<if test="content != null">content = #{content},</if>
-			<if test="amount != null">amount = #{amount},</if>
-			<if test="camout != null">camout = #{camout},</if>
+			<if test="amount != null and amount > 0">amount = #{amount},</if>
+			<if test="camout != null and camout > 0">camout = #{camout},</if>
 			<if test="sdate != null">sdate = #{sdate},</if>
 			<if test="edate != null">edate = #{edate},</if>
 			<if test="category != null">category = #{category},</if>

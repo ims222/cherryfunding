@@ -18,6 +18,8 @@ public class FundingUpdateController {
 	@ResponseBody
 	public FundingVo editContent(FundingVo vo) {
 		fundingUpdateService.update(vo);
+		System.out.println("!!!!!!!!!!!!!!");
+		System.out.println(vo.toString());
 		return fundingUpdateService.detail(vo.getfNum());
 	}
 }

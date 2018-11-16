@@ -91,6 +91,8 @@
 	};
 	var updateFunding = function(col){
 		var val = prompt("수정할 " + col + " 입력", '');
+		
+		console.log('col', col);
 		$.ajax({
 			url:'${pageContext.request.contextPath}/funding/editContent',
 			data:{ [col]:val, fNum:'${vo.fNum}'},
