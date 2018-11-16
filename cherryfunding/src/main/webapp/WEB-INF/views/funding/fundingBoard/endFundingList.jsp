@@ -3,13 +3,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <script type="text/javascript">
+	var array = [];
 	$(document).ready(function(){
+		
 		showMore();
-		//$("#category").on('click', 'button', selectCategory);
+		$("#category").on('click', 'button', selectCategory);
 		//$("#sort").on('change', selectionOption);
-		//$("#keyword").on('keyup', related);
+		$("#keyword").on('keyup', related);
 		$("#showMore").on('click', showMore);
-		//$("#keyword").autocomplete({source: array});
+		$("#keyword").autocomplete({source: array});
 		
 		$('#search').on('click', function(){
 			$("#list").empty();
@@ -17,6 +19,40 @@
 			showMore();
 		});
 	});
+	
+	
+	function related(){ //종료된 것이 나오게 수정 좀...
+		var keyword = $("#keyword").val();
+		var field = $("#field option:selected").text();
+		
+		$.ajax({
+			url:'${pageContext.request.contextPath}/funding/relatedWords',
+			data: {keyword: keyword, field: field},
+			dataType: 'json',
+			type:'get',
+			success: function(data){
+				for(var i=0; i<data.length; i++){
+					array[i]=data[i];
+				}
+			}
+		});
+	}
+	
+	
+	function selectCategory(){
+		$("#list").empty();
+		$('#pageNum').val(1);
+		$('#keyword').val('');
+		$('#category').val($(this).text());
+		showMore();
+	}
+	
+	function selectionOption(){
+		$("#list").empty();
+		$('#pageNum').val(1);
+		showMore();
+	}
+	
 	var showMore = function(){
 		$('#list').append(document.querySelector('#loadingTemplate').innerHTML);
 		var pageNum = $('#pageNum').val();
@@ -118,32 +154,39 @@
 <!-- Main -->
 <div id="main">
 	<div class="container">
-		<div class="btn-group" role="group" aria-label="category" id="category">
-			<button type="button" class="btn btn-secondary">전체보기</button>
-			<button type="button" class="btn btn-secondary">테크·가전</button>
-			<button type="button" class="btn btn-secondary">패션·잡화</button>
-			<button type="button" class="btn btn-secondary">푸드</button>
-			<button type="button" class="btn btn-secondary">홈리빙</button>
-			<button type="button" class="btn btn-secondary">디자인소품</button>
-			<button type="button" class="btn btn-secondary">여행·레저</button>
-			<button type="button" class="btn btn-secondary">스포츠·모빌리티</button>
-			<button type="button" class="btn btn-secondary">반려동물</button>
-			<button type="button" class="btn btn-secondary">공연·컬쳐</button>
-			<button type="button" class="btn btn-secondary">소셜·캠페인</button>
-			<button type="button" class="btn btn-secondary">교육·키즈</button>
-			<button type="button" class="btn btn-secondary">게임·취미</button>
-			<button type="button" class="btn btn-secondary">출판</button>
+		<div class="w3-bar" id="category">
+			<button type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">전체보기</button>
+			<button type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">테크·가전</button>
+			<button type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">패션·잡화</button>
+			<button type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">푸드</button>
+			<button type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">홈리빙</button>
+			<button type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">디자인소품</button>
+			<button type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">여행·레저</button>
+			<button type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">스포츠·모빌리티</button>
+			<button type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">반려동물</button>
+			<button type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">공연·컬쳐</button>
+			<button type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">소셜·캠페인</button>
+			<button type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">교육·키즈</button>
+			<button type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">게임·취미</button>
+			<button type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">출판</button>
 		</div>
-		<form method="get" action="${pageContext.request.contextPath}/funding/endFundingList">
-			<input type="hidden" name="category" value="${category}">
-			<select name="field">
-				<option value="title" <c:if test="${field eq 'title'}">selected="selected"</c:if>>제목</option>
-				<option value="content" <c:if test="${field eq 'content'}">selected="selected"</c:if>>내용</option>
-				<option value="id" <c:if test="${field eq 'id'}">selected="selected"</c:if>>글쓴이</option>
+		
+		
+		<div class="topnav">
+			<span>종료된 펀딩</span>
+			<select id="sort" class="dropbtn w3-button">
+				<option value="latest" <c:if test="${sort eq 'latest'}">selected="selected"</c:if>>최신순</option>
+				<option value="recommend" <c:if test="${sort eq 'recommend'}">selected="selected"</c:if>>추천순</option>
+				<option value="popular" <c:if test="${sort eq 'popular'}">selected="selected"</c:if>>인기순</option>
+				<option value="camount" <c:if test="${sort eq 'camount'}">selected="selected"</c:if>>참여금액순</option>
+				<option value="end" <c:if test="${sort eq 'end'}">selected="selected"</c:if>>종료임박순</option>
 			</select>
-			<input type="text" name="keyword" value="${keyword}">
-			<input type="submit" value="검색">		
-		</form>
+ 			<div class="search-container">
+					<input type="text" id="keyword" placeholder="Search.." name="search">
+					<button id="search" type="submit">검색</button>
+			</div>
+		</div>
+		
 		
 		
 		<input type="hidden" id="pageNum" value="">
@@ -151,7 +194,6 @@
 		<div id="list" class="w3-row">
 		</div>
 		<button id="showMore" class="w3-btn w3-block w3-teal">더보기</button>
-		
 		
 	</div>
 </div>

@@ -116,7 +116,7 @@
 	}
 	
 	
-	function related(){
+	function related(){//진행중인 것만 나오게... 부탁드려요....
 		var keyword = $("#keyword").val();
 		var field = $("#field option:selected").text();
 		
@@ -188,16 +188,6 @@
 			<button type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">게임·취미</button>
 			<button type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">출판</button>
 		</div>
-		<!-- 
-		<form method="get" action="${pageContext.request.contextPath}/funding/ingFundingList">
-			<input type="hidden" name="category" id="category" value="${category}">
-			<select name="field" id="field">
-				<option value="title" <c:if test="${field eq 'title'}">selected="selected"</c:if>>제목</option>
-				<option value="content" <c:if test="${field eq 'content'}">selected="selected"</c:if>>내용</option>
-				<option value="id" <c:if test="${field eq 'id'}">selected="selected"</c:if>>글쓴이</option>
-			</select>
-		</form>
-		 -->
 				
 		<div class="topnav">
 			<span>진행중 펀딩</span>
