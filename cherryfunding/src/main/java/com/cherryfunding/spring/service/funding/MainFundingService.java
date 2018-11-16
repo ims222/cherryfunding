@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cherryfunding.spring.dao.FPictureDao;
+import com.cherryfunding.spring.dao.FRecommendDao;
 import com.cherryfunding.spring.dao.FundingDao;
 import com.cherryfunding.spring.util.S3Util;
 import com.cherryfunding.spring.util.StringLengthCut;
@@ -23,6 +24,13 @@ public class MainFundingService {
 
 	@Autowired
 	private FPictureDao pfdao;
+
+	@Autowired
+	private FRecommendDao fRecommendDao;
+
+	public int getRecomm(int fNum) {
+		return fRecommendDao.getRecommend(fNum);
+	}
 
 	public FundingVo mainEnd() {
 		FundingVo fEnd = fdao.mainEnd();

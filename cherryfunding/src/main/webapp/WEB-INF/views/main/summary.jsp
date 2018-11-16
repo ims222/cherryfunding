@@ -202,7 +202,7 @@
 		
 						<div>
 							<div class="w3-left-align" style="float:left;">${summary.fEnd.category} | ${summary.fEnd.id}</div>
-							<div class="w3-right-align"><p>추천 <span class="w3-badge w3-green">{recomm}</span></p></div>
+							<div class="w3-right-align"><p>추천 <span class="w3-badge w3-green">${summary.fEndRecomm}</span></p></div>
 							<div class="w3-border">
 								<div class="w3-blue" style="height:5px;width:${barfEndBefore/100}"></div>
 							</div>
@@ -245,7 +245,7 @@
 		
 						<div>
 							<div class="w3-left-align" style="float:left;">${summary.fHot.category} | ${summary.fHot.id}</div>
-							<div class="w3-right-align"><p>추천 <span class="w3-badge w3-green">{recomm}</span></p></div>
+							<div class="w3-right-align"><p>추천 <span class="w3-badge w3-green">${summary.fHotRecomm}</span></p></div>
 							<div class="w3-border">
 								<div class="w3-blue" style="height:5px;width:${barfHotBefore/100}"></div>
 							</div>
@@ -288,7 +288,7 @@
 		
 						<div>
 							<div class="w3-left-align" style="float:left;">${summary.fPrice.category} | ${summary.fPrice.id}</div>
-							<div class="w3-right-align"><p>추천 <span class="w3-badge w3-green">{recomm}</span></p></div>
+							<div class="w3-right-align"><p>추천 <span class="w3-badge w3-green">${summary.fPriceRecomm}</span></p></div>
 							<div class="w3-border">
 								<div class="w3-blue" style="height:5px;width:${barfPriceBefore/100}"></div>
 							</div>

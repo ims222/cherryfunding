@@ -35,9 +35,13 @@ public class HomeController {
 
 		// 펀딩 요약
 		summary.put("fEnd", mfService.mainEnd()); // 종료임박
+		summary.put("fEndRecomm", mfService.getRecomm(mfService.mainEnd().getfNum()));
 		summary.put("fNew", mfService.mainNew()); // 새로 시작하는 펀딩
+		summary.put("fNewRecomm", mfService.getRecomm(mfService.mainNew().getfNum()));
 		summary.put("fHot", mfService.mainHot()); // 진행중 펀딩중 조회수가 가장 높은
+		summary.put("fHotRecomm", mfService.getRecomm(mfService.mainHot().getfNum()));
 		summary.put("fPrice", mfService.mainPrice()); // 진행중 펀딩중 참여금액이 제일 높은
+		summary.put("fPriceRecomm", mfService.getRecomm(mfService.mainPrice().getfNum()));
 		summary.put("totFunding", mfService.totFunding());
 		summary.put("todayFundingPrice", mfService.todayFundingPrice()); // 오늘 펀딩 금액
 		summary.put("todayFundingCount", mfService.todayFundingCount()); // 오늘 펀딩 갯수
