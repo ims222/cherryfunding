@@ -134,7 +134,7 @@
 	<a href="${pageContext.request.contextPath}/funding/ingFundingDetailforUser?fNum={fNum}">
 	<img src="{savename}" class="w3-round" alt="{fpinfo}" height="200px" width="100%"></a>
 	<div>
-		<div style="height: 50px; overflow:auto;>
+		<div style="height: 50px; overflow:hidden;>
 			<p class="w3-left-align" style="word-break:break-all;">
 				<a href="${pageContext.request.contextPath}/funding/ingFundingDetailforUser?fNum={fNum}">
 				<h4>{title}</h4></a>
@@ -184,6 +184,7 @@
 			<button type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">게임·취미</button>
 			<button type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">출판</button>
 		</div>
+		<!-- 
 		<form method="get" action="${pageContext.request.contextPath}/funding/ingFundingList">
 			<input type="hidden" name="category" id="category" value="${category}">
 			<select name="field" id="field">
@@ -192,28 +193,8 @@
 				<option value="id" <c:if test="${field eq 'id'}">selected="selected"</c:if>>글쓴이</option>
 			</select>
 		</form>
-		
+		 -->
 				
-		<div class="row">
-			<div class="col-lg-6">
-				<div class="input-group">
-					<input type="text" id="keyword" value="" class="form-control" aria-label="...">
-					<span class="input-group-btn">
-						<button class="btn btn-default" id="search" type="button">검색</button>
-					</span>
-					<div class="input-group-btn">
-						<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Action <span class="caret"></span></button>
-						<ul class="dropdown-menu" role="menu">
-							<li><a href="#">Action</a></li>
-							<li><a href="#">Another action</a></li>
-							<li><a href="#">Something else here</a></li>
-							<li class="divider"></li>
-							<li><a href="#">Separated link</a></li>
-						</ul>
-					</div><!-- /btn-group -->
-				</div><!-- /input-group -->
-			</div><!-- /.col-lg-6 -->
-		</div><!-- /.row -->
 		<div class="topnav">
 			<span>진행중 펀딩</span>
 			<select id="sort">
@@ -236,10 +217,8 @@
 				</div>
 			</div>
  			<div class="search-container">
-				<form action="/action_page.php">
-					<input type="text" placeholder="Search.." name="search">
-					<button type="submit">Submit</button>
-				</form>
+					<input type="text" id="keyword" placeholder="Search.." name="search">
+					<button id="search" type="submit">검색</button>
 			</div>
 		</div>
 

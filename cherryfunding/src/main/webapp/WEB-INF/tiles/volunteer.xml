@@ -4,7 +4,6 @@ PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
 "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 
 <tiles-definitions>
-	
 	<definition name=".insertVolunteer" template = "/WEB-INF/views/main/layout2.jsp">
 		<put-attribute name="header" value="/WEB-INF/views/main/header.jsp"/>
 		<put-attribute name="banner" value="/WEB-INF/views/volunteer/banner.jsp"/>
@@ -12,15 +11,12 @@ PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
 		<put-attribute name="footer" value="/WEB-INF/views/main/footer.jsp"/>
 	</definition>
 	
-	<definition name=".volunteerList" template = "/WEB-INF/views/main/layout2.jsp">
-		<put-attribute name="header" value="/WEB-INF/views/main/header.jsp"/>
-		<put-attribute name="banner" value="/WEB-INF/views/volunteer/banner.jsp"/>
+	<definition name=".volunteerList" extends = ".insertVolunteer">
 		<put-attribute name="content" value="/WEB-INF/views/volunteer/volunteerBoard/volunteerList.jsp"/>
 		<put-attribute name="footer" value="/WEB-INF/views/main/footer.jsp"/>
 	</definition>
-	<definition name=".VolunteerDetail" template = "/WEB-INF/views/main/layout2.jsp">
-		<put-attribute name="header" value="/WEB-INF/views/main/header.jsp"/>
-		<put-attribute name="banner" value="/WEB-INF/views/volunteer/banner.jsp"/>
+	
+	<definition name=".VolunteerDetail" extends = ".insertVolunteer">
 		<put-attribute name="content" value="/WEB-INF/views/volunteer/volunteerBoard/volunteerDetail.jsp"/>
 		<put-attribute name="footer" value="/WEB-INF/views/main/footer.jsp"/>
 	</definition>
