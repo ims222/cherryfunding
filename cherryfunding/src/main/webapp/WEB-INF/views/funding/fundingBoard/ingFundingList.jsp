@@ -20,6 +20,7 @@
 			$('#pageNum').val(1);
 			showMore();
 		});
+		
 	});
 	
 	var showMore = function(){
@@ -64,6 +65,8 @@
 									.replace(/{width}/gi, barBefore + "%" )
 									.replace("{valuenow}", barBefore)
 									.replace(/{percent}/gi, Math.ceil((before/100) * 100) + "%"); 
+						
+						
 					});
 					document.querySelector('#list').innerHTML = result;
 					$('#pageNum').val(data.pageNum);
@@ -72,6 +75,7 @@
 					    return $(this).text() == data.field; 
 					}).prop('selected', true);
 					$('#keyword').val(data.keyword);
+					
 				}
 			},
 			complete :function(){

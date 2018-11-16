@@ -9,22 +9,28 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cherryfunding.spring.service.funding.EndFundingListService;
-import com.cherryfunding.spring.util.S3Util;
-import com.cherryfunding.spring.vo.FundingVo;
+import com.cherryfunding.spring.util.PageUtil;
 
 @Controller
 public class EndFundingListController {
 
 	@Autowired
-	private S3Util s3;
-
-	@Autowired
 	private EndFundingListService endService;
 
-	@RequestMapping("/funding/endFundingList")
-	public String end(Model model, HttpServletRequest request) {
+	@RequestMapping(value = "/funding/endFundingList", method = RequestMethod.GET)
+	public String ingFundingList() {
+		return ".endFundingList";
+	}
+
+	@RequestMapping("/funding/moreEndFundingList")
+	@ResponseBody
+	public HashMap<String, Object> end(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum, Model model,
+			HttpServletRequest request) {
 		String category = request.getParameter("category");
 		String field = request.getParameter("field");
 		String keyword = request.getParameter("keyword");
@@ -33,18 +39,19 @@ public class EndFundingListController {
 		map.put("field", field);
 		map.put("keyword", keyword);
 		map.put("category", request.getParameter("category"));
-		List<FundingVo> list = endService.list(map);
-
-		for (FundingVo vo : list) {
-			String thumbnail = endService.thumbnail(vo.getfNum()).getSavename();
-			vo.setSavename(s3.getFileURL("funding/" + thumbnail));
-			vo.setFpinfo(endService.thumbnail(vo.getfNum()).getFpinfo());
+		PageUtil pageUtil = new PageUtil(pageNum, endService.getTotCountEnd(map));
+		map.put("startRow", pageUtil.getStartRow());
+		map.put("endRow", pageUtil.getEndRow());
+		
+		List<HashMap<String, Object>> list = endService.list(map);
+		if (list.size() == 0 && pageNum > 1) {
+			map.put("list", "no");
+			map.put("pageNum", pageNum);
+		} else {
+			map.put("list", list);
+			map.put("pageNum", pageNum + 1);
 		}
 
-		model.addAttribute("list", list);
-		model.addAttribute("category", category);
-		model.addAttribute("field", field);
-		model.addAttribute("keyword", keyword);
-		return ".endFundingList";
+		return map;
 	}
 }

@@ -44,7 +44,7 @@ public class FundingDao {
 		return sqlSession.selectList(NAMESPACE + "prepare", map);
 	}
 
-	public List<FundingVo> end(HashMap<String, Object> map) { // 종료
+	public List<HashMap<String, Object>> end(HashMap<String, Object> map) { // 종료
 		return sqlSession.selectList(NAMESPACE + "end", map);
 	}
 
@@ -127,6 +127,10 @@ public class FundingDao {
 
 	public int getTotCount(HashMap<String, Object> map) {
 		return sqlSession.selectOne(NAMESPACE + "getTotCount", map);
+	}
+	
+	public int getTotCountEnd(HashMap<String, Object> map) {
+		return sqlSession.selectOne(NAMESPACE + "getTotCountEnd", map);
 	}
 
 }
