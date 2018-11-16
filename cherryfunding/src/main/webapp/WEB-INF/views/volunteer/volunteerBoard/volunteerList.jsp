@@ -3,6 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 	var pageNum = 1;
 	var vNum = 0;
@@ -18,6 +20,10 @@
 		    dataType: 'json',
 		    success: function(data){
 		    	var html = '';
+		    	if(vNum == 1){
+		    		$("#myModal").modal('show');
+					return;
+		    	}
 		    	for(var i=0; i<data.list.length; i++){
 		    		vNum = data.list[i].vNum;
 		    		html += '<section class="4u">';
@@ -34,14 +40,24 @@
 		    		html += '</div>';
 		    		html += '</section>';
 		    	}
-		    	console.log(data);
 		    	$("#showDiv").append(html);
-		    	
 		    }	
 		})
 	}
 	
 </script>
+<style type="text/css">
+.modal{
+      position: absolute;
+      top: 90%;
+      z-index: 1050;
+      width: auto;
+      outline: none;
+      }
+.modal-backdrop{
+  z-index: -1;
+}
+</style>
 <!-- Main -->
 <div id="main">
 	<div class="container">
@@ -64,4 +80,20 @@
 	<div id="showDiv" class="row no-collapse-1"></div><br>
 	<button id="showmore" class="w3-btn w3-block w3-teal">더보기</button>
 	</div>
+	<!-- modal -->
+	<div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p>마지막 페이지입니다.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+                </div>
+            </div>
+        </div>
+    </div>  
 </div>

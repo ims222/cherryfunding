@@ -17,7 +17,7 @@
 			var recomm;
 			var id='${sessionScope.id}';
 			if(!id){
-				alert("로그인 해주세욧");
+				$("#myModal1").modal('show');
 				return;
 			}
 			$.ajax({
@@ -47,7 +47,7 @@
 			var apply;
 			var id='${sessionScope.id}';
 			if(!id){
-				alert("로그인 해주세욧");
+				$('#myModal1').modal('show');
 				return;
 			}
 			$.ajax({
@@ -84,7 +84,8 @@
 			e.preventDefault();
 			var id = '${sessionScope.id}';
 			if(!id)
-				alert('로그인 해주세욧ㅅ');
+				$('#myModal1').modal('show');
+			return;
 			var content = $("#insertComment input[name='content']").val();
 			if(!content)
 				alert('댓글을 작성해욧');
@@ -194,8 +195,8 @@
 </script>
 <style type="text/css">
 .modal{
-      position: auto;
-      top: 10%;
+      position: absolute;
+      top: 50%;
       z-index: 1050;
       width: auto;
       outline: none;
@@ -203,6 +204,7 @@
 .modal-backdrop{
   z-index: -1;
 }
+
 </style>
 <!-- Main -->
 <div id="main">
@@ -239,6 +241,21 @@
                 <div class="modal-body">
                     <p>죄송합니다.</p>
                     <p>신청 마감되었습니다.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+                </div>
+            </div>
+        </div>
+    </div>  
+    <div id="myModal1" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p>로그인 해주세요.</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
