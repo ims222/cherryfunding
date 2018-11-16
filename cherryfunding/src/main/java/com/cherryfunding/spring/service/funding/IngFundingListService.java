@@ -14,6 +14,7 @@ import com.cherryfunding.spring.dao.FundingDao;
 import com.cherryfunding.spring.dao.UsersDao;
 import com.cherryfunding.spring.util.ClobToString;
 import com.cherryfunding.spring.util.S3Util;
+import com.cherryfunding.spring.util.StringLengthCut;
 import com.cherryfunding.spring.vo.FPictureVo;
 import com.cherryfunding.spring.vo.FundingVo;
 import com.cherryfunding.spring.vo.UsersVo;
@@ -49,6 +50,13 @@ public class IngFundingListService {
 				} catch (Exception e) {
 					System.out.println(e.getMessage());
 				}
+			}
+
+			try {
+				String title = (String) l.get("TITLE");
+				l.put("TITLE", StringLengthCut.getString(title));
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
 			}
 			String thumbnail = this.thumbnail(fNum).getSavename();
 			l.put("savename", s3.getFileURL("funding/" + thumbnail));
