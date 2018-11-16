@@ -328,7 +328,7 @@
 			</div>
 			<div class="modal-body" style="overflow:hidden;">
 				<form id="insertComment">
-					<textarea name="content" rows="10" cols="94"></textarea><br>
+					<textarea name="content" rows="10" style="width:100%"></textarea><br>
 				</form>
 			</div>
 			<div class="modal-footer">
