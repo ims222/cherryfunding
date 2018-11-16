@@ -127,4 +127,9 @@ public class FundingDetailServiceImpl implements FundingDetailService {
 		return fResultDao.insert(vo);
 	}
 
+	@Override
+	public int withdraw(HashMap<String, Object> map) {
+		return usersDao.withdraw(map);
+	}
+
 }

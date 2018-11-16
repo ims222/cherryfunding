@@ -321,7 +321,7 @@ ul {
 				<span class="w3-xlarge">결제하신 금액은 별도 수수료 없이 펀딩을 진행하는 펀더에게 100% 전달됩니다.</span>
 			</div>
 			<div>
-				<button id="getUserInfo" class="w3-btn w3-block w3-teal">결제</button>
+				<button id="getUserInfo" class="w3-btn w3-block w3-teal">펀딩 참여하기</button>
 			</div>
 		</div>
 		<div id="userInfo" style="display:none;">
@@ -332,7 +332,7 @@ ul {
 			결제일:: <span id="pDate"></span><br>
 			
 			결제를 계속 진행 하시려면 펀딩 참여하기 버튼을 눌러주세욧.
-		<button id="applicationReward" class="w3-btn w3-block w3-teal">펀딩 참여하기</button>
+		<button id="applicationReward" class="w3-btn w3-block w3-teal">결제</button>
 		</div>
 	</div>
 </div>

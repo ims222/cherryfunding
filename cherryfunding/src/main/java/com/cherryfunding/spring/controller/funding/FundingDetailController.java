@@ -195,11 +195,13 @@ public class FundingDetailController {
 						rewardMap.put("price", price * amount);
 						rewardMap.put("fNum", fNum);
 						fundingDetailService.addCamout(rewardMap); // 현재금액 추가
-						rewardMap.clear();
 						rewardMap.put("rNum", rNum);
 						rewardMap.put("amount", amount);
 						fundingDetailService.updateAmount(rewardMap); // 남은 수량 수정
 						FResultVo frvo = new FResultVo(0, fdNum, null);
+						rewardMap.put("id", id);
+						fundingDetailService.withdraw(rewardMap);
+						// 유저 잔고 차감
 						fundingDetailService.insertFResult(frvo);// 펀딩 결과 등록
 						obj.put("result", "ok");
 						obj.put("reward", r);
