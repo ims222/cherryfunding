@@ -1,16 +1,32 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
 <script type="text/javascript">
 function idCheck(){
 	var id='${sessionScope.id}';
 	if(!id){
-		alert("로그인 해주세욧");
+		//$("#myModal").modal('show');
+		alert('로그인 해주세욧');
 	}else{
 		window.location.href="${pageContext.request.contextPath}/volunteer/insertVolunteer";
 	}
 }
 </script>
+<style type="text/css">
+.modal{
+      position: absolute;
+      top: 50%;
+      z-index: 1050;
+      width: auto;
+      outline: none;
+      }
+.modal-backdrop{
+  z-index: -1;
+}
+</style>
 <!-- Banner -->
 <div id="banner" class="container">
 	<section>
@@ -22,5 +38,19 @@ function idCheck(){
 			class="button medium" onclick="idCheck();">봉사신청하기</a>
 		</p>
 	</section>
-	
+	<div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p>로그인 해주세요.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+                </div>
+            </div>
+        </div>
+    </div>  
 </div>
