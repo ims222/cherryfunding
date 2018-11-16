@@ -4,8 +4,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <script type="text/javascript">
-
-
 	$(document).ready(function(){
 		isRecommend();
 		getRecommend();
@@ -82,13 +80,15 @@
 		$("#insertComment").on('submit', function(e){
 			e.preventDefault();
 			var id = '${sessionScope.id}';
-			if(!id)
+			if(!id){
 				$('#myModal1').modal('show');
-			return;
+				return;
+			}
 			var content = $("#insertComment input[name='content']").val();
-			if(!content)
+			if(!content){
 				alert('댓글을 작성해욧');
-			
+				return;
+			}
 			var vNum = '${vo.vNum}';
 			
 			$.ajax({
@@ -208,28 +208,33 @@
 <!-- Main -->
 <div id="main">
 	<div class="container">
-		<div class="row no-collapse-1">
-			<section class="12u">
-				<div class="box">
-				 	<p>제목: ${vo.title}</p>
-				 	<p>내용: ${vo.content}</p>
-				 	<p>날짜: ${vo.dDay }</p>
-				 	<p>장소: ${vo.place }</p>
-				 	<p>모집인원: ${vo.members }</p>
-				 	추천 수:<div id="showRecomm"></div>
-				 	현재 신청 인원:<div id="applicant"></div><br>
-				 	<button id="recommend" type="button"></button>
-				 	<button id="apply" type="button"></button>
-				</div>
-				
-			</section>
+		<div class="row box">
+			<div class="col-md-8">
+				 <h1>${vo.title}</h1>
+				 
+				 
+				 <div class="w3-sand" style="padding:20px;">
+				 <p>날짜: ${vo.dDay }</p>
+				 <p>장소: ${vo.place }</p>
+				 <p>모집인원: ${vo.members }명</p>
+				 </div>
+				 <h4>${vo.content}</h4><br>
+			</div>
+			<div class="col-md-4">
+				추천 수:<div id="showRecomm"></div>
+				현재 신청 인원:<div id="applicant"></div><br>
+				<button id="recommend" type="button"></button>
+				<button id="apply" type="button"></button>
+			</div>
 		</div>
-		<div class="row box" id="commment"></div>
+		<div class="box" id="commment">댓글왜안나옴</div>
 		<form id="insertComment">
 			<input type="text" name="content"><br>
 			<input type="submit" value="댓글 등록">
 		</form>
+		
 	</div>
+	
 	<!-- modal -->
 	<div id="myModal" class="modal fade" role="dialog">
         <div class="modal-dialog modal-sm">

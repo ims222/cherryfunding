@@ -7,6 +7,8 @@
 	var vNum = 0;
 	$(document).ready(function(){
 		$("#showmore").on('click', showmore);
+		getRecommend();
+		
 	});
 	function showmore(){
 		pageNum += 1;
@@ -40,6 +42,18 @@
 		    }	
 		})
 	}
+	function getRecommend(){
+		$.ajax({
+			url: '${pageContext.request.contextPath}/volunteer/volunteerGetRecommend',
+			data: {vNum: '${vo.vNum}'},
+			type: 'get',
+			dataType: 'text',
+			success: function(data){
+				$("#showRecomm").empty();
+				$("#showRecomm").append(data);
+			}
+		})
+	}
 	
 </script>
 <style type="text/css">
@@ -69,7 +83,10 @@
 						alt="${vo.vpInfo}" height="200px"></a>
 					<div class="box">
 						<h4>${vo.title}</h4>
+						<div class="w3-right-align"><p>추천 <span class="w3-badge w3-green">여기에</span></p></div>
+						<div id="showRecomm"></div>
 					</div>
+					
 				</div>
 			</c:forEach>
 		</div>
