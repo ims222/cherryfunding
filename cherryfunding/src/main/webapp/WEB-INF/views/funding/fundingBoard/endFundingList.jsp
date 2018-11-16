@@ -47,6 +47,11 @@
 						else
 							barBefore = before;
 						
+						var success = "";
+						if(camout >= amount)
+							success = "성공";
+						else
+							success = "실패";
 						result +=	html.replace(/{fNum}/gi, value.FNUM)
 									.replace("{savename}", value.savename)
 									.replace("{fpinfo}", value.fpinfo)
@@ -55,10 +60,10 @@
 									.replace("{camout}", comma(camout))
 									.replace("{category}", value.CATEGORY)
 									.replace("{recomm}", value.recomm)
-									.replace("{dday}", value.DDAY)
 									.replace(/{width}/gi, barBefore + "%" )
 									.replace("{valuenow}", barBefore)
-									.replace(/{percent}/gi, Math.ceil((before/100) * 100) + "%"); 
+									.replace(/{percent}/gi, Math.ceil((before/100) * 100) + "%")
+									.replace("{isSuccess}", success);
 						
 						
 					});
@@ -96,7 +101,7 @@
 				<div class="w3-blue" style="height:5px;width:{width}"></div>
 			</div>
 			<div class="w3-left-align" style="float:left;">{percent} · {camout}원</div>
-			<div class="w3-right-align">{dday}일 남음</div>
+			<div class="w3-right-align">종료 · {isSuccess}</div>
 		</div>
 	</div>
 </div>
