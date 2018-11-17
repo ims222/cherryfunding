@@ -29,9 +29,6 @@ public class FCommentService {
 	@Autowired
 	private S3Util s3;
 
-	@Autowired
-	private ClobToString clobToString;
-
 	public int insert(FCommentVo vo) {
 		return fCommentDao.insert(vo);
 	}

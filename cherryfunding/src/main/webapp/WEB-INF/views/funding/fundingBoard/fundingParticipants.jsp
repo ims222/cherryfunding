@@ -38,7 +38,7 @@
 <div class="media">
 	<p class="pull-right"><small></small></p>
 	<a class="media-left" href="#">
-		<img src="{savename}">
+		<img src="{savename}" class="w3-circle" width="50px">
 	</a>
 	<div class="media-body">
 		<h4 class="media-heading user_name">&nbsp</h4>
