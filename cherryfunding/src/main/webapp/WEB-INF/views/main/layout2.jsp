@@ -28,19 +28,28 @@
 <script src="http://code.responsivevoice.org/responsivevoice.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
-		//responsiveVoice.setDefaultVoice("Korean Female");
-		//responsiveVoice.speak("안녕하세요");
 		
-		$('body').on('keyup', function(e){
+		
+		if('${sessionScope.id}'){
+			var voice = '${sessionScope.setting.voice}';
+			if(voice === 'y'){
+				responsiveVoice.setDefaultVoice("Korean Female");
+				responsiveVoice.speak("안녕하세요");
+			}
+			
+		}
+		
+	
+		$('body').on('keyup', function(e){ // 음성
 			if(e.keyCode === 9){
-				var target = $(e.target);
-				var text = target.text();
-				if($(target).attr('class') === 'image featured'){
-					text = $(target).find('img').attr('alt');
-				}
-				//responsiveVoice.speak(text);		
+				var $target = $(e.target);
+				console.log('target', $target );
+				console.log('$target', $target.attr('data-voice'));	
+				responsiveVoice.speak($target.attr('data-voice'));
 			}
 		});
+		
+		
 		
 	    $(window).scroll(function(){
 	        if ($(this).scrollTop() > 200) {
@@ -64,6 +73,6 @@
 		<tiles:insertAttribute name="content" />
 		<tiles:insertAttribute name="footer" />
 	</div>
-	<a href="#" id="scroll" style="display: none;"><span></span></a>
+	<a href="#" data-voice="상단으로" id="scroll" style="display: none;"><span></span></a>
 </body>
 </html>
