@@ -165,11 +165,6 @@
 	<div class="rect5"></div>
 </div>
 </script>
-<style type="text/css">
-
-	
-	
-</style>
 <div id="main">
 	<div class="container">
 		<div class="w3-bar" id="category">
@@ -206,7 +201,6 @@
 
 		
 		<input type="hidden" id="pageNum" value="">
-		
 		<div id="list" class="w3-row">
 		</div>
 		<button id="showMore" class="w3-btn w3-block w3-teal">더보기</button>

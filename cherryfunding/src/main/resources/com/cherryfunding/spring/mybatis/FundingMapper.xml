@@ -44,7 +44,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				</choose>
 			</when>
 		</choose>
-	
 	</sql>
 	
 	<sql id="sort">
@@ -165,14 +164,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 
 	<!-- 준비중 펀딩 -->
-	<select id="prepare" parameterType="hashmap"
-		resultType="funding">
-		select * from funding
-		<include refid="prepare"/>
-		<include refid="category" />
-		<include refid="search" />
-		<include refid="isConfirm"/>
-		order by fNum desc
+	<select id="prepare" parameterType="hashmap" resultType="hashmap">
+		select * from (
+					select aa.FNUM fnum, aa.TITLE title, aa.CONTENT content,
+					aa.AMOUNT amount, aa.CAMOUT camout, to_char(aa.SDATE, 'yy-mm-dd') sdate,
+					to_char(aa.EDATE, 'yy-mm-dd') edate, ceil(sdate - (sysdate + (1/24)*9)) dday, aa.CATEGORY category, aa.CONFIRM confirm,
+					aa.AID aid, aa.ADDR addr, aa.REGDATE regdate, aa.ID id, aa.HIT hit, rownum rnum from (
+						select * from funding
+						<include refid="prepare"/>
+						<include refid="isConfirm"/>
+						<include refid="category" />
+						<include refid="search" />
+						<!-- 
+						<include refid="sort" />
+						 -->
+					)aa
+				) <![CDATA[where rnum >=#{startRow} and rnum <=#{endRow}]]>
 	</select>
 
 	<!-- 종료된 펀딩 -->
@@ -196,6 +203,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getTotCountEnd" resultType="int" parameterType="hashmap">
 		select NVL(count(fNum), 0) from funding
 		<include refid="end"/>
+		<include refid="isConfirm"/>
+		<include refid="category" />
+		<include refid="search" />
+		<!-- 
+		<include refid="sort" />
+		 -->
+	</select>
+	
+	<select id="getTotCountPrepare" resultType="int" parameterType="hashmap">
+		select NVL(count(fNum), 0) from funding
+		<include refid="prepare"/>
 		<include refid="isConfirm"/>
 		<include refid="category" />
 		<include refid="search" />

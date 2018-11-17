@@ -9,22 +9,31 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cherryfunding.spring.service.funding.PrepareFundingListService;
+import com.cherryfunding.spring.util.PageUtil;
 import com.cherryfunding.spring.util.S3Util;
-import com.cherryfunding.spring.vo.FundingVo;
 
 @Controller
 public class PrepareFundingListController {
 
 	@Autowired
 	private S3Util s3;
-	
+
 	@Autowired
 	private PrepareFundingListService prepareService;
-	
+
 	@RequestMapping("/funding/prepareFundingList")
-	public String prepare(Model model, HttpServletRequest request) {
+	public String prepare() {
+		return ".prepareFundingList";
+	}
+
+	@RequestMapping("/funding/morePrepareFundingList")
+	@ResponseBody
+	public HashMap<String, Object> prepare(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
+			Model model, HttpServletRequest request) {
 		String category = request.getParameter("category");
 		String field = request.getParameter("field");
 		String keyword = request.getParameter("keyword");
@@ -33,18 +42,20 @@ public class PrepareFundingListController {
 		map.put("field", field);
 		map.put("keyword", keyword);
 		map.put("category", request.getParameter("category"));
-		List<FundingVo> list = prepareService.list(map);
-		
-		for (FundingVo vo : list) {
-			String thumbnail = prepareService.thumbnail(vo.getfNum()).getSavename();
-			vo.setSavename(s3.getFileURL("funding/"+ thumbnail));
-			vo.setFpinfo(prepareService.thumbnail(vo.getfNum()).getFpinfo());
+		PageUtil pageUtil = new PageUtil(pageNum, prepareService.getTotCountPrepare(map));
+
+		map.put("startRow", pageUtil.getStartRow());
+		map.put("endRow", pageUtil.getEndRow());
+
+		List<HashMap<String, Object>> list = prepareService.list(map);
+		if (list.size() == 0 && pageNum > 1) {
+			map.put("list", "no");
+			map.put("pageNum", pageNum);
+		} else {
+			map.put("list", list);
+			map.put("pageNum", pageNum + 1);
 		}
 
-		model.addAttribute("list", list);
-		model.addAttribute("category", category);
-		model.addAttribute("field", field);
-		model.addAttribute("keyword", keyword);
-		return ".prepareFundingList";
+		return map;
 	}
 }
