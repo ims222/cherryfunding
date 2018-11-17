@@ -128,14 +128,16 @@
 			dataType: 'json',
 			success: function(data){
 				if(data.result === 'ok'){
-					$("#recommend").text('추천');
+					$(".button-like").removeClass("liked");
 				}else{
-					$("#recommend").text('추천취소');
+					$(".button-like").addClass("liked");
 				}
-				$('#fRecommend').text('추천수: ' + data.fRecommend);
+				$('#fRecommend').text(data.fRecommend);
 			}
 		});
 	}
+	
+
 	function commentList(){
 		$.ajax({
 			url: '${pageContext.request.contextPath}/funding/commentList',
@@ -291,11 +293,17 @@
  				
 				<button class="w3-btn w3-block w3-teal w3-xxlarge" onclick="location.href='${pageContext.request.contextPath}/funding/rewardList?fNum=${vo.fNum}';">펀딩 신청</button>
 				
-				<button id="recommend" type="button">추천</button><br>
+				
+				<button id="recommend" class="button button-like">
+					<i class="fa fa-heart"></i>
+					<span>Like <span id="fRecommend"></span></span>
+				</button>
+				
+				
 				<a href="${pageContext.request.contextPath}/funding/fundingParticipation?fNum=${vo.fNum}">참여내역</a>
 				<br>
 				조회수: ${vo.hit}
-				<span id="fRecommend"></span>
+				
  			</div>
 		</div>
 		<div class="row">
