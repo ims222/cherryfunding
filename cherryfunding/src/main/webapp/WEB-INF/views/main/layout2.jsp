@@ -32,20 +32,25 @@
 		
 		if('${sessionScope.id}'){
 			var voice = '${sessionScope.setting.voice}';
-			if(voice === 'y'){
+			console.log('welcomeVoice', window.welcomeVoice);
+			if(voice === 'y' && typeof window.welcomeVoice == "undefined") {
 				responsiveVoice.setDefaultVoice("Korean Female");
-				responsiveVoice.speak("안녕하세요");
+				//responsiveVoice.speak("안녕하세요");
+				window.welcomeVoice = "complete";
 			}
-			
 		}
 		
 	
 		$('body').on('keyup', function(e){ // 음성
-			if(e.keyCode === 9){
+			var voice = '${sessionScope.setting.voice}';
+			if(e.keyCode === 9 && voice === 'y'){
 				var $target = $(e.target);
-				console.log('target', $target );
-				console.log('$target', $target.attr('data-voice'));	
-				responsiveVoice.speak($target.attr('data-voice'));
+				if (typeof $target.attr('data-voice') == "undefined"){
+					return;
+				}else{
+					responsiveVoice.speak($target.attr('data-voice'));
+				}
+					
 			}
 		});
 		

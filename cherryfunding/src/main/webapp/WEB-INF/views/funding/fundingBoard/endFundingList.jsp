@@ -155,20 +155,20 @@
 <div id="main">
 	<div class="container">
 		<div class="w3-bar" id="category">
-			<button type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">전체보기</button>
-			<button type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">테크·가전</button>
-			<button type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">패션·잡화</button>
-			<button type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">푸드</button>
-			<button type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">홈리빙</button>
-			<button type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">디자인소품</button>
-			<button type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">여행·레저</button>
-			<button type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">스포츠·모빌리티</button>
-			<button type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">반려동물</button>
-			<button type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">공연·컬쳐</button>
-			<button type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">소셜·캠페인</button>
-			<button type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">교육·키즈</button>
-			<button type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">게임·취미</button>
-			<button type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">출판</button>
+			<button data-voice="전체보기" type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">전체보기</button>
+			<button data-voice="테크·가전" type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">테크·가전</button>
+			<button data-voice="패션·잡화" type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">패션·잡화</button>
+			<button data-voice="푸드" type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">푸드</button>
+			<button data-voice="홈리빙" type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">홈리빙</button>
+			<button data-voice="디자인소품" type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">디자인소품</button>
+			<button data-voice="여행·레저" type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">여행·레저</button>
+			<button data-voice="스포츠·모빌리티" type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">스포츠·모빌리티</button>
+			<button data-voice="반려동물" type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">반려동물</button>
+			<button data-voice="공연·컬쳐" type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">공연·컬쳐</button>
+			<button data-voice="소셜·캠페인" type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">소셜·캠페인</button>
+			<button data-voice="교육·키즈" type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">교육·키즈</button>
+			<button data-voice="게임·취미" type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">게임·취미</button>
+			<button data-voice="출판" type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">출판</button>
 		</div>
 		
 		
