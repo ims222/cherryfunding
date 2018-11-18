@@ -12,8 +12,6 @@
 <meta name="description" content="" />
 <meta name="keywords" content="" />
 
-<script src="${pageContext.request.contextPath}/resources/js/util.js"></script>
-
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.5.0/css/all.css' integrity='sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU' crossorigin='anonymous'>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -25,26 +23,55 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/layout2.css" type="text/css">
+
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/mypagelayout.css" type="text/css">
+
+<script src="${pageContext.request.contextPath}/resources/js/util.js"></script>
+
 
 <script src="http://code.responsivevoice.org/responsivevoice.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
-		//responsiveVoice.setDefaultVoice("Korean Female");
-		//responsiveVoice.speak("안녕하세요");
 		
-		$('body').on('keyup', function(e){
-			if(e.keyCode === 9){
-				var target = $(e.target);
-				var text = target.text();
-				if($(target).attr('class') === 'image featured'){
-					text = $(target).find('img').attr('alt');
+		
+		if('${sessionScope.id}'){
+			var voice = '${sessionScope.setting.voice}';
+			console.log('welcomeVoice', window.welcomeVoice);
+			if(voice === 'y' && typeof window.welcomeVoice == "undefined") {
+				responsiveVoice.setDefaultVoice("Korean Female");
+				//responsiveVoice.speak("안녕하세요");
+				window.welcomeVoice = "complete";
+			}
+		}
+		
+	
+		$('body').on('keyup', function(e){ // 음성
+			var voice = '${sessionScope.setting.voice}';
+			if(e.keyCode === 9 && voice === 'y'){
+				var $target = $(e.target);
+				if (typeof $target.attr('data-voice') == "undefined"){
+					return;
+				}else{
+					responsiveVoice.speak($target.attr('data-voice'));
 				}
-				//responsiveVoice.speak(text);		
+					
 			}
 		});
+		
+		
+		
+	    $(window).scroll(function(){
+	        if ($(this).scrollTop() > 200) {
+	            $('#scroll').fadeIn(); 
+	        } else { 
+	            $('#scroll').fadeOut(); 
+	        } 
+	    }); 
+	    $('#scroll').click(function(){ 
+	        $("html, body").animate({ scrollTop: 0 }, 600); 
+	        return false; 
+	    });
 	});
-
 </script>
 </head>
 <body>
@@ -55,5 +82,6 @@
 		<tiles:insertAttribute name="content" />
 		<tiles:insertAttribute name="footer" />
 	</div>
+	<a href="#" data-voice="상단으로" id="scroll" style="display: none;"><span></span></a>
 </body>
 </html>

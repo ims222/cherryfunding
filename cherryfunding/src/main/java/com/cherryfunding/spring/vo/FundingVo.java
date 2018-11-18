@@ -179,4 +179,12 @@ public class FundingVo {
 		this.fpinfo = fpinfo;
 	}
 
+	@Override
+	public String toString() {
+		return "FundingVo [fNum=" + fNum + ", title=" + title + ", content=" + content + ", amount=" + amount
+				+ ", camout=" + camout + ", sdate=" + sdate + ", edate=" + edate + ", category=" + category
+				+ ", confirm=" + confirm + ", aid=" + aid + ", addr=" + addr + ", regdate=" + regdate + ", id=" + id
+				+ ", hit=" + hit + ", savename=" + savename + ", fpinfo=" + fpinfo + "]";
+	}
+
 }

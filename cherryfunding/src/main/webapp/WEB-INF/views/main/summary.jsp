@@ -10,8 +10,8 @@
 			<!-- <h1>로그인</h1> -->
 				<c:choose>
 					<c:when test="${not empty sessionScope.id}">
-						${sessionScope.id} 님 <a href="${pageContext.request.contextPath}/mypage">마이페이지</a>
-						<input type="button" class="btn" value="로그아웃" onclick="location.href='${pageContext.request.contextPath}/testlogout'">
+						${sessionScope.id} 님 <a data-voice="마이페이지" href="${pageContext.request.contextPath}/mypage">마이페이지</a>
+						<input data-voice="로그아웃" type="button" class="btn" value="로그아웃" onclick="location.href='${pageContext.request.contextPath}/testlogout'">
 					</c:when>
 					<c:otherwise>
 						<label for="id"><b>아이디</b></label>
@@ -30,13 +30,13 @@
 			<div class="row">
 				<!-- 종료임박후원 -->
 				<div class="col-md-3 mainContent">
-					<a href="${pageContext.request.contextPath}/charityList/detail?num=${summary.cEnd.cNum}">
+					<a data-voice="종료임박후원" href="${pageContext.request.contextPath}/charityList/detail?num=${summary.cEnd.cNum}">
 					<img src="${summary.cEnd.savename}"	alt="${summary.cEnd.cpinfo}" class="w3-round listImage">
 					</a><div class="top-left">종료임박후원</div>
 					<div>
 						<div class="listTitle">
 							<p class="w3-left-align">
-								<h4><a href="#">${summary.cEnd.title}</a></h4>
+								<h4><a data-voice="${summary.cEnd.title}" href="#">${summary.cEnd.title}</a></h4>
 							</p>
 						</div>
 						<fmt:formatDate value="${summary.cEnd.eDate}" var="cEndeDate" pattern="yyyyMMdd"/>
@@ -72,13 +72,13 @@
 				</div>
 				<!-- 주목할만한 후원 -->
 				<div class="col-md-3 mainContent">
-					<a href="${pageContext.request.contextPath}/fundingList/detail?num=${summary.cHot.cNum}">
+					<a data-voice="주목할만한 후원" href="${pageContext.request.contextPath}/fundingList/detail?num=${summary.cHot.cNum}">
 					<img src="${summary.cHot.savename}"	alt="${summary.cHot.cpinfo}" class="w3-round listImage">
 					</a><div class="top-left">주목할만한 후원</div>
 					<div>
 						<div class="listTitle">
 							<p class="w3-left-align">
-								<h4><a href="#">${summary.cHot.title}</a></h4>
+								<h4><a data-voice="${summary.cHot.title}" href="#">${summary.cHot.title}</a></h4>
 							</p>
 						</div>
 						<fmt:formatDate value="${summary.cHot.eDate}" var="cHoteDate" pattern="yyyyMMdd"/>
@@ -115,13 +115,13 @@
 				</div>
 				<!-- 참여금액이 높은 후원 -->
 				<div class="col-md-3 mainContent">
-					<a href="${pageContext.request.contextPath}/fundingList/detail?num=${summary.cPrice.cNum}">
+					<a data-voice="참여금액이 높은 후원" href="${pageContext.request.contextPath}/fundingList/detail?num=${summary.cPrice.cNum}">
 					<img src="${summary.cPrice.savename}"	alt="${summary.cPrice.cpinfo}" class="w3-round listImage">
 					</a><div class="top-left">참여금액이 높은 후원</div>
 					<div>
 						<div class="listTitle">
 							<p class="w3-left-align">
-								<h4><a href="#">${summary.cPrice.title}</a></h4>
+								<h4><a data-voice="${summary.cPrice.title}" href="#">${summary.cPrice.title}</a></h4>
 							</p>
 						</div>
 						<fmt:formatDate value="${summary.cPrice.eDate}" var="cPriceeDate" pattern="yyyyMMdd"/>
@@ -172,13 +172,13 @@
 			<div class="row">
 				<!-- 종료임박펀딩 -->
 				<div class="col-md-3 mainContent">
-					<a href="${pageContext.request.contextPath}/funding/ingFundingDetailforUser?fNum=${summary.fEnd.fNum}">
+					<a data-voice="종료임박펀딩" href="${pageContext.request.contextPath}/funding/ingFundingDetailforUser?fNum=${summary.fEnd.fNum}">
 					<img src="${summary.fEnd.savename}"	alt="${summary.fEnd.fpinfo}" class="w3-round listImage">
 					</a><div class="top-left">종료임박펀딩</div>
 					<div>
 						<div class="listTitle">
 							<p class="w3-left-align">
-								<h4><a href="#">${summary.fEnd.title}</a></h4>
+								<h4><a data-voice="${summary.fEnd.title}" href="#">${summary.fEnd.title}</a></h4>
 							</p>
 						</div>
 						<fmt:formatDate value="${summary.fEnd.edate}" var="fEndEdate" pattern="yyyyMMdd"/>
@@ -202,7 +202,7 @@
 		
 						<div>
 							<div class="w3-left-align" style="float:left;">${summary.fEnd.category} | ${summary.fEnd.id}</div>
-							<div class="w3-right-align"><p>추천 <span class="w3-badge w3-green">{recomm}</span></p></div>
+							<div class="w3-right-align"><p>추천 <span class="w3-badge w3-green">${summary.fEndRecomm}</span></p></div>
 							<div class="w3-border">
 								<div class="w3-blue" style="height:5px;width:${barfEndBefore/100}"></div>
 							</div>
@@ -215,13 +215,13 @@
 				</div>
 				<!-- 가장 많이 주목된 펀딩 -->
 				<div class="col-md-3 mainContent">
-					<a href="${pageContext.request.contextPath}/funding/ingFundingDetailforUser?fNum=${summary.fHot.fNum}">
+					<a data-voice="가장 많이 주목된 펀딩" href="${pageContext.request.contextPath}/funding/ingFundingDetailforUser?fNum=${summary.fHot.fNum}">
 					<img src="${summary.fHot.savename}"	alt="${summary.fHot.fpinfo}" class="w3-round listImage">
 					</a><div class="top-left">가장 많이 주목된 펀딩</div>
 					<div>
 						<div class="listTitle">
 							<p class="w3-left-align">
-								<h4><a>${summary.fHot.title}</a></h4>
+								<h4><a data-voice="${summary.fHot.title}" href="#">${summary.fHot.title}</a></h4>
 							</p>
 						</div>
 						<fmt:formatDate value="${summary.fHot.edate}" var="fHotEdate" pattern="yyyyMMdd"/>
@@ -245,7 +245,7 @@
 		
 						<div>
 							<div class="w3-left-align" style="float:left;">${summary.fHot.category} | ${summary.fHot.id}</div>
-							<div class="w3-right-align"><p>추천 <span class="w3-badge w3-green">{recomm}</span></p></div>
+							<div class="w3-right-align"><p>추천 <span class="w3-badge w3-green">${summary.fHotRecomm}</span></p></div>
 							<div class="w3-border">
 								<div class="w3-blue" style="height:5px;width:${barfHotBefore/100}"></div>
 							</div>
@@ -258,13 +258,13 @@
 				</div>
 				<!-- 참여금액이 가장 높은 펀딩 -->
 				<div class="col-md-3 mainContent">
-					<a href="${pageContext.request.contextPath}/funding/ingFundingDetailforUser?fNum=${summary.fPrice.fNum}">
+					<a data-voice="참여금액이 가장 높은 펀딩" href="${pageContext.request.contextPath}/funding/ingFundingDetailforUser?fNum=${summary.fPrice.fNum}">
 					<img src="${summary.fPrice.savename}" alt="${summary.fPrice.fpinfo}" class="w3-round listImage">
 					</a><div class="top-left">참여금액이 가장 높은 펀딩</div>
 					<div>
 						<div class="listTitle">
 							<p class="w3-left-align">
-								<h4><a href="#">${summary.fPrice.title}</a></h4>
+								<h4><a data-voice="${summary.fPrice.title}" href="#">${summary.fPrice.title}</a></h4>
 							</p>
 						</div>
 						<fmt:formatDate value="${summary.fPrice.edate}" var="fPriceEdate" pattern="yyyyMMdd"/>
@@ -288,7 +288,7 @@
 		
 						<div>
 							<div class="w3-left-align" style="float:left;">${summary.fPrice.category} | ${summary.fPrice.id}</div>
-							<div class="w3-right-align"><p>추천 <span class="w3-badge w3-green">{recomm}</span></p></div>
+							<div class="w3-right-align"><p>추천 <span class="w3-badge w3-green">${summary.fPriceRecomm}</span></p></div>
 							<div class="w3-border">
 								<div class="w3-blue" style="height:5px;width:${barfPriceBefore/100}"></div>
 							</div>

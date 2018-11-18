@@ -27,4 +27,8 @@ public class SCommentDao {
 		return sqlSession.selectList(NAMESPACE + "commentList", sNum);
 	}
 
+	public int getCommentCount(int sNum) {
+		return sqlSession.selectOne(NAMESPACE + "getCommentCount", sNum);
+	}
+
 }

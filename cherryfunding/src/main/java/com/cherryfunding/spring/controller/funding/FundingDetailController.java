@@ -1,7 +1,6 @@
 package com.cherryfunding.spring.controller.funding;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -15,13 +14,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cherryfunding.spring.service.funding.FundingDetailService;
 import com.cherryfunding.spring.vo.FDetailVo;
+import com.cherryfunding.spring.vo.FResultVo;
 import com.cherryfunding.spring.vo.RewardVo;
+import com.cherryfunding.spring.vo.UsersVo;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Controller
@@ -166,7 +168,7 @@ public class FundingDetailController {
 
 	@RequestMapping(value = "/funding/applicationReward", produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public String applicationReward(int fNum, HttpSession session, HttpServletRequest request) {
+	public String applicationReward(int fNum, HttpSession session, Model model, HttpServletRequest request) {
 		String id = (String) session.getAttribute("id");
 		String reward = request.getParameter("reward");
 		JSONObject obj = new JSONObject();
@@ -185,17 +187,24 @@ public class FundingDetailController {
 							obj.put("result", "amountOver");
 							return obj.toString();
 						}
-						FDetailVo fdvo = new FDetailVo(0, id, fNum, rNum, null, null, amount);
+
+						int fdNum = fundingDetailService.fdetailGetMaxNum() + 1;
+						FDetailVo fdvo = new FDetailVo(fdNum, id, fNum, rNum, null, null, amount);
 						fundingDetailService.insertFDetail(fdvo); // 펀딩내역
 						HashMap<String, Object> rewardMap = new HashMap<String, Object>();
 						rewardMap.put("price", price * amount);
 						rewardMap.put("fNum", fNum);
 						fundingDetailService.addCamout(rewardMap); // 현재금액 추가
-						rewardMap.clear();
 						rewardMap.put("rNum", rNum);
 						rewardMap.put("amount", amount);
 						fundingDetailService.updateAmount(rewardMap); // 남은 수량 수정
+						FResultVo frvo = new FResultVo(0, fdNum, null);
+						rewardMap.put("id", id);
+						fundingDetailService.withdraw(rewardMap);
+						// 유저 잔고 차감
+						fundingDetailService.insertFResult(frvo);// 펀딩 결과 등록
 						obj.put("result", "ok");
+						obj.put("reward", r);
 					}
 				} else {
 					obj.put("result", "wrongId");
@@ -208,6 +217,34 @@ public class FundingDetailController {
 			obj.put("result", "no");
 		}
 		return obj.toString();
+	}
+
+	@RequestMapping("/funding/getUserInfo")
+	@ResponseBody
+	public UsersVo getUserInfo(HttpSession session) {
+		String id = (String) session.getAttribute("id");
+		return fundingDetailService.userInfo(id);
+	}
+
+	@RequestMapping(value = "/funding/rewardOk", method = RequestMethod.POST)
+	public String applicationRewardOk(int[] rNum, int[] price, int[] amount, Model model, HttpSession session) {
+		List<HashMap<String, Object>> rList = new ArrayList<HashMap<String, Object>>();
+		for (int i = 0; i < rNum.length; i++) {
+			HashMap<String, Object> hm = new HashMap<String, Object>();
+			hm.put("rNum", rNum[i]);
+			hm.put("price", price[i]);
+			hm.put("amount", amount[i]);
+
+			String title = fundingDetailService.rewardDetail(rNum[i]).getTitle();
+			hm.put("title", title);
+
+			rList.add(hm);
+		}
+		String id = (String) session.getAttribute("id");
+
+		model.addAttribute("rewardList", rList);
+		model.addAttribute("vo", fundingDetailService.userInfo(id));
+		return ".rewardOk";
 	}
 
 }

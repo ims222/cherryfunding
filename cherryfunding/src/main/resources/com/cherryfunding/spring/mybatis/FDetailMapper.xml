@@ -24,5 +24,27 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where fd.rNum = r.rNum and r.fNum = #{fNum}
 		group by id
 	</select>
+	
+	<select id="isSuccess" resultType="hashmap">
+		select e.fNum fNum, e.amount amount, e.camout camout, fdetail.fdNum fdNum, fdetail.id id from(
+			select * from funding
+			<![CDATA[where sdate < (sysdate + (1/24)*9) and edate < (sysdate + (1/24)*9)]]>
+			and confirm = 'y' ) e, (
+			select * from fdetail where state = '예약'
+			) fdetail
+		where e.fnum = fdetail.fnum
+	</select>
+	
+	<update id="update" parameterType="fDetail">
+		update fDetail
+		<set>
+			<if test="id != null">id = #{id},</if>
+			<if test="fNum != null">fNum = #{fNum},</if>
+			<if test="rNum != null">rNum = #{rNum},</if>
+			<if test="state != null">state = #{state},</if>
+			<if test="amount != null">amount = #{amount},</if>
+		</set>
+		where fdNum = #{fdNum}
+	</update>
 
 </mapper>

@@ -31,4 +31,13 @@ public class FDetailDao {
 	public int countFdetailbyfNum(int fNum) {
 		return sqlSession.selectOne(NAMESPACE + "countFdetailbyfNum", fNum);
 	}
+
+	public List<HashMap<String, Object>> isSuccess() {
+		return sqlSession.selectList(NAMESPACE + "isSuccess");
+	}
+
+	public int update(FDetailVo vo) {
+		return sqlSession.update(NAMESPACE + "update", vo);
+	}
+
 }

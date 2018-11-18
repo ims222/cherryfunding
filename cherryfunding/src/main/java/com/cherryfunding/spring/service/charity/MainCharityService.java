@@ -8,12 +8,13 @@ import org.springframework.stereotype.Service;
 import com.cherryfunding.spring.dao.CPictureDao;
 import com.cherryfunding.spring.dao.CharityDao;
 import com.cherryfunding.spring.util.S3Util;
+import com.cherryfunding.spring.util.StringLengthCut;
 import com.cherryfunding.spring.vo.CPictureVo;
 import com.cherryfunding.spring.vo.CharityVo;
 
 @Service
 public class MainCharityService {
-	
+
 	@Autowired
 	private S3Util s3;
 
@@ -28,6 +29,14 @@ public class MainCharityService {
 		if (cEnd == null) {
 			cEnd = new CharityVo();
 		}
+
+		try {
+			String title = cEnd.getTitle();
+			cEnd.setTitle(StringLengthCut.getString(title, 100));
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+
 		String thumbnail = this.thumbnail(cEnd.getcNum()).getSaveName();
 		cEnd.setSavename(s3.getFileURL("charity/" + thumbnail));// 썸네일
 		cEnd.setCpinfo(this.thumbnail(cEnd.getcNum()).getCpinfo()); // 사진정보
@@ -40,6 +49,14 @@ public class MainCharityService {
 		if (cNew == null) {
 			cNew = new CharityVo();
 		}
+
+		try {
+			String title = cNew.getTitle();
+			cNew.setTitle(StringLengthCut.getString(title, 100));
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+
 		String thumbnail = this.thumbnail(cNew.getcNum()).getSaveName();
 		cNew.setSavename(s3.getFileURL("charity/" + thumbnail));// 썸네일
 		cNew.setCpinfo(this.thumbnail(cNew.getcNum()).getCpinfo()); // 사진정보
@@ -52,6 +69,14 @@ public class MainCharityService {
 		if (cHot == null) {
 			cHot = new CharityVo();
 		}
+
+		try {
+			String title = cHot.getTitle();
+			cHot.setTitle(StringLengthCut.getString(title, 100));
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+
 		String thumbnail = this.thumbnail(cHot.getcNum()).getSaveName();
 		cHot.setSavename(s3.getFileURL("charity/" + thumbnail));// 썸네일
 		cHot.setCpinfo(this.thumbnail(cHot.getcNum()).getCpinfo()); // 사진정보
@@ -64,6 +89,14 @@ public class MainCharityService {
 		if (cPrice == null) {
 			cPrice = new CharityVo();
 		}
+
+		try {
+			String title = cPrice.getTitle();
+			cPrice.setTitle(StringLengthCut.getString(title, 100));
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+
 		String thumbnail = this.thumbnail(cPrice.getcNum()).getSaveName();
 		cPrice.setSavename(s3.getFileURL("charity/" + thumbnail));// 썸네일
 		cPrice.setCpinfo(this.thumbnail(cPrice.getcNum()).getCpinfo()); // 사진정보

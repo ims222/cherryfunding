@@ -40,11 +40,11 @@ public class FundingDao {
 		return sqlSession.selectOne(NAMESPACE + "getMaxNum");
 	}
 
-	public List<FundingVo> prepare(HashMap<String, Object> map) { // 준비중
+	public List<HashMap<String, Object>> prepare(HashMap<String, Object> map) { // 준비중
 		return sqlSession.selectList(NAMESPACE + "prepare", map);
 	}
 
-	public List<FundingVo> end(HashMap<String, Object> map) { // 종료
+	public List<HashMap<String, Object>> end(HashMap<String, Object> map) { // 종료
 		return sqlSession.selectList(NAMESPACE + "end", map);
 	}
 
@@ -127,6 +127,14 @@ public class FundingDao {
 
 	public int getTotCount(HashMap<String, Object> map) {
 		return sqlSession.selectOne(NAMESPACE + "getTotCount", map);
+	}
+
+	public int getTotCountEnd(HashMap<String, Object> map) {
+		return sqlSession.selectOne(NAMESPACE + "getTotCountEnd", map);
+	}
+
+	public int getTotCountPrepare(HashMap<String, Object> map) {
+		return sqlSession.selectOne(NAMESPACE + "getTotCountPrepare", map);
 	}
 
 }

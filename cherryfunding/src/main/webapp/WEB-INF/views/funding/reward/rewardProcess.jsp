@@ -210,6 +210,26 @@ ul {
 		$('#rewardInfo').on('click', '.decreaseAmount', decreaseAmount);
 		$('#rewardInfo').on('keyup', '.inputAmount', inputAmount);
 		$('#rewardInfo').on('click', '.removeReward', removeReward);
+		$('#getUserInfo').on('click', function(){
+			$.ajax({
+				url:'${pageContext.request.contextPath}/funding/getUserInfo',
+				dataType:'json',
+				type:'post',
+				success: function(data){
+					
+					$('#nick').text(data.nick);
+					$('#balance').text(comma(data.balance) + " 원");
+					var totPrice = uncomma($('#totPrice').text());
+					$('#paymentAmount').text(comma(totPrice) + " 원");
+					
+					var afterBalance = parseInt(data.balance) - parseInt(totPrice);
+					$('#afterBalance').text(comma(afterBalance) + " 원");
+					$('#pDate').text(formatDate(new Date()));
+					
+					$('#userInfo').fadeIn();
+				}
+			});
+		});
 		$('#applicationReward').on('click', function(){
 			var select = $('.selectedReward');
 			if(select.length === 0){
@@ -233,9 +253,38 @@ ul {
 				dataType:'json',
 				type:'post',
 				success: function(data){
-					if(data.result === 'ok')
-						alert('신청 성공!');
-					else if(data.result === 'amountOver')
+					if(data.result === 'ok'){
+						console.log('reward', data.reward);
+						var r = data.reward;
+						
+						var form = document.createElement("form");
+					    form.setAttribute("method", "POST");
+					    form.setAttribute("action", "${pageContext.request.contextPath}/funding/rewardOk");
+					    
+					    for(var i=0;i<r.length;i++){
+							
+							var hiddenField1 = document.createElement("input");
+				            hiddenField1.setAttribute("type", "hidden");
+				            hiddenField1.setAttribute("name", 'rNum');
+				            hiddenField1.setAttribute("value", r[i].rNum);
+				            form.appendChild(hiddenField1);
+				            
+				            var hiddenField2 = document.createElement("input");
+				            hiddenField2.setAttribute("type", "hidden");
+				            hiddenField2.setAttribute("name", 'price');
+				            hiddenField2.setAttribute("value", r[i].price);
+				            form.appendChild(hiddenField2);
+				            
+				            var hiddenField3 = document.createElement("input");
+				            hiddenField3.setAttribute("type", "hidden");
+				            hiddenField3.setAttribute("name", 'amount');
+				            hiddenField3.setAttribute("value", r[i].amount);
+				            form.appendChild(hiddenField3);
+						}
+
+					    document.body.appendChild(form);
+					    form.submit();
+					}else if(data.result === 'amountOver')
 						alert('수량이 부족합니다');
 					else if(data.result === 'wrongId')
 						alert('로그인이 필요한 서비스입니다');
@@ -271,8 +320,18 @@ ul {
 				<span class="w3-xlarge">결제하신 금액은 별도 수수료 없이 펀딩을 진행하는 펀더에게 100% 전달됩니다.</span>
 			</div>
 			<div>
-				<button id="applicationReward" class="w3-btn w3-block w3-teal">펀딩 참여하기</button>
+				<button id="getUserInfo" class="w3-btn w3-block w3-teal">펀딩 참여하기</button>
 			</div>
+		</div>
+		<div id="userInfo" style="display:none;">
+			닉네임:: <span id="nick"></span> <br>
+			잔액:: <span id="balance"></span> <br>
+			결제금액:: <span id="paymentAmount"></span><br>
+			결제후 잔액:: <span id="afterBalance"></span><br>
+			결제일:: <span id="pDate"></span><br>
+			
+			결제를 계속 진행 하시려면 결제 버튼을 눌러주세요.
+		<button id="applicationReward" class="w3-btn w3-block w3-teal">결제</button>
 		</div>
 	</div>
 </div>

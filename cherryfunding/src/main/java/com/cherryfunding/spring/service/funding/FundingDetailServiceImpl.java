@@ -10,13 +10,16 @@ import org.springframework.transaction.annotation.Transactional;
 import com.cherryfunding.spring.dao.FDetailDao;
 import com.cherryfunding.spring.dao.FHashtagDao;
 import com.cherryfunding.spring.dao.FRecommendDao;
+import com.cherryfunding.spring.dao.FResultDao;
 import com.cherryfunding.spring.dao.FundingDao;
 import com.cherryfunding.spring.dao.RewardDao;
 import com.cherryfunding.spring.dao.UsersDao;
 import com.cherryfunding.spring.vo.FDetailVo;
 import com.cherryfunding.spring.vo.FHashtagVo;
+import com.cherryfunding.spring.vo.FResultVo;
 import com.cherryfunding.spring.vo.FundingVo;
 import com.cherryfunding.spring.vo.RewardVo;
+import com.cherryfunding.spring.vo.UsersVo;
 
 @Transactional
 @Service
@@ -36,6 +39,12 @@ public class FundingDetailServiceImpl implements FundingDetailService {
 
 	@Autowired
 	private FHashtagDao fHashtagDao;
+
+	@Autowired
+	private UsersDao usersDao;
+
+	@Autowired
+	FResultDao fResultDao;
 
 	@Override
 	public FundingVo detail(int fNum) {
@@ -69,7 +78,6 @@ public class FundingDetailServiceImpl implements FundingDetailService {
 
 	@Override
 	public int insertFDetail(FDetailVo fDetailVo) {
-		fDetailVo.setFdNum(this.fdetailGetMaxNum() + 1);
 		return fDetailDao.insert(fDetailVo);
 	}
 
@@ -101,6 +109,27 @@ public class FundingDetailServiceImpl implements FundingDetailService {
 	@Override
 	public int countFdetailbyfNum(int fNum) {
 		return fDetailDao.countFdetailbyfNum(fNum);
+	}
+
+	@Override
+	public UsersVo userInfo(String id) {
+		return usersDao.select(id);
+	}
+
+	@Override
+	public int fResultGetMaxNum() {
+		return fResultDao.getMaxNum();
+	}
+
+	@Override
+	public int insertFResult(FResultVo vo) {
+		vo.setFrNum(this.fResultGetMaxNum() + 1);
+		return fResultDao.insert(vo);
+	}
+
+	@Override
+	public int withdraw(HashMap<String, Object> map) {
+		return usersDao.withdraw(map);
 	}
 
 }

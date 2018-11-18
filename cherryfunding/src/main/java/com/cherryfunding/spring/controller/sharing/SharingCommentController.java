@@ -39,4 +39,13 @@ public class SharingCommentController {
 		return sharingCommentService.commentList(sNum);
 	}
 
+	@RequestMapping(value = "/sharing/commentCount", produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String commentCount(int sNum) {
+		JSONObject obj = new JSONObject();
+		obj.put("commentCount", sharingCommentService.getCommentCount(sNum));
+
+		return obj.toString();
+	}
+
 }

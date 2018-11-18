@@ -20,7 +20,9 @@
 			$('#pageNum').val(1);
 			showMore();
 		});
+		
 	});
+	
 	var showMore = function(){
 		$('#list').append(document.querySelector('#loadingTemplate').innerHTML);
 		var pageNum = $('#pageNum').val();
@@ -60,9 +62,11 @@
 									.replace("{category}", value.CATEGORY)
 									.replace("{recomm}", value.recomm)
 									.replace("{dday}", value.DDAY)
-									.replace(/{width}/gi, (barBefore) + "%" )
+									.replace(/{width}/gi, barBefore + "%" )
 									.replace("{valuenow}", barBefore)
 									.replace(/{percent}/gi, Math.ceil((before/100) * 100) + "%"); 
+						
+						
 					});
 					document.querySelector('#list').innerHTML = result;
 					$('#pageNum').val(data.pageNum);
@@ -71,12 +75,31 @@
 					    return $(this).text() == data.field; 
 					}).prop('selected', true);
 					$('#keyword').val(data.keyword);
+					
 				}
 			},
 			complete :function(){
 				$('.loading').remove();
 			}
 		});	
+	}
+	
+	function dropdown() {
+		$('#myDropdown').css('display', 'block');
+	}
+
+	// Close the dropdown menu if the user clicks outside of it
+	window.onclick = function(event) {
+		var target = event.target;
+		if (!$(target).hasClass('dropbtn')) {
+			var dropdowns = $('.dropdown-content');
+			for (var i = 0; i < dropdowns.length; i++) {
+				var openDropdown = dropdowns[i];
+				if ($(openDropdown).css('display') === 'block') {
+					$(openDropdown).css('display', 'none');
+				}
+			}
+		}
 	}
 	
 	function selectCategory(){
@@ -93,7 +116,7 @@
 	}
 	
 	
-	function related(){
+	function related(){//진행중인 것만 나오게... 부탁드려요....
 		var keyword = $("#keyword").val();
 		var field = $("#field option:selected").text();
 		
@@ -115,7 +138,7 @@
 	<a href="${pageContext.request.contextPath}/funding/ingFundingDetailforUser?fNum={fNum}">
 	<img src="{savename}" class="w3-round" alt="{fpinfo}" height="200px" width="100%"></a>
 	<div>
-		<div style="height: 50px; overflow:auto;>
+		<div style="height: 50px; overflow:hidden;>
 			<p class="w3-left-align" style="word-break:break-all;">
 				<a href="${pageContext.request.contextPath}/funding/ingFundingDetailforUser?fNum={fNum}">
 				<h4>{title}</h4></a>
@@ -142,169 +165,42 @@
 	<div class="rect5"></div>
 </div>
 </script>
-<style type="text/css">
-
-.topnav {
-  background-color: #e9e9e9;
-}
-
-.topnav a {
-  float: left;
-  display: block;
-  color: black;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-  font-size: 17px;
-}
-.topnav span{
-	float: left;
-	display: block;
-	color: black;
-	text-align: center;
-	padding: 14px 16px;
-	font-size: 17px;
-}
-.topnav button{
-	float: right;
-	padding: 6px;
-	margin-top: 8px;
-	margin-right: 16px;
-	font-size: 17px;
-	border: none;
-	cursor: pointer;
-}
-
-.topnav a:hover {
-  background-color: #ddd;
-  color: black;
-}
-
-.topnav a.active {
-  background-color: #2196F3;
-  color: white;
-}
-
-.topnav .search-container {
-  float: right;
-}
-
-.topnav input[type=text] {
-  padding: 6px;
-  margin-top: 8px;
-  font-size: 17px;
-  border: none;
-}
-
-.topnav .search-container button {
-  float: right;
-  padding: 6px;
-  margin-top: 8px;
-  margin-right: 16px;
-  background: #ddd;
-  font-size: 17px;
-  border: none;
-  cursor: pointer;
-}
-
-.topnav .search-container button:hover {
-  background: #ccc;
-}
-
-@media screen and (max-width: 600px) {
-  .topnav .search-container {
-    float: none;
-  }
-  .topnav a, .topnav input[type=text], .topnav .search-container button {
-    float: none;
-    display: block;
-    text-align: left;
-    width: 100%;
-    margin: 0;
-    padding: 14px;
-  }
-  .topnav input[type=text] {
-    border: 1px solid #ccc;  
-  }
-}
-	
-	
-</style>
 <div id="main">
 	<div class="container">
 		<div class="w3-bar" id="category">
-			<button type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">전체보기</button>
-			<button type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">테크·가전</button>
-			<button type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">패션·잡화</button>
-			<button type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">푸드</button>
-			<button type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">홈리빙</button>
-			<button type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">디자인소품</button>
-			<button type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">여행·레저</button>
-			<button type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">스포츠·모빌리티</button>
-			<button type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">반려동물</button>
-			<button type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">공연·컬쳐</button>
-			<button type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">소셜·캠페인</button>
-			<button type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">교육·키즈</button>
-			<button type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">게임·취미</button>
-			<button type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">출판</button>
+			<button data-voice="전체보기" type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">전체보기</button>
+			<button data-voice="테크·가전" type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">테크·가전</button>
+			<button data-voice="패션·잡화" type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">패션·잡화</button>
+			<button data-voice="푸드" type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">푸드</button>
+			<button data-voice="홈리빙" type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">홈리빙</button>
+			<button data-voice="디자인소품" type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">디자인소품</button>
+			<button data-voice="여행·레저" type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">여행·레저</button>
+			<button data-voice="스포츠·모빌리티" type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">스포츠·모빌리티</button>
+			<button data-voice="반려동물" type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">반려동물</button>
+			<button data-voice="공연·컬쳐" type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">공연·컬쳐</button>
+			<button data-voice="소셜·캠페인" type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">소셜·캠페인</button>
+			<button data-voice="교육·키즈" type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">교육·키즈</button>
+			<button data-voice="게임·취미" type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">게임·취미</button>
+			<button data-voice="출판" type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">출판</button>
 		</div>
-		<form method="get" action="${pageContext.request.contextPath}/funding/ingFundingList">
-			<input type="hidden" name="category" id="category" value="${category}">
-			<select name="field" id="field">
-				<option value="title" <c:if test="${field eq 'title'}">selected="selected"</c:if>>제목</option>
-				<option value="content" <c:if test="${field eq 'content'}">selected="selected"</c:if>>내용</option>
-				<option value="id" <c:if test="${field eq 'id'}">selected="selected"</c:if>>글쓴이</option>
-			</select>
-		</form>
-		
 				
-		<div class="row">
-			<div class="col-lg-6">
-				<div class="input-group">
-					<input type="text" id="keyword" value="" class="form-control" aria-label="...">
-					<span class="input-group-btn">
-						<button class="btn btn-default" id="search" type="button">검색</button>
-					</span>
-					<div class="input-group-btn">
-						<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Action <span class="caret"></span></button>
-						<ul class="dropdown-menu" role="menu">
-							<li><a href="#">Action</a></li>
-							<li><a href="#">Another action</a></li>
-							<li><a href="#">Something else here</a></li>
-							<li class="divider"></li>
-							<li><a href="#">Separated link</a></li>
-						</ul>
-					</div><!-- /btn-group -->
-				</div><!-- /input-group -->
-			</div><!-- /.col-lg-6 -->
-		</div><!-- /.row -->
 		<div class="topnav">
 			<span>진행중 펀딩</span>
-			<div class="w3-dropdown-hover">
-				<button class="w3-button">선택하세요<i class="fa fa-caret-down"></i></button>
-				<div class="w3-dropdown-content w3-bar-block w3-border" style="top:45px;">
-					<a href="#" class="w3-bar-item w3-button">Link 1</a>
-					<a href="#" class="w3-bar-item w3-button">Link 2</a>
-					<a href="#" class="w3-bar-item w3-button">Link 3</a>
-				</div>
-			</div>
+			<select id="sort" class="dropbtn w3-button">
+				<option value="latest" <c:if test="${sort eq 'latest'}">selected="selected"</c:if>>최신순</option>
+				<option value="recommend" <c:if test="${sort eq 'recommend'}">selected="selected"</c:if>>추천순</option>
+				<option value="popular" <c:if test="${sort eq 'popular'}">selected="selected"</c:if>>인기순</option>
+				<option value="camount" <c:if test="${sort eq 'camount'}">selected="selected"</c:if>>참여금액순</option>
+				<option value="end" <c:if test="${sort eq 'end'}">selected="selected"</c:if>>종료임박순</option>
+			</select>
  			<div class="search-container">
-				<form action="/action_page.php">
-					<input type="text" placeholder="Search.." name="search">
-					<button type="submit">Submit</button>
-				</form>
+					<input type="text" id="keyword" placeholder="Search.." name="search">
+					<button id="search" type="submit">검색</button>
 			</div>
 		</div>
 
-		<select id="sort">
-			<option value="latest" <c:if test="${sort eq 'latest'}">selected="selected"</c:if>>최신순</option>
-			<option value="recommend" <c:if test="${sort eq 'recommend'}">selected="selected"</c:if>>추천순</option>
-			<option value="popular" <c:if test="${sort eq 'popular'}">selected="selected"</c:if>>인기순</option>
-			<option value="camount" <c:if test="${sort eq 'camount'}">selected="selected"</c:if>>참여금액순</option>
-			<option value="end" <c:if test="${sort eq 'end'}">selected="selected"</c:if>>종료임박순</option>
-		</select>
-		<input type="hidden" id="pageNum" value="">
 		
+		<input type="hidden" id="pageNum" value="">
 		<div id="list" class="w3-row">
 		</div>
 		<button id="showMore" class="w3-btn w3-block w3-teal">더보기</button>

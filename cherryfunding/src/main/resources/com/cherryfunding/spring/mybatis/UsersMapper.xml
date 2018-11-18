@@ -26,7 +26,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<update id="withdraw" parameterType="hashmap">
-		update users set balance = balance - #{totAmount} where id = #{id}
+		update users set balance = balance - #{price} where id = #{id}
 	</update>
 	
 	<update id="deposit" parameterType="hashmap">

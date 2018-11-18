@@ -1,5 +1,7 @@
-package com.cherryfunding.spring.controller.visit;
+package com.cherryfunding.spring.controller.funding;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.UUID;
 
@@ -46,6 +48,7 @@ public class InsertFundingController {
 		if (result.hasErrors()) {
 			return ".inputFunding";
 		}
+		String[] dateRange = request.getParameter("dateRange").replaceAll(" ", "").split("-");
 		String[] hashtags = request.getParameterValues("hashtag");
 		String[] rewards = request.getParameterValues("reward");
 		String[] fAmount = request.getParameterValues("fAmount");
@@ -55,6 +58,13 @@ public class InsertFundingController {
 		int fNum = fundingService.getMaxNum() + 1; // 펀딩번호
 		try { // 펀딩저장
 			fvo.setfNum(fNum);
+			String sDate = dateRange[0].replaceAll("/", "-");
+			String eDate = dateRange[1].replaceAll("/", "-");
+
+			java.util.Date jsdate = new SimpleDateFormat("yyyy-MM-dd").parse(sDate);
+			fvo.setSdate(new Date(jsdate.getTime()));
+			java.util.Date jedate = new SimpleDateFormat("yyyy-MM-dd").parse(eDate);
+			fvo.setEdate(new Date(jedate.getTime()));
 			insertFundingService.finsert(fvo); // db
 
 			for (String hashtag : hashtags) { // 해시태그 저장
