@@ -2,11 +2,6 @@
     pageEncoding="EUC-KR"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="utf-8">
-<title>Insert title here</title>
-
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -41,12 +36,9 @@
   	
   
   </script>
-  
-  
-</head>
-<body>
-	<h2><a href="/cherryfunding/admypagea">승인 목록</a></h2>
-	<h1>인원<%=session.getAttribute("count")%></h1>
+	
+	<div class="container2">
+	<h2>승인 관리</h2>
 	<table class="table table-condensed" border="1" width="500">
 		<tr>
 			<th>글번호</th>
@@ -129,18 +121,4 @@
 <input type="submit" value="찾기">
 
 </form>
-
-
-
-
-
-
-
-
-
-
-
-
-
-</body>
-</html>
+</div>
