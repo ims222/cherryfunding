@@ -27,8 +27,22 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/mypagelayout.css" type="text/css">
 
 <script src="${pageContext.request.contextPath}/resources/js/util.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/responsiveVoice/responsiveVoice.js"></script>
+<<<<<<< HEAD
+=======
 
+>>>>>>> branch 'master' of https://github.com/ims222/cherryfunding.git
+<script src="${pageContext.request.contextPath}/resources/js/responsiveVoice/responsiveVoice.js"></script>
+<<<<<<< HEAD
+=======
+
+>>>>>>> branch 'master' of https://github.com/ims222/cherryfunding.git
+
+<<<<<<< HEAD
+=======
+
+<script src="http://code.responsivevoice.org/responsivevoice.js"></script>
+
+>>>>>>> branch 'master' of https://github.com/ims222/cherryfunding.git
 <script type="text/javascript">
 	$(document).ready(function(){
 		
