@@ -9,7 +9,6 @@
 		isRecommed();
 		commentCount();
 		commentList();
-		updateList();
 		var errMsg = '${errMsg}';
 		
 		if(errMsg){
@@ -79,47 +78,6 @@
 		
 	});
 	
-	function updateList(){
-		$.ajax({
-			url: '${pageContext.request.contextPath}/funding/getSelectedFundingList',
-			data: {fNum:'${vo.fNum}'},
-			dataType: 'json',
-			type: 'post',
-			success: function(data){
-				$("#selectedReward").empty();
-				for(let i=0;i<data.length;i++){
-					var rNum = data[i].rNum;
-					var title = data[i].title;
-					var amount = data[i].amount;
-					var rNumInput = $("<input>").attr("type", "hidden")
-					.attr("name", 'rNum')
-					.attr('value', rNum);
-					
-					var amountInput = $("<input>").attr("type", 'hidden')
-												.attr('name', 'amount')
-												.attr('value', amount);
-					var cancelReward = $("<a></a>").text('삭제')
-														.attr('href', '#')
-														.click(function(){
-															$.ajax({
-																url: '${pageContext.request.contextPath}/funding/cancelSelectReward',
-																data: {i:i},
-																dataType: 'json',
-																type:'post',
-																success: function(data){
-																	updateList();
-																}
-															});
-														});
-					
-					var div = $("<div></div>").append("<span>리워드명: " + title + " 수량: " + amount +"</span>")
-											.append(rNumInput).append(amountInput).append(cancelReward);					
-					$("#selectedReward").append(div);
-				}
-			}
-		});
-	}
-	
 	function isRecommed(){
 		$.ajax({
 			url: '${pageContext.request.contextPath}/funding/fundingIsRecommend',
@@ -137,6 +95,21 @@
 		});
 	}
 	
+	function commentDelete(fcNum){
+		$.ajax({
+			url:'${pageContext.request.contextPath}/funding/commentDelete',
+			data:{fcNum:fcNum},
+			dataType:'json',
+			type:'post',
+			success:function(data){
+				if(data.result === 'ok'){
+					commentCount();
+					commentList();
+				}
+			}
+		});
+	}
+	
 
 	function commentList(){
 		$.ajax({
@@ -148,10 +121,15 @@
 				var result = "";
 				var html = document.querySelector("#commentLine").innerHTML;
 				data.forEach(function(value){
+					var deleteComment = "&nbsp";
+					if('${sessionScope.id}' === value.ID){
+						deleteComment = "<button class='deleteComment' onclick='commentDelete(" + value.FCNUM +")'>삭제</button>";
+					}
 					result +=	html.replace("{nick}", value.nick)
 								.replace("{savename}", value.savename)
 								.replace("{content}", value.CONTENT)
-								.replace("{regdate}", calDate(value.REGDATE));
+								.replace("{regdate}", calDate(value.REGDATE))
+								.replace("{deleteComment}", deleteComment);
 				});
 				document.querySelector('#comment').innerHTML = result;
 			}
@@ -217,7 +195,7 @@
 	<div class="media-body">
 		<h4 class="media-heading user_name">{nick}</h4>
 		{content}
-		<p><small><a href="">Like</a> - <a href="">Share</a></small></p>
+		<p><small>{deleteComment}</small></p>
 	</div>
 </div>
 </script>

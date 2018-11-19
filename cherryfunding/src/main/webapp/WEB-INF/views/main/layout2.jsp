@@ -24,8 +24,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/layout2.css" type="text/css">
 <script src="${pageContext.request.contextPath}/resources/js/util.js"></script>
-
-<script src="http://code.responsivevoice.org/responsivevoice.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/responsiveVoice/responsiveVoice.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
 		

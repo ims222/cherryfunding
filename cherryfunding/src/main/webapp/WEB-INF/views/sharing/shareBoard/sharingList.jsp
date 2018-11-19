@@ -8,6 +8,7 @@
 		$('#showMore').on('click', showMore);
 	});
 	var showMore = function(){
+		$('#list').append(document.querySelector('#loadingTemplate').innerHTML);
 		var pageNum = $('#pageNum').val();
 		$.ajax({
 			url : '${pageContext.request.contextPath}/sharing/moreSharingList',
@@ -17,13 +18,13 @@
 			dataType : 'json',
 			type : 'post',
 			success : function(data) {
-				console.log(data);
 				var result = $('#list').html(); 
 				var html = document.querySelector('#sharingList').innerHTML;
 				if(data.list === 'no'){
 					alert('마지막 페이지 입니다');
 				}else{
 					data.list.forEach(function(value){
+						console.log(value);
 						result +=	html.replace(/{sNum}/gi, value.SNUM)
 									.replace("{savename}", value.savename)
 									.replace("{spinfo}", value.spinfo)
@@ -34,6 +35,9 @@
 					document.querySelector('#list').innerHTML = result;
 					$('#pageNum').val(data.pageNum);
 				}
+			},
+			complete :function(){
+				$('.loading').remove();
 			}
 		});
 	}
@@ -59,6 +63,15 @@
 			<div class="w3-right-align">{dday}일 남음</div>
 		</div>
 	</div>
+</div>
+</script>
+<script id="loadingTemplate" type="text/template">
+<div class="spinner loading">
+	<div class="rect1"></div>
+	<div class="rect2"></div>
+	<div class="rect3"></div>
+	<div class="rect4"></div>
+	<div class="rect5"></div>
 </div>
 </script>
 <!-- Main -->

@@ -50,4 +50,17 @@ public class FCommentController {
 		obj.put("commentCount", fCommentService.getCommentCount(fNum));
 		return obj.toString();
 	}
+
+	@RequestMapping(value = "/funding/commentDelete", produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String commentDelete(int fcNum) {
+		JSONObject obj = new JSONObject();
+		if (fCommentService.delete(fcNum) > 0) {
+			obj.put("result", "ok");
+		} else {
+			obj.put("result", "no");
+		}
+
+		return obj.toString();
+	}
 }

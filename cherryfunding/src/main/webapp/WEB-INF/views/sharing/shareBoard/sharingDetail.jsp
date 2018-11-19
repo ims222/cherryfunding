@@ -6,9 +6,11 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		isRecommed();
+		commentCount();
 		commentList();
 		itemDetail();
 		updateList();
+		
 		$("#recommend").on('click', function(){
 			var recomm;
 			var id='${sessionScope.id}';
@@ -38,6 +40,10 @@
 				}
 			});
 		});
+		
+		
+		
+		
 		
 		$("#chooseItem").on('click', function(){
 			var siNum = $("select[name='item']").val();
@@ -93,18 +99,23 @@
 	function isRecommed(){
 		$.ajax({
 			url: '${pageContext.request.contextPath}/sharing/sharingIsRecommend',
-			data:{id:'${sessionScope.id}', sNum: '${vo.sNum}'},
+			data:{id:'${sessionScope.id}', sNum:'${vo.sNum}'},
 			type:'post',
 			dataType: 'json',
 			success: function(data){
 				if(data.result === 'ok'){
-					$("#recommend").text('추천');
+					$(".button-like").removeClass("liked");
 				}else{
-					$("#recommend").text('추천취소');
+					$(".button-like").addClass("liked");
 				}
+				$('#sRecommend').text(data.sRecommend);
 			}
 		});
 	}
+	
+	
+	
+	
 	
 	function itemDetail(){
 		$.ajax({
@@ -160,6 +171,21 @@
 		});
 	}
 	
+	function commentDelete(scNum){
+		$.ajax({
+			url:'${pageContext.request.contextPath}/sharing/commentDelete',
+			data:{scNum:scNum},
+			dataType:'json',
+			type:'post',
+			success:function(data){
+				if(data.result === 'ok'){
+					commentCount();
+					commentList();
+				}
+			}
+		});
+	}
+	
 	function commentList(){
 		$.ajax({
 			url: '${pageContext.request.contextPath}/sharing/commentList',
@@ -170,10 +196,15 @@
 				var result = "";
 				var html = document.querySelector("#commentLine").innerHTML;
 				data.forEach(function(value){
+					var deleteComment = "&nbsp";
+					if('${sessionScope.id}' === value.ID){
+						deleteComment = "<button class='deleteComment' onclick='commentDelete(" + value.SCNUM +")'>삭제</button>";
+					}
 					result +=	html.replace("{nick}", value.nick)
 								.replace("{savename}", value.savename)
-								.replace("{content}", value.content)
-								.replace("{regdate}", calDate(value.regdate));
+								.replace("{content}", value.CONTENT)
+								.replace("{regdate}", calDate(value.REGDATE))
+								.replace("{deleteComment}", deleteComment);
 				});
 				document.querySelector('#comment').innerHTML = result;
 			}
@@ -228,7 +259,7 @@
 	<div class="media-body">
 		<h4 class="media-heading user_name">{nick}</h4>
 		{content}
-		<p><small><a href="">Like</a> - <a href="">Share</a></small></p>
+		<p><small>{deleteComment}</small></p>
 	</div>
 </div>
 </script>
@@ -255,7 +286,14 @@
 						<div id="selectedItem"></div>
 						<input type="submit" value="나눔 신청">
 				</form><br>
-				<button id="recommend" type="button">추천</button><br>
+				
+				
+				<button id="recommend" class="button button-like">
+					<i class="fa fa-heart"></i>
+					<span>Like <span id="sRecommend"></span></span>
+				</button>
+				
+				
 				<a href="${pageContext.request.contextPath}/sharing/sharingParticipation?sNum=${vo.sNum}">나눔 신청자</a>
 			</div>
 		</div>

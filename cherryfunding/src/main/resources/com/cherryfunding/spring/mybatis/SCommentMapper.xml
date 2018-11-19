@@ -11,13 +11,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select NVL(max(scNum), 0) from sComment
 	</select>
 
-	<select id="commentList" parameterType="int" resultType="sComment">
+	<select id="commentList" parameterType="int" resultType="hashmap">
 		select scNum, id, content, to_char(regdate, 'yyyy-mm-dd hh24:mi:ss') regdate,
-		sNum from sComment where sNum = #{num} order by scNum
+		sNum from sComment where sNum = #{sNum} order by scNum
 	</select>
 	
 	<select id="getCommentCount" parameterType="int" resultType="int">
 		select NVL(count(scnum),0) from sComment where sNum = #{sNum}
 	</select>
+	
+	<delete id="delete" parameterType="int">
+		delete from sComment where scNum = #{scNum}
+	</delete>
 
 </mapper>

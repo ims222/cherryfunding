@@ -1,5 +1,6 @@
 package com.cherryfunding.spring.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -23,12 +24,16 @@ public class SCommentDao {
 		return sqlSession.selectOne(NAMESPACE + "getMaxNum");
 	}
 
-	public List<SCommentVo> commentList(int sNum) {
+	public List<HashMap<String, Object>> commentList(int sNum) {
 		return sqlSession.selectList(NAMESPACE + "commentList", sNum);
 	}
 
 	public int getCommentCount(int sNum) {
 		return sqlSession.selectOne(NAMESPACE + "getCommentCount", sNum);
+	}
+
+	public int delete(int scNum) {
+		return sqlSession.delete(NAMESPACE + "delete", scNum);
 	}
 
 }

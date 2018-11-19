@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cherryfunding.spring.service.sharing.SRecommendService;
+import com.cherryfunding.spring.vo.FRecommendVo;
 import com.cherryfunding.spring.vo.SRecommendVo;
 
 @Controller
@@ -17,14 +18,16 @@ public class ShringRecommendController {
 
 	@RequestMapping(value = "/sharing/sharingIsRecommend", produces = "application/json;charset=UTF-8")
 	@ResponseBody
-	public String sharingIsRecommend(String id, int sNum) {
+	public String isRecomm(String id, int sNum) {
 		JSONObject obj = new JSONObject();
 		SRecommendVo vo = sRecommendService.isRecomm(new SRecommendVo(0, sNum, id));
+
 		if (vo == null) {
 			obj.put("result", "ok");
 		} else {
 			obj.put("result", "no");
 		}
+		obj.put("sRecommend", sRecommendService.getRecommend(sNum));
 		return obj.toString();
 	}
 
