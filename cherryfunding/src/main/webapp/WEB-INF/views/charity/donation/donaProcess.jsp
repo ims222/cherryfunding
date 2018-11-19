@@ -7,8 +7,18 @@
 <title>home.jsp</title>
 </head>
 <body>
-	<h1>home_home_home_</h1>
+	<h1>home11111_home_home_</h1>
 	
-	<!-- 후기 -->
+	
+
+
+	후원 금액 
+	후원하세요
+	
+	<form>
+		<input type="number" name="dona">
+		<input type="submit" value="후원">
+	</form>
+	
 </body>
 </html>

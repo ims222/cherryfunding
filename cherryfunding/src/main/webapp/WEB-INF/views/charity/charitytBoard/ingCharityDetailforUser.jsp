@@ -172,10 +172,10 @@
 				
 				<div class="w3-sand" style="padding:20px;">
 					목표 금액 <fmt:formatNumber value="${vo.amount}" pattern="#,###"/>원 
-					펀딩기간 <fmt:formatDate value="${vo.sDate}" pattern="yyyy.MM.dd"/>-<fmt:formatDate value="${vo.eDate}" pattern="yyyy.MM.dd"/>
+					후원기간 <fmt:formatDate value="${vo.sDate}" pattern="yyyy.MM.dd"/>-<fmt:formatDate value="${vo.eDate}" pattern="yyyy.MM.dd"/>
 					<br>
-					100% 이상 모이면 펀딩이 성공되는 프로젝트<br>
-					이 프로젝트는 펀딩 마감일까지 목표 금액이 100% 모이지 않으면 결제가 진행되지 않습니다
+					100% 이상 모이면 후원이 성공되는 프로젝트<br>
+					이 프로젝트는 후원 마감일까지 목표 금액이 100% 모이지 않으면 결제가 진행되지 않습니다
 				</div>
 				
 				<div class="contentStyle">
@@ -223,14 +223,14 @@
  				</div>
  				
  				<div style="margin-bottom:20px;">
- 					<span class="w3-xxlarge"><fmt:formatNumber value="${vo.cAmount}" pattern="#,###"/></span><span class="w3-xlarge">원 펀딩</span>
+ 					<span class="w3-xxlarge"><fmt:formatNumber value="${vo.cAmount}" pattern="#,###"/></span><span class="w3-xlarge">원 후원</span>
  				</div>
  				
  				<div style="margin-bottom:20px;">
  				<span class="w3-xxlarge">${countSupporter}</span><span class="w3-xlarge"> 명의 서포터</span>
  				</div>
  				
-				<button class="w3-btn w3-block w3-teal w3-xxlarge" onclick="location.href='${pageContext.request.contextPath}/funding/rewardList?cNum=${vo.cNum}';">펀딩 신청</button>
+				<button class="w3-btn w3-block w3-teal w3-xxlarge" onclick="location.href='${pageContext.request.contextPath}/funding/rewardList?cNum=${vo.cNum}';">후원 신청</button>
 				
 				
 				<button id="recommend" class="button button-like">
