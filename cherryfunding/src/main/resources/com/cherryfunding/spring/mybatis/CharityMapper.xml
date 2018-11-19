@@ -123,6 +123,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<include refid="sort" />
 	</select>
 	
+	<select id="getTotCountEnd" parameterType="hashmap" resultType="int">
+		select NVL(count(cNum), 0) from charity
+		<include refid="end"/>
+		<include refid="isConfirm"/>
+		<include refid="category" />
+		<include refid="search" />
+		<include refid="sort" />
+	</select>
+	
 	
 	
 	<!-- 준비중 후원 -->
@@ -136,7 +145,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<!-- 종료된 후원 -->
-	<select id="end" parameterType= "hashmap"  resultType="charity">
+	<select id="end" parameterType= "hashmap"  resultType="hashmap">
 		select * from charity
 		<include refid="end"/>
 		<include refid="category"/>

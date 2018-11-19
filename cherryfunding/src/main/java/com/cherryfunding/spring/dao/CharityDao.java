@@ -44,7 +44,7 @@ public class CharityDao {
 		return sqlSession.selectList(NAMESPACE + "prepare", map);
 	}
 
-	public List<CharityVo> end(HashMap<String, Object> map) {
+	public List<HashMap<String, Object>> end(HashMap<String, Object> map) {
 		return sqlSession.selectList(NAMESPACE + "end", map);
 	}
 
@@ -119,5 +119,9 @@ public class CharityDao {
 
 	public int getTotCount(HashMap<String, Object> map) {
 		return sqlSession.selectOne(NAMESPACE + "getTotCount", map);
+	}
+	
+	public int getTotCountEnd(HashMap<String, Object> map) {
+		return sqlSession.selectOne(NAMESPACE + "getTotCountEnd", map);
 	}
 }

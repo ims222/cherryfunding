@@ -26,7 +26,7 @@ public class EndCharityListController {
 
 	@Autowired
 	private EndCharityListService endService;
-	
+
 	@RequestMapping(value = "/charity/endCharityList", method = RequestMethod.GET)
 	public String ingCharityList() {
 		return ".ingCharityList";
@@ -46,18 +46,18 @@ public class EndCharityListController {
 		map.put("keyword", keyword);
 		map.put("sort", sort);
 
-		//PageUtil pageUtil = new PageUtil(pageNum, endService.getTotCount(map));
-//		map.put("startRow", pageUtil.getStartRow());
-//		map.put("endRow", pageUtil.getEndRow());
-		
-		//List<HashMap<String, Object>> list = endService.list(map);
-//		if (list.size() == 0 && pageNum > 1) {
-//			map.put("list", "no");
-//			map.put("pageNum", pageNum);
-//		} else {
-//			map.put("list", list);
-//			map.put("pageNum", pageNum + 1);
-//		}
+		PageUtil pageUtil = new PageUtil(pageNum, endService.getTotCountEnd(map));
+		map.put("startRow", pageUtil.getStartRow());
+		map.put("endRow", pageUtil.getEndRow());
+
+		List<HashMap<String, Object>> list = endService.list(map);
+		if (list.size() == 0 && pageNum > 1) {
+			map.put("list", "no");
+			map.put("pageNum", pageNum);
+		} else {
+			map.put("list", list);
+			map.put("pageNum", pageNum + 1);
+		}
 
 		return map;
 	}
