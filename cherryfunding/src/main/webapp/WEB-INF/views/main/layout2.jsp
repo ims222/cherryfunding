@@ -23,8 +23,17 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/layout2.css" type="text/css">
+
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/mypagelayout.css" type="text/css">
+
 <script src="${pageContext.request.contextPath}/resources/js/util.js"></script>
+<<<<<<< HEAD
 <script src="${pageContext.request.contextPath}/resources/js/responsiveVoice/responsiveVoice.js"></script>
+=======
+
+
+<script src="http://code.responsivevoice.org/responsivevoice.js"></script>
+>>>>>>> branch 'master' of https://github.com/ims222/cherryfunding.git
 <script type="text/javascript">
 	$(document).ready(function(){
 		

@@ -25,9 +25,14 @@ public class AdmypageController {
 	
 	
 	@RequestMapping(value="/admypage",method=RequestMethod.GET)
-	public String admypage() {
+	public String admypage(Model model) {
 		
-		return "admin/manage/adminPage";
+		List<FundingVo> vo= FundingConfirmService.waitList();
+		List<CharityVo> co= CharityService.waitList();
+		model.addAttribute("vo",vo);
+		model.addAttribute("co",co);
+		
+		return ".admypage";
 	}
 	
 	@RequestMapping(value="/admypagea",method=RequestMethod.GET)
@@ -37,7 +42,7 @@ public class AdmypageController {
 		model.addAttribute("vo",vo);
 		model.addAttribute("co",co);
 		
-		return "admin/manage/confirm";
+		return ".admypage";
 	}
 	
 	@RequestMapping(value="/confirmList",method=RequestMethod.GET)
@@ -70,14 +75,14 @@ public class AdmypageController {
 	@RequestMapping(value="/admypage/confirm",method=RequestMethod.GET)
 	public String confirm(int num) {//승인 하기
 		FundingConfirmService.confirm(num);
-		return "redirect:/admypagea";
+		return "redirect:/admypage";
 		
 	}
 	
 	@RequestMapping(value="/admypage/chirtyconfirm",method=RequestMethod.GET)
 	public String chirtyconfirm(int num) {//승인 하기
 		CharityService.confirm(num);
-		return "redirect:/admypagea";
+		return "redirect:/admypage";
 		
 	}
 	
