@@ -3,21 +3,26 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cherryfunding.spring.vo.CCommentMapper">
-	<select id="list" resultType="cComment">
-		select * from cComment
-	</select>
 
-	<select id="select" parameterType="string" resultType="cComment">
-		select * from cComment where id = #{id}
-	</select>
-
-	<insert id="insert" parameterType="cComment">
-		insert into cComment values()
+	<insert id="insert" parameterType="fComment">
+		insert into cComment values(#{ccNum}, #{id}, #{cNum}, #{content}, (sysdate + (1/24)*9))
 	</insert>
-	<update id="update" parameterType="cComment">
-		update cComment set #{pwd} where #{id}
-	</update>
-	<delete id="delete" parameterType="string">
-		delete from cComment where id=#{id}
+	
+	<select id="getMaxNum" resultType="int">
+		select NVL(max(ccNum), 0) from cComment
+	</select>
+	
+	<select id="commentList" parameterType="int" resultType="hashmap">
+		select ccNum, id, cNum, content, to_char(regdate, 'yyyy-mm-dd hh24:mi:ss') regdate from cComment
+		where cNum = #{cNum} order by ccNum
+	</select>
+	
+	<select id="getCommentCount" parameterType="int" resultType="int">
+		select NVL(count(ccnum),0) from cComment where cNum = #{cNum}
+	</select>
+	
+	<delete id="delete" parameterType="int">
+		delete from ccomment where ccNum = #{fcNum}
 	</delete>
+	
 </mapper>

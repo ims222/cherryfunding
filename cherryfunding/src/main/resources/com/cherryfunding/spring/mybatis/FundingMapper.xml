@@ -91,7 +91,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="confirm != null">confirm = #{confirm},</if>
 			<if test="aid != null">aid = #{aid},</if>
 			<if test="addr != null">addr = #{addr},</if>
-			<if test="aid != null">aid = #{aid},</if>
+			<if test="id != null">aid = #{id},</if>
 		</set>
 		where fNum = #{fNum}
 	</update>

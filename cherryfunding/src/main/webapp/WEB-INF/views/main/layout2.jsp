@@ -27,13 +27,8 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/mypagelayout.css" type="text/css">
 
 <script src="${pageContext.request.contextPath}/resources/js/util.js"></script>
-<<<<<<< HEAD
 <script src="${pageContext.request.contextPath}/resources/js/responsiveVoice/responsiveVoice.js"></script>
-=======
 
-
-<script src="http://code.responsivevoice.org/responsivevoice.js"></script>
->>>>>>> branch 'master' of https://github.com/ims222/cherryfunding.git
 <script type="text/javascript">
 	$(document).ready(function(){
 		
@@ -61,8 +56,6 @@
 					
 			}
 		});
-		
-		
 		
 	    $(window).scroll(function(){
 	        if ($(this).scrollTop() > 200) {

@@ -9,16 +9,11 @@
 		isRecommed();
 		commentCount();
 		commentList();
-		updateList();
 		var errMsg = '${errMsg}';
 		
 		if(errMsg){
 			alert(errMsg);
 		}
-		
-		$( "#commentModal" ).on('show', function(){
-		    alert("I want this to appear after the modal has opened!");
-		});
 		
 		$("#recommend").on('click', function(){
 			var recomm;
@@ -28,8 +23,8 @@
 				return;
 			}
 			$.ajax({
-				url: '${pageContext.request.contextPath}/funding/fundingIsRecommend',
-				data:{id:'${sessionScope.id}', fNum: '${vo.fNum}'},
+				url: '${pageContext.request.contextPath}/charity/charityIsRecommend',
+				data:{id:'${sessionScope.id}', cNum: '${vo.cNum}'},
 				dataType: 'json',
 				success: function(data){
 					if(data.result === 'ok'){
@@ -38,8 +33,8 @@
 						recomm = 'cancel';
 					}
 					$.ajax({
-						url:'${pageContext.request.contextPath}/funding/fundingRecommend',
-						data: {id:id, fNum: '${vo.fNum}', recomm:recomm},
+						url:'${pageContext.request.contextPath}/charity/charityRecommend',
+						data: {id:id, cNum: '${vo.cNum}', recomm:recomm},
 						dataType: 'json',
 						type:'post',
 						success: function(data){
@@ -52,78 +47,12 @@
 		
 		$("#insertComment").on('submit', insertComment);
 		
-		$("#chooseItem").on('click', function(){
-			var rNum = $("select[name='reward']").val();
-			var amount = $("input[name='amount']").val();
-			
-			if(!amount){
-				alert("수량을 입력하셔요");
-				return;
-			}
-			
-			$.ajax({
-				url:'${pageContext.request.contextPath}/funding/getAmount',
-				data:{rNum: rNum, amount: amount, fNum:'${vo.fNum}'},
-				dataType:'json',
-				type:'post',
-				success: function(data){
-					console.log('data', data);
-					if(data.result === 'no'){
-						alert("수량이 부족해요");
-					}else{
-						updateList();
-					}
-				}
-			});
-		});
-		
 	});
-	
-	function updateList(){
-		$.ajax({
-			url: '${pageContext.request.contextPath}/funding/getSelectedFundingList',
-			data: {fNum:'${vo.fNum}'},
-			dataType: 'json',
-			type: 'post',
-			success: function(data){
-				$("#selectedReward").empty();
-				for(let i=0;i<data.length;i++){
-					var rNum = data[i].rNum;
-					var title = data[i].title;
-					var amount = data[i].amount;
-					var rNumInput = $("<input>").attr("type", "hidden")
-					.attr("name", 'rNum')
-					.attr('value', rNum);
-					
-					var amountInput = $("<input>").attr("type", 'hidden')
-												.attr('name', 'amount')
-												.attr('value', amount);
-					var cancelReward = $("<a></a>").text('삭제')
-														.attr('href', '#')
-														.click(function(){
-															$.ajax({
-																url: '${pageContext.request.contextPath}/funding/cancelSelectReward',
-																data: {i:i},
-																dataType: 'json',
-																type:'post',
-																success: function(data){
-																	updateList();
-																}
-															});
-														});
-					
-					var div = $("<div></div>").append("<span>리워드명: " + title + " 수량: " + amount +"</span>")
-											.append(rNumInput).append(amountInput).append(cancelReward);					
-					$("#selectedReward").append(div);
-				}
-			}
-		});
-	}
 	
 	function isRecommed(){
 		$.ajax({
-			url: '${pageContext.request.contextPath}/funding/fundingIsRecommend',
-			data:{id:'${sessionScope.id}', fNum:'${vo.fNum}'},
+			url: '${pageContext.request.contextPath}/charity/charityIsRecommend',
+			data:{id:'${sessionScope.id}', cNum:'${vo.cNum}'},
 			type:'post',
 			dataType: 'json',
 			success: function(data){
@@ -132,15 +61,15 @@
 				}else{
 					$(".button-like").addClass("liked");
 				}
-				$('#fRecommend').text(data.fRecommend);
+				$('#cRecommend').text(data.cRecommend);
 			}
 		});
 	}
 	
-	function commentDelete(fcNum){
+	function commentDelete(ccNum){
 		$.ajax({
-			url:'${pageContext.request.contextPath}/funding/commentDelete',
-			data:{fcNum:fcNum},
+			url:'${pageContext.request.contextPath}/charity/commentDelete',
+			data:{ccNum:ccNum},
 			dataType:'json',
 			type:'post',
 			success:function(data){
@@ -155,8 +84,8 @@
 
 	function commentList(){
 		$.ajax({
-			url: '${pageContext.request.contextPath}/funding/commentList',
-			data: {fNum:'${vo.fNum}'},
+			url: '${pageContext.request.contextPath}/charity/commentList',
+			data: {cNum:'${vo.cNum}'},
 			dataType: 'json',
 			type: 'post',
 			success: function(data){
@@ -165,7 +94,7 @@
 				data.forEach(function(value){
 					var deleteComment = "&nbsp";
 					if('${sessionScope.id}' === value.ID){
-						deleteComment = "<button class='deleteComment' onclick='commentDelete(" + value.FCNUM +")'>삭제</button>";
+						deleteComment = "<button class='deleteComment' onclick='commentDelete(" + value.CCNUM +")'>삭제</button>";
 					}
 					result +=	html.replace("{nick}", value.nick)
 								.replace("{savename}", value.savename)
@@ -178,20 +107,10 @@
 		});
 	}
 	
-	
-	function submitReward(){
-		var id = '${sessionScope.id}';
-		if(!id){
-			alert("로그인 하셔요");
-			return false;
-		}
-		return true;
-	}
-	
 	var commentCount = function(){
 		$.ajax({
-			url:'${pageContext.request.contextPath}/funding/commentCount',
-			data:{fNum: '${vo.fNum}'},
+			url:'${pageContext.request.contextPath}/charity/commentCount',
+			data:{cNum: '${vo.cNum}'},
 			dataType:'json',
 			type:'post',
 			success: function(data){
@@ -214,10 +133,10 @@
 		}
 			
 		$.ajax({
-			url:'${pageContext.request.contextPath}/funding/insertComment',
+			url:'${pageContext.request.contextPath}/charity/insertComment',
 			dataType:'json',
 			type:'post',
-			data: {id:id, content:content, fNum:'${vo.fNum}'},
+			data: {id:id, content:content, cNum:'${vo.cNum}'},
 			success: function(data){
 				$("#insertComment textarea[name='content']").val('');
 				commentCount();
@@ -253,7 +172,7 @@
 				
 				<div class="w3-sand" style="padding:20px;">
 					목표 금액 <fmt:formatNumber value="${vo.amount}" pattern="#,###"/>원 
-					펀딩기간 <fmt:formatDate value="${vo.sdate}" pattern="yyyy.MM.dd"/>-<fmt:formatDate value="${vo.edate}" pattern="yyyy.MM.dd"/>
+					펀딩기간 <fmt:formatDate value="${vo.sDate}" pattern="yyyy.MM.dd"/>-<fmt:formatDate value="${vo.eDate}" pattern="yyyy.MM.dd"/>
 					<br>
 					100% 이상 모이면 펀딩이 성공되는 프로젝트<br>
 					이 프로젝트는 펀딩 마감일까지 목표 금액이 100% 모이지 않으면 결제가 진행되지 않습니다
@@ -263,7 +182,7 @@
 					${vo.content}
 				</div>
 			
-			 	<div id="fHashtag">
+			 	<div id="cHashtag">
 			 		<c:forEach var="ht" items="${hashtag}">
 			 			<a href="${pageContext.request.contextPath}/funding/searchHashtag?hashtag=${ht.hashtag}">#${ht.hashtag}</a>
 			 		</c:forEach>
@@ -271,7 +190,7 @@
  			</div>
  			<div class="col-md-4">
  				<div style="margin-bottom:20px;">
-					<fmt:formatDate value="${vo.edate}" var="eDate" pattern="yyyyMMdd"/>
+					<fmt:formatDate value="${vo.eDate}" var="eDate" pattern="yyyyMMdd"/>
 					<fmt:parseDate value="${eDate}" var="eDateDate" pattern="yyyyMMdd"/>
 					<fmt:parseNumber value="${eDateDate.time / (1000 * 60 * 60 * 24)}" var="end" integerOnly="true"/>
 					
@@ -280,10 +199,10 @@
 					<fmt:parseDate value="${todayDate}" var="nowDate" pattern="yyyyMMdd"/>
 					<fmt:parseNumber value="${nowDate.time / (1000 * 60 * 60 * 24)}" var="now" integerOnly="true"/>
 					
- 					<span class="w3-xxlarge">${end - now}</span><span class="w3-xlarge">일 후 시작합니다</span>
+ 					<span class="w3-xxlarge">${end - now}</span><span class="w3-xlarge">일 남음</span>
  				</div>
  			
- 				<c:set var="before" value="${vo.camout * 100 / vo.amount}" />
+ 				<c:set var="before" value="${vo.cAmount * 100 / vo.amount}" />
  				<c:choose>
 					<c:when test="${before >= 100}">
 						<c:set var="barBefore" value="100"/>
@@ -304,25 +223,25 @@
  				</div>
  				
  				<div style="margin-bottom:20px;">
- 					<span class="w3-xxlarge"><fmt:formatNumber value="${vo.camout}" pattern="#,###"/></span><span class="w3-xlarge">원 펀딩</span>
+ 					<span class="w3-xxlarge"><fmt:formatNumber value="${vo.cAmount}" pattern="#,###"/></span><span class="w3-xlarge">원 펀딩</span>
  				</div>
  				
  				<div style="margin-bottom:20px;">
  				<span class="w3-xxlarge">${countSupporter}</span><span class="w3-xlarge"> 명의 서포터</span>
  				</div>
  				
-				<button class="w3-btn w3-block w3-teal w3-xxlarge" onclick="location.href='${pageContext.request.contextPath}/funding/rewardList?fNum=${vo.fNum}';">펀딩 신청</button>
+				<button class="w3-btn w3-block w3-teal w3-xxlarge" onclick="location.href='${pageContext.request.contextPath}/funding/rewardList?cNum=${vo.cNum}';">펀딩 신청</button>
 				
 				
 				<button id="recommend" class="button button-like">
 					<i class="fa fa-heart"></i>
-					<span>Like <span id="fRecommend">0</span></span>
+					<span>Like <span id="cRecommend">0</span></span>
 				</button>
 				
 				
-				<a href="${pageContext.request.contextPath}/funding/fundingParticipation?fNum=${vo.fNum}">참여내역</a>
+				<a href="${pageContext.request.contextPath}/funding/fundingParticipation?cNum=${vo.cNum}">참여내역</a>
 				<br>
-				조회수: ${vo.hit} 진행중
+				조회수: ${vo.hit}
 				
  			</div>
 		</div>
@@ -330,7 +249,7 @@
 			<div class="col-md-8">
 				<div class="w3-right-align">
 					<button type="button" class="w3-button" data-toggle="modal" data-target="#commentModal">댓글 작성</button>
-					<button type="button" class="w3-button" onclick="javascript:location.href='${pageContext.request.contextPath}/funding/ingFundingList'">목록</button>
+					<button type="button" class="w3-button" onclick="javascript:location.href='${pageContext.request.contextPath}/charity/ingCharityList'">목록</button>
 				</div>
 			</div>
 		</div>

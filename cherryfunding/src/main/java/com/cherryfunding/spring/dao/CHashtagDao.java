@@ -1,5 +1,7 @@
 package com.cherryfunding.spring.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -18,5 +20,9 @@ public class CHashtagDao {
 	}
 	public int getMaxNum() {
 		return sqlSession.selectOne(NAMESPACE + "getMaxNum");
+	}
+	
+	public List<CHashtagVo> listBycNum(int cNum){
+		return sqlSession.selectList(NAMESPACE + "listBycNum", cNum);
 	}
 }

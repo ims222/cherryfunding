@@ -58,14 +58,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		0,#{sDate},#{eDate},#{category},
 		#{confirm},#{aId},#{addr},(sysdate + (1/24)*9),0,#{cPrice})
 	</insert>
+	
 	<update id="update" parameterType="charity">
-		update charity set title=#{title},content=#{content},amount=#{amount},cAmount=#{cAmount},
-		sdate=#{sdate},edate=#{edate},category=#{category},confirm=#{confirm},aId=#{aId},
-		addr=#{addr},id=#{id} where cNum = #{cNum} 
+		update charity
+		<set>
+			<if test="title != null">title = #{title},</if>
+			<if test="content != null">content = #{content},</if>
+			<if test="amount != null and amount > 0">amount = #{amount},</if>
+			<if test="cAmount != null and cAmount > 0">cAmount = #{cAmount},</if>
+			<if test="sdate != null">sdate = #{sdate},</if>
+			<if test="edate != null">edate = #{edate},</if>
+			<if test="category != null">category = #{category},</if>
+			<if test="confirm != null">confirm = #{confirm},</if>
+			<if test="aid != null">aid = #{aid},</if>
+			<if test="addr != null">addr = #{addr},</if>
+			<if test="id != null">id = #{aid},</if>
+		</set>
+		where cNum = #{cNum}
 	</update>
+	
 	<delete id="delete" parameterType="int">
 		delete from charity where cNum=#{num}
 	</delete>
+	
 	<select id="getMaxNum" resultType="int">
 		select nvl(max(cNum), 0) from charity
 	</select>

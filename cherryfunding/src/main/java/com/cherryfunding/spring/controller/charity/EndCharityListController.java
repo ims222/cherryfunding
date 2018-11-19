@@ -9,8 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cherryfunding.spring.service.charity.EndCharityListService;
+import com.cherryfunding.spring.util.PageUtil;
 import com.cherryfunding.spring.util.S3Util;
 import com.cherryfunding.spring.vo.CharityVo;
 
@@ -22,29 +26,39 @@ public class EndCharityListController {
 
 	@Autowired
 	private EndCharityListService endService;
+	
+	@RequestMapping(value = "/charity/endCharityList", method = RequestMethod.GET)
+	public String ingCharityList() {
+		return ".ingCharityList";
+	}
 
-	@RequestMapping("/charity/endCharityList")
-	public String end(Model model, HttpServletRequest request) {
+	@RequestMapping("/charity/moreEndCharityList")
+	@ResponseBody
+	public HashMap<String, Object> ingCharityList(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
+			Model model, HttpServletRequest request) {
 		String category = request.getParameter("category");
 		String field = request.getParameter("field");
 		String keyword = request.getParameter("keyword");
+		String sort = request.getParameter("sort");
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("category", category);
 		map.put("field", field);
 		map.put("keyword", keyword);
-		map.put("category", request.getParameter("category"));
-		List<CharityVo> list = endService.list(map);
+		map.put("sort", sort);
 
-		for (CharityVo vo : list) {
-			String thumbnail = endService.thumbnail(vo.getcNum()).getSaveName();
-			vo.setSavename(s3.getFileURL("charity/" + thumbnail));
-			vo.setCpinfo(endService.thumbnail(vo.getcNum()).getCpinfo());
-		}
+		//PageUtil pageUtil = new PageUtil(pageNum, endService.getTotCount(map));
+//		map.put("startRow", pageUtil.getStartRow());
+//		map.put("endRow", pageUtil.getEndRow());
+		
+		//List<HashMap<String, Object>> list = endService.list(map);
+//		if (list.size() == 0 && pageNum > 1) {
+//			map.put("list", "no");
+//			map.put("pageNum", pageNum);
+//		} else {
+//			map.put("list", list);
+//			map.put("pageNum", pageNum + 1);
+//		}
 
-		model.addAttribute("list", list);
-		model.addAttribute("category", category);
-		model.addAttribute("field", field);
-		model.addAttribute("keyword", keyword);
-		return ".endCharityList";
+		return map;
 	}
 }

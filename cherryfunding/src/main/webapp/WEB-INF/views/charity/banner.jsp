@@ -2,22 +2,20 @@
 	pageEncoding="UTF-8"%>
 <!-- Banner -->
 <div id="banner" class="container">
-	<section>
-		<p>
-			안녕하세요 <strong>CherryFunding</strong>입니다.<br> 후원신청은 아래 신청버튼을 눌러주세요<br> 
-			<a href="http://templated.co">템플릿</a>
-			<a href="http://twitter.com/templatedco">Twitter</a>.
-			<a href="${pageContext.request.contextPath}/charity/charityApplication"
-			class="button medium">후원신청하기</a>
-		</p>
+	<p>
+		안녕하세요 <strong>CherryFunding</strong>입니다.<br> 후원신청은 아래 신청버튼을 눌러주세요<br> 
 		
-		
-		<a href="${pageContext.request.contextPath}/charity/prepareCharityList"
-		class="button medium">준비중 후원</a>
-		<a href="${pageContext.request.contextPath}/charity/ingCharityList"
-		class="button medium">진행중 후원</a>
-		<a href="${pageContext.request.contextPath}/charity/endCharityList"
-		class="button medium">종료된 후원</a>
-	</section>
+		<button data-voice="후원신청하기" class="w3-btn w3-block w3-teal"
+		onclick="location.href='${pageContext.request.contextPath}/charity/charityApplication'">
+		후원신청하기</button>
+	</p>
 	
+	<div class="w3-bar w3-center">
+		<button data-voice="준비중 후원" class="w3-btn w3-large"
+		onclick="location.href='${pageContext.request.contextPath}/charity/prepareCharityList'">준비중 후원</button>
+		<button data-voice="진행중 후원" class="w3-btn w3-large"
+		onclick="location.href='${pageContext.request.contextPath}/charity/ingCharityList'">진행중 후원</button>
+		<button data-voice="종료된 펀딩" class="w3-btn w3-large"
+		onclick="location.href='${pageContext.request.contextPath}/charity/endCharityList'">종료된 후원</button>
+	</div>
 </div>
