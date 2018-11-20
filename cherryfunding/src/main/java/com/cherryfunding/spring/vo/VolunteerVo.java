@@ -15,12 +15,13 @@ public class VolunteerVo {
 	private int hit;
 	private String saveName;
 	private String vpInfo;
+	private int recommend;
 
 	public VolunteerVo() {
 	}
 
 	public VolunteerVo(int vNum, String id, String content, Date dDay, String title, int members, Date regdate,
-			String category, String place, int hit, String saveName, String vpInfo) {
+			String category, String place, int hit, String saveName, String vpInfo, int recommend) {
 		super();
 		this.vNum = vNum;
 		this.id = id;
@@ -34,6 +35,7 @@ public class VolunteerVo {
 		this.hit = hit;
 		this.saveName = saveName;
 		this.vpInfo = vpInfo;
+		this.recommend = recommend;
 	}
 
 	public int getvNum() {
@@ -131,5 +133,14 @@ public class VolunteerVo {
 	public void setVpInfo(String vpInfo) {
 		this.vpInfo = vpInfo;
 	}
+
+	public int getRecommend() {
+		return recommend;
+	}
+
+	public void setRecommend(int recommend) {
+		this.recommend = recommend;
+	}
+	
 
 }

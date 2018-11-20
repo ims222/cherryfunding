@@ -6,12 +6,10 @@
 	var pageNum = 1;
 	var vNum = 0;
 	$(document).ready(function(){
-		$("#showmore").on('click', showmore);
-		getRecommend();
-		
+		firstShow();
+		$("#showmore").on('click', showmore);		
 	});
 	function showmore(){
-		pageNum += 1;
 		$.ajax({
 			url: '${pageContext.request.contextPath}/volunteer/volunteerShowMore',
 			type: 'get',
@@ -21,7 +19,7 @@
 		    	var html = '';
 		    	if(vNum == 1){
 		    		//$("#myModal").modal('show');
-		    		alert("마지막 페이지입니다. 모달창은 왜 자꾸 위에 붙을까요.")
+		    		alert("마지막 페이지입니다. 모달창이 자꾸 위에 붙어서 alert로 변경했습니다.")
 					return;
 		    	}
 		    	for(var i=0; i<data.list.length; i++){
@@ -36,17 +34,20 @@
 		    			+'" height="200px" class="w3-round" width="100%"></a></div>';
 		    		html += '<div class="box">';
 		    		html += '<h4>' + data.list[i].title + '</h4>';
+		    		html += '<div class="w3-right-align"><p>추천 <span class="w3-badge w3-green">' 
+			    		+ data.list[i].recommend + '</span></p></div>';
 		    		html += '</div>';
 		    		html += '</div>';
 		    	}
 		    	$("#showDiv").append(html);
 		    }	
 		})
+		pageNum += 1;
 	}
-	function getRecommend(){
+	function getRecommend(vNum){
 		$.ajax({
 			url: '${pageContext.request.contextPath}/volunteer/volunteerGetRecommend',
-			data: {vNum: '${vo.vNum}'},
+			data: {vNum: vNum},
 			type: 'get',
 			dataType: 'text',
 			success: function(data){
@@ -54,6 +55,43 @@
 				$("#showRecomm").append(data);
 			}
 		})
+	}
+	
+	function firstShow(){
+		$.ajax({
+			url: '${pageContext.request.contextPath}/volunteer/volunteerFirstShow',
+			type: 'get',
+			data: {pageNum: pageNum, vNum: vNum},
+		    dataType: 'json',
+		    success: function(data){
+		    	var html = '';
+		    	if(vNum == 1){
+		    		//$("#myModal").modal('show');
+		    		alert("마지막 페이지입니다. 모달창이 자꾸 위에 붙어서 alert로 변경했습니다.")
+					return;
+		    	}
+		    	for(var i=0; i<data.list.length; i++){
+		    		vNum = data.list[i].vNum;
+		    		html += '<div class="w3-col m4 l4 " style="padding: 20px;">';
+		    		html += '<a href="${pageContext.request.contextPath}/volunteer/volunteerDetail?vNum='
+			    			+ data.list[i].vNum
+		    				+ '" class="image featured">';		    				
+		    		html += '<div style="min-height:200px"><img src="${pageContext.request.contextPath}/resources/upload/volunteer/'
+		    			+ data.list[i].saveName + '" alt="'
+		    			+ data.list[i].vpInfo 
+		    			+'" height="200px" class="w3-round" width="100%"></a></div>';
+		    		html += '<div class="box">';
+		    		html += '<h4>' + data.list[i].title + '</h4>';
+		    		
+		    		html += '<div class="w3-right-align"><p>추천 <span class="w3-badge w3-green">' 
+		    		+ data.list[i].recommend + '</span></p></div>';
+		    		html += '</div>';
+		    		html += '</div>';
+		    	}
+		    	$("#showDiv").append(html);
+		    }	
+		})
+		pageNum += 1;
 	}
 	
 </script>
@@ -73,26 +111,25 @@
 <!-- Main -->
 <div id="main">
 	<div class="container">
-		<div class="row no-collapse-1">
+		<!--<div class="row no-collapse-1">  -->
+		<!-- 
 			<c:forEach var="vo" items="${list}" varStatus="vs">
 				<div class="w3-col m4 l4" style="padding: 20px;">
 					<a href="${pageContext.request.contextPath}/volunteer/volunteerDetail?vNum=${vo.vNum}" class="image featured">
-					<script>
-					vNum = ${vo.vNum}
-					</script>
+					
 					<div style="min-height:200px">
 					<img src="${pageContext.request.contextPath}/resources/upload/volunteer/${vo.saveName}"
-						class="w3-round" alt="${vo.vpInfo}" height="200px" width="100%"></a>
+						class="w3-round" alt="${vo.vpInfo}" height="200px" width="100%" onload="getRecommend(${vo.vNum});"></a>
 					</div>	
 					<div class="box">
 						<h4>${vo.title}</h4>
-						<div class="w3-right-align"><p>추천 <span class="w3-badge w3-green">여기에</span></p></div>
-						<div id="showRecomm"></div>
+						<div class="w3-right-align"><p>추천 <span class="w3-badge w3-green" id="showRecomm">여기에</span></p></div>
 					</div>
 					
 				</div>
 			</c:forEach>
-		</div>
+			-->
+		<!-- </div> -->
 	<div id="showDiv" class="row no-collapse-1"></div><br>
 	<button id="showmore" class="w3-btn w3-block w3-teal">더보기</button>
 	</div>
