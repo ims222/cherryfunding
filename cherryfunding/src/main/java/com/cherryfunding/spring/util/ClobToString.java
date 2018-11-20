@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 public class ClobToString {
 	// Clob 를 String 으로 변경
 	public static String clobToString(Clob clob) throws SQLException, IOException {
-		
+
 		if (clob == null) {
 			return "";
 		}
@@ -24,7 +24,7 @@ public class ClobToString {
 		while ((str = br.readLine()) != null) {
 			strOut.append(str);
 		}
-		
+
 		return strOut.toString();
 	}
 

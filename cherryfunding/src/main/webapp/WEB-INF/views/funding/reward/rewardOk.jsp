@@ -2,12 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<div>
-	
-	
-	<!-- 후기 -->
-</div>
-
 <div id="main">
 	<div class="container">
 		<div class="w3-center">
