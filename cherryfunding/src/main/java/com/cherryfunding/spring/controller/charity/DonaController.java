@@ -28,21 +28,31 @@ public class DonaController {
 		return ".donaProcess";
 	}
 
-	@RequestMapping("/charity/donaOk")
+	@RequestMapping("/charity/donaProcess")
 	@ResponseBody
-	public String donaOk(int cNum, int donaPrice, String content, HttpSession session) {
+	public String donaProcess(int cNum, int donaPrice, String content, HttpSession session) {
 		String id = (String) session.getAttribute("id");
 		JSONObject obj = new JSONObject();
 		donaService.donation(donaPrice, id); // 후원금액 차감
-		CDetailVo cdvo = new CDetailVo(0, id, cNum, donaPrice, content, null);
+		int cdNum = donaService.getMaxNum() + 1;
+		System.out.println("!!!!!!!!!!!!!!!!");
+		System.out.println(cNum);
+		CDetailVo cdvo = new CDetailVo(cdNum, id, cNum, donaPrice, content, null);
 
 		int n = donaService.updatecDetail(cdvo); // 후원 내역 등록
 		if (n > 0) {
 			obj.put("result", "ok");
+			obj.put("cdNum", cdNum);
 		} else {
 			obj.put("result", "no");
 		}
 
 		return obj.toString();
+	}
+
+	@RequestMapping("/charity/donaOk")
+	public String donaOk(int cdNum, Model model) {
+		model.addAttribute("vo", donaService.getcDetailInfo(cdNum));
+		return ".donaOk";
 	}
 }

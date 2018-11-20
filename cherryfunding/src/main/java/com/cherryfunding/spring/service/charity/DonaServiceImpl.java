@@ -38,8 +38,17 @@ public class DonaServiceImpl implements DonaService {
 
 	@Override
 	public int updatecDetail(CDetailVo vo) {
-		vo.setCdNum(cDetailDao.getMaxNum() + 1);
-
 		return cDetailDao.insert(vo);
 	}
+
+	@Override
+	public int getMaxNum() {
+		return cDetailDao.getMaxNum();
+	}
+
+	@Override
+	public CDetailVo getcDetailInfo(int cdNum) {
+		return cDetailDao.select(cdNum);
+	}
+
 }

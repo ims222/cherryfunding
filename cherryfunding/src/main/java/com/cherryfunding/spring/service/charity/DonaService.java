@@ -10,4 +10,8 @@ public interface DonaService {
 	public int donation(int donaPrice, String id);
 
 	public int updatecDetail(CDetailVo vo);
+
+	public int getMaxNum();
+
+	public CDetailVo getcDetailInfo(int cdNum);
 }

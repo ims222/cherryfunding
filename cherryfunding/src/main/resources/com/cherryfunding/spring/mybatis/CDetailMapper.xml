@@ -7,8 +7,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from cDetail
 	</select>
 
-	<select id="select" parameterType="string" resultType="cDetail">
-		select * from cDetail where id = #{id}
+	<select id="select" parameterType="int" resultType="cDetail">
+		select * from cDetail where cdNum = #{cdNum}
 	</select>
 
 

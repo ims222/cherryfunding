@@ -14,6 +14,10 @@ PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
 		<put-attribute name="content" value="/WEB-INF/views/charity/donation/donaProcess.jsp"/>
 	</definition>
 	
+	<definition name=".donaOk" extends = ".ingCharityList">
+		<put-attribute name="content" value="/WEB-INF/views/charity/donation/donaOk.jsp"/>
+	</definition>
+	
 	<definition name=".prepareCharityList" extends = ".ingCharityList">
 		<put-attribute name="content" value="/WEB-INF/views/charity/charitytBoard/prepareCharityList.jsp"/>
 	</definition>
