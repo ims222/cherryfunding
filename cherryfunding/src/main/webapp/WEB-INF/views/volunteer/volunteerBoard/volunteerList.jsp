@@ -20,7 +20,8 @@
 		    success: function(data){
 		    	var html = '';
 		    	if(vNum == 1){
-		    		$("#myModal").modal('show');
+		    		//$("#myModal").modal('show');
+		    		alert("마지막 페이지입니다. 모달창은 왜 자꾸 위에 붙을까요.")
 					return;
 		    	}
 		    	for(var i=0; i<data.list.length; i++){
@@ -29,10 +30,10 @@
 		    		html += '<a href="${pageContext.request.contextPath}/volunteer/volunteerDetail?vNum='
 			    			+ data.list[i].vNum
 		    				+ '" class="image featured">';		    				
-		    		html += '<img src="${pageContext.request.contextPath}/resources/upload/volunteer/'
+		    		html += '<div style="min-height:200px"><img src="${pageContext.request.contextPath}/resources/upload/volunteer/'
 		    			+ data.list[i].saveName + '" alt="'
 		    			+ data.list[i].vpInfo 
-		    			+'" height="200px"></a>';
+		    			+'" height="200px" class="w3-round" width="100%"></a></div>';
 		    		html += '<div class="box">';
 		    		html += '<h4>' + data.list[i].title + '</h4>';
 		    		html += '</div>';
@@ -79,8 +80,10 @@
 					<script>
 					vNum = ${vo.vNum}
 					</script>
+					<div style="min-height:200px">
 					<img src="${pageContext.request.contextPath}/resources/upload/volunteer/${vo.saveName}"
-						alt="${vo.vpInfo}" height="200px"></a>
+						class="w3-round" alt="${vo.vpInfo}" height="200px" width="100%"></a>
+					</div>	
 					<div class="box">
 						<h4>${vo.title}</h4>
 						<div class="w3-right-align"><p>추천 <span class="w3-badge w3-green">여기에</span></p></div>
