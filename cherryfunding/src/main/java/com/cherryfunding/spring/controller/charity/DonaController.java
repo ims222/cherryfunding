@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cherryfunding.spring.service.charity.DonaService;
 import com.cherryfunding.spring.vo.CDetailVo;
+import com.cherryfunding.spring.vo.CharityVo;
 
 @Controller
 public class DonaController {
@@ -35,9 +36,11 @@ public class DonaController {
 		JSONObject obj = new JSONObject();
 		donaService.donation(donaPrice, id); // 후원금액 차감
 		int cdNum = donaService.getMaxNum() + 1;
-		System.out.println("!!!!!!!!!!!!!!!!");
-		System.out.println(cNum);
 		CDetailVo cdvo = new CDetailVo(cdNum, id, cNum, donaPrice, content, null);
+		CharityVo cvo = new CharityVo();
+		cvo.setcAmount(donaPrice);
+		cvo.setId(id);
+		donaService.updateCharity(cvo);
 
 		int n = donaService.updatecDetail(cdvo); // 후원 내역 등록
 		if (n > 0) {

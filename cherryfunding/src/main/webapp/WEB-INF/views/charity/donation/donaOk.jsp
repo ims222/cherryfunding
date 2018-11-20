@@ -4,7 +4,7 @@
 	<div class="container">
 		<div class="w3-center">
 			<div class="w3-large" style="margin: 30px 30px;">
-				${vo.id} 님 ${vo.amount}원 후원을 감사합니다.
+				${vo.id} 님 ${vo.amount}원 후원 감사합니다.
 			</div>
 		
 		
