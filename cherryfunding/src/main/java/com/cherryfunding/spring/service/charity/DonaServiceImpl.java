@@ -2,21 +2,23 @@ package com.cherryfunding.spring.service.charity;
 
 import java.util.HashMap;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.cherryfunding.spring.dao.CDetailDao;
+import com.cherryfunding.spring.dao.CharityDao;
 import com.cherryfunding.spring.dao.UsersDao;
 import com.cherryfunding.spring.vo.CDetailVo;
+import com.cherryfunding.spring.vo.CharityVo;
 import com.cherryfunding.spring.vo.UsersVo;
 
 @Transactional
 @Service
 public class DonaServiceImpl implements DonaService {
 
+	@Autowired
+	private CharityDao charityDao;
 	@Autowired
 	private UsersDao usersDao;
 
@@ -38,8 +40,22 @@ public class DonaServiceImpl implements DonaService {
 
 	@Override
 	public int updatecDetail(CDetailVo vo) {
-		vo.setCdNum(cDetailDao.getMaxNum() + 1);
-
 		return cDetailDao.insert(vo);
 	}
+
+	@Override
+	public int getMaxNum() {
+		return cDetailDao.getMaxNum();
+	}
+
+	@Override
+	public CDetailVo getcDetailInfo(int cdNum) {
+		return cDetailDao.select(cdNum);
+	}
+
+	@Override
+	public int updateCharity(CharityVo vo) {
+		return charityDao.update(vo);
+	}
+
 }

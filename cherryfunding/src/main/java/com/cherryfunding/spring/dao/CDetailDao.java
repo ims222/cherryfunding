@@ -14,10 +14,16 @@ public class CDetailDao {
 	private static final String NAMESPACE = "com.cherryfunding.spring.vo.CDetailMapper.";
 
 	public int insert(CDetailVo vo) {
+		System.out.println(vo.toString());
 		return sqlSession.insert(NAMESPACE + "insert", vo);
 	}
 
 	public int getMaxNum() {
 		return sqlSession.selectOne(NAMESPACE + "getMaxNum");
 	}
+
+	public CDetailVo select(int cdNum) {
+		return sqlSession.selectOne(NAMESPACE + "select", cdNum);
+	}
+
 }

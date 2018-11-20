@@ -66,13 +66,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="content != null">content = #{content},</if>
 			<if test="amount != null and amount > 0">amount = #{amount},</if>
 			<if test="cAmount != null and cAmount > 0">cAmount = #{cAmount},</if>
-			<if test="sdate != null">sdate = #{sdate},</if>
-			<if test="edate != null">edate = #{edate},</if>
+			<if test="sDate != null">sDate = #{sDate},</if>
+			<if test="eDate != null">eDate = #{eDate},</if>
 			<if test="category != null">category = #{category},</if>
 			<if test="confirm != null">confirm = #{confirm},</if>
-			<if test="aid != null">aid = #{aid},</if>
+			<if test="aId != null">aId = #{aId},</if>
 			<if test="addr != null">addr = #{addr},</if>
-			<if test="id != null">id = #{aid},</if>
+			<if test="id != null">id = #{id},</if>
 		</set>
 		where cNum = #{cNum}
 	</update>
