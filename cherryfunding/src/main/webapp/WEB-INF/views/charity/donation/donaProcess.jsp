@@ -5,7 +5,8 @@
 $(document).ready(function(){
 	
 	$("input[name='dona']").on('keyup', inputAmount);
-	
+	$("input[name='content']").on('focus', clearInput);
+	$("input[name='content']").on('focusout', writeInput);
 	$('.donaOk').on('click', function(){
 		var donaPrice = parseInt($("input[name='dona']").val());
 		var userAmount = parseInt(uncomma($('#userAmount').text()));
@@ -31,7 +32,17 @@ $(document).ready(function(){
 		});
 	});
 });
+function clearInput(){
+	if($("input[name='content']").val() === '희망을 응원합니다 ♡'){
+		$("input[name='content']").val("");
+	}
+}
 
+function writeInput(){
+	if(!$("input[name='content']").val()){
+		$("input[name='content']").val("희망을 응원합니다 ♡");
+	}
+}
 
 
 
@@ -51,7 +62,7 @@ function inputAmount(){
 </style>
 <div id="main">
 	<div class="container">
-		<div class="w3-center">
+		<div class="w3-center" >
 			<div class="w3-large" style="margin: 30px 30px;">
 			"기부자님의 소중한 마음으로 놀라운 변화가 일어납니다."<br>
 			투명한 기부 후기로 그 변화를 소개하고 보답하겠습니다!
