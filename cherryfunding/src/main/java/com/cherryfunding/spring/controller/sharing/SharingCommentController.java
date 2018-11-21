@@ -1,5 +1,6 @@
 package com.cherryfunding.spring.controller.sharing;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.json.JSONObject;
@@ -35,7 +36,7 @@ public class SharingCommentController {
 
 	@RequestMapping("/sharing/commentList")
 	@ResponseBody
-	public List<SCommentVo> commentList(int sNum) {
+	public List<HashMap<String, Object>> commentList(int sNum) {
 		return sharingCommentService.commentList(sNum);
 	}
 
@@ -44,6 +45,19 @@ public class SharingCommentController {
 	public String commentCount(int sNum) {
 		JSONObject obj = new JSONObject();
 		obj.put("commentCount", sharingCommentService.getCommentCount(sNum));
+
+		return obj.toString();
+	}
+
+	@RequestMapping(value = "/sharing/commentDelete", produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String commentDelete(int scNum) {
+		JSONObject obj = new JSONObject();
+		if (sharingCommentService.delete(scNum) > 0) {
+			obj.put("result", "ok");
+		} else {
+			obj.put("result", "no");
+		}
 
 		return obj.toString();
 	}

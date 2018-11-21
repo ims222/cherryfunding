@@ -115,7 +115,7 @@
 </script>
 <script id="fundingList" type="text/template">
 <div class="w3-col m4 l4 " style="padding: 20px;">
-	<a href="${pageContext.request.contextPath}/funding/ingFundingDetailforUser?fNum={fNum}">
+	<a href="${pageContext.request.contextPath}/funding/prepareFundingDetailforUser?fNum={fNum}">
 	<img src="{savename}" class="w3-round" alt="{fpinfo}" height="200px" width="100%"></a>
 	<div>
 		<div style="height: 50px; overflow:hidden;>

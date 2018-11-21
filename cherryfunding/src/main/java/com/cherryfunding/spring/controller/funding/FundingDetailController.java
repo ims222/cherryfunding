@@ -55,6 +55,7 @@ public class FundingDetailController {
 		model.addAttribute("rewardList", fundingDetailService.rewardList(fNum));
 		model.addAttribute("fRecommend", fundingDetailService.getRecommend(fNum));
 		model.addAttribute("hashtag", fundingDetailService.hashtag(fNum));
+		model.addAttribute("countSupporter", fundingDetailService.countFdetailbyfNum(fNum));
 		fundingDetailService.hitUp(fNum);
 		return ".prepareFundingDetailforUser";
 	}
@@ -65,6 +66,7 @@ public class FundingDetailController {
 		model.addAttribute("rewardList", fundingDetailService.rewardList(fNum));
 		model.addAttribute("fRecommend", fundingDetailService.getRecommend(fNum));
 		model.addAttribute("hashtag", fundingDetailService.hashtag(fNum));
+		model.addAttribute("countSupporter", fundingDetailService.countFdetailbyfNum(fNum));
 		fundingDetailService.hitUp(fNum);
 		return ".endFundingDetailforUser";
 	}

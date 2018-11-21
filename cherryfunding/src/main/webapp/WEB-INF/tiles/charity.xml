@@ -10,14 +10,30 @@ PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
 		<put-attribute name="content" value="/WEB-INF/views/charity/charitytBoard/ingCharityList.jsp"/>
 	</definition>
 	
-	<definition name=".prepareCharityList" extends = ".main">
-		<put-attribute name="banner" value="/WEB-INF/views/charity/banner.jsp"/>
+	<definition name=".donaProcess" extends = ".ingCharityList">
+		<put-attribute name="content" value="/WEB-INF/views/charity/donation/donaProcess.jsp"/>
+	</definition>
+	
+	<definition name=".donaOk" extends = ".ingCharityList">
+		<put-attribute name="content" value="/WEB-INF/views/charity/donation/donaOk.jsp"/>
+	</definition>
+	
+	<definition name=".prepareCharityList" extends = ".ingCharityList">
 		<put-attribute name="content" value="/WEB-INF/views/charity/charitytBoard/prepareCharityList.jsp"/>
 	</definition>
 	
-	<definition name=".endCharityList" extends = ".main">
-		<put-attribute name="banner" value="/WEB-INF/views/charity/banner.jsp"/>
+	<definition name=".endCharityList" extends = ".ingCharityList">
 		<put-attribute name="content" value="/WEB-INF/views/charity/charitytBoard/endCharityList.jsp"/>
+	</definition>
+	
+	<definition name=".ingCharityDetailforUser" extends = ".ingCharityList">
+		<put-attribute name="content" value="/WEB-INF/views/charity/charitytBoard/ingCharityDetailforUser.jsp"/>
+	</definition>
+	<definition name=".prepareCharityDetailforUser" extends = ".ingCharityList">
+		<put-attribute name="content" value="/WEB-INF/views/charity/charitytBoard/ingCharityDetailforUser.jsp"/>
+	</definition>
+	<definition name=".endCharityDetailforUser" extends = ".ingCharityList">
+		<put-attribute name="content" value="/WEB-INF/views/charity/charitytBoard/ingCharityDetailforUser.jsp"/>
 	</definition>
 	
 	<definition name=".inputCharity" extends = ".main">

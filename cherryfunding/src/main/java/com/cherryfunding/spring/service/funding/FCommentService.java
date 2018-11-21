@@ -53,13 +53,23 @@ public class FCommentService {
 				}
 			}
 			String id = (String) l.get("ID");
-			String profile = userSettingDao.getInfo(id).getProfile();
+			String profile = "";
+			try {
+				profile = userSettingDao.getInfo(id).getProfile();
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+				profile = "default";
+			}
 			String savename = s3.getFileURL("profile/" + profile);
 			l.put("savename", savename);
 			String nick = usersDao.select(id).getNick();
 			l.put("nick", nick);
 		}
 		return list;
+	}
+
+	public int delete(int fcNum) {
+		return fCommentDao.delete(fcNum);
 	}
 
 }

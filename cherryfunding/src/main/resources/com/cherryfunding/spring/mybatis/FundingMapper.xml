@@ -16,8 +16,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		and confirm = 'y' 
 	</sql>
 	<sql id="category">
-		<if
-			test="category != null and category != '' and category != '전체보기'">
+		<if test="category != null and category != '' and category != '전체보기'">
 			and category = #{category}
 		</if>
 	</sql>
@@ -92,7 +91,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="confirm != null">confirm = #{confirm},</if>
 			<if test="aid != null">aid = #{aid},</if>
 			<if test="addr != null">addr = #{addr},</if>
-			<if test="aid != null">aid = #{aid},</if>
+			<if test="id != null">aid = #{id},</if>
 		</set>
 		where fNum = #{fNum}
 	</update>
@@ -246,23 +245,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 					<![CDATA[where rnum >= #{startRow} and rnum <= #{endRow}]]>
 			</when>
 			<when test="sort == 'recommend'">
-				select * from (select aa.cnt, bb.FNUM fnum, bb.TITLE title, bb.CONTENT content,
-					bb.AMOUNT amount, bb.CAMOUT camout, to_char(bb.SDATE, 'yy-mm-dd') sdate,
-					to_char(bb.EDATE, 'yy-mm-dd') edate, (ceil(edate - (sysdate + (1/24)*9)) * -1) dday, bb.CATEGORY category, bb.CONFIRM confirm,
-					bb.AID aid, bb.ADDR addr, bb.REGDATE regdate, bb.ID id, bb.HIT hit, rownum rnum from (
-					select * from (
-    					select aa.* from (
-     						select count(f.fNum) cnt, f.fNum fn from (
-       							select * from funding
-       							<include refid="ing"/>
-      						) f, frecommend fr where f.fNum = fr.fNum group by f.fNum
-    					)aa
-    				order by cnt desc, fn desc)
-			)aa, (select * from funding )bb
-			where 
-			 <include refid="isConfirm"/>
-			order by cnt desc)
-			<![CDATA[where rnum >= #{startRow} and rnum <= #{endRow}]]>
+				select * from (
+					select aa.*, rownum rnum from (
+						select f.FNUM fnum, f.TITLE title, f.CONTENT content,
+						f.AMOUNT amount, f.CAMOUT camout, to_char(f.SDATE, 'yy-mm-dd') sdate,
+						to_char(f.EDATE, 'yy-mm-dd') edate, (ceil(edate - (sysdate + (1/24)*9)) * -1) dday, f.CATEGORY category, f.CONFIRM confirm,
+						f.AID aid, f.ADDR addr, f.REGDATE regdate, f.ID id, f.HIT hit,
+						NVL((select NVL(count(frNum), 0) from frecommend fr group by fNum having fr.fNum = f.fNum), 0) cnt
+						from funding f
+						<include refid="ing"/>
+						<include refid="isConfirm"/>
+						<include refid="category" />
+						<include refid="search" />
+						 order by cnt desc)aa
+						)<![CDATA[where rnum >=#{startRow} and rnum <=#{endRow}]]>
 			</when>
 			<otherwise>
 				select * from (

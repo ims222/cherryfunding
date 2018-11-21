@@ -31,4 +31,9 @@ public class FCommentDao {
 	public int getCommentCount(int fNum) {
 		return sqlSession.selectOne(NAMESPACE + "getCommentCount", fNum);
 	}
+
+	public int delete(int fcNum) {
+		return sqlSession.delete(NAMESPACE + "delete", fcNum);
+	}
+
 }

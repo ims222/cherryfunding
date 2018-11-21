@@ -28,4 +28,8 @@ public class SRecommendService {
 		return sRecommendDao.delete(vo);
 	}
 
+	public int getRecommend(int sNum) {
+		return sRecommendDao.getRecommend(sNum);
+	}
+
 }

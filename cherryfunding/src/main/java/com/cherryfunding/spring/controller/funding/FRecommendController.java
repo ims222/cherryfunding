@@ -19,8 +19,6 @@ public class FRecommendController {
 	@ResponseBody
 	public String isRecomm(String id, int fNum) {
 		JSONObject obj = new JSONObject();
-		System.out.println("id: " + id);
-		System.out.println("fNum: " + fNum);
 		FRecommendVo frvo = fRecommendService.isRecomm(new FRecommendVo(0, fNum, id));
 
 		if (frvo == null) {

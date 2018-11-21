@@ -19,7 +19,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="countFdetailbyfNum" resultType="int" parameterType="int">
-		select count(count(id))
+		select NVL(count(count(id)), 0)
 		from fDetail fd, reward r
 		where fd.rNum = r.rNum and r.fNum = #{fNum}
 		group by id

@@ -95,12 +95,12 @@
 </script>
 <script id="charityList" type="text/template">
 <div class="w3-col m4 l4" style="padding: 20px;">
-	<a href="${pageContext.request.contextPath}/charityList/detail?num=${vo.cNum}">
+	<a href="${pageContext.request.contextPath}/Charity/ingCharityDetailforUser?cNum={cNum}">
 	<img src="{savename}" class="w3-round" alt="{cpinfo}" height="200px" width="100%"></a>
 	<div>
 		<div style="height: 50px;>
 			<p class="w3-left-align" style="word-break:break-all;">
-				<a href="${pageContext.request.contextPath}/charityList/detail?num=${vo.cNum}">
+				<a href="${pageContext.request.contextPath}/charityList/detail?num={cNum}">
 				<h4>{title}</h4></a>
 			</p>
 		</div>
@@ -119,33 +119,30 @@
 <!-- Main -->
 <div id="main">
 	<div class="container">
-		<div class="btn-group" role="group" aria-label="category" id="category">
-			<button type="button" class="btn btn-secondary">전체보기</button>
-			<button type="button" class="btn btn-secondary">아동·청소년</button>
-			<button type="button" class="btn btn-secondary">어르신</button>
-			<button type="button" class="btn btn-secondary">다문화</button>
-			<button type="button" class="btn btn-secondary">장애인</button>
-			<button type="button" class="btn btn-secondary">사회운동</button>
-			<button type="button" class="btn btn-secondary">동물</button>
-			<button type="button" class="btn btn-secondary">환경</button>
+		<div class="w3-bar" id="category">
+			<button data-voice="전체보기" type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">전체보기</button>
+			<button data-voice="아동·청소년" type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">아동·청소년</button>
+			<button data-voice="어르신" type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">어르신</button>
+			<button data-voice="다문화" type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">다문화</button>
+			<button data-voice="장애인" type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">장애인</button>
+			<button data-voice="사회운동" type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">사회운동</button>
+			<button data-voice="동물" type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">동물</button>
+			<button data-voice="환경" type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">환경</button>
 		</div>
-		<form method="get" action="${pageContext.request.contextPath}/charity/ingCharityList">
-			<input type="hidden" name="category" value="${category}">
-			<select name="field">
-				<option value="title" <c:if test="${field eq 'title'}">selected="selected"</c:if>>제목</option>
-				<option value="content" <c:if test="${field eq 'content'}">selected="selected"</c:if>>내용</option>
-				<option value="id" <c:if test="${field eq 'id'}">selected="selected"</c:if>>글쓴이</option>
+		<div class="topnav">
+			<span>진행중 후원</span>
+			<select id="sort" class="dropbtn w3-button">
+				<option value="latest" <c:if test="${sort eq 'latest'}">selected="selected"</c:if>>최신순</option>
+				<option value="recommend" <c:if test="${sort eq 'recommend'}">selected="selected"</c:if>>추천순</option>
+				<option value="popular" <c:if test="${sort eq 'popular'}">selected="selected"</c:if>>인기순</option>
+				<option value="camount" <c:if test="${sort eq 'camount'}">selected="selected"</c:if>>참여금액순</option>
+				<option value="end" <c:if test="${sort eq 'end'}">selected="selected"</c:if>>종료임박순</option>
 			</select>
-			<input type="text" name="keyword" id="keyword" value="${keyword}">
-			<input type="submit" value="검색">		
-		</form>
-		<select id="sort">
-			<option value="latest">최신순</option>
-			<option value="recommend">추천순</option>
-			<option value="popular">인기순</option>
-			<option value="camount">참여금액순</option>
-			<option value="end">종료임박순</option>
-		</select>
+ 			<div class="search-container">
+					<input type="text" id="keyword" placeholder="Search.." name="search">
+					<button id="search" type="submit">검색</button>
+			</div>
+		</div>
 		<input type="hidden" id="pageNum" value="">
 		<div id="list" class="w3-row">
 		</div>

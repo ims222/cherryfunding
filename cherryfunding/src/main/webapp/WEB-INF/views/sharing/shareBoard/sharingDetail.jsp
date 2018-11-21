@@ -3,12 +3,16 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
 		isRecommed();
+		commentCount();
 		commentList();
 		itemDetail();
 		updateList();
+		//$('#profileModal').modal('hide');
+		
 		$("#recommend").on('click', function(){
 			var recomm;
 			var id='${sessionScope.id}';
@@ -38,6 +42,10 @@
 				}
 			});
 		});
+		
+		
+		
+		
 		
 		$("#chooseItem").on('click', function(){
 			var siNum = $("select[name='item']").val();
@@ -88,20 +96,22 @@
 		});
 		
 		$("select[name='item']").on('change', itemDetail);
+		
 	});
 	
 	function isRecommed(){
 		$.ajax({
 			url: '${pageContext.request.contextPath}/sharing/sharingIsRecommend',
-			data:{id:'${sessionScope.id}', sNum: '${vo.sNum}'},
+			data:{id:'${sessionScope.id}', sNum:'${vo.sNum}'},
 			type:'post',
 			dataType: 'json',
 			success: function(data){
 				if(data.result === 'ok'){
-					$("#recommend").text('추천');
+					$(".button-like").removeClass("liked");
 				}else{
-					$("#recommend").text('추천취소');
+					$(".button-like").addClass("liked");
 				}
+				$('#sRecommend').text(data.sRecommend);
 			}
 		});
 	}
@@ -160,6 +170,21 @@
 		});
 	}
 	
+	function commentDelete(scNum){
+		$.ajax({
+			url:'${pageContext.request.contextPath}/sharing/commentDelete',
+			data:{scNum:scNum},
+			dataType:'json',
+			type:'post',
+			success:function(data){
+				if(data.result === 'ok'){
+					commentCount();
+					commentList();
+				}
+			}
+		});
+	}
+	
 	function commentList(){
 		$.ajax({
 			url: '${pageContext.request.contextPath}/sharing/commentList',
@@ -170,10 +195,17 @@
 				var result = "";
 				var html = document.querySelector("#commentLine").innerHTML;
 				data.forEach(function(value){
+					var deleteComment = "&nbsp";
+					if('${sessionScope.id}' === value.ID){
+						deleteComment = "<button class='deleteComment' onclick='commentDelete(" + value.SCNUM +")'>삭제</button>";
+					}
 					result +=	html.replace("{nick}", value.nick)
+								.replace("{nick2}", value.nick)
 								.replace("{savename}", value.savename)
-								.replace("{content}", value.content)
-								.replace("{regdate}", calDate(value.regdate));
+								.replace("{savename2}", value.savename)
+								.replace("{content}", value.CONTENT)
+								.replace("{regdate}", calDate(value.REGDATE))
+								.replace("{deleteComment}", deleteComment);
 				});
 				document.querySelector('#comment').innerHTML = result;
 			}
@@ -217,18 +249,54 @@
 			}
 		});
 	}
+ 
+	function showProfile(nick, savename){
+		$.ajax({
+			url: '${pageContext.request.contextPath}/sharing/getUserInfoByNick',
+			data: {nick: nick},
+			dataType: 'json',
+			type: 'get',
+			success: function(data){
+				$('#showProfile').empty();
+				$('#showProfile').append('<img src="'+ savename + '" class="w3-circle" width="120px" height="120px">');
+				$('#showProfile').append('<p>'+'아이디:' + data.id + '<p>' 
+						+'<p>'+' 닉네임: ' + data.nick + '</p>'
+						+'<p>'+' 성별: ' + data.gender+'</p>'
+						);
+				$('#showProfile').dialog({width: 200, height:270, hide: "fade", close : function(){
+					parent.$('#showProfile').dialog('destroy');
+	              }  
+				});		
+			}
+		});
+	}
 	
 </script>
+<style>
+	.ui-widget {
+        font-family: Verdana,Arial,sans-serif;
+        font-size: 1em;
+        font-weight: bold;
+        left: 100px;
+        top: 200px;
+        }
+	.ui-widget-header,.ui-state-default, ui-button {
+		background:#b9cd6d;
+        border: 1px solid #b9cd6d;
+        color: #FFFFFF;
+        font-weight: bold;
+        }
+</style>
 <script id="commentLine" type="text/template">
 <div class="media">
 	<p class="pull-right"><small> {regdate} </small></p>
 	<a class="media-left" href="#">
-		<img src="{savename}" class="w3-circle" width="50px">
+		<img src="{savename}" class="w3-circle" width="50px" onclick="showProfile('{nick2}','{savename2}')">
 	</a>
 	<div class="media-body">
 		<h4 class="media-heading user_name">{nick}</h4>
 		{content}
-		<p><small><a href="">Like</a> - <a href="">Share</a></small></p>
+		<p><small>{deleteComment}</small></p>
 	</div>
 </div>
 </script>
@@ -255,7 +323,14 @@
 						<div id="selectedItem"></div>
 						<input type="submit" value="나눔 신청">
 				</form><br>
-				<button id="recommend" type="button">추천</button><br>
+				
+				
+				<button id="recommend" class="button button-like">
+					<i class="fa fa-heart"></i>
+					<span>Like <span id="sRecommend"></span></span>
+				</button>
+				
+				
 				<a href="${pageContext.request.contextPath}/sharing/sharingParticipation?sNum=${vo.sNum}">나눔 신청자</a>
 			</div>
 		</div>
@@ -297,3 +372,7 @@
 		</div>
 	</div>
 </div>
+<div>
+<div id="showProfile" hidden="hidden" title="회원 프로필"></div>
+</div>
+

@@ -7,17 +7,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from cDetail
 	</select>
 
-	<select id="select" parameterType="string" resultType="cDetail">
-		select * from cDetail where id = #{id}
+	<select id="select" parameterType="int" resultType="cDetail">
+		select * from cDetail where cdNum = #{cdNum}
 	</select>
 
+
 	<insert id="insert" parameterType="cDetail">
-		insert into cDetail values()
+		insert into cDetail values(#{cdNum}, #{id}, #{cNum}, #{amount}, #{content}, (sysdate + (1/24)*9))
 	</insert>
+	
+	
 	<update id="update" parameterType="cDetail">
 		update cDetail set #{pwd} where #{id}
 	</update>
 	<delete id="delete" parameterType="string">
 		delete from cDetail where id=#{id}
 	</delete>
+	
+	<select id="getMaxNum" resultType="int">
+		select NVL(count(cdNum), 0) from cDetail
+	</select>
 </mapper>

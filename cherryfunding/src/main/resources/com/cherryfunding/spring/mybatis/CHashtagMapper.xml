@@ -11,4 +11,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getMaxNum" resultType="int">
 		select NVL(max(ctagnum), 0) from chashtag
 	</select>
+	
+	<select id="listBycNum" parameterType="int" resultType="cHashtag">
+		select * from cHashtag where cNum = #{cNum}
+	</select>
 </mapper>
