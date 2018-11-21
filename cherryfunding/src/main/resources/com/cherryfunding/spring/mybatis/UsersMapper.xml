@@ -46,6 +46,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select email from users where id=#{id}
 	</select>
 	
+	<select id="idsearch" parameterType="String" resultType="users">
+		select * from users where id like #{idsearch} || '%'
+	</select>
+	
 	
 	
 	

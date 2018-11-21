@@ -3,7 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<div class="bg-img">
+<div class="bg-img" style="width:1140px; margin:auto;">
 	<form action="${pageContext.request.contextPath}/adlogin" method="post" class="container">
 	<!-- <h1>로그인</h1> -->
 		<c:choose>

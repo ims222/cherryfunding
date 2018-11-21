@@ -84,12 +84,11 @@
 </head>
 <body>
 
-<h1>회원가입</h1>
-
 <form method="post" onsubmit="return adjoin()" action="<c:url value='adjoin'/>">
 
 	<div class="container">
 		<div class="row" id=container_row>
+			<h1 style="text-align:center; width:350px;">회원가입</h1>
 			<div>
 				<h3>아이디</h3>
 			</div>

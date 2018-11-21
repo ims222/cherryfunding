@@ -1,12 +1,16 @@
 package com.cherryfunding.spring.controller.admin;
 
+import java.util.HashMap;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cherryfunding.spring.service.admin.UserManageService;
 import com.cherryfunding.spring.service.charity.CharityService;
@@ -46,13 +50,13 @@ public class AdmypageController {
 	}
 	
 	@RequestMapping(value="/confirmList",method=RequestMethod.GET)
-	public String confirmList(Model model) {//승인안된 리스트
+	public String confirmList(Model model,HttpServletRequest request) {//승인된 리스트
 		List<FundingVo> vo= FundingConfirmService.confirmList();
 		List<CharityVo> co= CharityService.confirmList();
 		model.addAttribute("vo",vo);
 		model.addAttribute("co",co);
 		
-		return "admin/manage/confirmList";
+		return ".confirmList";
 	}
 	
 	@RequestMapping(value="/admypage/wait",method=RequestMethod.GET)
@@ -68,9 +72,6 @@ public class AdmypageController {
 		
 		return "redirect:/confirmList";
 	}
-	
-	
-	
 	
 	@RequestMapping(value="/admypage/confirm",method=RequestMethod.GET)
 	public String confirm(int num) {//승인 하기
@@ -90,7 +91,7 @@ public class AdmypageController {
 	public String usermanage(Model mv) {
 		List<UsersVo> vo=UserManageService.list();
 		mv.addAttribute("vo",vo);
-		return "admin/manage/userList";
+		return ".userList";
 	}
 	
 	@RequestMapping(value="/userdelete",method=RequestMethod.GET)

@@ -29,7 +29,6 @@ public class LoginController {
 	@ResponseBody
 	@RequestMapping(value="/adlogin1",method=RequestMethod.GET)
 	public HashMap<String, String> adlogin1(HttpServletRequest request) {
-		System.out.println("접근하였습@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 		String aid=request.getParameter("aid");
 		String pwd = request.getParameter("pwd");
 		HashMap<String, String> map = new HashMap<String,String>();

@@ -7,15 +7,22 @@ PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
 
 	<definition name=".admypage" template="/WEB-INF/views/main/layout2.jsp">
 		<put-attribute name="header" value="/WEB-INF/views/admin/manage/mypageheader.jsp"/>
-		<put-attribute name="banner" value="/WEB-INF/views/admin/manage/confirm.jsp"/>
-		<put-attribute name="content" value="/WEB-INF/views/funding/fundingBoard/ingFundingList.jsp"/>
+		<put-attribute name="banner" value="/WEB-INF/views/main/banner.jsp"/>
+		<put-attribute name="content" value="/WEB-INF/views/admin/manage/confirm.jsp"/>
 		<put-attribute name="footer" value="/WEB-INF/views/main/footer.jsp"/>
 	</definition>
 	
-		<definition name=".confirmList" template="/WEB-INF/views/main/layout2.jsp">
+	<definition name=".confirmList" template="/WEB-INF/views/main/layout2.jsp">
 		<put-attribute name="header" value="/WEB-INF/views/admin/manage/mypageheader.jsp"/>
-		<put-attribute name="banner" value="/WEB-INF/views/admin/manage/confirm.jsp"/>
-		<put-attribute name="content" value="/WEB-INF/views/funding/fundingBoard/ingFundingList.jsp"/>
+		<put-attribute name="banner" value="/WEB-INF/views/main/banner.jsp"/>
+		<put-attribute name="content" value="/WEB-INF/views/admin/manage/confirmList.jsp"/>
+		<put-attribute name="footer" value="/WEB-INF/views/main/footer.jsp"/>
+	</definition>
+	
+	<definition name=".userList" template="/WEB-INF/views/main/layout2.jsp">
+		<put-attribute name="header" value="/WEB-INF/views/admin/manage/mypageheader.jsp"/>
+		<put-attribute name="banner" value="/WEB-INF/views/main/banner.jsp"/>
+		<put-attribute name="content" value="/WEB-INF/views/admin/manage/userList.jsp"/>
 		<put-attribute name="footer" value="/WEB-INF/views/main/footer.jsp"/>
 	</definition>
 
