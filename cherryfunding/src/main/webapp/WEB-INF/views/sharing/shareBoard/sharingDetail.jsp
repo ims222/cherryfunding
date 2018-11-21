@@ -258,12 +258,12 @@
 			type: 'get',
 			success: function(data){
 				$('#showProfile').empty();
-				$('#showProfile').append('<img src="'+ savename + '" class="w3-circle" width="100px" height="100px">');
+				$('#showProfile').append('<img src="'+ savename + '" class="w3-circle" width="120px" height="120px">');
 				$('#showProfile').append('<p>'+'아이디:' + data.id + '<p>' 
 						+'<p>'+' 닉네임: ' + data.nick + '</p>'
 						+'<p>'+' 성별: ' + data.gender+'</p>'
 						);
-				$('#showProfile').dialog({width: 250, height:250, hide: "fade", close : function(){
+				$('#showProfile').dialog({width: 200, height:270, hide: "fade", close : function(){
 					parent.$('#showProfile').dialog('destroy');
 	              }  
 				});		
@@ -278,7 +278,7 @@
         font-size: 1em;
         font-weight: bold;
         left: 100px;
-        top: 100px;
+        top: 200px;
         }
 	.ui-widget-header,.ui-state-default, ui-button {
 		background:#b9cd6d;
