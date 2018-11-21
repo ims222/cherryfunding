@@ -5,9 +5,6 @@
 <link href="${pageContext.request.contextPath}/resources/css/datepicker/datepicker.min.css" type="text/css" rel="stylesheet">
 <script src="${pageContext.request.contextPath}/resources/js/datepicker/datepicker.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/datepicker/datepicker.en.js"></script>
-<<<<<<< HEAD
-
-=======
 <style>
 		.row {
 		  display: -ms-flexbox; /* IE10 */
@@ -172,7 +169,6 @@
 }
 
 </style>
->>>>>>> branch 'master' of https://github.com/ims222/cherryfunding.git
 <script type="text/javascript">
 	$.fn.datepicker.language['en'] = {
 	    days: ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'],
@@ -240,6 +236,12 @@
 								$("#inputHashtag").append(h).append("<br>");
 							}
 						});
+				
+				$(document).on('focusout', "input[name='amount']", function(){
+					var hundred = 100;
+					var price = parseInt($(this).val());
+					$(this).val(Math.floor(price/hundred) * hundred);
+				})
 
 			});
 	/*
@@ -415,7 +417,7 @@
 		<div class="row">
 			<div class='col-lg-6'>
 				<label for="amount">목표금액(달성금액)</label>
-           		<input type="number" name="amount" id="amount" min="0"  step="1000"><p style="display: inline;margin-left: 10px">원</p>
+           		<input type="number" name="amount" id="amount" min="0" step="1000" pattern="#,###"><p style="display: inline;margin-left: 10px">원</p>
 				<span><form:errors path="fvo.amount" /></span><br>
 			</div>
 			<div class='col-lg-6'>
@@ -432,10 +434,14 @@
 		</div>
 		<div class="row">
           	<div class='col-lg-12' name="inputReward">
-	          <label for="rewardNum" style="display: inline;">리워드</label> <button class="MyButton" name="showMore" style="display: inline;">+</button><button class="MyButton" name="showLess" style="display: inline;">-</button>
+	          <label for="rewardNum" style="display: inline;">리워드</label>
+	          <button type="button" class="MyButton" name="showMore" style="display: inline;">+</button>
+	          <button type="button" class="MyButton" name="showLess" style="display: inline;">-</button>
 	          <label for="reward">리워드명</label><input type="text" name="reward"> 
-	          <label for="price">가격</label><input type="number" name="price"><p style="display: inline;margin-left: 10px">원</p> 
-	          <label for="fAmount">수량</label><input type="number" name="fAmount"><p style="display: inline;margin-left: 10px">개</p>
+	          <label for="price">가격</label>
+	          <input type="number" name="price"><p style="display: inline;margin-left: 10px">원</p> 
+	          <label for="fAmount">수량</label>
+	          <input type="number" name="fAmount"><p style="display: inline;margin-left: 10px">개</p>
 	        </div>
 	    </div>
 		<div class="row">
