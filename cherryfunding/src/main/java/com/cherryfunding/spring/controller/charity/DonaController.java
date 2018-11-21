@@ -39,7 +39,7 @@ public class DonaController {
 		CDetailVo cdvo = new CDetailVo(cdNum, id, cNum, donaPrice, content, null);
 		CharityVo cvo = new CharityVo();
 		cvo.setcAmount(donaPrice);
-		cvo.setId(id);
+		cvo.setcNum(cNum);
 		donaService.updateCharity(cvo);
 
 		int n = donaService.updatecDetail(cdvo); // 후원 내역 등록

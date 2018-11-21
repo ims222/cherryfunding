@@ -16,9 +16,9 @@ public class CharityDetailController {
 	@RequestMapping("/Charity/ingCharityDetailforUser")
 	public String ingCharityDetail(int cNum, Model model) {
 		model.addAttribute("vo", charityDetailService.detail(cNum));
-		//model.addAttribute("fRecommend", CharityDetailService.getRecommend(fNum));
+		model.addAttribute("cRecommend", charityDetailService.getRecommend(cNum));
 		model.addAttribute("hashtag", charityDetailService.hashtag(cNum));
-		//model.addAttribute("countSupporter", CharityDetailService.countFdetailbyfNum(fNum));
+		model.addAttribute("countSupporter", charityDetailService.countCdetailbycNum(cNum));
 		charityDetailService.hitUp(cNum);
 		return ".ingCharityDetailforUser";
 	}

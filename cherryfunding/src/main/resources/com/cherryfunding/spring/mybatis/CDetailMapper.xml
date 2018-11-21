@@ -27,4 +27,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getMaxNum" resultType="int">
 		select NVL(count(cdNum), 0) from cDetail
 	</select>
+	
+	<select id="countCdetailbycNum" resultType="int" parameterType="int">
+		select  NVL(count(NVL(count(id), 0)), 0) from cdetail group by id
+	</select>
 </mapper>

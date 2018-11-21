@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.cherryfunding.spring.dao.CDetailDao;
 import com.cherryfunding.spring.dao.CHashtagDao;
+import com.cherryfunding.spring.dao.CRecommendDao;
 import com.cherryfunding.spring.dao.CharityDao;
 import com.cherryfunding.spring.dao.UsersDao;
 import com.cherryfunding.spring.vo.CHashtagVo;
@@ -23,6 +25,12 @@ public class CharityDetailServiceImpl implements CharityDetailService {
 
 	@Autowired
 	private CHashtagDao cHashtagDao;
+
+	@Autowired
+	private CRecommendDao cRecommendDao;
+
+	@Autowired
+	private CDetailDao cDetailDao;
 
 	@Autowired
 	private UsersDao usersDao;
@@ -49,8 +57,7 @@ public class CharityDetailServiceImpl implements CharityDetailService {
 
 	@Override
 	public int getRecommend(int cNum) {
-		// TODO Auto-generated method stub
-		return 0;
+		return cRecommendDao.getRecommend(cNum);
 	}
 
 	@Override
@@ -68,6 +75,11 @@ public class CharityDetailServiceImpl implements CharityDetailService {
 	public int withdraw(HashMap<String, Object> map) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public int countCdetailbycNum(int cNum) {
+		return cDetailDao.countCdetailbycNum(cNum);
 	}
 
 }

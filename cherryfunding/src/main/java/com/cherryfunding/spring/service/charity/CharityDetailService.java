@@ -23,4 +23,7 @@ public interface CharityDetailService {
 	UsersVo userInfo(String id);
 
 	int withdraw(HashMap<String, Object> map);
+	
+	int countCdetailbycNum(int cNum);
+	
 }
