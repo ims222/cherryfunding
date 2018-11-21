@@ -27,4 +27,8 @@ public class VolunteerCommentService {
 	public List<VCommentVo> commentList(int vNum) {
 		return vCommentDao.commentList(vNum);
 	}
+	
+	public int delete(int vcNum) {
+		return vCommentDao.delete(vcNum);
+	}
 }

@@ -19,4 +19,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select vcNum, id, content, to_char(regdate, 'yyyy-mm-dd hh24:mi:ss') regdate,
 		vNum from vComment where vNum = #{vNum} order by vcNum
 	</select>
+	
+	<delete id="delete" parameterType="int">
+		delete from vComment where vcNum = #{vcNum}
+	</delete>
 </mapper>
