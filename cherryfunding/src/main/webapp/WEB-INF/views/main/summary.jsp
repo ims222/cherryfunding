@@ -59,7 +59,7 @@
 						</c:choose>
 						<div>
 							<div class="w3-left-align" style="float:left;">${summary.cEnd.category} | ${summary.cEnd.id}</div>
-							<div class="w3-right-align"><p>추천 <span class="w3-badge w3-green">{recomm}</span></p></div>
+							<div class="w3-right-align"><p><i style='font-size:15px;color:red' class='fas'>&#xf004;</i><span>${summary.cEndRecomm}</span></p></div>
 							<div class="w3-border">
 								<div class="w3-blue" style="height:5px;width:${barcEndBefore/10000}"></div>
 							</div>
@@ -102,7 +102,7 @@
 	
 						<div>
 							<div class="w3-left-align" style="float:left;">${summary.cHot.category} | ${summary.cHot.id}</div>
-							<div class="w3-right-align"><p>추천 <span class="w3-badge w3-green">{recomm}</span></p></div>
+							<div class="w3-right-align"><p>추천 <span class="w3-badge w3-green">${summary.cHotRecomm}</span></p></div>
 							<div class="w3-border">
 								<div class="w3-blue" style="height:5px;width:${barcHotBefore/100}"></div>
 							</div>
@@ -145,7 +145,7 @@
 	
 						<div>
 							<div class="w3-left-align" style="float:left;">${summary.cPrice.category} | ${summary.cPrice.id}</div>
-							<div class="w3-right-align"><p>추천 <span class="w3-badge w3-green">{recomm}</span></p></div>
+							<div class="w3-right-align"><p>추천 <span class="w3-badge w3-green">${summary.cPriceRecomm}</span></p></div>
 							<div class="w3-border">
 								<div class="w3-blue" style="height:5px;width:${barcPriceBefore/100}"></div>
 							</div>

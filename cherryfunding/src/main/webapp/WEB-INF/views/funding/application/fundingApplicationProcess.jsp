@@ -5,6 +5,7 @@
 <link href="${pageContext.request.contextPath}/resources/css/datepicker/datepicker.min.css" type="text/css" rel="stylesheet">
 <script src="${pageContext.request.contextPath}/resources/js/datepicker/datepicker.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/datepicker/datepicker.en.js"></script>
+
 <script type="text/javascript">
 	$.fn.datepicker.language['en'] = {
 	    days: ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'],
