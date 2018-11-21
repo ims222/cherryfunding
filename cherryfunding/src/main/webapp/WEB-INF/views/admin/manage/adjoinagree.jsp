@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
@@ -27,7 +27,7 @@
 
 </head>
 <body>
-		<div class="container">
+		<div class="container" style="width:700px;">
 		  <div class="row" style="margin:auto;">
 		    <div class="col-sm-12">
 		      <input type="checkbox" id="agree1" name="agree1">
@@ -279,6 +279,10 @@
 		
 		<script type="text/javascript">
 		
+			$("#noagree").click(function(){
+				location.href="<c:url value='/admin'/>";
+			});
+		
 			$("#agreebutton").click(function(){
 
 				if($("#agree3").is(":checked")==false){
@@ -298,6 +302,7 @@
 					
 					$("input:checkbox").prop('checked',true);	
 				}
+				
 				
 				
 			});

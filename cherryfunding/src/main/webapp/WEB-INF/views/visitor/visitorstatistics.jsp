@@ -41,7 +41,6 @@
 		            	type:"GET",
 		            	dataType:"json",
 		            	success:function(date){
-		            		alert(date);
 		            		var count = Number(date);
 		            		google.charts.load('current',{'packages':['corechart']});
 		            		google.charts.setOnLoadCallback(drawVisualization);
@@ -120,31 +119,18 @@
 		            				seriesType: 'bars',
 		            				series: {5: {type:'line'}}
 		            		};
-		            		
-		            		
 		            		var chart = new google.visualization.ComboChart(document.getElementById('chart_div5'));
 		            		chart.draw(data,options);
 		    			
 		            		};
-		            		
-		            		
-		            		
-
-		            		
 		            	},
 		            	error:function(data){
-		            		alert("실패");
-		            		
 		            	}
-		            	
 		            });
-		                 
 		         }
-
 		    });//여기 까지가 달력을 이용해서 그래프 가져오는 ajax 부분
 		    
 		    	//일일 인원 접속 통계
-		    
 				google.charts.load('current',{'packages':['corechart']});
         		google.charts.setOnLoadCallback(drawVisualization);
         		
@@ -165,10 +151,8 @@
         				series: {5: {type:'line'}}
         		};
         		
-        		
         		var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
         		chart.draw(data,options);
-			
         		};
         		
         		////////////////////////////// 펀딩 , 총 금액 그래프
@@ -199,9 +183,6 @@
 			
         		};
         		
-        		
-        		
-        		
 //////////////////////////////기부 , 총 금액 그래프
         		google.charts.load('current',{'packages':['corechart']});
         		google.charts.setOnLoadCallback(drawVisualization3);
@@ -223,12 +204,10 @@
         				series: {5: {type:'line'}}
         		};
         		
-        		
         		var chart = new google.visualization.ComboChart(document.getElementById('chart_div3'));
         		chart.draw(data,options);
 			
         		};
-        		
         		
 				////////////////////////////// 오늘 펀딩 모인 금액
 				
@@ -252,12 +231,10 @@
         				series: {5: {type:'line'}}
         		};
         		
-        		
         		var chart = new google.visualization.ComboChart(document.getElementById('chart_div4'));
         		chart.draw(data,options);
 			
         		};
-				
 				
 				////////////////////////////// 오늘 모인 기부 금액
 
@@ -286,9 +263,6 @@
         		chart.draw(data,options);
 			
         		};
-        		
-        		
-        		
 		});
 		
 </script>
@@ -297,10 +271,6 @@
 <body>
 
 	<input type="text" id="testDatepicker">
-	
-	
-	
-	
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-12" style="width:900px; height: 500px;">

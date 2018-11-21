@@ -19,6 +19,10 @@ public class UserManageService {
 		return UserDao.list();
 	}
 	
+	public List<UsersVo> idsearch(String idsearch) {
+		return UserDao.idsearch(idsearch);
+	}
+	
 	public int sdelete(String id) { // 관리자 페이지 회원 탈퇴
 		return UserDao.sdelete(id);
 	} 

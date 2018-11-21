@@ -1,6 +1,5 @@
 package com.cherryfunding.spring.controller.admin;
 
-import java.text.CharacterIterator;
 import java.util.HashMap;
 import java.util.List;
 
@@ -12,16 +11,20 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.cherryfunding.spring.service.admin.UserManageService;
 import com.cherryfunding.spring.service.charity.SearchCharityService;
 import com.cherryfunding.spring.service.funding.SearchFundingService;
+import com.cherryfunding.spring.service.user.InputUsersService;
 import com.cherryfunding.spring.vo.CharityVo;
 import com.cherryfunding.spring.vo.FundingVo;
+import com.cherryfunding.spring.vo.UsersVo;
 
 @Controller
-public class search {
+public class SearchController {
 	
 	@Autowired SearchCharityService SearchCharityService; 
 	@Autowired SearchFundingService SearchFundingService;
+	@Autowired UserManageService UserManageService;
 	
 	
 	@RequestMapping(value="/admin/wsearch",method=RequestMethod.POST)
@@ -68,7 +71,7 @@ public class search {
 			map.put("keyword", keyword);
 			List<CharityVo> co=SearchCharityService.searchconfirmList(map);
 			model.addAttribute("co", co);
-			return "admin/manage/confirmList";
+			
 			
 		}else if(kinds.equals("funding")){
 			
@@ -77,11 +80,21 @@ public class search {
 			map.put("keyword",keyword);
 			List<FundingVo> vo = SearchFundingService.searchconfirmList(map); 
 			model.addAttribute("vo", vo);
-			return "admin/manage/confirmList";
+			
 		}
 		
-		return "";
+		return "admin/manage/confirmList";
 		
 	}
+	
+	@RequestMapping(value="/admin/idsearch",method=RequestMethod.POST)
+	public String idsearch(Model model,HttpServletRequest request) {
+		
+		String idsearch = request.getParameter("idsearch");
+		List<UsersVo> vo= UserManageService.idsearch(idsearch);
+		model.addAttribute("vo", vo);
+		return ".userList";
+	}
+	
 
 }

@@ -43,7 +43,8 @@
   
 </head>
 <body>
-	<h2><a href="/cherryfunding/confirmList">승인 목록</a></h2>
+	<div class="container2">
+	<h2>승인 확인</h2>
 	<table class="table table-condensed" border="1" width="500">
 		<tr>
 			<th>글번호</th>
@@ -124,6 +125,7 @@
 <input type="submit" value="찾기">
 
 </form>
+</div>
 
 </body>
 </html>

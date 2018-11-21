@@ -65,5 +65,9 @@ public class UsersDao {
 		return sqlSession.selectOne(NAMESPACE + "getEmail", id);
 	}
 	
+	public List<UsersVo> idsearch(String idsearch) {
+		return sqlSession.selectList(NAMESPACE+"idsearch",idsearch);
+	}
+	
 
 }

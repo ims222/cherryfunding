@@ -26,6 +26,7 @@
   </script>
 </head>
 <body>
+	<div class="container2">
 	<h2>회원목록</h2>
 	<table class="table table-condensed" border="1" width="500">
 		<tr>
@@ -71,6 +72,12 @@
   </div>
 		
 	</table>
+	
+	<form method="POST" action="${pageContext.request.contextPath }/admin/idsearch">
+		<input type="text" placeholder="search" id="idsearch" name="idsearch">
+		<input type="submit" value="찾기"><br>
+	</form>
+</div>
 	
 </body>
 </html>
