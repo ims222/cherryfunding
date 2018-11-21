@@ -7,7 +7,7 @@
 <meta charset="utf-8">
 <title>Insert title here</title>
 
- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   
@@ -43,13 +43,31 @@
   
 </head>
 <body>
-	<div class="container2">
-	<h2>승인 확인</h2>
-	<table class="table table-condensed" border="1" width="500">
+	<div class="container">
+	<h2>승인 확인</h2><br>
+	
+	<form action="${pageContext.request.contextPath }/admin/csearch" method="post">
+	<select name="kinds">
+		<option value='chirty' <c:if test="${kinds eq 'chirty' }">selected="selected"</c:if>>기부</option>
+		<option value='funding'<c:if test="${kinds eq 'funding' }">selected="selected"</c:if>>펀딩</option>
+	
+	</select>
+	
+	<select name="field">
+		<option value='id' <c:if test="${field eq 'id' }">selected="selected"</c:if>>아이디</option>
+		<option value='title' <c:if test="${field eq 'title' }">selected="selected"</c:if>>글제목</option>
+	</select><br>
+	
+	<input type="text" class="form-control" name="keyword" placeholder="search"style="width:1080px;float:left;">
+	&nbsp<input type="submit" value="찾기" class="btn btn-info">
+	</form><br>
+
+	
+	<table class="table table-striped" width="500">
 		<tr>
 			<th>글번호</th>
 			<th>아이디</th>
-			<th>제목</th>
+			<th style="width:600px;">제목</th>
 			<th>카테고리</th>
 			<th>등록일</th>
 			<th>상세보기</th>
@@ -109,22 +127,6 @@
 
 </table>
 
-<form action="${pageContext.request.contextPath }/admin/csearch" method="post">
-<select name="kinds">
-	<option value='chirty' <c:if test="${kinds eq 'chirty' }">selected="selected"</c:if>>기부</option>
-	<option value='funding'<c:if test="${kinds eq 'funding' }">selected="selected"</c:if>>펀딩</option>
-
-</select>
-
-<select name="field">
-	<option value='id' <c:if test="${field eq 'id' }">selected="selected"</c:if>>아이디</option>
-	<option value='title' <c:if test="${field eq 'title' }">selected="selected"</c:if>>글제목</option>
-</select>
-
-<input type="text" class="form-control" name="keyword" placeholder="search">
-<input type="submit" value="찾기">
-
-</form>
 </div>
 
 </body>

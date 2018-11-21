@@ -38,8 +38,26 @@
   </script>
 	
 	<div class="container2">
-	<h2>승인 관리</h2>
-	<table class="table table-condensed" border="1" width="500">
+	<h2>승인 관리</h2><br>
+	
+<form action="${pageContext.request.contextPath }/admin/wsearch" method="post">
+
+
+<select name="kinds">
+	<option value='chirty' <c:if test="${kinds eq 'chirty' }">selected="selected"</c:if>>기부</option>
+	<option value='funding'<c:if test="${kinds eq 'funding' }">selected="selected"</c:if>>펀딩</option>
+
+</select>
+
+<select name="field">
+	<option value='id' <c:if test="${field eq 'id' }">selected="selected"</c:if>>아이디</option>
+	<option value='title' <c:if test="${field eq 'title' }">selected="selected"</c:if>>글제목</option>
+</select><br>
+
+<input type="text" class="form-control" name="keyword" placeholder="search" style="width:1080px;float:left;">
+&nbsp<input type="submit" class="btn btn-info" value="찾기">
+</form><br>
+	<table class="table table-striped" width="500">
 		<tr>
 			<th>글번호</th>
 			<th>아이디</th>
@@ -105,20 +123,4 @@
 		
 </table>
 
-<form action="${pageContext.request.contextPath }/admin/wsearch" method="post">
-<select name="kinds">
-	<option value='chirty' <c:if test="${kinds eq 'chirty' }">selected="selected"</c:if>>기부</option>
-	<option value='funding'<c:if test="${kinds eq 'funding' }">selected="selected"</c:if>>펀딩</option>
-
-</select>
-
-<select name="field">
-	<option value='id' <c:if test="${field eq 'id' }">selected="selected"</c:if>>아이디</option>
-	<option value='title' <c:if test="${field eq 'title' }">selected="selected"</c:if>>글제목</option>
-</select>
-
-<input type="text" class="form-control" name="keyword" placeholder="search">
-<input type="submit" value="찾기">
-
-</form>
 </div>

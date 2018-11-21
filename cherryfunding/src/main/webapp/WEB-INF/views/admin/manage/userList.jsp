@@ -27,8 +27,14 @@
 </head>
 <body>
 	<div class="container2">
-	<h2>회원목록</h2>
-	<table class="table table-condensed" border="1" width="500">
+	<h2>회원목록</h2><br>
+	
+	<form method="POST" action="${pageContext.request.contextPath }/admin/idsearch">
+		<input type="text"  class="form-control" placeholder="search" id="idsearch" name="idsearch"style="width:1080px;float:left;">
+		 &nbsp<input type="submit" value="찾기" class="btn btn-info">
+	</form>
+	<br>
+	<table class="table table-striped" width="500">
 		<tr>
 			<th>아이디</th>
 			<th>닉네임</th>
@@ -73,10 +79,6 @@
 		
 	</table>
 	
-	<form method="POST" action="${pageContext.request.contextPath }/admin/idsearch">
-		<input type="text" placeholder="search" id="idsearch" name="idsearch">
-		<input type="submit" value="찾기"><br>
-	</form>
 </div>
 	
 </body>

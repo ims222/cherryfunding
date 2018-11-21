@@ -21,7 +21,7 @@
 						<input type="password" placeholder="패스워드" name="pwd" required>
 
 						<button type="submit" class="btn">로그인</button>
-						<button type="button" name="회원가입" class="btn" onclick="javascript:location.href='${pageContext.request.contextPath}/users/insert'">회원가입</button>
+						<button type="button" name="회원가입" class="btn" onclick="javascript:location.href='${pageContext.request.contextPath}/users/userjoinagree'">회원가입</button>
 					</c:otherwise>
 				</c:choose>
 			</form>
