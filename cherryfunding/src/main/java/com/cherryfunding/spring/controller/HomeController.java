@@ -26,9 +26,13 @@ public class HomeController {
 
 		// 후원 요약
 		summary.put("cEnd", mcService.mainEnd()); // 종료임박
+		summary.put("cEndRecomm", mcService.getRecomm(mcService.mainEnd().getcNum()));
 		summary.put("cNew", mcService.mainNew()); // 새로 시작하는 펀딩
+		summary.put("cNewRecomm", mcService.getRecomm(mcService.mainNew().getcNum()));
 		summary.put("cHot", mcService.mainHot()); // 진행중 펀딩중 조회수가 가장 높은
+		summary.put("cHotRecomm", mcService.getRecomm(mcService.mainHot().getcNum()));
 		summary.put("cPrice", mcService.mainPrice()); // 진행중 펀딩중 참여금액이 제일 높은
+		summary.put("cPriceRecomm", mcService.getRecomm(mcService.mainPrice().getcNum()));
 		summary.put("totCharity", mcService.totCharity());
 		summary.put("todayCharityPrice", mcService.todayCharityPrice());
 		summary.put("todayCharityCount", mcService.todayCharityCount());

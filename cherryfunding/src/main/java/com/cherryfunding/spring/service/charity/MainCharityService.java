@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cherryfunding.spring.dao.CPictureDao;
+import com.cherryfunding.spring.dao.CRecommendDao;
 import com.cherryfunding.spring.dao.CharityDao;
 import com.cherryfunding.spring.util.S3Util;
 import com.cherryfunding.spring.util.StringLengthCut;
@@ -23,6 +24,9 @@ public class MainCharityService {
 
 	@Autowired
 	private CPictureDao cfdao;
+
+	@Autowired
+	private CRecommendDao cRecommendDao;
 
 	public CharityVo mainEnd() {
 		CharityVo cEnd = cdao.mainEnd();
@@ -118,6 +122,10 @@ public class MainCharityService {
 
 	public int todayCharityCount() {
 		return cdao.todayCharityCount();
+	}
+
+	public int getRecomm(int cNum) {
+		return cRecommendDao.getRecommend(cNum);
 	}
 
 }
