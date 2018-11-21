@@ -26,4 +26,8 @@ public class CDetailDao {
 		return sqlSession.selectOne(NAMESPACE + "select", cdNum);
 	}
 
+	public int countCdetailbycNum(int cNum) {
+		return sqlSession.selectOne(NAMESPACE + "countCdetailbycNum", cNum);
+	}
+
 }

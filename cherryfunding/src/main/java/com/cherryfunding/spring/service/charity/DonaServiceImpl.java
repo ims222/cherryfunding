@@ -58,4 +58,9 @@ public class DonaServiceImpl implements DonaService {
 		return charityDao.update(vo);
 	}
 
+	@Override
+	public int countSupporter(int cNum) {
+		return cDetailDao.countCdetailbycNum(cNum);
+	}
+
 }

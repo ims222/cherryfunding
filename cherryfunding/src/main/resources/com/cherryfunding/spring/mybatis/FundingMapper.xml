@@ -249,7 +249,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 					select aa.*, rownum rnum from (
 						select f.FNUM fnum, f.TITLE title, f.CONTENT content,
 						f.AMOUNT amount, f.CAMOUT camout, to_char(f.SDATE, 'yy-mm-dd') sdate,
-						to_char(f.EDATE, 'yy-mm-dd') edate, (ceil(edate - (sysdate + (1/24)*9)) * -1) dday, f.CATEGORY category, f.CONFIRM confirm,
+						to_char(f.EDATE, 'yy-mm-dd') edate, ceil(edate - (sysdate + (1/24)*9)) dday, f.CATEGORY category, f.CONFIRM confirm,
 						f.AID aid, f.ADDR addr, f.REGDATE regdate, f.ID id, f.HIT hit,
 						NVL((select NVL(count(frNum), 0) from frecommend fr group by fNum having fr.fNum = f.fNum), 0) cnt
 						from funding f

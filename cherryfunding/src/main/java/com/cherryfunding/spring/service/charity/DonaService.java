@@ -17,4 +17,6 @@ public interface DonaService {
 	public CDetailVo getcDetailInfo(int cdNum);
 
 	public int updateCharity(CharityVo vo);
+
+	public int countSupporter(int cNum);
 }

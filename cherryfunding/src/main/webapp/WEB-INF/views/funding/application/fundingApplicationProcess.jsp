@@ -5,6 +5,170 @@
 <link href="${pageContext.request.contextPath}/resources/css/datepicker/datepicker.min.css" type="text/css" rel="stylesheet">
 <script src="${pageContext.request.contextPath}/resources/js/datepicker/datepicker.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/datepicker/datepicker.en.js"></script>
+<style>
+		.row {
+		  display: -ms-flexbox; /* IE10 */
+		  display: flex;
+		  -ms-flex-wrap: wrap; /* IE10 */
+		  flex-wrap: wrap;
+		  margin: 0 -16px;
+		}
+		
+		.col-25 {
+		  -ms-flex: 25%; /* IE10 */
+		  flex: 25%;
+		}
+		
+		.col-50 {
+		  -ms-flex: 50%; /* IE10 */
+		  flex: 50%;
+		}
+		
+		.col-75 {
+		  -ms-flex: 75%; /* IE10 */
+		  flex: 75%;
+		}
+		
+		.col-25,
+		.col-50,
+		.col-75 {
+		  padding: 0 16px;
+		}
+		
+		.container {
+		  background-color: #FFFFFF;
+		  padding: 5px 20px 15px 20px;
+		  border: 1px solid lightgrey;
+		  border-radius: 3px;
+		}
+		
+		input[type=text] {
+		  width: 100%;
+		  margin-bottom: 20px;
+		  padding: 12px;
+		  border: 1px solid #ccc;
+		  border-radius: 3px;
+		}
+		
+		input[type=number] {
+		  width: 50%;
+		  margin-bottom: 20px;
+		  padding: 12px;
+		  border: 1px solid #ccc;
+		  border-radius: 3px;
+		}
+		
+		input[type=date] {
+		  width: 100%;
+		  margin-bottom: 20px;
+		  padding: 12px;
+		  border: 1px solid #ccc;
+		  border-radius: 3px;
+		}
+		
+		input[name="dateRange"] {
+		  width: 60%;
+		  margin-bottom: 20px;
+		  padding: 12px;
+		  border: 1px solid #ccc;
+		  border-radius: 3px;
+		}
+		
+		textarea{
+		  width: 100%;
+		  margin-bottom: 20px;
+		  padding: 12px;
+		  border: 1px solid #ccc;
+		  border-radius: 3px;
+		}
+		
+		label {
+		  margin-top: 10px;
+		  margin-bottom: 10px;
+		  display: block;
+		}
+		
+		label.current {
+		  margin-bottom: 10px;
+		  margin-top: 10px;
+		  display: inline;
+		}
+		
+		span {
+		  display: block;
+		}
+		
+		.icon-container {
+		  margin-bottom: 20px;
+		  padding: 7px 0;
+		  font-size: 24px;
+		}
+		
+		.btn {
+		  background-color: #088A85;
+		  color: white;
+		  padding: 12px;
+		  margin: 10px 0;
+		  border: none;
+		  width: 100%;
+		  border-radius: 3px;
+		  cursor: pointer;
+		  font-size: 17px;
+		}
+		
+		.btn:hover {
+		    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+		}
+		
+		.AddBtn {
+			display: inline;
+			position: relative;
+			overflow: hidden;
+			margin-left: -1px;
+			float: left;
+			min-width: 33px;
+			height: 33px;
+			border: 1px solid #ccc;
+			background-color: #fff;
+			vertical-align: middle;
+		}
+		
+		span.price {
+		  float: right;
+		  color: grey;
+		}
+		.checks {position: relative;} .checks input[type="checkbox"] { /* 실제 체크박스는 화면에서 숨김 */ position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip:rect(0,0,0,0); border: 0 } .checks input[type="checkbox"] + label { display: inline-block; position: relative; padding-left: 30px; /* 글자와 체크박스 사이의 간격을 변경 */ cursor: pointer; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; } .checks input[type="checkbox"] + label:before { /* 가짜 체크박스 */ content: ''; position: absolute; left: 0; top: -4px; /* 이 값을 변경해서 글자와의 정렬 */ width: 21px; /* 체크박스의 너비를 지정 */ height: 21px; /* 체크박스의 높이를 지정 */ line-height: 21px; /* 세로정렬을 위해 높이값과 일치 */ text-align: center; background: #fafafa; border: 1px solid #cacece; border-radius : 3px; box-shadow: 0px 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05); } .checks input[type="checkbox"] + label:active:before, .checks input[type="checkbox"]:checked + label:active:before { box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px 1px 3px rgba(0,0,0,0.1); } .checks input[type="checkbox"]:checked + label:before { /* 체크박스를 체크했을때 */ content: '\2714'; /* 체크표시 유니코드 사용 */ color: #99a1a7; text-shadow: 1px 1px #fff; background: #e9ecee; border-color: #adb8c0; box-shadow: 0px 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05), inset 15px 10px -12px rgba(255,255,255,0.1); }
+	
+		@media (max-width: 800px) {
+		  .row {
+		    flex-direction: column-reverse;
+		  }
+		  .col-25 {
+		    margin-bottom: 20px;
+		  }
+		}
+		select {
+		  margin-bottom: 1em;
+		  padding: .25em;
+		  font-weight: bold;
+		  letter-spacing: .15em;
+		  border-radius: 0;
+  			}
+  		.MyButton {
+		    background-color: #4CAF50; /* Green */
+		    border: none;
+		    color: white;
+		    padding: 1px 3px;
+		    text-align: center;
+		    text-decoration: none;
+		    display: inline-block;
+		    font-size: 25px;
+		    margin: 4px 2px;
+		    cursor: pointer;
+		}
+}
+
+</style>
 <script type="text/javascript">
 	$.fn.datepicker.language['en'] = {
 	    days: ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'],
@@ -72,36 +236,35 @@
 								$("#inputHashtag").append(h).append("<br>");
 							}
 						});
+				
+				$(document).on('focusout', "input[name='amount']", function(){
+					var hundred = 100;
+					var price = parseInt($(this).val());
+					$(this).val(Math.floor(price/hundred) * hundred);
+				})
 
 			});
+	/*
 	function appCommit() {
-		//if(!$("#title").val()){
-		// alert("제목을 입력해주세욧");
-		// return false;
-		//}
-		//if(!$("#content").val()){
-		//	alert("내용을 입력해주세욧");
-		//	 return false;
-		//}
-		//if(!$("#amount").val()){
-		//	alert("목표금액을 설정하세욧");
-		//	return false;
-		//}
-		if (!$("#sdate").val()) {
-			alert("시작일자를 선택하세요");
-			return false;
+		if(!$("#title").val()){
+		alert("제목은 필수입력사항입니다");
+		return false;
 		}
-		if (!$("#edate").val()) {
-			alert("종료일자를 선택하세요");
-			return false;
+		if(!$("#content").val()){
+		alert("제목은 필수입력사항입니다");
+		return false;
 		}
+		if(!$("#amount").val()){
+		alert("제목은 필수입력사항입니다");
+		return false;
+		}
+		*/
 
-		var sd = new Date($("#sdate").val());
+		/* var sd = new Date($("#sdate").val());
 		var ed = new Date($("#edate").val());
 		if (sd.getTime() > ed.getTime()) {
 			alert("시작보다 종료를 더 먼저 입력했어여");
-			return false;
-		}
+			return false; 
 
 		var r = $("input[name='reward']");
 		var ind = $("input[name='reward']").length;
@@ -114,8 +277,13 @@
 		if (check < 1) {
 			alert("물품은 한가지 이상 입력하셔야 되욧");
 			return false;
+			
 		}
 		return true;
+		
+	}*/
+	function AddRewards(){
+		
 	}
 </script>
 <script type="text/template" id="qq-template-gallery">
@@ -182,78 +350,135 @@
             </dialog>
         </div>
 </script>
+
 </head>
 <div class="container">
 	<form method="post" action="${pageContext.request.contextPath}/funding/fundingApplication" enctype="multipart/form-data" onsubmit="return appCommit()">
-		<input type="hidden" name="id" value="${sessionScope.id}">
-		<label for="title">제목</label>
-		<input type="text" name="title" id="title" value="${fvo.title}" placeholder="제목을 입력하세요">
-		<span><form:errors path="fvo.title" /></span><br>
-		<label for="content">내용</label><br>
-		<textarea rows="5" cols="50" name="content" id="content" placeholder="내용을 입력하세요">${fvo.content}</textarea>
-		<span><form:errors path="fvo.content" /></span><br>
-		<label for="amount">목표금액</label>
-		<input type="number" name="amount" id="amount" value="1000" min="1000" step="1000">
-		<span><form:errors path="fvo.amount" /></span><br>
-		
-		
-		<input type="text" name="dateRange" data-range="true" data-multiple-dates-separator=" - " data-language="en" class="datepicker-here"/>
-		
-		
-		<label for="sdate">시작날짜</label>
-		<input type="date" name="sdate" id="sdate" value="${fvo.sdate}"><span></span><br>
-		<label for="edate">종료날짜</label>
-		<input type="date" name="edate" id="edate" value="${fvo.edate}"><span></span><br>
-		<label for="category">카테고리</label>
-		<select name="category">
-			<option value="테크·가전">테크·가전</option>
-			<option value="패션·잡화">패션·잡화</option>
-			<option value="뷰티">뷰티</option>
-			<option value="푸드">푸드</option>
-			<option value="홈리빙">홈리빙</option>
-			<option value="디자인소품">디자인소품</option>
-			<option value="여행·레저">여행·레저</option>
-			<option value="스포츠·모빌리티">스포츠·모빌리티</option>
-			<option value="반려동물">반려동물</option>
-			<option value="공연·컬쳐">공연·컬쳐</option>
-			<option value="소셜·캠페인">소셜·캠페인</option>
-			<option value="교육·키즈">교육·키즈</option>
-			<option value="게임·취미">게임·취미</option>
-			<option value="출판">출판</option>
-		</select><br>
-		 해시태그<br>
-		<input type="checkbox" name="hashtag" value="테크·가전" id="tech"><label for="tech">#테크·가전&nbsp</label>
-		<input type="checkbox" name="hashtag" value="패션·잡화" id="fashion"><label for="fashion">#패션·잡화&nbsp</label>
-		<input type="checkbox" name="hashtag" value="뷰티" id="beauty"><label for="beauty">#뷰티&nbsp</label>
-		<input type="checkbox" name="hashtag" value="푸드" id="food"><label for="food">#푸드&nbsp</label>
-		<input type="checkbox" name="hashtag" value="홈리빙" = id="homeliving"><label for="homeliving">#홈리빙&nbsp</label>
-		<input type="checkbox" name="hashtag" value="디자인소품" id="design"><label for="design">#디자인소품&nbsp</label>
-		<input type="checkbox" name="hashtag" value="여행·레저" id="tour"><label for="tour">#여행·레저&nbsp</label>
-		<input type="checkbox" name="hashtag" value="스포츠·모빌리티" id="sports"><label for="sports">#스포츠·모빌리티&nbsp</label>
-		<input type="checkbox" name="hashtag" value="반려동물" id="animal"><label for="animal">#반려동물&nbsp</label>
-		<input type="checkbox" name="hashtag" value="공연·컬쳐" id="culture"><label for="culture">#공연·컬쳐&nbsp</label>
-		<input type="checkbox" name="hashtag" value="소셜·캠페인" id="social"><label for="social">#소셜·캠페인&nbsp</label>
-		<input type="checkbox" name="hashtag" value="교육·키즈" id="education"><label for="education">#교육·키즈&nbsp</label>
-		<input type="checkbox" name="hashtag" value="게임·취미" id="game"><label for="game">#게임·취미&nbsp</label>
-		<input type="checkbox" name="hashtag" value="출판" id="book"><label for="book">#출판&nbsp</label><br>
-		<div id="inputHashtag">
-			<input type="text" name="hashtag" data-hash="ht"><br>
+	<div class="row">
+		<div class='col-lg-12' align="center"><h3>펀딩신청서</h3></div>
+	</div>
+	<div class="row">
+		<div class='col-lg-12' align="center"><p></p></div>
+	</div>
+	<div class="row">
+		<div class='col-lg-6'>	
+			<input type="hidden" name="id" value="${sessionScope.id}">
+			<label for="title">제목</label>
+			<input type="text" name="title" id="title" value="${fvo.title}" placeholder="제목을 입력하세요">
+			<span><form:errors path="fvo.title" /></span>
+			<label for="content">내용</label>
+			<textarea rows="5" cols="50" name="content" id="content" placeholder="내용을 입력하세요">${fvo.content}</textarea>
+			<span><form:errors path="fvo.content" /></span><br>
+		</div> 
+		<div class='col-lg-6'>
+			<label for="category">카테고리</label>
+			<select name="category">
+				<option value="테크·가전">테크·가전</option>
+				<option value="패션·잡화">패션·잡화</option>
+				<option value="뷰티">뷰티</option>
+				<option value="푸드">푸드</option>
+				<option value="홈리빙">홈리빙</option>
+				<option value="디자인소품">디자인소품</option>
+				<option value="여행·레저">여행·레저</option>
+				<option value="스포츠·모빌리티">스포츠·모빌리티</option>
+				<option value="반려동물">반려동물</option>
+				<option value="공연·컬쳐">공연·컬쳐</option>
+				<option value="소셜·캠페인">소셜·캠페인</option>
+				<option value="교육·키즈">교육·키즈</option>
+				<option value="게임·취미">게임·취미</option>
+				<option value="출판">출판</option>
+			</select>
+			<label for="checks">해시태그</label>
+			<div class="checks">
+				<input type="checkbox"	class="checks" name="hashtag" value="테크·가전" id="tech"><label for="tech">#테크·가전</label>
+				<input type="checkbox" name="hashtag" value="패션·잡화" id="fashion"><label for="fashion">#패션·잡화</label>
+				<input type="checkbox" name="hashtag" value="뷰티" id="beauty"><label for="beauty">#뷰티</label>
+				<input type="checkbox" name="hashtag" value="푸드" id="food"><label for="food">#푸드</label>
+				<input type="checkbox" name="hashtag" value="홈리빙" id="homeliving"><label for="homeliving">#홈리빙</label>
+			</div>
+			<div class="checks">
+				<input type="checkbox" name="hashtag" value="디자인소품" id="design"><label for="design">#디자인소품</label>
+				<input type="checkbox" name="hashtag" value="여행·레저" id="tour"><label for="tour">#여행·레저</label>
+				<input type="checkbox" name="hashtag" value="스포츠·모빌리티" id="sports"><label for="sports">#스포츠·모빌리티</label>
+				<input type="checkbox" name="hashtag" value="반려동물" id="animal"><label for="animal">#반려동물</label>
+			</div>
+			<div class="checks">
+				<input type="checkbox" name="hashtag" value="공연·컬쳐" id="culture"><label for="culture">#공연·컬쳐</label>
+				<input type="checkbox" name="hashtag" value="소셜·캠페인" id="social"><label for="social">#소셜·캠페인</label>
+				<input type="checkbox" name="hashtag" value="교육·키즈" id="education"><label for="education">#교육·키즈</label>
+				<input type="checkbox" name="hashtag" value="게임·취미" id="game"><label for="game">#게임·취미</label>
+				<input type="checkbox" name="hashtag" value="출판" id="book"><label for="book">#출판</label><br>
+			</div>
+			<div id="inputHashtag">
+				<input type="text" name="hashtag" data-hash="ht"><br>
+			</div>	
 		</div>
-
-		리워드 등록<br>
-		<div id="inputReward">
-			<span>리워드명</span><input type="text" name="reward"> <span>가격</span><input
-				type="text" name="price"> <span>수량</span><input
-				type="number" name="fAmount">
 		</div>
-
-		<div id="inputFile">
-			사진업로드<br> <input type="file" name="fPicture"> <input
-				type="text" name="fPinfo"><br>
+		<div class="row">
+			<div class='col-lg-6'>
+				<label for="amount">목표금액(달성금액)</label>
+           		<input type="number" name="amount" id="amount" min="0" step="1000" pattern="#,###"><p style="display: inline;margin-left: 10px">원</p>
+				<span><form:errors path="fvo.amount" /></span><br>
+			</div>
+			<div class='col-lg-6'>
+				<label for="dateRange">펀딩기간(달력으로 입력)</label>	
+				<input type="text" name="dateRange" data-range="true" data-multiple-dates-separator=" - " data-language="en" class="datepicker-here"/>
+			</div>
 		</div>
-		<input type="submit" value="제출">
+		<div class="row">
+			<div class='col-lg-12' id="fine-uploader-gallery">
+				<label for="dateRange">사진업로드</label>	
+				<input type="file" name="fPicture"> 
+				<input type="text" name="fPinfo">
+			</div>
+		</div>
+		<div class="row">
+          	<div class='col-lg-12' name="inputReward">
+	          <label for="rewardNum" style="display: inline;">리워드</label>
+	          <button type="button" class="MyButton" name="showMore" style="display: inline;">+</button>
+	          <button type="button" class="MyButton" name="showLess" style="display: inline;">-</button>
+	          <label for="reward">리워드명</label><input type="text" name="reward"> 
+	          <label for="price">가격</label>
+	          <input type="number" name="price"><p style="display: inline;margin-left: 10px">원</p> 
+	          <label for="fAmount">수량</label>
+	          <input type="number" name="fAmount"><p style="display: inline;margin-left: 10px">개</p>
+	        </div>
+	    </div>
+		<div class="row">
+			<div class='col-lg-12'>
+				<button type="submit" class="btn" name="application">신  청</button>
+			</div>
+		</div>				
 	</form>
-	<div id="fine-uploader-gallery"></div>
+</div>
+	<script>
+    var cnt=1;
+		//리워드 추가 버튼
+	    $(document).on("click","button[name=showMore]",function(){
+        cnt++;
+	    var addRewardText =  
+	    	'<div class="col-lg-12" name="inputReward" >'+
+	    		'<label for="rewardNum" style="display: inline;">리워드' + cnt + '</label>'+
+            	'<label for="reward">리워드명</label><input type="text" name="reward">'+
+            	'<label for="price">가격</label><input type="number" name="price"><p style="display: inline;margin-left: 10px">원</p>'+
+            	'<label for="fAmount">수량</label><input type="number" name="fAmount"><p style="display: inline;margin-left: 10px">개</p>'+ 
+            '</div>';   
+        var RewardHtml = $("div[name=inputReward]:last"); //last를 사용하여 마지막 태그 호출
+        RewardHtml.after(addRewardText); //마지막 뒤에 붙인다.
+    });
+    //리워드 삭제 버튼
+	    $(document).on("click","button[name=showLess]",function(){
+	        console.log(cnt);
+	    	if(cnt===1){
+	    		alert("리워드는 하나 이상은 반드시 입력해야합니다");
+	        	return false;
+	        }
+	    	var RewardHtml = $("div[name=inputReward]:last");
+	        RewardHtml.remove(); //삭제 
+	        cnt--;
+	    });
+	</script>
+	
 	<script type="text/javascript">
 		var galleryUploader = new qq.FineUploader(
 				{
@@ -289,4 +514,3 @@
 			galleryUploader.uploadStoredFiles();
         });
 	</script>
-</div>

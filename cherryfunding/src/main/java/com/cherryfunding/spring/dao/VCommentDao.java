@@ -26,4 +26,8 @@ public class VCommentDao {
 	public List<VCommentVo> commentList(int vNum) {
 		return sqlSession.selectList(NAMESPACE + "commentList", vNum);
 	}
+	
+	public int delete(int vcNum) {
+		return sqlSession.delete(NAMESPACE + "delete", vcNum);
+	}
 }

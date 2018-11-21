@@ -39,4 +39,17 @@ public class VolunteerCommentController {
 	public List<VCommentVo> commentList(int vNum) {
 		return volunteerCommentService.commentList(vNum);
 	}
+	
+	@RequestMapping(value = "/volunteer/commentDelete", produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String commentDelete(int vcNum) {
+		JSONObject obj = new JSONObject();
+		if (volunteerCommentService.delete(vcNum) > 0) {
+			obj.put("result", "ok");
+		} else {
+			obj.put("result", "no");
+		}
+
+		return obj.toString();
+	}
 }
