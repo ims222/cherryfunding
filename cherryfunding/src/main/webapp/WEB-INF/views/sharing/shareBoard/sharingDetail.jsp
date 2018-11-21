@@ -96,6 +96,7 @@
 		});
 		
 		$("select[name='item']").on('change', itemDetail);
+		
 	});
 	
 	function isRecommed(){
@@ -114,10 +115,6 @@
 			}
 		});
 	}
-	
-	
-	
-	
 	
 	function itemDetail(){
 		$.ajax({
@@ -260,20 +257,36 @@
 			dataType: 'json',
 			type: 'get',
 			success: function(data){
-				//alert('아이디:' + data.id  + ' 닉네임: ' + data.nick + ' 성별: ' +data.gender);
-				$('#dialog').empty();
-				$('#dialog').append('<img src="'+ savename + '" class="w3-circle" width="100px" height="100px">');
-				$('#dialog').append('<p>'+'아이디:' + data.id + '<p>' 
+				$('#showProfile').empty();
+				$('#showProfile').append('<img src="'+ savename + '" class="w3-circle" width="100px" height="100px">');
+				$('#showProfile').append('<p>'+'아이디:' + data.id + '<p>' 
 						+'<p>'+' 닉네임: ' + data.nick + '</p>'
 						+'<p>'+' 성별: ' + data.gender+'</p>'
 						);
-				$('#dialog').dialog();
-				
+				$('#showProfile').dialog({width: 250, height:250, hide: "fade", close : function(){
+					parent.$('#showProfile').dialog('destroy');
+	              }  
+				});		
 			}
 		});
 	}
-
+	
 </script>
+<style>
+	.ui-widget {
+        font-family: Verdana,Arial,sans-serif;
+        font-size: 1em;
+        font-weight: bold;
+        left: 100px;
+        top: 100px;
+        }
+	.ui-widget-header,.ui-state-default, ui-button {
+		background:#b9cd6d;
+        border: 1px solid #b9cd6d;
+        color: #FFFFFF;
+        font-weight: bold;
+        }
+</style>
 <script id="commentLine" type="text/template">
 <div class="media">
 	<p class="pull-right"><small> {regdate} </small></p>
@@ -360,6 +373,6 @@
 	</div>
 </div>
 <div>
-<div id="dialog" hidden="hidden"></div>
+<div id="showProfile" hidden="hidden" title="회원 프로필"></div>
 </div>
 
