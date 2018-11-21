@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
 		isRecommed();
@@ -204,6 +205,7 @@
 					result +=	html.replace("{nick}", value.nick)
 								.replace("{nick2}", value.nick)
 								.replace("{savename}", value.savename)
+								.replace("{savename2}", value.savename)
 								.replace("{content}", value.CONTENT)
 								.replace("{regdate}", calDate(value.REGDATE))
 								.replace("{deleteComment}", deleteComment);
@@ -251,26 +253,32 @@
 		});
 	}
  
-	function showProfile(nick){
+	function showProfile(nick, savename){
 		$.ajax({
 			url: '${pageContext.request.contextPath}/sharing/getUserInfoByNick',
 			data: {nick: nick},
 			dataType: 'json',
 			type: 'get',
 			success: function(data){
-				alert('아이디:' + data.id  + ' 닉네임: ' + data.nick + ' 성별: ' +data.gender);
-				
-				//$('#profileModal').modal('show');
+				//alert('아이디:' + data.id  + ' 닉네임: ' + data.nick + ' 성별: ' +data.gender);
+				$('#dialog').empty();
+				$('#dialog').append('<img src="'+ savename + '" class="w3-circle" width="100px" height="100px">');
+				$('#dialog').append('<p>'+'아이디:' + data.id + '<p>' 
+						+'<p>'+' 닉네임: ' + data.nick + '</p>'
+						+'<p>'+' 성별: ' + data.gender+'</p>'
+						);
+				$('#dialog').dialog();
 				
 			}
 		});
 	}
+
 </script>
 <script id="commentLine" type="text/template">
 <div class="media">
 	<p class="pull-right"><small> {regdate} </small></p>
 	<a class="media-left" href="#">
-		<img src="{savename}" class="w3-circle" width="50px" onclick="showProfile('{nick2}')">
+		<img src="{savename}" class="w3-circle" width="50px" onclick="showProfile('{nick2}','{savename2}')">
 	</a>
 	<div class="media-body">
 		<h4 class="media-heading user_name">{nick}</h4>
@@ -351,22 +359,7 @@
 		</div>
 	</div>
 </div>
-<div class="modal fade" id="profileModal" role="dialog">
-	<div class="modal-dialog modal-lg">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title">프로필 보기</h4>
-			</div>
-			<div class="modal-body" style="overflow:hidden;">
-				<form id="insertComment">
-					<textarea name="content" rows="10" style="width:100%"></textarea><br>
-				</form>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default"
-				data-dismiss="modal" onclick="insertComment(event)">저장</button>
-			</div>
-		</div>
-	</div>
+<div>
+<div id="dialog" hidden="hidden"></div>
 </div>
+
