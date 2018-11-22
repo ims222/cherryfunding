@@ -161,7 +161,7 @@
 			dataType: 'json',
 			type: 'post',
 			success: function(data){
-				var table = $('<table></table>');
+				var html = '';
 				data.forEach(function(value){
 					var deleteComment = "&nbsp";
 					if('${sessionScope.id}' === value.id){
@@ -170,15 +170,19 @@
 					var id = value.id;
 					var content = value.content;
 					var regdate = value.regdate;
-					var tr = $('<tr></tr>');
-					$(tr).append('<td>' + id + '</td>')
-					$(tr).append('<td>' + content + '</td>')
-					$(tr).append('<td>'+ regdate +'</td>')
-					$(tr).append('<td><p><small>' + deleteComment + '</small></p></td>')
-					$(table).append(tr);
+					var savename = value.savename;
+					var nick = value.nick;
+					html += '<p class="pull-right"><small>' + regdate + '</small></p>'
+							+ '<a class="media-left" href="#">' +
+							+ '<img src=' + savename + ' class="w3-circle" width="50px"'
+							+ 'onclick="showProfile(' + nick + ',' + savename + ')"></a>'
+							+ '<div class="media-body">'
+							+ '<h4 class="media-heading user_name">' + nick + '</h4>' + content
+							+ '<p><small>' + deleteComment + '</small></p></div>';
+					
 				});
 				$('#comment').empty();
-				$('#comment').append(table);
+				$('#comment').append(html);
 				
 			}
 		});
@@ -304,8 +308,10 @@
 			<div class="col-md-8">
 				<div class="page-header">
 					<h1>댓글 <span id="commentCount"></span></h1>
-				</div> 
-				<div id="comment" class="comments-list"></div>
+				</div>
+				<div class="media"> 
+					<div id="comment" class="comments-list"></div>
+				</div>
 			</div>
 		</div>		
 	</div>

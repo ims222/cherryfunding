@@ -326,10 +326,12 @@
 	<div class="container">
 		<div class="row box">
 			<div class="col-md-8">
-				<p>제목: ${vo.title}</p>
-				<p>내용: ${vo.content}</p>
-				<p>조회수: </p>
-				<span id="fRecommend"></span>
+				<h1>${vo.title}</h1>
+				<!-- <p>조회수 </p>
+				<span id="fRecommend"></span> -->
+				<div class="w3-sand" style="padding:20px;">
+				<h4>${vo.content}</h4>
+				</div>
 			</div>
 			<div class="col-md-4 form-group" id="featuredBox">
 				<select name="item" class="form-control">
