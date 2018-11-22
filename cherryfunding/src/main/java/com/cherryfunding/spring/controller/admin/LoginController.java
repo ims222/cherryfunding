@@ -46,6 +46,7 @@ public class LoginController {
 		}
 		return map1;
 		
+		
 	}
 	
 	@RequestMapping(value="/adlogin",method=RequestMethod.POST)

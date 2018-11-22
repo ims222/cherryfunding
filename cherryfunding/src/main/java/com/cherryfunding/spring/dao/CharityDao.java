@@ -93,8 +93,8 @@ public class CharityDao {
 		return sqlSession.selectList(NAMESPACE + "searchconfirmList", map);
 	}
 
-	public int confirm(int cNum) { // 컨펌
-		return sqlSession.update(NAMESPACE + "confirm", cNum);
+	public int confirm(HashMap<Object, Object> map) { // 컨펌
+		return sqlSession.update(NAMESPACE + "confirm", map);
 	}
 
 	public List<CharityVo> confirmList() {

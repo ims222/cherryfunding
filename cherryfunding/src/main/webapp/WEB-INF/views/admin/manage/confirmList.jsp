@@ -7,17 +7,15 @@
 <meta charset="utf-8">
 <title>Insert title here</title>
 
-   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   
    <script type="text/javascript">
 
   	 	function modalshow(num){
  
-  			$('#myModal').modal('show');
+  			$("#myModal").modal("show");
   			
-  			$('#btn1').click(function(){
+  			$("#btn1").click(function(){
   				var value = num;
   				var url = "<c:url value='/admypage/wait?num="+value+"'/>";
   				location.href=url;  				
@@ -27,11 +25,11 @@
   	 	
   	 	function modalshow2(num){
   	 	 
-  			$('#myModal').modal('show');
+  			$("#myModal").modal("show");
   			
-  			$('#btn1').click(function(){
-  				var value = num;
-  				var url = "<c:url value='/admypage/cwait?num="+value+"'/>";
+  			$("#btn1").click(function(){
+  				var cNum = num;
+  				var url = "<c:url value='/admypage/cwait?cNum="+cNum+"'/>";
   				location.href=url;  				
   			});
   			
@@ -44,7 +42,7 @@
 </head>
 <body>
 	<div class="container">
-	<h2>승인 확인</h2><br>
+	<h2>승인 현황</h2><br>
 	
 	<form action="${pageContext.request.contextPath }/admin/csearch" method="post">
 	<select name="kinds">
@@ -72,18 +70,20 @@
 			<th>등록일</th>
 			<th>상세보기</th>
 			<th>승인여부</th>
+			<th>승인자</th>
 			
 		</tr>
 		<c:if test="${vo ne 'null'}">
 		<c:forEach var="vo" items="${vo }">
 			<tr>
 				<td>${vo.fNum }</td>
-				<td>${vo.aid }</td>
+				<td>${vo.id }</td>
 				<td>${vo.title }</td>
 				<td>${vo.category }</td>
 				<td>${vo.regdate }</td>
 				<td><a href="<c:url value='/fundingList/detail?num=${vo.fNum }'/>">보기</a></td>
-				<td id="mm"><a data-toggle="modal" href="javascript:modalshow('${vo.fNum}');">${vo.confirm }</a></td>
+				<td><a data-toggle="modal" href="javascript:modalshow('${vo.fNum}');">${vo.confirm }</a></td>
+				<td>${vo.aid }</td>
 			
 			</tr>
 		</c:forEach>
@@ -98,7 +98,8 @@
 				<td>${co.category }</td>
 				<td>${co.regdate }</td>
 				<td><a href="<c:url value='/charityList/detail?num=${co.cNum }'/>">보기</a></td>
-				<td id="mm"><a data-toggle="modal" href="javascript:modalshow2('${co.cNum}');">${co.confirm }</a></td>
+				<td><a data-toggle="modal" href="javascript:modalshow2('${co.cNum}');">${co.confirm }</a></td>
+				<td>${co.aId }</td>
 			
 			</tr>
 		</c:forEach>

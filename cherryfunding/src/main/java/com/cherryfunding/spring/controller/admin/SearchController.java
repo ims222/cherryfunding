@@ -41,7 +41,6 @@ public class SearchController {
 			map.put("keyword", keyword);
 			List<CharityVo> co=SearchCharityService.searchwaitList(map);
 			model.addAttribute("co", co);
-			return "admin/manage/confirm";
 			
 		}else if(kinds.equals("funding")){
 			
@@ -50,10 +49,9 @@ public class SearchController {
 			map.put("keyword",keyword);
 			List<FundingVo> vo = SearchFundingService.searchwaitList(map); 
 			model.addAttribute("vo", vo);
-			return "admin/manage/confirm";
 		}
 		
-		return "";
+		return ".confirm";
 		
 	}
 	
@@ -83,7 +81,7 @@ public class SearchController {
 			
 		}
 		
-		return "admin/manage/confirmList";
+		return ".confirmList";
 		
 	}
 	

@@ -128,13 +128,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<include refid="searchwaite"/>
 	</select>
 		
-	<update id="confirm" parameterType="int">
-		update funding set confirm = 'y' where fNum = #{fNum}
+	<update id="confirm" parameterType="hashmap">
+		update funding set confirm = 'y',aid = #{aid} where fNum = #{num}
 	</update>
 	
 
 	<update id="wait" parameterType="int">
-		update funding set confirm ='n' where fNum = #{fNum}
+		update funding set confirm ='n',aid = null where fNum = #{fNum}
 	</update>
 
 	<update id="addCamout" parameterType="hashmap">

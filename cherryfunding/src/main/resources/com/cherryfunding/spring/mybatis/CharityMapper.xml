@@ -98,11 +98,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<update id="wait" parameterType="int">
-		update charity set confirm ='n' where cNum = #{cNum}
+		update charity set confirm ='n',aid = null where cNum = #{cNum}
 	</update>
 	
-	<update id="confirm" parameterType="int">
-		update charity set confirm = 'y' where cNum = #{cNum}
+	<update id="confirm" parameterType="hashmap">
+		update charity set confirm = 'y',aid = #{aid} where cNum = #{cNum}
 	</update>
 	
 	<select id="confirmList" resultType="charity">

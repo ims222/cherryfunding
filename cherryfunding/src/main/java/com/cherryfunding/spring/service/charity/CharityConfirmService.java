@@ -1,5 +1,6 @@
 package com.cherryfunding.spring.service.charity;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,9 @@ public class CharityConfirmService {
 	}
 
 	public int confirm(int cNum) { // 컨펌
-		return charityDao.confirm(cNum);
+		HashMap<Object, Object> map = new HashMap<Object, Object>();
+		map.put("cNum", cNum);
+		return charityDao.confirm(map);
 	}
 
 	public int wait(int cNum) { // 컨펌취소

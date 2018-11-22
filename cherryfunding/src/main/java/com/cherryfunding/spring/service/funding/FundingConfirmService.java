@@ -1,5 +1,6 @@
 package com.cherryfunding.spring.service.funding;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,8 +32,9 @@ public class FundingConfirmService {
 		return fundingDao.confirmList();
 	}
 
-	public int confirm(int fNum) { // 컨펌
-		return fundingDao.confirm(fNum);
+	public int confirm(HashMap<Object, Object> map) { // 컨펌
+		System.out.println("Service 접근@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+		return fundingDao.confirm(map);
 	}
 
 	public int wait(int fNum) { // 컨펌취소
