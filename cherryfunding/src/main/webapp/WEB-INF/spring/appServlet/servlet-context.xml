@@ -59,6 +59,7 @@
 				<beans:value>/WEB-INF/tiles/volunteer.xml</beans:value>
 				<beans:value>/WEB-INF/tiles/mypage.xml</beans:value>
 				<beans:value>/WEB-INF/tiles/admypage.xml</beans:value>
+				<beans:value>/WEB-INF/tiles/info.xml</beans:value>
 			</beans:list>
 		</beans:property>
 	</beans:bean>

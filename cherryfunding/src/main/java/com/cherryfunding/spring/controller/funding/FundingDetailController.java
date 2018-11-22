@@ -39,6 +39,7 @@ public class FundingDetailController {
 		model.addAttribute("fRecommend", fundingDetailService.getRecommend(fNum));
 		model.addAttribute("hashtag", fundingDetailService.hashtag(fNum));
 		model.addAttribute("countSupporter", fundingDetailService.countFdetailbyfNum(fNum));
+		model.addAttribute("savename",fundingDetailService.thumbnailString(fNum));
 		fundingDetailService.hitUp(fNum);
 		return ".ingFundingDetailforUser";
 	}

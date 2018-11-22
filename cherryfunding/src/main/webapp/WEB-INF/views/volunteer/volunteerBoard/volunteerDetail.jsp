@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script><link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/comment.css" type="text/css">
 
 <script type="text/javascript">
 	$(document).ready(function(){
@@ -160,8 +161,7 @@
 			dataType: 'json',
 			type: 'post',
 			success: function(data){
-				var table = $('<table></table>');
-				$("#commment").empty().append(table);
+				var html = '';
 				data.forEach(function(value){
 					var deleteComment = "&nbsp";
 					if('${sessionScope.id}' === value.id){
@@ -170,14 +170,19 @@
 					var id = value.id;
 					var content = value.content;
 					var regdate = value.regdate;
-					var tr = $('<tr></tr>');
-					$(tr).append('<td>' + id + '</td>')
-					$(tr).append('<td>' + content + '</td>')
-					$(tr).append('<td>'+ regdate +'</td>')
-					$(tr).append('<td><p><small>' + deleteComment + '</small></p></td>')
-					$(table).append(tr);
+					var savename = value.savename;
+					var nick = value.nick;
+					html += '<p class="pull-right"><small>' + regdate + '</small></p>'
+							+ '<a class="media-left" href="#">' +
+							+ '<img src=' + savename + ' class="w3-circle" width="50px"'
+							+ 'onclick="showProfile(' + nick + ',' + savename + ')"></a>'
+							+ '<div class="media-body">'
+							+ '<h4 class="media-heading user_name">' + nick + '</h4>' + content
+							+ '<p><small>' + deleteComment + '</small></p></div>';
+					
 				});
-				$('#comment').append(table);
+				$('#comment').empty();
+				$('#comment').append(html);
 				
 			}
 		});
@@ -210,7 +215,32 @@
 			}
 		});
 	}
-
+	$("#insertComment").on('submit', insertComment);
+	function insertComment(e){
+		e.preventDefault();
+		var id = '${sessionScope.id}';
+		if(!id){
+			alert('로그인 해주세욧ㅅ');
+			return;
+		}
+		var content = $("#insertComment textarea[name='content']").val();
+		if(!content){
+			alert('댓글을 작성해욧');
+			return;
+		}
+			
+		$.ajax({
+			url:'${pageContext.request.contextPath}/volunteer/insertComment',
+			dataType:'json',
+			type:'post',
+			data: {id:id, content:content, vNum:'${vo.vNum}'},
+			success: function(data){
+				$("#insertComment textarea[name='content']").val('');
+				//commentCount();
+				commentList();
+			}
+		});
+	}
 </script>
 <style type="text/css">
 .modal{
@@ -223,7 +253,23 @@
 .modal-backdrop{
   z-index: -1;
 }
-
+#featuredBox{
+		background: rgba(0,0,0,.1);
+		width: 304px;
+		padding: 40px 40px;
+}
+.featuredButton{
+	display: inline-block;
+			padding: 1em 2em 1em 2em;
+			background: #862525;
+			border-radius: 5px;
+			letter-spacing: 0.20em;
+			text-decoration: none;
+			text-transform: uppercase;
+			font-weight: 400;
+			font-size: 0.90em;
+			color: #FFF;
+}
 </style>
 <!-- Main -->
 <div id="main">
@@ -240,19 +286,34 @@
 				 </div>
 				 <h4>${vo.content}</h4><br>
 			</div>
-			<div class="col-md-4">
-				추천 수:<div id="showRecomm"></div>
-				현재 신청 인원:<div id="applicant"></div><br>
-				<button id="recommend" type="button"></button>
-				<button id="apply" type="button"></button>
+			<div class="col-md-4" id="featuredBox">
+				<p><span class="w3-xxlarge" id="showRecomm"></span><span class="w3-large">명이 추천</span></p>
+				<p><span class="w3-xxlarge" id="applicant"></span><span class="w3-large">명이 신청</span></p>
+				<div style="margin-top:10px;">
+					<button id="recommend" type="button" class="featuredButton"></button>
+					<button id="apply" type="button" class="featuredButton"></button>
+				</div>
 			</div>
 		</div>
-		<div class="box" id="commment">댓글왜안나옴</div>
-		<form id="insertComment">
-			<input type="text" name="content"><br>
-			<input type="submit" value="댓글 등록">
-		</form>
 		
+		<div class="row">
+			<div class="col-md-8">
+				<div class="w3-right-align">
+					<button type="button" class="w3-button" data-toggle="modal" data-target="#commentModal">댓글 작성</button>
+					<button type="button" class="w3-button" onclick="javascript:location.href='${pageContext.request.contextPath}/volunteer/volunteerList'">목록</button>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-8">
+				<div class="page-header">
+					<h1>댓글 <span id="commentCount"></span></h1>
+				</div>
+				<div class="media"> 
+					<div id="comment" class="comments-list"></div>
+				</div>
+			</div>
+		</div>		
 	</div>
 	
 	<!-- modal -->
@@ -286,5 +347,24 @@
                 </div>
             </div>
         </div>
-    </div>  
+    </div>
+    <div class="modal fade" id="commentModal" role="dialog">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">댓글 작성</h4>
+			</div>
+			<div class="modal-body" style="overflow:hidden;">
+				<form id="insertComment">
+					<textarea name="content" rows="10" style="width:100%"></textarea><br>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default"
+				data-dismiss="modal" onclick="insertComment(event)">저장</button>
+			</div>
+		</div>
+	</div>
+</div>  
 </div>
