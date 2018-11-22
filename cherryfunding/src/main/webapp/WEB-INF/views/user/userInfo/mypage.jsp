@@ -5,6 +5,7 @@
 
 <link href="${pageContext.request.contextPath}/resources/css/fine-uploader/fine-uploader-new.min.css" type="text/css" rel="stylesheet">
 <script src="${pageContext.request.contextPath}/resources/js/fine-uploader/fine-uploader.min.js"></script>
+<script src="http://cdn.sockjs.org/sockjs-0.3.4.js"></script>
 <style type="text/css">
 table.type04 {
     border-collapse: separate;
@@ -49,7 +50,48 @@ table.type04 td {
 	$(document).ready(function(){
 		getProfileImg();
 		
+		$("#sendBtn").click(function() {
+			sendMessage();
+			$('#message').val('')
+		});
+
+		$("#message").keydown(function(key) {
+			if (key.keyCode == 13) {// 엔터
+				sendMessage();
+				$('#message').val('')
+			}
+		});
 	});
+	
+	
+	let sock = new SockJS("<c:url value="/echo"/>");
+	sock.onmessage = onMessage;
+	sock.onclose = onClose;
+
+     // 메시지 전송
+
+	function sendMessage() {
+		sock.send($("#message").val());
+	}
+
+
+     // 서버로부터 메시지를 받았을 때
+
+	function onMessage(msg) {
+		var data = msg.data;
+		$("#data").append(data + "<br/>");
+	}
+
+     // 서버와 연결을 끊었을 때
+
+	function onClose(evt) {
+		$("#data").append("연결 끊김");
+	}
+
+
+
+	
+	
 	function getProfileImg(){
 		$.ajax({
 			url:'${pageContext.request.contextPath}/users/getProfileImg',
@@ -153,8 +195,11 @@ table.type04 td {
 			</c:forEach>
 	</table>
 </div>
-		
 
+<input type="text" id="message" />
+<input type="button" id="sendBtn" value="전송" />
+
+<div id="data"></div>
 
 <!-- modal -->
 <div class="modal fade" id="profileModal" role="dialog">

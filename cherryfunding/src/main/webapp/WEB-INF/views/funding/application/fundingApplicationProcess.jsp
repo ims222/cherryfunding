@@ -551,22 +551,36 @@
 				});
 	
 		qq(document.getElementById("fundingApplicationButton")).attach("click", function() {
-			if(!$("#title").val()){
+			if(!$("input[name='title']").val()){
 				alert("제목은 필수입력사항입니다");
 				return false;
 			}
-			if(!$("#content").val()){
+			if(!$("textarea[name='content']").val()){
 				alert("내용은 필수입력사항입니다");
 				return false;
 			}
-			if(!$("#amount").val()){
+			if(!$("input[name='amount']").val()){
 				alert("목표금액은 필수입력사항입니다");
 				return false;
 			}
-			if(!$("#dateRange").val()){
+			if(!$("input[name='dateRange']").val()){
 				alert("펀딩기간은 필수입력사항입니다");
 				return false;
 			}
+			
+			var r = $("input[name='reward']");
+			var ind = $("input[name='reward']").length;
+			var check = 0;
+			for (var i = 0; i < ind; i++) {
+				if ($(r[i]).val()) {
+					check++;
+				}
+			}
+			if (check < 1) {
+				alert("물품은 한가지 이상 입력하셔야 되욧");
+				return false;
+			}
+			
 			galleryUploader.uploadStoredFiles();
 			
         });
