@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
@@ -124,7 +125,7 @@
 			success:function(data){
 				var title = data.title;
 				var amount = data.amount;
-				$("#itemInfo").text("아이템명: " + title + " 남은 수량: " + amount);
+				$("#itemInfo").text("물품명: " + title + " 남은 수량: " + amount);
 			}
 		});
 	}
@@ -162,8 +163,8 @@
 															});
 														});
 					
-					var div = $("<div></div>").append("<span>아이템명: " + title + " 수량: " + amount +"</span>")
-											.append(sNumInput).append(amountInput).append(cancelItem);					
+					var div = $("<div></div>").append("<span>물품명: " + title + " 수량: " + amount +"</span>")
+											.append(sNumInput).append(amountInput).append(cancelItem);
 					$("#selectedItem").append(div);
 				}
 			}
@@ -286,6 +287,26 @@
         color: #FFFFFF;
         font-weight: bold;
         }
+#featuredBox{
+		background: rgba(0,0,0,.1);
+		font-size: 1.1em;
+		font-weight: normal;
+		width: 304px;
+		padding: 40px 40px;
+}
+.featuredButton{
+			display: inline-block;
+			padding: 1em 2em 1em 2em;
+			background: #862525;
+			border-radius: 5px;
+			letter-spacing: 0.20em;
+			text-decoration: none;
+			text-transform: uppercase;
+			font-weight: 400;
+			font-size: 0.90em;
+			color: #FFF;
+}
+
 </style>
 <script id="commentLine" type="text/template">
 <div class="media">
@@ -305,33 +326,36 @@
 	<div class="container">
 		<div class="row box">
 			<div class="col-md-8">
-				<p>제목: ${vo.title}</p>
-				<p>내용: ${vo.content}</p>
-				<p>조회수: </p>
-				<span id="fRecommend"></span>
+				<h1>${vo.title}</h1>
+				<!-- <p>조회수 </p>
+				<span id="fRecommend"></span> -->
+				<div class="w3-sand" style="padding:20px;">
+				<h4>${vo.content}</h4>
+				</div>
 			</div>
-			<div class="col-md-4">
-				<select name="item">
+			<div class="col-md-4 form-group" id="featuredBox">
+				<select name="item" class="form-control">
 					<c:forEach var="item" items="${itemList}">
 						<option value="${item.siNum}">물품명: ${item.title}</option>
 					</c:forEach>
 				</select><br><div id="itemInfo"></div>
-				수량<input type="number" name="amount"><button id="chooseItem">선택</button>
-					
+				<div style="margin-top:15px;">
+					수량<input type="number" name="amount" class="form-control"><button id="chooseItem" class="featuredButton">추가</button>
+				</div>
+				<div style="margin-top:20px;">	
 				<form method="post" action="${pageContext.request.contextPath}/sharing/insertSItem" onsubmit="return submitItem();">
 					<input type="hidden" name="sNum" value="${vo.sNum}">
 						<div id="selectedItem"></div>
-						<input type="submit" value="나눔 신청">
+					<input type='submit' class='featuredButton' value='나눔 신청'>
 				</form><br>
-				
-				
-				<button id="recommend" class="button button-like">
+				</div>
+				<button id="recommend" class="button button-like" >
 					<i class="fa fa-heart"></i>
 					<span>Like <span id="sRecommend"></span></span>
 				</button>
+				<!-- 아래거 회원 마이페이지로 옮겨야함 -->
+				<!-- <a href="${pageContext.request.contextPath}/sharing/sharingParticipation?sNum=${vo.sNum}">나눔 신청자</a> -->
 				
-				
-				<a href="${pageContext.request.contextPath}/sharing/sharingParticipation?sNum=${vo.sNum}">나눔 신청자</a>
 			</div>
 		</div>
 		<div class="row">

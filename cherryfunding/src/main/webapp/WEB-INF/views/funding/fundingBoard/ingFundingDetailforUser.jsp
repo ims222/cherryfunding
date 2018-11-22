@@ -245,6 +245,7 @@
 				<div class="mContent">
 					<h3>${vo.category}</h3>
 					<h1>${vo.title}</h1>
+					<img src="${savename}" class="w3-round" alt="{fpinfo}" width="50%" style="margin-left: auto; margin-right: auto; display: block; margin-top: 30px; margin-bottom: 30px;">
 				</div>
 				
 				<div class="w3-sand" style="padding:20px;">

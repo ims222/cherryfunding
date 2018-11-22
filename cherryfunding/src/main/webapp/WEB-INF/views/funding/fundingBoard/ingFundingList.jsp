@@ -55,8 +55,8 @@
 						
 						result +=	html.replace(/{fNum}/gi, value.FNUM)
 									.replace("{savename}", value.savename)
-									.replace("{fpinfo}", value.fpinfo)
-									.replace("{title}", value.TITLE)
+									.replace(/{fpinfo}/gi, value.fpinfo)
+									.replace(/{title}/gi, value.TITLE)
 									.replace("{nick}", value.nick)
 									.replace("{camout}", comma(camout))
 									.replace("{category}", value.CATEGORY)
@@ -135,12 +135,12 @@
 </script>
 <script id="fundingList" type="text/template">
 <div class="w3-col m4 l4 " style="padding: 20px;">
-	<a href="${pageContext.request.contextPath}/funding/ingFundingDetailforUser?fNum={fNum}">
+	<a data-voice="{fpinfo}" href="${pageContext.request.contextPath}/funding/ingFundingDetailforUser?fNum={fNum}">
 	<img src="{savename}" class="w3-round" alt="{fpinfo}" height="200px" width="100%"></a>
 	<div>
 		<div style="height: 50px; overflow:hidden;>
 			<p class="w3-left-align" style="word-break:break-all;">
-				<a href="${pageContext.request.contextPath}/funding/ingFundingDetailforUser?fNum={fNum}">
+				<a data-voice="{title}" href="${pageContext.request.contextPath}/funding/ingFundingDetailforUser?fNum={fNum}">
 				<h4>{title}</h4></a>
 			</p>
 		</div>

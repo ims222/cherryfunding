@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.cherryfunding.spring.vo.AdminVo;
 
+
 public class AdminDao {
 	@Autowired
 	SqlSession sqlSession;

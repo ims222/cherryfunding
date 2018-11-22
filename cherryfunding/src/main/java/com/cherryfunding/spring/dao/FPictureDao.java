@@ -37,5 +37,15 @@ public class FPictureDao {
 		}
 		return fPictureVo;
 	}
+	public String thumbnailString(int fNum) {
+		FPictureVo savename = sqlSession.selectOne(NAMESPACE + "thumbnail", fNum);
+		if (savename == null) {
+			savename = new FPictureVo();
+			savename.setfNum(fNum);
+			savename.setSavename("default");
+			savename.setFpinfo("default");
+		}
+		return savename.getSavename();
+	}
 
 }
