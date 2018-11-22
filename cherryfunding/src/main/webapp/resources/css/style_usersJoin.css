@@ -1,0 +1,97 @@
+@charset "UTF-8";
+
+
+	#idCheck{
+    color: red;
+    font-size: 12px;
+    }
+    
+    #matchingPwd{
+    color: red;
+    font-size: 12px;
+    }
+    #nickCheck{
+    color: red;
+    font-size: 12px;
+    }
+    
+    #aid_span{
+    	width: 366px;
+    	height: 51px;
+    	border:1px solid gray;
+    }
+    #pwd_span{
+    	width: 366px;
+    	height: 51px;
+    	border:1px solid gray;
+    }
+    
+    #id{
+    	width: 366px;
+    	height: 51px;
+    	border:1px solid gray;
+    }
+
+	#password{
+
+    	width: 366px;
+    	height: 51px;
+    	border:1px solid gray;	
+	}
+	#pwd{
+    	width: 366px;
+    	height: 51px;
+    	border:1px solid gray;	
+	}
+	#nick {
+	
+    	width: 366px;
+    	height: 51px;
+    	border:1px solid gray;
+	}
+	#email{
+		width: 366px;
+    	height: 51px;
+    	border:1px solid gray;
+	}
+	#addr{
+		width: 366px;
+    	height: 51px;
+    	border:1px solid gray;
+	}
+	#phone{
+		width: 366px;
+    	height: 51px;
+    	border:1px solid gray;
+	}
+	#birth{
+		width: 366px;
+    	height: 51px;
+    	border:1px solid gray;
+	}
+	
+	#container_row{
+	
+		width: 500px;
+    	height:700px;
+    	margin:auto;
+	
+	}
+	#lock{
+	}
+	
+	#nick_name{
+		margin-top: 42px;
+	}
+	
+	#send{
+		background: limegreen;
+    	font-size: 20px;
+    	color: white;
+    	width: 366px;
+    	height: 51px;
+    	outline: 0px;
+    	border: 0px;
+    	margin-top: 40px;
+    	cursor: pointer;
+	}

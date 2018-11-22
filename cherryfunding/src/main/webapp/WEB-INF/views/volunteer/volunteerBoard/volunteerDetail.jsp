@@ -163,6 +163,10 @@
 				var table = $('<table></table>');
 				$("#commment").empty().append(table);
 				data.forEach(function(value){
+					var deleteComment = "&nbsp";
+					if('${sessionScope.id}' === value.id){
+						deleteComment = "<button class='deleteComment' onclick='commentDelete(" + value.vcNum +")'>삭제</button>";
+					}
 					var id = value.id;
 					var content = value.content;
 					var regdate = value.regdate;
@@ -170,10 +174,26 @@
 					$(tr).append('<td>' + id + '</td>')
 					$(tr).append('<td>' + content + '</td>')
 					$(tr).append('<td>'+ regdate +'</td>')
+					$(tr).append('<td><p><small>' + deleteComment + '</small></p></td>')
 					$(table).append(tr);
 				});
 				$('#comment').append(table);
 				
+			}
+		});
+	}
+	
+	function commentDelete(vcNum){
+		$.ajax({
+			url:'${pageContext.request.contextPath}/volunteer/commentDelete',
+			data:{vcNum:vcNum},
+			dataType:'json',
+			type:'post',
+			success:function(data){
+				if(data.result === 'ok'){
+					//commentCount();
+					commentList();
+				}
 			}
 		});
 	}
