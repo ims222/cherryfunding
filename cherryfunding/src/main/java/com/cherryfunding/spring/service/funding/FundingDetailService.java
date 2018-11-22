@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.cherryfunding.spring.vo.FDetailVo;
 import com.cherryfunding.spring.vo.FHashtagVo;
+import com.cherryfunding.spring.vo.FPictureVo;
 import com.cherryfunding.spring.vo.FResultVo;
 import com.cherryfunding.spring.vo.FundingVo;
 import com.cherryfunding.spring.vo.RewardVo;
@@ -45,4 +46,6 @@ public interface FundingDetailService {
 	int insertFResult(FResultVo vo);
 
 	int withdraw(HashMap<String, Object> map);
+	
+	String thumbnailString(int fNum);
 }
