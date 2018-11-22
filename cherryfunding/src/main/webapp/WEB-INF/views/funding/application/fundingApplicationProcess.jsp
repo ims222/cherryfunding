@@ -5,6 +5,8 @@
 <link href="${pageContext.request.contextPath}/resources/css/datepicker/datepicker.min.css" type="text/css" rel="stylesheet">
 <script src="${pageContext.request.contextPath}/resources/js/datepicker/datepicker.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/datepicker/datepicker.en.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/fine-uploader/fine-uploader.min.js"></script>
+<link href="${pageContext.request.contextPath}/resources/css/fine-uploader/fine-uploader-new.min.css" type="text/css" rel="stylesheet">
 <style>
 		.row {
 		  display: -ms-flexbox; /* IE10 */
@@ -155,21 +157,24 @@
 		  border-radius: 0;
   			}
   		.MyButton {
-		    background-color: #4CAF50; /* Green */
+	        background-color: #009999;
 		    border: none;
 		    color: white;
-		    padding: 1px 3px;
+		    padding: 1px 7px;
 		    text-align: center;
 		    text-decoration: none;
 		    display: inline-block;
 		    font-size: 25px;
 		    margin: 4px 2px;
 		    cursor: pointer;
+		    font-size: 15px;
 		}
 }
 
 </style>
 <script type="text/javascript">
+
+	var index = 0;
 	$.fn.datepicker.language['en'] = {
 	    days: ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'],
 	    daysShort: ['일', '월', '화', '수', '목', '금', '토'],
@@ -188,6 +193,16 @@
 
 	$(document).ready(
 			function() {
+				$.ajax({
+					url:'${pageContext.request.contextPath}/funding/getFnum',
+					dataType:'json',
+					type:'post',
+					success: function(data){
+						$("input[name='fNum']").val(data);
+					}
+				});
+				
+				
 				$("#inputFile").on(
 						'change',
 						"input[name='fPicture']",
@@ -203,6 +218,8 @@
 							}
 
 						});
+				
+				
 				$("#inputReward").on(
 						'change',
 						"input[name='price']",
@@ -246,18 +263,7 @@
 			});
 	/*
 	function appCommit() {
-		if(!$("#title").val()){
-		alert("제목은 필수입력사항입니다");
-		return false;
-		}
-		if(!$("#content").val()){
-		alert("제목은 필수입력사항입니다");
-		return false;
-		}
-		if(!$("#amount").val()){
-		alert("제목은 필수입력사항입니다");
-		return false;
-		}
+		
 		*/
 
 		/* var sd = new Date($("#sdate").val());
@@ -353,7 +359,7 @@
 
 </head>
 <div class="container">
-	<form method="post" action="${pageContext.request.contextPath}/funding/fundingApplication" enctype="multipart/form-data" onsubmit="return appCommit()">
+	<form id="fundingApplication" method="post" action="${pageContext.request.contextPath}/funding/fundingApplication" enctype="multipart/form-data">
 	<div class="row">
 		<div class='col-lg-12' align="center"><h3>펀딩신청서</h3></div>
 	</div>
@@ -427,9 +433,6 @@
 		</div>
 		<div class="row">
 			<div class='col-lg-12' id="fine-uploader-gallery">
-				<label for="dateRange">사진업로드</label>	
-				<input type="file" name="fPicture"> 
-				<input type="text" name="fPinfo">
 			</div>
 		</div>
 		<div class="row">
@@ -446,9 +449,10 @@
 	    </div>
 		<div class="row">
 			<div class='col-lg-12'>
-				<button type="submit" class="btn" name="application">신  청</button>
+				<button id="fundingApplicationButton" type="button" class="btn" name="application">신  청</button>
 			</div>
-		</div>				
+		</div>
+		<input type="hidden" name="fNum" value="">				
 	</form>
 </div>
 	<script>
@@ -499,18 +503,71 @@
 					},
 					callbacks : {
 						onUpload : function(id) {
+							console.log('id', id);
 							var fileContainer = this.getItemByFileId(id);
 							var captionInput = fileContainer.querySelector('.caption');
 							var captionText = captionInput.value;
+							
+							var title = $("input[name='title']").val() ;
+							var content = $("textarea[name='content']").val();
+							var category = $("select[name='category']").val();
+							var amount = $("input[name='amount']").val();
+							var dateRange = $("input[name='dateRange']").val();
+							var uid= $("input[name='id']").val();
+							var fNum = $("input[name='fNum']").val();
+							console.log('여기가 나와야  된다고 제미라미나ㅓ', fNum)
+							
+							console.log(title, content, category, amount, dateRange, uid, fNum);
 
 							this.setParams({
-								caption : captionText
+								index : index,
+								caption : captionText,
+								title : title,
+								content : content,
+								category : category,
+								amount : amount,
+								dateRange : dateRange,
+								uid : uid,
+								fNum : fNum
 							}, id);
-							//$(caoptionText).attr('readOny', 'readOnly');
+							index++;
+							
+						},
+						onComplete: function(id, name, responseJSON){
+							console.log(id, name, '에프 넘아 나와라 ', $("input[name='fNum']").val());
+							if(!$("input[name='fNum']").val()){
+								$("input[name='fNum']").val(responseJSON.fNum);
+							}
+							
+							
+						},
+
+						onAllComplete: function(succeeded){
+							console.log('succeeded', succeeded);
+							$('#fundingApplication').submit();
+							
 						}
 					}
 				});
-		qq(document.getElementById("trigger-upload")).attach("click", function() {
+	
+		qq(document.getElementById("fundingApplicationButton")).attach("click", function() {
+			if(!$("#title").val()){
+				alert("제목은 필수입력사항입니다");
+				return false;
+			}
+			if(!$("#content").val()){
+				alert("내용은 필수입력사항입니다");
+				return false;
+			}
+			if(!$("#amount").val()){
+				alert("목표금액은 필수입력사항입니다");
+				return false;
+			}
+			if(!$("#dateRange").val()){
+				alert("펀딩기간은 필수입력사항입니다");
+				return false;
+			}
 			galleryUploader.uploadStoredFiles();
+			
         });
 	</script>
