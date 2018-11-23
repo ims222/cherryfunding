@@ -58,6 +58,10 @@
 	}
 </script>
 <body>
+<div id="main">
+	<div class="container">
+		<div class="row">
+		<div class='col-lg-12' style="margin-top: 20px; margin-bottom: 10%;">
 	<form method="post" action="${pageContext.request.contextPath}/sharing/insertSharing" enctype="multipart/form-data" onsubmit="return appCommit()">
 		<input type="hidden" name="id" value="${sessionScope.id}">
 		<label for="title">제목</label><input type="text" name="title" id="title"><br>
@@ -88,6 +92,10 @@
 		</div>
 		<input type="submit" value="제출">
 	</form>
+	</div>
+	</div>
+	</div>
+</div>	
 </body>
 </html>
 
