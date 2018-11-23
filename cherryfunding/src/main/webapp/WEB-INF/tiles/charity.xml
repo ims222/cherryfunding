@@ -37,7 +37,7 @@ PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
 	</definition>
 	
 	<definition name=".inputCharity" extends = ".main">
-		<put-attribute name="banner" value="/WEB-INF/views/charity/application/banner.jsp"/>
+		<put-attribute name="banner" value="/WEB-INF/views/charity/banner.jsp"/>
 		<put-attribute name="content" value="/WEB-INF/views/charity/application/charityApplicationProcess.jsp"/>
 	</definition>
 	<!-- //////// -->
