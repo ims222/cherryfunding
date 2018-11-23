@@ -11,7 +11,7 @@
 				${reward.title} <fmt:formatNumber value="${reward.price}" pattern="#,###"/>원 ${reward.amount}개 <br>
 				<fmt:formatNumber value="${reward.price * reward.amount}" pattern="#,###"/>원<br>
 				<br><br>	
-				<c:set value="${totPrice + reward.price}" var="totPrice"/>
+				<c:set value="${totPrice + (reward.price * reward.amount)}" var="totPrice"/>
 			</c:forEach>
 			닉네임::${vo.nick}<br>
 			합계::<fmt:formatNumber value="${totPrice}" pattern="#,###"/> 원<br>

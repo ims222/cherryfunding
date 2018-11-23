@@ -13,6 +13,7 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.css" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.js"></script>
 <script src="https://html2canvas.hertzen.com/build/html2canvas.js"></script>
+<script src="http://cdn.sockjs.org/sockjs-0.3.4.js"></script>
 </head>
 <body>
 	<h2>상세글 보기</h2>
@@ -57,6 +58,47 @@
 <!-- <button id="save" class="btn btn-primary" onclick="fileSave()" type="button">저장</button> -->
 <div id="summernote"><p><br></p></div>
 	<script type="text/javascript">
+	
+		$(document).ready(function(){
+			$("#sendBtn").click(function() {
+				sendMessage();
+				$('#message').val('')
+			});
+
+			$("#message").keydown(function(key) {
+				if (key.keyCode == 13) {// 엔터
+					sendMessage();
+					$('#message').val('')
+				}
+			});
+		});
+		
+		let sock = new SockJS("<c:url value="/echo"/>");
+		sock.onmessage = onMessage;
+		sock.onclose = onClose;
+
+	     // 메시지 전송
+	     
+		function sendMessage() {
+			message = {};
+			message.aid = '${vo.id}';
+			message.msg = $("#message").val();
+			sock.send(JSON.stringify(message));
+		}
+
+
+	     // 서버로부터 메시지를 받았을 때
+
+		function onMessage(msg) {
+			var data = msg.data;
+			$("#data").append(data + "<br/>");
+		}
+
+	     // 서버와 연결을 끊었을 때
+
+		function onClose(evt) {
+			$("#data").append("연결 끊김");
+		}
 	$(function() {
 	  var $placeholder = $('.placeholder');
 	  $('#summernote').summernote({
@@ -122,5 +164,10 @@
 		<div id="space"></div>
 		<input type="submit" value="저장">
 </form>
+
+<input type="text" id="message" />
+<input type="button" id="sendBtn" value="전송" />
+
+<div id="data"></div>
 </body>
 </html>

@@ -14,8 +14,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getMaxNum" resultType="int">
 		select NVL(max(vcNum), 0) from vComment
 	</select>
-
+	
+	<!--  
 	<select id="commentList" parameterType="int" resultType="vComment">
+		select vcNum, id, content, to_char(regdate, 'yyyy-mm-dd hh24:mi:ss') regdate,
+		vNum from vComment where vNum = #{vNum} order by vcNum
+	</select>
+	-->
+	
+	<select id="commentList" parameterType="int" resultType="hashmap">
 		select vcNum, id, content, to_char(regdate, 'yyyy-mm-dd hh24:mi:ss') regdate,
 		vNum from vComment where vNum = #{vNum} order by vcNum
 	</select>

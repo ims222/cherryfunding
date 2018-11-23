@@ -167,13 +167,13 @@
 					if('${sessionScope.id}' === value.id){
 						deleteComment = "<button class='deleteComment' onclick='commentDelete(" + value.vcNum +")'>삭제</button>";
 					}
-					var id = value.id;
-					var content = value.content;
-					var regdate = value.regdate;
+					var id = value.ID;
+					var content = value.CONTENT;
+					var regdate = calDate(value.REGDATE);
 					var savename = value.savename;
 					var nick = value.nick;
 					html += '<p class="pull-right"><small>' + regdate + '</small></p>'
-							+ '<a class="media-left" href="#">' +
+							+ '<a class="media-left" href="#">' 
 							+ '<img src=' + savename + ' class="w3-circle" width="50px"'
 							+ 'onclick="showProfile(' + nick + ',' + savename + ')"></a>'
 							+ '<div class="media-body">'
@@ -241,6 +241,26 @@
 			}
 		});
 	}
+	function showProfile(nick, savename){
+		$.ajax({
+			url: '${pageContext.request.contextPath}/sharing/getUserInfoByNick',
+			data: {nick: nick},
+			dataType: 'json',
+			type: 'get',
+			success: function(data){
+				$('#showProfile').empty();
+				$('#showProfile').append('<img src="'+ savename + '" class="w3-circle" width="120px" height="120px">');
+				$('#showProfile').append('<p>'+'아이디:' + data.id + '<p>' 
+						+'<p>'+' 닉네임: ' + data.nick + '</p>'
+						+'<p>'+' 성별: ' + data.gender+'</p>'
+						);
+				$('#showProfile').dialog({width: 200, height:270, hide: "fade", close : function(){
+					parent.$('#showProfile').dialog('destroy');
+	              }  
+				});		
+			}
+		});
+	}
 </script>
 <style type="text/css">
 .modal{
@@ -286,7 +306,7 @@
 				 </div>
 				 <h4>${vo.content}</h4><br>
 			</div>
-			<div class="col-md-4" id="featuredBox">
+			<div class="col-md-4" id="featuredBox" style="margin-top: 20px;">
 				<p><span class="w3-xxlarge" id="showRecomm"></span><span class="w3-large">명이 추천</span></p>
 				<p><span class="w3-xxlarge" id="applicant"></span><span class="w3-large">명이 신청</span></p>
 				<div style="margin-top:10px;">
@@ -296,7 +316,7 @@
 			</div>
 		</div>
 		
-		<div class="row">
+		<div class="row" style="margin-top: 20%;">
 			<div class="col-md-8">
 				<div class="w3-right-align">
 					<button type="button" class="w3-button" data-toggle="modal" data-target="#commentModal">댓글 작성</button>
@@ -366,5 +386,6 @@
 			</div>
 		</div>
 	</div>
-</div>  
+</div>
+<div id="showProfile" hidden="hidden" title="회원 프로필"></div>  
 </div>

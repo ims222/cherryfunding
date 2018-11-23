@@ -71,9 +71,11 @@ table.type04 td {
      // 메시지 전송
 
 	function sendMessage() {
-		sock.send($("#message").val());
+		message = {};
+		message.id = '${vo.id}';
+		message.msg = $("#message").val();
+		sock.send(JSON.stringify(message));
 	}
-
 
      // 서버로부터 메시지를 받았을 때
 
