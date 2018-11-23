@@ -1,5 +1,6 @@
 package com.cherryfunding.spring.controller.volunteer;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.json.JSONObject;
@@ -34,9 +35,15 @@ public class VolunteerCommentController {
 		return obj.toString();
 	}
 
+//	@RequestMapping("/volunteer/commentList")
+//	@ResponseBody
+//	public List<VCommentVo> commentList(int vNum) {
+//		return volunteerCommentService.commentList(vNum);
+//	}
+	
 	@RequestMapping("/volunteer/commentList")
 	@ResponseBody
-	public List<VCommentVo> commentList(int vNum) {
+	public List<HashMap<String, Object>> commentList(int vNum) {
 		return volunteerCommentService.commentList(vNum);
 	}
 	
