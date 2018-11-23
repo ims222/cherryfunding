@@ -286,7 +286,7 @@
 				 </div>
 				 <h4>${vo.content}</h4><br>
 			</div>
-			<div class="col-md-4" id="featuredBox">
+			<div class="col-md-4" id="featuredBox" style="margin-top: 20px;">
 				<p><span class="w3-xxlarge" id="showRecomm"></span><span class="w3-large">명이 추천</span></p>
 				<p><span class="w3-xxlarge" id="applicant"></span><span class="w3-large">명이 신청</span></p>
 				<div style="margin-top:10px;">
@@ -296,7 +296,7 @@
 			</div>
 		</div>
 		
-		<div class="row">
+		<div class="row" style="margin-top: 20%;">
 			<div class="col-md-8">
 				<div class="w3-right-align">
 					<button type="button" class="w3-button" data-toggle="modal" data-target="#commentModal">댓글 작성</button>
