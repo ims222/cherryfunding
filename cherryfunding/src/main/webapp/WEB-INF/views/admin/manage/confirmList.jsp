@@ -88,7 +88,6 @@
 		</c:forEach>
 		</c:if>
 		</table>
-		
 		<table class="table table-striped" width="500">
 		<c:if test="${null ne co}">
 		<h2 style="text-align:center;">±âºÎ</h2>

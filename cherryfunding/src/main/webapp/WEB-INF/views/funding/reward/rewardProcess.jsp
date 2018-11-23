@@ -153,7 +153,7 @@ ul {
 	function decreaseAmount(e){
 		var target = e.target;
 		var curAmount = parseInt($(e.target).siblings("input[name='amount']").val());
-		if(curAmount <= 1){
+		if(curAmount <= 0){
 			return;
 		}
 		var incAmount = curAmount - 1;
