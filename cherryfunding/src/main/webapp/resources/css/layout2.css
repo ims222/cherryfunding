@@ -10,6 +10,17 @@
 body {
 	font-family: 'Hanna', serif;
 }
+/*
+a {
+    color: #ff6666 !important; 
+    text-decoration: none;
+}
+
+*/
+
+.processBar{
+	background-color: #ff4d4d;
+}
 
 #header {
 	
@@ -145,7 +156,7 @@ body {
 
 .bg-img {
 	/* The image used */
-	background-image: url(../images/crowd3.png);
+	background-image: url(../images/지옥.png);
 	/* Control the height of the image */
 	min-height: 380px;
 	/* Center and scale the image nicely */

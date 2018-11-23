@@ -61,7 +61,7 @@
 							<div class="w3-left-align" style="float:left;">${summary.cEnd.category} | ${summary.cEnd.id}</div>
 							<div class="w3-right-align"><p><i style='font-size:15px;color:red' class='fas'>&#xf004;</i><span>${summary.cEndRecomm}</span></p></div>
 							<div class="w3-border">
-								<div class="w3-blue" style="height:5px;width:${barcEndBefore/10000}"></div>
+								<div class="processBar" style="height:5px;width:${barcEndBefore/10000}"></div>
 							</div>
 							<div class="w3-left-align" style="float:left;">
 							<fmt:formatNumber value="${cEndBefore/100}" type="percent" pattern="0%"/> ·
@@ -104,7 +104,7 @@
 							<div class="w3-left-align" style="float:left;">${summary.cHot.category} | ${summary.cHot.id}</div>
 							<div class="w3-right-align"><p>추천 <span class="w3-badge w3-green">${summary.cHotRecomm}</span></p></div>
 							<div class="w3-border">
-								<div class="w3-blue" style="height:5px;width:${barcHotBefore/100}"></div>
+								<div class="processBar" style="height:5px;width:${barcHotBefore/100}"></div>
 							</div>
 							<div class="w3-left-align" style="float:left;">
 							<fmt:formatNumber value="${cHotBefore/10000}" type="percent" pattern="0%"/> ·
@@ -147,7 +147,7 @@
 							<div class="w3-left-align" style="float:left;">${summary.cPrice.category} | ${summary.cPrice.id}</div>
 							<div class="w3-right-align"><p>추천 <span class="w3-badge w3-green">${summary.cPriceRecomm}</span></p></div>
 							<div class="w3-border">
-								<div class="w3-blue" style="height:5px;width:${barcPriceBefore/100}"></div>
+								<div class="processBar" style="height:5px;width:${barcPriceBefore/100}"></div>
 							</div>
 							<div class="w3-left-align" style="float:left;">
 							<fmt:formatNumber value="${cPriceBefore/10000}" type="percent" pattern="0%"/> ·
@@ -204,7 +204,7 @@
 							<div class="w3-left-align" style="float:left;">${summary.fEnd.category} | ${summary.fEnd.id}</div>
 							<div class="w3-right-align"><p>추천 <span class="w3-badge w3-green">${summary.fEndRecomm}</span></p></div>
 							<div class="w3-border">
-								<div class="w3-blue" style="height:5px;width:${barfEndBefore/100}"></div>
+								<div class="processBar" style="height:5px;width:${barfEndBefore/100}"></div>
 							</div>
 							<div class="w3-left-align" style="float:left;">
 							<fmt:formatNumber value="${fEndBefore/10000}" type="percent" pattern="0%"/> ·
@@ -247,7 +247,7 @@
 							<div class="w3-left-align" style="float:left;">${summary.fHot.category} | ${summary.fHot.id}</div>
 							<div class="w3-right-align"><p>추천 <span class="w3-badge w3-green">${summary.fHotRecomm}</span></p></div>
 							<div class="w3-border">
-								<div class="w3-blue" style="height:5px;width:${barfHotBefore/100}"></div>
+								<div class="processBar" style="height:5px;width:${barfHotBefore/100}"></div>
 							</div>
 							<div class="w3-left-align" style="float:left;">
 							<fmt:formatNumber value="${fHotBefore/10000}" type="percent" pattern="0%"/> ·
@@ -290,7 +290,7 @@
 							<div class="w3-left-align" style="float:left;">${summary.fPrice.category} | ${summary.fPrice.id}</div>
 							<div class="w3-right-align"><p>추천 <span class="w3-badge w3-green">${summary.fPriceRecomm}</span></p></div>
 							<div class="w3-border">
-								<div class="w3-blue" style="height:5px;width:${barfPriceBefore/100}"></div>
+								<div class="processBar" style="height:5px;width:${barfPriceBefore/100}"></div>
 							</div>
 							<div class="w3-left-align" style="float:left;">
 							<fmt:formatNumber value="${fPriceBefore/10000}" type="percent" pattern="0%"/> ·

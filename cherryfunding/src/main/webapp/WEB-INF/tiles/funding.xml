@@ -16,6 +16,11 @@ PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
 			<put-attribute name="content" value="/WEB-INF/views/funding/fundingBoard/ingFundingDetailforUser.jsp"/>
 		</definition>
 		
+		<definition name=".fundingEdit" extends=".ingFundingList">
+			<put-attribute name="content" value="/WEB-INF/views/funding/application/fundingEdit.jsp"/>
+		</definition>
+		
+		
 		<definition name=".rewardProcess" extends = ".ingFundingList">
 			<put-attribute name="content" value="/WEB-INF/views/funding/reward/rewardProcess.jsp"/>
 		</definition>

@@ -292,7 +292,7 @@
 				
  				<div style="margin-bottom:20px;">
 					<div class="w3-border">
-						<div class="w3-blue" style="height:5px;width:<fmt:formatNumber value="${barBefore/100}" type="percent" pattern="0%"/>"></div>
+						<div class="processBar" style="height:5px;width:<fmt:formatNumber value="${barBefore/100}" type="percent" pattern="0%"/>"></div>
 					</div>
  				</div>
  				
