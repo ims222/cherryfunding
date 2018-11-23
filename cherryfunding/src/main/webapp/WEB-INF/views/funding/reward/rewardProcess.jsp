@@ -79,7 +79,7 @@ ul {
 		</div>
 		
 		<button class="rBtn decreaseAmount"><i class="fas fa-minus"></i></button>
-		<input type="text" class="rInput inputAmount" name="amount" value="1">
+		<input type="text" class="rInput inputAmount" name="amount" value="{currentAmount}">
 		<button class="rBtn increaseAmount"><i class="fas fa-plus"></i></button>
 		<input type="text" class="rInput totPrice" value="{price}" name="totPrice" style="width:100px; margin-left:10px;" readOnly="readOnly">
 		<button class="rBtn removeReward" style="margin-left: 10px;"><i class="fa fa-remove"></i></button>
@@ -118,11 +118,14 @@ ul {
 				var rNum = data.rNum;
 				var html = document.querySelector('#selectedReward').innerHTML;
 				var result = "";
-				
+				var currentAmount = 0;
+				if(amount > 0)
+					currentAmount = 1;
 				result +=	html.replace("{title}", title)
 							.replace("{orgPrice}", price)
 							.replace(/{price}/gi, comma(price))
 							.replace(/{amount}/gi, amount)
+							.replace("{currentAmount}", currentAmount)
 							.replace("{rNum}", rNum);
 				$('#rewardList').append(result);
 				var totPrice = parseInt(uncomma($('#totPrice').text()));
@@ -195,6 +198,19 @@ ul {
 	
 	
 	$(document).ready(function(){
+		$.ajax({
+			url:'${pageContext.request.contextPath}/funding/getRewardList',
+			data:{fNum:'${vo.fNum}'},
+			dataType:'json',
+			type:'post',
+			success: function(data){
+				for(var i=0;i< data.length; i++){
+					rewardDetail(data[i].rNum);
+				}
+			}
+		});
+		
+		
 		$('#myDropdown').on('click', 'a', function(){
 			var rNum = $(this).attr('data-num');
 			var a = $(".selectedReward>input[name='rNum']");

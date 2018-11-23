@@ -39,13 +39,20 @@ public class FundingDetailController {
 		model.addAttribute("fRecommend", fundingDetailService.getRecommend(fNum));
 		model.addAttribute("hashtag", fundingDetailService.hashtag(fNum));
 		model.addAttribute("countSupporter", fundingDetailService.countFdetailbyfNum(fNum));
-		model.addAttribute("savename",fundingDetailService.thumbnailString(fNum));
+		model.addAttribute("savename", fundingDetailService.thumbnailString(fNum));
 		fundingDetailService.hitUp(fNum);
 		return ".ingFundingDetailforUser";
 	}
 
+	@RequestMapping("/funding/getRewardList")
+	@ResponseBody
+	public List<RewardVo> getRewardList(int fNum) {
+		return fundingDetailService.rewardList(fNum);
+	}
+
 	@RequestMapping("/funding/rewardList")
 	public String rewardList(@ModelAttribute("fNum") int fNum, Model model) { // 리워드 리스트
+		model.addAttribute("vo", fundingDetailService.detail(fNum));
 		model.addAttribute("rewardList", fundingDetailService.rewardList(fNum));
 		return ".rewardProcess";
 	}
