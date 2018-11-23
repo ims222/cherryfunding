@@ -4,6 +4,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <script src="${pageContext.request.contextPath}/resources/js/summernote/summernote.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/summernote/summernote-ko-KR.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@7"></script>
 <link href="${pageContext.request.contextPath}/resources/css/summernote/summernote.css" type="text/css" rel="stylesheet">
 <style type="text/css">
 #fundingInfo {
@@ -224,7 +225,13 @@ function showSlides(n) {
 			dataType:'json',
 			type:'post',
 			success: function(data){
-				alert('저장 완료');
+				//alert('저장 완료');
+				swal({
+				  type: 'success',
+				  title: 'Your work has been saved',
+				  showConfirmButton: false,
+				  timer: 1500
+				})
 			}
 		});
 	};

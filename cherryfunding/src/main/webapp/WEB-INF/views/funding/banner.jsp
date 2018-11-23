@@ -1,10 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@7"></script>	
 <script type="text/javascript">
 	function loginPlease(){
 		var id = '${sessionScope.id}';
 		if(!id){
-			alert('로그인 플리즈');
+			swal({
+				  type: 'error',
+				  title: '로그인 해주세요.',
+				});
 			return false;
 		}
 		return true;

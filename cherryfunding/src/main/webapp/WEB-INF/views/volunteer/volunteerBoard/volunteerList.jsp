@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@7"></script>
 <script type="text/javascript">
 	var pageNum = 1;
 	var vNum = 0;
@@ -20,7 +20,10 @@
 		    	var html = '';
 		    	if(vNum == 1){
 		    		//$("#myModal").modal('show');
-		    		alert("마지막 페이지입니다. 모달창이 자꾸 위에 붙어서 alert로 변경했습니다.")
+		    		swal({
+					  type: 'error',
+					  title: '마지막 페이지입니다.',
+					});
 					return;
 		    	}
 		    	for(var i=0; i<data.list.length; i++){
@@ -72,7 +75,10 @@
 		    	var html = '';
 		    	if(vNum == 1){
 		    		//$("#myModal").modal('show');
-		    		alert("마지막 페이지입니다. 모달창이 자꾸 위에 붙어서 alert로 변경했습니다.")
+		    		swal({
+					  type: 'error',
+					  title: '마지막 페이지입니다.',
+					});
 					return;
 		    	}
 		    	for(var i=0; i<data.list.length; i++){

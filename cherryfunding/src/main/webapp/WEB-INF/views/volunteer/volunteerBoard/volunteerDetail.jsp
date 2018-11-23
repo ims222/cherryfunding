@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script><link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/comment.css" type="text/css">
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@7"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
 		isRecommend();
@@ -70,7 +70,10 @@
 								$("#myModal").modal('show');
 								return;
 							}else{
-								alert("마감된 게시글입니다.");
+								swal({
+									  type: 'error',
+									  title: '마감된 게시글입니다.',
+									});
 							}
 						}
 					});	
@@ -87,7 +90,10 @@
 			}
 			var content = $("#insertComment input[name='content']").val();
 			if(!content){
-				alert('댓글을 작성해욧');
+				swal({
+					  type: 'error',
+					  title: '댓글을 작성하세요.',
+					});
 				return;
 			}
 			var vNum = '${vo.vNum}';
@@ -220,12 +226,18 @@
 		e.preventDefault();
 		var id = '${sessionScope.id}';
 		if(!id){
-			alert('로그인 해주세욧ㅅ');
+			swal({
+				  type: 'error',
+				  title: '로그인 해주세요.',
+				});
 			return;
 		}
 		var content = $("#insertComment textarea[name='content']").val();
 		if(!content){
-			alert('댓글을 작성해욧');
+			swal({
+				  type: 'error',
+				  title: '댓글을 작성하세요.',
+				});
 			return;
 		}
 			
