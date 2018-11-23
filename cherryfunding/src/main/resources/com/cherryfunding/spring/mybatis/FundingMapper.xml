@@ -129,7 +129,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 		
 	<update id="confirm" parameterType="hashmap">
-		update funding set confirm = 'y',aid = #{aid} where fNum = #{num}
+		update funding set confirm = 'y',aid = #{aid} where fNum = #{fNum}
 	</update>
 	
 

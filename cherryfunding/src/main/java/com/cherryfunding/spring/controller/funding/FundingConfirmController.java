@@ -2,6 +2,8 @@ package com.cherryfunding.spring.controller.funding;
 
 import java.util.HashMap;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,8 +31,13 @@ public class FundingConfirmController {
 	}
 
 	@RequestMapping("/funding/confirm")
-	public String confirmFunding(int fNum) {
+	public String confirmFunding(int fNum, HttpSession session) {
 		HashMap<Object, Object> map = new HashMap<Object, Object>();
+		String aid = "admin";
+		if (session.getAttribute("aid") != null)
+			aid = (String) session.getAttribute("aid");
+		map.put("fNum", fNum);
+		map.put("aid", aid);
 		fundingConfirmService.confirm(map);
 		return "redirect:/funding/waitList";
 	}
