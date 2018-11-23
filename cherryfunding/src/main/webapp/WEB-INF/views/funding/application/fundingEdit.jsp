@@ -153,7 +153,7 @@ function showSlides(n) {
 			<th scope="col" width="9%;">승인구분</th>
 			<th scope="col" width="10%;">승인자</th>
 			<th scope="col" width="8%;">신청일</th>
-			<th scope="col" width="8%;">신청자</th>
+			<th scope="col" width="8%;">신청자</th> 
 		</tr>
 		<tr>
 			<td scope="row">${vo.fNum}</td>	
