@@ -1,17 +1,27 @@
 package com.cherryfunding.spring.util;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
+import org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor;
+
+import com.cherryfunding.spring.dao.MessagerDao;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class EchoHandler extends TextWebSocketHandler {
+
+	@Autowired
+	private MessagerDao messengerDao;
+
 	private static Logger logger = LoggerFactory.getLogger(EchoHandler.class);
 	private List<WebSocketSession> sessionList = new ArrayList<WebSocketSession>();
 
@@ -25,6 +35,17 @@ public class EchoHandler extends TextWebSocketHandler {
 	// 클라이언트가 서버로 메시지를 전송했을 때 실행되는 메서드
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
+		Map<String, Object> map = new ObjectMapper().readValue(message.getPayload(), HashMap.class);
+		System.out.println("!!!!!!!!!!!!!!!!!!!!!!");
+		System.out.println(map);
+		if ((String) map.get("id") == null || ((String) map.get("id")).equals(""))
+			System.out.println("aid: " + map.get("aid"));
+		else
+			System.out.println("id: " + map.get("id"));
+		System.out.println(map.get("id"));
+		System.out.println(map.get("msg"));
+		System.out.println(session.getAttributes());
+
 		logger.info("{}로 부터 {} 받음", session.getId(), message.getPayload());
 		for (WebSocketSession sess : sessionList) {
 			sess.sendMessage(new TextMessage(session.getId() + " : " + message.getPayload()));

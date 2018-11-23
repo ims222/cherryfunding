@@ -3,21 +3,12 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cherryfunding.spring.vo.MessengerMapper">
-	<select id="list" resultType="messenger">
-		select * from messager
-	</select>
-
-	<select id="select" parameterType="string" resultType="messenger">
-		select * from messager where id = #{id}
-	</select>
 
 	<insert id="insert" parameterType="messenger">
-		insert into messager values()
+		insert into messenger values(#{mNum}, #{id}, #{aId}, #{content}, 0, (sysdate + (1/24)*9))
 	</insert>
-	<update id="update" parameterType="messenger">
-		update messager set #{pwd} where #{id}
-	</update>
-	<delete id="delete" parameterType="string">
-		delete from messager where id=#{id}
-	</delete>
+	
+	<select id="getMaxNum" resultType="int">
+		select NVL(max(mNum), 0) from messenger
+	</select>
 </mapper>
