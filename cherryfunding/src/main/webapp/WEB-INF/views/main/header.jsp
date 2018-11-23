@@ -73,7 +73,7 @@ function myFunction() {
 	<div class="topnav2" id="mytopnav2">
 		
 		<a data-voice="CherryFunding" class="active2" href="${pageContext.request.contextPath}/">CherryFunding</a>
-		<a data-voice="소개" href="${pageContext.request.contextPath}/info"> 소개</a>
+		<a data-voice="소개" href="${pageContext.request.contextPath}/info"><i class='fas fa-pen'></i> 소개</a>
 		<a data-voice="후원" href="${pageContext.request.contextPath}/charity/ingCharityList"><i class='fas fa-seedling'></i> 후원</a>
 		<a data-voice="펀딩" href="${pageContext.request.contextPath}/funding/ingFundingList"><i class='fas fa-piggy-bank'></i> 펀딩</a>
 		<a data-voice="나눔" href="${pageContext.request.contextPath}/sharing/sharingList"><i class='fas fa-gift'></i> 나눔</a>
