@@ -268,7 +268,7 @@
  				<span class="w3-xxlarge">${countSupporter}</span><span class="w3-xlarge"> 명의 서포터</span>
  				</div>
  				
-				<button class="w3-btn w3-block w3-teal w3-xxlarge" onclick="location.href='${pageContext.request.contextPath}/charity/donation?cNum=${vo.cNum}';">후원 신청</button>
+				<button class="w3-btn w3-block w3-teal w3-xxlarge" onclick="location.href='${pageContext.request.contextPath}/charity/donation?cNum=${vo.cNum}';">후원 참여</button>
 				
 				
 				<button id="recommend" class="button button-like">
