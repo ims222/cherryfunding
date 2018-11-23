@@ -89,29 +89,36 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 	
 	<select id="searchwaitList" parameterType="hashmap" resultType="charity">
-		select * from charity where confirm = 'n'
+		select * from charity 
+		where confirm = 'n'
+		order by regdate desc
 		<include refid="searchcharity"/>
 	</select>
 	
 	<select id="waitList" resultType="charity">
 		select * from charity where confirm = 'n'
+		order by regdate desc
 	</select>
 	
 	<update id="wait" parameterType="int">
-		update charity set confirm ='n' where cNum = #{cNum}
+		update charity set confirm ='n',aid = null where cNum = #{cNum}
 	</update>
 	
-	<update id="confirm" parameterType="int">
-		update charity set confirm = 'y' where cNum = #{cNum}
+	<update id="confirm" parameterType="hashmap">
+		update charity set confirm = 'y',aid = #{aid} where cNum = #{cNum}
 	</update>
 	
 	<select id="confirmList" resultType="charity">
-		select * from charity where confirm = 'y'
+		select * from charity 
+		where confirm = 'y'
+		order by regdate desc
 	</select>
 	
 	<select id="searchconfirmList" parameterType="hashmap" resultType="charity">
-		select * from charity where confirm = 'y'
+		select * from charity 
+		where confirm = 'y'
 		<include refid="searchcharity"/>
+		order by regdate desc
 	</select>
 	
 	<select id="getTotCount" parameterType="hashmap" resultType="int">

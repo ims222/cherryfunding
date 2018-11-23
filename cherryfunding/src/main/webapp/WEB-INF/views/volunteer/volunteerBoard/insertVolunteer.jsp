@@ -57,10 +57,73 @@
 		return true;
 	}
 </script>
-
+<style>
+input[type=text] {
+		  width: 100%;
+		  margin-bottom: 20px;
+		  padding: 12px;
+		  border: 1px solid #ccc;
+		  border-radius: 3px;
+		}
+input[type=number] {
+		  width: 50%;
+		  margin-bottom: 20px;
+		  padding: 12px;
+		  border: 1px solid #ccc;
+		  border-radius: 3px;
+		}
+		
+		input[type=date] {
+		  width: 100%;
+		  margin-bottom: 20px;
+		  padding: 12px;
+		  border: 1px solid #ccc;
+		  border-radius: 3px;
+		}
+		
+		input[name="dateRange"] {
+		  width: 60%;
+		  margin-bottom: 20px;
+		  padding: 12px;
+		  border: 1px solid #ccc;
+		  border-radius: 3px;
+		}
+		
+		textarea{
+		  width: 100%;
+		  margin-bottom: 20px;
+		  padding: 12px;
+		  border: 1px solid #ccc;
+		  border-radius: 3px;
+		}
+		.btn {
+		  background-color: #088A85;
+		  color: white;
+		  padding: 12px;
+		  margin: 10px 0;
+		  border: none;
+		  width: 100%;
+		  border-radius: 3px;
+		  cursor: pointer;
+		  font-size: 17px;
+		}
+		
+		.btn:hover {
+		    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+		}
+		select {
+		  margin-bottom: 1em;
+		  padding: .25em;
+		  font-weight: bold;
+		  letter-spacing: .15em;
+		  border-radius: 0;
+  			}		
+</style>
 <body>
 <div id="main">
 	<div class="container">
+	<div class="row">
+		<div class='col-lg-12' style="margin-top: 20px; margin-bottom: 10%;">
 	<form method="post" action="${pageContext.request.contextPath}/volunteer/insertVolunteer" enctype="multipart/form-data" onsubmit="return appCommit()">
 		<input type="hidden" name="id" value="${sessionScope.id}">
 		<label for="title">제목</label><input type="text" name="title" id="title"><br>
@@ -91,8 +154,10 @@
 			<input type="file" name="vPicture">
 			<input type="text" name="vPinfo"><br>
 		</div>
-		<input type="submit" value="제출">
+		<input type="submit" value="제출" class="btn">
 	</form>
+	</div>
+	</div>
 	</div>
 </div>
 </body>

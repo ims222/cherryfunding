@@ -89,8 +89,9 @@ public class FundingDao {
 		return sqlSession.selectList(NAMESPACE + "waitList");
 	}
 
-	public int confirm(int fNum) { // 컨펌
-		return sqlSession.update(NAMESPACE + "confirm", fNum);
+	public int confirm(HashMap<Object, Object> map) { // 컨펌
+		System.out.println("DAO접근@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+		return sqlSession.update(NAMESPACE + "confirm",map);
 	}
 
 	public int wait(int fNum) { // 컨펌
