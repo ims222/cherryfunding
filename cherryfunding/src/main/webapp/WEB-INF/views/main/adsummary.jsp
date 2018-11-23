@@ -8,7 +8,7 @@
 	<!-- <h1>로그인</h1> -->
 		<c:choose>
 			<c:when test="${not empty sessionScope.adid}">
-				${sessionScope.adid} 님 <a href="${pageContext.request.contextPath}/admypage">마이페이지</a>
+				${sessionScope.adid} 님 환영합니다
 				<input type="button" class="btn" value="로그아웃" onclick="location.href='${pageContext.request.contextPath}/adlogout'">
 			</c:when>
 			<c:otherwise>

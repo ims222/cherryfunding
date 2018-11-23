@@ -154,7 +154,6 @@ body {
 	background-size: inherit;
 	position: relative;
 }
-
 .bg-img input[type=text], input[type=password] {
 	width: 100%;
 	padding: 15px;
@@ -479,4 +478,5 @@ body {
     opacity:1;filter:"alpha(opacity=100)";
     -ms-filter:"alpha(opacity=100)";
 }
+
 
