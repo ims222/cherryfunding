@@ -119,7 +119,7 @@
 		<c:forEach var="co" items="${co }">
 			<tr>
 				<td>${co.cNum }</td>
-				<td>${co.aId }</td>
+				<td>${co.id }</td>
 				<td>${co.title }</td>
 				<td>${co.category }</td>
 				<td>${co.regdate }</td>
