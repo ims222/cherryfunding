@@ -230,7 +230,7 @@ function showSlides(n) {
 				//alert('저장 완료');
 				swal({
 				  type: 'success',
-				  title: 'Your work has been saved',
+				  title: '저장을 완료하였습니다.',
 				  showConfirmButton: false,
 				  timer: 1500
 				})
