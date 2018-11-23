@@ -46,7 +46,7 @@ public class FundingConfirmController {
 	public String fundingDetail(int fNum, Model model) {
 		model.addAttribute("vo", fundingConfirmService.detail(fNum));
 		model.addAttribute("fPictureList", fundingConfirmService.fPictureList(fNum));
-		return "funding/application/fundingEdit";
+		return ".fundingEdit";
 	}
 
 	@RequestMapping("/funding/confirmCancel")

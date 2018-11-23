@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cherryfunding.spring.dao.CPictureDao;
+import com.cherryfunding.spring.dao.CRecommendDao;
 import com.cherryfunding.spring.dao.CharityDao;
 import com.cherryfunding.spring.dao.UsersDao;
 import com.cherryfunding.spring.util.ClobToString;
@@ -22,6 +23,9 @@ public class IngCharityListService {
 
 	@Autowired
 	private UsersDao usersDao;
+
+	@Autowired
+	private CRecommendDao cRecommendDao;
 
 	@Autowired
 	private S3Util s3;
@@ -56,7 +60,7 @@ public class IngCharityListService {
 				nick = usersDao.select(id).getNick();
 			}
 			l.put("nick", nick);
-			// l.put("recomm", cRecommendDao.getRecommend(cNum).intValue()));
+			l.put("recomm", cRecommendDao.getRecommend(((BigDecimal) l.get("CNUM")).intValue()));
 
 		}
 		return list;
