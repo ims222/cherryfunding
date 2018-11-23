@@ -65,7 +65,6 @@
   </script>
 	
 	<div class="container2">
-	<h2>승인 요청</h2><br>
 	
 <form action="${pageContext.request.contextPath }/admin/wsearch" method="post">
 
@@ -85,27 +84,27 @@
 &nbsp<input type="submit" class="btn btn-info" value="찾기">
 </form><br>
 	<table class="table table-striped" width="500">
+	<c:if test="${vo ne null}">
 		<tr>
 			<th>글번호</th>
 			<th>아이디</th>
 			<th>제목</th>
 			<th>카테고리</th>
 			<th>등록일</th>
-			<th>상세보기</th>
 			<th>승인여부</th>
 			<th>삭제</th>
 			
 		</tr>
-		<c:if test="${vo ne 'null'}">
+		
+		<h2 style="text-align:center;">펀딩</h2>
 		<c:forEach var="vo" items="${vo }">
 		<c:set var="name" value="${vo.fNum }"/>
 			<tr>
 				<td>${vo.fNum }</td>
 				<td>${vo.id }</td>
-				<td>${vo.title }</td>
+				<td><a href="<c:url value='/funding/detail?fNum=${vo.fNum }'/>">${vo.title }</a></td>
 				<td>${vo.category }</td>
 				<td>${vo.regdate }</td>
-				<td><a href="<c:url value='/fundingList/detail?num=${vo.fNum }'/>">상세보기</a></td>
 				<td id="mm"><a data-toggle="modal" href='javascript:modalshow("${vo.fNum}");'>${vo.confirm }</a></td>
 				<td><a href='javascript:modaldelshow("${vo.fNum}");'>삭제</a></td>
 				
@@ -113,9 +112,23 @@
 			</tr>
 		</c:forEach>
 		</c:if>
+		</table>
 		
+		<table class="table table-striped" width="500">
+		<c:if test="${null ne co}">
+		<tr>
+			<th>글번호</th>
+			<th>아이디</th>
+			<th>제목</th>
+			<th>카테고리</th>
+			<th>등록일</th>
+			<th>승인여부</th>
+			<th>삭제</th>
+			
+		</tr>
+		<%-- <c:if test="${co ne 'null'}"> --%>
 		
-		<c:if test="${co ne 'null'}">
+		<h2 style="text-align:center;">기부</h2>
 		<c:forEach var="co" items="${co }">
 			<tr>
 				<td>${co.cNum }</td>
@@ -123,7 +136,7 @@
 				<td>${co.title }</td>
 				<td>${co.category }</td>
 				<td>${co.regdate }</td>
-				<td><a href="<c:url value='/charityList/detail?num=${co.cNum }'/>">상세보기</a></td>
+				<%-- <td><a href="<c:url value='/charity/confirm?cNum=${co.cNum }'/>">상세보기</a></td> --%>
 				<td><a data-toggle="modal" href="javascript:modalshow2('${co.cNum}');">${co.confirm }</a></td>
 				<td><a href='javascript:modaldelshow2("${co.cNum}");'>삭제</a></td>
 				
@@ -131,6 +144,7 @@
 			</tr>
 		</c:forEach>
 		</c:if>
+		</table>
 		
 		
 		
@@ -153,6 +167,5 @@
     </div>
   </div>
 		
-</table>
 
 </div>

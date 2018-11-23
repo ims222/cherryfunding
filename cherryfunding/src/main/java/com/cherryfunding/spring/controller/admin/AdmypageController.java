@@ -131,5 +131,7 @@ public class AdmypageController {
 		int n = UserManageService.sdelete(id);
 		return "redirect:/usermanage";
 	}
+	
+	
 
 }

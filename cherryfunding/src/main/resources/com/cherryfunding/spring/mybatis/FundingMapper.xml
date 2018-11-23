@@ -112,20 +112,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="waitList" resultType="funding">
 		select * from funding where confirm = 'n'
+		order by regdate desc
 	</select>
 	
 	<select id="searchwaitList" parameterType="hashmap" resultType="funding">
 		select * from funding where confirm = 'n'
 		<include refid="searchwaite"/>
+		order by regdate desc
 	</select>
 	
 	<select id="confirmList" resultType="funding">
 		select * from funding where confirm = 'y'
+		order by regdate desc
 	</select>
 	
 	<select id="searchconfirmList" parameterType="hashmap" resultType="funding">
 		select * from funding where confirm = 'y'
 		<include refid="searchwaite"/>
+		order by regdate desc
 	</select>
 		
 	<update id="confirm" parameterType="hashmap">
