@@ -142,21 +142,21 @@ function showSlides(n) {
 }
 </script>
 <div class="container">
-	<table border="1" width="100%" id="fundingInfo">
-		<tr>
-			<th>펀딩번호</th>
-			<th>제목</th>
-			<th>목표금액</th>
-			<th>시작일자</th>
-			<th>종료일자</th>
-			<th>카테고리</th>
-			<th>승인구분</th>
-			<th>승인자</th>
-			<th>신청일</th>
-			<th>신청자</th>
+	<table class="table">
+		<tr> 
+			<th scope="col" width="9%;">펀딩번호</th>
+			<th scope="col" width="20%;">제목</th>
+			<th scope="col" width="10%;">목표금액</th>
+			<th scope="col" width="8%;">시작일자</th>
+			<th scope="col" width="8%;">종료일자</th>
+			<th scope="col" width="10%;">카테고리</th>
+			<th scope="col" width="9%;">승인구분</th>
+			<th scope="col" width="10%;">승인자</th>
+			<th scope="col" width="8%;">신청일</th>
+			<th scope="col" width="8%;">신청자</th>
 		</tr>
 		<tr>
-			<td>${vo.fNum}</td>	
+			<td scope="row">${vo.fNum}</td>	
 			<td id="title">${vo.title}<button class="btn btn-primary" onclick="updateFunding('title')">수정</button></td>
 			<td id="amount">${vo.amount}<button class="btn btn-primary" onclick="updateFunding('amount')">수정</button></td>
 			<td id="sdate">${vo.sdate}</td>
