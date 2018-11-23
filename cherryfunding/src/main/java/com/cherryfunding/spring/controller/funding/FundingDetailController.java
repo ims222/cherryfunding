@@ -183,6 +183,8 @@ public class FundingDetailController {
 		String reward = request.getParameter("reward");
 		JSONObject obj = new JSONObject();
 		if (reward != null) {
+			System.out.println("!!!!!!!!!!!!!!!!!!!!!!");
+			System.out.println(reward);
 			try {
 				Map<String, Object> map = new ObjectMapper().readValue(reward, HashMap.class);
 				if (id.equals(map.get("id"))) {

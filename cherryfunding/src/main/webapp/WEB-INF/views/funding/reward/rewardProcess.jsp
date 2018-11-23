@@ -68,6 +68,9 @@ ul {
     float: right;
 	clear: both;
 }
+.table > tbody > tr > td {
+     vertical-align: middle;
+}
 </style>
 <script id="selectedReward" type="text/template">
 <li>
@@ -313,6 +316,7 @@ ul {
 </script>
 <div class="container w3-border">
 	<div class="container w3-border">
+		<!-- 
 		<div class="dropdown">
 			<button onclick="myFunction()" class="dropbtn">리워드 선택</button>
 			<div id="myDropdown" class="dropdown-content">
@@ -321,6 +325,7 @@ ul {
 				</c:forEach>
 			</div>
 		</div>
+		-->
 		<div id="rewardInfo">
 			<ul id="rewardList">
 				
@@ -333,20 +338,40 @@ ul {
 				<span class="w3-xlarge">원</span>
 			</div>
 			<div class="w3-center w3-border-top" style="padding: 10px">
-				<span class="w3-xlarge">결제하신 금액은 별도 수수료 없이 펀딩을 진행하는 펀더에게 100% 전달됩니다.</span>
+				<span class="w3-large">결제하신 금액은 별도 수수료 없이 펀딩을 진행하는 펀더에게 100% 전달됩니다.</span>
 			</div>
 			<div>
 				<button id="getUserInfo" class="w3-btn w3-block w3-teal">펀딩 참여하기</button>
 			</div>
 		</div>
-		<div id="userInfo" style="display:none;">
-			닉네임:: <span id="nick"></span> <br>
-			잔액:: <span id="balance"></span> <br>
-			결제금액:: <span id="paymentAmount"></span><br>
-			결제후 잔액:: <span id="afterBalance"></span><br>
-			결제일:: <span id="pDate"></span><br>
-			
-			결제를 계속 진행 하시려면 결제 버튼을 눌러주세요.
+		<div id="userInfo" style="display:none; margin-top: 10px;">
+			<table class="table">
+				<tbody>
+					<tr>
+						<th>닉네임 </th> 
+							<td><span id="nick"></span></td>
+					</tr>
+					<tr>
+						<th>잔액 </th> 
+							<td><span id="balance"></span></td>
+					</tr>
+					<tr>
+						<th>결제액 </th> 
+							<td><span id="paymentAmount"></span></td>
+					</tr>
+					<tr>
+						<th>결제 후 잔액 </th> 
+							<td><span id="afterBalance"></span></td>
+					</tr>
+					<tr>
+						<th>결제일 </th> 
+							<td><span id="pDate"></span></td>
+					</tr>
+				</tbody>
+			</table>
+		<div class="w3-center w3-border-top" style="padding: 10px">
+			<span class="w3-large">위의 내용대로 결제를 계속 진행하시려면 결제 버튼을 눌러주세요.</span>
+		</div>	
 		<button id="applicationReward" class="w3-btn w3-block w3-teal">결제</button>
 		</div>
 	</div>
