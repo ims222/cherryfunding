@@ -1,4 +1,4 @@
-package com.cherryfunding.spring.controller.funding;
+package com.cherryfunding.spring.controller.charity;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,12 +9,12 @@ import com.cherryfunding.spring.service.funding.FundingUpdateService;
 import com.cherryfunding.spring.vo.FundingVo;
 
 @Controller
-public class FundingUpdateController {
+public class CharityUpdateController {
 
 	@Autowired
 	private FundingUpdateService fundingUpdateService;
 
-	@RequestMapping("/charity/editContent")
+	@RequestMapping("/funding/editContent")
 	@ResponseBody
 	public FundingVo editContent(FundingVo vo) {
 		fundingUpdateService.update(vo);

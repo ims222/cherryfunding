@@ -44,9 +44,16 @@ public class FundingConfirmController {
 
 	@RequestMapping("/funding/detail")
 	public String fundingDetail(int fNum, Model model) {
-		model.addAttribute("vo", fundingConfirmService.detail(fNum));
+		model.addAttribute("vo", fundingConfirmService.fundingDetail(fNum));
 		model.addAttribute("fPictureList", fundingConfirmService.fPictureList(fNum));
 		return ".fundingEdit";
+	}
+	
+	@RequestMapping("/charity/detail")
+	public String charityDetail(int cNum, Model model) {
+		model.addAttribute("vo", fundingConfirmService.charityDetail(cNum));
+		model.addAttribute("cPictureList", fundingConfirmService.cPictureList(cNum));
+		return ".charityEdit";
 	}
 
 	@RequestMapping("/funding/confirmCancel")
@@ -60,6 +67,8 @@ public class FundingConfirmController {
 		charityConfirmService.confirm(cNum);
 		return "redirect:/funding/waitList";
 	}
+	
+	
 
 	@RequestMapping("/charity/confirmCancel")
 	public String charityConfirmCancel(int cNum) {
