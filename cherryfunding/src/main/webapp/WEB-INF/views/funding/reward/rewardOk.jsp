@@ -2,6 +2,10 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<link rel="stylesheet" href="css/demo.css">
+	<link rel="stylesheet" href="css/footer-distributed.css">
+		
+	
 <div id="main">
 	<div class="container">
 		<div class="w3-center">
