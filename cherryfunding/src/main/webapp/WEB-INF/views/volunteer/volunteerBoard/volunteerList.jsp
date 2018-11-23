@@ -10,6 +10,7 @@
 		$("#showmore").on('click', showmore);		
 	});
 	function showmore(){
+		$('#showDiv').append(document.querySelector('#loadingTemplate').innerHTML);
 		$.ajax({
 			url: '${pageContext.request.contextPath}/volunteer/volunteerShowMore',
 			type: 'get',
@@ -40,7 +41,10 @@
 		    		html += '</div>';
 		    	}
 		    	$("#showDiv").append(html);
-		    }	
+		    },
+			complete :function(){
+				$('.loading').remove();
+			}	
 		})
 		pageNum += 1;
 	}
@@ -58,6 +62,7 @@
 	}
 	
 	function firstShow(){
+		$('#showDiv').append(document.querySelector('#loadingTemplate').innerHTML);
 		$.ajax({
 			url: '${pageContext.request.contextPath}/volunteer/volunteerFirstShow',
 			type: 'get',
@@ -89,11 +94,23 @@
 		    		html += '</div>';
 		    	}
 		    	$("#showDiv").append(html);
-		    }	
+		    },
+			complete :function(){
+				$('.loading').remove();
+			}	
 		})
 		pageNum += 1;
 	}
 	
+</script>
+<script id="loadingTemplate" type="text/template">
+<div class="spinner loading">
+	<div class="rect1"></div>
+	<div class="rect2"></div>
+	<div class="rect3"></div>
+	<div class="rect4"></div>
+	<div class="rect5"></div>
+</div>
 </script>
 <style type="text/css">
 .modal{
