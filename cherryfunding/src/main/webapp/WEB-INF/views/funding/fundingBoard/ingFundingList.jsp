@@ -118,7 +118,7 @@
 	
 	function related(){//진행중인 것만 나오게... 부탁드려요....
 		var keyword = $("#keyword").val();
-		var field = $("#field option:selected").text();
+		//var field = $("#field option:selected").text();
 		
 		$.ajax({
 			url:'${pageContext.request.contextPath}/funding/relatedWords',
@@ -148,7 +148,7 @@
 			<div class="w3-left-align" style="float:left;">{category} | {nick}</div>
 			<div class="w3-right-align"><p>추천 <span class="w3-badge w3-green">{recomm}</span></p></div>
 			<div class="w3-border">
-				<div class="w3-blue" style="height:5px;width:{width}"></div>
+				<div class="processBar" style="height:5px;width:{width}"></div>
 			</div>
 			<div class="w3-left-align" style="float:left;">{percent} · {camout}원</div>
 			<div class="w3-right-align">{dday}일 남음</div>

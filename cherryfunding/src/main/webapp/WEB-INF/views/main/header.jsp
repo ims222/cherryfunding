@@ -4,7 +4,7 @@
 
 <style>
 .topnav2 {
-    background-color: #333;
+    background-color: #ff4d4d;
     overflow: hidden;
 }
 
