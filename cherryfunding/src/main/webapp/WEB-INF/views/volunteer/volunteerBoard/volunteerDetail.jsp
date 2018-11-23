@@ -167,13 +167,13 @@
 					if('${sessionScope.id}' === value.id){
 						deleteComment = "<button class='deleteComment' onclick='commentDelete(" + value.vcNum +")'>삭제</button>";
 					}
-					var id = value.id;
-					var content = value.content;
-					var regdate = value.regdate;
+					var id = value.ID;
+					var content = value.CONTENT;
+					var regdate = calDate(value.REGDATE);
 					var savename = value.savename;
 					var nick = value.nick;
 					html += '<p class="pull-right"><small>' + regdate + '</small></p>'
-							+ '<a class="media-left" href="#">' +
+							+ '<a class="media-left" href="#">' 
 							+ '<img src=' + savename + ' class="w3-circle" width="50px"'
 							+ 'onclick="showProfile(' + nick + ',' + savename + ')"></a>'
 							+ '<div class="media-body">'
@@ -238,6 +238,26 @@
 				$("#insertComment textarea[name='content']").val('');
 				//commentCount();
 				commentList();
+			}
+		});
+	}
+	function showProfile(nick, savename){
+		$.ajax({
+			url: '${pageContext.request.contextPath}/sharing/getUserInfoByNick',
+			data: {nick: nick},
+			dataType: 'json',
+			type: 'get',
+			success: function(data){
+				$('#showProfile').empty();
+				$('#showProfile').append('<img src="'+ savename + '" class="w3-circle" width="120px" height="120px">');
+				$('#showProfile').append('<p>'+'아이디:' + data.id + '<p>' 
+						+'<p>'+' 닉네임: ' + data.nick + '</p>'
+						+'<p>'+' 성별: ' + data.gender+'</p>'
+						);
+				$('#showProfile').dialog({width: 200, height:270, hide: "fade", close : function(){
+					parent.$('#showProfile').dialog('destroy');
+	              }  
+				});		
 			}
 		});
 	}
@@ -366,5 +386,6 @@
 			</div>
 		</div>
 	</div>
-</div>  
+</div>
+<div id="showProfile" hidden="hidden" title="회원 프로필"></div>  
 </div>
