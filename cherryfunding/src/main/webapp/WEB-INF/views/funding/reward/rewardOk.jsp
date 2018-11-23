@@ -16,7 +16,7 @@
 			닉네임::${vo.nick}<br>
 			합계::<fmt:formatNumber value="${totPrice}" pattern="#,###"/> 원<br>
 			잔고::<fmt:formatNumber value="${vo.balance}" pattern="#,###"/> 원<br>
-			<button>목록</button>
+			<button class="w3-btn w3-block w3-teal" onclick="location.href='${pageContext.request.contextPath}/funding/ingFundingList'">목록</button>
 		</div>
 		
 		
