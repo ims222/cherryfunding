@@ -24,6 +24,7 @@
 	});
 	
 	var showMore = function(){
+		$('#list').append(document.querySelector('#loadingTemplate').innerHTML);
 		var pageNum = $('#pageNum').val();
 		var category = $('#category').val();
 		var sort = $('#sort').val();
@@ -73,6 +74,9 @@
 					}).prop('selected', true);
 					$('#keyword').val(data.keyword);
 				}
+			},
+			complete :function(){
+				$('.loading').remove();
 			}
 		});	
 	}
@@ -114,6 +118,15 @@
 			<div class="w3-right-align">{dday}일 남음</div>
 		</div>
 	</div>
+</div>
+</script>
+<script id="loadingTemplate" type="text/template">
+<div class="spinner loading">
+	<div class="rect1"></div>
+	<div class="rect2"></div>
+	<div class="rect3"></div>
+	<div class="rect4"></div>
+	<div class="rect5"></div>
 </div>
 </script>
 <!-- Main -->
