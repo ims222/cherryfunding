@@ -42,7 +42,6 @@
 </head>
 <body>
 	<div class="container">
-	<h2>승인 현황</h2><br>
 	
 	<form action="${pageContext.request.contextPath }/admin/csearch" method="post">
 	<select name="kinds">
@@ -62,6 +61,8 @@
 
 	
 	<table class="table table-striped" width="500">
+			<c:if test="${null ne vo}">
+			<h2 style="text-align:center;">펀딩</h2>
 		<tr>
 			<th>글번호</th>
 			<th>아이디</th>
@@ -71,9 +72,7 @@
 			<th>상세보기</th>
 			<th>승인여부</th>
 			<th>승인자</th>
-			
 		</tr>
-		<c:if test="${vo ne 'null'}">
 		<c:forEach var="vo" items="${vo }">
 			<tr>
 				<td>${vo.fNum }</td>
@@ -88,8 +87,11 @@
 			</tr>
 		</c:forEach>
 		</c:if>
+		</table>
 		
-		<c:if test="${co ne 'null'}">
+		<table class="table table-striped" width="500">
+		<c:if test="${null ne co}">
+		<h2 style="text-align:center;">기부</h2>
 	 	<c:forEach var="co" items="${co }">
 			<tr>
 				<td>${co.cNum }</td>
@@ -104,6 +106,7 @@
 			</tr>
 		</c:forEach>
 		</c:if>
+		</table>
 		
 		
 			 <!-- Modal -->
@@ -124,9 +127,6 @@
       </div>
     </div>
   </div>
-		
-
-</table>
 
 </div>
 
