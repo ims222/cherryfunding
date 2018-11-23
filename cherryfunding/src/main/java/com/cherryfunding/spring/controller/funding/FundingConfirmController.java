@@ -79,7 +79,7 @@ public class FundingConfirmController {
 	@RequestMapping("/charity/delete")
 	public String deleteCharity(int cNum) {
 		charityConfirmService.wait(cNum);
-		return "redirect:/funding/waitList";
+		return "redirect:/confirmList";
 	}
 
 }
