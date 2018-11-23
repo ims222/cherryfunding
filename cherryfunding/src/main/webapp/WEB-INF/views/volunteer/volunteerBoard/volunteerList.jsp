@@ -32,7 +32,7 @@
 		    		html += '<a href="${pageContext.request.contextPath}/volunteer/volunteerDetail?vNum='
 			    			+ data.list[i].vNum
 		    				+ '" class="image featured">';		    				
-		    		html += '<div style="min-height:200px"><img src="${pageContext.request.contextPath}/resources/upload/volunteer/'
+		    		html += '<div style="min-height:200px"><img src="'
 		    			+ data.list[i].saveName + '" alt="'
 		    			+ data.list[i].vpInfo 
 		    			+'" height="200px" class="w3-round" width="100%"></a></div>';
@@ -87,7 +87,7 @@
 		    		html += '<a href="${pageContext.request.contextPath}/volunteer/volunteerDetail?vNum='
 			    			+ data.list[i].vNum
 		    				+ '" class="image featured">';		    				
-		    		html += '<div style="min-height:200px"><img src="${pageContext.request.contextPath}/resources/upload/volunteer/'
+		    		html += '<div style="min-height:200px"><img src="'
 		    			+ data.list[i].saveName + '" alt="'
 		    			+ data.list[i].vpInfo 
 		    			+'" height="200px" class="w3-round" width="100%"></a></div>';
