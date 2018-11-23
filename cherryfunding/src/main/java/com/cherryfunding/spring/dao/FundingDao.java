@@ -91,7 +91,7 @@ public class FundingDao {
 
 	public int confirm(HashMap<Object, Object> map) { // 컨펌
 		System.out.println("DAO접근@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-		return sqlSession.update(NAMESPACE + "confirm",map);
+		return sqlSession.update(NAMESPACE + "confirm", map);
 	}
 
 	public int wait(int fNum) { // 컨펌
