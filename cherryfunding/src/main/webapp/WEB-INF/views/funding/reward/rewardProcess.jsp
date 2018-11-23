@@ -370,7 +370,7 @@ ul {
 				</tbody>
 			</table>
 		<div class="w3-center w3-border-top" style="padding: 10px">
-			<span class="w3-large">위의 내용대로 결제를 계속 진행하시려면 결제 버튼을 눌러주세요.</span>
+			<span class="w3-large">위의 내용대로 결제를 진행하시려면 결제 버튼을 눌러주세요.</span>
 		</div>	
 		<button id="applicationReward" class="w3-btn w3-block w3-teal">결제</button>
 		</div>

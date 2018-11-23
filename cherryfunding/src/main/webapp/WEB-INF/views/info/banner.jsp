@@ -27,6 +27,7 @@ function idCheck(){
 </style>
 <!-- Banner -->
 <div id="banner" class="container">
+<!-- 소개페이지에는 필요없을거 같아 제외함
 	<section>
 		<p>
 			안녕하세요 <strong>CherryFunding</strong>입니다.<br> 봉사신청은 아래 신청버튼을 눌러주세요<br> 
@@ -36,6 +37,7 @@ function idCheck(){
 			class="button medium" onclick="idCheck();">봉사신청하기</a>
 		</p>
 	</section>
+-->	
 	<div id="myModal" class="modal fade" role="dialog">
         <div class="modal-dialog modal-sm">
             <div class="modal-content">
