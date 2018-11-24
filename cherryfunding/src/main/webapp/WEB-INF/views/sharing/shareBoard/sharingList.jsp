@@ -24,13 +24,13 @@
 					alert('마지막 페이지 입니다');
 				}else{
 					data.list.forEach(function(value){
-						console.log(value);
 						result +=	html.replace(/{sNum}/gi, value.SNUM)
 									.replace("{savename}", value.savename)
 									.replace("{spinfo}", value.spinfo)
 									.replace("{title}", value.TITLE)
 									.replace("{nick}", value.nick)
-									.replace("{category}", value.CATEGORY);
+									.replace("{category}", value.CATEGORY)
+									.replace("{recomm}", value.recomm);
 					});
 					document.querySelector('#list').innerHTML = result;
 					$('#pageNum').val(data.pageNum);
@@ -56,11 +56,6 @@
 		<div>
 			<div class="w3-left-align" style="float:left;">{category} | {nick}</div>
 			<div class="w3-right-align"><p>추천 <span class="w3-badge w3-green">{recomm}</span></p></div>
-			<div class="w3-border">
-				<div class="w3-blue" style="height:5px;width:{width}"></div>
-			</div>
-			<div class="w3-left-align" style="float:left;">{percent} · {camout}원</div>
-			<div class="w3-right-align">{dday}일 남음</div>
 		</div>
 	</div>
 </div>

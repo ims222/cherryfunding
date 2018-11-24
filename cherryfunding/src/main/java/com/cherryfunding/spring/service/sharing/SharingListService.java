@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cherryfunding.spring.dao.SPictureDao;
+import com.cherryfunding.spring.dao.SRecommendDao;
 import com.cherryfunding.spring.dao.ShareDao;
 import com.cherryfunding.spring.dao.UsersDao;
 import com.cherryfunding.spring.util.ClobToString;
@@ -26,6 +27,9 @@ public class SharingListService {
 
 	@Autowired
 	private UsersDao usersDao;
+
+	@Autowired
+	private SRecommendDao sRecommendDao;
 
 	@Autowired
 	private S3Util s3;
@@ -59,6 +63,7 @@ public class SharingListService {
 				nick = usersDao.select(id).getNick();
 			}
 			l.put("nick", nick);
+			l.put("recomm", sRecommendDao.getRecommend(((BigDecimal) l.get("SNUM")).intValue()));
 		}
 		return list;
 	}

@@ -172,6 +172,7 @@
 }
 
 </style>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@7"></script>
 <script type="text/javascript">
 
 	var index = 0;
@@ -474,7 +475,11 @@
 	    $(document).on("click","button[name=showLess]",function(){
 	        console.log(cnt);
 	    	if(cnt===1){
-	    		alert("리워드는 하나 이상은 반드시 입력해야합니다");
+	    		//alert("리워드는 하나 이상은 반드시 입력해야합니다");
+	    		swal({
+				  type: 'error',
+				  title: '리워드는 하나 이상은 반드시 입력해야 합니다.',
+				});
 	        	return false;
 	        }
 	    	var RewardHtml = $("div[name=inputReward]:last");
@@ -552,19 +557,35 @@
 	
 		qq(document.getElementById("fundingApplicationButton")).attach("click", function() {
 			if(!$("input[name='title']").val()){
-				alert("제목은 필수입력사항입니다");
+				//alert("제목은 필수입력사항입니다");
+				swal({
+				  type: 'error',
+				  title: '제목은 필수입력사항입니다.',
+				});
 				return false;
 			}
 			if(!$("textarea[name='content']").val()){
-				alert("내용은 필수입력사항입니다");
+				//alert("내용은 필수입력사항입니다");
+				swal({
+				  type: 'error',
+				  title: '내용은 필수입력사항입니다.',
+				});
 				return false;
 			}
 			if(!$("input[name='amount']").val()){
-				alert("목표금액은 필수입력사항입니다");
+				//alert("목표금액은 필수입력사항입니다");
+				swal({
+				  type: 'error',
+				  title: '목표금액은 필수입력사항입니다.',
+				});
 				return false;
 			}
 			if(!$("input[name='dateRange']").val()){
-				alert("펀딩기간은 필수입력사항입니다");
+				//alert("펀딩기간은 필수입력사항입니다");
+				swal({
+				  type: 'error',
+				  title: '펀딩기간은 필수입력사항입니다.',
+				});
 				return false;
 			}
 			
@@ -577,7 +598,11 @@
 				}
 			}
 			if (check < 1) {
-				alert("물품은 한가지 이상 입력하셔야 되욧");
+				//alert("물품은 한가지 이상 입력하셔야 되욧");
+				swal({
+					  type: 'error',
+					  title: '물품은 한 가지 이상 입력하셔야 합니다.',
+					});
 				return false;
 			}
 			

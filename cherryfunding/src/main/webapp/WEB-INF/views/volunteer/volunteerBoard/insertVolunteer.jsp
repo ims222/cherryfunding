@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@7"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
 		$("#inputFile").on('change', "input[name='sPicture']", function(){
@@ -35,23 +36,38 @@
 	});
 	function appCommit(){
 		if(!$("#title").val()){
-			alert("제목을 입력해주세욧");
+			swal({
+				  type: 'error',
+				  title: '제목을 입력하세요.',
+				});
 			return false;
 		}
 		if(!$("#content").val()){
-			alert("내용을 입력해주세욧");
+			swal({
+				  type: 'error',
+				  title: '내용을 입력하세요.',
+				});
 			return false;
 		}
 		if(!$("#dDay").val()){
-			alert("봉사 날짜를 입력하세욧");
+			swal({
+				  type: 'error',
+				  title: '봉사일을 입력하세요.',
+				});
 			return false;
 		}
 		if(!$("#members").val()){
-			alert("필요인원수를 입력하세욧");
+			swal({
+				  type: 'error',
+				  title: '필요인원 수를 입력하세요.',
+				});
 			return false;
 		}
 		if(!$("#place").val()){
-			alert("봉사 장소를 입력하세욧ㅅㅅ");
+			swal({
+				  type: 'error',
+				  title: '봉사 장소를 입력하세요.',
+				});
 			return false;
 		}
 		return true;

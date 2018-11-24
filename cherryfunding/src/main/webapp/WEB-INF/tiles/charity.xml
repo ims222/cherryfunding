@@ -10,6 +10,14 @@ PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
 		<put-attribute name="content" value="/WEB-INF/views/charity/charitytBoard/ingCharityList.jsp"/>
 	</definition>
 	
+	<definition name=".charityEdit" extends = ".ingCharityList">
+		<put-attribute name="content" value="/WEB-INF/views/charity/application/charityEdit.jsp"/>
+	</definition>
+	
+	<definition name=".charityParticipants" extends = ".ingCharityList">
+		<put-attribute name="content" value="/WEB-INF/views/charity/donation/charityParticipants.jsp"/>
+	</definition>
+	
 	<definition name=".donaProcess" extends = ".ingCharityList">
 		<put-attribute name="content" value="/WEB-INF/views/charity/donation/donaProcess.jsp"/>
 	</definition>
@@ -37,7 +45,7 @@ PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
 	</definition>
 	
 	<definition name=".inputCharity" extends = ".main">
-		<put-attribute name="banner" value="/WEB-INF/views/charity/application/banner.jsp"/>
+		<put-attribute name="banner" value="/WEB-INF/views/charity/banner.jsp"/>
 		<put-attribute name="content" value="/WEB-INF/views/charity/application/charityApplicationProcess.jsp"/>
 	</definition>
 	<!-- //////// -->

@@ -99,7 +99,7 @@ public class AdmypageController {
 	@RequestMapping(value="/admypage/confirm",method=RequestMethod.GET)
 	public String confirm(int num,String adid) {//승인 하기
 		HashMap<Object, Object> map = new HashMap<Object, Object>();
-		map.put("num", num);
+		map.put("fNum", num);
 		map.put("aid",adid);
 		FundingConfirmService.confirm(map);
 		

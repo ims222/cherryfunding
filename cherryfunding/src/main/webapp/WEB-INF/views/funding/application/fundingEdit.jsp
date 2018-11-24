@@ -4,6 +4,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <script src="${pageContext.request.contextPath}/resources/js/summernote/summernote.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/summernote/summernote-ko-KR.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@7"></script>
 <link href="${pageContext.request.contextPath}/resources/css/summernote/summernote.css" type="text/css" rel="stylesheet">
 <style type="text/css">
 #fundingInfo {
@@ -144,16 +145,17 @@ function showSlides(n) {
 <div class="container">
 	<table class="table">
 		<tr> 
-			<th scope="col" width="9%;">펀딩번호</th>
-			<th scope="col" width="20%;">제목</th>
+			<th scope="col" width="8%;">후원번호</th>
+			<th scope="col" width="19%;">제목</th>
 			<th scope="col" width="10%;">목표금액</th>
 			<th scope="col" width="8%;">시작일자</th>
 			<th scope="col" width="8%;">종료일자</th>
 			<th scope="col" width="10%;">카테고리</th>
-			<th scope="col" width="9%;">승인구분</th>
-			<th scope="col" width="10%;">승인자</th>
+			<th scope="col" width="7%;">승인구분</th>
+			<th scope="col" width="9%;">승인자</th>
 			<th scope="col" width="8%;">신청일</th>
-			<th scope="col" width="8%;">신청자</th>
+			<th scope="col" width="8%;">신청자</th> 
+			<th scope="col" width="5%;">삭제</th> 
 		</tr>
 		<tr>
 			<td scope="row">${vo.fNum}</td>	
@@ -166,6 +168,7 @@ function showSlides(n) {
 			<td id="aid">${vo.aid}<button class="btn btn-primary" onclick="updateFunding('aid')">수정</button></td>
 			<td>${vo.regdate}</td>
 			<td>${vo.id}</td>
+			<td><a href="${pageContext.request.contextPath}/fundingList/delete?fNum=${vo.fNum}">삭제</a></td>
 		</tr>
 	</table>
 	
@@ -224,7 +227,13 @@ function showSlides(n) {
 			dataType:'json',
 			type:'post',
 			success: function(data){
-				alert('저장 완료');
+				//alert('저장 완료');
+				swal({
+				  type: 'success',
+				  title: '저장을 완료하였습니다.',
+				  showConfirmButton: false,
+				  timer: 1500
+				})
 			}
 		});
 	};

@@ -14,7 +14,7 @@ public class FundingUpdateController {
 	@Autowired
 	private FundingUpdateService fundingUpdateService;
 
-	@RequestMapping("/funding/editContent")
+	@RequestMapping("/charity/editContent")
 	@ResponseBody
 	public FundingVo editContent(FundingVo vo) {
 		fundingUpdateService.update(vo);

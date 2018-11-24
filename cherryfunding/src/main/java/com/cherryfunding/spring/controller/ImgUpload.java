@@ -58,7 +58,6 @@ public class ImgUpload {
 			if (index == 0) {
 				String sDate = dateRange[0].replaceAll("/", "-");
 				String eDate = dateRange[1].replaceAll("/", "-");
-				System.out.println("루ㅕㅡ 나와라");
 				FundingVo fvo = new FundingVo();
 				fvo.setfNum(fNum);
 				fvo.setTitle(title);
@@ -70,7 +69,6 @@ public class ImgUpload {
 				fvo.setSdate(new Date(jsdate.getTime()));
 				java.util.Date jedate = new SimpleDateFormat("yyyy-MM-dd").parse(eDate);
 				fvo.setEdate(new Date(jedate.getTime()));
-				System.out.println("살려주세용ㅇㅇㅇ");
 				insertFundingService.finsert(fvo); // db
 			}
 			String caption = request.getParameter("caption");
@@ -82,8 +80,6 @@ public class ImgUpload {
 			fpvo.setOrgname(orgfilename);
 			fpvo.setFilesize(filesize);
 			fpvo.setFpinfo(caption);
-			System.out.println("!!!!!!!!!!1");
-			System.out.println(orgfilename);
 			insertFundingService.fpinsert(fpvo); // 저장
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
