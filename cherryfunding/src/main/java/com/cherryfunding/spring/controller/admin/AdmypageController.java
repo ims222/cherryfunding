@@ -31,7 +31,6 @@ public class AdmypageController {
 	@Autowired UserManageService UserManageService; //유저 관리 ex) 리스트 ,삭제
 	
 	
-	
 	@RequestMapping(value="/admypage",method=RequestMethod.GET)
 	public String admypage(Model model) {
 		
