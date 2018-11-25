@@ -3,6 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- Main -->
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/layoutForSummary.css">
 <div id="main">
 	<div class="container">
 		<div class="bg-img">
@@ -27,10 +28,51 @@
 			</form>
 		</div>
 		<div>
+
+		<div class="row">
+				  <div class="col-md-3 mainContent">
+				    <div class="card" style="background-color: #2196F3;">
+				      <p><i class='fas fa-hand-holding-heart w3-xxlarge'></i></p>
+				      <p style="display: none;">전체 후원 갯수 ${summary.totCharity.CNT}</p>
+					  <p>전체 후원 금액 <fmt:formatNumber value="${summary.totCharity.S}" pattern="#,###"/>원</p>
+				    </div>
+				  </div>
+				
+				  <div class="col-md-3 mainContent">
+				    <div class="card" style="background-color: #4CAF50;">
+				      <p><i class='fas fa-seedling w3-xxlarge'></i></p>
+				      <p style="display: none;">오늘 후원 갯수 ${summary.todayCharityCount}</p>
+					  <p>오늘 후원 금액 <fmt:formatNumber value="${summary.todayCharityPrice}" pattern="#,###"/>원</p>
+				    </div>
+				  </div>
+				
+				 <div class="col-md-3 mainContent">
+				    <div class="card" style="background-color: #f44336;">
+				      <p><i class='fas fa-hand-holding-usd w3-xxlarge'></i></p>
+				      <p style="display:none;">전체 펀딩 갯수 ${summary.totFunding.CNT}</p>
+					  <p>전체 펀딩 금액 <fmt:formatNumber value="${summary.totFunding.S}" pattern="#,###" />원</p>
+				    </div>
+				  </div>
+				
+				  <div class="col-md-3 mainContent">
+				    <div class="card" style="background-color: #555;">
+				      <p><i class='fas fa-piggy-bank w3-xxlarge'></i></p>
+				      <p style="display:none;">오늘 펀딩 갯수 ${summary.todayFundingCount}</p>
+					  <p>오늘 펀딩 금액 <fmt:formatNumber value="${summary.todayFundingPrice}" pattern="#,###"/>원</p>
+				    </div>
+				  </div>
+				</div>
+		
+		
 			<div class="row">
 				<!-- 종료임박후원 -->
+<<<<<<< HEAD
+				<div class="col-md-4 mainContent">
+					<a data-voice="종료임박후원" href="${pageContext.request.contextPath}/charityList/detail?num=${summary.cEnd.cNum}">
+=======
 				<div class="col-md-3 mainContent">
 					<a data-voice="종료임박후원" href="${pageContext.request.contextPath}/Charity/ingCharityDetailforUser?cNum=${summary.cEnd.cNum}">
+>>>>>>> refs/remotes/origin/master
 					<img src="${summary.cEnd.savename}"	alt="${summary.cEnd.cpinfo}" class="w3-round listImage">
 					</a><div class="top-left">종료임박후원</div>
 					<div>
@@ -71,8 +113,13 @@
 					</div>
 				</div>
 				<!-- 주목할만한 후원 -->
+<<<<<<< HEAD
+				<div class="col-md-4 mainContent">
+					<a data-voice="주목할만한 후원" href="${pageContext.request.contextPath}/fundingList/detail?num=${summary.cHot.cNum}">
+=======
 				<div class="col-md-3 mainContent">
 					<a data-voice="종료임박후원" href="${pageContext.request.contextPath}/Charity/ingCharityDetailforUser?cNum=${summary.cHot.cNum}">
+>>>>>>> refs/remotes/origin/master
 					<img src="${summary.cHot.savename}"	alt="${summary.cHot.cpinfo}" class="w3-round listImage">
 					</a><div class="top-left">종료임박후원</div>
 					<div>
@@ -113,8 +160,13 @@
 					</div>
 				</div>
 				<!-- 참여금액이 높은 후원 -->
+<<<<<<< HEAD
+				<div class="col-md-4 mainContent">
+					<a data-voice="참여금액이 높은 후원" href="${pageContext.request.contextPath}/fundingList/detail?num=${summary.cPrice.cNum}">
+=======
 				<div class="col-md-3 mainContent">
 					<a data-voice="참여금액이 높은 후원" href="${pageContext.request.contextPath}/Charity/ingCharityDetailforUser?cNum=${summary.cPrice.cNum}">
+>>>>>>> refs/remotes/origin/master
 					<img src="${summary.cPrice.savename}"	alt="${summary.cPrice.cpinfo}" class="w3-round listImage">
 					</a><div class="top-left">참여금액이 높은 후원</div>
 					<div>
@@ -156,21 +208,13 @@
 					</div>
 				</div>
 				<!-- 요약 -->
-				<div class="col-md-3 mainContent">
-					<p style="display:none;">전체 펀딩 갯수 ${summary.totFunding.CNT}</p>
-					<p>전체 펀딩 금액 <fmt:formatNumber value="${summary.totFunding.S}" pattern="#,###" />원</p>
-					<p style="display:none;">오늘 펀딩 갯수 ${summary.todayFundingCount}</p>
-					<p>오늘 펀딩 금액 <fmt:formatNumber value="${summary.todayFundingPrice}" pattern="#,###"/>원</p>
-					<br>
-					<p style="display: none;">전체 후원 갯수 ${summary.totCharity.CNT}</p>
-					<p>전체 후원 금액 <fmt:formatNumber value="${summary.totCharity.S}" pattern="#,###"/>원</p>
-					<p style="display: none;">오늘 후원 갯수 ${summary.todayCharityCount}</p>
-					<p>오늘 후원 금액 <fmt:formatNumber value="${summary.todayCharityPrice}" pattern="#,###"/>원</p>
+				
 				</div>
-			</div>
+				
+				
 			<div class="row">
 				<!-- 종료임박펀딩 -->
-				<div class="col-md-3 mainContent">
+				<div class="col-md-4 mainContent">
 					<a data-voice="종료임박펀딩" href="${pageContext.request.contextPath}/funding/ingFundingDetailforUser?fNum=${summary.fEnd.fNum}">
 					<img src="${summary.fEnd.savename}"	alt="${summary.fEnd.fpinfo}" class="w3-round listImage">
 					</a><div class="top-left">종료임박펀딩</div>
@@ -213,7 +257,7 @@
 					</div>
 				</div>
 				<!-- 가장 많이 주목된 펀딩 -->
-				<div class="col-md-3 mainContent">
+				<div class="col-md-4 mainContent">
 					<a data-voice="가장 많이 주목된 펀딩" href="${pageContext.request.contextPath}/funding/ingFundingDetailforUser?fNum=${summary.fHot.fNum}">
 					<img src="${summary.fHot.savename}"	alt="${summary.fHot.fpinfo}" class="w3-round listImage">
 					</a><div class="top-left">가장 많이 주목된 펀딩</div>
@@ -256,7 +300,7 @@
 					</div>
 				</div>
 				<!-- 참여금액이 가장 높은 펀딩 -->
-				<div class="col-md-3 mainContent">
+				<div class="col-md-4 mainContent">
 					<a data-voice="참여금액이 가장 높은 펀딩" href="${pageContext.request.contextPath}/funding/ingFundingDetailforUser?fNum=${summary.fPrice.fNum}">
 					<img src="${summary.fPrice.savename}" alt="${summary.fPrice.fpinfo}" class="w3-round listImage">
 					</a><div class="top-left">참여금액이 가장 높은 펀딩</div>
@@ -299,7 +343,7 @@
 					</div>
 				</div>
 				<!-- 로그인 -->
-				<div class="col-md-3 mainContent">
+				<div class="col-md-4 mainContent">
 					<!-- 
 					<form method="post" action="${pageContext.request.contextPath}/testlogin">
 						<c:choose>
