@@ -25,11 +25,17 @@
 <style>
 #welcome
 	{
+		height: 300px;
+		background-image: url(../resources/images/main_charity.png);
+		background-position: center;
+		background-size: 100% 100%;
 		overflow: hidden;
 		padding: 2em 100px 0em 100px;
 		text-align: center;
 		color: #7D6774;
+		/*
 		background-color: #333;
+		*/
 	}
 	
 	#welcome .content

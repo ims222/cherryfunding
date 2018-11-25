@@ -27,15 +27,18 @@
 		
 					<div class="w3-center">
 		
-						<a href="#"><i class="fa fa-facebook"></i></a>&nbsp
-						<a href="#"><i class="fa fa-twitter"></i></a>&nbsp
-						<a href="#"><i class="fa fa-linkedin"></i></a>&nbsp
-						<a href="#"><i class="fa fa-github"></i></a>
+						<a data-voice="facebook" href="#"><i class="fa fa-facebook"></i></a>&nbsp&nbsp&nbsp
+						<a data-voice="twitter" href="#"><i class="fa fa-twitter"></i></a>&nbsp&nbsp&nbsp
+						<a data-voice="링크드인" href="#"><i class="fa fa-linkedin"></i></a>&nbsp&nbsp&nbsp
+						<a data-voice="github" href="#"><i class="fa fa-github"></i></a>
 		
 					</div>
 		
 					<div class="w3-center">
+					<br>
 					펀딩 프로젝트의 진행과 리워드 제공의 책임은 해당 프로젝트의 개설자에게 있습니다. 체리펀딩은 통신판매중개자이며 직접 판매를 진행하지 않습니다.
+					<br>
+					<br>
 						<p>Cherryfunding &copy; 2018</p>
 					</div>
 					
