@@ -288,7 +288,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 오늘 후원 금액, 갯수 -->
 	<select id="todayCharityPrice" resultType="int">
 		select NVL(sum(amount), 0) sumPrice from cDetail
-            where regdate = (sysdate + (1/24)*9)
+		where to_date(regdate, 'yyyy-MM-dd') = to_date(sysdate + (1/24) * 9, 'yyyy-mm-dd')
 	</select>
 	<select id="todayCharityCount" resultType="int">
 		select NVL(count(cNum), 0) cnt from charity where confirm = 'y'
