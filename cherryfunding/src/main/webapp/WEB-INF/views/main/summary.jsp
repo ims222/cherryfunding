@@ -313,7 +313,6 @@
 									<c:set var="barfPriceBefore" value="${fPriceBefore}" />
 								</c:otherwise>
 							</c:choose>
-		
 						<div>
 							<div class="w3-left-align" style="float:left;">${summary.fPrice.category} | ${summary.fPrice.id}</div>
 							<div class="w3-right-align"><p>추천 <span class="w3-badge w3-green">${summary.fPriceRecomm}</span></p></div>
