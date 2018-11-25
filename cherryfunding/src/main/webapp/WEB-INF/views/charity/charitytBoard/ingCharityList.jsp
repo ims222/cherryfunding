@@ -8,20 +8,26 @@
 <script type="text/javascript">
 	var array = [];
 	$(document).ready(function(){
-		$("#category").on('click', 'button', function(e){
-			var value = $(this).text();
-			location.href= "${pageContext.request.contextPath}/charity/ingCharityList?category=" + value;
-		});
-		$("#sort").on('change', function(){
-			var value = $(this).val();
-			location.href= "${pageContext.request.contextPath}/charity/ingCharityList?sort=" + value;
-		});
-		$("#keyword").on('keyup', related);
-		$("#keyword").autocomplete({source: array});
-		
 		showMore();
-		$('#showMore').on('click', showMore);
+		$("#category").on('click', 'button', selectCategory);
+		$("#sort").on('change', selectionOption);
+		$("#keyword").on('keyup', related);
+		$("#showMore").on('click', showMore);
+		$("#keyword").autocomplete({source: array});
 	});
+	
+	function selectCategory(){
+		$("#list").empty();
+		$('#pageNum').val(1);
+		$('#keyword').val('');
+		$('#category').val($(this).text());
+		showMore();
+	}
+	function selectionOption(){
+		$("#list").empty();
+		$('#pageNum').val(1);
+		showMore();
+	}
 	
 	var showMore = function(){
 		$('#list').append(document.querySelector('#loadingTemplate').innerHTML);
