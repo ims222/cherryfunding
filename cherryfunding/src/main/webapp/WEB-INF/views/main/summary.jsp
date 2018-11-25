@@ -64,7 +64,7 @@
 								<div class="processBar" style="height:5px;width:${barcEndBefore/10000}"></div>
 							</div>
 							<div class="w3-left-align" style="float:left;">
-							<fmt:formatNumber value="${cEndBefore/100}" type="percent" pattern="0%"/> ·
+							<fmt:formatNumber value="${cEndBefore/100}" type="percent" pattern="#%"/> ·
 							<fmt:formatNumber value="${summary.cEnd.cAmount}" pattern="#,###"/>원</div>
 							<div class="w3-right-align">${cEndEnd - cEndNow}일 남음</div>
 						</div>
