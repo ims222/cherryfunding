@@ -268,19 +268,19 @@
  				<span class="w3-xxlarge">${countSupporter}</span><span class="w3-xlarge"> 명의 서포터</span>
  				</div>
  				
-				<button class="w3-btn w3-block w3-teal w3-xxlarge" onclick="location.href='${pageContext.request.contextPath}/charity/donation?cNum=${vo.cNum}';">후원 신청</button>
+				<button class="w3-btn w3-block w3-teal w3-xxlarge" onclick="location.href='${pageContext.request.contextPath}/charity/donation?cNum=${vo.cNum}';">후원 참여</button>
 				
-				
-				<button id="recommend" class="button button-like">
-					<i class="fa fa-heart"></i>
-					<span>Like <span id="cRecommend">0</span></span>
-				</button>
-				
-				
+				<div style="margin-top: 10px;">
+					<button id="recommend" class="button button-like">
+						<i class="fa fa-heart"></i>
+						<span>Like <span id="cRecommend">0</span></span>
+					</button>
+				</div>
+				<div style="margin-top: 10px;">
 				<a href="${pageContext.request.contextPath}/funding/fundingParticipation?cNum=${vo.cNum}">참여내역</a>
 				<br>
 				조회수: ${vo.hit}
-				
+				</div>
  			</div>
 		</div>
 		<div class="row">

@@ -148,7 +148,7 @@
 	<c:forEach var="vo" items="${charityList}">
 		<tr>
 			<td>${vo.cNum}</td>	
-			<td>${vo.title}</td>
+			<td><a href="${pageContext.request.contextPath}/charity/detail?cNum=${vo.cNum}">${vo.title}</a></td>
 			<td>${vo.amount}</td>
 			<td>${vo.sDate}</td>
 			<td>${vo.eDate}</td>

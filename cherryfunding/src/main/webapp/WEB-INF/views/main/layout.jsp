@@ -8,55 +8,76 @@
 <head>
 <title>CherryFunding</title>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="" />
 <meta name="keywords" content="" />
-<!--[if lte IE 8]><script src="css/ie/html5shiv.js"></script><![endif]-->
-<script src="${pageContext.request.contextPath}/resources/js/jquery.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/jquery.dropotron.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/skel.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/skel-layers.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/init.js"></script>
-<noscript>
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/skel.css" />
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css" />
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style-wide.css" />
-</noscript>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-<!--[if lte IE 8]><link rel="stylesheet" href="css/ie/v8.css" /><![endif]-->
-<script src="http://code.responsivevoice.org/responsivevoice.js"></script>
 
-`
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.5.0/css/all.css' integrity='sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU' crossorigin='anonymous'>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/layout2.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/mypagelayout.css" type="text/css">
+
+
+<script src="${pageContext.request.contextPath}/resources/js/util.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/responsiveVoice/responsiveVoice.js"></script>
+
+
 <script type="text/javascript">
 	$(document).ready(function(){
-		//responsiveVoice.setDefaultVoice("Korean Female");
-		//responsiveVoice.speak("안녕하세요");
 		
-		$('body').on('keyup', function(e){
-			if(e.keyCode === 9){
-				var target = $(e.target);
-				var text = target.text();
-				if($(target).attr('class') === 'image featured'){
-					text = $(target).find('img').attr('alt');
+		
+		if('${sessionScope.id}'){
+			var voice = '${sessionScope.setting.voice}';
+			console.log('welcomeVoice', window.welcomeVoice);
+			if(voice === 'y' && typeof window.welcomeVoice == "undefined") {
+				responsiveVoice.setDefaultVoice("Korean Female");
+				//responsiveVoice.speak("안녕하세요");
+				window.welcomeVoice = "complete";
+			}
+		}
+		
+	
+		$('body').on('keyup', function(e){ // 음성
+			var voice = '${sessionScope.setting.voice}';
+			if(e.keyCode === 9 && voice === 'y'){
+				var $target = $(e.target);
+				if (typeof $target.attr('data-voice') == "undefined"){
+					return;
+				}else{
+					responsiveVoice.speak($target.attr('data-voice'));
 				}
-				//responsiveVoice.speak(text);		
+					
 			}
 		});
+		
+	    $(window).scroll(function(){
+	        if ($(this).scrollTop() > 200) {
+	            $('#scroll').fadeIn(); 
+	        } else { 
+	            $('#scroll').fadeOut(); 
+	        } 
+	    }); 
+	    $('#scroll').click(function(){ 
+	        $("html, body").animate({ scrollTop: 0 }, 600); 
+	        return false; 
+	    });
 	});
-
 </script>
 </head>
 <body>
-
 	<!-- Wrapper -->
-	<div class="wrapper style1">
+	<div class="w3-container">
 		<tiles:insertAttribute name="header" />
 		<tiles:insertAttribute name="banner" />
 		<tiles:insertAttribute name="content" />
 		<tiles:insertAttribute name="footer" />
 	</div>
-
+	<a href="#" data-voice="상단으로" id="scroll" style="display: none;"><span></span></a>
 </body>
 </html>

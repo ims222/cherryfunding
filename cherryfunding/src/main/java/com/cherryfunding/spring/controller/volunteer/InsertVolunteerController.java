@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
 
@@ -19,6 +20,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.cherryfunding.spring.service.volunteer.VPictureService;
 import com.cherryfunding.spring.service.volunteer.VolunteerService;
+import com.cherryfunding.spring.util.S3Util;
 import com.cherryfunding.spring.vo.VPictureVo;
 import com.cherryfunding.spring.vo.VolunteerVo;
 
@@ -29,6 +31,9 @@ public class InsertVolunteerController {
 	
 	@Autowired
 	private VPictureService vPictureService;
+	
+	@Autowired
+	private S3Util s3;
 	
 	
 	@RequestMapping(value = "/volunteer/insertVolunteer", method = RequestMethod.GET)
@@ -77,7 +82,7 @@ public class InsertVolunteerController {
 			int num = 0;
 			for (MultipartFile file : files) {
 				String orgfilename = file.getOriginalFilename();
-				String savefilename = id + "_" + title + "_" + num + orgfilename;
+				String savefilename = String.valueOf(UUID.randomUUID());
 				long filesize = file.getSize();
 				if (filesize > 0) {
 					
@@ -88,13 +93,8 @@ public class InsertVolunteerController {
 					vpvo.setSaveName(savefilename);
 					vpvo.setFileSize(filesize);
 					vpvo.setVpInfo(vPinfo[num++]);
-					
+					s3.fileUpload("volunteer/" + savefilename, file.getBytes()); // 파일 업로드
 					vPictureService.insert(vpvo);
-					InputStream is = file.getInputStream();
-					FileOutputStream fos = new FileOutputStream(uploadPath + "\\" + savefilename);
-					FileCopyUtils.copy(is, fos);
-					is.close();
-					fos.close();
 				}
 			}
 		}catch(Exception e) {

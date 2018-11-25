@@ -11,8 +11,6 @@
 
 
 
-
-
 	<beans:bean id="echoHandler" class="com.cherryfunding.spring.util.EchoHandler" />
 	<websocket:handlers>
 		<websocket:mapping handler="echoHandler" path="/echo"/>
@@ -20,8 +18,6 @@
 		<beans:bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor"/>
 		</websocket:handshake-interceptors>
 	</websocket:handlers>
-
-
 
 
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->

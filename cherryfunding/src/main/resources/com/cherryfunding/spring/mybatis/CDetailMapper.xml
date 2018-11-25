@@ -10,6 +10,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="select" parameterType="int" resultType="cDetail">
 		select * from cDetail where cdNum = #{cdNum}
 	</select>
+	
+	<select id="listBycNum" resultType="hashmap" parameterType="int">
+		select id, sum(amount) sumPrice from cDetail
+		where cNum = #{cNum} group by id
+	</select>
 
 
 	<insert id="insert" parameterType="cDetail">
@@ -25,7 +30,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</delete>
 	
 	<select id="getMaxNum" resultType="int">
-		select NVL(count(cdNum), 0) from cDetail
+		select NVL(max(cdNum), 0) from cDetail
 	</select>
 	
 	<select id="countCdetailbycNum" resultType="int" parameterType="int">

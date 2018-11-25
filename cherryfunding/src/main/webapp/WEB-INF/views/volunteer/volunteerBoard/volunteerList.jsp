@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@7"></script>
 <script type="text/javascript">
 	var pageNum = 1;
 	var vNum = 0;
@@ -10,6 +10,7 @@
 		$("#showmore").on('click', showmore);		
 	});
 	function showmore(){
+		$('#showDiv').append(document.querySelector('#loadingTemplate').innerHTML);
 		$.ajax({
 			url: '${pageContext.request.contextPath}/volunteer/volunteerShowMore',
 			type: 'get',
@@ -19,7 +20,10 @@
 		    	var html = '';
 		    	if(vNum == 1){
 		    		//$("#myModal").modal('show');
-		    		alert("마지막 페이지입니다. 모달창이 자꾸 위에 붙어서 alert로 변경했습니다.")
+		    		swal({
+					  type: 'error',
+					  title: '마지막 페이지입니다.',
+					});
 					return;
 		    	}
 		    	for(var i=0; i<data.list.length; i++){
@@ -28,7 +32,7 @@
 		    		html += '<a href="${pageContext.request.contextPath}/volunteer/volunteerDetail?vNum='
 			    			+ data.list[i].vNum
 		    				+ '" class="image featured">';		    				
-		    		html += '<div style="min-height:200px"><img src="${pageContext.request.contextPath}/resources/upload/volunteer/'
+		    		html += '<div style="min-height:200px"><img src="'
 		    			+ data.list[i].saveName + '" alt="'
 		    			+ data.list[i].vpInfo 
 		    			+'" height="200px" class="w3-round" width="100%"></a></div>';
@@ -40,7 +44,10 @@
 		    		html += '</div>';
 		    	}
 		    	$("#showDiv").append(html);
-		    }	
+		    },
+			complete :function(){
+				$('.loading').remove();
+			}	
 		})
 		pageNum += 1;
 	}
@@ -58,6 +65,7 @@
 	}
 	
 	function firstShow(){
+		$('#showDiv').append(document.querySelector('#loadingTemplate').innerHTML);
 		$.ajax({
 			url: '${pageContext.request.contextPath}/volunteer/volunteerFirstShow',
 			type: 'get',
@@ -67,7 +75,10 @@
 		    	var html = '';
 		    	if(vNum == 1){
 		    		//$("#myModal").modal('show');
-		    		alert("마지막 페이지입니다. 모달창이 자꾸 위에 붙어서 alert로 변경했습니다.")
+		    		swal({
+					  type: 'error',
+					  title: '마지막 페이지입니다.',
+					});
 					return;
 		    	}
 		    	for(var i=0; i<data.list.length; i++){
@@ -76,7 +87,7 @@
 		    		html += '<a href="${pageContext.request.contextPath}/volunteer/volunteerDetail?vNum='
 			    			+ data.list[i].vNum
 		    				+ '" class="image featured">';		    				
-		    		html += '<div style="min-height:200px"><img src="${pageContext.request.contextPath}/resources/upload/volunteer/'
+		    		html += '<div style="min-height:200px"><img src="'
 		    			+ data.list[i].saveName + '" alt="'
 		    			+ data.list[i].vpInfo 
 		    			+'" height="200px" class="w3-round" width="100%"></a></div>';
@@ -89,11 +100,23 @@
 		    		html += '</div>';
 		    	}
 		    	$("#showDiv").append(html);
-		    }	
+		    },
+			complete :function(){
+				$('.loading').remove();
+			}	
 		})
 		pageNum += 1;
 	}
 	
+</script>
+<script id="loadingTemplate" type="text/template">
+<div class="spinner loading">
+	<div class="rect1"></div>
+	<div class="rect2"></div>
+	<div class="rect3"></div>
+	<div class="rect4"></div>
+	<div class="rect5"></div>
+</div>
 </script>
 <style type="text/css">
 .modal{

@@ -1,13 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@7"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
 <script type="text/javascript">
 function idCheck(){
 	var id='${sessionScope.id}';
 	if(!id){
 		//$("#myModal").modal('show');
-		alert('로그인 해주세욧');
+		swal({
+			  type: 'error',
+			  title: '로그인 해주세요.',
+			});
 	}else{
 		window.location.href="${pageContext.request.contextPath}/volunteer/insertVolunteer";
 	}

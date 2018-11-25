@@ -77,10 +77,10 @@
 			<tr>
 				<td>${vo.fNum }</td>
 				<td>${vo.id }</td>
-				<td>${vo.title }</td>
+				<td>${vo.title}</td>
 				<td>${vo.category }</td>
 				<td>${vo.regdate }</td>
-				<td><a href="<c:url value='/fundingList/detail?num=${vo.fNum }'/>">보기</a></td>
+				<td><a href="<c:url value='/funding/detail?fNum=${vo.fNum}'/>">보기</a></td>
 				<td><a data-toggle="modal" href="javascript:modalshow('${vo.fNum}');">${vo.confirm }</a></td>
 				<td>${vo.aid }</td>
 			
@@ -95,10 +95,10 @@
 			<tr>
 				<td>${co.cNum }</td>
 				<td>${co.id }</td>
-				<td>${co.title }</td>
+				<td>${co.title}</td>
 				<td>${co.category }</td>
 				<td>${co.regdate }</td>
-				<td><a href="<c:url value='/charityList/detail?num=${co.cNum }'/>">보기</a></td>
+				<td><a href="<c:url value='/charity/detail?cNum=${co.cNum}'/>">보기</a></td>
 				<td><a data-toggle="modal" href="javascript:modalshow2('${co.cNum}');">${co.confirm }</a></td>
 				<td>${co.aId }</td>
 			

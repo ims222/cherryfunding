@@ -13,8 +13,15 @@
 			</c:when>
 			<c:otherwise>
 				<script type="text/javascript">
-					alert("로그인을 해주세요");
+					function login(){
+						alert("로그인을 해주세요")
+					}
 				</script>
+					<a class="activeMenu" href="javascript:login();">CherryFunding</a>
+					<a href="javascript:login();"><i class='fas fa-seedling'></i> 승인요청</a>
+					<a href="javascript:login();"><i class='fas fa-piggy-bank'></i> 승인현황</a>
+					<a href="javascript:login();"><i class='fas fa-gift'></i> 회원목록</a>
+					<a href="javascript:login();"><i class='fas fa-hand-holding-heart'></i> 통계</a>
 			</c:otherwise>
 		</c:choose>
 	</div>

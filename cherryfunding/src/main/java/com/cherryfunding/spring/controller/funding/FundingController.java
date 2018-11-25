@@ -55,7 +55,7 @@ public class FundingController {
 	public String delete(int fNum, Model model) {
 		int n = fundingService.delete(fNum); // �뼨�먯삕 �뜝�럡留믣뜝�럡�돪�뜝�럩�젧�솻洹⑥삕
 		if (n > 0) {
-			return "redirect:/funding/waitList";
+			return "redirect:/confirmList";
 		} else {
 			return "error";
 		}

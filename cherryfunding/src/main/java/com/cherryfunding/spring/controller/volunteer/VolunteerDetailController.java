@@ -16,6 +16,7 @@ import com.cherryfunding.spring.service.volunteer.VRecommendService;
 import com.cherryfunding.spring.service.volunteer.VolunteerListService;
 import com.cherryfunding.spring.service.volunteer.VolunteerService;
 import com.cherryfunding.spring.util.PageUtil;
+import com.cherryfunding.spring.util.S3Util;
 import com.cherryfunding.spring.vo.VolunteerVo;
 
 @Controller
@@ -29,6 +30,9 @@ public class VolunteerDetailController {
 	
 	@Autowired
 	private VRecommendService vRecommendService;
+	
+	@Autowired
+	private S3Util s3;
 
 	@RequestMapping(value = "/volunteer/volunteerDetail", method = RequestMethod.GET)
 	public String volunteerDetail(int vNum, Model model) {
@@ -47,7 +51,8 @@ public class VolunteerDetailController {
 		map.put("vNum", vNumInt);
 		List<VolunteerVo> list = volunteerService.showMore(map);
 		for (VolunteerVo vo : list) {
-			vo.setSaveName(volunteerListService.thumbnail(vo.getvNum()).getSaveName());
+			String thumbnail = volunteerListService.thumbnail(vo.getvNum()).getSaveName();
+			vo.setSaveName(s3.getFileURL("volunteer/" + thumbnail));
 			vo.setVpInfo(volunteerListService.thumbnail(vo.getvNum()).getVpInfo());
 			vo.setRecommend(vRecommendService.getRecomm(vo.getvNum()));
 		}
@@ -69,7 +74,8 @@ public class VolunteerDetailController {
 		map.put("vNum", vNumInt);
 		List<VolunteerVo> list = volunteerService.showMore(map);
 		for (VolunteerVo vo : list) {
-			vo.setSaveName(volunteerListService.thumbnail(vo.getvNum()).getSaveName());
+			String thumbnail = volunteerListService.thumbnail(vo.getvNum()).getSaveName();
+			vo.setSaveName(s3.getFileURL("volunteer/" + thumbnail));
 			vo.setVpInfo(volunteerListService.thumbnail(vo.getvNum()).getVpInfo());
 			vo.setRecommend(vRecommendService.getRecomm(vo.getvNum()));
 		}

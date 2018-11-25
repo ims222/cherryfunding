@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.cherryfunding.spring.dao.UsersDao;
 import com.cherryfunding.spring.service.charity.DonaService;
 import com.cherryfunding.spring.vo.CDetailVo;
 import com.cherryfunding.spring.vo.CharityVo;
@@ -18,6 +19,9 @@ public class DonaController {
 
 	@Autowired
 	private DonaService donaService;
+
+	@Autowired
+	private UsersDao usersDao;
 
 	@RequestMapping("/charity/donation")
 	public String donationForm(int cNum, Model model, HttpSession session) {
@@ -55,7 +59,9 @@ public class DonaController {
 
 	@RequestMapping("/charity/donaOk")
 	public String donaOk(int cdNum, Model model) {
-		model.addAttribute("vo", donaService.getcDetailInfo(cdNum));
+		CDetailVo cdvo = donaService.getcDetailInfo(cdNum);
+		model.addAttribute("vo", cdvo);
+		model.addAttribute("nick", usersDao.select(cdvo.getId()).getNick());
 		return ".donaOk";
 	}
 }

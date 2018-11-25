@@ -133,7 +133,7 @@
 			<tr>
 				<td>${co.cNum }</td>
 				<td>${co.id }</td>
-				<td>${co.title }</td>
+				<td><a href="<c:url value='/charity/detail?cNum=${co.cNum}'/>">${co.title }</a></td>
 				<td>${co.category }</td>
 				<td>${co.regdate }</td>
 				<%-- <td><a href="<c:url value='/charity/confirm?cNum=${co.cNum }'/>">상세보기</a></td> --%>
