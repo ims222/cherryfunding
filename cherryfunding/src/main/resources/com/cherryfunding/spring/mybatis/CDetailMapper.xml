@@ -34,6 +34,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="countCdetailbycNum" resultType="int" parameterType="int">
-		select  NVL(count(NVL(count(id), 0)), 0) from cdetail group by id
+		select NVL(count(NVL(count(id), 0)), 0) from cdetail where cNum = #{cNum} group by id 
 	</select>
 </mapper>

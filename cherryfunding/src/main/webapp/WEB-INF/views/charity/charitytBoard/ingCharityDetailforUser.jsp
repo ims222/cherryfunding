@@ -277,7 +277,7 @@
 					</button>
 				</div>
 				<div style="margin-top: 10px;">
-				<a href="${pageContext.request.contextPath}/funding/fundingParticipation?cNum=${vo.cNum}">참여내역</a>
+				<a href="${pageContext.request.contextPath}/charity/charityParticipation?cNum=${vo.cNum}">참여내역</a>
 				<br>
 				조회수: ${vo.hit}
 				</div>

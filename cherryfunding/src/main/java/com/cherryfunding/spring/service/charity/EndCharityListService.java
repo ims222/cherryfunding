@@ -59,8 +59,8 @@ public class EndCharityListService {
 				System.out.println(e.getMessage());
 			}
 			String thumbnail = this.thumbnail(cNum).getSaveName();
-			l.put("savename", s3.getFileURL("funding/" + thumbnail));
-			l.put("fpinfo", this.thumbnail(((BigDecimal) l.get("CNUM")).intValue()).getCpinfo());
+			l.put("savename", s3.getFileURL("charity/" + thumbnail));
+			l.put("cpinfo", this.thumbnail(((BigDecimal) l.get("CNUM")).intValue()).getCpinfo());
 
 			String id = (String) l.get("ID");
 			String nick = "";

@@ -63,6 +63,8 @@ public class InsertUsersController {
 		try {
 			inputUsersService.inputUsers(users);
 			inputUsersService.inputUserSetting(users.getId());
+			System.out.println("!!!!!!!!!");
+			System.out.println("여기");
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}

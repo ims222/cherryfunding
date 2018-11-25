@@ -41,6 +41,7 @@
 					alert('마지막 페이지 입니다');
 				}else{
 					data.list.forEach(function(value){
+						console.log('value', value);
 						var camount = parseInt(value.CAMOUNT);
 						var amount = parseInt(value.AMOUNT);
 						var before = Math.ceil((camount * 100) / amount);
@@ -130,7 +131,7 @@
 			<button data-voice="환경" type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">환경</button>
 		</div>
 		<div class="topnav">
-			<span>진행중 후원</span>
+			<span>준비중 후원</span>
 			<select id="sort" class="dropbtn w3-button">
 				<option value="latest" <c:if test="${sort eq 'latest'}">selected="selected"</c:if>>최신순</option>
 				<option value="recommend" <c:if test="${sort eq 'recommend'}">selected="selected"</c:if>>추천순</option>
