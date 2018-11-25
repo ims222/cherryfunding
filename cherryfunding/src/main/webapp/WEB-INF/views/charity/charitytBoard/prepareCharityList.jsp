@@ -41,7 +41,6 @@
 					alert('마지막 페이지 입니다');
 				}else{
 					data.list.forEach(function(value){
-						console.log('value', value);
 						var camount = parseInt(value.CAMOUNT);
 						var amount = parseInt(value.AMOUNT);
 						var before = Math.ceil((camount * 100) / amount);
@@ -68,6 +67,7 @@
 					});
 					document.querySelector('#list').innerHTML = result;
 					$('#pageNum').val(data.pageNum);
+					console.log('pageNum', data.pageNum);
 					$('#category').val(data.category);
 					$("#field option").filter(function() {
 					    return $(this).text() == data.field; 
