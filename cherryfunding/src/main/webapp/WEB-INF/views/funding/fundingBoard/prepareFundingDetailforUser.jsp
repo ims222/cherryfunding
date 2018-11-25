@@ -271,7 +271,7 @@
  			</div>
  			<div class="col-md-4">
  				<div style="margin-bottom:20px;">
-					<fmt:formatDate value="${vo.edate}" var="eDate" pattern="yyyyMMdd"/>
+					<fmt:formatDate value="${vo.sdate}" var="eDate" pattern="yyyyMMdd"/>
 					<fmt:parseDate value="${eDate}" var="eDateDate" pattern="yyyyMMdd"/>
 					<fmt:parseNumber value="${eDateDate.time / (1000 * 60 * 60 * 24)}" var="end" integerOnly="true"/>
 					
