@@ -161,9 +161,11 @@ a {
 
 
 .bg-img {
-	background-image: url(../images/지옥.png);
+	background-image: url(../images/메인5.png);
     min-height: 380px;
+    /*
     background-position: center;
+    */
     background-repeat: no-repeat;
     background-size: 100% 100%;
     position: relative;
@@ -182,13 +184,15 @@ a {
 }
 
 .bg-img .btn {
-	background-color: #4CAF50;
-	color: white;
-	padding: 16px 20px;
-	border: none;
-	cursor: pointer;
-	width: 100%;
-	opacity: 0.9;
+    background-color: #4CAF50;
+    color: white;
+    /* padding: 16px 20px; */
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+    /* height: 50%; */
+    margin-top: 10px;
 }
 
 .bg-img .btn:hover {
