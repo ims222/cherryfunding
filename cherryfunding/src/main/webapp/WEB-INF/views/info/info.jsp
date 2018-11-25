@@ -20,8 +20,7 @@
 
 <div class="container">
 	<div class="row">
-		<div class="col-lg-12">
-		    
+		<div class="col-lg-12">  
 			<p class="title" style="font-size:xx-large;">크라우드 펀딩 :  대중이 만드는 새로운 금융문화</p>
 			<p class="a">크라우드펀딩(Crowdfunding)이란, 단어가 주는 의미 그대로 Crowd + Funding 즉, 대중이 함께 만드는 기금이라는 의미이다. </p>
 			<p class="a">자금을 필요로 하는 사람이 기존 금융 기관이나, 자금력이 풍부한 소수로부터 자금을 융통하는 형태가 아니라, </p>
