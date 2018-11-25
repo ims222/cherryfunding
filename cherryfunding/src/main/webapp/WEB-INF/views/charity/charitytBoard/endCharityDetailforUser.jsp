@@ -199,7 +199,6 @@
 					<fmt:parseDate value="${todayDate}" var="nowDate" pattern="yyyyMMdd"/>
 					<fmt:parseNumber value="${nowDate.time / (1000 * 60 * 60 * 24)}" var="now" integerOnly="true"/>
 					
- 					<span class="w3-xxlarge">${end - now}</span><span class="w3-xlarge">일 남음</span>
  				</div>
  			
  				<c:set var="before" value="${vo.cAmount * 100 / vo.amount}" />
@@ -223,23 +222,19 @@
  				</div>
  				
  				<div style="margin-bottom:20px;">
- 					<span class="w3-xxlarge"><fmt:formatNumber value="${vo.cAmount}" pattern="#,###"/></span><span class="w3-xlarge">원 펀딩</span>
+ 					<span class="w3-xxlarge"><fmt:formatNumber value="${vo.cAmount}" pattern="#,###"/></span><span class="w3-xlarge">원 후원</span>
  				</div>
  				
  				<div style="margin-bottom:20px;">
  				<span class="w3-xxlarge">${countSupporter}</span><span class="w3-xlarge"> 명의 서포터</span>
  				</div>
  				
-				<button class="w3-btn w3-block w3-teal w3-xxlarge" onclick="location.href='${pageContext.request.contextPath}/funding/rewardList?cNum=${vo.cNum}';">펀딩 신청</button>
-				
-				
 				<button id="recommend" class="button button-like">
 					<i class="fa fa-heart"></i>
 					<span>Like <span id="cRecommend">0</span></span>
 				</button>
 				
-				
-				<a href="${pageContext.request.contextPath}/funding/fundingParticipation?cNum=${vo.cNum}">참여내역</a>
+				<a href="${pageContext.request.contextPath}/charity/charityParticipation?cNum=${vo.cNum}">참여내역</a>
 				<br>
 				조회수: ${vo.hit}
 				

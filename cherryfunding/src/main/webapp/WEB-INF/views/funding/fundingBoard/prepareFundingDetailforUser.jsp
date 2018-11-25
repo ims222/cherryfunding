@@ -310,9 +310,6 @@
  				<div style="margin-bottom:20px;">
  				<span class="w3-xxlarge">${countSupporter}</span><span class="w3-xlarge"> 명의 서포터</span>
  				</div>
- 				
-				<button class="w3-btn w3-block w3-teal w3-xxlarge" onclick="location.href='${pageContext.request.contextPath}/funding/rewardList?fNum=${vo.fNum}';">펀딩 신청</button>
-				
 				
 				<button id="recommend" class="button button-like">
 					<i class="fa fa-heart"></i>

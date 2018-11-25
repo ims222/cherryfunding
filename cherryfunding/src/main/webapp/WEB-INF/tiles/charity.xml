@@ -38,10 +38,10 @@ PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
 		<put-attribute name="content" value="/WEB-INF/views/charity/charitytBoard/ingCharityDetailforUser.jsp"/>
 	</definition>
 	<definition name=".prepareCharityDetailforUser" extends = ".ingCharityList">
-		<put-attribute name="content" value="/WEB-INF/views/charity/charitytBoard/ingCharityDetailforUser.jsp"/>
+		<put-attribute name="content" value="/WEB-INF/views/charity/charitytBoard/prepareCharityDetailforUser.jsp"/>
 	</definition>
 	<definition name=".endCharityDetailforUser" extends = ".ingCharityList">
-		<put-attribute name="content" value="/WEB-INF/views/charity/charitytBoard/ingCharityDetailforUser.jsp"/>
+		<put-attribute name="content" value="/WEB-INF/views/charity/charitytBoard/endCharityDetailforUser.jsp"/>
 	</definition>
 	
 	<definition name=".inputCharity" extends = ".main">

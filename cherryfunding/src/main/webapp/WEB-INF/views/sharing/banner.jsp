@@ -71,7 +71,7 @@
 <!-- Banner -->
 <div class="container">
 	<div id="welcome">
-	<h3>안녕하세요 <strong>CherryFunding</strong>입니다.<br></h3><h4>나눔글을 등록하시려면 아래 글쓰기 버튼을 눌러주세요</h4><br> 
+	<h3>안녕하세요 <strong>CherryFunding</strong>입니다.<br></h3><h4>나눔글을 등록하시려면 아래 신청 버튼을 눌러주세요</h4><br> 
 		<div id="menu">
 			<button style="width: 30%;" class="w3-btn w3-teal" onclick="location.href='${pageContext.request.contextPath}/sharing/insertSharing'">나눔 신청 하기</button>
 		</div>

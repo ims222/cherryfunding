@@ -138,15 +138,17 @@
 <!-- Main -->
 <div id="main">
 	<div class="container">
-		<div class="w3-bar" id="category">
-			<button data-voice="전체보기" type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">전체보기</button>
-			<button data-voice="아동·청소년" type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">아동·청소년</button>
-			<button data-voice="어르신" type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">어르신</button>
-			<button data-voice="다문화" type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">다문화</button>
-			<button data-voice="장애인" type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">장애인</button>
-			<button data-voice="사회운동" type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">사회운동</button>
-			<button data-voice="동물" type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">동물</button>
-			<button data-voice="환경" type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">환경</button>
+		<div class="w3-center">
+			<div class="w3-bar" id="category">
+				<button data-voice="전체보기" type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">전체보기</button>
+				<button data-voice="아동·청소년" type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">아동·청소년</button>
+				<button data-voice="어르신" type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">어르신</button>
+				<button data-voice="다문화" type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">다문화</button>
+				<button data-voice="장애인" type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">장애인</button>
+				<button data-voice="사회운동" type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">사회운동</button>
+				<button data-voice="동물" type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">동물</button>
+				<button data-voice="환경" type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">환경</button>
+			</div>
 		</div>
 		<div class="topnav">
 			<span>진행중 후원</span>

@@ -52,6 +52,12 @@
 						else
 							barBefore = before;
 						
+						var success = "";
+						if(camount >= amount)
+							success = "성공";
+						else
+							success = "실패";
+						
 						result +=	html.replace(/{cNum}/gi, value.CNUM)
 									.replace("{savename}", value.savename)
 									.replace("{cpinfo}", value.cpinfo)
@@ -63,7 +69,8 @@
 									.replace("{dday}", value.DDAY)
 									.replace(/{width}/gi, (barBefore) + "%" )
 									.replace("{valuenow}", barBefore)
-									.replace(/{percent}/gi, ((before/100) * 100) + "%"); 
+									.replace(/{percent}/gi, ((before/100) * 100) + "%")
+									.replace("{isSuccess}", success);
 					});
 					document.querySelector('#list').innerHTML = result;
 					$('#pageNum').val(data.pageNum);
@@ -95,12 +102,12 @@
 </script>
 <script id="charityList" type="text/template">
 <div class="w3-col m4 l4" style="padding: 20px;">
-	<a href="${pageContext.request.contextPath}/Charity/ingCharityDetailforUser?cNum={cNum}">
+	<a href="${pageContext.request.contextPath}/Charity/endCharityDetailforUser?cNum={cNum}">
 	<img src="{savename}" class="w3-round" alt="{cpinfo}" height="200px" width="100%"></a>
 	<div>
 		<div style="height: 50px;>
 			<p class="w3-left-align" style="word-break:break-all;">
-				<a href="${pageContext.request.contextPath}/charityList/detail?num={cNum}">
+				<a href="${pageContext.request.contextPath}/Charity/endCharityDetailforUser?cNum={cNum}">
 				<h4>{title}</h4></a>
 			</p>
 		</div>
@@ -111,7 +118,7 @@
 				<div class="processBar" style="height:5px;width:{width}"></div>
 			</div>
 			<div class="w3-left-align" style="float:left;">{percent} · {camount}원</div>
-			<div class="w3-right-align">{dday}일 남음</div>
+			<div class="w3-right-align">종료 · {isSuccess}</div>
 		</div>
 	</div>
 </div>
@@ -119,15 +126,17 @@
 <!-- Main -->
 <div id="main">
 	<div class="container">
-		<div class="w3-bar" id="category">
-			<button data-voice="전체보기" type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">전체보기</button>
-			<button data-voice="아동·청소년" type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">아동·청소년</button>
-			<button data-voice="어르신" type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">어르신</button>
-			<button data-voice="다문화" type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">다문화</button>
-			<button data-voice="장애인" type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">장애인</button>
-			<button data-voice="사회운동" type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">사회운동</button>
-			<button data-voice="동물" type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">동물</button>
-			<button data-voice="환경" type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">환경</button>
+		<div class="w3-center">
+			<div class="w3-bar" id="category">
+				<button data-voice="전체보기" type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">전체보기</button>
+				<button data-voice="아동·청소년" type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">아동·청소년</button>
+				<button data-voice="어르신" type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">어르신</button>
+				<button data-voice="다문화" type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">다문화</button>
+				<button data-voice="장애인" type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">장애인</button>
+				<button data-voice="사회운동" type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">사회운동</button>
+				<button data-voice="동물" type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">동물</button>
+				<button data-voice="환경" type="button" class="w3-bar-item w3-button w3-pale-yellow w3-hover-purple">환경</button>
+			</div>
 		</div>
 		<div class="topnav">
 			<span>종료된 후원</span>

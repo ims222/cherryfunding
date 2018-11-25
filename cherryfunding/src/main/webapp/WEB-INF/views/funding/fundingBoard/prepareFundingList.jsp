@@ -131,7 +131,7 @@
 				<div class="processBar" style="height:5px;width:{width}"></div>
 			</div>
 			<div class="w3-left-align" style="float:left;">{percent} · {camout}원</div>
-			<div class="w3-right-align">{dday} 일 후 시작</div>
+			<div class="w3-right-align">{dday}일 후 시작</div>
 		</div>
 	</div>
 </div>

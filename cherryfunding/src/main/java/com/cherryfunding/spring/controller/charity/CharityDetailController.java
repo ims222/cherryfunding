@@ -27,9 +27,9 @@ public class CharityDetailController {
 	@RequestMapping("/Charity/prepareCharityDetailforUser")
 	public String prepareCharityDetail(int cNum, Model model) {
 		model.addAttribute("vo", charityDetailService.detail(cNum));
-		//model.addAttribute("fRecommend", CharityDetailService.getRecommend(fNum));
+		model.addAttribute("cRecommend", charityDetailService.getRecommend(cNum));
 		model.addAttribute("hashtag", charityDetailService.hashtag(cNum));
-		//model.addAttribute("countSupporter", CharityDetailService.countFdetailbyfNum(fNum));
+		model.addAttribute("countSupporter", charityDetailService.countCdetailbycNum(cNum));
 		charityDetailService.hitUp(cNum);
 		return ".prepareCharityDetailforUser";
 	}
@@ -37,9 +37,9 @@ public class CharityDetailController {
 	@RequestMapping("/Charity/endCharityDetailforUser")
 	public String endCharityDetail(int cNum, Model model) {
 		model.addAttribute("vo", charityDetailService.detail(cNum));
-		//model.addAttribute("fRecommend", CharityDetailService.getRecommend(fNum));
+		model.addAttribute("cRecommend", charityDetailService.getRecommend(cNum));
 		model.addAttribute("hashtag", charityDetailService.hashtag(cNum));
-		//model.addAttribute("countSupporter", CharityDetailService.countFdetailbyfNum(fNum));
+		model.addAttribute("countSupporter", charityDetailService.countCdetailbycNum(cNum));
 		charityDetailService.hitUp(cNum);
 		return ".endCharityDetailforUser";
 	}
