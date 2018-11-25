@@ -29,7 +29,7 @@ public class EndCharityListController {
 
 	@RequestMapping(value = "/charity/endCharityList", method = RequestMethod.GET)
 	public String ingCharityList() {
-		return ".ingCharityList";
+		return ".endCharityList";
 	}
 
 	@RequestMapping("/charity/moreEndCharityList")

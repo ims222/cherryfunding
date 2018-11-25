@@ -152,7 +152,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 준비중 후원 -->
 	<select id="prepare" parameterType= "hashmap" resultType="hashmap">
-		select * from charity
+		select CNUM cnum, TITLE title, CONTENT content, AMOUNT amount, CAMOUNT camount,
+		to_char(SDATE, 'yy-mm-dd') sdate, to_char(EDATE, 'yy-mm-dd') edate,
+		ceil(edate - (sysdate + (1/24)*9)) dday, CATEGORY category, CONFIRM confirm,
+		AID aid, ADDR addr, REGDATE regdate, ID id, HIT hit, CPRICE cprice
+		from charity
 		<include refid="prepare"/>
 		<include refid="category"/>
 		<include refid="search"/>
@@ -162,7 +166,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 종료된 후원 -->
 	<select id="end" parameterType= "hashmap"  resultType="hashmap">
-		select * from charity
+		select CNUM cnum, TITLE title, CONTENT content, AMOUNT amount, CAMOUNT camount,
+		to_char(SDATE, 'yy-mm-dd') sdate, to_char(EDATE, 'yy-mm-dd') edate,
+		ceil(edate - (sysdate + (1/24)*9)) dday, CATEGORY category, CONFIRM confirm,
+		AID aid, ADDR addr, REGDATE regdate, ID id, HIT hit, CPRICE cprice
+		from charity
 		<include refid="end"/>
 		<include refid="category"/>
 		<include refid="search"/>
