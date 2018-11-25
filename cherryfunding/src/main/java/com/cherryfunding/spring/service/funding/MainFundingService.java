@@ -40,7 +40,7 @@ public class MainFundingService {
 
 		try {
 			String title = fEnd.getTitle();
-			fEnd.setTitle(StringLengthCut.getString(title, 100));
+			fEnd.setTitle(StringLengthCut.getString(title, 98));
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
@@ -60,7 +60,7 @@ public class MainFundingService {
 
 		try {
 			String title = fNew.getTitle();
-			fNew.setTitle(StringLengthCut.getString(title, 100));
+			fNew.setTitle(StringLengthCut.getString(title, 98));
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
@@ -80,7 +80,7 @@ public class MainFundingService {
 
 		try {
 			String title = fHot.getTitle();
-			fHot.setTitle(StringLengthCut.getString(title, 100));
+			fHot.setTitle(StringLengthCut.getString(title, 98));
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
@@ -100,7 +100,7 @@ public class MainFundingService {
 
 		try {
 			String title = fPrice.getTitle();
-			fPrice.setTitle(StringLengthCut.getString(title, 100));
+			fPrice.setTitle(StringLengthCut.getString(title, 98));
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}

@@ -30,13 +30,13 @@
 			<div class="row">
 				<!-- 종료임박후원 -->
 				<div class="col-md-3 mainContent">
-					<a data-voice="종료임박후원" href="${pageContext.request.contextPath}/charityList/detail?num=${summary.cEnd.cNum}">
+					<a data-voice="종료임박후원" href="${pageContext.request.contextPath}/Charity/ingCharityDetailforUser?cNum=${summary.cEnd.cNum}">
 					<img src="${summary.cEnd.savename}"	alt="${summary.cEnd.cpinfo}" class="w3-round listImage">
 					</a><div class="top-left">종료임박후원</div>
 					<div>
 						<div class="listTitle">
 							<p class="w3-left-align">
-								<h4><a data-voice="${summary.cEnd.title}" href="#">${summary.cEnd.title}</a></h4>
+								<h4><a data-voice="${summary.cEnd.title}" href="${pageContext.request.contextPath}/Charity/ingCharityDetailforUser?cNum=${summary.cEnd.cNum}">${summary.cEnd.title}</a></h4>
 							</p>
 						</div>
 						<fmt:formatDate value="${summary.cEnd.eDate}" var="cEndeDate" pattern="yyyyMMdd"/>
@@ -72,24 +72,24 @@
 				</div>
 				<!-- 주목할만한 후원 -->
 				<div class="col-md-3 mainContent">
-					<a data-voice="주목할만한 후원" href="${pageContext.request.contextPath}/fundingList/detail?num=${summary.cHot.cNum}">
+					<a data-voice="종료임박후원" href="${pageContext.request.contextPath}/Charity/ingCharityDetailforUser?cNum=${summary.cHot.cNum}">
 					<img src="${summary.cHot.savename}"	alt="${summary.cHot.cpinfo}" class="w3-round listImage">
-					</a><div class="top-left">주목할만한 후원</div>
+					</a><div class="top-left">종료임박후원</div>
 					<div>
 						<div class="listTitle">
 							<p class="w3-left-align">
-								<h4><a data-voice="${summary.cHot.title}" href="#">${summary.cHot.title}</a></h4>
+								<h4><a data-voice="${summary.cHot.title}" href="${pageContext.request.contextPath}/Charity/ingCharityDetailforUser?cNum=${summary.cHot.cNum}">${summary.cHot.title}</a></h4>
 							</p>
 						</div>
 						<fmt:formatDate value="${summary.cHot.eDate}" var="cHoteDate" pattern="yyyyMMdd"/>
 						<fmt:parseDate value="${cHoteDate}" var="cHoteDateDate" pattern="yyyyMMdd"/>
 						<fmt:parseNumber value="${cHoteDateDate.time / (1000 * 60 * 60 * 24)}" var="cHotEnd" integerOnly="true"/>
-						
+					
 						<jsp:useBean id="cHotToday" class="java.util.Date"/>
 						<fmt:formatDate value="${cHotToday}" var="cHotTodayDate" pattern="yyyyMMdd"/>
 						<fmt:parseDate value="${cHotTodayDate}" var="cHotNowDate" pattern="yyyyMMdd"/>
 						<fmt:parseNumber value="${cHotNowDate.time / (1000 * 60 * 60 * 24)}" var="cHotNow" integerOnly="true"/>
-	
+						
 						<c:set var="cHotBefore" value="${summary.cHot.cAmount * 100 / summary.cHot.amount}" />
 						<c:choose>
 							<c:when test="${cHotBefore > 100}">
@@ -99,15 +99,14 @@
 								<c:set var="barcHotBefore" value="${cHotBefore}" />
 							</c:otherwise>
 						</c:choose>
-	
 						<div>
 							<div class="w3-left-align" style="float:left;">${summary.cHot.category} | ${summary.cHot.id}</div>
-							<div class="w3-right-align"><p>추천 <span class="w3-badge w3-green">${summary.cHotRecomm}</span></p></div>
+							<div class="w3-right-align"><p><i style='font-size:15px;color:red' class='fas'>&#xf004;</i><span>${summary.cHotRecomm}</span></p></div>
 							<div class="w3-border">
 								<div class="processBar" style="height:5px;width:${barcHotBefore}%"></div>
 							</div>
 							<div class="w3-left-align" style="float:left;">
-							<fmt:formatNumber value="${cHotBefore}" type="percent" pattern="0%"/> ·
+							<fmt:formatNumber value="${cHotBefore/100}" type="percent" pattern="0%"/> ·
 							<fmt:formatNumber value="${summary.cHot.cAmount}" pattern="#,###"/>원</div>
 							<div class="w3-right-align">${cHotEnd - cHotNow}일 남음</div>
 						</div>
@@ -115,13 +114,13 @@
 				</div>
 				<!-- 참여금액이 높은 후원 -->
 				<div class="col-md-3 mainContent">
-					<a data-voice="참여금액이 높은 후원" href="${pageContext.request.contextPath}/fundingList/detail?num=${summary.cPrice.cNum}">
+					<a data-voice="참여금액이 높은 후원" href="${pageContext.request.contextPath}/Charity/ingCharityDetailforUser?cNum=${summary.cPrice.cNum}">
 					<img src="${summary.cPrice.savename}"	alt="${summary.cPrice.cpinfo}" class="w3-round listImage">
 					</a><div class="top-left">참여금액이 높은 후원</div>
 					<div>
 						<div class="listTitle">
 							<p class="w3-left-align">
-								<h4><a data-voice="${summary.cPrice.title}" href="#">${summary.cPrice.title}</a></h4>
+								<h4><a data-voice="${summary.cPrice.title}" href="${pageContext.request.contextPath}/Charity/ingCharityDetailforUser?cNum=${summary.cPrice.cNum}">${summary.cPrice.title}</a></h4>
 							</p>
 						</div>
 						<fmt:formatDate value="${summary.cPrice.eDate}" var="cPriceeDate" pattern="yyyyMMdd"/>
