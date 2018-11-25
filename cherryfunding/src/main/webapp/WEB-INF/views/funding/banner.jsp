@@ -108,12 +108,7 @@
 	<div id="welcome">
 	<h3>안녕하세요 <strong>CherryFunding</strong>입니다.<br></h3><h4>펀딩글을 등록하시려면 아래 글쓰기 버튼을 눌러주세요</h4><br> 
 		<div id="menu">
-			<ul>
-				<li><a href="http://templated.co" >템플릿</a></li>
-				<li><a href="http://twitter.com/templatedco">트위터</a></li>
-				<li><a href="${pageContext.request.contextPath}/funding/fundingApplication"
-			class="button medium">글쓰기</a></li>
-			</ul>
+			<button style="width: 30%;" class="w3-btn w3-teal" onclick="location.href='${pageContext.request.contextPath}/funding/fundingApplication'">펀딩 신청 하기</button>
 		</div>
 	</div>	
 	<div class="w3-bar w3-center">
