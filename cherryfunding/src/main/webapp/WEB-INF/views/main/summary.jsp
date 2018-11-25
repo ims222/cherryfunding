@@ -50,21 +50,21 @@
 						
 						<c:set var="cEndBefore" value="${summary.cEnd.cAmount * 100 / summary.cEnd.amount}" />
 						<c:choose>
-							<c:when test="${cEndBefore >= 1000}">
+							<c:when test="${cEndBefore > 100}">
 								<c:set var="barcEndBefore" value="100"/>
 							</c:when>
 							<c:otherwise>
-								<c:set var="barcEndBefore" value="${barcEndBefore}" />
+								<c:set var="barcEndBefore" value="${cEndBefore}" />
 							</c:otherwise>
 						</c:choose>
 						<div>
 							<div class="w3-left-align" style="float:left;">${summary.cEnd.category} | ${summary.cEnd.id}</div>
 							<div class="w3-right-align"><p><i style='font-size:15px;color:red' class='fas'>&#xf004;</i><span>${summary.cEndRecomm}</span></p></div>
 							<div class="w3-border">
-								<div class="processBar" style="height:5px;width:${barcEndBefore/10000}"></div>
+								<div class="processBar" style="height:5px;width:${barcEndBefore}%"></div>
 							</div>
 							<div class="w3-left-align" style="float:left;">
-							<fmt:formatNumber value="${cEndBefore/100}" type="percent" pattern="#%"/> ·
+							<fmt:formatNumber value="${cEndBefore/100}" type="percent" pattern="0%"/> ·
 							<fmt:formatNumber value="${summary.cEnd.cAmount}" pattern="#,###"/>원</div>
 							<div class="w3-right-align">${cEndEnd - cEndNow}일 남음</div>
 						</div>
@@ -92,11 +92,11 @@
 	
 						<c:set var="cHotBefore" value="${summary.cHot.cAmount * 100 / summary.cHot.amount}" />
 						<c:choose>
-							<c:when test="${cHotBefore >= 1000}">
+							<c:when test="${cHotBefore > 100}">
 								<c:set var="barcHotBefore" value="100"/>
 							</c:when>
 							<c:otherwise>
-								<c:set var="barcHotBefore" value="${barcHotBefore}" />
+								<c:set var="barcHotBefore" value="${cHotBefore}" />
 							</c:otherwise>
 						</c:choose>
 	
@@ -104,10 +104,10 @@
 							<div class="w3-left-align" style="float:left;">${summary.cHot.category} | ${summary.cHot.id}</div>
 							<div class="w3-right-align"><p>추천 <span class="w3-badge w3-green">${summary.cHotRecomm}</span></p></div>
 							<div class="w3-border">
-								<div class="processBar" style="height:5px;width:${barcHotBefore/100}"></div>
+								<div class="processBar" style="height:5px;width:${barcHotBefore}%"></div>
 							</div>
 							<div class="w3-left-align" style="float:left;">
-							<fmt:formatNumber value="${cHotBefore/10000}" type="percent" pattern="0%"/> ·
+							<fmt:formatNumber value="${cHotBefore}" type="percent" pattern="0%"/> ·
 							<fmt:formatNumber value="${summary.cHot.cAmount}" pattern="#,###"/>원</div>
 							<div class="w3-right-align">${cHotEnd - cHotNow}일 남음</div>
 						</div>
@@ -135,7 +135,7 @@
 	
 						<c:set var="cPriceBefore" value="${summary.cPrice.cAmount * 100 / summary.cPrice.amount}" />
 							<c:choose>
-								<c:when test="${cPriceBefore >= 1000}">
+								<c:when test="${cPriceBefore > 100}">
 									<c:set var="barcPriceBefore" value="100"/>
 								</c:when>
 								<c:otherwise>
@@ -147,10 +147,10 @@
 							<div class="w3-left-align" style="float:left;">${summary.cPrice.category} | ${summary.cPrice.id}</div>
 							<div class="w3-right-align"><p>추천 <span class="w3-badge w3-green">${summary.cPriceRecomm}</span></p></div>
 							<div class="w3-border">
-								<div class="processBar" style="height:5px;width:${barcPriceBefore/100}"></div>
+								<div class="processBar" style="height:5px;width:${barcPriceBefore}%"></div>
 							</div>
 							<div class="w3-left-align" style="float:left;">
-							<fmt:formatNumber value="${cPriceBefore/10000}" type="percent" pattern="0%"/> ·
+							<fmt:formatNumber value="${cPriceBefore/100}" type="percent" pattern="0%"/> ·
 							<fmt:formatNumber value="${summary.cPrice.cAmount}" pattern="#,###"/>원</div>
 							<div class="w3-right-align">${cPriceEnd - cPriceNow}일 남음</div>
 						</div>
@@ -192,7 +192,7 @@
 						
 						<c:set var="fEndBefore" value="${summary.fEnd.camout * 100 / summary.fEnd.amount}" />
 							<c:choose>
-								<c:when test="${fEndBefore >= 1000}">
+								<c:when test="${fEndBefore > 100}">
 									<c:set var="barfEndBefore" value="100"/>
 								</c:when>
 								<c:otherwise>
@@ -204,10 +204,10 @@
 							<div class="w3-left-align" style="float:left;">${summary.fEnd.category} | ${summary.fEnd.id}</div>
 							<div class="w3-right-align"><p>추천 <span class="w3-badge w3-green">${summary.fEndRecomm}</span></p></div>
 							<div class="w3-border">
-								<div class="processBar" style="height:5px;width:${barfEndBefore/100}"></div>
+								<div class="processBar" style="height:5px;width:${barfEndBefore}%"></div>
 							</div>
 							<div class="w3-left-align" style="float:left;">
-							<fmt:formatNumber value="${fEndBefore/10000}" type="percent" pattern="0%"/> ·
+							<fmt:formatNumber value="${fEndBefore/100}" type="percent" pattern="0%"/> ·
 							<fmt:formatNumber value="${summary.fEnd.camout}" pattern="#,###"/>원</div>
 							<div class="w3-right-align">${fEndEnd - fEndNow}일 남음</div>
 						</div>
@@ -235,7 +235,7 @@
 						
 						<c:set var="fHotBefore" value="${summary.fHot.camout * 100 / summary.fHot.amount}" />
 							<c:choose>
-								<c:when test="${fHotBefore >= 1000}">
+								<c:when test="${fHotBefore > 100}">
 									<c:set var="barfHotBefore" value="100"/>
 								</c:when>
 								<c:otherwise>
@@ -247,10 +247,10 @@
 							<div class="w3-left-align" style="float:left;">${summary.fHot.category} | ${summary.fHot.id}</div>
 							<div class="w3-right-align"><p>추천 <span class="w3-badge w3-green">${summary.fHotRecomm}</span></p></div>
 							<div class="w3-border">
-								<div class="processBar" style="height:5px;width:${barfHotBefore/100}"></div>
+								<div class="processBar" style="height:5px;width:${barfHotBefore}%"></div>
 							</div>
 							<div class="w3-left-align" style="float:left;">
-							<fmt:formatNumber value="${fHotBefore/10000}" type="percent" pattern="0%"/> ·
+							<fmt:formatNumber value="${fHotBefore/100}" type="percent" pattern="0%"/> ·
 							<fmt:formatNumber value="${summary.fHot.camout}" pattern="#,###"/>원</div>
 							<div class="w3-right-align">${fHotEnd - fHotNow}일 남음</div>
 						</div>
@@ -278,7 +278,7 @@
 						
 						<c:set var="fPriceBefore" value="${summary.fPrice.camout * 100 / summary.fPrice.amount}" />
 							<c:choose>
-								<c:when test="${fPriceBefore >= 1000}">
+								<c:when test="${fPriceBefore > 100}">
 									<c:set var="barfPriceBefore" value="100"/>
 								</c:when>
 								<c:otherwise>
@@ -290,10 +290,10 @@
 							<div class="w3-left-align" style="float:left;">${summary.fPrice.category} | ${summary.fPrice.id}</div>
 							<div class="w3-right-align"><p>추천 <span class="w3-badge w3-green">${summary.fPriceRecomm}</span></p></div>
 							<div class="w3-border">
-								<div class="processBar" style="height:5px;width:${barfPriceBefore/100}"></div>
+								<div class="processBar" style="height:5px;width:${barfPriceBefore}%"></div>
 							</div>
 							<div class="w3-left-align" style="float:left;">
-							<fmt:formatNumber value="${fPriceBefore/10000}" type="percent" pattern="0%"/> ·
+							<fmt:formatNumber value="${fPriceBefore/100}" type="percent" pattern="0%"/> ·
 							 <fmt:formatNumber value="${summary.fPrice.camout}" pattern="#,###"/>원</div>
 							<div class="w3-right-align">${fHotEnd - fHotNow}일 남음</div>
 						</div>
