@@ -40,7 +40,7 @@ public class CharityDao {
 		return sqlSession.selectOne(NAMESPACE + "getMaxNum");
 	}
 
-	public List<CharityVo> prepare(HashMap<String, Object> map) {
+	public List<HashMap<String, Object>> prepare(HashMap<String, Object> map) {
 		return sqlSession.selectList(NAMESPACE + "prepare", map);
 	}
 
@@ -123,5 +123,10 @@ public class CharityDao {
 	
 	public int getTotCountEnd(HashMap<String, Object> map) {
 		return sqlSession.selectOne(NAMESPACE + "getTotCountEnd", map);
+	}
+	
+	
+	public int getTotCountPrepare(HashMap<String, Object> map) {
+		return sqlSession.selectOne(NAMESPACE + "getTotCountPrepare", map);
 	}
 }

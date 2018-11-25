@@ -19,11 +19,15 @@ public class PrepareCharityListService {
 	@Autowired
 	private CPictureDao cpdao;
 	
-	public List<CharityVo> list(HashMap<String, Object> map){
+	public List<HashMap<String, Object>> list(HashMap<String, Object> map){
 		return cdao.prepare(map);
 	}
 	
 	public CPictureVo thumbnail(int cNum) {
 		return cpdao.thumbnail(cNum);
+	}
+	
+	public int getTotCountPrepare(HashMap<String, Object> map) {
+		return cdao.getTotCountPrepare(map);
 	}
 }
