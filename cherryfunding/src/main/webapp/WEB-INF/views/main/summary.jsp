@@ -27,7 +27,6 @@
 				</c:choose>
 			</form>
 		</div>
-		<div>
 
 		<div class="row">
 				  <div class="col-md-3 mainContent">
@@ -66,13 +65,8 @@
 		
 			<div class="row">
 				<!-- 종료임박후원 -->
-<<<<<<< HEAD
 				<div class="col-md-4 mainContent">
-					<a data-voice="종료임박후원" href="${pageContext.request.contextPath}/charityList/detail?num=${summary.cEnd.cNum}">
-=======
-				<div class="col-md-3 mainContent">
 					<a data-voice="종료임박후원" href="${pageContext.request.contextPath}/Charity/ingCharityDetailforUser?cNum=${summary.cEnd.cNum}">
->>>>>>> refs/remotes/origin/master
 					<img src="${summary.cEnd.savename}"	alt="${summary.cEnd.cpinfo}" class="w3-round listImage">
 					</a><div class="top-left">종료임박후원</div>
 					<div>
@@ -113,15 +107,10 @@
 					</div>
 				</div>
 				<!-- 주목할만한 후원 -->
-<<<<<<< HEAD
 				<div class="col-md-4 mainContent">
-					<a data-voice="주목할만한 후원" href="${pageContext.request.contextPath}/fundingList/detail?num=${summary.cHot.cNum}">
-=======
-				<div class="col-md-3 mainContent">
-					<a data-voice="종료임박후원" href="${pageContext.request.contextPath}/Charity/ingCharityDetailforUser?cNum=${summary.cHot.cNum}">
->>>>>>> refs/remotes/origin/master
+					<a data-voice="주목할만한 후원" href="${pageContext.request.contextPath}/Charity/ingCharityDetailforUser?cNum=${summary.cHot.cNum}">
 					<img src="${summary.cHot.savename}"	alt="${summary.cHot.cpinfo}" class="w3-round listImage">
-					</a><div class="top-left">종료임박후원</div>
+					</a><div class="top-left">주목할만한 후원</div>
 					<div>
 						<div class="listTitle">
 							<p class="w3-left-align">
@@ -160,13 +149,8 @@
 					</div>
 				</div>
 				<!-- 참여금액이 높은 후원 -->
-<<<<<<< HEAD
 				<div class="col-md-4 mainContent">
-					<a data-voice="참여금액이 높은 후원" href="${pageContext.request.contextPath}/fundingList/detail?num=${summary.cPrice.cNum}">
-=======
-				<div class="col-md-3 mainContent">
 					<a data-voice="참여금액이 높은 후원" href="${pageContext.request.contextPath}/Charity/ingCharityDetailforUser?cNum=${summary.cPrice.cNum}">
->>>>>>> refs/remotes/origin/master
 					<img src="${summary.cPrice.savename}"	alt="${summary.cPrice.cpinfo}" class="w3-round listImage">
 					</a><div class="top-left">참여금액이 높은 후원</div>
 					<div>
@@ -258,9 +242,9 @@
 				</div>
 				<!-- 가장 많이 주목된 펀딩 -->
 				<div class="col-md-4 mainContent">
-					<a data-voice="가장 많이 주목된 펀딩" href="${pageContext.request.contextPath}/funding/ingFundingDetailforUser?fNum=${summary.fHot.fNum}">
+					<a data-voice="주목할만한 펀딩" href="${pageContext.request.contextPath}/funding/ingFundingDetailforUser?fNum=${summary.fHot.fNum}">
 					<img src="${summary.fHot.savename}"	alt="${summary.fHot.fpinfo}" class="w3-round listImage">
-					</a><div class="top-left">가장 많이 주목된 펀딩</div>
+					</a><div class="top-left">주목할만한 펀딩</div>
 					<div>
 						<div class="listTitle">
 							<p class="w3-left-align">
