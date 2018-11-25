@@ -270,6 +270,7 @@
 								</c:otherwise>
 							</c:choose>
 		
+		
 						<div>
 							<div class="w3-left-align" style="float:left;">${summary.fHot.category} | ${summary.fHot.id}</div>
 							<div class="w3-right-align"><p>추천 <span class="w3-badge w3-green">${summary.fHotRecomm}</span></p></div>
