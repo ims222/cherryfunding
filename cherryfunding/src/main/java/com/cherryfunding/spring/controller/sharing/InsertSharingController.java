@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.cherryfunding.spring.dao.RestKeyDao;
 import com.cherryfunding.spring.service.sharing.InsertSharingService;
 import com.cherryfunding.spring.service.sharing.SItemService;
 import com.cherryfunding.spring.service.sharing.SPictureService;
@@ -38,7 +39,7 @@ public class InsertSharingController {
 	private InsertSharingService insertSharingService;
 	
 	@Autowired
-	private S3Util s3;
+	private RestKeyDao restKeyDao;
 
 	@RequestMapping(value = "/sharing/insertSharing", method = RequestMethod.GET)
 	public String inputSharingForm() {
@@ -99,7 +100,9 @@ public class InsertSharingController {
 					spvo.setsPinfo(sPinfos[num++]);
 
 					insertSharingService.spInsert(spvo); // 저장
-					s3.fileUpload("sharing/" + savefilename, file.getBytes()); // 파일 업로드
+					S3Util s3Util = new S3Util(restKeyDao.getKeyValue("s3_accessKey"),
+							restKeyDao.getKeyValue("s3_secretKey"));
+					s3Util.fileUpload("sharing/" + savefilename, file.getBytes()); // 파일 업로드
 				}
 			}
 		} catch (Exception e) {

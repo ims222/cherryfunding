@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.cherryfunding.spring.dao.RestKeyDao;
 import com.cherryfunding.spring.dao.UserSettingDao;
 import com.cherryfunding.spring.dao.UsersDao;
 import com.cherryfunding.spring.service.funding.FundingParticipantsService;
@@ -18,7 +19,7 @@ import com.cherryfunding.spring.util.S3Util;
 public class FundingParticipantsController {
 
 	@Autowired
-	private S3Util s3;
+	private RestKeyDao restKeyDao;
 
 	@Autowired
 	private UserSettingDao userSettingDao;
@@ -41,7 +42,8 @@ public class FundingParticipantsController {
 			String nick = fundingParticipantsService.usersInfo(id).getNick();
 			map.put("nick", nick); // 닉네임
 			String profile = userSettingDao.getInfo(id).getProfile();
-			String savename = s3.getFileURL("profile/" + profile);
+			S3Util s3Util = new S3Util(restKeyDao.getKeyValue("s3_accessKey"), restKeyDao.getKeyValue("s3_secretKey"));
+			String savename = s3Util.getFileURL("profile/" + profile);
 			map.put("savename", savename);
 		}
 		return list;

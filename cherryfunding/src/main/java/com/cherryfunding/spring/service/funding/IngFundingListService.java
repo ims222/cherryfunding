@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.cherryfunding.spring.dao.FPictureDao;
 import com.cherryfunding.spring.dao.FRecommendDao;
 import com.cherryfunding.spring.dao.FundingDao;
+import com.cherryfunding.spring.dao.RestKeyDao;
 import com.cherryfunding.spring.dao.UsersDao;
 import com.cherryfunding.spring.util.ClobToString;
 import com.cherryfunding.spring.util.S3Util;
@@ -34,7 +35,7 @@ public class IngFundingListService {
 	private FRecommendDao fRecommendDao;
 
 	@Autowired
-	private S3Util s3;
+	private RestKeyDao restKeyDao;
 
 	public List<HashMap<String, Object>> list(HashMap<String, Object> map) {
 		List<HashMap<String, Object>> list = fundingDao.ing(map);
@@ -59,7 +60,9 @@ public class IngFundingListService {
 				System.out.println(e.getMessage());
 			}
 			String thumbnail = this.thumbnail(fNum).getSavename();
-			l.put("savename", s3.getFileURL("funding/" + thumbnail));
+			S3Util s3Util = new S3Util(restKeyDao.getKeyValue("s3_accessKey"),
+					restKeyDao.getKeyValue("s3_secretKey"));
+			l.put("savename", s3Util.getFileURL("funding/" + thumbnail));
 			l.put("fpinfo", this.thumbnail(((BigDecimal) l.get("FNUM")).intValue()).getFpinfo());
 
 			String id = (String) l.get("ID");
@@ -83,7 +86,9 @@ public class IngFundingListService {
 		List<FundingVo> list = fundingDao.hashtag(hashtag);
 		for (FundingVo vo : list) {
 			String thumbnail = this.thumbnail(vo.getfNum()).getSavename();
-			vo.setSavename(s3.getFileURL("funding/" + thumbnail));
+			S3Util s3Util = new S3Util(restKeyDao.getKeyValue("s3_accessKey"),
+					restKeyDao.getKeyValue("s3_secretKey"));
+			vo.setSavename(s3Util.getFileURL("funding/" + thumbnail));
 			vo.setFpinfo(this.thumbnail(vo.getfNum()).getFpinfo());
 		}
 		return list;

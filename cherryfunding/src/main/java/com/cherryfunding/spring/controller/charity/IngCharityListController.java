@@ -21,8 +21,6 @@ import com.cherryfunding.spring.vo.CharityVo;
 @Controller
 public class IngCharityListController {
 	@Autowired
-	private S3Util s3;
-	@Autowired
 	IngCharityListService ingCharityListService;
 
 	@RequestMapping(value = "/charity/ingCharityList", method = RequestMethod.GET)

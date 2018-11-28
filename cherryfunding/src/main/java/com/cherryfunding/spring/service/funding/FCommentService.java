@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cherryfunding.spring.dao.FCommentDao;
+import com.cherryfunding.spring.dao.RestKeyDao;
 import com.cherryfunding.spring.dao.UserSettingDao;
 import com.cherryfunding.spring.dao.UsersDao;
 import com.cherryfunding.spring.util.ClobToString;
@@ -27,7 +28,7 @@ public class FCommentService {
 	private FCommentDao fCommentDao;
 
 	@Autowired
-	private S3Util s3;
+	private RestKeyDao restKeyDao;
 
 	public int insert(FCommentVo vo) {
 		return fCommentDao.insert(vo);
@@ -60,7 +61,9 @@ public class FCommentService {
 				System.out.println(e.getMessage());
 				profile = "default";
 			}
-			String savename = s3.getFileURL("profile/" + profile);
+			S3Util s3Util = new S3Util(restKeyDao.getKeyValue("s3_accessKey"),
+					restKeyDao.getKeyValue("s3_secretKey"));
+			String savename = s3Util.getFileURL("profile/" + profile);
 			l.put("savename", savename);
 			String nick = usersDao.select(id).getNick();
 			l.put("nick", nick);

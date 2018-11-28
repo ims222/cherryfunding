@@ -26,8 +26,6 @@ public class InsertFundingController {
 	private InsertFundingService insertFundingService;
 
 	@Autowired
-	private S3Util s3;
-	@Autowired
 	private FundingService fundingService;
 
 	@RequestMapping(value = "/funding/fundingApplication", method = RequestMethod.GET)

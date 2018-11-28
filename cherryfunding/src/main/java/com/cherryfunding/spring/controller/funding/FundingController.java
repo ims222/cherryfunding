@@ -22,9 +22,6 @@ import com.cherryfunding.spring.vo.UsersVo;
 public class FundingController {
 
 	@Autowired
-	private TestLoginService testLoginService;
-
-	@Autowired
 	private FundingService fundingService;
 
 	@Autowired

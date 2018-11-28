@@ -5,7 +5,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.List;
 
-import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.amazonaws.ClientConfiguration;
 import com.amazonaws.Protocol;
@@ -14,18 +15,14 @@ import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.Bucket;
-import com.amazonaws.services.s3.model.GeneratePresignedUrlRequest;
 import com.amazonaws.services.s3.model.ObjectMetadata;
+import com.cherryfunding.spring.dao.RestKeyDao;
 
-@Component
 public class S3Util {
 	private String bucketName = "cherryfundingbucket";
-	private String accessKey = "AKIAIIA225UH6CXIMDQQ"; // 엑세스 키
-	private String secretKey = "kwjuNxkNB+t3E3lBFMEf7RalW6n2S89IY/qf4puw"; // 보안 엑세스 키
-
 	private AmazonS3 conn;
 
-	public S3Util() {
+	public S3Util(String accessKey, String secretKey) {
 		AWSCredentials credentials = new BasicAWSCredentials(accessKey, secretKey);
 		ClientConfiguration clientConfig = new ClientConfiguration();
 		clientConfig.setProtocol(Protocol.HTTP);
@@ -50,7 +47,6 @@ public class S3Util {
 
 	// 파일 업로드
 	public void fileUpload(String fileName, byte[] fileData) throws FileNotFoundException {
-
 		String filePath = (fileName).replace(File.separatorChar, '/'); // 파일 구별자를 `/`로 설정(\->/) 이게 기존에 / 였어도 넘어오면서 \로
 																		// 바뀌는 거같다.
 		ObjectMetadata metaData = new ObjectMetadata();
@@ -73,9 +69,9 @@ public class S3Util {
 	public String getFileURL(String fileName) {
 		System.out.println("넘어오는 파일명 : " + fileName);
 		String imgName = (fileName).replace(File.separatorChar, '/');
-		//return conn.generatePresignedUrl(new GeneratePresignedUrlRequest(bucketName, imgName)).toString();
+		// return conn.generatePresignedUrl(new GeneratePresignedUrlRequest(bucketName,
+		// imgName)).toString();
 		return "https://s3.ap-northeast-2.amazonaws.com/cherryfundingbucket/" + fileName;
 	}
-	
 
 }

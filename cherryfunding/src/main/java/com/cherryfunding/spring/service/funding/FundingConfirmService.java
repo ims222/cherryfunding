@@ -10,6 +10,7 @@ import com.cherryfunding.spring.dao.CPictureDao;
 import com.cherryfunding.spring.dao.CharityDao;
 import com.cherryfunding.spring.dao.FPictureDao;
 import com.cherryfunding.spring.dao.FundingDao;
+import com.cherryfunding.spring.dao.RestKeyDao;
 import com.cherryfunding.spring.util.S3Util;
 import com.cherryfunding.spring.vo.CPictureVo;
 import com.cherryfunding.spring.vo.CharityVo;
@@ -32,7 +33,7 @@ public class FundingConfirmService {
 	private CPictureDao cPictureDao;
 
 	@Autowired
-	private S3Util s3;
+	private RestKeyDao restKeyDao;
 
 	public List<FundingVo> waitList() { // 대기 목록
 		return fundingDao.waitList();
@@ -66,7 +67,9 @@ public class FundingConfirmService {
 
 		List<FPictureVo> list = fPictureDao.list(fNum);
 		for (FPictureVo vo : list) {
-			vo.setSavename(s3.getFileURL("funding/" + vo.getSavename()));
+			S3Util s3Util = new S3Util(restKeyDao.getKeyValue("s3_accessKey"),
+					restKeyDao.getKeyValue("s3_secretKey"));
+			vo.setSavename(s3Util.getFileURL("funding/" + vo.getSavename()));
 		}
 
 		return list;
@@ -76,7 +79,9 @@ public class FundingConfirmService {
 
 		List<CPictureVo> list = cPictureDao.list(cNum);
 		for (CPictureVo vo : list) {
-			vo.setSaveName(s3.getFileURL("charity/" + vo.getSaveName()));
+			S3Util s3Util = new S3Util(restKeyDao.getKeyValue("s3_accessKey"),
+					restKeyDao.getKeyValue("s3_secretKey"));
+			vo.setSaveName(s3Util.getFileURL("charity/" + vo.getSaveName()));
 		}
 
 		return list;

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.cherryfunding.spring.dao.FPictureDao;
 import com.cherryfunding.spring.dao.FRecommendDao;
 import com.cherryfunding.spring.dao.FundingDao;
+import com.cherryfunding.spring.dao.RestKeyDao;
 import com.cherryfunding.spring.util.S3Util;
 import com.cherryfunding.spring.util.StringLengthCut;
 import com.cherryfunding.spring.vo.FPictureVo;
@@ -17,7 +18,7 @@ import com.cherryfunding.spring.vo.FundingVo;
 public class MainFundingService {
 
 	@Autowired
-	private S3Util s3;
+	private RestKeyDao restKeyDao;
 
 	@Autowired
 	private FundingDao fdao;
@@ -45,8 +46,9 @@ public class MainFundingService {
 			System.out.println(e.getMessage());
 		}
 
+		S3Util s3Util = new S3Util(restKeyDao.getKeyValue("s3_accessKey"), restKeyDao.getKeyValue("s3_secretKey"));
 		String thumbnail = this.thumbnail(fEnd.getfNum()).getSavename();
-		fEnd.setSavename(s3.getFileURL("funding/" + thumbnail));// 썸네일
+		fEnd.setSavename(s3Util.getFileURL("funding/" + thumbnail));// 썸네일
 		fEnd.setFpinfo(this.thumbnail(fEnd.getfNum()).getFpinfo()); // 사진정보
 
 		return fEnd;
@@ -65,8 +67,9 @@ public class MainFundingService {
 			System.out.println(e.getMessage());
 		}
 
+		S3Util s3Util = new S3Util(restKeyDao.getKeyValue("s3_accessKey"), restKeyDao.getKeyValue("s3_secretKey"));
 		String thumbnail = this.thumbnail(fNew.getfNum()).getSavename();
-		fNew.setSavename(s3.getFileURL("funding/" + thumbnail));// 썸네일
+		fNew.setSavename(s3Util.getFileURL("funding/" + thumbnail));// 썸네일
 		fNew.setFpinfo(this.thumbnail(fNew.getfNum()).getFpinfo()); // 사진정보
 
 		return fNew;
@@ -85,8 +88,9 @@ public class MainFundingService {
 			System.out.println(e.getMessage());
 		}
 
+		S3Util s3Util = new S3Util(restKeyDao.getKeyValue("s3_accessKey"), restKeyDao.getKeyValue("s3_secretKey"));
 		String thumbnail = this.thumbnail(fHot.getfNum()).getSavename();
-		fHot.setSavename(s3.getFileURL("funding/" + thumbnail));// 썸네일
+		fHot.setSavename(s3Util.getFileURL("funding/" + thumbnail));// 썸네일
 		fHot.setFpinfo(this.thumbnail(fHot.getfNum()).getFpinfo()); // 사진정보
 
 		return fHot;
@@ -105,8 +109,9 @@ public class MainFundingService {
 			System.out.println(e.getMessage());
 		}
 
+		S3Util s3Util = new S3Util(restKeyDao.getKeyValue("s3_accessKey"), restKeyDao.getKeyValue("s3_secretKey"));
 		String thumbnail = this.thumbnail(fPrice.getfNum()).getSavename();
-		fPrice.setSavename(s3.getFileURL("funding/" + thumbnail));// 썸네일
+		fPrice.setSavename(s3Util.getFileURL("funding/" + thumbnail));// 썸네일
 		fPrice.setFpinfo(this.thumbnail(fPrice.getfNum()).getFpinfo()); // 사진정보
 		return fPrice;
 	}

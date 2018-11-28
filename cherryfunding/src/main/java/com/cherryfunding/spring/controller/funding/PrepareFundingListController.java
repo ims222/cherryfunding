@@ -20,9 +20,6 @@ import com.cherryfunding.spring.util.S3Util;
 public class PrepareFundingListController {
 
 	@Autowired
-	private S3Util s3;
-
-	@Autowired
 	private PrepareFundingListService prepareService;
 
 	@RequestMapping("/funding/prepareFundingList")

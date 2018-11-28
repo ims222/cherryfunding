@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cherryfunding.spring.dao.RestKeyDao;
 import com.cherryfunding.spring.dao.SCommentDao;
 import com.cherryfunding.spring.dao.UserSettingDao;
 import com.cherryfunding.spring.dao.UsersDao;
@@ -27,7 +28,7 @@ public class SharingCommentService {
 	private UserSettingDao userSettingDao;
 
 	@Autowired
-	private S3Util s3;
+	private RestKeyDao restKeyDao;
 
 	public int insert(SCommentVo vo) {
 		return sCommentDao.insert(vo);
@@ -56,7 +57,9 @@ public class SharingCommentService {
 				System.out.println(e.getMessage());
 				profile = "default";
 			}
-			String savename = s3.getFileURL("profile/" + profile);
+			S3Util s3Util = new S3Util(restKeyDao.getKeyValue("s3_accessKey"),
+					restKeyDao.getKeyValue("s3_secretKey"));
+			String savename = s3Util.getFileURL("profile/" + profile);
 			l.put("savename", savename);
 			String nick = usersDao.select(id).getNick();
 			l.put("nick", nick);

@@ -32,9 +32,6 @@ public class CharityDetailServiceImpl implements CharityDetailService {
 	@Autowired
 	private CDetailDao cDetailDao;
 
-	@Autowired
-	private UsersDao usersDao;
-
 	@Override
 	public CharityVo detail(int cNum) {
 		return charityDao.select(cNum);

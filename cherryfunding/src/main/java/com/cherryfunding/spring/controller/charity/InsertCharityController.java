@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.cherryfunding.spring.dao.RestKeyDao;
 import com.cherryfunding.spring.service.charity.CHashtagService;
 import com.cherryfunding.spring.service.charity.CPictureService;
 import com.cherryfunding.spring.service.charity.CharityService;
@@ -26,8 +27,12 @@ import com.cherryfunding.spring.vo.CharityVo;
 
 @Controller
 public class InsertCharityController {
+
 	@Autowired
-	private CHashtagService cHashtagService; 
+	private RestKeyDao restKeyDao;
+
+	@Autowired
+	private CHashtagService cHashtagService;
 
 	@Autowired
 	private CharityService charityService;
@@ -93,13 +98,12 @@ public class InsertCharityController {
 		}
 
 		try { // 사진db저장
-		List<MultipartFile> files = request.getFiles("cPicture");
-		int num = 0;
-		for (MultipartFile file : files) { // 사진들
-			S3Util s3 = new S3Util();
-			String orgfilename = file.getOriginalFilename();
-			String savefilename = String.valueOf(UUID.randomUUID());
-			long filesize = file.getSize();
+			List<MultipartFile> files = request.getFiles("cPicture");
+			int num = 0;
+			for (MultipartFile file : files) { // 사진들
+				String orgfilename = file.getOriginalFilename();
+				String savefilename = String.valueOf(UUID.randomUUID());
+				long filesize = file.getSize();
 				if (filesize > 0) {
 					CPictureVo cpvo = new CPictureVo();
 					cpvo.setCpNum(cPictureService.getMaxNum() + 1);
@@ -109,7 +113,9 @@ public class InsertCharityController {
 					cpvo.setFileSize(filesize);
 					cpvo.setCpinfo(cpinfo[num++]);
 					insertCharityService.cpinsert(cpvo); // 저장
-					s3.fileUpload("charity/" + savefilename, file.getBytes()); // 파일 업로드
+					S3Util s3Util = new S3Util(restKeyDao.getKeyValue("s3_accessKey"),
+							restKeyDao.getKeyValue("s3_secretKey"));
+					s3Util.fileUpload("charity/" + savefilename, file.getBytes()); // 파일 업로드
 				}
 			}
 		} catch (Exception e) {

@@ -10,18 +10,19 @@ import com.cherryfunding.spring.vo.FundingVo;
 
 @Service
 public class SearchFundingService {
-	@Autowired FundingDao FundingDao;
-	
-	public List<FundingVo> searchwaitList(HashMap<String, String> map){
-		
+	@Autowired
+	FundingDao FundingDao;
+
+	public List<FundingVo> searchwaitList(HashMap<String, String> map) {
+
 		return FundingDao.searchwaitList(map);
-		
+
 	}
-	
-	public List<FundingVo> searchconfirmList(HashMap<String, String> map){
-		
+
+	public List<FundingVo> searchconfirmList(HashMap<String, String> map) {
+
 		return FundingDao.searchconfirmList(map);
-		
+
 	}
 
 }

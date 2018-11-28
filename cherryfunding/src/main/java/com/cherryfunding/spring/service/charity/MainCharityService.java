@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.cherryfunding.spring.dao.CPictureDao;
 import com.cherryfunding.spring.dao.CRecommendDao;
 import com.cherryfunding.spring.dao.CharityDao;
+import com.cherryfunding.spring.dao.RestKeyDao;
 import com.cherryfunding.spring.util.S3Util;
 import com.cherryfunding.spring.util.StringLengthCut;
 import com.cherryfunding.spring.vo.CPictureVo;
@@ -17,7 +18,7 @@ import com.cherryfunding.spring.vo.CharityVo;
 public class MainCharityService {
 
 	@Autowired
-	private S3Util s3;
+	private RestKeyDao restKeyDao;
 
 	@Autowired
 	private CharityDao cdao;
@@ -40,9 +41,9 @@ public class MainCharityService {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-
+		S3Util s3Util = new S3Util(restKeyDao.getKeyValue("s3_accessKey"), restKeyDao.getKeyValue("s3_secretKey"));
 		String thumbnail = this.thumbnail(cEnd.getcNum()).getSaveName();
-		cEnd.setSavename(s3.getFileURL("charity/" + thumbnail));// 썸네일
+		cEnd.setSavename(s3Util.getFileURL("charity/" + thumbnail));// 썸네일
 		cEnd.setCpinfo(this.thumbnail(cEnd.getcNum()).getCpinfo()); // 사진정보
 
 		return cEnd;
@@ -61,8 +62,9 @@ public class MainCharityService {
 			System.out.println(e.getMessage());
 		}
 
+		S3Util s3Util = new S3Util(restKeyDao.getKeyValue("s3_accessKey"), restKeyDao.getKeyValue("s3_secretKey"));
 		String thumbnail = this.thumbnail(cNew.getcNum()).getSaveName();
-		cNew.setSavename(s3.getFileURL("charity/" + thumbnail));// 썸네일
+		cNew.setSavename(s3Util.getFileURL("charity/" + thumbnail));// 썸네일
 		cNew.setCpinfo(this.thumbnail(cNew.getcNum()).getCpinfo()); // 사진정보
 
 		return cNew;
@@ -81,8 +83,9 @@ public class MainCharityService {
 			System.out.println(e.getMessage());
 		}
 
+		S3Util s3Util = new S3Util(restKeyDao.getKeyValue("s3_accessKey"), restKeyDao.getKeyValue("s3_secretKey"));
 		String thumbnail = this.thumbnail(cHot.getcNum()).getSaveName();
-		cHot.setSavename(s3.getFileURL("charity/" + thumbnail));// 썸네일
+		cHot.setSavename(s3Util.getFileURL("charity/" + thumbnail));// 썸네일
 		cHot.setCpinfo(this.thumbnail(cHot.getcNum()).getCpinfo()); // 사진정보
 
 		return cHot;
@@ -101,8 +104,9 @@ public class MainCharityService {
 			System.out.println(e.getMessage());
 		}
 
+		S3Util s3Util = new S3Util(restKeyDao.getKeyValue("s3_accessKey"), restKeyDao.getKeyValue("s3_secretKey"));
 		String thumbnail = this.thumbnail(cPrice.getcNum()).getSaveName();
-		cPrice.setSavename(s3.getFileURL("charity/" + thumbnail));// 썸네일
+		cPrice.setSavename(s3Util.getFileURL("charity/" + thumbnail));// 썸네일
 		cPrice.setCpinfo(this.thumbnail(cPrice.getcNum()).getCpinfo()); // 사진정보
 
 		return cPrice;

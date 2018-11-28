@@ -18,7 +18,6 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class KakaoLogin {
-	private final static String adminKey = "94993e59908d14bc4fff4e15168f2d01";
 
 	public static JsonNode getAccessToken(String autorize_code) {
 		final String RequestUrl = "https://kauth.kakao.com/oauth/token";

@@ -21,8 +21,6 @@ import com.cherryfunding.spring.vo.CharityVo;
 @Controller
 public class EndCharityListController {
 
-	@Autowired
-	private S3Util s3;
 
 	@Autowired
 	private EndCharityListService endService;

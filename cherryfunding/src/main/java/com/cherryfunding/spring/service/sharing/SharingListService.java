@@ -8,6 +8,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cherryfunding.spring.dao.RestKeyDao;
 import com.cherryfunding.spring.dao.SPictureDao;
 import com.cherryfunding.spring.dao.SRecommendDao;
 import com.cherryfunding.spring.dao.ShareDao;
@@ -32,7 +33,7 @@ public class SharingListService {
 	private SRecommendDao sRecommendDao;
 
 	@Autowired
-	private S3Util s3;
+	private RestKeyDao restKeyDao;
 
 	public List<HashMap<String, Object>> list(HashMap<String, Object> map) {
 		List<HashMap<String, Object>> list = shareDao.list(map);
@@ -52,7 +53,9 @@ public class SharingListService {
 			}
 
 			String thumbnail = this.thumbnail(sNum).getSaveName();
-			l.put("savename", s3.getFileURL("sharing/" + thumbnail));
+			S3Util s3Util = new S3Util(restKeyDao.getKeyValue("s3_accessKey"),
+					restKeyDao.getKeyValue("s3_secretKey"));
+			l.put("savename", s3Util.getFileURL("sharing/" + thumbnail));
 			l.put("spinfo", this.thumbnail(sNum).getsPinfo());
 
 			String id = (String) l.get("ID");

@@ -22,8 +22,6 @@ import com.cherryfunding.spring.vo.FundingVo;
 @Controller
 public class PrepareCharityListController {
 
-	@Autowired
-	private S3Util s3;
 
 	@Autowired
 	private PrepareCharityListService prepareService;

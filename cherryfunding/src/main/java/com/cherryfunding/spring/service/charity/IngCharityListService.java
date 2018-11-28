@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.cherryfunding.spring.dao.CPictureDao;
 import com.cherryfunding.spring.dao.CRecommendDao;
 import com.cherryfunding.spring.dao.CharityDao;
+import com.cherryfunding.spring.dao.RestKeyDao;
 import com.cherryfunding.spring.dao.UsersDao;
 import com.cherryfunding.spring.util.ClobToString;
 import com.cherryfunding.spring.util.S3Util;
@@ -28,7 +29,7 @@ public class IngCharityListService {
 	private CRecommendDao cRecommendDao;
 
 	@Autowired
-	private S3Util s3;
+	private RestKeyDao restKeyDao;
 
 	@Autowired
 	private CPictureDao cpdao;
@@ -49,7 +50,9 @@ public class IngCharityListService {
 				}
 			}
 			String thumbnail = this.thumbnail(cNum).getSaveName();
-			l.put("savename", s3.getFileURL("charity/" + thumbnail));
+			S3Util s3Util = new S3Util(restKeyDao.getKeyValue("s3_accessKey"),
+					restKeyDao.getKeyValue("s3_secretKey"));
+			l.put("savename", s3Util.getFileURL("charity/" + thumbnail));
 			l.put("cpinfo", this.thumbnail(((BigDecimal) l.get("CNUM")).intValue()).getCpinfo());
 
 			String id = (String) l.get("ID");

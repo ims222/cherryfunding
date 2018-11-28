@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.cherryfunding.spring.dao.RestKeyDao;
 import com.cherryfunding.spring.service.funding.FundingService;
 import com.cherryfunding.spring.service.funding.InsertFundingService;
 import com.cherryfunding.spring.util.S3Util;
@@ -23,7 +24,7 @@ import com.cherryfunding.spring.vo.FundingVo;
 public class ImgUpload {
 
 	@Autowired
-	private S3Util s3;
+	private RestKeyDao restKeyDao;
 
 	@Autowired
 	private FundingService fundingService;
@@ -72,7 +73,8 @@ public class ImgUpload {
 				insertFundingService.finsert(fvo); // db
 			}
 			String caption = request.getParameter("caption");
-			s3.fileUpload("funding/" + savefilename, file.getBytes()); // 파일 업로드
+			S3Util s3Util = new S3Util(restKeyDao.getKeyValue("s3_accessKey"), restKeyDao.getKeyValue("s3_secretKey"));
+			s3Util.fileUpload("funding/" + savefilename, file.getBytes()); // 파일 업로드
 
 			FPictureVo fpvo = new FPictureVo();
 			fpvo.setfNum(fNum);

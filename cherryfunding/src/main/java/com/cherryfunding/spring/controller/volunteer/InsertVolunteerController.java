@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.cherryfunding.spring.dao.RestKeyDao;
 import com.cherryfunding.spring.service.volunteer.VPictureService;
 import com.cherryfunding.spring.service.volunteer.VolunteerService;
 import com.cherryfunding.spring.util.S3Util;
@@ -28,14 +29,13 @@ import com.cherryfunding.spring.vo.VolunteerVo;
 public class InsertVolunteerController {
 	@Autowired
 	private VolunteerService volunteerService;
-	
+
 	@Autowired
 	private VPictureService vPictureService;
-	
+
 	@Autowired
-	private S3Util s3;
-	
-	
+	private RestKeyDao restKeyDao;
+
 	@RequestMapping(value = "/volunteer/insertVolunteer", method = RequestMethod.GET)
 	public String insertVolunteerForm() {
 		return ".insertVolunteer";
@@ -50,20 +50,20 @@ public class InsertVolunteerController {
 		String dDay = request.getParameter("dDay");
 		int members = Integer.parseInt(request.getParameter("members"));
 		String place = request.getParameter("place");
-		
+
 		String[] vPinfo = request.getParameterValues("vPinfo");
 		List<MultipartFile> files = request.getFiles("vPicture");
-		
+
 		int vNum = volunteerService.getMaxNum() + 1;
-		
+
 		String uploadPath = session.getServletContext().getRealPath("/resources/upload/volunteer");
 		File f = new File(uploadPath);
 		if (f.exists() == false) { // 파일 생성
 			f.mkdirs();
 		}
-		
-		try {	//텍스트 저장
-			VolunteerVo vo=new VolunteerVo();
+
+		try { // 텍스트 저장
+			VolunteerVo vo = new VolunteerVo();
 			vo.setvNum(vNum);
 			vo.setId(id);
 			vo.setTitle(title);
@@ -74,30 +74,32 @@ public class InsertVolunteerController {
 			vo.setMembers(members);
 			vo.setPlace(place);
 			volunteerService.insert(vo);
-		}catch(Exception e) {
+		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-		
-		try {	//사진 저장
+
+		try { // 사진 저장
 			int num = 0;
 			for (MultipartFile file : files) {
 				String orgfilename = file.getOriginalFilename();
 				String savefilename = String.valueOf(UUID.randomUUID());
 				long filesize = file.getSize();
 				if (filesize > 0) {
-					
-					VPictureVo vpvo=new VPictureVo();
+
+					VPictureVo vpvo = new VPictureVo();
 					vpvo.setVpNum(vPictureService.getMaxNum() + 1);
 					vpvo.setvNum(vNum);
 					vpvo.setOrgName(orgfilename);
 					vpvo.setSaveName(savefilename);
 					vpvo.setFileSize(filesize);
 					vpvo.setVpInfo(vPinfo[num++]);
-					s3.fileUpload("volunteer/" + savefilename, file.getBytes()); // 파일 업로드
+					S3Util s3Util = new S3Util(restKeyDao.getKeyValue("s3_accessKey"),
+							restKeyDao.getKeyValue("s3_secretKey"));
+					s3Util.fileUpload("volunteer/" + savefilename, file.getBytes()); // 파일 업로드
 					vPictureService.insert(vpvo);
 				}
 			}
-		}catch(Exception e) {
+		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
 		return "redirect:/volunteer/volunteerList";

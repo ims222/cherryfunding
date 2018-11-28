@@ -13,15 +13,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.cherryfunding.spring.dao.RestKeyDao;
 import com.cherryfunding.spring.dao.UserSettingDao;
 import com.cherryfunding.spring.util.S3Util;
 import com.cherryfunding.spring.vo.UserSettingVo;
 
 @Controller
 public class ProfileImgController {
-
+	
 	@Autowired
-	private S3Util s3;
+	private RestKeyDao restKeyDao;
 
 	@Autowired
 	private UserSettingDao userSettingDao;
@@ -35,14 +36,18 @@ public class ProfileImgController {
 		try {
 			String profile = userSettingDao.getInfo(id).getProfile();
 			if (!profile.equals("default")) {
-				s3.fileDelete("profile/" + profile);
+				S3Util s3Util = new S3Util(restKeyDao.getKeyValue("s3_accessKey"),
+						restKeyDao.getKeyValue("s3_secretKey"));
+				s3Util.fileDelete("profile/" + profile);
 			}
 			profile = String.valueOf(UUID.randomUUID());
 			UserSettingVo usvo = new UserSettingVo();
 			usvo.setProfile(profile);
 			usvo.setId(id);
 			userSettingDao.update(usvo);
-			s3.fileUpload("profile/" + profile, file.getBytes()); // 파일 업로드
+			S3Util s3Util = new S3Util(restKeyDao.getKeyValue("s3_accessKey"),
+					restKeyDao.getKeyValue("s3_secretKey"));
+			s3Util.fileUpload("profile/" + profile, file.getBytes()); // 파일 업로드
 
 			obj.put("success", "true");
 		} catch (Exception e) {
@@ -58,7 +63,9 @@ public class ProfileImgController {
 		JSONObject obj = new JSONObject();
 		String id = (String) session.getAttribute("id");
 		String profile = userSettingDao.getInfo(id).getProfile();
-		String savename = s3.getFileURL("profile/" + profile); // 파일이름 불러오기
+		S3Util s3Util = new S3Util(restKeyDao.getKeyValue("s3_accessKey"),
+				restKeyDao.getKeyValue("s3_secretKey"));
+		String savename = s3Util.getFileURL("profile/" + profile); // 파일이름 불러오기
 		obj.put("savename", savename);
 		return obj.toString();
 	}

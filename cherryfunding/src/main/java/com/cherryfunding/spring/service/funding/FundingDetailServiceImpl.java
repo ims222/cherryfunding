@@ -1,6 +1,5 @@
 package com.cherryfunding.spring.service.funding;
 
-import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 
@@ -14,6 +13,7 @@ import com.cherryfunding.spring.dao.FPictureDao;
 import com.cherryfunding.spring.dao.FRecommendDao;
 import com.cherryfunding.spring.dao.FResultDao;
 import com.cherryfunding.spring.dao.FundingDao;
+import com.cherryfunding.spring.dao.RestKeyDao;
 import com.cherryfunding.spring.dao.RewardDao;
 import com.cherryfunding.spring.dao.UsersDao;
 import com.cherryfunding.spring.util.S3Util;
@@ -28,6 +28,9 @@ import com.cherryfunding.spring.vo.UsersVo;
 @Transactional
 @Service
 public class FundingDetailServiceImpl implements FundingDetailService {
+
+	@Autowired
+	private RestKeyDao restKeyDao;
 
 	@Autowired
 	private FundingDao fundingDao;
@@ -49,7 +52,7 @@ public class FundingDetailServiceImpl implements FundingDetailService {
 
 	@Autowired
 	FResultDao fResultDao;
-	
+
 	@Autowired
 	private FPictureDao fPictureDao;
 
@@ -138,12 +141,12 @@ public class FundingDetailServiceImpl implements FundingDetailService {
 	public int withdraw(HashMap<String, Object> map) {
 		return usersDao.withdraw(map);
 	}
-	
+
 	@Override
 	public String thumbnailString(int fNum) {
-		S3Util s3=new S3Util();
+		S3Util s3Util = new S3Util(restKeyDao.getKeyValue("s3_accessKey"), restKeyDao.getKeyValue("s3_secretKey"));
 		String thumbnail = fPictureDao.thumbnailString(fNum);
-		return s3.getFileURL("funding/" + thumbnail);
-		
+		return s3Util.getFileURL("funding/" + thumbnail);
+
 	}
 }
