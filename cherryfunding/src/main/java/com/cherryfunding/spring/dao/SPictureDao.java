@@ -12,7 +12,7 @@ public class SPictureDao {
 	SqlSession sqlSession;
 
 	private static final String NAMESPACE = "com.cherryfunding.spring.vo.SPictureMapper.";
-
+ 
 	public int insert(SPictureVo vo) {
 		return sqlSession.insert(NAMESPACE + "insert", vo);
 	}

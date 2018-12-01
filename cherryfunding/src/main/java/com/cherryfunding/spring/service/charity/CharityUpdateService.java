@@ -14,7 +14,7 @@ public class CharityUpdateService {
 
 	public int update(CharityVo vo) {
 		return charityDao.update(vo);
-	}
+	} 
 
 	public CharityVo detail(int cNum) {
 		return charityDao.select(cNum);

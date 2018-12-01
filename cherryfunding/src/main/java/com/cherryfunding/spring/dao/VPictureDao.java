@@ -12,7 +12,7 @@ import com.cherryfunding.spring.vo.VPictureVo;
 public class VPictureDao {
 	@Autowired
 	SqlSession sqlSession;
-	
+	 
 	private static final String NAMESPACE = "com.cherryfunding.spring.vo.VPictureMapper.";
 	
 	public int insert(VPictureVo vo) {

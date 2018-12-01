@@ -20,7 +20,7 @@ import com.cherryfunding.spring.vo.FundingVo;
 
 @Controller
 public class IngFundingListController {
-
+ 
 	@Autowired
 	IngFundingListService ingFundingListService;
 

@@ -10,7 +10,7 @@ import com.cherryfunding.spring.service.volunteer.VolunteerService;
 @Controller
 public class BatchController {
 
-	@Autowired
+	@Autowired 
 	private VolunteerService volunteerService;
 
 	public void method() { // 마감일 지난 봉사 게시물 제목에 [마감] 붙이기(하루 1회 실행)

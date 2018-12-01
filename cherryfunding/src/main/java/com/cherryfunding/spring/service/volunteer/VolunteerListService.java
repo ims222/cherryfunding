@@ -16,7 +16,7 @@ public class VolunteerListService {
 	@Autowired
 	private VolunteerDao volunteerDao;
 	
-	@Autowired
+	@Autowired 
 	private VPictureDao vPictureDao;
 	
 	public List<VolunteerVo> list(){

@@ -10,7 +10,7 @@ public class EHashtagDao {
 	SqlSession sqlSession;
 	
 	private static final String NAMESPACE = "com.cherryfunding.spring.vo.EHashtagMapper.";
-	
+	 
 	public int insert(EHashtagVo vo) {
 		return sqlSession.insert(NAMESPACE + "insert", vo);
 	}

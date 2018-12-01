@@ -14,7 +14,7 @@ public class CRecommendService {
 
 	public int insert(CRecommendVo vo) {
 		return cRecommendDao.insert(vo);
-	}
+	} 
 
 	public int getMaxNum() {
 		return cRecommendDao.getMaxNum();

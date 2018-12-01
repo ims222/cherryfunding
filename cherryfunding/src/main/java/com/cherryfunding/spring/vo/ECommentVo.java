@@ -8,7 +8,7 @@ public class ECommentVo {
 	private String id; 
 	private String content;
 	private Date regdate;   
-	public ECommentVo() {}
+	public ECommentVo() {} 
 	public ECommentVo(int ecNum, int eNum, String id, String content, Date regdate) {
 		super();
 		this.ecNum = ecNum;

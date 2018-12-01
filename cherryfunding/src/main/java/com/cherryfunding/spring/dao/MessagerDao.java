@@ -15,7 +15,7 @@ public class MessagerDao {
 
 	public int insert(MessengerVo vo) {
 		return sqlSession.insert(NAMESPACE + "insert", vo);
-	}
+	} 
 
 	public int getMaxNum() {
 		return sqlSession.selectOne(NAMESPACE + "getMaxNUm");

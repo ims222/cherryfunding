@@ -12,7 +12,7 @@ import com.cherryfunding.spring.vo.FundingVo;
 
 @Controller
 public class CharityUpdateController {
-
+ 
 	@Autowired
 	private CharityUpdateService charityUpdateService;
 

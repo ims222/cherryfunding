@@ -8,7 +8,7 @@ public class SCommentVo {
 	private int sNum;
 
 	public SCommentVo() {
-	}
+	} 
 
 	public SCommentVo(int scNum, String id, String content, String regdate, int sNum) {
 		super();

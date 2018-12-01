@@ -12,7 +12,7 @@ public class VisitorDao {
 
 	@Autowired SqlSession sqlsession;
 	private static final String NAMESPACE ="com.cherryfunding.spring.vo.VisitorMapper.";
-	
+	 
 	public int insert(VisitorVo vo) {
 		return sqlsession.insert(NAMESPACE+"insert",vo);
 	}

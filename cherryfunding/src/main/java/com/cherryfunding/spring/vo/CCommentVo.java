@@ -4,7 +4,7 @@ import java.sql.Date;
 
 public class CCommentVo {
 	 private int ccNum;
-	 private String id;
+	 private String id; 
 	 private int cNum;
 	 private String content;
 	 private Date regdate;

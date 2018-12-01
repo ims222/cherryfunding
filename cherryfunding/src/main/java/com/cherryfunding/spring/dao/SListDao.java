@@ -15,7 +15,7 @@ public class SListDao {
 	SqlSession sqlSession;
 
 	private static final String NAMESPACE = "com.cherryfunding.spring.vo.SListMapper.";
-
+ 
 	public int insert(SListVo vo) {
 		return sqlSession.insert(NAMESPACE + "insert", vo);
 	}

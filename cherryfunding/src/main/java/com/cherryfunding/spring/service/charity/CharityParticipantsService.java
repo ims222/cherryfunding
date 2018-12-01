@@ -16,7 +16,7 @@ public class CharityParticipantsService {
 
 	@Autowired
 	private CDetailDao cDetailDao;
-
+ 
 	@Autowired
 	private UsersDao usersDao;
 

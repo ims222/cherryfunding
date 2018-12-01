@@ -17,7 +17,7 @@ public class MypageService {
 	private MypageDao dao;
 
 	@Autowired
-	private UserSettingDao userSettingDao;
+	private UserSettingDao userSettingDao; 
 
 	public int charitySum(String id) {
 		return dao.charitySum(id);

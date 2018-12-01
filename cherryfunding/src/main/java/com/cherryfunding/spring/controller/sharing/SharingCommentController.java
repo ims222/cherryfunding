@@ -17,7 +17,7 @@ public class SharingCommentController {
 
 	@Autowired
 	private SharingCommentService sharingCommentService;
-
+ 
 	@RequestMapping(value = "/sharing/insertComment", produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String insertComment(String id, String content, int sNum) {

@@ -6,7 +6,7 @@ public class RestKeyVo {
 	String keyValue;
 
 	public RestKeyVo() {
-	}
+	} 
 
 	public RestKeyVo(String keyName, String keyValue) {
 		this.keyName = keyName;

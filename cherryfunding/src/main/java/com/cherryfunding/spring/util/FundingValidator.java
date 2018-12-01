@@ -11,7 +11,7 @@ public class FundingValidator implements Validator {
 	@Override
 	public boolean supports(Class<?> clazz) {
 		return FundingVo.class.isAssignableFrom(clazz);
-	}
+	} 
 
 	@Override
 	public void validate(Object target, Errors errors) {

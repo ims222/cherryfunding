@@ -10,7 +10,7 @@ public class CRecommendVo {
 
 	public CRecommendVo(int crNum, int cNum, String id) {
 		this.crNum = crNum;
-		this.cNum = cNum;
+		this.cNum = cNum; 
 		this.id = id;
 	}
 

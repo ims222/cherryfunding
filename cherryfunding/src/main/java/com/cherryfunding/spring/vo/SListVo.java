@@ -10,7 +10,7 @@ public class SListVo {
 	private int amount;
 
 	public SListVo() {
-	}
+	} 
 
 	public SListVo(int slNum, int sNum, String id, String confirm, String content, int siNum, int amount) {
 		super();

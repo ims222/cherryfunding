@@ -18,7 +18,7 @@ public class SharingListController {
 
 	@Autowired
 	private SharingListService sharingListService;
-
+ 
 	@RequestMapping(value = "/sharing/sharingList", method = RequestMethod.GET)
 	public String sharingList() {
 		return ".sharingList";

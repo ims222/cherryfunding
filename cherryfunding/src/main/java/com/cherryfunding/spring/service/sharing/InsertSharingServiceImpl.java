@@ -17,7 +17,7 @@ public class InsertSharingServiceImpl implements InsertSharingService {
 
 	@Autowired
 	private ShareDao shareDao;
-
+ 
 	@Autowired
 	private SItemDao sItemDao;
 

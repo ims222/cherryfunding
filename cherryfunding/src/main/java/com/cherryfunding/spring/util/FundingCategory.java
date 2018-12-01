@@ -5,7 +5,7 @@ public enum FundingCategory {
 	ANIMAL, PLAY, SOCIAL, EDU, GAME, BOOK
 }
 
-//전체보기
+//전체보기 
 //테크·가전
 //패션·잡화
 //뷰티

@@ -15,7 +15,7 @@ public class SItemDao {
 	SqlSession sqlSession;
 
 	private static final String NAMESPACE = "com.cherryfunding.spring.vo.SItemMapper.";
-
+ 
 	public int insert(SItemVo vo) {
 		return sqlSession.insert(NAMESPACE + "insert", vo);
 	}

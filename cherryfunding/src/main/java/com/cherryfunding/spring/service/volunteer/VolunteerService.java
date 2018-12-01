@@ -15,7 +15,7 @@ public class VolunteerService {
 	@Autowired
 	private VolunteerDao volunteerDao;
 	
-	public int getMaxNum() {
+	public int getMaxNum() { 
 		return volunteerDao.getMaxNum();
 	}
 	

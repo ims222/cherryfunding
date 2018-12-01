@@ -20,7 +20,7 @@ public class VolunteerListController {
 
 	@Autowired
 	private RestKeyDao restKeyDao;
-
+ 
 	@RequestMapping(value = "/volunteer/volunteerList", method = RequestMethod.GET)
 	public String sharingList(Model model) {
 		List<VolunteerVo> list = volunteerListService.getFirstSix();

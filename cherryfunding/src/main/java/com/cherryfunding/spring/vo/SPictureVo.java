@@ -9,7 +9,7 @@ public class SPictureVo {
 	private String sPinfo;
 
 	public SPictureVo() {
-	}
+	} 
 
 	public SPictureVo(int spNum, int sNum, String saveName, String orgName, long fileSize, String sPinfo) {
 		super();

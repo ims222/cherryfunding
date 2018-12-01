@@ -15,7 +15,7 @@ import com.cherryfunding.spring.vo.UsersVo;
 public class MemberJoinController {
 	@Autowired
 	private TestLoginService service;
-	
+	 
 	@RequestMapping(value="/insert",method=RequestMethod.GET)
 	public String insert() {
 		return "insert";

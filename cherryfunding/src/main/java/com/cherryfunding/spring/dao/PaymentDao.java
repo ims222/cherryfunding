@@ -13,5 +13,5 @@ public class PaymentDao {
 	
 	public int insert(PaymentVo vo) {
 		return sqlSession.insert(NAMESPACE + "insert", vo);
-	}
+	} 
 }

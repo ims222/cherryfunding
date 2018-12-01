@@ -18,7 +18,7 @@ public class MypageController {
 
 	@Autowired
 	private MypageService mpService;
-
+ 
 	@RequestMapping(value = "/mypage", method = RequestMethod.GET)
 	public String mypage(HttpSession session, Model model) {
 		String id = (String) session.getAttribute("id");

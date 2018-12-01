@@ -19,7 +19,7 @@ import com.cherryfunding.spring.vo.FCommentVo;
 public class FCommentService {
 
 	@Autowired
-	private UsersDao usersDao;
+	private UsersDao usersDao; 
 
 	@Autowired
 	private UserSettingDao userSettingDao;

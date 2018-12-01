@@ -10,7 +10,7 @@ public class EPictureDao {
 	SqlSession sqlSession;
 	
 	private static final String NAMESPACE = "com.cherryfunding.spring.vo.EPictureMapper.";
-	
+	 
 	public int insert(EPictureVo vo) {
 		return sqlSession.insert(NAMESPACE + "insert", vo);
 	}

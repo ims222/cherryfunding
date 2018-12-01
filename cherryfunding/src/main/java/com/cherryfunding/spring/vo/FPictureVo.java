@@ -5,7 +5,7 @@ import java.sql.Date;
 public class FPictureVo {
 	private int fpNum;
 	private int fNum;
-	private String savename;
+	private String savename; 
 	private String orgname;
 	private long filesize;
 	private Date regdate;

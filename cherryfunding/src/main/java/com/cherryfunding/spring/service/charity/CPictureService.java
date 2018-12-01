@@ -17,7 +17,7 @@ public class CPictureService {
 
 	public int insert(CPictureVo vo) {
 		return dao.insert(vo);
-	}
+	} 
 
 	public int getMaxNum() {
 		return dao.getMaxNum();

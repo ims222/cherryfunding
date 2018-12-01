@@ -10,7 +10,7 @@ public class EventDao {
 	SqlSession sqlSession;
 	
 	private static final String NAMESPACE = "com.cherryfunding.spring.vo.EventMapper.";
-	
+	 
 	public int insert(EventVo vo) {
 		return sqlSession.insert(NAMESPACE + "insert", vo);
 	}

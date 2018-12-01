@@ -14,7 +14,7 @@ public class FPictureDao {
 	SqlSession sqlSession;
 
 	private static final String NAMESPACE = "com.cherryfunding.spring.vo.FPictureMapper.";
-
+ 
 	public int insert(FPictureVo vo) {
 		return sqlSession.insert(NAMESPACE + "insert", vo);
 	}

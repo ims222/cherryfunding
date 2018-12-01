@@ -9,7 +9,7 @@ public class SRecommendVo {
 	}
 
 	public SRecommendVo(int srNum, int sNum, String id) {
-		this.srNum = srNum;
+		this.srNum = srNum; 
 		this.sNum = sNum;
 		this.id = id;
 	}

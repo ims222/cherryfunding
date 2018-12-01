@@ -12,7 +12,7 @@ public class FRecommendService {
 	@Autowired
 	private FRecommendDao fRecommendDao;
 
-	public int insert(FRecommendVo vo) {
+	public int insert(FRecommendVo vo) { 
 		return fRecommendDao.insert(vo);
 	}
 

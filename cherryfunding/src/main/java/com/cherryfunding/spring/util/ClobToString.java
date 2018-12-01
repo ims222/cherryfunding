@@ -12,7 +12,7 @@ import com.cherryfunding.spring.vo.FundingVo;
 
 @Component
 public class ClobToString {
-	// Clob 를 String 으로 변경
+	// Clob 를 String 으로 변경 
 	public static String clobToString(Clob clob) throws SQLException, IOException {
 
 		if (clob == null) {

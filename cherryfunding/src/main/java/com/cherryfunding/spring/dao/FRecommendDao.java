@@ -12,7 +12,7 @@ public class FRecommendDao {
 	SqlSession sqlSession;
 
 	private static final String NAMESPACE = "com.cherryfunding.spring.vo.FRecommendMapper.";
-
+ 
 	public int insert(FRecommendVo vo) {
 		return sqlSession.insert(NAMESPACE + "insert", vo);
 	}

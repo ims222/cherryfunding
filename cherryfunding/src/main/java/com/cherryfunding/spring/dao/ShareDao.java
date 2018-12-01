@@ -15,7 +15,7 @@ public class ShareDao {
 	SqlSession sqlSession;
 
 	private static final String NAMESPACE = "com.cherryfunding.spring.vo.ShareMapper.";
-
+ 
 	public int insert(ShareVo vo) {
 		return sqlSession.insert(NAMESPACE + "insert", vo);
 	}

@@ -13,7 +13,7 @@ public class FPictureService {
 
 	@Autowired
 	private FPictureDao dao;
-
+ 
 	public int insert(FPictureVo vo) {
 		return dao.insert(vo);
 	}

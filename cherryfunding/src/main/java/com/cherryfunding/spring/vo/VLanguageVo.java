@@ -7,7 +7,7 @@ public class VLanguageVo {
 
 	public VLanguageVo() {
 	}
-
+ 
 	public VLanguageVo(String lang, String div, String saying) {
 		this.lang = lang;
 		this.div = div;

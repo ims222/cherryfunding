@@ -23,7 +23,7 @@ public class FundingConfirmService {
 	@Autowired
 	private FundingDao fundingDao;
 
-	@Autowired
+	@Autowired 
 	private CharityDao charityDao;
 
 	@Autowired

@@ -24,7 +24,7 @@ public class IngCharityListService {
 
 	@Autowired
 	private UsersDao usersDao;
-
+ 
 	@Autowired
 	private CRecommendDao cRecommendDao;
 

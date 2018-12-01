@@ -13,7 +13,7 @@ import com.cherryfunding.spring.vo.VListVo;
 public class VListDao {
 	@Autowired
 	SqlSession sqlSession;
-	
+	 
 	private static final String NAMESPACE = "com.cherryfunding.spring.vo.VListMapper.";
 	
 	public VListVo isApply(VListVo vo) {

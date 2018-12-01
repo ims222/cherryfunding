@@ -8,7 +8,7 @@ public class EHashtagVo {
 	public EHashtagVo(int ctagNum, int eNum, String hashtag) {
 		super();
 		this.ctagNum = ctagNum;
-		this.eNum = eNum;
+		this.eNum = eNum; 
 		this.hashtag = hashtag;
 	}
 	public int getCtagNum() {

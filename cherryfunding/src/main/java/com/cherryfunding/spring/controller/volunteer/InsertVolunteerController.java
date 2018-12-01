@@ -29,7 +29,7 @@ import com.cherryfunding.spring.vo.VolunteerVo;
 public class InsertVolunteerController {
 	@Autowired
 	private VolunteerService volunteerService;
-
+ 
 	@Autowired
 	private VPictureService vPictureService;
 

@@ -12,5 +12,5 @@ public interface InsertFundingService {
 
 	int rinsert(RewardVo rvo);// 펀딩테이블
 
-	int fpinsert(FPictureVo fpvo);// 펀딩테이블
+	int fpinsert(FPictureVo fpvo);// 펀딩테이블 
 }

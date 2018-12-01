@@ -14,7 +14,7 @@ public class CHashtagService {
 
 	public int insert(CHashtagVo vo) {
 		return dao.insert(vo);
-	}
+	} 
 
 	public int getMaxNum() {
 		return dao.getMaxNum();

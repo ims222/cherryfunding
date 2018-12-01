@@ -10,7 +10,7 @@ public class EpilogueDao {
 	SqlSession sqlSession;
 	
 	private static final String NAMESPACE = "com.cherryfunding.spring.vo.EpilogueMapper.";
-	
+	 
 	public int insert(EpilogueVo vo) {
 		return sqlSession.insert(NAMESPACE + "insert", vo);
 	}

@@ -16,7 +16,7 @@ public class SharingParticipantsController {
 
 	@Autowired
 	SharingParticipantsService sharingParticipantsService;
-
+ 
 	@RequestMapping("/sharing/sharingParticipation")
 	public String fundingParticipation(int sNum, Model model) { // 펀딩 참여자 목록
 		model.addAttribute("sNum", sNum);

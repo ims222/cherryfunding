@@ -17,7 +17,7 @@ public class UpdateUsersController {
 	
 	@Autowired
 	private MypageService mpService;
-	
+	 
 	@RequestMapping(value="/users/getInfo",method=RequestMethod.GET)
 	public String getInfo(HttpSession session,Model model) {
 		String id=(String)session.getAttribute("id");

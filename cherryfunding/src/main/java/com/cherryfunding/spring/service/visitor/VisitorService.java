@@ -12,7 +12,7 @@ public class VisitorService {
 	@Autowired
 	VisitorDao VisitorDao;
 
-	public int insert(VisitorVo vo) {
+	public int insert(VisitorVo vo) { 
 		return VisitorDao.insert(vo);
 	}
 

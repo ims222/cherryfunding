@@ -10,7 +10,7 @@ public class InterestDao {
 	SqlSession sqlSession;
 	
 	private static final String NAMESPACE = "com.cherryfunding.spring.vo.InterestMapper.";
-	
+	 
 	public int insert(InterestVo vo) {
 		return sqlSession.insert(NAMESPACE + "insert", vo);
 	}

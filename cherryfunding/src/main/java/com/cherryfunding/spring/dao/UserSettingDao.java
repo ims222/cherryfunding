@@ -12,7 +12,7 @@ public class UserSettingDao {
 	SqlSession sqlSession;
 
 	private static final String NAMESPACE = "com.cherryfunding.spring.vo.UserSettingMapper.";
-
+ 
 	public int insert(String id) {
 		return sqlSession.insert(NAMESPACE + "insert", id);
 	}

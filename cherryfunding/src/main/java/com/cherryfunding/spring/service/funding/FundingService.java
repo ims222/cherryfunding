@@ -16,7 +16,7 @@ public class FundingService {
 	private FundingDao fundingDao;
 
 	@Autowired
-	private FPictureDao fpdao;
+	private FPictureDao fpdao; 
 
 	public List<FundingVo> list() {
 		return fundingDao.list();

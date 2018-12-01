@@ -24,7 +24,7 @@ import com.cherryfunding.spring.vo.UsersVo;
 
 @Controller
 public class AdmypageController {
-	
+	 
 	@Autowired FundingConfirmService FundingConfirmService;//funding 글 목록 가져오기
 	@Autowired FundingService fundingService;
 	@Autowired CharityService CharityService;//Charity 글 목록 가져오기 

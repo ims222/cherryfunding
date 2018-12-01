@@ -12,7 +12,7 @@ public class VRecommendDao {
 	SqlSession sqlSession;
 	
 	private static final String NAMESPACE = "com.cherryfunding.spring.vo.VRecommendMapper.";
-
+ 
 	public VRecommendVo isRecomm(VRecommendVo vo) {
 		return sqlSession.selectOne(NAMESPACE + "isRecomm", vo);
 	}

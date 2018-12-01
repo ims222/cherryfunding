@@ -13,7 +13,7 @@ import com.cherryfunding.spring.vo.UsersVo;
 public class InputUsersServiceImpl implements InputUsersService {
 
 	@Autowired
-	private UsersDao usersDao;
+	private UsersDao usersDao; 
 
 	@Autowired
 	private UserSettingDao userSettingDao;

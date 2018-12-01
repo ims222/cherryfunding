@@ -20,7 +20,7 @@ public class InsertUsersController {
 
 	@Autowired
 	private InputUsersService inputUsersService;
-
+ 
 	@RequestMapping(value = "/users/userjoinagree", method = RequestMethod.GET)
 	public String adjoinagree() {
 		return "user/userInfo/userjoinagree";

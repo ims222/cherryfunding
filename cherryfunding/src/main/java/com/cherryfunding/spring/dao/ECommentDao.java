@@ -10,7 +10,7 @@ public class ECommentDao {
 	SqlSession sqlSession;
 	
 	private static final String NAMESPACE = "com.cherryfunding.spring.vo.ECommentMapper.";
-	
+	 
 	public int insert(ECommentVo vo) {
 		return sqlSession.insert(NAMESPACE + "insert", vo);
 	}

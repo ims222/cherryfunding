@@ -10,7 +10,7 @@ public class CategoryDao {
 	SqlSession sqlSession;
 	
 	private static final String NAMESPACE = "com.cherryfunding.spring.vo.CategoryMapper.";
-	
+	 
 	public int insert(CategoryVo vo) {
 		return sqlSession.insert(NAMESPACE + "insert", vo);
 	}

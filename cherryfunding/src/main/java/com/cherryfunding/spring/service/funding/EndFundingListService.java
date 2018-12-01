@@ -22,7 +22,7 @@ import com.cherryfunding.spring.vo.FundingVo;
 @Service
 public class EndFundingListService {
 	@Autowired
-	private FundingDao fundingDao;
+	private FundingDao fundingDao; 
 
 	@Autowired
 	private FPictureDao fpdao;

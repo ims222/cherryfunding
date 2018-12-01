@@ -17,7 +17,7 @@ public class MypageDao {
 
 	public int charitySum(String id) {
 		return sqlSession.selectOne(NAMESPACE + "charitySum", id);
-	}
+	} 
 
 	public int fundingSum(String id) {
 		return sqlSession.selectOne(NAMESPACE + "fundingSum", id);

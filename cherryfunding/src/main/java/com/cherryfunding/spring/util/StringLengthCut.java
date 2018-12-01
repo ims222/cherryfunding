@@ -4,7 +4,7 @@ public class StringLengthCut {
 	private static int CUTLEN = 135;
 
 	public static String getString(String str) throws Exception {
-		if (!str.isEmpty()) {
+		if (!str.isEmpty()) { 
 			str = str.trim();
 			if (str.getBytes().length <= CUTLEN) {
 				return str;

@@ -14,7 +14,7 @@ public class CharityConfirmService {
 
 	@Autowired
 	private CharityDao charityDao;
-
+ 
 	public List<CharityVo> waitList() { // 대기 목록
 		return charityDao.waitList();
 	}

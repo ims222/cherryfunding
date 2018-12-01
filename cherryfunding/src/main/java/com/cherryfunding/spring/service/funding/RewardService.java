@@ -13,7 +13,7 @@ public class RewardService {
 
 	public int insert(RewardVo vo) {
 		return rewardDao.insert(vo);
-	}
+	} 
 
 	public int getMaxNum() {
 		return rewardDao.getMaxNum();

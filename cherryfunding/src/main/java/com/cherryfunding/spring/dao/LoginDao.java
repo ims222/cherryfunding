@@ -8,3 +8,4 @@ public interface LoginDao{
 	public UserInfoVo findUserInfo(String id);
 	public List<String> getUserRoles(String id);
 }
+ 

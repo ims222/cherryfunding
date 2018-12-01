@@ -25,7 +25,7 @@ public class SharingDetailController {
 
 	@Autowired
 	private ShareService shareService;
-
+ 
 	@Autowired
 	private SItemService sItemService;
 

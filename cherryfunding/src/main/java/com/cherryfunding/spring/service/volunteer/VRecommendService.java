@@ -12,7 +12,7 @@ public class VRecommendService {
 	@Autowired
 	private VRecommendDao vRecommendDao;
 	
-	public VRecommendVo isRecomm(VRecommendVo vo) {
+	public VRecommendVo isRecomm(VRecommendVo vo) { 
 		return vRecommendDao.isRecomm(vo);
 	}
 

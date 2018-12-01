@@ -20,7 +20,7 @@ public class VisitorController {
 	@Autowired VisitorService VisitorService;
 	/*@Autowired
 	private MainCharityService mcService;
-
+ 
 	@Autowired
 	private MainFundingService mfService;*/
 	

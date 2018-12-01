@@ -12,7 +12,7 @@ public class SessionController {
 	 @RequestMapping(value = "/security/login", method = RequestMethod.GET)
 	    public String loginGet() {
 	        return "statics/login";
-	    }
+	    } 
 	 @RequestMapping(value = "/security/login", method = RequestMethod.POST)
 	    public String loginPost(HttpServletRequest request,HttpSession session) { 	
 			String id = request.getParameter("id");

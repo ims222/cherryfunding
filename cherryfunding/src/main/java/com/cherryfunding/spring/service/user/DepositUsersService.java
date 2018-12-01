@@ -11,7 +11,7 @@ import com.cherryfunding.spring.vo.UsersVo;
 @Service
 public class DepositUsersService {
 
-	@Autowired
+	@Autowired 
 	private UsersDao usersDao;
 
 	public int deposit(HashMap<String, Object> map) {

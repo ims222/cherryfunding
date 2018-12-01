@@ -8,7 +8,7 @@ public class VPictureVo {
 	private String saveName;
 	private String orgName;
 	private long fileSize;
-	private Date regdate;
+	private Date regdate; 
 	private String vpInfo;
 	public String getVpInfo() {
 		return vpInfo;

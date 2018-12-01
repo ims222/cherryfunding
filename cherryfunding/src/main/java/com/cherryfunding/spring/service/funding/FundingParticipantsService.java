@@ -14,7 +14,7 @@ import com.cherryfunding.spring.vo.UsersVo;
 public class FundingParticipantsService {
 
 	@Autowired
-	private FDetailDao fDetailDao;
+	private FDetailDao fDetailDao; 
 
 	@Autowired
 	private UsersDao usersDao;

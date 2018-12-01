@@ -11,7 +11,7 @@ import com.cherryfunding.spring.vo.CRecommendVo;
 
 @Controller
 public class CRecommendController {
-
+ 
 	@Autowired
 	private CRecommendService cRecommendService;
 

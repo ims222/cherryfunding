@@ -25,7 +25,7 @@ public class PrepareCharityListService {
 	private RestKeyDao restKeyDao;
 
 	@Autowired
-	private CharityDao cdao;
+	private CharityDao cdao; 
 
 	@Autowired
 	private CPictureDao cpdao;

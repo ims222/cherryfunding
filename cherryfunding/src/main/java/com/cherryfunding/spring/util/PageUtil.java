@@ -5,7 +5,7 @@ public class PageUtil {
 	private int startRow;// 시작행
 	private int endRow;// 끝행
 	private int rowBlockCount = 6;// 나타날 행 숫자
-	private int totalRowCount;// 총 행수
+	private int totalRowCount;// 총 행수 
 
 	public PageUtil() {
 	}

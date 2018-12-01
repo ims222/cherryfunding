@@ -8,7 +8,7 @@ public class ERecommendVo {
 	public ERecommendVo(int erNum, int eNum, String id) {
 		super();
 		this.erNum = erNum;
-		this.eNum = eNum;
+		this.eNum = eNum; 
 		this.id = id;
 	}
 	public int getErNum() {

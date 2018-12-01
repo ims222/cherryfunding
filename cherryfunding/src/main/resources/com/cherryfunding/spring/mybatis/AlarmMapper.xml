@@ -6,7 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="list" resultType="alarm">
 		select * from alarm
 	</select>
-
+ 
 	<select id="select" parameterType="string" resultType="alarm">
 		select * from alarm where id = #{id}
 	</select>

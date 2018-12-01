@@ -21,7 +21,7 @@ public class KakaoLogin {
 
 	public static JsonNode getAccessToken(String autorize_code) {
 		final String RequestUrl = "https://kauth.kakao.com/oauth/token";
-
+ 
 		final List<NameValuePair> postParams = new ArrayList<NameValuePair>();
 		postParams.add(new BasicNameValuePair("grant_type", "authorization_code"));
 		postParams.add(new BasicNameValuePair("client_id", "89f185a407f3d617bfbb42e27e8f07c9")); // REST API KEY

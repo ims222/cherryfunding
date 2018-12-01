@@ -12,7 +12,7 @@ import com.cherryfunding.spring.vo.FDetailVo;
 @Controller
 public class FundingResultBatch {
 
-	@Autowired
+	@Autowired 
 	private FundingResultServiceImpl fundingResultService;
 
 	public void fundingResult() {

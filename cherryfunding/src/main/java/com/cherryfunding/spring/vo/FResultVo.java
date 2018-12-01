@@ -6,7 +6,7 @@ public class FResultVo {
 	private String state;
 
 	public FResultVo() {
-	}
+	} 
 
 	public FResultVo(int frNum, int fdNum, String state) {
 		this.frNum = frNum;

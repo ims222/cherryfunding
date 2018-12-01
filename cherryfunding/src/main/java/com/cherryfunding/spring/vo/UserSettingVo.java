@@ -8,7 +8,7 @@ public class UserSettingVo {
 	private String profile;
 
 	public UserSettingVo() {
-	}
+	} 
 
 	public UserSettingVo(String id, String lang, String voice, String alarm, String profile) {
 		super();

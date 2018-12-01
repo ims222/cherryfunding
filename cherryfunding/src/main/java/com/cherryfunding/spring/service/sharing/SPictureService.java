@@ -11,7 +11,7 @@ public class SPictureService {
 	@Autowired
 	private SPictureDao sPictureDao;
 	
-	public int getMaxNum() {
+	public int getMaxNum() { 
 		return sPictureDao.getMaxNum();
 	}
 }

@@ -14,7 +14,7 @@ public class FHashtagDao {
 	SqlSession sqlSession;
 
 	private static final String NAMESPACE = "com.cherryfunding.spring.vo.FHashtagMapper.";
-
+ 
 	public int insert(FHashtagVo vo) {
 		return sqlSession.insert(NAMESPACE + "insert", vo);
 	}

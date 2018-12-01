@@ -16,7 +16,7 @@ public class SharingParticipantsService {
 	@Autowired
 	private SListDao sListDao;
 
-	@Autowired
+	@Autowired 
 	private UsersDao usersDao;
 
 	public List<HashMap<String, Object>> listBysNum(int sNum) {

@@ -12,7 +12,7 @@ public class FResultDao {
 	SqlSession sqlSession;
 
 	private static final String NAMESPACE = "com.cherryfunding.spring.vo.FResultMapper.";
-
+ 
 	public int insert(FResultVo vo) {
 		return sqlSession.insert(NAMESPACE + "insert", vo);
 	}

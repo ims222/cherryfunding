@@ -16,7 +16,7 @@ public class UsersDao {
 	SqlSession sqlSession;
 
 	private static final String NAMESPACE = "com.cherryfunding.spring.mybatis.UsersMapper.";
-
+ 
 	public int insert(UsersVo vo) {
 		return sqlSession.insert(NAMESPACE + "insert", vo);
 	}

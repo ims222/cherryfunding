@@ -15,7 +15,7 @@ public class CCommentDao {
 	SqlSession sqlSession;
 
 	private static final String NAMESPACE = "com.cherryfunding.spring.vo.CCommentMapper.";
-
+ 
 	public int insert(CCommentVo vo) {
 		return sqlSession.insert(NAMESPACE + "insert", vo);
 	}

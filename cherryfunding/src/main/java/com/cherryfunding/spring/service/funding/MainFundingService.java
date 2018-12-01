@@ -21,7 +21,7 @@ public class MainFundingService {
 	private RestKeyDao restKeyDao;
 
 	@Autowired
-	private FundingDao fdao;
+	private FundingDao fdao; 
 
 	@Autowired
 	private FPictureDao pfdao;

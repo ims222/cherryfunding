@@ -10,7 +10,7 @@ public class CreditMethodDao {
 	SqlSession sqlSession;
 	
 	private static final String NAMESPACE = "com.cherryfunding.spring.vo.CreditMethodMapper.";
-	
+	 
 	public int insert(CreditMethodVo vo) {
 		return sqlSession.insert(NAMESPACE + "insert", vo);
 	}

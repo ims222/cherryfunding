@@ -10,7 +10,7 @@ public class CDetailVo {
 	private String content;
 	private Date regdate;
 
-	public CDetailVo() {
+	public CDetailVo() { 
 	}
 
 	public CDetailVo(int cdNum, String id, int cNum, int amount, String content, Date regdate) {

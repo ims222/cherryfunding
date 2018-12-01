@@ -10,7 +10,7 @@ public class VLanguageDao {
 	SqlSession sqlSession;
 	
 	private static final String NAMESPACE = "com.cherryfunding.spring.vo.VLanguageMapper.";
-	
+	 
 	public int insert(VLanguageVo vo) {
 		return sqlSession.insert(NAMESPACE + "insert", vo);
 	}

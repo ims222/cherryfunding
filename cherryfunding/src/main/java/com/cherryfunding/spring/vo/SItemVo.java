@@ -7,7 +7,7 @@ public class SItemVo {
 	private int amount;
 
 	public SItemVo() {
-	}
+	} 
 
 	public SItemVo(int siNum, int sNum, String title, int amount) {
 		super();

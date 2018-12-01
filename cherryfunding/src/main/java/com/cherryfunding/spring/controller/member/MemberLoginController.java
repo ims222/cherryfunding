@@ -17,7 +17,7 @@ import com.cherryfunding.spring.vo.UsersVo;
 public class MemberLoginController {
 @Autowired
 private TestLoginService service;
-
+ 
 	@RequestMapping(value="/login",method=RequestMethod.GET)
 	public String login() {
 		return "login";

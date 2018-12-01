@@ -18,7 +18,7 @@ public interface FundingDetailService {
 	List<RewardVo> rewardList(int fNum);
 
 	int hitUp(int fNum);
-
+ 
 	RewardVo rewardDetail(int rNum);
 
 	int fdetailGetMaxNum();

@@ -17,7 +17,7 @@ public class InsertCharityServiceImpl implements InsertCharityService{
 
 	@Autowired
 	private CharityDao charityDao;
-	
+	 
 	@Autowired
 	private CPictureDao cPictureDao;
 

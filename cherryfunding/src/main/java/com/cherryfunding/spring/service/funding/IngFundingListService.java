@@ -28,7 +28,7 @@ public class IngFundingListService {
 	@Autowired
 	private FPictureDao fpdao;
 
-	@Autowired
+	@Autowired 
 	private UsersDao usersDao;
 
 	@Autowired

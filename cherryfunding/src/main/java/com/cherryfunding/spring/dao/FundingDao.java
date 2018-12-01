@@ -15,7 +15,7 @@ public class FundingDao {
 	SqlSession sqlSession;
 
 	private static final String NAMESPACE = "com.cherryfunding.spring.vo.FundingMapper.";
-
+ 
 	public int insert(FundingVo vo) { // 지원서 작성
 		return sqlSession.insert(NAMESPACE + "insert", vo);
 	}

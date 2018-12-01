@@ -18,7 +18,7 @@ import com.cherryfunding.spring.vo.VisitorVo;
 
 
 public class VisitorStatistics implements HttpSessionListener {
-
+ 
 //	@Autowired VisitorDao VisitorDao;
 	@Override
 	public void sessionCreated(HttpSessionEvent se) {

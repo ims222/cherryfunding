@@ -19,7 +19,7 @@ public class CharityService {
 
 	@Autowired
 	private CPictureDao cpdao;
-
+ 
 	public List<CharityVo> list() {
 		return dao.list();
 	}

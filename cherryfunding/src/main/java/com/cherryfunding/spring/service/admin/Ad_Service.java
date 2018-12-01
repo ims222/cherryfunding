@@ -15,7 +15,7 @@ public class Ad_Service {
 	
 	public int insert(AdminVo vo) { //관리자 회원가입
 		return dao.insert(vo);
-	}
+	} 
 	
 	public AdminVo login(HashMap<String, String> map) { //관리자 로그인
 		return dao.login(map);

@@ -21,7 +21,7 @@ import com.cherryfunding.spring.vo.UsersVo;
 
 @Controller
 public class SearchController {
-
+ 
 	@Autowired
 	SearchCharityService SearchCharityService;
 	@Autowired

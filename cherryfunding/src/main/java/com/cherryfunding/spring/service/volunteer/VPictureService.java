@@ -14,7 +14,7 @@ public class VPictureService {
 	private VPictureDao vPictureDao;
 	
 	public int getMaxNum() {
-		return vPictureDao.getMaxNum();
+		return vPictureDao.getMaxNum(); 
 	}
 	
 	public int insert(VPictureVo vo) {

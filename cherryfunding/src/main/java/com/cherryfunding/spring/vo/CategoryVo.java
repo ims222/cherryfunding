@@ -5,7 +5,7 @@ public class CategoryVo {
 	private String category;
 
 	public CategoryVo() {
-	}
+	} 
 
 	public CategoryVo(String group, String category) {
 		this.group = group;

@@ -14,7 +14,7 @@ public class SItemService {
 	@Autowired
 	private SItemDao sItemDao;
 
-	public int getMaxNum() {
+	public int getMaxNum() { 
 		return sItemDao.getMaxNum();
 	}
 

@@ -11,7 +11,7 @@ public class FHashtagService {
 	@Autowired
 	private FHashtagDao dao;
 
-	public int insert(FHashtagVo vo) {
+	public int insert(FHashtagVo vo) { 
 		return dao.insert(vo);
 	}
 

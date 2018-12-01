@@ -14,7 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 public class InsertImgController {
-  
+   
 	@RequestMapping(value = "/insertImg", method = RequestMethod.POST)
 	public String insertImg(MultipartFile file, HttpSession session) {
 		String savefilename = null;

@@ -9,7 +9,7 @@ import com.cherryfunding.spring.vo.AdminVo;
 public class AdminDao {
 	@Autowired
 	SqlSession sqlSession;
-
+ 
 	private static final String NAMESPACE = "com.cherryfunding.spring.vo.AdminMapper.";
 	
 	public int insert(AdminVo vo) {

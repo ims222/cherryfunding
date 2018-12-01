@@ -14,7 +14,7 @@ public class SearchCharityService {
 	
 	@Autowired CharityDao CharityDao;
 	
-	public List<CharityVo> searchwaitList(HashMap<String, String>map){
+	public List<CharityVo> searchwaitList(HashMap<String, String>map){ 
 		
 		return CharityDao.searchwaitList(map); // 검색 찾기 기능 confirm ='n'인 경우
 	}

@@ -18,7 +18,7 @@ import com.cherryfunding.spring.vo.AdminVo;
 
 @Controller
 public class LoginController {
-	
+	 
 	@Autowired private Ad_Service service;
 	
 	@RequestMapping(value="/adlogin",method=RequestMethod.GET)

@@ -15,7 +15,7 @@ public class FDetailDao {
 	SqlSession sqlSession;
 
 	private static final String NAMESPACE = "com.cherryfunding.spring.vo.FDetailMapper.";
-
+ 
 	public int insert(FDetailVo vo) {
 		return sqlSession.insert(NAMESPACE + "insert", vo);
 	}

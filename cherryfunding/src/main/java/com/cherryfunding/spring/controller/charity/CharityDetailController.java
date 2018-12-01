@@ -9,7 +9,7 @@ import com.cherryfunding.spring.service.charity.CharityDetailService;
 
 @Controller
 public class CharityDetailController {
-
+ 
 	@Autowired
 	private CharityDetailService charityDetailService;
 

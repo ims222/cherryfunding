@@ -15,7 +15,7 @@ public class DepositUsersController {
 
 	@Autowired
 	private DepositUsersService depositUsersService;
-
+ 
 	@RequestMapping("/users/usersDeposit")
 	@ResponseBody
 	public String usersDeposit(String id, int deposit) {

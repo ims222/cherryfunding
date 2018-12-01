@@ -21,7 +21,7 @@ public class MainCharityService {
 	private RestKeyDao restKeyDao;
 
 	@Autowired
-	private CharityDao cdao;
+	private CharityDao cdao; 
 
 	@Autowired
 	private CPictureDao cfdao;

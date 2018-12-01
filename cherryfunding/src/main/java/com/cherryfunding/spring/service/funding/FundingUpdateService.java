@@ -14,7 +14,7 @@ public class FundingUpdateService {
 
 	public int update(FundingVo vo) {
 		return fundingDao.update(vo);
-	}
+	} 
 
 	public FundingVo detail(int fNum) {
 		return fundingDao.detail(fNum);

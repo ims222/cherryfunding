@@ -9,7 +9,7 @@ public class VRecommendVo {
 		super();
 		this.vrNum = vrNum;
 		this.vNum = vNum;
-		this.id = id;
+		this.id = id; 
 	}
 	public int getVrNum() {
 		return vrNum;

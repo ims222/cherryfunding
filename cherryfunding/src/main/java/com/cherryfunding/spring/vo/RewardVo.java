@@ -7,7 +7,7 @@ public class RewardVo {
 	private int fNum;
 	private String title;
 	private int price;
-	private Date regdate;
+	private Date regdate; 
 	private int amount;
 
 	public RewardVo() {

@@ -18,7 +18,7 @@ public class TestLoginService {
 
 	@Autowired
 	private UserSettingDao userSettingDao;
-
+ 
 	public UsersVo login(UsersVo vo) {
 		return dao.login(vo);
 	}

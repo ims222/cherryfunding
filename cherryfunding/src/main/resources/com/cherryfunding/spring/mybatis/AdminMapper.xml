@@ -5,7 +5,7 @@
   
   <mapper namespace="com.cherryfunding.spring.mybatis.AdminMapper">
   
-  	<insert id="insert" parameterType="AdminVo">
+  	<insert id="insert" parameterType="AdminVo"> 
   		insert into admin values(#{aid},#{pwd},#{nick},sysdate)
   	</insert>
   	

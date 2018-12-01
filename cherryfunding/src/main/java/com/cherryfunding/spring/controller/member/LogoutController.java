@@ -12,7 +12,7 @@ import com.cherryfunding.spring.service.TestLoginService;
 public class LogoutController {
 	@Autowired
 	private TestLoginService service;
-	
+	 
 	@RequestMapping("/logout")
 	public String logout(HttpSession session) {
 		session.invalidate();

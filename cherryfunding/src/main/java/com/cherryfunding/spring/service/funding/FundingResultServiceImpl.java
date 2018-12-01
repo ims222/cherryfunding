@@ -18,7 +18,7 @@ public class FundingResultServiceImpl implements FundingResultService {
 
 	@Autowired
 	private FDetailDao fDetailDao;
-
+ 
 
 	public List<HashMap<String, Object>> isSuccess() {
 		return fDetailDao.isSuccess();

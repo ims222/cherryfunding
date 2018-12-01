@@ -4,7 +4,7 @@ public class FHashtagVo {
 	private int ftagNum;
 	private int fNum;
 	private String hashtag;
-
+ 
 	public FHashtagVo() {
 	}
 

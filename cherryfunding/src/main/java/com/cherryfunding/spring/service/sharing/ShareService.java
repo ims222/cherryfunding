@@ -11,7 +11,7 @@ public class ShareService {
 	
 	@Autowired
 	private ShareDao shareDao;
-	
+	 
 	public int getMaxNum() {
 		return shareDao.getMaxNum();
 	}

@@ -15,7 +15,7 @@ public class CDetailDao {
 	SqlSession sqlSession;
 
 	private static final String NAMESPACE = "com.cherryfunding.spring.vo.CDetailMapper.";
-
+ 
 	public int insert(CDetailVo vo) {
 		return sqlSession.insert(NAMESPACE + "insert", vo);
 	}

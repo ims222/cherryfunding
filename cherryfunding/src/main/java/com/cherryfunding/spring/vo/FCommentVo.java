@@ -7,7 +7,7 @@ public class FCommentVo {
 	private String content;
 	private String regdate;
 
-	public FCommentVo() {
+	public FCommentVo() { 
 	}
 
 	public FCommentVo(int fcNum, String id, int fNum, String content, String regdate) {

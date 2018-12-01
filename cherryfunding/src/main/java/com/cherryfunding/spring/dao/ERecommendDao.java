@@ -10,7 +10,7 @@ public class ERecommendDao {
 	SqlSession sqlSession;
 	
 	private static final String NAMESPACE = "com.cherryfunding.spring.vo.ERecommendMapper.";
-	
+	 
 	public int insert(ERecommendVo vo) {
 		return sqlSession.insert(NAMESPACE + "insert", vo);
 	}

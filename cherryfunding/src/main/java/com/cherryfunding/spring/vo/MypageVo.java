@@ -11,7 +11,7 @@ public class MypageVo {
 	MypageVo(){}
 
 	public MypageVo(String title, String category, int amount, Date regdate) {
-		super();
+		super(); 
 		this.title = title;
 		this.category = category;
 		this.amount = amount;

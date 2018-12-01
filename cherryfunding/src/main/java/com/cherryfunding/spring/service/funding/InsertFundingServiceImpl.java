@@ -20,7 +20,7 @@ public class InsertFundingServiceImpl implements InsertFundingService {
 	private FHashtagDao fHashtagDao;
 
 	@Autowired
-	private RewardDao rewardDao;
+	private RewardDao rewardDao; 
 
 	@Autowired
 	private FundingDao fundingDao;

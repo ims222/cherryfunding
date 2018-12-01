@@ -5,5 +5,5 @@ import java.util.List;
 
 public interface FundingResultService {
 
-	public List<HashMap<String, Object>> isSuccess();
+	public List<HashMap<String, Object>> isSuccess(); 
 }

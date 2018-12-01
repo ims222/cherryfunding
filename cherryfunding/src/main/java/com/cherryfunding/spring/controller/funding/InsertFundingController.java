@@ -21,7 +21,7 @@ import com.cherryfunding.spring.vo.RewardVo;
 
 @Controller
 public class InsertFundingController {
-
+ 
 	@Autowired
 	private InsertFundingService insertFundingService;
 

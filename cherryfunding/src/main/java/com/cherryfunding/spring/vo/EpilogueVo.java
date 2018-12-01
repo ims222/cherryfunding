@@ -6,7 +6,7 @@ public class EpilogueVo {
 	private int eNum;
 	private String id;
 	private int cNum;
-	private String title;
+	private String title; 
 	private String content;
 	private Date regdate;
 	private int hit;

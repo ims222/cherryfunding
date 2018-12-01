@@ -13,7 +13,7 @@ public class SharingDetailServiceImpl implements SharingDetailService {
 
 	@Autowired
 	private SListDao sListDao;
-
+ 
 	public int sListInsert(SListVo sListVo) {
 		sListVo.setSlNum(sListDao.getMaxNum() + 1);
 		return sListDao.insert(sListVo);

@@ -15,7 +15,7 @@ public class RewardDao {
 	SqlSession sqlSession;
 
 	private static final String NAMESPACE = "com.cherryfunding.spring.vo.RewardMapper.";
-
+ 
 	public int insert(RewardVo vo) {
 		return sqlSession.insert(NAMESPACE + "insert", vo);
 	}

@@ -9,7 +9,7 @@ public class CreditMethodVo {
 
 	public CreditMethodVo(int cmNum, String method) {
 		this.cmNum = cmNum;
-		this.method = method;
+		this.method = method; 
 	}
 
 	public int getCmNum() {

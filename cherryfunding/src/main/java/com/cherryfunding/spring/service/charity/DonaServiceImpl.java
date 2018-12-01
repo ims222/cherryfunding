@@ -21,7 +21,7 @@ public class DonaServiceImpl implements DonaService {
 	private CharityDao charityDao;
 	@Autowired
 	private UsersDao usersDao;
-
+ 
 	@Autowired
 	private CDetailDao cDetailDao;
 

@@ -21,7 +21,7 @@ import com.cherryfunding.spring.vo.CharityVo;
 @Controller
 public class EndCharityListController {
 
-
+ 
 	@Autowired
 	private EndCharityListService endService;
 

@@ -11,7 +11,7 @@ public interface CharityDetailService {
 	CharityVo detail(int cNum);
 
 	int hitUp(int cNum);
-
+ 
 	int addCamount(CharityVo vo);
 
 	int updateAmount(CharityVo vo);

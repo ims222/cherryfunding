@@ -7,7 +7,7 @@ public class PageUtil2 {
 	
 	private int totalPageCount; //총 페이지
 	private int startPageNum; // 시작 페이지 번호
-	private int endPageNum;// 끝 페이지 번호
+	private int endPageNum;// 끝 페이지 번호 
 	
 	private int rowBlockCount; // 나타낼 게시물수
 	private int pageBlockCount; // 나타낼 페이지 

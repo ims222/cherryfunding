@@ -10,7 +10,7 @@ import org.springframework.stereotype.Controller;
 
 public class CronQuartz2 extends QuartzJobBean {
 
-	@Override
+	@Override 
 	protected void executeInternal(JobExecutionContext context) throws JobExecutionException {
 		long time = System.currentTimeMillis();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");

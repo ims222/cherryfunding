@@ -13,7 +13,7 @@ public class VolunteerApplicantController {
 
 	@Autowired
 	private VListService vListService;
-	
+	 
 	@RequestMapping(value = "/volunteer/applicantCount", method = RequestMethod.GET, produces = "text/plain")
 	@ResponseBody
 	public String VolunteerApplicant(int vNum) {	//해당 글의 신청인원 수 조회

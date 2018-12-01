@@ -11,7 +11,7 @@ public class FundingBuilder {
 	private int fNum;
 	@Size(min = 10, max = 100, message = "{min}자에서 {max}자 사이로 입력하세요")
 	private String title;
-	@NotEmpty(message = "내용을 입력하세요")
+	@NotEmpty(message = "내용을 입력하세요") 
 	private String content;
 	private int amount;
 	private int camout;

@@ -27,7 +27,7 @@ public class VolunteerDetailController {
 
 	@Autowired
 	private VolunteerListService volunteerListService;
-
+ 
 	@Autowired
 	private VRecommendService vRecommendService;
 

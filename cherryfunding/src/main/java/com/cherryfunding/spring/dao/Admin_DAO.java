@@ -10,7 +10,7 @@ import com.cherryfunding.spring.vo.AdminVo;
 
 @Repository
 public class Admin_DAO {
-	
+	 
 	@Autowired private SqlSession sqlsession; //sql 세션 주입
 	private static final String NAMESPACE ="com.cherryfunding.spring.mybatis.AdminMapper";//mapper
 	

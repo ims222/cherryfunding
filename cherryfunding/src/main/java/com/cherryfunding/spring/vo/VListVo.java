@@ -6,7 +6,7 @@ public class VListVo {
     private String id;
     private String content;
     public VListVo() {}
-    
+     
 	public VListVo(int vNum, String id) {
 		super();
 		this.vNum = vNum;

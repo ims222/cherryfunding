@@ -16,7 +16,7 @@ import com.cherryfunding.spring.vo.CharityVo;
 
 @Controller
 public class DonaController {
-
+ 
 	@Autowired
 	private DonaService donaService;
 

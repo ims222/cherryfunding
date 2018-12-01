@@ -15,7 +15,7 @@ import com.cherryfunding.spring.service.funding.MainFundingService;
 @Controller
 public class HomeController {
 
-	@Autowired
+	@Autowired 
 	private MainCharityService mcService;
 
 	@Autowired

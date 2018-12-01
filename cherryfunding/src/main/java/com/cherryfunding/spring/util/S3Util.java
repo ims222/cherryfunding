@@ -20,7 +20,7 @@ import com.cherryfunding.spring.dao.RestKeyDao;
 
 public class S3Util {
 	private String bucketName = "cherryfundingbucket";
-	private AmazonS3 conn;
+	private AmazonS3 conn; 
 
 	public S3Util(String accessKey, String secretKey) {
 		AWSCredentials credentials = new BasicAWSCredentials(accessKey, secretKey);

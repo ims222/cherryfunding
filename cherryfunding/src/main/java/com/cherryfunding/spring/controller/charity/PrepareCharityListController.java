@@ -22,7 +22,7 @@ import com.cherryfunding.spring.vo.FundingVo;
 @Controller
 public class PrepareCharityListController {
 
-
+ 
 	@Autowired
 	private PrepareCharityListService prepareService;
 

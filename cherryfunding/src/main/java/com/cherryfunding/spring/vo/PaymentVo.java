@@ -7,7 +7,7 @@ public class PaymentVo {
 	private String id;
 	private int amount;
 	private Date payDate;
-	private String method;
+	private String method; 
 
 	public PaymentVo() {
 	}

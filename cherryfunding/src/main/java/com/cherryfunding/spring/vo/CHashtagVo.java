@@ -9,7 +9,7 @@ public class CHashtagVo {
 		super();
 		this.ctagNum = ctagNum;
 		this.cNum = cNum;
-		this.hashtag = hashtag;
+		this.hashtag = hashtag; 
 	}
 	public int getCtagNum() {
 		return ctagNum;

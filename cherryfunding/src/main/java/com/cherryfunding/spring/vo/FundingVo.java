@@ -12,7 +12,7 @@ public class FundingVo {
 	private String title;
 	@NotEmpty(message = "내용을 입력하세요")
 	private String content;
-	private int amount;
+	private int amount; 
 	private int camout;
 	private Date sdate;
 	private Date edate;

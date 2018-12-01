@@ -7,7 +7,7 @@ public class VisitorVo {
 	private String v_ip;
 	private String v_refer;
 	private Date v_date;
-	
+	 
 	public VisitorVo() {}
 	
 	

@@ -17,7 +17,7 @@ public class VolunteerRecommendController {
 
 	@Autowired
 	private VRecommendService vRecommendService;
-	
+	 
 	@RequestMapping(value="/volunteer/volunteerIsRecommend", produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String volunteerIsRecommend(String id, int vNum) {

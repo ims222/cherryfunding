@@ -11,7 +11,7 @@ public class RestKeyDao {
 	SqlSession sqlSession;
 
 	private static final String NAMESPACE = "com.cherryfunding.spring.vo.RestKeyMapper.";
-
+ 
 	public String getKeyValue(String keyName) {
 		return sqlSession.selectOne(NAMESPACE + "getKeyValue", keyName);
 	}

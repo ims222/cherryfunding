@@ -6,7 +6,7 @@ public class FDetailVo {
 	private int fdNum;
 	private String id;
 	private int fNum;
-	private int rNum;
+	private int rNum; 
 	private Date regdate;
 	private String state;
 	private int amount;

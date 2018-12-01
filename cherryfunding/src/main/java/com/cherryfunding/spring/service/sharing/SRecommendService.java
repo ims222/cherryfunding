@@ -13,7 +13,7 @@ public class SRecommendService {
 	private SRecommendDao sRecommendDao;
 
 	public SRecommendVo isRecomm(SRecommendVo vo) {
-		return sRecommendDao.isRecomm(vo);
+		return sRecommendDao.isRecomm(vo); 
 	}
 
 	public int insert(SRecommendVo vo) {

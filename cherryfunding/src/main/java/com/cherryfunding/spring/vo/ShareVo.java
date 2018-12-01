@@ -7,7 +7,7 @@ public class ShareVo {
 	private String id;
 	private String content;
 	private String category;
-	private Date regdate;
+	private Date regdate; 
 	private int hit;
 	private String title;
 	private String saveName;

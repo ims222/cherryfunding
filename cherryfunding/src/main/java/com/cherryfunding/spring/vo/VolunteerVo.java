@@ -6,7 +6,7 @@ public class VolunteerVo {
 	private int vNum;
 	private String id;
 	private String content;
-	private Date dDay;
+	private Date dDay; 
 	private String title;
 	private int members;
 	private Date regdate;

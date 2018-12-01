@@ -13,7 +13,7 @@ import com.cherryfunding.spring.vo.AdminVo;
 
 @Controller
 public class JoinController {
-	
+	 
 	@Autowired private Ad_Service service;
 	
 	@RequestMapping(value="/adjoin",method = RequestMethod.GET)

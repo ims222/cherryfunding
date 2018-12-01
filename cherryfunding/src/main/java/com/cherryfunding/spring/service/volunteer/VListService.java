@@ -12,7 +12,7 @@ import com.cherryfunding.spring.vo.VListVo;
 public class VListService {
 
 	@Autowired
-	private VListDao vListDao;
+	private VListDao vListDao; 
 	
 	public VListVo isApply(VListVo vo) {
 		return vListDao.isApply(vo);

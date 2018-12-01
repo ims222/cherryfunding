@@ -10,7 +10,7 @@ public class AlarmDao {
 	SqlSession sqlSession;
 
 	private static final String NAMESPACE = "com.cherryfunding.spring.vo.AlarmMapper.";
-
+ 
 	public int insert(AlarmVo vo) {
 		return sqlSession.insert(NAMESPACE + "insert", vo);
 	}

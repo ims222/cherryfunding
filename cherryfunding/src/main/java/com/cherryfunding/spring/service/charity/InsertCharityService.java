@@ -9,3 +9,4 @@ public interface InsertCharityService {
 	int chinsert(CHashtagVo chvo);//?��?��?��?��
 	int cpinsert(CPictureVo cpvo);//???��?��?���?
 }
+ 

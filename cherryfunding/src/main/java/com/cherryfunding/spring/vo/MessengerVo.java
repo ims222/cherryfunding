@@ -8,7 +8,7 @@ public class MessengerVo {
 	private String content;
 	private String check;
 	private Date senddate;
-
+ 
 	public MessengerVo() {
 	}
 

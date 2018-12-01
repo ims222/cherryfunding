@@ -27,7 +27,7 @@ import com.cherryfunding.spring.vo.CharityVo;
 
 @Controller
 public class InsertCharityController {
-
+ 
 	@Autowired
 	private RestKeyDao restKeyDao;
 

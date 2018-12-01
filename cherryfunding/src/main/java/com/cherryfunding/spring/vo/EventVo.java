@@ -8,7 +8,7 @@ public class EventVo {
 	private Date startTime;
 	private Date endTime;
 
-	public EventVo() {
+	public EventVo() { 
 	}
 
 	public EventVo(int eNum, String name, Date startTime, Date endTime) {

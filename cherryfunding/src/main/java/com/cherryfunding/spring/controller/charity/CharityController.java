@@ -17,7 +17,7 @@ import com.cherryfunding.spring.vo.CharityVo;
 public class CharityController {
 	@Autowired
 	private CharityService charityService;
-
+ 
 	@Autowired
 	private CPictureService cPictureService;
 

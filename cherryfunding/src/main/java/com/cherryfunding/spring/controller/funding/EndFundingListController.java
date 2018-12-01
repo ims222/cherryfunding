@@ -18,7 +18,7 @@ import com.cherryfunding.spring.util.PageUtil;
 
 @Controller
 public class EndFundingListController {
-
+ 
 	@Autowired
 	private EndFundingListService endService;
 

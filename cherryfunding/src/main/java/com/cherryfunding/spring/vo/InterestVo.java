@@ -8,7 +8,7 @@ public class InterestVo {
 
 	public InterestVo() {
 	}
-
+ 
 	public InterestVo(int iNum, String id, String group, String category) {
 		this.iNum = iNum;
 		this.id = id;

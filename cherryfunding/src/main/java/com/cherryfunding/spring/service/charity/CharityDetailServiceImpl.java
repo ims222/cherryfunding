@@ -22,7 +22,7 @@ public class CharityDetailServiceImpl implements CharityDetailService {
 
 	@Autowired
 	private CharityDao charityDao;
-
+ 
 	@Autowired
 	private CHashtagDao cHashtagDao;
 

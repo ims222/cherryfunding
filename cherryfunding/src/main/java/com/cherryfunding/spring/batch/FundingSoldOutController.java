@@ -11,7 +11,7 @@ import com.cherryfunding.spring.vo.FundingVo;
 @Controller
 public class FundingSoldOutController { // 마감 표시
 
-	@Autowired
+	@Autowired 
 	private FundingService fundingService;
 
 	public void fundingSoldOut() {

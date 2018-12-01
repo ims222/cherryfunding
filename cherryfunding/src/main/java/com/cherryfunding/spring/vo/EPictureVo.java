@@ -7,7 +7,7 @@ public class EPictureVo {
 	private int eNum;
 	private String saveName;
 	private String orgName;
-	private String fileSize;
+	private String fileSize; 
 	private Date regdate;
 	public EPictureVo() {}
 	public EPictureVo(int epNum, int eNum, String saveName, String orgName, String fileSize, Date regdate) {

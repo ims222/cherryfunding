@@ -6,7 +6,7 @@ public class AdminVo {
 	private String aid;
 	private String pwd;
 	private String nick;
-	private Date regdate;
+	private Date regdate; 
 
 	public String getaid() {
 		return aid;

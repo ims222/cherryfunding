@@ -17,7 +17,7 @@ import com.cherryfunding.spring.util.S3Util;
 
 @Controller
 public class FundingParticipantsController {
-
+ 
 	@Autowired
 	private RestKeyDao restKeyDao;
 

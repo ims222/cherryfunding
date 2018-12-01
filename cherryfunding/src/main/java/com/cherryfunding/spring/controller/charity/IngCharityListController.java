@@ -22,7 +22,7 @@ import com.cherryfunding.spring.vo.CharityVo;
 public class IngCharityListController {
 	@Autowired
 	IngCharityListService ingCharityListService;
-
+ 
 	@RequestMapping(value = "/charity/ingCharityList", method = RequestMethod.GET)
 	public String ingCharityList() {
 		return ".ingCharityList";

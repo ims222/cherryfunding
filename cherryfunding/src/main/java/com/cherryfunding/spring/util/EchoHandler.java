@@ -19,7 +19,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class EchoHandler extends TextWebSocketHandler {
 
-	@Autowired
+	@Autowired 
 	private MessagerDao messengerDao;
 
 	private static Logger logger = LoggerFactory.getLogger(EchoHandler.class);

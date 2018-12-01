@@ -9,7 +9,7 @@ public class CPictureVo {
     private String orgName;
     private long fileSize;
     private Date regdate;
-    private String cpinfo;
+    private String cpinfo; 
     public CPictureVo(){}
 	public CPictureVo(int cpNum, int cNum, String saveName, String orgName, long fileSize, Date regdate, String cpinfo) {
 		super();

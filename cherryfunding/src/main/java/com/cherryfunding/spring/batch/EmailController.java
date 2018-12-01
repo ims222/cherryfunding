@@ -20,7 +20,7 @@ import com.cherryfunding.spring.service.volunteer.VolunteerService;
 
 @Controller
 public class EmailController {
-
+ 
 	@Autowired
 	private VolunteerService volunteerService;
 

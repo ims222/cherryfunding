@@ -21,7 +21,7 @@ public class WithdrawalController {
 	public String withdrawal() {
 		return "withdrawal";
 	}
-	
+	 
 	
 	@RequestMapping(value="/withdrawal",method=RequestMethod.POST)
 	public String withdrawal(HttpServletRequest req,HttpSession session) {

@@ -17,7 +17,7 @@ import com.cherryfunding.spring.vo.UsersVo;
 public class UpdateController {
 	@Autowired
 	private TestLoginService service;
-	
+	 
 	@ModelAttribute("vo")
 	public UsersVo user(String id) {
 		UsersVo vo = service.detail(id);

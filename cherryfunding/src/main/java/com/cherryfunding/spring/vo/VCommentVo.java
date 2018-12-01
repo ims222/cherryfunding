@@ -10,7 +10,7 @@ public class VCommentVo {
 	private String regdate;   
 	public VCommentVo() {}
 	public VCommentVo(int vcNum, int vNum, String id, String content, String regdate) {
-		super();
+		super(); 
 		this.vcNum = vcNum;
 		this.vNum = vNum;
 		this.id = id;

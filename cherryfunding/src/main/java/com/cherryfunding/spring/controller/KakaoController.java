@@ -20,7 +20,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 @Controller
 public class KakaoController {
 	private final static String adminKey = "94993e59908d14bc4fff4e15168f2d01";
-
+ 
 	private KakaoApi apiHelper = new KakaoApi();
 
 	@RequestMapping(value = "/oauth", produces = "application/json", method = { RequestMethod.GET, RequestMethod.POST })

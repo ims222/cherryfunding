@@ -14,7 +14,7 @@ public class SearchFundingService {
 	FundingDao FundingDao;
 
 	public List<FundingVo> searchwaitList(HashMap<String, String> map) {
-
+ 
 		return FundingDao.searchwaitList(map);
 
 	}

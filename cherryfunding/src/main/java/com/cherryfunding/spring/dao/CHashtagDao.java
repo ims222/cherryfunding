@@ -14,7 +14,7 @@ public class CHashtagDao {
 	SqlSession sqlSession;
 	
 	private static final String NAMESPACE = "com.cherryfunding.spring.vo.CHashtagMapper.";
-	
+	 
 	public int insert(CHashtagVo vo) {
 		return sqlSession.insert(NAMESPACE + "insert", vo);
 	}

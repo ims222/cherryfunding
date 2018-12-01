@@ -12,6 +12,6 @@ public interface SharingConfirmService {
 	public SListVo slDetail(int slNum);
 
 	public int updateAmount(HashMap<String, Object> map);
-
+ 
 	public SItemVo siDetail(int siNum);
 }

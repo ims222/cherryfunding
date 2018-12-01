@@ -26,7 +26,7 @@ public class KakaoApi {
 	public enum HttpMethodType {
 		POST, GET, DELETE
 	}
-
+ 
 	private static final String API_SERVER_HOST = "https://kapi.kakao.com";
 
 	private static final String USER_SIGNUP_PATH = "/v1/user/signup";

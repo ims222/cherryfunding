@@ -23,7 +23,7 @@ public class SharingListService {
 	@Autowired
 	private ShareDao shareDao;
 
-	@Autowired
+	@Autowired 
 	private SPictureDao sPictureDao;
 
 	@Autowired

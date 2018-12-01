@@ -9,7 +9,7 @@ public class CharityVo {
 	private String content;
 	private int amount;
 	private int cAmount;
-	private Date sDate;
+	private Date sDate; 
 	private Date eDate;
 	private String category;
 	private String confirm;

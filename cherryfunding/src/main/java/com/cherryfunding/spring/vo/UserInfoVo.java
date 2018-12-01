@@ -9,7 +9,7 @@ public class UserInfoVo {
 	}
 	public void setId(String id) {
 		this.id = id;
-	}
+	} 
 	public String getPwd() {
 		return pwd;
 	}

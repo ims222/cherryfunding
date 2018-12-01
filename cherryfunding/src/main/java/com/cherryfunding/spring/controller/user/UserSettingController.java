@@ -17,7 +17,7 @@ public class UserSettingController {
 
 	@Autowired
 	private UserSettingService usService;
-
+ 
 	@Autowired
 	private TestLoginService testLoginService;
 

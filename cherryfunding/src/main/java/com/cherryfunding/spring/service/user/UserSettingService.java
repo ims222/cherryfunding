@@ -13,7 +13,7 @@ public class UserSettingService {
 	private UserSettingDao userSettingDao;
 	@Autowired
 	private UsersDao usersDao;
-
+ 
 	public int insert(String id) {
 		return userSettingDao.insert(id);
 	}

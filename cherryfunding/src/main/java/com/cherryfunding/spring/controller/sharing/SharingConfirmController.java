@@ -13,7 +13,7 @@ public class SharingConfirmController {
 
 	@Autowired
 	private SharingConfirmServiceImpl sharingConfirmService;
-
+ 
 	@RequestMapping("/shring/sharingConfirm")
 	public String sharingConfirm(int slNum) {
 		int siNum = sharingConfirmService.slDetail(slNum).getSiNum();

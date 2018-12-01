@@ -17,7 +17,7 @@ public class SharingConfirmServiceImpl implements SharingConfirmService {
 
 	@Autowired
 	private SListDao sListDao;
-
+ 
 	@Autowired
 	private SItemDao sItemDao;
 

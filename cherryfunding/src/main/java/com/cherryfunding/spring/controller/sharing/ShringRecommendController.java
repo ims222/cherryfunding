@@ -15,7 +15,7 @@ public class ShringRecommendController {
 
 	@Autowired
 	SRecommendService sRecommendService;
-
+ 
 	@RequestMapping(value = "/sharing/sharingIsRecommend", produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String isRecomm(String id, int sNum) {

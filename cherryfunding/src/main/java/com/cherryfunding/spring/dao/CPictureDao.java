@@ -14,7 +14,7 @@ public class CPictureDao {
 	SqlSession sqlSession;
 
 	private static final String NAMESPACE = "com.cherryfunding.spring.vo.CPictureMapper.";
-
+ 
 	public int insert(CPictureVo vo) {
 		return sqlSession.insert(NAMESPACE + "insert", vo);
 	}

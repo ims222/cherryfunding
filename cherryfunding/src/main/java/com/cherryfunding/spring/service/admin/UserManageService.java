@@ -17,7 +17,7 @@ public class UserManageService {
 	
 	public List<UsersVo> list(){ // 관리자 페이지 user리스트
 		return UserDao.list();
-	}
+	} 
 	
 	public List<UsersVo> idsearch(String idsearch) {
 		return UserDao.idsearch(idsearch);
