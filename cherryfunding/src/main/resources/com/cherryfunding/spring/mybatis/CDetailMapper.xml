@@ -9,7 +9,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<select id="select" parameterType="int" resultType="cDetail">
 		select * from cDetail where cdNum = #{cdNum}
-	</select>
+	</select> 
 	
 	<select id="listBycNum" resultType="hashmap" parameterType="int">
 		select id, sum(amount) sumPrice from cDetail

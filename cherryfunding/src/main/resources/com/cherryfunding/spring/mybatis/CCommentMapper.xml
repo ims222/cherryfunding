@@ -9,7 +9,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	<select id="getMaxNum" resultType="int">
-		select NVL(max(ccNum), 0) from cComment
+		select NVL(max(ccNum), 0) from cComment 
 	</select>
 	
 	<select id="commentList" parameterType="int" resultType="hashmap">
