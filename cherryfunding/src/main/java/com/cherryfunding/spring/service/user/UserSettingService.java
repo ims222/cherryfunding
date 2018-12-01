@@ -10,24 +10,24 @@ import com.cherryfunding.spring.vo.UserSettingVo;
 @Service
 public class UserSettingService {
 	@Autowired
-	private UserSettingDao dao;
+	private UserSettingDao userSettingDao;
 	@Autowired
-	private UsersDao dao1;
+	private UsersDao usersDao;
 
 	public int insert(String id) {
-		return dao.insert(id);
+		return userSettingDao.insert(id);
 	}
 
 	public UserSettingVo getInfo(String id) {
-		return dao.getInfo(id);
+		return userSettingDao.getInfo(id);
 	}
 
 	public int update(UserSettingVo vo) {
-		return dao.update(vo);
+		return userSettingDao.update(vo);
 	}
 
-	public String getEmail(String id) {
-		return dao1.getEmail(id);
+	public String getEmail(String id) { // 따로 뽑지 말고 vo에서 빼요
+		return usersDao.getEmail(id);
 	}
 
 }
