@@ -27,9 +27,6 @@ public class ImgUpload {
 	private RestKeyDao restKeyDao;
 
 	@Autowired
-	private FundingService fundingService;
-
-	@Autowired
 	private InsertFundingService insertFundingService;
 
 //	qqfilename

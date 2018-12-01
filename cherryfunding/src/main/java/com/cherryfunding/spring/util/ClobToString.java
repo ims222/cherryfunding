@@ -7,6 +7,9 @@ import java.sql.SQLException;
 
 import org.springframework.stereotype.Component;
 
+import com.cherryfunding.spring.vo.FundingBuilder;
+import com.cherryfunding.spring.vo.FundingVo;
+
 @Component
 public class ClobToString {
 	// Clob 를 String 으로 변경
@@ -24,6 +27,8 @@ public class ClobToString {
 		while ((str = br.readLine()) != null) {
 			strOut.append(str);
 		}
+
+		FundingVo vo = FundingVo.builder().setAddr("d").setfNum(1).setCamout(1).builder();
 
 		return strOut.toString();
 	}

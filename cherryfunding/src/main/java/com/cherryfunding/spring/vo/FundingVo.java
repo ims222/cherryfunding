@@ -187,4 +187,8 @@ public class FundingVo {
 				+ ", hit=" + hit + ", savename=" + savename + ", fpinfo=" + fpinfo + "]";
 	}
 
+	public static FundingBuilder builder() {
+		return new FundingBuilder();
+	}
+
 }
