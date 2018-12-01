@@ -52,9 +52,11 @@ public class EmailController {
 				final String username = "id"; // 네이버 아이디(아이디만)
 				final String password = "pwd"; // 네이버 이메일 비밀번호.
 				int port = 465; // 포트번호
+
 				String recipient = email.get(j).toString(); // 받는 사람의 메일주소
 				String subject = "봉사 D-1"; // 메일 제목
 				String body = "안녕하세요. 체리펀딩입니다. 내일 봉사일인거 잊지 않으셨죠?ㅎ"; // 메일 내용
+
 				Properties props = System.getProperties(); // 정보를 담기 위한 객체 생성 // SMTP 서버 정보 설정
 				props.put("mail.smtp.host", host);
 				props.put("mail.smtp.port", port);

@@ -21,78 +21,78 @@ import com.cherryfunding.spring.vo.UsersVo;
 
 @Controller
 public class SearchController {
-	
-	@Autowired SearchCharityService SearchCharityService; 
-	@Autowired SearchFundingService SearchFundingService;
-	@Autowired UserManageService UserManageService;
-	
-	
-	@RequestMapping(value="/admin/wsearch",method=RequestMethod.POST)
-	public String Wsearch(Model model , HttpServletRequest request) {
-		
+
+	@Autowired
+	SearchCharityService SearchCharityService;
+	@Autowired
+	SearchFundingService SearchFundingService;
+	@Autowired
+	UserManageService UserManageService;
+
+	@RequestMapping(value = "/admin/wsearch", method = RequestMethod.POST)
+	public String Wsearch(Model model, HttpServletRequest request) {
+
 		String kinds = request.getParameter("kinds");
 		String keyword = request.getParameter("keyword");
-		HashMap<String, String> map = new HashMap<String,String>();
-		
-		if(kinds.equals("chirty")) {
-		
-			String field= request.getParameter("field");
+		HashMap<String, String> map = new HashMap<String, String>();
+
+		if (kinds.equals("chirty")) {
+
+			String field = request.getParameter("field");
 			map.put("field", field);
 			map.put("keyword", keyword);
-			List<CharityVo> co=SearchCharityService.searchwaitList(map);
+			List<CharityVo> co = SearchCharityService.searchwaitList(map);
 			model.addAttribute("co", co);
-			
-		}else if(kinds.equals("funding")){
-			
-			String field= request.getParameter("field");
+
+		} else if (kinds.equals("funding")) {
+
+			String field = request.getParameter("field");
 			map.put("field", field);
-			map.put("keyword",keyword);
-			List<FundingVo> vo = SearchFundingService.searchwaitList(map); 
+			map.put("keyword", keyword);
+			List<FundingVo> vo = SearchFundingService.searchwaitList(map);
 			model.addAttribute("vo", vo);
 		}
-		
+
 		return ".confirm";
-		
+
 	}
-	
-	@RequestMapping(value="/admin/csearch",method=RequestMethod.POST)
-	public String Csearch(Model model , HttpServletRequest request) {
-		
+
+	@RequestMapping(value = "/admin/csearch", method = RequestMethod.POST)
+	public String Csearch(Model model, HttpServletRequest request) {
+
 		String kinds = request.getParameter("kinds");
 		String keyword = request.getParameter("keyword");
-		HashMap<String, String> map = new HashMap<String,String>();
-		
-		if(kinds.equals("chirty")) {
-		
-			String field= request.getParameter("field");
+		HashMap<String, String> map = new HashMap<String, String>();
+
+		if (kinds.equals("chirty")) {
+
+			String field = request.getParameter("field");
 			map.put("field", field);
 			map.put("keyword", keyword);
-			List<CharityVo> co=SearchCharityService.searchconfirmList(map);
+			List<CharityVo> co = SearchCharityService.searchconfirmList(map);
 			model.addAttribute("co", co);
-			
-			
-		}else if(kinds.equals("funding")){
-			
-			String field= request.getParameter("field");
+
+		} else if (kinds.equals("funding")) {
+
+			String field = request.getParameter("field");
 			map.put("field", field);
-			map.put("keyword",keyword);
-			List<FundingVo> vo = SearchFundingService.searchconfirmList(map); 
+			map.put("keyword", keyword);
+			List<FundingVo> vo = SearchFundingService.searchconfirmList(map);
 			model.addAttribute("vo", vo);
-			
+
 		}
-		
+
 		return ".confirmList";
-		
+
 	}
-	
-	@RequestMapping(value="/admin/idsearch",method=RequestMethod.POST)
-	public String idsearch(Model model,HttpServletRequest request) {
-		
+
+	@RequestMapping(value = "/admin/idsearch", method = RequestMethod.POST)
+	public String idsearch(Model model, HttpServletRequest request) {
+
 		String idsearch = request.getParameter("idsearch");
-		List<UsersVo> vo= UserManageService.idsearch(idsearch);
+		List<UsersVo> vo = UserManageService.idsearch(idsearch);
 		model.addAttribute("vo", vo);
 		return ".userList";
 	}
-	
 
 }

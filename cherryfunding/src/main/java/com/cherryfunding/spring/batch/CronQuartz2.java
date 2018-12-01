@@ -15,7 +15,6 @@ public class CronQuartz2 extends QuartzJobBean {
 		long time = System.currentTimeMillis();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
 		System.out.println("트리거2 (1 minute): current time = " + sdf.format(time));
-
 	}
-
+	
 }
