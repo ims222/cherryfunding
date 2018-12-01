@@ -138,4 +138,8 @@ public class FundingDao {
 		return sqlSession.selectOne(NAMESPACE + "getTotCountPrepare", map);
 	}
 
+	public List<FundingVo> ingAll() {
+		return sqlSession.selectList(NAMESPACE + "ingAll");
+	}
+
 }

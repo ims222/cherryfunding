@@ -13,37 +13,41 @@ import com.cherryfunding.spring.vo.FundingVo;
 @Service
 public class FundingService {
 	@Autowired
-	private FundingDao dao;
+	private FundingDao fundingDao;
 
 	@Autowired
 	private FPictureDao fpdao;
 
 	public List<FundingVo> list() {
-		return dao.list();
+		return fundingDao.list();
 	}
 
 	public FundingVo select(int fNum) {
-		return dao.select(fNum);
+		return fundingDao.select(fNum);
 	}
 
 	public int insert(FundingVo vo) {
-		return dao.insert(vo);
+		return fundingDao.insert(vo);
 	}
 
 	public int update(FundingVo vo) {
-		return dao.update(vo);
+		return fundingDao.update(vo);
 	}
 
 	public int delete(int fNum) {
-		return dao.delete(fNum);
+		return fundingDao.delete(fNum);
 	}
 
 	public int getMaxNum() {
-		return dao.getMaxNum();
+		return fundingDao.getMaxNum();
 	}
 
 	public FPictureVo thumbnail(int fNum) {
 		return fpdao.thumbnail(fNum);
+	}
+
+	public List<FundingVo> ingAll() {
+		return fundingDao.ingAll();
 	}
 
 }

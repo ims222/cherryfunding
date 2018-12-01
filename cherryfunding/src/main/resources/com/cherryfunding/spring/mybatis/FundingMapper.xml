@@ -164,6 +164,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			or category like '%' || #{hashtag} || '%'
 		order by fNum desc
 	</select>
+	
+	<!-- 진행중 펀딩 전체 목록 -->
+	<select id="ingAll" resultType="funding">
+		select * from funding
+		<include refid="ing"/>
+	</select>
 
 
 	<!-- 준비중 펀딩 -->
