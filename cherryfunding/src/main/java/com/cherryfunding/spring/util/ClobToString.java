@@ -28,7 +28,7 @@ public class ClobToString {
 			strOut.append(str);
 		}
 
-		FundingVo vo = FundingVo.builder().setAddr("d").setfNum(1).setCamout(1).builder();
+		
 
 		return strOut.toString();
 	}

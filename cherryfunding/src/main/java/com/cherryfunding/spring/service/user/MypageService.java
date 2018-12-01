@@ -50,7 +50,7 @@ public class MypageService {
 	public UserSettingVo getUserSetting(String id) {
 		return userSettingDao.getInfo(id);
 	}
-	
+
 	public UsersVo getInfoByNick(String nick) {
 		return dao.getInfoByNick(nick);
 	}
