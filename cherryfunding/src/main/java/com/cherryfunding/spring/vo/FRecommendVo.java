@@ -6,7 +6,7 @@ public class FRecommendVo {
 	private String id;
 
 	public FRecommendVo() {
-	} 
+	}  
 
 	public FRecommendVo(int frNum, int fNum, String id) {
 		this.frNum = frNum;
