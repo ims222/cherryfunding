@@ -6,8 +6,6 @@ public class AlarmVo {
 	private String msg;
 
 	public AlarmVo() {
-		super(); 
-		// TODO Auto-generated constructor stub
 	}
 	public AlarmVo(int alarmNum, String msg) {
 		this.alarmNum = alarmNum;
